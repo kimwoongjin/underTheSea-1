@@ -14,3 +14,4 @@ LOGO
 
 
 사용한 기술 스택
+ ![사용스택](https://user-images.githubusercontent.com/87528753/147187223-1468a491-d90d-471a-beeb-a2f7fc6e006c.png)
