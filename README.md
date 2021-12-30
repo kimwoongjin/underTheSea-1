@@ -1,7 +1,5 @@
 ## LOGO
-
 ![로고](https://media.discordapp.net/attachments/924937469370200086/925548107943538758/1_.png)
-
  집에서 생활하는 시간이 늘어난 요즘. 
  애완용 물고기를 길러보시는 건 어떠신가요?
  저희 Under The Sea를 사용하시면
