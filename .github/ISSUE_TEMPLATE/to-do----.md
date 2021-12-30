@@ -2,7 +2,7 @@
 name: To Do 리스트
 about: To Do 리스트
 title: ''
-labels: Bare Minimum, Sprint 2
+labels: ''
 assignees: ''
 
 ---
