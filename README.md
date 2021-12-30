@@ -1,7 +1,7 @@
 
 
 ## LOGO
-![로고](https://cdn.discordapp.com/attachments/924937469370200086/925988877422968872/-024.png)
+![로고](https://cdn.discordapp.com/attachments/921036051819134996/926080243805089822/KakaoTalk_Photo_2021-12-30-20-51-40.png)
  
  집에서 생활하는 시간이 늘어난 요즘. 
  애완용 물고기를 길러보시는 건 어떠신가요?
