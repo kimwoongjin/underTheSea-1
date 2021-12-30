@@ -2,7 +2,7 @@
 name: 'Issue: 에러 핸들링 템플릿'
 about: 'Issue: 에러 핸들링 템플릿'
 title: ''
-labels: Bare Minimum, Sprint 2
+labels: ''
 assignees: ''
 
 ---
