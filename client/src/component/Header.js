@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> d6ae4704bcf5d67b842b96d0f87bf557d5510817
 import styled from "styled-components";
 
 const Container = styled.div`
