@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /home/ubuntu/underTheSea/server
- npm install -g npm@latest
+sudo npm install -g npm@latest
 sudo npm install
 sudo npm install pm2 -g
 sudo apt-get update
