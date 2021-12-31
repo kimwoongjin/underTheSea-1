@@ -1,8 +1,8 @@
 #!/bin/bash
 cd /home/ubuntu/underTheSea/server
-npm install -g npm@latest
-npm install
-npm install pm2 -g
+ npm install -g npm@latest
+sudo npm install
+sudo npm install pm2 -g
 sudo apt-get update
 sudo apt-get install authbind
 sudo touch /etc/authbind/byport/80
