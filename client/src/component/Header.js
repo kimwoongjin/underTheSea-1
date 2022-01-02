@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -31,7 +30,7 @@ const BtnContainer = styled.div`
 function Header() {
   return (
     <Container>
-      <Img src="스몰로고.png" alt="로고임ㅎㅎ" />
+      <Img src="로고.png" alt="로고임ㅎㅎ" />
       <BtnContainer>
         <Guide>Guide</Guide>
         <Search>Search</Search>
