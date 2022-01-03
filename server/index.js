@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-//const cookieParser = require("cookie-parser");
-//const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 // const { authToken } = require("./middleware/token");
 const db = require("./db/connection");
 // const controllers = require("./controllers");
@@ -21,7 +21,7 @@ app.use(
     methods: ["GET", "POST", "OPTIONS", "PATCH", "DELETE"],
   })
 );
-//app.use(cookieParser());
+app.use(cookieParser());
 
 app.get("/", function (req, res) {
   res.status(200).send("hello world");

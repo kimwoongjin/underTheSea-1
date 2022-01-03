@@ -1,5 +1,5 @@
 const { users } = require("../../models");
-const { isAuthorized, generateAccessToken } = require("../tokenFunction");
+const { generateAccessToken } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const { email, user_pwd } = req.body.data;
@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
       const accessToken = generateAccessToken(user.dataValues);
       return res
         .cookie("jwt", accessToken, {
-          expire: new Date(Date.now() + 900000),
           httpOnly: true,
         })
         .status(201)
