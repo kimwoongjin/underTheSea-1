@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100vw;
   height: 90vh;
-  background: #70d6ff;
+  background: linear-gradient(to top, #70d6ff, #d2f7ff);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,10 +12,9 @@ const Container = styled.div`
 `;
 const MainImg = styled.img`
   position: absolute;
-  bottom: 80px;
-  left: 380px;
+  bottom: 12%;
   margin-top: 60px;
-  width: 35%;
+  width: 30%;
   opacity: 0.8;
 `;
 const SeaWeed = styled.img`
@@ -26,48 +25,48 @@ const SeaWeed = styled.img`
   opacity: 0.7;
 `;
 const Coral = styled.img`
-  width: 8%;
+  width: 10%;
   position: absolute;
   bottom: 12px;
-  right: 180px;
+  right: 13%;
   opacity: 0.7;
 `;
 const BubbleL = styled.img`
-  width: 25%;
+  width: 30%;
   position: absolute;
-  left: 10px;
-  bottom: 20px;
+  left: 4%;
+  bottom: 7%;
 `;
 const BubbleR = styled.img`
   width: 26%;
   position: absolute;
-  right: 11%;
-  bottom: 20px;
+  right: 6%;
+  bottom: 10%;
 `;
 const Shark = styled.img`
   position: absolute;
   /* -webkit-transform: rotate(30deg) */
   left: 2%;
   width: 15%;
-  bottom: 280px;
+  bottom: 44%;
 `;
 const JellyFish = styled.img`
   width: 9%;
   position: absolute;
-  left: 14%;
-  bottom: 33%;
+  left: 18%;
+  bottom: 28%;
 `;
 const Fish1 = styled.img`
-  width: 7%;
+  width: 9%;
   position: absolute;
-  bottom: 220px;
-  right: 29%;
+  top: 29%;
+  right: 22%;
 `;
 const Fish3 = styled.img`
-  width: 7%;
+  width: 9%;
   position: absolute;
-  bottom: 180px;
-  right: 12%;
+  bottom: 43%;
+  right: 4%;
 `;
 const TilteContainer = styled.div`
   display: flex;
@@ -77,19 +76,19 @@ const TilteContainer = styled.div`
 const Title = styled.div`
   position: absolute;
   z-index: 999;
-  font-weight: bold;
-  color: white;
+  font-weight: 800;
+  color: #092011;
   font-size: 3rem;
-  top: 20%;
-  right: 10%;
+  top: 18%;
+  left: 39.5%;
 `;
 const Contents = styled.div`
   position: absolute;
   z-index: 999;
-  color: white;
-  font-size: 1.7rem;
-  top: 33%;
-  right: 8%;
+  color: #092011;
+  font-size: 1.5rem;
+  top: 28%;
+  left: 40%;
   font-weight: 460;
   line-height: 140%;
   text-align: center;
