@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100vw;
   height: 10vh;
-  background: #d2f7ff;
+  /* background: #e9faff; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,7 +27,7 @@ const BtnContainer = styled.div`
   width: 300px;
 `;
 
-function Header() {
+function Header2() {
   return (
     <Container>
       <Img src="로고.png" alt="로고임ㅎㅎ" />
@@ -41,4 +41,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Header2;
