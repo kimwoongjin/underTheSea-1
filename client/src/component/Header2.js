@@ -4,6 +4,7 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   /* background: #e9faff; */
+  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;

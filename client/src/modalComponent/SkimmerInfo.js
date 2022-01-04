@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 const fadeIn = keyframes`
     from {
@@ -103,7 +102,9 @@ const ContentContainer = styled.div`
     margin-top: 50px;
   }
   h2 {
-    border-bottom: 2px solid #e5e5e5;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #d2f7ff;
   }
   p {
     font-size: 18px;
