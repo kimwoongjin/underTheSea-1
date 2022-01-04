@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 const fadeIn = keyframes`
     from {
@@ -99,8 +98,13 @@ const ContentContainer = styled.div`
   height: 90%;
   overflow: auto;
   /* border: 1px solid red; */
+  .structure {
+    margin-top: 50px;
+  }
   h2 {
-    border-bottom: 2px solid #e5e5e5;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #d2f7ff;
   }
   p {
     font-size: 18px;
@@ -115,6 +119,46 @@ const IconContainer = styled.div`
   /* border: 1px solid red; */
 `;
 
+const ImgContainer = styled.div`
+  display: flex;
+  p {
+    margin-left: 20px;
+    div {
+      font-weight: bold;
+      margin-top: 7px;
+      margin-bottom: 5px;
+    }
+  }
+`;
+const ImgContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-left: 20px;
+    div {
+      font-weight: bold;
+      margin-top: 7px;
+      margin-bottom: 5px;
+    }
+  }
+`;
+const Skimmer = styled.img`
+  width: 30%;
+`;
+const DryContainer = styled.div`
+  display: flex;
+`;
+const Dry = styled.img`
+  /* margin-left: 20px; */
+  /* margin-right: 20px; */
+  width: 20%;
+`;
+const WetContainer = styled.div`
+  display: flex;
+`;
+const Wet = styled.img`
+  width: 20%;
+`;
 function SkimmerInfo({ onCancel, visible }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
@@ -146,11 +190,53 @@ function SkimmerInfo({ onCancel, visible }) {
             스키머는 미세버블을 이용하여 여과를 수행하는 장비입니다.
             <br /> 미세버블을 발생시키고 발생한 미세버블의 사이사이로 유기물을
             흡착하여 상단의 콜렉션 컵으로 모아줍니다.
-            <br /> 사용자는 눈으로 모인양을 확인하고 제거해줄 수 있습니다.
+            <br /> 스키머는 유기물의 분해단계 이전에 물리적으로 제거할 수 있는
+            유일한 장치이며 생물학적 여과 장치의 로드를
+            <br /> 줄여주며 잠재적으로 해수의 산화환원도를 개선합니다. 또한
+            사용자는 눈으로 모인 양을 확인하고 <br />
+            제거해줄 수 있어 관리가 쉽습니다.
           </p>
-          <h2>스키머의 작동원리</h2>
-          <img src="스키머그림.png" />
-          <p>ㅇㅇㅇㅇ</p>
+          <h2 className="structure">스키머의 구조</h2>
+          <ImgContainer>
+            <Skimmer src="스키머그림.png" />
+            <p>
+              <div className="sub-title">1. 공기조절벨브</div>
+              스키머로 들어가는 공기유입량과 배출되는 물의 양을 조절하여 <br />
+              버블의 양과 수위를 조절하는 기능을 합니다.
+              <div className="sub-title">2. 콜렉션컵</div>
+              스키머의 가장 상단에 위치하며 걸러낸 유기물을 포집합니다. <br />
+              본체와 분리가 가능하여 주기적인 확인을 통해 세척해주어야 합니다.
+              <div className="sub-title">3. 출수구</div>
+              상단의 벨브를 이용하여 원하는 만큼의 물을 배출합니다.
+              <div className="sub-title">4. 입수구</div>
+              물과 공기를 스키머의 내부로 주입힙니다.
+            </p>
+          </ImgContainer>
+          <h2 className="structure">스키머 사용의 방식</h2>
+          <ImgContainer2>
+            <DryContainer>
+              <Dry src="드라이스키밍.png" />
+              <p>
+                <div className="sub-title">드라이 스키밍</div>
+                미세버블의 수위를 낮게 조절하여 오물을 진하게 모으는 방법입니다.
+                <br />
+                효율은 웻스키밍보다 다소 떨어지지만 콜렉션컵이 늦게 차기 때문에
+                <br />
+                청소주기가 길어집니다.
+              </p>
+            </DryContainer>
+            <WetContainer>
+              <Wet src="웻스키밍.png" />
+              <p>
+                <div className="sub-title">웻 스키밍</div>
+                미세버블의 수위를 높게 조절하여 효율이 좋지만 컵이 빠르게
+                <br />
+                가득차기 때문에 청소주기가 짧아집니다. 자주 비워 주어야하는
+                <br /> 만큼 염도가 변할 수 있으므로 염도유지에 신경써주면
+                좋습니다.
+              </p>
+            </WetContainer>
+          </ImgContainer2>
         </ContentContainer>
       </ModalContainer>
     </DarkBackGround>

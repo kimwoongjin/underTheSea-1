@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import React from "react";
-import Header from "../component/Header";
+import Header2 from "../component/Header2";
 
 const Container = styled.div`
   width: 100vw;
@@ -15,7 +15,7 @@ const MiddleContainer = styled.div`
 const Seawater = styled.div`
   width: 33vw;
   height: 90vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,16 +25,23 @@ const Seawater = styled.div`
 const Tips = styled.div`
   width: 34vw;
   height: 90vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
+const SeaImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+const FreshImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
 const Freshwater = styled.div`
   width: 33vw;
   height: 90vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,11 +55,15 @@ function Guide() {
   return (
     <>
       <Container>
-        <Header></Header>
+        <Header2></Header2>
         <MiddleContainer>
-          <Seawater onClick={goToSeawater}>Seawater Guide</Seawater>
+          <Seawater onClick={goToSeawater}>
+            <SeaImg src="가이드타이틀이미지1.png" />
+          </Seawater>
           <Tips>Tips</Tips>
-          <Freshwater>Freshwater Guide</Freshwater>
+          <Freshwater>
+            <FreshImg src="가이드타이틀이미지2.png" />
+          </Freshwater>
         </MiddleContainer>
       </Container>
     </>

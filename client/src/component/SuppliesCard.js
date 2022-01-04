@@ -39,24 +39,24 @@ const Content = styled.div`
   height: 140px;
   /* border: 1px solid black; */
   border-radius: 10px;
-  background: #d2f7ff;
+  background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
 `;
-function SkimmerCard({ handleSkimmerModal }) {
+function SuppliesCard({ handleSuppliesModal }) {
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={handleSkimmerModal}>
+    <Container onClick={handleSuppliesModal}>
       <ImgContainer>
-        <Img src="https://www.simplicityaquatics.com/wp-content/uploads/how-to-break-in-a-protein-skimmer@2x.jpg" />
+        <Img src="https://mblogthumb-phinf.pstatic.net/MjAxNjExMTFfNzUg/MDAxNDc4ODQ3OTIwMzMx.-g3VP-eicS-jmQDfE_OE_VyHutifC59SewBQBgQNO_Yg.2NFPLYrpcEQ9YqLgH-UVgwZQIAnN5HeCgTRy29YDhU4g.JPEG.joyful_c/02.jpg?type=w2" />
       </ImgContainer>
-      <Title>스키머란 무엇일까요?</Title>
+      <Title>시작 전 필요한 용품모음</Title>
       <Content>
-        해수어를 키우려면 스키머를 필수라는데 스키머가 무엇일까요? 스키머에 관한
-        모든 것을 알려드립니다.
+        일단 수족관을 시작하고 싶은데 어떤게 필요한지 뭘 사야하는지
+        모르시겠나요? 필수용품은 어떤 것들이 있는지 알아보세요!
       </Content>
     </Container>
   );
 }
 
-export default SkimmerCard;
+export default SuppliesCard;

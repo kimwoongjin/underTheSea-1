@@ -6,6 +6,8 @@ import Header2 from "../component/Header2";
 import GuideinfoCard from "../component/GuideinfoCard";
 import SkimmerCard from "../component/SkimmerCard";
 import SkimmerInfo from "../modalComponent/SkimmerInfo";
+import SuppliesCard from "../component/SuppliesCard";
+import SuppliesInfo from "../modalComponent/SuppliesInfo";
 
 const Container = styled.div`
   width: 100%;
@@ -47,11 +49,18 @@ const InfoContainer = styled.div`
 function SeaWaterGuide() {
   const Navigate = useNavigate();
   const [skimmerModal, setSkimmerModal] = useState(false);
+  const [suppliesModal, setSuppliesModal] = useState(false);
   const handleSkimmerModal = () => {
     setSkimmerModal(true);
   };
+  const handleSuppliesModal = () => {
+    setSuppliesModal(true);
+  };
   const skimmerCancel = () => {
     setSkimmerModal(false);
+  };
+  const suppliesCancel = () => {
+    setSuppliesModal(false);
   };
   return (
     <>
@@ -64,7 +73,9 @@ function SeaWaterGuide() {
 
         <InfoContainer>
           <SkimmerCard handleSkimmerModal={handleSkimmerModal} />
-          <GuideinfoCard></GuideinfoCard>
+          <SuppliesCard
+            handleSuppliesModal={handleSuppliesModal}
+          ></SuppliesCard>
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
@@ -72,6 +83,11 @@ function SeaWaterGuide() {
         </InfoContainer>
         {skimmerModal ? (
           <SkimmerInfo onCancel={skimmerCancel} visible={skimmerModal} />
+        ) : (
+          ""
+        )}
+        {suppliesModal ? (
+          <SuppliesInfo onCancel={suppliesCancel} visible={suppliesModal} />
         ) : (
           ""
         )}
