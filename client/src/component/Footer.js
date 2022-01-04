@@ -84,6 +84,12 @@ const LinkTag = styled.div`
     text-decoration: underline;
   }
 `;
+const Copy = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 8%;
+  color: white;
+`;
 
 function Footer() {
   return (
@@ -112,6 +118,7 @@ function Footer() {
           https://github.com/JeongSeongWu
         </a>
       </LinkTag>
+      <Copy>Copyright © 2022 Under The Sea All rights reserved.</Copy>
     </Container>
   );
 }

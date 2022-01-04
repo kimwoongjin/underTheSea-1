@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 const MainImg = styled.img`
   position: absolute;
-  bottom: 12%;
+  bottom: 10%;
   margin-top: 60px;
   width: 30%;
   opacity: 0.8;

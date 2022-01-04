@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 100vw;
+  width: 99vw;
   height: 10vh;
   background: #d2f7ff;
   display: flex;
@@ -23,17 +24,19 @@ const BtnContainer = styled.div`
   font-size: 1.1rem;
   /* border: 1px solid red; */
   justify-content: space-around;
-  margin-right: 5px;
+  margin-right: 2%;
   width: 300px;
 `;
 
 function Header() {
   return (
     <Container>
-      <Img src="로고.png" alt="로고임ㅎㅎ" />
+      <Img src="/로고.png" alt="" />
       <BtnContainer>
         <Guide>Guide</Guide>
-        <Search>Search</Search>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/search">
+          <Search>Search</Search>
+        </Link>
         <Signin>SignIn</Signin>
         <Signout>SignOut</Signout>
       </BtnContainer>
