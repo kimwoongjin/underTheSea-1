@@ -20,7 +20,10 @@ module.exports = async (req, res) => {
         const last_ex_water = ex_water_data.reverse()[0].dataValues.createAt;
 
         return {
+          container_id: el.dataValues.id,
           container_name: el.dataValues.container_name,
+          size: el.dataValues.size,
+          level_img: el.dataValues.level_img,
           fish_num: el.dataValues.fish_num,
           last_ex_water: last_ex_water,
           theme: el.dataValues.theme,
