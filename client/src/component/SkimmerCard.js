@@ -4,7 +4,6 @@ const Container = styled.div`
   width: 300px;
   height: 420px;
   border-radius: 20px;
-  /* background-color: red; */
   margin-bottom: 40px;
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
@@ -49,7 +48,7 @@ function SkimmerCard({ handleSkimmerModal }) {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={handleSkimmerModal}>
       <ImgContainer>
-        <Img src="placeholder-300x300.jpg" />
+        <Img src="https://www.simplicityaquatics.com/wp-content/uploads/how-to-break-in-a-protein-skimmer@2x.jpg" />
       </ImgContainer>
       <Title>스키머란 무엇일까요?</Title>
       <Content>
