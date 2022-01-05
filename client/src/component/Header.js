@@ -33,12 +33,12 @@ function Header({ handleLogin }) {
     <Container>
       <Img src="/로고.png" alt="" />
       <BtnContainer>
-        <Guide>Guide</Guide>
+        <Guide>가이드</Guide>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <Search>Search</Search>
+          <Search>검색</Search>
         </Link>
-        <Signin onClick={handleLogin}>SignIn</Signin>
-        <Signout>SignOut</Signout>
+        <Signin onClick={handleLogin}>로그인</Signin>
+        <Signout>회원가입</Signout>
       </BtnContainer>
     </Container>
   );
