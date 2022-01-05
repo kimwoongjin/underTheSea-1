@@ -97,7 +97,7 @@ const Contents = styled.div`
 function Landingpage() {
   return (
     <Container>
-      <MainImg src="완성어항.png" alt="어항" />
+      <MainImg src="관리어항.png" alt="어항" />
       <Coral src="해초.png" />
       <SeaWeed src="작은해초.png" />
       <Shark src="상어.png" />
