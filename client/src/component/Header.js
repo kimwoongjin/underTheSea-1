@@ -28,7 +28,7 @@ const BtnContainer = styled.div`
   width: 300px;
 `;
 
-function Header() {
+function Header({ handleLogin }) {
   return (
     <Container>
       <Img src="/로고.png" alt="" />
@@ -37,7 +37,7 @@ function Header() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>Search</Search>
         </Link>
-        <Signin>SignIn</Signin>
+        <Signin onClick={handleLogin}>SignIn</Signin>
         <Signout>SignOut</Signout>
       </BtnContainer>
     </Container>

@@ -75,7 +75,6 @@ const TilteContainer = styled.div`
 
 const Title = styled.div`
   position: absolute;
-  z-index: 999;
   font-weight: 800;
   color: #092011;
   font-size: 3rem;
@@ -84,7 +83,6 @@ const Title = styled.div`
 `;
 const Contents = styled.div`
   position: absolute;
-  z-index: 999;
   color: #092011;
   font-size: 1.5rem;
   top: 28%;
