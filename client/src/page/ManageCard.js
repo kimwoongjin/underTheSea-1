@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import ManageInfo from "./ManageInfo";
+import ManageAdd from "./ManageAdd";
 
 const Container = styled.div`
   /* border: 1px solid black; */
@@ -19,7 +20,7 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 12%;
+  margin-top: 8%;
 `;
 
 function ManageCard() {
@@ -28,10 +29,10 @@ function ManageCard() {
       <CardContainer>
         <ManageInfo />
         <ManageInfo />
-        <ManageInfo />
-        <ManageInfo />
-        <ManageInfo />
-        <ManageInfo />
+        <ManageAdd />
+        <ManageAdd />
+        <ManageAdd />
+        <ManageAdd />
       </CardContainer>
     </Container>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -8,25 +9,32 @@ const Container = styled.div`
   flex-direction: column;
   top: 15%;
   width: 300px;
-  height: 420px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 20px #adb5bd;
-  margin-bottom: 7%;
+  height: 390px;
+  box-shadow: 5px 8px 7px 3px #c6c6c6;
+  margin-bottom: 9%;
   background: #d1f8ff;
-  perspective: 1000px;
+  /* border: 1px solid black; */
+`;
+
+const Contents = styled.div`
+  position: relative;
+  width: 100%;
+  height: 93%;
+  /* border: 1px solid black; */
+  text-align: left;
 `;
 
 const ImgContainer = styled.div`
-  width: 100%;
-  height: 70%;
   position: relative;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  overflow: hidden;
+  width: 100%;
+  height: 60%;
+  cursor: pointer;
+  /* border: 1px solid black; */
 `;
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  opacity: 0.8;
 `;
 const Content = styled.div`
   position: relative;
@@ -34,55 +42,42 @@ const Content = styled.div`
   height: 140px;
   text-align: left;
   line-height: 200%;
-  margin: 10% 0 0 5%;
+  margin: 5% 0 0 5%;
   /* border: 1px solid black; */
 `;
+
 const Name = styled.div`
-  font-weight: bold;
-  font-size: 1.5rem;
-`;
-const Ename = styled.div`
-  font-size: 1.5rem;
-  color: #828282;
-`;
-const Contents = styled.div`
-  position: relative;
-  width: 100%;
-  height: 93%;
-  /* border: 1px solid black; */
-  margin-top: 7%;
-  text-align: left;
-`;
-const NameB = styled.div`
   position: absolute;
   left: 5%;
   font-weight: bold;
   font-size: 1.5rem;
 `;
 
-const NamesB = styled.div`
-  position: absolute;
-  top: 8%;
-  left: 5%;
-  font-size: 0.7rem;
-  color: #828282;
-`;
 const Text = styled.div`
   position: absolute;
   left: 5%;
-  top: 20%;
+  top: 33%;
   line-height: 170%;
-  font-weight: bold;
+  font-weight: 450;
 `;
 function ManageInfo() {
   return (
     <Container>
       <Contents>
-        <NameB>라스보라 헤테로몰파</NameB>
-        <NamesB>Rasbora heteromorpha</NamesB>
-        <Text>
-          서식지 : <br></br> 크기 : <br></br> 주요특징:
-        </Text>
+        <ImgContainer>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/manage/detailinfo"
+          >
+            <Img src="관리어항.png"></Img>
+          </Link>
+        </ImgContainer>
+        <Content>
+          <Name>누구누구의 어항</Name>
+          <Text>
+            물고기 수 :<br></br> 사이즈 <br></br> 테마
+          </Text>
+        </Content>
       </Contents>
     </Container>
   );
