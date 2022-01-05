@@ -1,3 +1,22 @@
-module.exports = (req, res) => {
-  return res.send("feed");
+const { feeds, containers } = require("../../models");
+const { isAuthorized } = require("../tokenFunction");
+
+module.exports = async (req, res) => {
+  const userInfo = isAuthorized(req);
+  if (!userInfo) {
+    return res.status(401).json({ message: "You are not authorized" });
+  } else {
+    const container_id = req.params.container_id;
+    const check_container = await containers.findOne({
+      where: { id: container_id },
+    });
+    if (!check_container) {
+      return res.status(404).json({ message: "The container doesn't exist" });
+    } else {
+      await feeds.create({ container_id });
+      return res
+        .status(201)
+        .json({ message: "Your feed log is successfully recorded" });
+    }
+  }
 };

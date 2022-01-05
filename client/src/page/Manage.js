@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
-import ManageInfo from "./ManageInfo";
+import ManageCard from "./ManageCard";
 
 const Container = styled.div`
   position: relative;
@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Title = styled.div`
   position: absolute;
-  top: 40%;
+  top: 50%;
   font-weight: bold;
   font-size: 1.8rem;
   text-align: center;
@@ -23,7 +23,7 @@ const Title = styled.div`
 
 const Text = styled.div`
   position: absolute;
-  top: 55%;
+  top: 65%;
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -32,14 +32,14 @@ const Text = styled.div`
 
 const Img = styled.img`
   position: absolute;
-  top: 27%;
+  top: 33%;
   right: 34%;
   width: 7%;
   height: 43%;
 `;
 
 const OuterContainer = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   height: 170%;
   position: absolute;
@@ -58,7 +58,7 @@ function Manage() {
         <Img src="작은해초.png" alt="" />
       </Container>
       <OuterContainer />
-      <ManageInfo />
+      <ManageCard />
     </>
   );
 }
