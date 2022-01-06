@@ -11,10 +11,10 @@ const ContainerS = styled.div`
   align-items: center;
   flex-direction: column;
   top: 15%;
-  width: 20vw;
+  width: 100%;
   height: 33vh;
   margin-bottom: 7%;
-  /* border: 1px solid black; */
+  border: 1px solid red;
 `;
 
 const DetailImg = styled.div`

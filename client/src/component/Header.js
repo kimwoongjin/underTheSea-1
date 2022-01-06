@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 99vw;
+  width: 100vw;
   height: 10vh;
   background: #d2f7ff;
   display: flex;
@@ -15,8 +15,8 @@ const Img = styled.img`
   margin-left: 1%;
 `;
 
-const Signin = styled.div``;
-const Signout = styled.div``;
+const Login = styled.div``;
+const Signup = styled.div``;
 const Search = styled.div``;
 const Guide = styled.div``;
 const BtnContainer = styled.div`
@@ -28,7 +28,7 @@ const BtnContainer = styled.div`
   width: 300px;
 `;
 
-function Header({ handleLogin }) {
+function Header({ handleLogin, handleSignup }) {
   return (
     <Container>
       <Img src="/로고.png" alt="" />
@@ -37,8 +37,8 @@ function Header({ handleLogin }) {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
         </Link>
-        <Signin onClick={handleLogin}>로그인</Signin>
-        <Signout>회원가입</Signout>
+        <Login onClick={handleLogin}>로그인</Login>
+        <Signup onClick={handleSignup}>회원가입</Signup>
       </BtnContainer>
     </Container>
   );

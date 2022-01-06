@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
 
 const fadeIn = keyframes`
     from {
@@ -22,7 +23,7 @@ const fadeOut = keyframes`
     }
 `;
 const slideUp = keyframes`
-    form {
+    from {
         transform: translateY(200px);
     }
     to {
@@ -51,6 +52,7 @@ const DarkBackGround = styled.div`
   background: rgba(0, 0, 0, 0.5);
 
   animation-duration: 0.25s;
+  animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
 
@@ -106,17 +108,24 @@ const Title = styled.div`
 `;
 const Form = styled.form`
   width: 80%;
-  height: 40%;
+  height: 60%;
   /* border: 1px dashed black; */
   display: flex;
   flex-direction: column;
+`;
+const Username = styled.input`
+  width: calc(100%-10px);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  /* margin-bottom: 20px; */
 `;
 const Email = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
 
 const Pwd = styled.input`
@@ -124,10 +133,24 @@ const Pwd = styled.input`
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+`;
+const PwdChk = styled.input`
+  width: calc(100%-10px);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  /* margin-bottom: 20px; */
+`;
+const Warning = styled.div`
+  width: calc(100%-10px);
+  height: 20px;
+  font-size: 0.5rem;
+  /* justify-content: flex-start; */
+  color: red;
 `;
 
-const LoginBtn = styled.button`
+const SignupBtn = styled.button`
   width: 100%;
   height: 50px;
   margin-bottom: 20px;
@@ -149,41 +172,19 @@ const LoginBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-const GoogleBtn = styled.button`
-  width: 100%;
-  height: 50px;
-  background: white;
-  border: 2px solid #108dee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* border-style: none; */
-  border-radius: 4px;
-  color: white;
-  padding: 5px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  position: relative;
-  :hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.07);
-  }
-`;
-const GoogleIcon = styled.img`
-  width: 30%;
-`;
+
 function SignUp({ onCancel, visible }) {
+  const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
   const [userData, setUserData] = useState({
     email: "",
+    user_name: "",
     user_pwd: "",
+    pwd_chk: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
+
   const handleInputValue = (e) => {
     setUserData({
       ...userData,
@@ -191,6 +192,60 @@ function SignUp({ onCancel, visible }) {
     });
   };
 
+  //-----------------------
+
+  const checkUsername = (user_name) => {
+    let regExp = /^([a-zA-Z가-힣]){0,10}$/;
+    return regExp.test(user_name);
+  };
+
+  const checkEmail = (email) => {
+    let regExp =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    return regExp.test(email);
+  };
+
+  const checkPassowrd = (user_pwd) => {
+    let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
+    return regExp.test(user_pwd);
+  };
+
+  const onChangePasswordChk = () => userData.user_pwd === userData.pwd_chk;
+
+  const handleSignup = () => {
+    const { email, user_name, user_pwd, pwd_chk } = userData;
+    if (!email || !user_name || !user_pwd || !pwd_chk) {
+      setErrorMsg("필수 정보를 모두 입력해주세요");
+    } else if (
+      !checkEmail(email) ||
+      !checkUsername(user_name) ||
+      !checkPassowrd(user_pwd) ||
+      !onChangePasswordChk()
+    ) {
+      setErrorMsg("올바른 정보를 입력해주세요");
+    } else {
+      setErrorMsg("");
+      axios
+        .post(`${process.env.REACT_APP_SERVER_URL}/user/signup`, {
+          data: {
+            email,
+            user_name,
+            user_pwd,
+          },
+        })
+        .then((res) => {
+          if (res.data.message === "Email is already in use") {
+            setErrorMsg("이미 사용중인 이메일입니다");
+          } else if (
+            res.data.message === "User account is successfully created"
+          ) {
+            navigate("/");
+          }
+        });
+    }
+  };
+
+  //-----------------------
   useEffect(() => {
     // visible -> false
     if (localVisible && !visible) {
@@ -210,27 +265,68 @@ function SignUp({ onCancel, visible }) {
         <CloseBtnContainer>
           <FontAwesomeIcon icon={faTimes} size="2x" onClick={onCancel} />
         </CloseBtnContainer>
-        <Title>Login</Title>
+        <Title>회원가입</Title>
         <Form>
+          <Username
+            placeholder="이름을 입력해주세요"
+            type="text"
+            name="user_name"
+            required
+            value={userData.user_name}
+            onChange={handleInputValue}
+            autoComplete="on"
+          />
+          {checkUsername(userData.user_name) || !userData.user_name ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
+          )}
           <Email
-            placeholder="email"
+            placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
+            required
+            value={userData.email}
             onChange={handleInputValue}
+            autoComplete="on"
           />
-
+          {checkEmail(userData.email) || !userData.email ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
+          )}
           <Pwd
-            placeholder="password"
+            placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
+            value={userData.user_pwd}
+            required
             onChange={handleInputValue}
+            autoComplete="on"
           />
-
-          <LoginBtn type="button">Login</LoginBtn>
-          <GoogleBtn type="button">
-            {/* <FontAwesomeIcon icon={faGoogle} /> */}
-            <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
-          </GoogleBtn>
+          {checkPassowrd(userData.user_pwd) || !userData.user_pwd ? (
+            <Warning />
+          ) : (
+            <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
+          )}
+          <PwdChk
+            placeholder="비밀번호를 확인해주세요"
+            type="password"
+            name="pwd_chk"
+            required
+            // value={userData.pwd_chk}
+            onChange={handleInputValue}
+            autoComplete="on"
+          />
+          {onChangePasswordChk() || !userData.pwd_chk ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>비밀번호가 일치하지 않습니다.</Warning>
+          )}
+          <SignupBtn type="button" onClick={handleSignup}>
+            회원가입
+          </SignupBtn>
+          <Warning>{errorMsg}</Warning>
         </Form>
       </ModalContainer>
     </DarkBackGround>

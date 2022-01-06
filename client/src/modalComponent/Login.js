@@ -22,7 +22,7 @@ const fadeOut = keyframes`
     }
 `;
 const slideUp = keyframes`
-    form {
+    from {
         transform: translateY(200px);
     }
     to {
@@ -210,23 +210,23 @@ function Login({ onCancel, visible }) {
         <CloseBtnContainer>
           <FontAwesomeIcon icon={faTimes} size="2x" onClick={onCancel} />
         </CloseBtnContainer>
-        <Title>Login</Title>
+        <Title>로그인</Title>
         <Form>
           <Email
-            placeholder="email"
+            placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
             onChange={handleInputValue}
           />
 
           <Pwd
-            placeholder="password"
+            placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
             onChange={handleInputValue}
           />
 
-          <LoginBtn type="button">Login</LoginBtn>
+          <LoginBtn type="button">로그인</LoginBtn>
           <GoogleBtn type="button">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />

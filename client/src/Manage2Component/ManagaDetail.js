@@ -18,7 +18,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
-  text-align: left;
+  /* text-align: left; */
 `;
 
 const Title = styled.div`
@@ -30,16 +30,84 @@ const Title = styled.div`
   line-height: 180%;
   color: #008eff;
 `;
-
-const Text = styled.div`
+const TextContainer = styled.div`
   position: absolute;
+  position: relative;
   top: 65%;
+  width: 23%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #108dee;
+  border-bottom-left-radius: 25px;
+`;
+const Lv = styled.div`
+  width: 20%;
+  background: #108dee;
+  height: 100%;
+  border-bottom: 1px solid #108dee;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
   font-weight: bold;
-  font-size: 1.8rem;
-  text-align: center;
-  line-height: 180%;
 `;
 
+const Lv2 = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 20%;
+  width: 20%;
+  background: white;
+  height: 100%;
+  border-bottom: 1px solid #108dee;
+  /* border-top-right-radius: 30px; */
+  /* border-top-left-radius: 30px; */
+  border-bottom-left-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  z-index: 99;
+`;
+const Lv3 = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 20%;
+  width: 20%;
+  background: #108dee;
+  height: 100%;
+  border-bottom: 1px solid #108dee;
+  /* border-top-right-radius: 25px; */
+  /* border-top-left-radius: 25px; */
+  /* border-bottom-left-radius: 25px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+const Text = styled.div`
+  width: 60%;
+  font-weight: bold;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 180%;
+  z-index: 999;
+  /* border: 1px solid #108dee; */
+`;
+const Icon = styled.div`
+  width: 20%;
+  height: 100%;
+`;
 const Img = styled.img`
   width: 10%;
   height: 15%;
@@ -51,17 +119,10 @@ const OuterContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  /* border: 1px solid red; */
   flex-direction: column;
 `;
 
-const TextContainer = styled.div`
-  width: 16%;
-  height: 3%;
-  display: flex;
-  flex-direction: row;
-  font-size: 1.5rem;
-  margin-left: 30%;
-`;
 const Detail = styled.div`
   margin-right: 15%;
 `;
@@ -191,7 +252,7 @@ const InfoShow = styled.div`
   align-items: center;
   width: 50%;
   height: 100%;
-  border: 1px solid #108dee;
+  border: 2px solid #108dee;
   border-radius: 5px;
 `;
 
@@ -244,6 +305,7 @@ const Control = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
   margin-bottom: 20px;
 `;
 
@@ -279,7 +341,7 @@ const Td = styled.td`
   border-radius: 4px;
   font-size: 1rem;
   width: 6vw;
-  height: 10vh;
+  height: 11vh;
   margin: 1px;
 `;
 const WeekContainer = styled.div`
@@ -372,15 +434,18 @@ function ManageDetail() {
       <Header2 />
       <Container>
         <Title>My Aquarium</Title>
-        <Text>구피와 구구 어항</Text>
+        <TextContainer>
+          <Lv>3</Lv>
+          <Lv2></Lv2>
+          <Lv3></Lv3>
+          <Text>구피와 구구 어항</Text>
+          <Icon></Icon>
+        </TextContainer>
+
         {/* <Img src="/물방울L.png" alt="" /> */}
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
-        <TextContainer>
-          {/* <Detail>실제 물고기 수 : </Detail> */}
-          {/* <Level>Lv. 1 </Level> */}
-        </TextContainer>
         <ImgContainer>
           <MainImg src="/관리어항.png" alt="" />
         </ImgContainer>
@@ -409,7 +474,7 @@ function ManageDetail() {
         </ProgressBar>
         {/* ----------------------------------------- */}
         <ContainerB>
-          <Level>Lv. 1 </Level>
+          <Level></Level>
           <BtnCover>
             <ButtonL>피딩기록</ButtonL>
             <ButtonR>환수기록</ButtonR>
@@ -455,7 +520,7 @@ function ManageDetail() {
 
         {/* ----------------------------------------- */}
 
-        {/* <ManageDetCard /> */}
+        <ManageDetCard />
       </OuterContainer>
     </>
   );

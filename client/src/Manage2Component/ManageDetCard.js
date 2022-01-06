@@ -6,8 +6,8 @@ import ManageDetInfo from "./ManageDetInfo";
 //후에 컴포넌트 이동
 
 const Container = styled.div`
-  /* border: 1px solid black; */
-  width: 99%;
+  border: 1px solid black;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -16,7 +16,7 @@ const Container = styled.div`
   margin-top: 10%;
 `;
 const CardTitle = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   text-align: center;
   z-index: 999;
   width: 30vw;
@@ -24,8 +24,8 @@ const CardTitle = styled.div`
   font-size: 2rem;
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
-  width: 80%;
+  border: 1px solid black;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -37,11 +37,6 @@ function ManageDetCard() {
     <Container>
       <CardTitle>어항 속 물고기 정보</CardTitle>
       <CardContainer>
-        <ManageDetInfo />
-        <ManageDetInfo />
-        <ManageDetInfo />
-        <ManageDetInfo />
-        <ManageDetInfo />
         <ManageDetInfo />
       </CardContainer>
     </Container>
