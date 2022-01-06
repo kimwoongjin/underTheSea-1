@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 17vw;
+  width: 13vw;
   margin-left: 1%;
 `;
 
@@ -26,13 +26,7 @@ const BtnContainer = styled.div`
   justify-content: space-around;
   margin-right: 2%;
   width: 300px;
-  /* font-family: "Kfont"; */
-  /* font-family: "Hfont"; */
-  /* font-family: "Nfont"; */
-  /* font-family: "Efont"; */
-  /* font-family: "Tfont"; */
-  font-family: "Cfont";
-  /* font-family: "SCfont"; */
+  font-family: "Kfont";
 `;
 
 function Header({ handleLogin, handleSignup }) {
@@ -42,10 +36,10 @@ function Header({ handleLogin, handleSignup }) {
       <BtnContainer>
         <Guide>가이드</Guide>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <Search>물고기 검색</Search>
+          <Search>검색</Search>
         </Link>
-        <Signin>로그인</Signin>
-        <Signout>회원가입</Signout>
+        <Login onClick={handleLogin}>로그인</Login>
+        <Signup onClick={handleSignup}>회원가입</Signup>
       </BtnContainer>
     </Container>
   );

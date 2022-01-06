@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import "./Landingpage.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -65,8 +66,8 @@ const TextContainer = styled.div`
   .icon {
     position: absolute;
     z-index: 999;
-    top: 63.5%;
-    left: 45.5%;
+    top: 64%;
+    left: 43%;
   }
 `;
 
@@ -76,28 +77,30 @@ const SearchTitle = styled.div`
   color: black;
   font-size: 2rem;
   top: 63%;
-  left: 35%;
-  font-weight: 650;
+  left: 34%;
+  font-family: "SCBfont";
 `;
 
 const SearchText = styled.div`
   position: absolute;
   text-align: right;
   z-index: 999;
-  font-weight: 650;
+  /* font-weight: 650; */
   color: #092011;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   top: 42%;
-  left: 29%;
+  left: 28%;
   line-height: 150%;
+  font-family: "Kfont";
 `;
 const MainText = styled.div`
   position: absolute;
-  font-weight: 750;
+  font-weight: 900;
   font-size: 2.7rem;
   top: 28%;
   left: 26%;
   color: #092011;
+  font-family: "SCBfont";
 `;
 
 function LandingSearch() {
