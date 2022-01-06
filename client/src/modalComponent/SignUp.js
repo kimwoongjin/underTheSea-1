@@ -172,11 +172,14 @@ const SignupBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
+// ==================================================================================
 
 function SignUp({ onCancel, visible }) {
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
+  //모달 창 애니멘이션 관련
+  //밑에 부분이 회원가입관련
   const [userData, setUserData] = useState({
     email: "",
     user_name: "",
@@ -192,8 +195,8 @@ function SignUp({ onCancel, visible }) {
     });
   };
 
-  //-----------------------
-
+  // ==================================================================================
+  // 유효성 cherUsername/ checkEmail / checkPassword /
   const checkUsername = (user_name) => {
     let regExp = /^([a-zA-Z가-힣]){0,10}$/;
     return regExp.test(user_name);
@@ -205,12 +208,14 @@ function SignUp({ onCancel, visible }) {
     return regExp.test(email);
   };
 
-  const checkPassowrd = (user_pwd) => {
+  const checkpassword = (user_pwd) => {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(user_pwd);
   };
+  // ==================================================================================
 
   const onChangePasswordChk = () => userData.user_pwd === userData.pwd_chk;
+  // 비밀번호 확인
 
   const handleSignup = () => {
     const { email, user_name, user_pwd, pwd_chk } = userData;
@@ -219,7 +224,7 @@ function SignUp({ onCancel, visible }) {
     } else if (
       !checkEmail(email) ||
       !checkUsername(user_name) ||
-      !checkPassowrd(user_pwd) ||
+      !checkpassword(user_pwd) ||
       !onChangePasswordChk()
     ) {
       setErrorMsg("올바른 정보를 입력해주세요");
@@ -240,6 +245,7 @@ function SignUp({ onCancel, visible }) {
             res.data.message === "User account is successfully created"
           ) {
             navigate("/");
+            //경로 메인으로 들어가서 로그인하면 됨
           }
         });
     }
@@ -304,7 +310,7 @@ function SignUp({ onCancel, visible }) {
             onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkPassowrd(userData.user_pwd) || !userData.user_pwd ? (
+          {checkpassword(userData.user_pwd) || !userData.user_pwd ? (
             <Warning />
           ) : (
             <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
