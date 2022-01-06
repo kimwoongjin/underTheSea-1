@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 99vw;
+  width: 100vw;
   height: 10vh;
   background: #d2f7ff;
   display: flex;
@@ -15,8 +15,8 @@ const Img = styled.img`
   margin-left: 1%;
 `;
 
-const Signin = styled.div``;
-const Signout = styled.div``;
+const Login = styled.div``;
+const Signup = styled.div``;
 const Search = styled.div``;
 const Guide = styled.div``;
 const BtnContainer = styled.div`
@@ -35,7 +35,7 @@ const BtnContainer = styled.div`
   /* font-family: "SCfont"; */
 `;
 
-function Header() {
+function Header({ handleLogin, handleSignup }) {
   return (
     <Container>
       <Img src="/로고.png" alt="" />
