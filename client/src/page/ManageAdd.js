@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -38,9 +39,14 @@ function ManageAdd() {
   return (
     <Container>
       <Contents>
-        <div className="icon">
-          <FontAwesomeIcon size="4x" icon={faPlus} />
-        </div>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/manage/addInfo"
+        >
+          <div className="icon">
+            <FontAwesomeIcon size="4x" icon={faPlus} />
+          </div>
+        </Link>
       </Contents>
     </Container>
   );

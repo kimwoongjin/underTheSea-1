@@ -26,4 +26,6 @@ module.exports = {
   usermanage: require("./user/usermanage"),
   usertips: require("./user/usertips"),
   usercomments: require("./user/usercomments"),
+  authgoogle: require("./user/authgoogle"),
+  googlecallback: require("./user/googlecallback"),
 };

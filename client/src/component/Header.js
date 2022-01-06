@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 17vw;
+  width: 13vw;
   margin-left: 1%;
 `;
 
@@ -26,6 +26,7 @@ const BtnContainer = styled.div`
   justify-content: space-around;
   margin-right: 2%;
   width: 300px;
+  font-family: "Kfont";
 `;
 
 function Header({ handleLogin, handleSignup }) {

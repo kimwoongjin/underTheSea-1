@@ -58,31 +58,34 @@ const TextContainer = styled.div`
 const SearchTitle = styled.div`
   position: absolute;
   z-index: 999;
-  font-size: 2rem;
+  font-size: 1.8rem;
   top: 55%;
-  right: 34.5%;
+  right: 34%;
   font-weight: 650;
   color: #092011;
+  font-family: "Kfont";
 `;
 
 const SearchText = styled.div`
   position: absolute;
   text-align: left;
   z-index: 999;
-  font-weight: 650;
+  /* font-weight: 650; */
   color: #092011;
   font-size: 1.5rem;
   top: 43%;
   right: 19.5%;
   line-height: 150%;
+  font-family: "Kfont";
 `;
 const MainText = styled.div`
   position: absolute;
   font-weight: 750;
   font-size: 2.7rem;
-  right: 17%;
+  right: 25.5%;
   top: 29%;
   color: #092011;
+  font-family: "Kfont";
 `;
 
 function LandingManage() {
@@ -91,11 +94,11 @@ function LandingManage() {
       <WomanImg src="메인여자인물3.png" alt="" />
       <Fish src="해파리.png" />
       <TextContainer>
-        <MainText>Daily Fish Manage</MainText>
+        <MainText>주간 어항 관리</MainText>
         <SearchText>
           어항 관리가 필요하세요?<br></br>Under the Sea에서 도와드립니다.
         </SearchText>
-        <SearchTitle>Manage</SearchTitle>
+        <SearchTitle>관리페이지</SearchTitle>
         <div className="icon">
           <FontAwesomeIcon size="2x" icon={faAngleDoubleRight} />
         </div>
