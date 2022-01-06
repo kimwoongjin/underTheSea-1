@@ -16,15 +16,10 @@ module.exports = async (req, res) => {
   // 여기가 redirect uri 이므로
   // 여기서 다시 구글 token_url로 회원정보를 요청한다
   // 정보를 받고 db에 저장을 한 다음 redirect 를 이용해서 다시 메인화면으로 돌아간다.
-  // console.log(req.query);
-  //   const token = req.cookies;
-  //   console.log(token);
-  //   if (token) return res.redirect("https://underthesea.ga");
-
   const { code } = req.query;
-  console.log(req.query);
+  //   console.log(req.query);
   try {
-    console.log("???");
+    // console.log("???");
     const { data } = await axios({
       method: "POST",
       url: `${GOOGLE_AUTH_TOKEN_URL}`,
@@ -41,12 +36,12 @@ module.exports = async (req, res) => {
     });
 
     const access_token = data["access_token"];
-    console.log(access_token);
+    // console.log(access_token);
 
     const { data: userinfo } = await axios.get(
       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
     );
-    console.log(userinfo);
+    // console.log(userinfo);
     const { sub, email, name } = userinfo;
     const userInformation = {
       email: email,
@@ -54,23 +49,23 @@ module.exports = async (req, res) => {
       isSocialLogin: true,
     };
 
-    const userdata = users
+    const userdata = await users
       .findOrCreate({
-        where: userInformation,
+        where: {
+          email: userInformation.email,
+          user_name: userInformation.user_name,
+          isSocialLogin: userInformation.isSocialLogin,
+        },
       })
       .then(([result, create]) => {
-        if (result) {
-          delete result.dataValues.user_pwd;
-
-          return result;
-        }
-        delete create.dataValues.user_pwd;
-
-        return create;
+        return result;
       });
 
+    delete userdata.dataValues.user_pwd;
+    // console.log(userdata.dataValues);
+
     const accessToken = generateAccessToken(userdata.dataValues);
-    console.log(accessToken);
+    // console.log(accessToken);
 
     res.cookie("jwt", accessToken, {
       httpOnly: true,

@@ -23,8 +23,8 @@ module.exports = {
       fish_num: {
         type: Sequelize.INTEGER,
       },
-      level_img: {
-        type: Sequelize.STRING,
+      level: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
