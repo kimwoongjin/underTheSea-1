@@ -205,7 +205,7 @@ function SignUp({ onCancel, visible }) {
     return regExp.test(email);
   };
 
-  const checkPassowrd = (user_pwd) => {
+  const checkPassword = (user_pwd) => {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(user_pwd);
   };
@@ -219,7 +219,7 @@ function SignUp({ onCancel, visible }) {
     } else if (
       !checkEmail(email) ||
       !checkUsername(user_name) ||
-      !checkPassowrd(user_pwd) ||
+      !checkPassword(user_pwd) ||
       !onChangePasswordChk()
     ) {
       setErrorMsg("올바른 정보를 입력해주세요");
@@ -304,7 +304,7 @@ function SignUp({ onCancel, visible }) {
             onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkPassowrd(userData.user_pwd) || !userData.user_pwd ? (
+          {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
             <Warning />
           ) : (
             <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>

@@ -143,18 +143,20 @@ const MainImg = styled.img`
 
 //--------------------------------------------
 
-const Bar = styled.div`
-  padding: 2px;
-  box-sizing: border-box;
-  display: flex;
-  /* border-radius: 5px; */
-  width: 50%;
-  height: 5px;
-  background: #108dee;
-  margin-bottom: 15px;
-  /* border: 2px solid #108dee; */
-`;
 //--------------------------------------------
+const MidContainer = styled.div`
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1%;
+  align-items: center;
+  /* background: #bdc3c7; */
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+`;
+
 const ProgressBar = styled.div`
   padding: 2px;
   box-sizing: border-box;
@@ -162,7 +164,9 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
+  background: white;
   border: 2px solid #108dee;
+  /* z-index: 999; */
 `;
 const Progress = styled.div`
   width: 15%;
@@ -178,10 +182,9 @@ const ContainerB = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
-  /* border: 1px solid red; */
+  margin-bottom: 1%;
 `;
 const BtnCover = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: flex-end;
   width: 30%;
@@ -196,6 +199,16 @@ const ButtonL = styled.button`
   border: 2px solid #108dee;
   color: white;
   font-size: 1rem;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
 `;
 const ButtonR = styled.button`
   width: 45%;
@@ -206,6 +219,16 @@ const ButtonR = styled.button`
   border: 2px solid #108dee;
   color: white;
   font-size: 1rem;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
 `;
 //--------------------------------------------
 const Counter = styled.div`
@@ -220,7 +243,6 @@ const Counter = styled.div`
 const InfoBar = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid red; */
   width: 50%;
   height: 30px;
   border-radius: 5px;
@@ -231,7 +253,6 @@ const InfoBar = styled.div`
 const InfoCover = styled.div`
   width: 30%;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
 `;
 const Info = styled.div`
@@ -250,6 +271,7 @@ const InfoShow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
   width: 50%;
   height: 100%;
   border: 2px solid #108dee;
@@ -450,37 +472,38 @@ function ManageDetail() {
           <MainImg src="/관리어항.png" alt="" />
         </ImgContainer>
         {/* ----------------------------------------- */}
-        <InfoBar>
-          <InfoCover>
-            <Info>
-              <FontAwesomeIcon icon={faFish} color="#108dee" size="2x" />
-            </Info>
-            <InfoShow>14마리</InfoShow>
-          </InfoCover>
+        <MidContainer>
+          <InfoBar>
+            <InfoCover>
+              <Info>
+                <FontAwesomeIcon icon={faFish} color="#108dee" size="2x" />
+              </Info>
+              <InfoShow>14마리</InfoShow>
+            </InfoCover>
 
-          <InfoCover>
-            <Info>주간 피딩횟수</Info>
-            <InfoShow>8회</InfoShow>
-          </InfoCover>
+            <InfoCover>
+              <Info>주간 피딩횟수</Info>
+              <InfoShow>8회</InfoShow>
+            </InfoCover>
 
-          <InfoCover>
-            <Info>주간 환수횟수</Info>
-            <InfoShow>2회</InfoShow>
-          </InfoCover>
-        </InfoBar>
-        {/* <Bar></Bar> */}
-        <ProgressBar>
-          <Progress></Progress>
-        </ProgressBar>
-        {/* ----------------------------------------- */}
-        <ContainerB>
-          <Level></Level>
-          <BtnCover>
-            <ButtonL>피딩기록</ButtonL>
-            <ButtonR>환수기록</ButtonR>
-          </BtnCover>
-        </ContainerB>
-
+            <InfoCover>
+              <Info>주간 환수횟수</Info>
+              <InfoShow>2회</InfoShow>
+            </InfoCover>
+          </InfoBar>
+          {/* <Bar></Bar> */}
+          <ProgressBar>
+            <Progress></Progress>
+          </ProgressBar>
+          {/* ----------------------------------------- */}
+          <ContainerB>
+            <Level></Level>
+            <BtnCover>
+              <ButtonL>피딩기록</ButtonL>
+              <ButtonR>환수기록</ButtonR>
+            </BtnCover>
+          </ContainerB>
+        </MidContainer>
         {/* -------------------- 달력 ------------------- */}
         <CalendarContainer>
           <Control>
