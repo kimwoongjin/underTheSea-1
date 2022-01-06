@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import "./Landingpage.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -72,26 +73,45 @@ const TilteContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+// const Img = styled.img`
+//   position: absolute;
+//   top: 0%;
+//   left: 38%;
+//   width: 25%;
+// `;
 const Title = styled.div`
   position: absolute;
   z-index: 999;
   font-weight: 800;
   color: #092011;
-  font-size: 3rem;
-  top: 18%;
-  left: 39.5%;
+  font-size: 2.7rem;
+  top: 20%;
+  left: 40%;
+  /* font-family: "KBfont"; */
+  /* font-family: "Hfont"; */
+  /* font-family: "NBfont"; */
+  /* font-family: "EBfont"; */
+  /* font-family: "TBfont"; */
+  font-family: "CBfont";
+  /* font-family: "SCBfont"; */
 `;
 const Contents = styled.div`
   position: absolute;
   z-index: 999;
   color: #092011;
   font-size: 1.5rem;
-  top: 28%;
-  left: 40%;
+  top: 32%;
+  left: 39%;
   font-weight: 460;
   line-height: 140%;
   text-align: center;
+  /* font-family: "Kfont"; */
+  /* font-family: "Hfont"; */
+  /* font-family: "Nfont"; */
+  /* font-family: "Efont"; */
+  /* font-family: "Tfont"; */
+  font-family: "Cfont";
+  /* font-family: "SCfont"; */
 `;
 
 function Landingpage() {
@@ -103,7 +123,8 @@ function Landingpage() {
       <Shark src="상어.png" />
       <JellyFish src="해파리.png" />
       <TilteContainer>
-        <Title>My Aquarium</Title>
+        {/* <Img src="/메인.png"></Img> */}
+        <Title id="title">My Aquarium</Title>
         <Contents>
           당신의 물 속 세상을 만나보세요.
           <br></br> Under The Sea가 함께합니다.

@@ -26,6 +26,13 @@ const BtnContainer = styled.div`
   justify-content: space-around;
   margin-right: 2%;
   width: 300px;
+  /* font-family: "Kfont"; */
+  /* font-family: "Hfont"; */
+  /* font-family: "Nfont"; */
+  /* font-family: "Efont"; */
+  /* font-family: "Tfont"; */
+  font-family: "Cfont";
+  /* font-family: "SCfont"; */
 `;
 
 function Header() {
@@ -33,12 +40,12 @@ function Header() {
     <Container>
       <Img src="/로고.png" alt="" />
       <BtnContainer>
-        <Guide>Guide</Guide>
+        <Guide>가이드</Guide>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <Search>Search</Search>
+          <Search>물고기 검색</Search>
         </Link>
-        <Signin>SignIn</Signin>
-        <Signout>SignOut</Signout>
+        <Signin>로그인</Signin>
+        <Signout>회원가입</Signout>
       </BtnContainer>
     </Container>
   );
