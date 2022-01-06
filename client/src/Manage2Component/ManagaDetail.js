@@ -320,6 +320,7 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* border: 2px solid darkgrey; */
 `;
 
 const Control = styled.div`
@@ -342,9 +343,13 @@ const Span = styled.span`
   font-size: 1.5rem;
 `;
 
-const Table = styled.table``;
+const Table = styled.table`
+  /* border: 1px solid gray; */
+`;
 
-const Tbody = styled.tbody``;
+const Tbody = styled.tbody`
+  /* border: 1px dashed blue; */
+`;
 
 const Tr = styled.tr`
   display: flex;
@@ -354,24 +359,25 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
 `;
 
 const Td = styled.td`
   display: flex;
   border: 1px solid gray;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   font-size: 1rem;
-  width: 6vw;
-  height: 11vh;
-  margin: 1px;
+  width: 6.8vw;
+  height: 13vh;
+  /* margin: 1px; */
 `;
 const WeekContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  /* border: 1px solid red; */
   .sun {
     color: red;
   }
@@ -383,9 +389,10 @@ const Day = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  width: 6.15vw;
+  width: 7vw;
   height: 3vh;
-  margin: 1px;
+  /* margin: 1px; */
+  /* border: 1px solid black; */
 `;
 function showText(e) {
   console.log(e.target.value);
