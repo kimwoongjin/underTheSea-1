@@ -10,6 +10,14 @@ const indexRouter = require("./routes");
 
 const port = 80;
 
+const fs = require("fs");
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
+const { uploadFile, getFileStream } = require("./s3");
 //const fs = require("fs");
 const app = express();
 app.use(express.json());
@@ -34,6 +42,25 @@ app.get("/status", (req, res) => {
     return res.status(200).send("DB connected!!!!!");
   });
 });
+
+app.get("/images/:key", (req, res) => {
+  console.log(req.params);
+  const key = req.params.key;
+  const readStream = getFileStream(key);
+  console.log(readStream);
+  readStream.pipe(res);
+});
+
+app.post("/images", upload.single("image"), async (req, res) => {
+  const file = req.file;
+  const result = await uploadFile(file);
+  await unlinkFile(file.path);
+  console.log(result);
+  const description = req.body.description;
+  console.log(description);
+  res.send({ imagePath: `/images/${result.Key}`, description });
+});
+
 app.use("/", indexRouter);
 
 let server;

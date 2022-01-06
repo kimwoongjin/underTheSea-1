@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
     salinity,
     theme,
     fish_id,
+    level: 1,
   });
   return res.status(201).json({
     data: new_container.dataValues,
