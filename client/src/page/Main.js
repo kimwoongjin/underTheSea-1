@@ -7,24 +7,39 @@ import LandingManage from "../Landing_component/LandingManage";
 import LandingGuide from "../Landing_component/LandingGuide";
 import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
+import SignUp from "../modalComponent/SignUp";
 
 function Main() {
   const [LoginModal, setLoginModal] = useState(false);
+  const [SignupModal, setSignupModal] = useState(false);
   const handleLogin = () => {
     setLoginModal(true);
   };
   const onCancel = () => {
     setLoginModal(false);
   };
+  const handleSignup = () => {
+    setSignupModal(true);
+    console.log("모달온", SignupModal);
+  };
+  const signupCancel = () => {
+    setSignupModal(false);
+    console.log("모달오프", SignupModal);
+  };
   return (
     <>
-      <Header handleLogin={handleLogin}></Header>
+      <Header handleLogin={handleLogin} handleSignup={handleSignup}></Header>
       <Landingpage></Landingpage>
       <LandingSearch></LandingSearch>
       <LandingManage></LandingManage>
       <LandingGuide></LandingGuide>
       <Footer></Footer>
       {LoginModal ? <Login visible={LoginModal} onCancel={onCancel} /> : ""}
+      {SignupModal ? (
+        <SignUp visible={SignupModal} onCancel={signupCancel} />
+      ) : (
+        ""
+      )}
     </>
   );
 }

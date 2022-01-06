@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
   /* border-bottom: 1px solid black; */
   display: flex;
