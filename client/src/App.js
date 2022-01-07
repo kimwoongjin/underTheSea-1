@@ -25,20 +25,23 @@ function App() {
     url.searchParams.get("code")
   );
 
-  useEffect(() => {
-    if (isLogin) {
-      axios({
-        method: "GET",
-        url: ``,
-        headers: {
-          accept: "application/json",
-          Authorization: accessToken,
-        },
-      }).then((res) => {
-        setUserinfo(res.data.userData);
-      });
-    }
-  }, [isLogin]);
+  const handleL = (value) => {
+    setIsLogin(value);
+  };
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     axios({
+  //       method: "GET",
+  //       url: ``,
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization: accessToken,
+  //       },
+  //     }).then((res) => {
+  //       setUserinfo(res.data.userData);
+  //     });
+  //   }
+  // }, [isLogin]);
 
   // useEffect(() => {
   //   if (nCodauthorizatioe) {
@@ -46,28 +49,19 @@ function App() {
   //   }
   // }, [authorizationCode]);
 
-  const handleL = (value) => {
-    setIsLogin(value);
-  };
-
-  const handleAccessToken = (accToken) => {
-    // 액세스토큰 저장
-    setAccessToken(accToken);
-  };
-
-  const getGoogleAccessToken = (authorizationCode) => {
-    //! 서버의 해당 엔드포인트로 authorization code를 보내주고 access token을 받아옴
-    axios
-      .post("", {
-        // 전달할 데이터 부분
-        authorizationCode,
-      })
-      .then((result) => {
-        // console.dir(result)
-        setAccessToken(result.data.accessToken);
-        setIsLogin(true);
-      });
-  };
+  // const getGoogleAccessToken = (authorizationCode) => {
+  //   //! 서버의 해당 엔드포인트로 authorization code를 보내주고 access token을 받아옴
+  //   axios
+  //     .post("", {
+  //       // 전달할 데이터 부분
+  //       authorizationCode,
+  //     })
+  //     .then((result) => {
+  //       // console.dir(result)
+  //       setAccessToken(result.data.accessToken);
+  //       setIsLogin(true);
+  //     });
+  // };
   return (
     <Routes>
       <Route

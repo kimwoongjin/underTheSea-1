@@ -99,6 +99,7 @@ const CancleBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
   :hover::before {
     content: "";
     position: absolute;
@@ -120,6 +121,7 @@ const SignOutBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
   :hover::before {
     content: "";
     position: absolute;
@@ -136,11 +138,8 @@ function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
   const navigate = useNavigate();
   function signOut() {
     axios
-      .delete("", {
-        headers: {
-          accept: "application/json",
-          Authorization: accessToken,
-        },
+      .delete("http://localhost:80/user", {
+        headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
         setIsLogin(false);
@@ -163,7 +162,9 @@ function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
             </Text>
           </TextForm>
           <Btn>
-            <CancleBtn type="button">아니요. 취소합니다.</CancleBtn>
+            <CancleBtn type="button" onClick={closeModal}>
+              아니요. 취소합니다.
+            </CancleBtn>
             <SignOutBtn type="button" onClick={signOut}>
               네. 탈퇴합니다.
             </SignOutBtn>

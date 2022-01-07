@@ -8,7 +8,6 @@ import LandingGuide from "../Landing_component/LandingGuide";
 import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
-import SignOut from "../modalComponent/SignOut";
 
 function Main(
   isLogin,
@@ -36,7 +35,11 @@ function Main(
   };
   return (
     <>
-      <Header handleLogin={handleLogin} handleSignup={handleSignup}></Header>
+      <Header
+        handleLogin={handleLogin}
+        handleSignup={handleSignup}
+        signupCancel={signupCancel}
+      ></Header>
       <Landingpage></Landingpage>
       <LandingSearch></LandingSearch>
       <LandingManage></LandingManage>
