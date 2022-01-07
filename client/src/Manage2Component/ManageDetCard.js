@@ -35,7 +35,7 @@ const CardContainer = styled.div`
 function ManageDetCard() {
   return (
     <Container>
-      <CardTitle>어항 속 물고기 정보</CardTitle>
+      <CardTitle></CardTitle>
       <CardContainer>
         <ManageDetInfo />
       </CardContainer>

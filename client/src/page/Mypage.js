@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import Header from "../component/Header";
 import { useState, useEffect } from "react";
+import SignOut from "../modalComponent/SignOut";
 
 const Container = styled.div`
   position: relative;
@@ -117,7 +118,7 @@ const BoxImg = styled.img`
 // 내용이 없을 시 박스와 함께 manage, contents, comment 문구가 나타나야 한다.
 
 const ManageText = styled.div`
-  z-index: 999;
+  z-index: 99;
   position: absolute;
   top: 56%;
   font-size: 1.5rem;
@@ -133,9 +134,17 @@ const ManageText = styled.div`
 //   font-size: 1.5rem;
 // `;
 
-function Mypage() {
+function Mypage({ isLogin, userinfo, accessToken, setIsLogin }) {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const GetClick = (e) => {
     setCurrentClick(e.target.id);
@@ -166,7 +175,18 @@ function Mypage() {
       </Container>
       <Box1>
         <ButtonL>비밀번호 변경</ButtonL>
-        <ButtonR>회원가입</ButtonR>
+        <ButtonR onClick={openModal}>회원탈퇴</ButtonR>
+        {showModal ? (
+          <SignOut
+            showModal={showModal}
+            closeModal={closeModal}
+            userinfo={userinfo}
+            accessToken={accessToken}
+            setIsLogin={setIsLogin}
+          />
+        ) : (
+          ""
+        )}
       </Box1>
       <ContentContainer>
         <Box2>
