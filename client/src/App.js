@@ -10,6 +10,9 @@ import SeaWaterGuide from "./page/SeaWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false); // 로그인 여부: true/fale로 구분
@@ -37,11 +40,11 @@ function App() {
     }
   }, [isLogin]);
 
-  useEffect(() => {
-    if (nCodauthorizatioe) {
-      getGoogleAccessToken(authorizationCode);
-    }
-  }, [authorizationCode]);
+  // useEffect(() => {
+  //   if (nCodauthorizatioe) {
+  //     getGoogleAccessToken(authorizationCode);
+  //   }
+  // }, [authorizationCode]);
 
   // const handleLogin = (value) => {
   //   setIsLogin(value)
@@ -94,6 +97,7 @@ function App() {
             isLogin={isLogin}
             userinfo={userinfo}
             accessToken={accessToken}
+            setIsLogin={setIsLogin}
           />
         }
       ></Route>
