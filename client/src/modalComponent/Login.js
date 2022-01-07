@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const fadeIn = keyframes`
     from {
@@ -70,6 +71,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   display: flex;
   /* justify-content: space-between; */
+  border-radius: 20px;
   align-items: center;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
@@ -177,7 +179,9 @@ const GoogleBtn = styled.button`
 const GoogleIcon = styled.img`
   width: 30%;
 `;
-function Login({ onCancel, visible }) {
+function Login({ onCancel, visible, handleL, handleAccessToken }) {
+  const navigate = useNavigate();
+  const [invalidLogin, setInvalidLogin] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
   const [userData, setUserData] = useState({
@@ -189,6 +193,31 @@ function Login({ onCancel, visible }) {
       ...userData,
       [e.target.name]: e.target.value,
     });
+  };
+  const handleLogin = () => {
+    const { email, user_pwd } = userData;
+
+    if (email && user_pwd) {
+      axios
+        .post(`http://localhost:80/user/login`, { data: userData })
+        .then((res) => {
+          console.log(res.headers);
+          if (res.data.token) {
+            console.log("res-->", res);
+            handleAccessToken(res.data.token);
+            handleL();
+            navigate("/mypage");
+          }
+        })
+        .then(() => {})
+        .catch((err) => {
+          if (err) {
+            setInvalidLogin(true);
+          }
+        });
+    } else {
+      setInvalidLogin(true);
+    }
   };
 
   useEffect(() => {
@@ -226,7 +255,9 @@ function Login({ onCancel, visible }) {
             onChange={handleInputValue}
           />
 
-          <LoginBtn type="button">로그인</LoginBtn>
+          <LoginBtn type="button" onClick={handleLogin}>
+            로그인
+          </LoginBtn>
           <GoogleBtn type="button">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />

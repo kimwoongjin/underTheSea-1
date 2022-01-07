@@ -72,6 +72,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   display: flex;
   /* justify-content: space-between; */
+  border-radius: 20px;
   align-items: center;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
@@ -174,7 +175,7 @@ const SignupBtn = styled.button`
 `;
 // ==================================================================================
 
-function SignUp({ onCancel, visible }) {
+function SignUp({ onCancel, visible, signupCancel }) {
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
@@ -208,7 +209,7 @@ function SignUp({ onCancel, visible }) {
     return regExp.test(email);
   };
 
-  const checkpassword = (user_pwd) => {
+  const checkPassword = (user_pwd) => {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(user_pwd);
   };
@@ -219,19 +220,20 @@ function SignUp({ onCancel, visible }) {
 
   const handleSignup = () => {
     const { email, user_name, user_pwd, pwd_chk } = userData;
+    console.log("유저데이터", userData);
     if (!email || !user_name || !user_pwd || !pwd_chk) {
       setErrorMsg("필수 정보를 모두 입력해주세요");
     } else if (
       !checkEmail(email) ||
       !checkUsername(user_name) ||
-      !checkpassword(user_pwd) ||
+      !checkPassword(user_pwd) ||
       !onChangePasswordChk()
     ) {
       setErrorMsg("올바른 정보를 입력해주세요");
     } else {
       setErrorMsg("");
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/user/signup`, {
+        .post(`http://localhost:80/user/signup`, {
           data: {
             email,
             user_name,
@@ -239,15 +241,18 @@ function SignUp({ onCancel, visible }) {
           },
         })
         .then((res) => {
+          console.log("res", res);
           if (res.data.message === "Email is already in use") {
+            console.log("메세지뭐냐?", res.data.message);
             setErrorMsg("이미 사용중인 이메일입니다");
-          } else if (
-            res.data.message === "User account is successfully created"
-          ) {
-            navigate("/");
+          } else {
+            console.log("왔냐?");
+            // signupCancel();
+            navigate("/mypage");
             //경로 메인으로 들어가서 로그인하면 됨
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -310,7 +315,7 @@ function SignUp({ onCancel, visible }) {
             onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkpassword(userData.user_pwd) || !userData.user_pwd ? (
+          {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
             <Warning />
           ) : (
             <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
