@@ -9,18 +9,17 @@ import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
 
-function Main(
+function Main({
   isLogin,
   setIsLogin,
   userinfo,
   accessToken,
   handleAccessToken,
-  handleL
-) {
-
+  handleL,
+}) {
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
-
+  // 이거는 모달창키는거라서
   const handleLogin = () => {
     setLoginModal(true);
   };
@@ -37,7 +36,12 @@ function Main(
   };
   return (
     <>
-      <Header handleLogin={handleLogin} handleSignup={handleSignup}></Header>
+      <Header
+        isLogin={isLogin}
+        handleLogin={handleLogin}
+        handleSignup={handleSignup}
+        signupCancel={signupCancel}
+      ></Header>
       <Landingpage></Landingpage>
       <LandingSearch></LandingSearch>
       <LandingManage></LandingManage>
@@ -62,7 +66,6 @@ function Main(
           userinfo={userinfo}
           accessToken={accessToken}
         />
-
       ) : (
         ""
       )}

@@ -136,11 +136,8 @@ function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
   const navigate = useNavigate();
   function signOut() {
     axios
-      .delete("", {
-        headers: {
-          accept: "application/json",
-          Authorization: accessToken,
-        },
+      .delete("http://localhost:80/user", {
+        headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
         setIsLogin(false);

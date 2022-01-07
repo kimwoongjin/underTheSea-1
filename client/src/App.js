@@ -24,21 +24,25 @@ function App() {
   const [authorizationCode, setAuthorizationCode] = useState(
     url.searchParams.get("code")
   );
-
   useEffect(() => {
-    if (isLogin) {
-      axios({
-        method: "GET",
-        url: ``,
-        headers: {
-          accept: "application/json",
-          Authorization: accessToken,
-        },
-      }).then((res) => {
-        setUserinfo(res.data.userData);
-      });
-    }
+    console.log("이즈로그인", isLogin);
+    console.log("토큰토큰~", accessToken);
   }, [isLogin]);
+
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     axios({
+  //       method: "GET",
+  //       url: ``,
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization: accessToken,
+  //       },
+  //     }).then((res) => {
+  //       setUserinfo(res.data.userData);
+  //     });
+  //   }
+  // }, [isLogin]);
 
   // useEffect(() => {
   //   if (nCodauthorizatioe) {
@@ -46,8 +50,8 @@ function App() {
   //   }
   // }, [authorizationCode]);
 
-  const handleL = (value) => {
-    setIsLogin(value);
+  const handleL = () => {
+    setIsLogin(true);
   };
 
   const handleAccessToken = (accToken) => {
@@ -70,7 +74,6 @@ function App() {
   };
   return (
     <Routes>
-
       <Route
         path="/"
         element={
@@ -79,12 +82,11 @@ function App() {
             userinfo={userinfo}
             accessToken={accessToken}
             handleAccessToken={handleAccessToken}
-            setIsLogin={setIsLogin}
+            // setIsLogin={setIsLogin}
             handleL={handleL}
           />
         }
       ></Route>
-
 
       <Route path="/guide" element={<Guide />}></Route>
       <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
