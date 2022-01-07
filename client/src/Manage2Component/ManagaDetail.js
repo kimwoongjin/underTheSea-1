@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { faFish } from "@fortawesome/free-solid-svg-icons";
+import AquaInfo from "../modalComponent/AquaInfo";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -39,62 +40,10 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #108dee;
-  border-bottom-left-radius: 25px;
-`;
-const Lv = styled.div`
-  width: 20%;
-  background: #108dee;
-  height: 100%;
-  border-bottom: 1px solid #108dee;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
+  /* border: 2px solid #108dee; */
+  /* border-bottom-left-radius: 25px; */
 `;
 
-const Lv2 = styled.div`
-  position: absolute;
-  top: 0px;
-  left: 20%;
-  width: 20%;
-  background: white;
-  height: 100%;
-  border-bottom: 1px solid #108dee;
-  /* border-top-right-radius: 30px; */
-  /* border-top-left-radius: 30px; */
-  border-bottom-left-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  z-index: 99;
-`;
-const Lv3 = styled.div`
-  position: absolute;
-  top: 0px;
-  left: 20%;
-  width: 20%;
-  background: #108dee;
-  height: 100%;
-  border-bottom: 1px solid #108dee;
-  /* border-top-right-radius: 25px; */
-  /* border-top-left-radius: 25px; */
-  /* border-bottom-left-radius: 25px; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-`;
 const Text = styled.div`
   width: 60%;
   font-weight: bold;
@@ -104,31 +53,52 @@ const Text = styled.div`
   z-index: 999;
   /* border: 1px solid #108dee; */
 `;
-const Icon = styled.div`
-  width: 20%;
-  height: 100%;
-`;
-const Img = styled.img`
-  width: 10%;
-  height: 15%;
-  /* margin: 10% 0 0 28%; */
-`;
 
 const OuterContainer = styled.div`
   width: 100%;
   position: relative;
   display: flex;
   align-items: center;
-  /* border: 1px solid red; */
   flex-direction: column;
 `;
 
-const Detail = styled.div`
-  margin-right: 15%;
-`;
 const Level = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  height: 30px;
   font-weight: bold;
   font-size: 1.5rem;
+`;
+const LevelCover = styled.div`
+  display: flex;
+  width: 8%;
+`;
+const LevelText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  color: #008eff;
+  /* border: 1px solid red; */
+  font-weight: bold;
+  font-family: "Kfont";
+`;
+
+const Logo = styled.img`
+  width: 20%;
+`;
+
+const Levelinfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-size: 1.2rem;
+  /* color: #008eff; */
+  /* border: 1px solid red; */
+  /* font-weight: bold; */
+  font-family: "Kfont";
 `;
 const ImgContainer = styled.div`
   /* margin: 2%; */
@@ -144,18 +114,43 @@ const MainImg = styled.img`
 //--------------------------------------------
 
 //--------------------------------------------
+// const MidContainer = styled.div`
+//   width: 100%;
+//   /* border: 1px solid red; */
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   margin-top: 1%;
+//   align-items: center;
+//   /* background: #bdc3c7; */
+//   /* background-color: rgba(0, 0, 0, 0.1); */
+//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+// `;
+
 const MidContainer = styled.div`
   width: 100%;
   /* border: 1px solid red; */
+  height: 20vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 1%;
   align-items: center;
-  /* background: #bdc3c7; */
+  /* background: #00d2ff; */
   /* background-color: rgba(0, 0, 0, 0.1); */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
+
+// const ProgressBar = styled.div`
+//   position: absolute;
+//   left: 0;
+//   width: ${(props) => (props.bar ? props.bar : "50%")};
+//   height: 100%;
+//   border-top-left-radius: 10px;
+//   border-bottom-left-radius: 10px;
+//   box-shadow: -5px 0 0 0 #bbdd3e inset;
+//   background-color: #a2c523;
+// `;
 
 const ProgressBar = styled.div`
   padding: 2px;
@@ -166,7 +161,6 @@ const ProgressBar = styled.div`
   height: 4vh;
   background: white;
   border: 2px solid #108dee;
-  /* z-index: 999; */
 `;
 const Progress = styled.div`
   width: 15%;
@@ -176,25 +170,26 @@ const Progress = styled.div`
   background: linear-gradient(#00d2ff, #3a7bd5);
 `;
 //--------------------------------------------
-const ContainerB = styled.div`
+const BtnContainer = styled.div`
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   width: 50%;
-  height: 4vh;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  height: 6vh;
+
+  .info {
+    background: white;
+    color: #108dee;
+  }
 `;
-const BtnCover = styled.div`
-  display: flex;
-  justify-content: flex-end;
+
+const Button = styled.button`
   width: 30%;
-`;
-const ButtonL = styled.button`
-  width: 45%;
   height: 100%;
   border-radius: 5px;
   font-weight: bold;
-  margin-right: 5%;
+  font-family: "Kfont";
+
   background: #108dee;
   border: 2px solid #108dee;
   color: white;
@@ -210,26 +205,7 @@ const ButtonL = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-const ButtonR = styled.button`
-  width: 45%;
-  height: 100%;
-  border-radius: 5px;
-  font-weight: bold;
-  background: #108dee;
-  border: 2px solid #108dee;
-  color: white;
-  font-size: 1rem;
-  position: relative;
-  :hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.07);
-  }
-`;
+
 //--------------------------------------------
 const Counter = styled.div`
   border: 1px solid black;
@@ -239,78 +215,6 @@ const Counter = styled.div`
   margin-top: 2%;
   display: flex;
 `;
-//--------------------------------------------
-const InfoBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-  height: 30px;
-  border-radius: 5px;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  display: flex;
-`;
-const InfoCover = styled.div`
-  width: 30%;
-  height: 100%;
-  display: flex;
-`;
-const Info = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #108dee;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 50%;
-  height: 100%;
-  /* background: #108dee; */
-`;
-
-const InfoShow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  width: 50%;
-  height: 100%;
-  border: 2px solid #108dee;
-  border-radius: 5px;
-`;
-
-//--------------------------------------------
-
-// const Feeding = styled.div`
-//   border: 1px solid black;
-//   width: 46.5%;
-//   height: 17vh;
-//   margin-right: 7%;
-//   border-radius: 30px;
-//   background: #108dee;
-//   border: 2px solid #108dee;
-// `;
-// const Changing = styled.div`
-//   border: 1px solid black;
-//   width: 46.5%;
-//   height: 17vh;
-//   border-radius: 30px;
-//   background: #108dee;
-//   border: 2px solid #108dee;
-// `;
-// const TextN = styled.div`
-//   color: white;
-//   text-align: center;
-//   font-size: 2rem;
-//   margin-top: 8%;
-// `;
-// const Input = styled.input`
-//   background: white;
-//   border: none;
-//   width: 60%;
-//   height: 22%;
-//   border-radius: 10px;
-//   margin: 6% 0 0 20%;
-// `;
 
 //------------------- 캘린더 --------------------
 const CalendarContainer = styled.div`
@@ -394,11 +298,12 @@ const Day = styled.div`
   /* margin: 1px; */
   /* border: 1px solid black; */
 `;
-function showText(e) {
-  console.log(e.target.value);
-}
+// 지금 해야되는거는 피딩기록하는 버튼을 누르면 버튼을 누른 숫자만큼 클릭한 날에 달력에 정보가 보여야해
 
 function ManageDetail() {
+  let feedingNum = 0;
+  let today1 = Date();
+  const [infoModal, setInfoModal] = useState(false);
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
@@ -406,6 +311,18 @@ function ManageDetail() {
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
+
+  const feedingCounter = () => {
+    feedingNum++;
+    // console.log(feedingNum);
+    console.log(today1);
+  };
+  const InfoModalOn = () => {
+    setInfoModal(true);
+  };
+  const InfoModalOff = () => {
+    setInfoModal(false);
+  };
 
   // ------ 달력날짜 랜더링 ------ //
 
@@ -464,11 +381,11 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          <Lv>3</Lv>
-          <Lv2></Lv2>
-          <Lv3></Lv3>
+          {/* <Lv>3</Lv> */}
+          {/* <Lv2></Lv2> */}
+          {/* <Lv3></Lv3> */}
           <Text>구피와 구구 어항</Text>
-          <Icon></Icon>
+          {/* <Icon></Icon> */}
         </TextContainer>
 
         {/* <Img src="/물방울L.png" alt="" /> */}
@@ -479,38 +396,30 @@ function ManageDetail() {
           <MainImg src="/관리어항.png" alt="" />
         </ImgContainer>
         {/* ----------------------------------------- */}
+
+        {/* ----------------------- */}
+
         <MidContainer>
-          <InfoBar>
-            <InfoCover>
-              <Info>
-                <FontAwesomeIcon icon={faFish} color="#108dee" size="2x" />
-              </Info>
-              <InfoShow>14마리</InfoShow>
-            </InfoCover>
-
-            <InfoCover>
-              <Info>주간 피딩횟수</Info>
-              <InfoShow>8회</InfoShow>
-            </InfoCover>
-
-            <InfoCover>
-              <Info>주간 환수횟수</Info>
-              <InfoShow>2회</InfoShow>
-            </InfoCover>
-          </InfoBar>
-          {/* <Bar></Bar> */}
+          {/* ----------------------------------------- */}
+          <Level>
+            <LevelCover>
+              <LevelText>Lv.</LevelText>
+              <Levelinfo>6</Levelinfo>
+            </LevelCover>
+            <Logo src="/로고.png" />
+          </Level>
           <ProgressBar>
             <Progress></Progress>
           </ProgressBar>
-          {/* ----------------------------------------- */}
-          <ContainerB>
-            <Level></Level>
-            <BtnCover>
-              <ButtonL>피딩기록</ButtonL>
-              <ButtonR>환수기록</ButtonR>
-            </BtnCover>
-          </ContainerB>
+          <BtnContainer>
+            <Button onClick={feedingCounter}>피딩기록</Button>
+            <Button onClick={InfoModalOn} className="info">
+              수조정보
+            </Button>
+            <Button>환수기록</Button>
+          </BtnContainer>
         </MidContainer>
+
         {/* -------------------- 달력 ------------------- */}
         <CalendarContainer>
           <Control>
@@ -552,6 +461,11 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
+      {infoModal ? (
+        <AquaInfo onCancel={InfoModalOff} visible={infoModal} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
