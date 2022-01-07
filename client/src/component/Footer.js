@@ -49,11 +49,11 @@ const LinkTag = styled.div`
   flex-direction: column;
   line-height: 170%;
   font-size: 1rem;
-  a:link {
+  #link1 {
     color: white;
     text-decoration: none;
   }
-  a:hover {
+  #link1:hover {
     color: #9ce6ff;
     text-decoration: underline;
   }
@@ -105,7 +105,7 @@ function Footer() {
         김웅진<br></br>박기정<br></br>송다영<br></br>정성우
       </NameTag>
       <LinkTag>
-        <a href="https://github.com/kimwoongjin">
+        <a id="link1" href="https://github.com/kimwoongjin">
           https://github.com/kimwoongjin
         </a>
         <a id="link2" href="https://github.com/pgj0116">
