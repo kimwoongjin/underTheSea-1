@@ -28,7 +28,7 @@ const BtnContainer = styled.div`
   font-family: "Kfont";
 `;
 
-function Header({ handleLogin, handleSignup }) {
+function Header({ handleLogin, handleSignup, signupCancel, isLogin }) {
   return (
     <Container>
       <Img src="/로고.png" alt="" />
@@ -38,7 +38,9 @@ function Header({ handleLogin, handleSignup }) {
           <Search>검색</Search>
         </Link>
         <Login onClick={handleLogin}>로그인</Login>
-        <Signup onClick={handleSignup}>회원가입</Signup>
+        <Signup onClick={handleSignup} signupCancel={signupCancel}>
+          회원가입
+        </Signup>
       </BtnContainer>
     </Container>
   );

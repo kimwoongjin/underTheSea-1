@@ -71,6 +71,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   display: flex;
   /* justify-content: space-between; */
+  border-radius: 20px;
   align-items: center;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
@@ -178,7 +179,7 @@ const GoogleBtn = styled.button`
 const GoogleIcon = styled.img`
   width: 30%;
 `;
-function Login({ onCancel, visible }) {
+function Login({ onCancel, visible, handleL, handleAccessToken }) {
   const navigate = useNavigate();
   const [invalidLogin, setInvalidLogin] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -198,15 +199,17 @@ function Login({ onCancel, visible }) {
 
     if (email && user_pwd) {
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/user/login`, { userData })
+        .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
+          console.log(res.headers);
           if (res.data.token) {
-            // setToken(res.data.token);
+            console.log("res-->", res);
+            handleAccessToken(res.data.token);
+            handleL();
+            navigate("/mypage");
           }
         })
-        .then(() => {
-          navigate("/mypage");
-        })
+        .then(() => {})
         .catch((err) => {
           if (err) {
             setInvalidLogin(true);
