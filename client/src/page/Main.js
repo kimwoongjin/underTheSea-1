@@ -8,8 +8,9 @@ import LandingGuide from "../Landing_component/LandingGuide";
 import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
+import SignOut from "../modalComponent/SignOut";
 
-function Main() {
+function Main(isLogin, userinfo, accessToken, handleAccessToken) {
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
   const handleLogin = () => {
@@ -36,7 +37,14 @@ function Main() {
       <Footer></Footer>
       {LoginModal ? <Login visible={LoginModal} onCancel={onCancel} /> : ""}
       {SignupModal ? (
-        <SignUp visible={SignupModal} onCancel={signupCancel} />
+        <SignUp
+          visible={SignupModal}
+          onCancel={signupCancel}
+          isLogin={isLogin}
+          userinfo={userinfo}
+          accessToken={accessToken}
+          handleAccessToken={handleAccessToken}
+        />
       ) : (
         ""
       )}
