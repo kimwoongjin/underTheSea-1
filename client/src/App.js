@@ -46,9 +46,9 @@ function App() {
   //   }
   // }, [authorizationCode]);
 
-  // const handleLogin = (value) => {
-  //   setIsLogin(value)
-  // }
+  const handleL = (value) => {
+    setIsLogin(value);
+  };
 
   const handleAccessToken = (accToken) => {
     // 액세스토큰 저장
@@ -70,7 +70,22 @@ function App() {
   };
   return (
     <Routes>
-      <Route path="/" element={<Main />}></Route>
+
+      <Route
+        path="/"
+        element={
+          <Main
+            isLogin={isLogin}
+            userinfo={userinfo}
+            accessToken={accessToken}
+            handleAccessToken={handleAccessToken}
+            setIsLogin={setIsLogin}
+            handleL={handleL}
+          />
+        }
+      ></Route>
+
+
       <Route path="/guide" element={<Guide />}></Route>
       <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
       <Route path="/honeytips" element={<HoneyTips />}></Route>

@@ -9,7 +9,15 @@ import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
 
-function Main() {
+function Main(
+  isLogin,
+  setIsLogin,
+  userinfo,
+  accessToken,
+  handleAccessToken,
+  handleL
+) {
+
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
 
@@ -35,9 +43,26 @@ function Main() {
       <LandingManage></LandingManage>
       <LandingGuide></LandingGuide>
       <Footer></Footer>
-      {LoginModal ? <Login visible={LoginModal} onCancel={onCancel} /> : ""}
+      {/* Login 다른 핸들 로그인 */}
+      {LoginModal ? (
+        <Login
+          visible={LoginModal}
+          onCancel={onCancel}
+          handleL={handleL}
+          handleAccessToken={handleAccessToken}
+        />
+      ) : (
+        ""
+      )}
       {SignupModal ? (
-        <SignUp visible={SignupModal} onCancel={signupCancel} />
+        <SignUp
+          visible={SignupModal}
+          onCancel={signupCancel}
+          isLogin={isLogin}
+          userinfo={userinfo}
+          accessToken={accessToken}
+        />
+
       ) : (
         ""
       )}
