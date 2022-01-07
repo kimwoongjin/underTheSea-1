@@ -10,7 +10,14 @@ import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
 import SignOut from "../modalComponent/SignOut";
 
-function Main(isLogin, setIsLogin, userinfo, accessToken, handleAccessToken) {
+function Main(
+  isLogin,
+  setIsLogin,
+  userinfo,
+  accessToken,
+  handleAccessToken,
+  handleL
+) {
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
   const handleLogin = () => {
@@ -40,7 +47,7 @@ function Main(isLogin, setIsLogin, userinfo, accessToken, handleAccessToken) {
         <Login
           visible={LoginModal}
           onCancel={onCancel}
-          handleLogin={handleLogin}
+          handleL={handleL}
           handleAccessToken={handleAccessToken}
         />
       ) : (
