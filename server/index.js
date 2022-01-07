@@ -32,7 +32,7 @@ app.use(
 app.use(cookieParser());
 
 app.get("/", function (req, res) {
-  res.status(200).send("hello world");
+  res.status(200).send("hello world!!!!!!!!!!!");
 });
 app.get("/status", (req, res) => {
   db.query("use uts", (err) => {

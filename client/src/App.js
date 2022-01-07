@@ -44,6 +44,21 @@ function App() {
   // }, [isLogin]);
 
   // useEffect(() => {
+  //   if (isLogin) {
+  //     axios({
+  //       method: "GET",
+  //       url: ``,
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization: accessToken,
+  //       },
+  //     }).then((res) => {
+  //       setUserinfo(res.data.userData);
+  //     });
+  //   }
+  // }, [isLogin]);
+
+  // useEffect(() => {
   //   if (nCodauthorizatioe) {
   //     getGoogleAccessToken(authorizationCode);
   //   }
@@ -72,11 +87,12 @@ function App() {
             userinfo={userinfo}
             accessToken={accessToken}
             handleAccessToken={handleAccessToken}
-            setIsLogin={setIsLogin}
+            // setIsLogin={setIsLogin}
             handleL={handleL}
           />
         }
       ></Route>
+
       <Route path="/guide" element={<Guide />}></Route>
       <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
       <Route path="/honeytips" element={<HoneyTips />}></Route>
