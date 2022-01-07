@@ -70,17 +70,7 @@ function App() {
   };
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Main
-            isLogin={isLogin}
-            userinfo={userinfo}
-            accessToken={accessToken}
-            handleAccessToken={handleAccessToken}
-          />
-        }
-      ></Route>
+      <Route path="/" element={<Main />}></Route>
       <Route path="/guide" element={<Guide />}></Route>
       <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
       <Route path="/honeytips" element={<HoneyTips />}></Route>
