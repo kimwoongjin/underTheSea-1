@@ -134,7 +134,13 @@ const ManageText = styled.div`
 //   font-size: 1.5rem;
 // `;
 
-function Mypage({ isLogin, userinfo, accessToken, handleAccessToken }) {
+function Mypage({
+  isLogin,
+  userinfo,
+  accessToken,
+  handleAccessToken,
+  setIsLogin,
+}) {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
   const [showModal, setShowModal] = useState(false);

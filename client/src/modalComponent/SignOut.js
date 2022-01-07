@@ -132,7 +132,7 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
-function SignOut({ showModal, closeModal, accessToken }) {
+function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
   const navigate = useNavigate();
   function signOut() {
     axios
