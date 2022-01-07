@@ -70,6 +70,7 @@ function App() {
   };
   return (
     <Routes>
+
       <Route
         path="/"
         element={
@@ -83,6 +84,8 @@ function App() {
           />
         }
       ></Route>
+
+
       <Route path="/guide" element={<Guide />}></Route>
       <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
       <Route path="/honeytips" element={<HoneyTips />}></Route>

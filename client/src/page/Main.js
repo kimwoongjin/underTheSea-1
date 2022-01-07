@@ -8,7 +8,6 @@ import LandingGuide from "../Landing_component/LandingGuide";
 import Footer from "../component/Footer";
 import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
-import SignOut from "../modalComponent/SignOut";
 
 function Main(
   isLogin,
@@ -18,8 +17,10 @@ function Main(
   handleAccessToken,
   handleL
 ) {
+
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
+
   const handleLogin = () => {
     setLoginModal(true);
   };
@@ -61,6 +62,7 @@ function Main(
           userinfo={userinfo}
           accessToken={accessToken}
         />
+
       ) : (
         ""
       )}
