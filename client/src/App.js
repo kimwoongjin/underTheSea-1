@@ -46,9 +46,9 @@ function App() {
   //   }
   // }, [authorizationCode]);
 
-  // const handleLogin = (value) => {
-  //   setIsLogin(value)
-  // }
+  const handleL = (value) => {
+    setIsLogin(value);
+  };
 
   const handleAccessToken = (accToken) => {
     // 액세스토큰 저장
@@ -78,6 +78,8 @@ function App() {
             userinfo={userinfo}
             accessToken={accessToken}
             handleAccessToken={handleAccessToken}
+            setIsLogin={setIsLogin}
+            handleL={handleL}
           />
         }
       ></Route>

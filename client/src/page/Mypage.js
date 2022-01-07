@@ -134,13 +134,7 @@ const ManageText = styled.div`
 //   font-size: 1.5rem;
 // `;
 
-function Mypage({
-  isLogin,
-  userinfo,
-  accessToken,
-  handleAccessToken,
-  setIsLogin,
-}) {
+function Mypage({ isLogin, userinfo, accessToken, setIsLogin }) {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -186,10 +180,9 @@ function Mypage({
           <SignOut
             showModal={showModal}
             closeModal={closeModal}
-            isLogin={isLogin}
             userinfo={userinfo}
             accessToken={accessToken}
-            handleAccessToken={handleAccessToken}
+            setIsLogin={setIsLogin}
           />
         ) : (
           ""

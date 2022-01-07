@@ -10,7 +10,7 @@ import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
 import SignOut from "../modalComponent/SignOut";
 
-function Main(isLogin, userinfo, accessToken, handleAccessToken) {
+function Main(isLogin, setIsLogin, userinfo, accessToken, handleAccessToken) {
   const [LoginModal, setLoginModal] = useState(false);
   const [SignupModal, setSignupModal] = useState(false);
   const handleLogin = () => {
@@ -35,7 +35,17 @@ function Main(isLogin, userinfo, accessToken, handleAccessToken) {
       <LandingManage></LandingManage>
       <LandingGuide></LandingGuide>
       <Footer></Footer>
-      {LoginModal ? <Login visible={LoginModal} onCancel={onCancel} /> : ""}
+      {/* Login 다른 핸들 로그인 */}
+      {LoginModal ? (
+        <Login
+          visible={LoginModal}
+          onCancel={onCancel}
+          handleLogin={handleLogin}
+          handleAccessToken={handleAccessToken}
+        />
+      ) : (
+        ""
+      )}
       {SignupModal ? (
         <SignUp
           visible={SignupModal}
@@ -43,7 +53,6 @@ function Main(isLogin, userinfo, accessToken, handleAccessToken) {
           isLogin={isLogin}
           userinfo={userinfo}
           accessToken={accessToken}
-          handleAccessToken={handleAccessToken}
         />
       ) : (
         ""
