@@ -61,6 +61,10 @@ app.post("/images", upload.single("image"), async (req, res) => {
   res.send({ imagePath: `/images/${result.Key}`, description });
 });
 
+app.get("/level/:level_id", (req, res) => {
+  const level_id = req.params.level_id;
+  res.sendFile(`./level_imgs/${level_id}.png`, { root: __dirname });
+});
 app.use("/", indexRouter);
 
 let server;

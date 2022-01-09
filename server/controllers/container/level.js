@@ -11,11 +11,11 @@ module.exports = async (req, res) => {
     if (!container) {
       return res.status(404).json({ message: "The container doesn't exist" });
     } else {
-      console.log(container.dataValues.level);
-      if (container.dataValues.level === 6) {
+      const level = Number(String(container.dataValues.level)[0]);
+      if (level === 6) {
         return res.status(200).json({ message: "You've reached max level" });
       }
-      await container.increment("level", { by: 1 });
+      await container.increment("level", { by: 10 });
       return res.status(200).json({
         message: `The container is successfully leveled up`,
       });
