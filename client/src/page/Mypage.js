@@ -134,7 +134,7 @@ const ManageText = styled.div`
 //   font-size: 1.5rem;
 // `;
 
-function Mypage({ isLogin, userinfo, accessToken, setIsLogin }) {
+function Mypage() {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -177,13 +177,7 @@ function Mypage({ isLogin, userinfo, accessToken, setIsLogin }) {
         <ButtonL>비밀번호 변경</ButtonL>
         <ButtonR onClick={openModal}>회원탈퇴</ButtonR>
         {showModal ? (
-          <SignOut
-            showModal={showModal}
-            closeModal={closeModal}
-            userinfo={userinfo}
-            accessToken={accessToken}
-            setIsLogin={setIsLogin}
-          />
+          <SignOut showModal={showModal} closeModal={closeModal} />
         ) : (
           ""
         )}

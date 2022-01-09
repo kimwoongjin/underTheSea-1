@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const fadeIn = keyframes`
     from {
@@ -179,46 +177,9 @@ const GoogleBtn = styled.button`
 const GoogleIcon = styled.img`
   width: 30%;
 `;
-function Login({ onCancel, visible, handleL, handleAccessToken }) {
-  const navigate = useNavigate();
-  const [invalidLogin, setInvalidLogin] = useState(false);
+function Login({ onCancel, visible }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
-  const [userData, setUserData] = useState({
-    email: "",
-    user_pwd: "",
-  });
-  const handleInputValue = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const handleLogin = () => {
-    const { email, user_pwd } = userData;
-
-    if (email && user_pwd) {
-      axios
-        .post(`http://localhost:80/user/login`, { data: userData })
-        .then((res) => {
-          console.log(res.headers);
-          if (res.data.token) {
-            console.log("res-->", res);
-            handleAccessToken(res.data.token);
-            handleL();
-            navigate("/mypage");
-          }
-        })
-        .then(() => {})
-        .catch((err) => {
-          if (err) {
-            setInvalidLogin(true);
-          }
-        });
-    } else {
-      setInvalidLogin(true);
-    }
-  };
 
   useEffect(() => {
     // visible -> false
@@ -245,19 +206,15 @@ function Login({ onCancel, visible, handleL, handleAccessToken }) {
             placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
-            onChange={handleInputValue}
           />
 
           <Pwd
             placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
-            onChange={handleInputValue}
           />
 
-          <LoginBtn type="button" onClick={handleLogin}>
-            로그인
-          </LoginBtn>
+          <LoginBtn type="button">로그인</LoginBtn>
           <GoogleBtn type="button">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />

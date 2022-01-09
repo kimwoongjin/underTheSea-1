@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 const fadeIn = keyframes`
     from {
@@ -175,87 +174,30 @@ const SignupBtn = styled.button`
 `;
 // ==================================================================================
 
-function SignUp({ onCancel, visible, signupCancel }) {
-  const navigate = useNavigate();
+function SignUp({ onCancel, visible }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
   //모달 창 애니멘이션 관련
   //밑에 부분이 회원가입관련
-  const [userData, setUserData] = useState({
-    email: "",
-    user_name: "",
-    user_pwd: "",
-    pwd_chk: "",
-  });
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleInputValue = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   // ==================================================================================
   // 유효성 cherUsername/ checkEmail / checkPassword /
-  const checkUsername = (user_name) => {
-    let regExp = /^([a-zA-Z가-힣]){0,10}$/;
-    return regExp.test(user_name);
-  };
+  // const checkUsername = (user_name) => {
+  //   let regExp = /^([a-zA-Z가-힣]){0,10}$/;
+  //   return regExp.test(user_name);
+  // };
 
-  const checkEmail = (email) => {
-    let regExp =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    return regExp.test(email);
-  };
+  // const checkEmail = (email) => {
+  //   let regExp =
+  //     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  //   return regExp.test(email);
+  // };
 
-  const checkPassword = (user_pwd) => {
-    let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
-    return regExp.test(user_pwd);
-  };
+  // const checkPassword = (user_pwd) => {
+  //   let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
+  //   return regExp.test(user_pwd);
+  // };
   // ==================================================================================
-
-  const onChangePasswordChk = () => userData.user_pwd === userData.pwd_chk;
-  // 비밀번호 확인
-
-  const handleSignup = () => {
-    const { email, user_name, user_pwd, pwd_chk } = userData;
-    console.log("유저데이터", userData);
-    if (!email || !user_name || !user_pwd || !pwd_chk) {
-      setErrorMsg("필수 정보를 모두 입력해주세요");
-    } else if (
-      !checkEmail(email) ||
-      !checkUsername(user_name) ||
-      !checkPassword(user_pwd) ||
-      !onChangePasswordChk()
-    ) {
-      setErrorMsg("올바른 정보를 입력해주세요");
-    } else {
-      setErrorMsg("");
-      axios
-        .post(`http://localhost:80/user/signup`, {
-          data: {
-            email,
-            user_name,
-            user_pwd,
-          },
-        })
-        .then((res) => {
-          console.log("res", res);
-          if (res.data.message === "Email is already in use") {
-            console.log("메세지뭐냐?", res.data.message);
-            setErrorMsg("이미 사용중인 이메일입니다");
-          } else {
-            console.log("왔냐?");
-            // signupCancel();
-            navigate("/mypage");
-            //경로 메인으로 들어가서 로그인하면 됨
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
   //-----------------------
   useEffect(() => {
     // visible -> false
@@ -283,61 +225,33 @@ function SignUp({ onCancel, visible, signupCancel }) {
             type="text"
             name="user_name"
             required
-            value={userData.user_name}
-            onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkUsername(userData.user_name) || !userData.user_name ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
-          )}
+
           <Email
             placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
             required
-            value={userData.email}
-            onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkEmail(userData.email) || !userData.email ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
-          )}
+
           <Pwd
             placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
-            value={userData.user_pwd}
-            required
-            onChange={handleInputValue}
             autoComplete="on"
           />
-          {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
-            <Warning />
-          ) : (
-            <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
-          )}
+
           <PwdChk
             placeholder="비밀번호를 확인해주세요"
             type="password"
             name="pwd_chk"
             required
-            // value={userData.pwd_chk}
-            onChange={handleInputValue}
             autoComplete="on"
           />
-          {onChangePasswordChk() || !userData.pwd_chk ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>비밀번호가 일치하지 않습니다.</Warning>
-          )}
-          <SignupBtn type="button" onClick={handleSignup}>
-            회원가입
-          </SignupBtn>
-          <Warning>{errorMsg}</Warning>
+          <SignupBtn type="button">회원가입</SignupBtn>
+          <Warning></Warning>
         </Form>
       </ModalContainer>
     </DarkBackGround>

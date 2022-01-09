@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+
+// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -134,21 +135,7 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
-function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
-  const navigate = useNavigate();
-  function signOut() {
-    axios
-      .delete("http://localhost:80/user", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        setIsLogin(false);
-        navigate("/");
-        window.alert("다음에 또 오세요!!");
-      });
-    // isLogin을 flase로 만든다음 메인페이지로 리다이렉트
-  }
-
+function SignOut({ showModal, closeModal }) {
   return (
     <DarkBackGround disappear={!showModal}>
       <ModalContainer disappear={!showModal}>
@@ -165,9 +152,7 @@ function SignOut({ showModal, closeModal, accessToken, setIsLogin }) {
             <CancleBtn type="button" onClick={closeModal}>
               아니요. 취소합니다.
             </CancleBtn>
-            <SignOutBtn type="button" onClick={signOut}>
-              네. 탈퇴합니다.
-            </SignOutBtn>
+            <SignOutBtn type="button">네. 탈퇴합니다.</SignOutBtn>
           </Btn>
         </Form>
       </ModalContainer>
