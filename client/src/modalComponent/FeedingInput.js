@@ -5,40 +5,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const fadeIn = keyframes`
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-`;
-
-const fadeOut = keyframes`
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-`;
-const slideUp = keyframes`
-    from {
-        transform: translateY(200px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-`;
-const slideDown = keyframes`
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(200px);
-    }
-`;
-
 const DarkBackGround = styled.div`
   position: fixed;
   left: 0;
@@ -49,16 +15,6 @@ const DarkBackGround = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-
-  animation-duration: 0.25s;
-  animation-name: ${fadeIn};
-  animation-fill-mode: forwards;
-
-  ${(props) =>
-    props.disappear &&
-    css`
-      animation-name: ${fadeOut};
-    `}
 `;
 
 const ModalContainer = styled.div`
@@ -71,16 +27,6 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${slideUp};
-  animation-fill-mode: forwards;
-
-  ${(props) =>
-    props.disappear &&
-    css`
-      animation-name: ${slideDown};
-    `};
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -91,7 +37,6 @@ const CloseBtnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  /* border: 1px solid black; */
 `;
 
 const ShowContainer = styled.div`
@@ -100,7 +45,6 @@ const ShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* border: 2px dashed red; */
 `;
 
 const InfoShow = styled.div`
@@ -110,7 +54,6 @@ const InfoShow = styled.div`
   align-items: center;
   width: 100%;
   height: 95%;
-  /* border: 2px dashed blue; */
 `;
 
 const Text = styled.div`
@@ -118,7 +61,6 @@ const Text = styled.div`
   align-items: center;
   width: 100%;
   height: 20%;
-  /* border: 1px dashed red; */
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
@@ -127,9 +69,7 @@ const Text = styled.div`
 const ImgContainer = styled.div`
   width: 100%;
   height: 30%;
-  /* border: 1px dashed red; */
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-around;
 `;
 
@@ -142,7 +82,6 @@ const Img = styled.img`
 
 const ImgNameContainer = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
   display: flex;
   justify-content: space-around;
 `;
@@ -184,34 +123,20 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ onCancel, visible }) {
-  const [animate, setAnimate] = useState(false);
-  const [localVisible, setLocalVisible] = useState(visible);
+function FeedingInput() {
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
   };
-  useEffect(() => {
-    // visible -> false
-    if (localVisible && !visible) {
-      setAnimate(true);
-      // 0.25초의 시간동안 애니메이션을 보여주겠다는 의미
-      setTimeout(() => setAnimate(false), 250);
-    }
-    // visible 값이 바뀔 때마다 로컬 visible 값을 동기화 시켜준다.
-    setLocalVisible(visible);
-  }, [localVisible, visible]);
-
-  if (!localVisible && !animate) return null;
 
   return (
-    <DarkBackGround disappear={!visible}>
-      <ModalContainer disappear={!visible}>
+    <DarkBackGround>
+      <ModalContainer>
         <CloseBtnContainer>
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            onClick={onCancel}
+            // onClick={onCancel}
             color="#e5e5e5"
           />
         </CloseBtnContainer>
@@ -238,7 +163,7 @@ function FeedingInput({ onCancel, visible }) {
                 생먹이
               </ImgName>
             </ImgNameContainer>
-            <Btn onClick={onCancel}>선택완료</Btn>
+            <Btn>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>

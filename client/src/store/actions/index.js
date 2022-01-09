@@ -20,3 +20,21 @@ export const logoutAction = {
 export const loginModalOnAction = {
   type: LOG_IN_MODAL_ON,
 };
+export const signupModalOnAction = {
+  type: SIGN_UP_MODAL_ON,
+};
+export const modalOff = {
+  type: MODAL_OFF,
+};
+export const skimmerInfoModalOnAction = {
+  type: SKIMMER_INFO_MODAL_ON,
+};
+export const seaBasicInfoModalOnAction = {
+  type: SEA_BASIC_INFO_MODAL_ON,
+};
+export const myAquariumInfoModalOnAction = {
+  type: MY_AQUARIUM_INFO_MODAL_ON,
+};
+export const feedingInputModalOnAction = {
+  type: FEEDING_INPUT_MODAL_ON,
+};

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginModalOnAction } from "../store/actions";
+import { loginModalOnAction, signupModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 100vw;
@@ -20,9 +20,15 @@ const Img = styled.img`
 const Login = styled.div`
   cursor: pointer;
 `;
-const Signup = styled.div``;
-const Search = styled.div``;
-const Guide = styled.div``;
+const Signup = styled.div`
+  cursor: pointer;
+`;
+const Search = styled.div`
+  cursor: pointer;
+`;
+const Guide = styled.div`
+  cursor: pointer;
+`;
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
@@ -40,12 +46,14 @@ function Header() {
     <Container>
       <Img src="/로고.png" alt="" />
       <BtnContainer>
-        <Guide>가이드</Guide>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
+          <Guide>가이드</Guide>
+        </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
         </Link>
         <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
-        <Signup>회원가입</Signup>
+        <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup>
       </BtnContainer>
     </Container>
   );

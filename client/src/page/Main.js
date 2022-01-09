@@ -10,22 +10,10 @@ import Login from "../modalComponent/Login";
 import SignUp from "../modalComponent/SignUp";
 import { useSelector } from "react-redux";
 
-function Main({
-  isLogin,
-  setIsLogin,
-  userinfo,
-  accessToken,
-  handleAccessToken,
-  handleL,
-}) {
-  // const [LoginModal, setLoginModal] = useState(false);
-  // const [SignupModal, setSignupModal] = useState(false);
-  // isLoginModal: false,
-  // isSignupModal: false,
-  const { isLoginModal, isSignupModal } = useSelector(
-    ({ modalReducer }) => modalReducer
-  );
-
+function Main() {
+  const state = useSelector((state) => state.modalReducer);
+  const { isLoginModal, isSignupModal } = state;
+  const isModal = isLoginModal || isSignupModal;
   return (
     <>
       <Header></Header>
@@ -35,6 +23,7 @@ function Main({
       <LandingGuide></LandingGuide>
       <Footer></Footer>
       {isLoginModal && <Login />}
+      {isSignupModal && <SignUp />}
     </>
   );
 }

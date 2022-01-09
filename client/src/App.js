@@ -15,15 +15,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Login from "./modalComponent/Login";
+import Header from "./component/Header";
+import Header2 from "./component/Header2";
+import SignUp from "./modalComponent/SignUp";
 
 function App() {
   const navigate = useNavigate();
   // isLoginModal: false,
   // isSignupModal: false,
   // isSkimmerModal: false,
-  const { isLoginModal, isSignupModal } = useSelector(
-    ({ modalReducer }) => modalReducer
-  );
+  // const { isLoginModal, isSignupModal } = useSelector(
+  //   ({ modalReducer }) => modalReducer
+  // );
+  const state = useSelector((state) => state.modalReducer);
+  const { isLoginModal, isSignupModal } = state;
   const isModal = isLoginModal || isSignupModal;
 
   return (
