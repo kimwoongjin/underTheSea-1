@@ -16,12 +16,7 @@ const DarkBackGround = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: blue; */
   background: rgba(0, 0, 0, 0.5);
-
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
 `;
 
 const ModalContainer = styled.div`
@@ -33,7 +28,6 @@ const ModalContainer = styled.div`
   position: relative;
   justify-content: center;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
@@ -47,7 +41,6 @@ const CloseBtnContainer = styled.div`
   right: 3%;
   top: 0%;
   width: 12%;
-  /* border: 1px solid red; */
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -59,7 +52,6 @@ const Form = styled.form`
   z-index: 999;
   width: 80%;
   height: 60%;
-  /* border: 1px dashed black; */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -68,7 +60,6 @@ const Form = styled.form`
 const TextForm = styled.div`
   position: relative;
   display: flex;
-  /* border: 1px solid black; */
   text-align: center;
   top: 22%;
 `;
@@ -80,7 +71,6 @@ const Text = styled.div`
   font-weight: 600;
 `;
 const Btn = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   width: 100%;
   height: 25%;
@@ -135,12 +125,25 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
-function SignOut({ showModal, closeModal }) {
+
+function SignOut({ accessToken }) {
+  const navigate = useNavigate();
+  function signOut() {
+    axios
+      .delete("http://localhost:80/user", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        navigate("/");
+      });
+  }
+
+
   return (
-    <DarkBackGround disappear={!showModal}>
-      <ModalContainer disappear={!showModal}>
+    <DarkBackGround>
+      <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon icon={faTimes} size="2x" onClick={closeModal} />
+          <FontAwesomeIcon icon={faTimes} size="2x" />
         </CloseBtnContainer>
         <Form>
           <TextForm>

@@ -1,42 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
 
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
-const fadeIn = keyframes`
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-`;
-
-const fadeOut = keyframes`
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-`;
-const slideUp = keyframes`
-    from {
-        transform: translateY(200px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-`;
-const slideDown = keyframes`
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(200px);
-    }
-`;
+import axios from "axios";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -47,19 +17,7 @@ const DarkBackGround = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: blue; */
   background: rgba(0, 0, 0, 0.5);
-
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${fadeIn};
-  animation-fill-mode: forwards;
-
-  ${(props) =>
-    props.disappear &&
-    css`
-      animation-name: ${fadeOut};
-    `}
 `;
 
 const ModalContainer = styled.div`
@@ -70,25 +28,13 @@ const ModalContainer = styled.div`
   position: relative;
   justify-content: center;
   display: flex;
-  /* justify-content: space-between; */
   border-radius: 20px;
   align-items: center;
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${slideUp};
-  animation-fill-mode: forwards;
-  z-index: 999;
-  ${(props) =>
-    props.disappear &&
-    css`
-      animation-name: ${slideDown};
-    `};
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
   top: 0px;
   width: 100%;
-  /* border: 1px solid red; */
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -98,7 +44,6 @@ const Title = styled.div`
   width: 40%;
   display: flex;
   justify-content: center;
-  /* border: 1px solid red; */
   color: #108dee;
   font-size: 2rem;
   font-weight: bold;
@@ -109,7 +54,6 @@ const Title = styled.div`
 const Form = styled.form`
   width: 80%;
   height: 60%;
-  /* border: 1px dashed black; */
   display: flex;
   flex-direction: column;
 `;
@@ -118,14 +62,12 @@ const Username = styled.input`
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  /* margin-bottom: 20px; */
 `;
 const Email = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  /* margin-bottom: 20px; */
 `;
 
 const Pwd = styled.input`
@@ -174,11 +116,25 @@ const SignupBtn = styled.button`
 `;
 // ==================================================================================
 
-function SignUp({ onCancel, visible }) {
-  const [animate, setAnimate] = useState(false);
-  const [localVisible, setLocalVisible] = useState(visible);
-  //모달 창 애니멘이션 관련
-  //밑에 부분이 회원가입관련
+
+function SignUp() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    email: "",
+    user_name: "",
+    user_pwd: "",
+    pwd_chk: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleInputValue = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
 
   // ==================================================================================
   // 유효성 cherUsername/ checkEmail / checkPassword /
@@ -199,24 +155,16 @@ function SignUp({ onCancel, visible }) {
   // };
   // ==================================================================================
   //-----------------------
-  useEffect(() => {
-    // visible -> false
-    if (localVisible && !visible) {
-      setAnimate(true);
-      // 0.25초의 시간동안 애니메이션을 보여주겠다는 의미
-      setTimeout(() => setAnimate(false), 250);
-    }
-    // visible 값이 바뀔 때마다 로컬 visible 값을 동기화 시켜준다.
-    setLocalVisible(visible);
-  }, [localVisible, visible]);
-
-  if (!localVisible && !animate) return null;
 
   return (
-    <DarkBackGround disappear={!visible}>
-      <ModalContainer disappear={!visible}>
+    <DarkBackGround>
+      <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon icon={faTimes} size="2x" onClick={onCancel} />
+          <FontAwesomeIcon
+            icon={faTimes}
+            size="2x"
+            onClick={() => dispatch(modalOff)}
+          />
         </CloseBtnContainer>
         <Title>회원가입</Title>
         <Form>
