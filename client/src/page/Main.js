@@ -16,7 +16,9 @@ function Main() {
   const isModal = isLoginModal || isSignupModal;
   return (
     <>
+
       <Header></Header>
+
       <Landingpage></Landingpage>
       <LandingSearch></LandingSearch>
       <LandingManage></LandingManage>

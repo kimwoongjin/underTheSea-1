@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     const { user_pwd } = user.dataValues;
 
     if (cur_pwd !== user_pwd) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(200).json({ message: "Invalid password" });
     } else {
       await users.update({ user_pwd: new_pwd }, { where: { id } });
       const new_userdata = await users.findOne({ where: { id } });

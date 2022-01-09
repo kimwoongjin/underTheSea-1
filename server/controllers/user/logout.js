@@ -4,7 +4,7 @@ module.exports = (req, res) => {
   const userinfo = isAuthorized(req);
 
   if (!userinfo) {
-    return res.status(404).json({ message: "You are not logged in" });
+    return res.status(200).json({ message: "You are not logged in" });
   } else {
     return res
       .cookie("jwt", "", { httpOnly: true })

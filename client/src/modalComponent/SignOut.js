@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+
+// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -89,6 +90,7 @@ const CancleBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
   :hover::before {
     content: "";
     position: absolute;
@@ -110,6 +112,7 @@ const SignOutBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
   :hover::before {
     content: "";
     position: absolute;
@@ -122,6 +125,7 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
+
 function SignOut({ accessToken }) {
   const navigate = useNavigate();
   function signOut() {
@@ -133,6 +137,7 @@ function SignOut({ accessToken }) {
         navigate("/");
       });
   }
+
 
   return (
     <DarkBackGround>
@@ -147,10 +152,10 @@ function SignOut({ accessToken }) {
             </Text>
           </TextForm>
           <Btn>
-            <CancleBtn type="button">아니요. 취소합니다.</CancleBtn>
-            <SignOutBtn type="button" onClick={signOut}>
-              네. 탈퇴합니다.
-            </SignOutBtn>
+            <CancleBtn type="button" onClick={closeModal}>
+              아니요. 취소합니다.
+            </CancleBtn>
+            <SignOutBtn type="button">네. 탈퇴합니다.</SignOutBtn>
           </Btn>
         </Form>
       </ModalContainer>
