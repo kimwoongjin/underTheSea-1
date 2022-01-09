@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
+    const month = req.params.month;
     const container = await containers.findOne({ where: { id: container_id } });
     if (!container) {
       return res.status(404).json({ message: "The container is not found" });
@@ -32,13 +33,49 @@ module.exports = async (req, res) => {
         })
       );
 
-      const feed_data = await feeds.findAll({ where: { container_id } });
-      const feed = feed_data.map((el) => el.dataValues.createdAt);
-
-      const ex_water_data = await ex_waters.findAll({
+      let feed_data = await feeds.findAll({
         where: { container_id },
+        attributes: [
+          "type",
+          [
+            feeds.sequelize.fn(
+              "date_format",
+              feeds.sequelize.col("createdAt"),
+              "%Y-%m-%d"
+            ),
+            "date",
+          ],
+        ],
       });
-      const ex_water = ex_water_data.map((el) => el.dataValues.createdAt);
+      feed_data = feed_data.filter((el) => {
+        return el.dataValues.date.split("-")[1] === month;
+      });
+
+      const feed_list = feed_data.map((el) => {
+        return { date: el.dataValues.date, type: el.dataValues.type };
+      });
+
+      let ex_water_data = await ex_waters.findAll({
+        where: { container_id },
+        attributes: [
+          "amount",
+          [
+            feeds.sequelize.fn(
+              "date_format",
+              feeds.sequelize.col("createdAt"),
+              "%Y-%m-%d"
+            ),
+            "date",
+          ],
+        ],
+      });
+      ex_water_data = ex_water_data.filter((el) => {
+        return el.dataValues.date.split("-")[1] === month;
+      });
+
+      const ex_water_list = ex_water_data.map((el) => {
+        return { date: el.dataValues.date, amount: el.dataValues.amount };
+      });
 
       let final = {
         container_id: id,
@@ -48,8 +85,8 @@ module.exports = async (req, res) => {
         salinity,
         theme,
         fish_num,
-        feed,
-        ex_water,
+        feed_list,
+        ex_water_list,
         fish_name: fish_list,
       };
       return res

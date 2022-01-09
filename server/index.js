@@ -56,9 +56,7 @@ app.post("/images", upload.single("image"), async (req, res) => {
   const result = await uploadFile(file);
   await unlinkFile(file.path);
   console.log(result);
-  const description = req.body.description;
-  console.log(description);
-  res.send({ imagePath: `/images/${result.Key}`, description });
+  res.send({ imagePath: `/images/${result.Key}` });
 });
 
 app.get("/level/:level_id", (req, res) => {
