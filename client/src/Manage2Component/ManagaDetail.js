@@ -137,7 +137,7 @@ const MidContainer = styled.div`
   align-items: center;
   /* background: #00d2ff; */
   /* background-color: rgba(102, 178, 255, 0.2); */
-  background-color: rgba(224, 224, 224, 0.5);
+  background-color: rgba(51, 153, 255, 0.1);
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 
@@ -303,16 +303,34 @@ const Day = styled.div`
 
 const FoodIconContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  border: 1px solid red;
+  height: 40%;
+  /* border: 1px solid red; */
+`;
+
+const FoodInnerContainer = styled.div`
+  display: flex;
+`;
+
+const FoodTypeAndNum = styled.div`
+  display: flex;
+`;
+
+const FeedingNum = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
 `;
 
 const FoodIcon = styled.img`
-  width: 25%;
-  border: 1px solid blue;
+  width: 40%;
+  /* border: 1px solid blue; */
 `;
 
-function ManageDetail() {
+function ManageDetail({ isLogin }) {
   let feedingNum = 0;
 
   const [infoModal, setInfoModal] = useState(false);
@@ -367,10 +385,26 @@ function ManageDetail() {
                       {days.format("D")}
                     </Number>
                     <FoodIconContainer>
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/펠렛.png" />
+                          <FeedingNum>1</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/플레이크.png" />
+                          <FeedingNum>2</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/냉동.png" />
+                          <FeedingNum>4</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/생먹이.png" />
+                          <FeedingNum>5</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -401,15 +435,11 @@ function ManageDetail() {
 
   return (
     <>
-      <Header2 />
+      <Header2 isLogin={isLogin} />
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Lv>3</Lv> */}
-          {/* <Lv2></Lv2> */}
-          {/* <Lv3></Lv3> */}
           <Text>구피와 구구 어항</Text>
-          {/* <Icon></Icon> */}
         </TextContainer>
 
         {/* <Img src="/물방울L.png" alt="" /> */}

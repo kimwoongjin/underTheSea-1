@@ -95,7 +95,10 @@ function App() {
       <Route path="/writetips" element={<WriteTips />}></Route>
       <Route path="/posttips" element={<PostTips />}></Route>
       <Route path="/manage" element={<Manage />}></Route>
-      <Route path="/manage/detailinfo" element={<ManageDetail />}></Route>
+      <Route
+        path="/manage/detailinfo"
+        element={<ManageDetail isLogin={isLogin} />}
+      ></Route>
       <Route path="/manage/addInfo" element={<ManageAddInfo />}></Route>
       <Route
         path="/mypage"

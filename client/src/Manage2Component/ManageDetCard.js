@@ -6,7 +6,7 @@ import ManageDetInfo from "./ManageDetInfo";
 //후에 컴포넌트 이동
 
 const Container = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 50%;
   height: 100%;
   display: flex;
@@ -18,24 +18,22 @@ const Container = styled.div`
 const CardTitle = styled.div`
   border: 1px solid black;
   text-align: center;
-  z-index: 999;
+  /* z-index: 999; */
   width: 30vw;
   height: 7vh;
   font-size: 2rem;
 `;
 const CardContainer = styled.div`
-  border: 1px solid black;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 4%;
+  /* margin-top: 4%; */
 `;
 function ManageDetCard() {
   return (
     <Container>
-      <CardTitle></CardTitle>
       <CardContainer>
         <ManageDetInfo />
       </CardContainer>

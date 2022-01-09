@@ -14,10 +14,20 @@ const Img = styled.img`
   margin-left: 1%;
 `;
 
-const Login = styled.div``;
-const Signup = styled.div``;
-const Search = styled.div``;
-const Guide = styled.div``;
+const Login = styled.div`
+  cursor: pointer;
+  font-family: "Kfont";
+`;
+const Signup = styled.div`
+  cursor: pointer;
+  font-family: "Kfont";
+`;
+const Search = styled.div`
+  font-family: "Kfont";
+`;
+const Guide = styled.div`
+  font-family: "Kfont";
+`;
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
