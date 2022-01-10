@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import React, { useState } from "react";
+import React from "react";
 import Header from "../component/Header";
 import Landingpage from "../Landing_component/Landingpage";
 import LandingSearch from "../Landing_component/LandingSearch";
@@ -16,7 +15,6 @@ function Main() {
   const isModal = isLoginModal || isSignupModal;
   return (
     <>
-
       <Header></Header>
 
       <Landingpage></Landingpage>

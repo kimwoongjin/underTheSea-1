@@ -123,7 +123,7 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput() {
+function FeedingInput({ onIncrease }) {
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
@@ -163,7 +163,7 @@ function FeedingInput() {
                 생먹이
               </ImgName>
             </ImgNameContainer>
-            <Btn>선택완료</Btn>
+            <Btn onClick={onIncrease}>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>

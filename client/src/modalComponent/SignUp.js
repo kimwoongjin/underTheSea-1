@@ -1,10 +1,8 @@
-
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
 
@@ -116,7 +114,6 @@ const SignupBtn = styled.button`
 `;
 // ==================================================================================
 
-
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -134,7 +131,6 @@ function SignUp() {
       [e.target.name]: e.target.value,
     });
   };
-
 
   // ==================================================================================
   // 유효성 cherUsername/ checkEmail / checkPassword /

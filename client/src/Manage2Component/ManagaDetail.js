@@ -8,6 +8,8 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -314,10 +316,11 @@ const FoodIcon = styled.img`
 
 function ManageDetail() {
   let feedingNum = 0;
-
+  const dispatch = useDispatch();
   const [infoModal, setInfoModal] = useState(false);
   const [feedModal, setFeedModal] = useState(false);
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
@@ -325,10 +328,11 @@ function ManageDetail() {
       ? 53
       : today.clone().endOf("month").week();
 
-  const feedingCounter = () => {
-    feedingNum++;
-    console.log(feedingNum);
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
   };
+
   const InfoModalOn = () => {
     setInfoModal(true);
   };
@@ -366,6 +370,7 @@ function ManageDetail() {
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
+                    {count}
                     <FoodIconContainer>
                       <FoodIcon />
                       <FoodIcon />
@@ -487,7 +492,11 @@ function ManageDetail() {
       </OuterContainer>
       {infoModal && <AquaInfo onCancel={InfoModalOff} visible={infoModal} />}
       {feedModal && (
-        <FeedingInput onCancel={feedingModalOff} visible={feedModal} />
+        <FeedingInput
+          onCancel={feedingModalOff}
+          visible={feedModal}
+          onIncrease={onIncrease}
+        />
       )}
     </>
   );

@@ -8,7 +8,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 
-
 const DarkBackGround = styled.div`
   position: fixed;
   left: 0;
@@ -153,13 +152,10 @@ function Login() {
         })
         .then(() => {})
         .catch((err) => {
-          if (err) {
-          }
+          console.log(err);
         });
-    } else {
     }
   };
-
 
   return (
     <DarkBackGround>
@@ -187,9 +183,6 @@ function Login() {
           <LoginBtn type="button" onClick={handleLogin}>
             로그인
           </LoginBtn>
-
-
-       
 
           <GoogleBtn type="button">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
