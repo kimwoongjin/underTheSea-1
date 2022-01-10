@@ -49,16 +49,13 @@ const modalReducer = (prevState = initialState, action) => {
     case FEEDING_INPUT_MODAL_ON:
       state = { ...prevState, isFeedingModal: true };
       break;
-<<<<<<< HEAD
     case SIGN_OUT_MODAL_ON:
       state = { ...prevState, isSignoutModal: true };
       break;
     case PWD_CHANGE_MODAL_ON:
       state = { ...prevState, isPwdChangeModal: true };
-=======
     case ACTIVATION_MODAL_ON:
       state = { ...prevState, isActivationModal: true };
->>>>>>> 85e468356557684613d56f2e948a907274f84dcc
       break;
     case MODAL_OFF:
       state = { ...initialState };

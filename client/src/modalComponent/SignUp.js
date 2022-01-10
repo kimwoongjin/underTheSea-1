@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
+import { axios } from "axios";
 
 const DarkBackGround = styled.div`
   position: fixed;

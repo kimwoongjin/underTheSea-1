@@ -124,6 +124,7 @@ const Btn = styled.button`
 `;
 
 function FeedingInput({ onIncrease }) {
+  const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
