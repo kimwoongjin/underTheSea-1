@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -84,12 +85,18 @@ const Rock = styled.img`
 `;
 
 function SuppliesInfo() {
+  const dispatch = useDispatch();
+
   return (
     <DarkBackGround>
       <ModalContainer>
         <IconContainer>
           <div className="btn">
-            <FontAwesomeIcon icon={faTimes} size="2x" />
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="2x"
+              onClick={() => dispatch(modalOff)}
+            />
           </div>
         </IconContainer>
         <ContentContainer>

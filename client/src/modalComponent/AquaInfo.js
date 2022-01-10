@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { modalOff } from "../store/actions";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 const DarkBackGround = styled.div`
@@ -113,6 +115,8 @@ const BottomText = styled.div`
 `;
 
 function AquaInfo() {
+  const dispatch = useDispatch();
+
   return (
     <DarkBackGround>
       <ModalContainer>
@@ -120,8 +124,8 @@ function AquaInfo() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            // onClick={onCancel}
             color="#e5e5e5"
+            onClick={() => dispatch(modalOff)}
           />
         </CloseBtnContainer>
         <ShowContainer>

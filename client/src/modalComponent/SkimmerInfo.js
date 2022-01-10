@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -104,12 +106,18 @@ const Wet = styled.img`
   width: 20%;
 `;
 function SkimmerInfo() {
+  const dispatch = useDispatch();
+
   return (
     <DarkBackGround>
       <ModalContainer>
         <IconContainer>
           <div className="btn">
-            <FontAwesomeIcon icon={faTimes} size="2x" />
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="2x"
+              onClick={() => dispatch(modalOff)}
+            />
           </div>
         </IconContainer>
         <ContentContainer>

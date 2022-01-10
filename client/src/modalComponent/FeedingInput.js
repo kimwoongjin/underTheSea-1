@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -124,6 +124,7 @@ const Btn = styled.button`
 `;
 
 function FeedingInput() {
+  const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
@@ -136,7 +137,7 @@ function FeedingInput() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            // onClick={onCancel}
+            onClick={() => dispatch(modalOff)}
             color="#e5e5e5"
           />
         </CloseBtnContainer>
@@ -163,7 +164,7 @@ function FeedingInput() {
                 생먹이
               </ImgName>
             </ImgNameContainer>
-            <Btn>선택완료</Btn>
+            <Btn onClick={() => dispatch(modalOff)}>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>

@@ -9,6 +9,11 @@ import SkimmerInfo from "../modalComponent/SkimmerInfo";
 import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  skimmerInfoModalOnAction,
+  seaBasicInfoModalOnAction,
+} from "../store/actions";
+import { useEffect } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -52,7 +57,11 @@ function SeaWaterGuide() {
   // isSeaBasicInfoModal: false,
   const state = useSelector((state) => state.modalReducer);
   const { isSkimmerModal, isSeaBasicInfoModal } = state;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("스키머 모달", isSkimmerModal);
+  }, []);
   return (
     <>
       <Container>
@@ -70,16 +79,8 @@ function SeaWaterGuide() {
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
         </InfoContainer>
-        {/* {skimmerModal ? (
-          <SkimmerInfo onCancel={skimmerCancel} visible={skimmerModal} />
-        ) : (
-          ""
-        )}
-        {suppliesModal ? (
-          <SuppliesInfo onCancel={suppliesCancel} visible={suppliesModal} />
-        ) : (
-          ""
-        )} */}
+        {isSkimmerModal && <SkimmerInfo />}
+        {isSeaBasicInfoModal && <SuppliesInfo />}
       </Container>
     </>
   );
