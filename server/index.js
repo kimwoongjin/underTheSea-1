@@ -68,7 +68,8 @@ app.use("/", indexRouter);
 let server;
 server = app.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
-  console.log("db host : ", DATABASE_HOST);
+  console.log("db host : ", process.env.DATABASE_HOST);
+  console.log("test : ", process.env.TEST);
 });
 
 module.exports = server;
