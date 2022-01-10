@@ -78,6 +78,10 @@ const Img = styled.img`
     background: #e5e5e5;
     border-radius: 5px;
   }
+  :visited {
+    background: #e5e5e5;
+    border-radius: 5px;
+  }
 `;
 
 const ImgNameContainer = styled.div`
@@ -92,7 +96,7 @@ const ImgName = styled.div`
   align-items: center;
   font-family: "Kfont";
   ${(props) =>
-    props.type === props.name &&
+    props.type.food_type === props.name &&
     css`
       color: #108dee;
     `};
@@ -123,13 +127,15 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ addFeedingNum, handleFoodtype }) {
+function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
   const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
   };
-
+  useEffect(() => {
+    console.log(feedingInfo);
+  }, []);
   return (
     <DarkBackGround>
       <ModalContainer>
@@ -147,20 +153,20 @@ function FeedingInput({ addFeedingNum, handleFoodtype }) {
             <ImgContainer>
               <Img name="pellet" src="/펠렛.png" onClick={handleFoodtype} />
               <Img name="flake" src="/플레이크.png" onClick={handleFoodtype} />
-              <Img name="forzen" src="/냉동.png" onClick={handleFoodtype} />
+              <Img name="frozen" src="/냉동.png" onClick={handleFoodtype} />
               <Img name="live" src="/생먹이.png" onClick={handleFoodtype} />
             </ImgContainer>
             <ImgNameContainer>
-              <ImgName type={foodType} name="펠렛">
+              <ImgName type={feedingInfo} name="pellet">
                 펠렛
               </ImgName>
-              <ImgName type={foodType} name="플레이크">
+              <ImgName type={feedingInfo} name="flake">
                 플레이크
               </ImgName>
-              <ImgName type={foodType} name="냉동">
+              <ImgName type={feedingInfo} name="frozen">
                 냉동
               </ImgName>
-              <ImgName type={foodType} name="생먹이">
+              <ImgName type={feedingInfo} name="live">
                 생먹이
               </ImgName>
             </ImgNameContainer>

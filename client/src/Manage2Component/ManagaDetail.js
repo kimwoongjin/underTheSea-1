@@ -573,6 +573,7 @@ function ManageDetail() {
         <FeedingInput
           addFeedingNum={addFeedingNum}
           handleFoodtype={handleFoodtype}
+          feedingInfo={feedingInfo}
         />
       )}
     </>
