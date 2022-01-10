@@ -8,7 +8,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 
-
 const DarkBackGround = styled.div`
   position: fixed;
   left: 0;
@@ -160,7 +159,6 @@ function Login() {
     }
   };
 
-
   return (
     <DarkBackGround>
       <ModalContainer>
@@ -177,19 +175,18 @@ function Login() {
             placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
+            onChange={handleInputValue}
           />
           <Pwd
             placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
+            onChange={handleInputValue}
           />
 
           <LoginBtn type="button" onClick={handleLogin}>
             로그인
           </LoginBtn>
-
-
-       
 
           <GoogleBtn type="button">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}

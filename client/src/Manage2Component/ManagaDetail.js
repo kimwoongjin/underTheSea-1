@@ -9,6 +9,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
 import { useSelector, useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
 import {
   myAquariumInfoModalOnAction,
   feedingInputModalOnAction,
@@ -146,7 +147,7 @@ const MidContainer = styled.div`
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 
-// const ProgressBar = styled.div`
+// const ProgressBar22 = styled.div`
 //   position: absolute;
 //   left: 0;
 //   width: ${(props) => (props.bar ? props.bar : "50%")};
@@ -156,6 +157,37 @@ const MidContainer = styled.div`
 //   box-shadow: -5px 0 0 0 #bbdd3e inset;
 //   background-color: #a2c523;
 // `;
+
+// const [data, setData] = useState({
+//   walks: [{ created_at: 0 }],
+//   goal: 0,
+//   users: [],
+// });
+
+// const [src, setSrc] = useState("");
+// const [display, setDisplay] = useState("none");
+// const [goal_percent, setGoal_Percent] = useState(0);
+// const [modal, setModal] = useState(false);
+// const Navigate = useNavigate();
+
+// const onCancel = () => {
+//   setModal(false);
+// };
+// const handleClick = () => {
+//   setModal(true);
+// };
+
+// useEffect(() => {
+//   loadingOn();
+// }, []);
+
+// useEffect(() => {
+//   if (data.goal) {
+//     setGoal_Percent(
+//       Math.min(100, Math.floor((100 * data.walks.length) / data.goal))
+//     );
+//   }
+// }, [data]);
 
 const ProgressBar = styled.div`
   padding: 2px;
@@ -209,16 +241,6 @@ const Button = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
   }
-`;
-
-//--------------------------------------------
-const Counter = styled.div`
-  border: 1px solid black;
-  width: 50%;
-  height: 50px;
-  /* height: 12%; */
-  margin-top: 2%;
-  display: flex;
 `;
 
 //------------------- 캘린더 --------------------
@@ -336,6 +358,21 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
+  // let feedingData = 0;
+  const [feedingNum, setFeedingNum] = useState(0);
+  // const [manageData, setManageDate] = useState({
+  //   feedingNum: 0,
+  //   exWater: 0
+  // })
+  // 피딩기록 버튼을 누르면 피딩넘이 하나 올라감
+  // 환수기록 버튼을 누르면 환수숫자가 하나 올라감
+  //
+  // const onIncrease = () => { setCount(prevCount => prevCount + 1); };
+  const AddFeedingData = () => {
+    setFeedingNum((feedingNum) => feedingNum++);
+    // console.log("먹이준 횟수", feedingNum);
+    // dispatch(modalOff);
+  };
   const state = useSelector((state) => state.modalReducer);
   const { isMyAquariumInfoModal, isFeedingModal } = state;
   const dispatch = useDispatch();
@@ -372,6 +409,7 @@ function ManageDetail() {
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
+                    {feedingNum}
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
@@ -423,14 +461,12 @@ function ManageDetail() {
 
   return (
     <>
-      <Header2 isLogin={isLogin} />
+      <Header2 />
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
           <Text>구피와 구구 어항</Text>
         </TextContainer>
-
-        {/* <Img src="/물방울L.png" alt="" /> */}
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
@@ -446,7 +482,7 @@ function ManageDetail() {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>6</Levelinfo>
+              <Levelinfo>{feedingNum}</Levelinfo>
             </LevelCover>
             <Logo src="/로고.png" />
           </Level>
@@ -509,7 +545,7 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
-      {isFeedingModal && <FeedingInput />}
+      {isFeedingModal && <FeedingInput AddFeedingData={AddFeedingData} />}
     </>
   );
 }

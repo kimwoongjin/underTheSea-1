@@ -18,31 +18,52 @@ const Img = styled.img`
 `;
 
 const Login = styled.div`
-  cursor: pointer;
-<<<<<<< HEAD
+  /* border: 1px solid red; */
+  padding: 10px;
   font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
 `;
 const Signup = styled.div`
-  cursor: pointer;
+  /* border: 1px solid red; */
+  border-radius: 8px;
+  padding: 10px;
   font-family: "Kfont";
+  cursor: pointer;
+  background: #008eff;
+  color: white;
+  position: relative;
+  :hover::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
 `;
 const Search = styled.div`
+  /* border: 1px solid red; */
+  padding: 10px;
   font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
 `;
 const Guide = styled.div`
+  /* border: 1px solid red; */
+  padding: 10px;
   font-family: "Kfont";
-=======
-`;
-const Signup = styled.div`
   cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
 `;
-const Search = styled.div`
-  cursor: pointer;
-`;
-const Guide = styled.div`
-  cursor: pointer;
->>>>>>> Add/redux
-`;
+
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
@@ -53,12 +74,8 @@ const BtnContainer = styled.div`
   font-family: "Kfont";
 `;
 
-
 function Header() {
   const dispatch = useDispatch();
-
-
-
 
   return (
     <Container>

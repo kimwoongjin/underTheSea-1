@@ -4,6 +4,8 @@ import {
   SKIMMER_INFO_MODAL_ON,
   SEA_BASIC_INFO_MODAL_ON,
   MY_AQUARIUM_INFO_MODAL_ON,
+  FILTER_MEDIA_MODAL_ON,
+  ACTIVATION_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
   MODAL_OFF,
 } from "../actions/actionTypes";
@@ -14,6 +16,8 @@ const initialState = {
   isSkimmerModal: false,
   isSeaBasicInfoModal: false,
   isMyAquariumInfoModal: false,
+  isFilterMediaModal: false,
+  isActivationModal: false,
   isFeedingModal: false,
 };
 
@@ -32,11 +36,17 @@ const modalReducer = (prevState = initialState, action) => {
     case SEA_BASIC_INFO_MODAL_ON:
       state = { ...prevState, isSeaBasicInfoModal: true };
       break;
+    case FILTER_MEDIA_MODAL_ON:
+      state = { ...prevState, isFilterMediaModal: true };
+      break;
     case MY_AQUARIUM_INFO_MODAL_ON:
       state = { ...prevState, isMyAquariumInfoModal: true };
       break;
     case FEEDING_INPUT_MODAL_ON:
       state = { ...prevState, isFeedingModal: true };
+      break;
+    case ACTIVATION_MODAL_ON:
+      state = { ...prevState, isActivationModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

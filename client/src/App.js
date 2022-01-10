@@ -6,30 +6,20 @@ import Mypage from "./page/Mypage";
 import ManageDetail from "./Manage2Component/ManagaDetail";
 import ManageAddInfo from "./page/ManageAddInfo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SeaWaterGuide from "./page/SeaWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import Login from "./modalComponent/Login";
-import Header from "./component/Header";
-import Header2 from "./component/Header2";
 import SignUp from "./modalComponent/SignUp";
 
 function App() {
-  const navigate = useNavigate();
-  // isLoginModal: false,
-  // isSignupModal: false,
-  // isSkimmerModal: false,
-  // const { isLoginModal, isSignupModal } = useSelector(
-  //   ({ modalReducer }) => modalReducer
-  // );
+  const state = useSelector((state) => state.modalReducer);
+  const { isLoginModal, isSignupModal } = state;
 
   return (
-    <>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/guide" element={<Guide />}></Route>
@@ -43,7 +33,9 @@ function App() {
         <Route path="/manage/addInfo" element={<ManageAddInfo />}></Route>
         <Route path="/mypage" element={<Mypage />}></Route>
       </Routes>
-    </>
+      {isLoginModal && <Login />}
+      {isSignupModal && <SignUp />}
+    </BrowserRouter>
   );
 }
 

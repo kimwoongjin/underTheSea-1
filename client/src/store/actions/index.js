@@ -5,6 +5,8 @@ import {
   SIGN_UP_MODAL_ON,
   SKIMMER_INFO_MODAL_ON,
   SEA_BASIC_INFO_MODAL_ON,
+  FILTER_MEDIA_MODAL_ON,
+  ACTIVATION_MODAL_ON,
   MY_AQUARIUM_INFO_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
   MODAL_OFF,
@@ -31,6 +33,12 @@ export const skimmerInfoModalOnAction = {
 };
 export const seaBasicInfoModalOnAction = {
   type: SEA_BASIC_INFO_MODAL_ON,
+};
+export const filterMediaModalOnAction = {
+  type: FILTER_MEDIA_MODAL_ON,
+};
+export const activationModalOnAction = {
+  type: ACTIVATION_MODAL_ON,
 };
 export const myAquariumInfoModalOnAction = {
   type: MY_AQUARIUM_INFO_MODAL_ON,

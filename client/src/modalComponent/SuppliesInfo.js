@@ -48,11 +48,13 @@ const ContentContainer = styled.div`
     margin-top: 50px;
   }
   h2 {
+    font-family: "Kfont";
     padding-bottom: 5px;
     box-sizing: border-box;
-    border-bottom: 2px solid #d2f7ff;
+    border-bottom: 2px solid #e5e5e5;
   }
   p {
+    font-family: "Kfont";
     font-size: 18px;
     line-height: 170%;
   }
@@ -60,12 +62,11 @@ const ContentContainer = styled.div`
 const IconContainer = styled.div`
   width: 95%;
   height: 5%;
-  /* margin-top: 5px; */
   display: flex;
   justify-content: flex-end;
-  /* border: 1px solid red; */
 `;
 const SubTitle = styled.div`
+  font-family: "Kfont";
   font-weight: bold;
   margin-top: 7px;
   margin-bottom: 5px;
