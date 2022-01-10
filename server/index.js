@@ -56,16 +56,19 @@ app.post("/images", upload.single("image"), async (req, res) => {
   const result = await uploadFile(file);
   await unlinkFile(file.path);
   console.log(result);
-  const description = req.body.description;
-  console.log(description);
-  res.send({ imagePath: `/images/${result.Key}`, description });
+  res.send({ imagePath: `/images/${result.Key}` });
 });
 
+app.get("/level/:level_id", (req, res) => {
+  const level_id = req.params.level_id;
+  res.sendFile(`./level_imgs/${level_id}.png`, { root: __dirname });
+});
 app.use("/", indexRouter);
 
 let server;
 server = app.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
+  console.log(process.env.TETT);
 });
 
 module.exports = server;

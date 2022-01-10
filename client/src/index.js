@@ -2,15 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85e468356557684613d56f2e948a907274f84dcc
   // </React.StrictMode>,
   document.getElementById("root")
 );

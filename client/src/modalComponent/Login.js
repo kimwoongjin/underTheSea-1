@@ -173,11 +173,13 @@ function Login() {
             placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
+            onChange={handleInputValue}
           />
           <Pwd
             placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
+            onChange={handleInputValue}
           />
 
           <LoginBtn type="button" onClick={handleLogin}>

@@ -8,8 +8,12 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import { useSelector, useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
-import { useDispatch } from "react-redux";
+import {
+  myAquariumInfoModalOnAction,
+  feedingInputModalOnAction,
+} from "../store/actions";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -139,11 +143,11 @@ const MidContainer = styled.div`
   align-items: center;
   /* background: #00d2ff; */
   /* background-color: rgba(102, 178, 255, 0.2); */
-  background-color: rgba(224, 224, 224, 0.5);
+  background-color: rgba(51, 153, 255, 0.1);
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 
-// const ProgressBar = styled.div`
+// const ProgressBar22 = styled.div`
 //   position: absolute;
 //   left: 0;
 //   width: ${(props) => (props.bar ? props.bar : "50%")};
@@ -153,6 +157,37 @@ const MidContainer = styled.div`
 //   box-shadow: -5px 0 0 0 #bbdd3e inset;
 //   background-color: #a2c523;
 // `;
+
+// const [data, setData] = useState({
+//   walks: [{ created_at: 0 }],
+//   goal: 0,
+//   users: [],
+// });
+
+// const [src, setSrc] = useState("");
+// const [display, setDisplay] = useState("none");
+// const [goal_percent, setGoal_Percent] = useState(0);
+// const [modal, setModal] = useState(false);
+// const Navigate = useNavigate();
+
+// const onCancel = () => {
+//   setModal(false);
+// };
+// const handleClick = () => {
+//   setModal(true);
+// };
+
+// useEffect(() => {
+//   loadingOn();
+// }, []);
+
+// useEffect(() => {
+//   if (data.goal) {
+//     setGoal_Percent(
+//       Math.min(100, Math.floor((100 * data.walks.length) / data.goal))
+//     );
+//   }
+// }, [data]);
 
 const ProgressBar = styled.div`
   padding: 2px;
@@ -206,16 +241,6 @@ const Button = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
   }
-`;
-
-//--------------------------------------------
-const Counter = styled.div`
-  border: 1px solid black;
-  width: 50%;
-  height: 50px;
-  /* height: 12%; */
-  margin-top: 2%;
-  display: flex;
 `;
 
 //------------------- 캘린더 --------------------
@@ -305,20 +330,49 @@ const Day = styled.div`
 
 const FoodIconContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  border: 1px solid red;
+  height: 40%;
+  /* border: 1px solid red; */
+`;
+
+const FoodInnerContainer = styled.div`
+  display: flex;
+`;
+
+const FoodTypeAndNum = styled.div`
+  display: flex;
+`;
+
+const FeedingNum = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
 `;
 
 const FoodIcon = styled.img`
-  width: 25%;
-  border: 1px solid blue;
+  width: 40%;
+  /* border: 1px solid blue; */
 `;
 
 function ManageDetail() {
-  let feedingNum = 0;
+  // let feedingData = 0;
+  const [feedingNum, setFeedingNum] = useState(0);
+  // const [manageData, setManageDate] = useState({
+  //   feedingNum: 0,
+  //   exWater: 0
+  // })
+  // 피딩기록 버튼을 누르면 피딩넘이 하나 올라감
+  // 환수기록 버튼을 누르면 환수숫자가 하나 올라감
+  //
+  // const onIncrease = () => { setCount(prevCount => prevCount + 1); };
+
+  const state = useSelector((state) => state.modalReducer);
+  const { isMyAquariumInfoModal, isFeedingModal } = state;
   const dispatch = useDispatch();
-  const [infoModal, setInfoModal] = useState(false);
-  const [feedModal, setFeedModal] = useState(false);
+
   const [getMoment, setMoment] = useState(moment());
   const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
@@ -331,19 +385,6 @@ function ManageDetail() {
   const onIncrease = () => {
     setCount((count) => count + 1);
     dispatch(modalOff);
-  };
-
-  const InfoModalOn = () => {
-    setInfoModal(true);
-  };
-  const InfoModalOff = () => {
-    setInfoModal(false);
-  };
-  const feedingModalOn = () => {
-    setFeedModal(true);
-  };
-  const feedingModalOff = () => {
-    setFeedModal(false);
   };
 
   // ------ 달력날짜 랜더링 ------ //
@@ -372,10 +413,26 @@ function ManageDetail() {
                     </Number>
                     {count}
                     <FoodIconContainer>
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/펠렛.png" />
+                          <FeedingNum>1</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/플레이크.png" />
+                          <FeedingNum>2</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/냉동.png" />
+                          <FeedingNum>4</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/생먹이.png" />
+                          <FeedingNum>5</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -410,14 +467,8 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Lv>3</Lv> */}
-          {/* <Lv2></Lv2> */}
-          {/* <Lv3></Lv3> */}
           <Text>구피와 구구 어항</Text>
-          {/* <Icon></Icon> */}
         </TextContainer>
-
-        {/* <Img src="/물방울L.png" alt="" /> */}
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
@@ -433,7 +484,7 @@ function ManageDetail() {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>6</Levelinfo>
+              <Levelinfo>{feedingNum}</Levelinfo>
             </LevelCover>
             <Logo src="/로고.png" />
           </Level>
@@ -441,8 +492,13 @@ function ManageDetail() {
             <Progress></Progress>
           </ProgressBar>
           <BtnContainer>
-            <Button onClick={feedingModalOn}>피딩기록</Button>
-            <Button onClick={InfoModalOn} className="info">
+            <Button onClick={() => dispatch(feedingInputModalOnAction)}>
+              피딩기록
+            </Button>
+            <Button
+              onClick={() => dispatch(myAquariumInfoModalOnAction)}
+              className="info"
+            >
               수조정보
             </Button>
             <Button>환수기록</Button>
@@ -490,14 +546,8 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
-      {infoModal && <AquaInfo onCancel={InfoModalOff} visible={infoModal} />}
-      {feedModal && (
-        <FeedingInput
-          onCancel={feedingModalOff}
-          visible={feedModal}
-          onIncrease={onIncrease}
-        />
-      )}
+      {isMyAquariumInfoModal && <AquaInfo />}
+      {isFeedingModal && <FeedingInput onIncrease={onIncrease} />}
     </>
   );
 }

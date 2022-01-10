@@ -5,14 +5,14 @@ module.exports = async (req, res) => {
 
   if (!email || !user_name || !user_pwd) {
     return res
-      .status(200)
+      .status(401)
       .json({ message: "signup: You are missing some argument(s)" });
   }
 
   const user = await users.findOne({ where: { email } });
 
   if (user) {
-    return res.status(200).json({ message: "Email is already in use" });
+    return res.status(400).json({ message: "Email is already in use" });
   } else {
     await users.create({ email, user_name, user_pwd });
     return res.status(201).json({

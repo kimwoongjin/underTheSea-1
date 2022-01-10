@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -136,7 +136,7 @@ function FeedingInput({ onIncrease }) {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            // onClick={onCancel}
+            onClick={() => dispatch(modalOff)}
             color="#e5e5e5"
           />
         </CloseBtnContainer>
