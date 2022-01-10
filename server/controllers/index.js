@@ -11,6 +11,7 @@ module.exports = {
   level: require("./container/level"),
   water: require("./container/water"),
   fishinfo: require("./fish/fishinfo"),
+  allfishinfo: require("./fish/allfishinfo"),
   addcomment: require("./comment/addcomment"),
   addtip: require("./tip/addtip"),
   alltips: require("./tip/alltips"),
