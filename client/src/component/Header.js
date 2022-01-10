@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginModalOnAction, signupModalOnAction } from "../store/actions";
+
 const Container = styled.div`
   width: 100vw;
   height: 10vh;
@@ -16,6 +19,7 @@ const Img = styled.img`
 
 const Login = styled.div`
   cursor: pointer;
+<<<<<<< HEAD
   font-family: "Kfont";
 `;
 const Signup = styled.div`
@@ -27,6 +31,17 @@ const Search = styled.div`
 `;
 const Guide = styled.div`
   font-family: "Kfont";
+=======
+`;
+const Signup = styled.div`
+  cursor: pointer;
+`;
+const Search = styled.div`
+  cursor: pointer;
+`;
+const Guide = styled.div`
+  cursor: pointer;
+>>>>>>> Add/redux
 `;
 const BtnContainer = styled.div`
   display: flex;
@@ -38,19 +53,25 @@ const BtnContainer = styled.div`
   font-family: "Kfont";
 `;
 
-function Header({ handleLogin, handleSignup, signupCancel, isLogin }) {
+
+function Header() {
+  const dispatch = useDispatch();
+
+
+
+
   return (
     <Container>
       <Img src="/로고.png" alt="" />
       <BtnContainer>
-        <Guide>가이드</Guide>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
+          <Guide>가이드</Guide>
+        </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
         </Link>
-        <Login onClick={handleLogin}>로그인</Login>
-        <Signup onClick={handleSignup} signupCancel={signupCancel}>
-          회원가입
-        </Signup>
+        <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
+        <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup>
       </BtnContainer>
     </Container>
   );

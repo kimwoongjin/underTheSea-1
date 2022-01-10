@@ -8,6 +8,11 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  myAquariumInfoModalOnAction,
+  feedingInputModalOnAction,
+} from "../store/actions";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -330,11 +335,11 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail({ isLogin }) {
-  let feedingNum = 0;
+function ManageDetail() {
+  const state = useSelector((state) => state.modalReducer);
+  const { isMyAquariumInfoModal, isFeedingModal } = state;
+  const dispatch = useDispatch();
 
-  const [infoModal, setInfoModal] = useState(false);
-  const [feedModal, setFeedModal] = useState(false);
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
@@ -342,23 +347,6 @@ function ManageDetail({ isLogin }) {
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-
-  const feedingCounter = () => {
-    feedingNum++;
-    console.log(feedingNum);
-  };
-  const InfoModalOn = () => {
-    setInfoModal(true);
-  };
-  const InfoModalOff = () => {
-    setInfoModal(false);
-  };
-  const feedingModalOn = () => {
-    setFeedModal(true);
-  };
-  const feedingModalOff = () => {
-    setFeedModal(false);
-  };
 
   // ------ 달력날짜 랜더링 ------ //
 
@@ -466,8 +454,13 @@ function ManageDetail({ isLogin }) {
             <Progress></Progress>
           </ProgressBar>
           <BtnContainer>
-            <Button onClick={feedingModalOn}>피딩기록</Button>
-            <Button onClick={InfoModalOn} className="info">
+            <Button onClick={() => dispatch(feedingInputModalOnAction)}>
+              피딩기록
+            </Button>
+            <Button
+              onClick={() => dispatch(myAquariumInfoModalOnAction)}
+              className="info"
+            >
               수조정보
             </Button>
             <Button>환수기록</Button>
@@ -515,10 +508,8 @@ function ManageDetail({ isLogin }) {
 
         <ManageDetCard />
       </OuterContainer>
-      {infoModal && <AquaInfo onCancel={InfoModalOff} visible={infoModal} />}
-      {feedModal && (
-        <FeedingInput onCancel={feedingModalOff} visible={feedModal} />
-      )}
+      {isMyAquariumInfoModal && <AquaInfo />}
+      {isFeedingModal && <FeedingInput />}
     </>
   );
 }
