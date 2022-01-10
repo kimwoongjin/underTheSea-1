@@ -8,6 +8,7 @@ import SkimmerCard from "../component/SkimmerCard";
 import SkimmerInfo from "../modalComponent/SkimmerInfo";
 import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -47,21 +48,11 @@ const InfoContainer = styled.div`
 `;
 
 function SeaWaterGuide() {
-  const Navigate = useNavigate();
-  const [skimmerModal, setSkimmerModal] = useState(false);
-  const [suppliesModal, setSuppliesModal] = useState(false);
-  const handleSkimmerModal = () => {
-    setSkimmerModal(true);
-  };
-  const handleSuppliesModal = () => {
-    setSuppliesModal(true);
-  };
-  const skimmerCancel = () => {
-    setSkimmerModal(false);
-  };
-  const suppliesCancel = () => {
-    setSuppliesModal(false);
-  };
+  // isSkimmerModal: false,
+  // isSeaBasicInfoModal: false,
+  const state = useSelector((state) => state.modalReducer);
+  const { isSkimmerModal, isSeaBasicInfoModal } = state;
+  const dispatch = useDispatch();
   return (
     <>
       <Container>
@@ -70,18 +61,16 @@ function SeaWaterGuide() {
           Saltwater Fish Guide
           <div className="sub">해수어는 어떻게 시작할까?</div>
         </Title>
-
         <InfoContainer>
-          <SkimmerCard handleSkimmerModal={handleSkimmerModal} />
-          <SuppliesCard
-            handleSuppliesModal={handleSuppliesModal}
-          ></SuppliesCard>
+          {/* 여따가 디스패치 걸어서 리덕스로 모듈 띄워야함 */}
+          <SkimmerCard />
+          <SuppliesCard></SuppliesCard>
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
           <GuideinfoCard></GuideinfoCard>
         </InfoContainer>
-        {skimmerModal ? (
+        {/* {skimmerModal ? (
           <SkimmerInfo onCancel={skimmerCancel} visible={skimmerModal} />
         ) : (
           ""
@@ -90,7 +79,7 @@ function SeaWaterGuide() {
           <SuppliesInfo onCancel={suppliesCancel} visible={suppliesModal} />
         ) : (
           ""
-        )}
+        )} */}
       </Container>
     </>
   );
