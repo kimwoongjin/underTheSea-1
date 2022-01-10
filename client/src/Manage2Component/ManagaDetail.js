@@ -6,7 +6,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { faFish } from "@fortawesome/free-solid-svg-icons";
+import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
 
 //경로 "/manage/detailinfo"의 전체 페이지
@@ -50,7 +50,6 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
-  z-index: 999;
   /* border: 1px solid #108dee; */
 `;
 
@@ -66,7 +65,7 @@ const Level = styled.div`
   display: flex;
   justify-content: space-between;
   width: 50%;
-  height: 30px;
+  height: 40px;
   font-weight: bold;
   font-size: 1.5rem;
 `;
@@ -137,8 +136,9 @@ const MidContainer = styled.div`
   margin-top: 1%;
   align-items: center;
   /* background: #00d2ff; */
-  /* background-color: rgba(0, 0, 0, 0.1); */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(102, 178, 255, 0.2); */
+  background-color: rgba(224, 224, 224, 0.5);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 
 // const ProgressBar = styled.div`
@@ -159,7 +159,7 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
-  background: white;
+  /* background: white; */
   border: 2px solid #108dee;
 `;
 const Progress = styled.div`
@@ -177,10 +177,10 @@ const BtnContainer = styled.div`
   width: 50%;
   height: 6vh;
 
-  .info {
+  /* .info {
     background: white;
     color: #108dee;
-  }
+  } */
 `;
 
 const Button = styled.button`
@@ -270,6 +270,7 @@ const Td = styled.td`
   display: flex;
   border: 1px solid gray;
   /* border-radius: 4px; */
+  flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
@@ -300,10 +301,22 @@ const Day = styled.div`
 `;
 // 지금 해야되는거는 피딩기록하는 버튼을 누르면 버튼을 누른 숫자만큼 클릭한 날에 달력에 정보가 보여야해
 
+const FoodIconContainer = styled.div`
+  display: flex;
+  width: 100%;
+  border: 1px solid red;
+`;
+
+const FoodIcon = styled.img`
+  width: 25%;
+  border: 1px solid blue;
+`;
+
 function ManageDetail() {
   let feedingNum = 0;
-  let today1 = Date();
+
   const [infoModal, setInfoModal] = useState(false);
+  const [feedModal, setFeedModal] = useState(false);
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
@@ -314,14 +327,19 @@ function ManageDetail() {
 
   const feedingCounter = () => {
     feedingNum++;
-    // console.log(feedingNum);
-    console.log(today1);
+    console.log(feedingNum);
   };
   const InfoModalOn = () => {
     setInfoModal(true);
   };
   const InfoModalOff = () => {
     setInfoModal(false);
+  };
+  const feedingModalOn = () => {
+    setFeedModal(true);
+  };
+  const feedingModalOff = () => {
+    setFeedModal(false);
   };
 
   // ------ 달력날짜 랜더링 ------ //
@@ -348,6 +366,12 @@ function ManageDetail() {
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
+                    <FoodIconContainer>
+                      <FoodIcon />
+                      <FoodIcon />
+                      <FoodIcon />
+                      <FoodIcon />
+                    </FoodIconContainer>
                   </Td>
                 );
               } else if (days.format("MM") !== today.format("MM")) {
@@ -412,7 +436,7 @@ function ManageDetail() {
             <Progress></Progress>
           </ProgressBar>
           <BtnContainer>
-            <Button onClick={feedingCounter}>피딩기록</Button>
+            <Button onClick={feedingModalOn}>피딩기록</Button>
             <Button onClick={InfoModalOn} className="info">
               수조정보
             </Button>
@@ -461,10 +485,9 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
-      {infoModal ? (
-        <AquaInfo onCancel={InfoModalOff} visible={infoModal} />
-      ) : (
-        ""
+      {infoModal && <AquaInfo onCancel={InfoModalOff} visible={infoModal} />}
+      {feedModal && (
+        <FeedingInput onCancel={feedingModalOff} visible={feedModal} />
       )}
     </>
   );
