@@ -3,6 +3,10 @@ import {
   LOG_OUT,
   LOG_IN_MODAL_ON,
   SIGN_UP_MODAL_ON,
+  SIGN_OUT,
+  PWD_CHANGE,
+  SIGN_OUT_MODAL_ON,
+  PWD_CHANGE_MODAL_ON,
   SKIMMER_INFO_MODAL_ON,
   SEA_BASIC_INFO_MODAL_ON,
   FILTER_MEDIA_MODAL_ON,
@@ -24,6 +28,15 @@ export const loginModalOnAction = {
 };
 export const signupModalOnAction = {
   type: SIGN_UP_MODAL_ON,
+};
+export const signoutAction = {
+  type: SIGN_OUT,
+};
+export const signoutModalAction = {
+  type: SIGN_OUT_MODAL_ON,
+};
+export const pwdchangeModalAction = {
+  type: PWD_CHANGE_MODAL_ON,
 };
 export const modalOff = {
   type: MODAL_OFF,

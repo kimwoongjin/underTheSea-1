@@ -123,7 +123,7 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ AddFeedingData }) {
+function FeedingInput({ onIncrease }) {
   const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
@@ -164,7 +164,7 @@ function FeedingInput({ AddFeedingData }) {
                 생먹이
               </ImgName>
             </ImgNameContainer>
-            <Btn onClick={AddFeedingData}>선택완료</Btn>
+            <Btn onClick={onIncrease}>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>

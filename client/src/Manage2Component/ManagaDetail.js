@@ -368,22 +368,24 @@ function ManageDetail() {
   // 환수기록 버튼을 누르면 환수숫자가 하나 올라감
   //
   // const onIncrease = () => { setCount(prevCount => prevCount + 1); };
-  const AddFeedingData = () => {
-    setFeedingNum((feedingNum) => feedingNum++);
-    // console.log("먹이준 횟수", feedingNum);
-    // dispatch(modalOff);
-  };
+
   const state = useSelector((state) => state.modalReducer);
   const { isMyAquariumInfoModal, isFeedingModal } = state;
   const dispatch = useDispatch();
 
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
+
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
+  };
 
   // ------ 달력날짜 랜더링 ------ //
 
@@ -409,7 +411,7 @@ function ManageDetail() {
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
-                    {feedingNum}
+                    {count}
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
@@ -545,7 +547,7 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
-      {isFeedingModal && <FeedingInput AddFeedingData={AddFeedingData} />}
+      {isFeedingModal && <FeedingInput onIncrease={onIncrease} />}
     </>
   );
 }
