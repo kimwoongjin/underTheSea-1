@@ -358,21 +358,47 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
-  // let feedingData = 0;
-  const [feedingNum, setFeedingNum] = useState(0);
-  // const [manageData, setManageDate] = useState({
-  //   feedingNum: 0,
-  //   exWater: 0
-  // })
-  // 피딩기록 버튼을 누르면 피딩넘이 하나 올라감
-  // 환수기록 버튼을 누르면 환수숫자가 하나 올라감
-  //
-  // const onIncrease = () => { setCount(prevCount => prevCount + 1); };
-  const AddFeedingData = () => {
-    setFeedingNum((feedingNum) => feedingNum++);
-    // console.log("먹이준 횟수", feedingNum);
-    // dispatch(modalOff);
+  const [feedingInfo, setFeedingInfo] = useState({
+    pellet_num: 0,
+    flake_num: 0,
+    frozen_num: 0,
+    live_num: 0,
+    food_type: "",
+  });
+
+  // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
+  const handleFoodtype = (e) => {
+    setFeedingInfo({
+      ...feedingInfo,
+      food_type: e.target.name,
+    });
   };
+
+  const addFeedingNum = () => {
+    if (feedingInfo.food_type === "pellet") {
+      setFeedingInfo({
+        ...feedingInfo,
+        pellet_num: feedingInfo.pellet_num + 1,
+      });
+    } else if (feedingInfo.food_type === "flake") {
+      setFeedingInfo({
+        ...feedingInfo,
+        flake_num: feedingInfo.flake_num + 1,
+      });
+    } else if (feedingInfo.food_type === "frozen") {
+      setFeedingInfo({
+        ...feedingInfo,
+        frozen_num: feedingInfo.frozen_num + 1,
+      });
+    } else {
+      setFeedingInfo({
+        ...feedingInfo,
+        live_num: feedingInfo.live_num + 1,
+      });
+    }
+    dispatch(modalOff);
+  };
+
   const state = useSelector((state) => state.modalReducer);
   const { isMyAquariumInfoModal, isFeedingModal } = state;
   const dispatch = useDispatch();
@@ -402,33 +428,31 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 return (
                   <Td key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
-                    {feedingNum}
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
                           <FoodIcon src="/펠렛.png" />
-                          <FeedingNum>1</FeedingNum>
+                          <FeedingNum>{feedingInfo.pellet_num}</FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/플레이크.png" />
-                          <FeedingNum>2</FeedingNum>
+                          <FeedingNum>{feedingInfo.flake_num}</FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
                           <FoodIcon src="/냉동.png" />
-                          <FeedingNum>4</FeedingNum>
+                          <FeedingNum>{feedingInfo.frozen_num}</FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/생먹이.png" />
-                          <FeedingNum>5</FeedingNum>
+                          <FeedingNum>{feedingInfo.live_num}</FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                     </FoodIconContainer>
@@ -482,7 +506,7 @@ function ManageDetail() {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>{feedingNum}</Levelinfo>
+              <Levelinfo></Levelinfo>
             </LevelCover>
             <Logo src="/로고.png" />
           </Level>
@@ -545,7 +569,12 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
-      {isFeedingModal && <FeedingInput AddFeedingData={AddFeedingData} />}
+      {isFeedingModal && (
+        <FeedingInput
+          addFeedingNum={addFeedingNum}
+          handleFoodtype={handleFoodtype}
+        />
+      )}
     </>
   );
 }

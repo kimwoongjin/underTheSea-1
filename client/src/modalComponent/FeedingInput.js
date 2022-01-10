@@ -123,7 +123,7 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ AddFeedingData }) {
+function FeedingInput({ addFeedingNum, handleFoodtype }) {
   const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
@@ -145,10 +145,10 @@ function FeedingInput({ AddFeedingData }) {
           <InfoShow>
             <Text>먹이 타입을 선택해주세요</Text>
             <ImgContainer>
-              <Img name="펠렛" src="/펠렛.png" onClick={choiceFood} />
-              <Img name="플레이크" src="/플레이크.png" onClick={choiceFood} />
-              <Img name="냉동" src="/냉동.png" onClick={choiceFood} />
-              <Img name="생먹이" src="/생먹이.png" onClick={choiceFood} />
+              <Img name="pellet" src="/펠렛.png" onClick={handleFoodtype} />
+              <Img name="flake" src="/플레이크.png" onClick={handleFoodtype} />
+              <Img name="forzen" src="/냉동.png" onClick={handleFoodtype} />
+              <Img name="live" src="/생먹이.png" onClick={handleFoodtype} />
             </ImgContainer>
             <ImgNameContainer>
               <ImgName type={foodType} name="펠렛">
@@ -164,7 +164,7 @@ function FeedingInput({ AddFeedingData }) {
                 생먹이
               </ImgName>
             </ImgNameContainer>
-            <Btn onClick={AddFeedingData}>선택완료</Btn>
+            <Btn onClick={addFeedingNum}>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>
