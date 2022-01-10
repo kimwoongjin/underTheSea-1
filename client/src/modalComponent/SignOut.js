@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -125,7 +126,6 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
-
 function SignOut({ accessToken }) {
   const navigate = useNavigate();
   function signOut() {
@@ -137,7 +137,6 @@ function SignOut({ accessToken }) {
         navigate("/");
       });
   }
-
 
   return (
     <DarkBackGround>
@@ -152,9 +151,7 @@ function SignOut({ accessToken }) {
             </Text>
           </TextForm>
           <Btn>
-            <CancleBtn type="button" onClick={closeModal}>
-              아니요. 취소합니다.
-            </CancleBtn>
+            <CancleBtn type="button">아니요. 취소합니다.</CancleBtn>
             <SignOutBtn type="button">네. 탈퇴합니다.</SignOutBtn>
           </Btn>
         </Form>
