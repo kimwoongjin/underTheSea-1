@@ -69,7 +69,10 @@ let server;
 server = app.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
   console.log("db host : ", process.env.DATABASE_HOST);
-  console.log("test : ", process.env.TEST);
+  console.log("username : ", process.env.DATABASE_USERNAME);
+  console.log("name : ", process.env.DATABASE_NAME);
+  console.log("password : ", process.env.DATABASE_PASSWORD);
+  console.log("port : ", process.env.DATABASE_PORT);
 });
 
 module.exports = server;
