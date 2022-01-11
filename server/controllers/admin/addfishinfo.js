@@ -8,9 +8,10 @@ module.exports = async (req, res) => {
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   }
+  console.log(req.body.data);
   const {
     fish_name,
-    habitant,
+    habitat,
     temp,
     desc,
     fish_img,
@@ -18,6 +19,7 @@ module.exports = async (req, res) => {
     reefsafe,
     size,
     sci_name,
+    ph,
   } = req.body.data;
   const check_new_fish = await fishes.findOne({ where: { fish_name } });
   if (check_new_fish) {
@@ -25,7 +27,7 @@ module.exports = async (req, res) => {
   } else {
     const new_fish = await fishes.create({
       fish_name,
-      habitant,
+      habitat,
       temp,
       desc,
       fish_img,
@@ -33,13 +35,14 @@ module.exports = async (req, res) => {
       reefsafe,
       size,
       sci_name,
+      ph,
     });
 
     const { id } = new_fish.dataValues;
-    console.log(new_fish.dataValues);
-    console.log(notTogether);
+    // console.log(new_fish.dataValues);
+    // console.log(notTogether);
 
-    //notTogether 배열을 다 돌면서 notTogether 리스트에 추가하기
+    // notTogether 배열을 다 돌면서 notTogether 리스트에 추가하기
     if (notTogether) {
       notTogether.forEach(async (el) => {
         const nt_fish = await fishes.findOne({ where: { fish_name: el } });
