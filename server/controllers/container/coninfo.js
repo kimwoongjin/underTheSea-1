@@ -3,7 +3,6 @@ const {
   containers,
   feeds,
   ex_waters,
-  fishes,
 } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
@@ -18,20 +17,29 @@ module.exports = async (req, res) => {
     if (!container) {
       return res.status(404).json({ message: "The container is not found" });
     } else {
-      const { id, user_id, container_name, size, salinity, theme, fish_num } =
+      const { id, user_id, container_name, size, salinity, theme } =
         container.dataValues;
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
       });
-      const fish_list = await Promise.all(
-        fish_info_list.map(async (el) => {
-          const fish = await fishes.findOne({
-            where: { id: el.dataValues.fish_id },
-          });
-          console.log(fish.dataValues.fish_name);
-          return fish.dataValues.fish_name;
-        })
-      );
+      console.log(fish_info_list);
+      const fish_list = [];
+      fish_info_list.map((el) => {
+        fish_list.push({
+          fish_name: el.dataValues.fish_name,
+          fish_num: el.dataValues.fish_num,
+        });
+        // return `{fish_name: ${el.dataValues.fish_name}, fish_num:${el.dataValues.fish_num}}`;
+      });
+      // const fish_list = await Promise.all(
+      //   fish_info_list.map(async (el) => {
+      //     const fish = await fishes.findOne({
+      //       where: { id: el.dataValues.fish_name },
+      //     });
+      //     console.log(fish.dataValues.fish_name);
+      //     return fish.dataValues.fish_name;
+      //   })
+      // );
 
       let feed_data = await feeds.findAll({
         where: { container_id },
@@ -84,10 +92,9 @@ module.exports = async (req, res) => {
         size,
         salinity,
         theme,
-        fish_num,
         feed_list,
         ex_water_list,
-        fish_name: fish_list,
+        fish_list,
       };
       return res
         .status(200)

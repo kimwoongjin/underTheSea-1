@@ -4,6 +4,7 @@ module.exports = {
   editfishinfo: require("./admin/editfishinfo"),
   addcon: require("./container/addcon"),
   addfish: require("./container/addfish"),
+  deletefish: require("./container/deletefish"),
   coninfo: require("./container/coninfo"),
   deletecon: require("./container/deletecon"),
   editcon: require("./container/editcon"),
