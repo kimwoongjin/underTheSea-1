@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       container_name: DataTypes.STRING,
       size: DataTypes.INTEGER,
       theme: DataTypes.STRING,
-      fish_num: DataTypes.INTEGER,
       level: DataTypes.INTEGER,
     },
     {

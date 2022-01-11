@@ -8,7 +8,7 @@ const db = require("./db/connection");
 // const controllers = require("./controllers");
 const indexRouter = require("./routes");
 
-const port = 80;
+const port = 8080;
 
 const fs = require("fs");
 const util = require("util");
@@ -68,7 +68,6 @@ app.use("/", indexRouter);
 let server;
 server = app.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
-  console.log(process.env.TETT);
 });
 
 module.exports = server;
