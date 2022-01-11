@@ -8,8 +8,17 @@ module.exports = async (req, res) => {
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   }
-  const { fish_name, habitant, temp, desc, fish_img, notTogether } =
-    req.body.data;
+  const {
+    fish_name,
+    habitant,
+    temp,
+    desc,
+    fish_img,
+    fresh_water,
+    reefsafe,
+    size,
+    sci_name,
+  } = req.body.data;
   const check_new_fish = await fishes.findOne({ where: { fish_name } });
   if (check_new_fish) {
     return res.status(400).json({ message: "The fish is already in DB" });
@@ -20,7 +29,10 @@ module.exports = async (req, res) => {
       temp,
       desc,
       fish_img,
-      notTogether,
+      fresh_water,
+      reefsafe,
+      size,
+      sci_name,
     });
 
     const { id } = new_fish.dataValues;
