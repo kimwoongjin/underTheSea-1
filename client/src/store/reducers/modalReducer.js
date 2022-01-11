@@ -7,6 +7,9 @@ import {
   FILTER_MEDIA_MODAL_ON,
   ACTIVATION_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
+  ADDFISH_MODAL_ON,
+  DEADFISH_MODAL_ON,
+  RECOMMENDINFO_MODAL_ON,
   MODAL_OFF,
 } from "../actions/actionTypes";
 
@@ -19,6 +22,9 @@ const initialState = {
   isFilterMediaModal: false,
   isActivationModal: false,
   isFeedingModal: false,
+  isAddfishModal: false,
+  isDeadfishModal: false,
+  isRecommendModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -47,6 +53,15 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case ACTIVATION_MODAL_ON:
       state = { ...prevState, isActivationModal: true };
+      break;
+    case ADDFISH_MODAL_ON:
+      state = { ...prevState, isAddfishModal: true };
+      break;
+    case DEADFISH_MODAL_ON:
+      state = { ...prevState, isDeadfishModal: true };
+      break;
+    case RECOMMENDINFO_MODAL_ON:
+      state = { ...prevState, isRecommendModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };
