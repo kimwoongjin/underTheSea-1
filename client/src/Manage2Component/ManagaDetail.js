@@ -6,8 +6,14 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { faFish } from "@fortawesome/free-solid-svg-icons";
+import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import { useSelector, useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
+import {
+  myAquariumInfoModalOnAction,
+  feedingInputModalOnAction,
+} from "../store/actions";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -50,7 +56,6 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
-  z-index: 999;
   /* border: 1px solid #108dee; */
 `;
 
@@ -66,7 +71,7 @@ const Level = styled.div`
   display: flex;
   justify-content: space-between;
   width: 50%;
-  height: 30px;
+  height: 40px;
   font-weight: bold;
   font-size: 1.5rem;
 `;
@@ -137,11 +142,12 @@ const MidContainer = styled.div`
   margin-top: 1%;
   align-items: center;
   /* background: #00d2ff; */
-  /* background-color: rgba(0, 0, 0, 0.1); */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(102, 178, 255, 0.2); */
+  background-color: rgba(51, 153, 255, 0.1);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 
-// const ProgressBar = styled.div`
+// const ProgressBar22 = styled.div`
 //   position: absolute;
 //   left: 0;
 //   width: ${(props) => (props.bar ? props.bar : "50%")};
@@ -152,6 +158,37 @@ const MidContainer = styled.div`
 //   background-color: #a2c523;
 // `;
 
+// const [data, setData] = useState({
+//   walks: [{ created_at: 0 }],
+//   goal: 0,
+//   users: [],
+// });
+
+// const [src, setSrc] = useState("");
+// const [display, setDisplay] = useState("none");
+// const [goal_percent, setGoal_Percent] = useState(0);
+// const [modal, setModal] = useState(false);
+// const Navigate = useNavigate();
+
+// const onCancel = () => {
+//   setModal(false);
+// };
+// const handleClick = () => {
+//   setModal(true);
+// };
+
+// useEffect(() => {
+//   loadingOn();
+// }, []);
+
+// useEffect(() => {
+//   if (data.goal) {
+//     setGoal_Percent(
+//       Math.min(100, Math.floor((100 * data.walks.length) / data.goal))
+//     );
+//   }
+// }, [data]);
+
 const ProgressBar = styled.div`
   padding: 2px;
   box-sizing: border-box;
@@ -159,7 +196,7 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
-  background: white;
+  /* background: white; */
   border: 2px solid #108dee;
 `;
 const Progress = styled.div`
@@ -177,10 +214,10 @@ const BtnContainer = styled.div`
   width: 50%;
   height: 6vh;
 
-  .info {
+  /* .info {
     background: white;
     color: #108dee;
-  }
+  } */
 `;
 
 const Button = styled.button`
@@ -204,16 +241,6 @@ const Button = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
   }
-`;
-
-//--------------------------------------------
-const Counter = styled.div`
-  border: 1px solid black;
-  width: 50%;
-  height: 50px;
-  /* height: 12%; */
-  margin-top: 2%;
-  display: flex;
 `;
 
 //------------------- 캘린더 --------------------
@@ -270,6 +297,7 @@ const Td = styled.td`
   display: flex;
   border: 1px solid gray;
   /* border-radius: 4px; */
+  flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
@@ -300,11 +328,53 @@ const Day = styled.div`
 `;
 // 지금 해야되는거는 피딩기록하는 버튼을 누르면 버튼을 누른 숫자만큼 클릭한 날에 달력에 정보가 보여야해
 
+const FoodIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+  /* border: 1px solid red; */
+`;
+
+const FoodInnerContainer = styled.div`
+  display: flex;
+`;
+
+const FoodTypeAndNum = styled.div`
+  display: flex;
+`;
+
+const FeedingNum = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+`;
+
+const FoodIcon = styled.img`
+  width: 40%;
+  /* border: 1px solid blue; */
+`;
+
 function ManageDetail() {
-  let feedingNum = 0;
-  let today1 = Date();
-  const [infoModal, setInfoModal] = useState(false);
+  // let feedingData = 0;
+  const [feedingNum, setFeedingNum] = useState(0);
+  // const [manageData, setManageDate] = useState({
+  //   feedingNum: 0,
+  //   exWater: 0
+  // })
+  // 피딩기록 버튼을 누르면 피딩넘이 하나 올라감
+  // 환수기록 버튼을 누르면 환수숫자가 하나 올라감
+  //
+  // const onIncrease = () => { setCount(prevCount => prevCount + 1); };
+
+  const state = useSelector((state) => state.modalReducer);
+  const { isMyAquariumInfoModal, isFeedingModal } = state;
+  const dispatch = useDispatch();
+
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
@@ -312,16 +382,9 @@ function ManageDetail() {
       ? 53
       : today.clone().endOf("month").week();
 
-  const feedingCounter = () => {
-    feedingNum++;
-    // console.log(feedingNum);
-    console.log(today1);
-  };
-  const InfoModalOn = () => {
-    setInfoModal(true);
-  };
-  const InfoModalOff = () => {
-    setInfoModal(false);
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
   };
 
   // ------ 달력날짜 랜더링 ------ //
@@ -348,6 +411,29 @@ function ManageDetail() {
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
+                    {count}
+                    <FoodIconContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/펠렛.png" />
+                          <FeedingNum>1</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/플레이크.png" />
+                          <FeedingNum>2</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/냉동.png" />
+                          <FeedingNum>4</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/생먹이.png" />
+                          <FeedingNum>5</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                    </FoodIconContainer>
                   </Td>
                 );
               } else if (days.format("MM") !== today.format("MM")) {
@@ -381,14 +467,8 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Lv>3</Lv> */}
-          {/* <Lv2></Lv2> */}
-          {/* <Lv3></Lv3> */}
           <Text>구피와 구구 어항</Text>
-          {/* <Icon></Icon> */}
         </TextContainer>
-
-        {/* <Img src="/물방울L.png" alt="" /> */}
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
@@ -404,7 +484,7 @@ function ManageDetail() {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>6</Levelinfo>
+              <Levelinfo>{feedingNum}</Levelinfo>
             </LevelCover>
             <Logo src="/로고.png" />
           </Level>
@@ -412,8 +492,13 @@ function ManageDetail() {
             <Progress></Progress>
           </ProgressBar>
           <BtnContainer>
-            <Button onClick={feedingCounter}>피딩기록</Button>
-            <Button onClick={InfoModalOn} className="info">
+            <Button onClick={() => dispatch(feedingInputModalOnAction)}>
+              피딩기록
+            </Button>
+            <Button
+              onClick={() => dispatch(myAquariumInfoModalOnAction)}
+              className="info"
+            >
               수조정보
             </Button>
             <Button>환수기록</Button>
@@ -461,11 +546,8 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
-      {infoModal ? (
-        <AquaInfo onCancel={InfoModalOff} visible={infoModal} />
-      ) : (
-        ""
-      )}
+      {isMyAquariumInfoModal && <AquaInfo />}
+      {isFeedingModal && <FeedingInput onIncrease={onIncrease} />}
     </>
   );
 }

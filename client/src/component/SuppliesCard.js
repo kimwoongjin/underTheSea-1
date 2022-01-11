@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { seaBasicInfoModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -43,10 +45,11 @@ const Content = styled.div`
   padding: 10px;
   box-sizing: border-box;
 `;
-function SuppliesCard({ handleSuppliesModal }) {
+function SuppliesCard() {
+  const dispatch = useDispatch();
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={handleSuppliesModal}>
+    <Container onClick={() => dispatch(seaBasicInfoModalOnAction)}>
       <ImgContainer>
         <Img src="https://mblogthumb-phinf.pstatic.net/MjAxNjExMTFfNzUg/MDAxNDc4ODQ3OTIwMzMx.-g3VP-eicS-jmQDfE_OE_VyHutifC59SewBQBgQNO_Yg.2NFPLYrpcEQ9YqLgH-UVgwZQIAnN5HeCgTRy29YDhU4g.JPEG.joyful_c/02.jpg?type=w2" />
       </ImgContainer>
