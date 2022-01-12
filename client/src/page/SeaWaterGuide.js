@@ -13,6 +13,8 @@ import FilterMediaCard from "../component/FilterMediaCard";
 import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
 import ActivationCard from "../component/ActivationCard";
 import ActivationInfo from "../modalComponent/ActivationInfo";
+import RecommendCard from "../component/RecommendCard";
+import RecommendInfo from "../modalComponent/RecommendInfo";
 
 const Container = styled.div`
   width: 100%;
@@ -58,6 +60,7 @@ function SeaWaterGuide() {
     isSeaBasicInfoModal,
     isFilterMediaModal,
     isActivationModal,
+    isRecommendModal,
   } = state;
 
   return (
@@ -73,13 +76,14 @@ function SeaWaterGuide() {
           <SuppliesCard />
           <FilterMediaCard />
           <ActivationCard />
-          <GuideinfoCard></GuideinfoCard>
+          <RecommendCard />
           <GuideinfoCard></GuideinfoCard>
         </InfoContainer>
         {isSkimmerModal && <SkimmerInfo />}
         {isSeaBasicInfoModal && <SuppliesInfo />}
         {isFilterMediaModal && <FilterMediaInfo />}
         {isActivationModal && <ActivationInfo />}
+        {isRecommendModal && <RecommendInfo />}
       </Container>
     </>
   );
