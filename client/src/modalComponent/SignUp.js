@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
-import { useDispatch } from "react-redux";
-import { axios } from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
+import { signupAction } from "../store/actions";
+import signupReducer from "../store/reducers/signupReducer";
+
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -55,7 +58,47 @@ const Form = styled.form`
   height: 60%;
   display: flex;
   flex-direction: column;
+  /* border: 1px solid red; */
 `;
+const signupSuccess = styled.div`
+  width: 80%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+`;
+const signupSuccessText = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+`;
+const CloseBtn = styled.button`
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+  background: #108dee;
+  border-style: none;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
+`;
+
 const Username = styled.input`
   width: calc(100%-10px);
   height: 30px;
@@ -116,6 +159,8 @@ const SignupBtn = styled.button`
 // ==================================================================================
 
 function SignUp() {
+  const state = useSelector((state) => state.signupReducer);
+  const { signup } = state;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -177,6 +222,7 @@ function SignUp() {
           },
         })
         .then(() => {
+          dispatch(signupAction);
           navigate("/mypage");
         })
         .catch((res) => {
@@ -198,63 +244,70 @@ function SignUp() {
           />
         </CloseBtnContainer>
         <Title>회원가입</Title>
-        <Form>
-          <Username
-            placeholder="이름을 입력해주세요"
-            type="text"
-            name="user_name"
-            required
-            autoComplete="on"
-            onChange={handleInputValue}
-          />
-          {checkUsername(userData.user_name) || !userData.user_name ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
-          )}
-          <Email
-            placeholder="이메일을 입력해주세요"
-            type="email"
-            name="email"
-            required
-            autoComplete="on"
-            onChange={handleInputValue}
-          />
-          {checkEmail(userData.email) || !userData.email ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
-          )}
-          <Pwd
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            name="user_pwd"
-            autoComplete="on"
-            onChange={handleInputValue}
-          />
-          {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
-            <Warning />
-          ) : (
-            <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
-          )}
-          <PwdChk
-            placeholder="비밀번호를 확인해주세요"
-            type="password"
-            name="pwd_chk"
-            required
-            autoComplete="on"
-            onChange={handleInputValue}
-          />
-          {onChangePasswordChk() || !userData.pwd_chk ? (
-            <Warning></Warning>
-          ) : (
-            <Warning>비밀번호가 일치하지 않습니다.</Warning>
-          )}
-          <SignupBtn type="button" onClick={handleSignup}>
-            회원가입
-          </SignupBtn>
-          <Warning>{errorMsg}</Warning>
-        </Form>
+        {signup ? (
+          <signupSuccess>
+            <signupSuccessText>회원가입에 성공했습니다!</signupSuccessText>
+            <CloseBtn onClick={() => dispatch(modalOff)}>닫기</CloseBtn>
+          </signupSuccess>
+        ) : (
+          <Form>
+            <Username
+              placeholder="이름을 입력해주세요"
+              type="text"
+              name="user_name"
+              required
+              autoComplete="on"
+              onChange={handleInputValue}
+            />
+            {checkUsername(userData.user_name) || !userData.user_name ? (
+              <Warning></Warning>
+            ) : (
+              <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
+            )}
+            <Email
+              placeholder="이메일을 입력해주세요"
+              type="email"
+              name="email"
+              required
+              autoComplete="on"
+              onChange={handleInputValue}
+            />
+            {checkEmail(userData.email) || !userData.email ? (
+              <Warning></Warning>
+            ) : (
+              <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
+            )}
+            <Pwd
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              name="user_pwd"
+              autoComplete="on"
+              onChange={handleInputValue}
+            />
+            {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
+              <Warning />
+            ) : (
+              <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
+            )}
+            <PwdChk
+              placeholder="비밀번호를 확인해주세요"
+              type="password"
+              name="pwd_chk"
+              required
+              autoComplete="on"
+              onChange={handleInputValue}
+            />
+            {onChangePasswordChk() || !userData.pwd_chk ? (
+              <Warning></Warning>
+            ) : (
+              <Warning>비밀번호가 일치하지 않습니다.</Warning>
+            )}
+            <SignupBtn type="button" onClick={handleSignup}>
+              회원가입
+            </SignupBtn>
+            <Warning>{errorMsg}</Warning>
+          </Form>
+        )}
       </ModalContainer>
     </DarkBackGround>
   );

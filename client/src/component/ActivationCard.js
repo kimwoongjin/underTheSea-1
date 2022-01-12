@@ -28,6 +28,7 @@ const Title = styled.div`
   width: 260px;
   height: 40px;
   /* border: 1px solid black; */
+  font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
   font-weight: bold;
@@ -37,6 +38,7 @@ const Title = styled.div`
   box-sizing: border-box;
 `;
 const Content = styled.div`
+  font-family: "Kfont";
   width: 260px;
   height: 140px;
   border-radius: 10px;
