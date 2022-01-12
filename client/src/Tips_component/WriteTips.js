@@ -8,13 +8,14 @@ import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
 const TopCover = styled.div`
   width: 100%;
   display: flex;
@@ -44,7 +45,7 @@ const Title = styled.div`
   /* border: 1px solid blue; */
   font-size: 1.8rem;
   font-weight: bold;
-  margin-top: 60px;
+  margin-top: 40px;
   padding-bottom: 5px;
   box-sizing: border-box;
   border-bottom: 5px solid #108dee;
@@ -59,31 +60,50 @@ const SubTitle = styled.div`
 
 const InputContainer = styled.div`
   width: 90%;
-  height: 100%;
+  height: 120vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  top: 0%;
 `;
 
 const TitleInput = styled.input`
-  width: 100%;
+  top: 10%;
+  width: 90%;
   height: 10%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #108dee;
-  border-radius: 4px;
-  font-size: 1rem;
+  padding: 0 0 1% 3%;
+  border: none;
+  align-items: center;
+  position: absolute;
+  border-bottom: 1px solid #108dee;
+  display: inline-block;
+  /* box-sizing: border-box; */
+  /* border: 1px solid #108dee; */
+  /* border-radius: 4px; */
+  font-size: 1.5rem;
   margin-bottom: 10px;
 `;
 
 const ImageInputForm = styled.label`
-  width: 50%;
-  height: 50%;
-  padding: 10px;
-  border: 1px dashed #108dee;
+  top: 60%;
+  width: 93%;
+  height: 25vh;
+  position: absolute;
+  border: 1px solid black;
+  bottom: 10%;
   border-radius: 4px;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  align-items: center;
-  justify-content: center;
-  overflow: scroll;
+  color: white;
+  cursor: pointer;
+  border: 1px dashed #108dee;
+  .input {
+    padding: 6px 25px;
+    background-color: #ff6600;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
 `;
 
 const ImageInput = styled.input`
@@ -95,32 +115,42 @@ const ImageInput = styled.input`
 `;
 
 const TipInput = styled.textarea`
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 25%;
+  width: 90%;
+  height: 30%;
   padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #108dee;
-  border-radius: 4px;
+  border: none;
   font-size: 1rem;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding: 0 0 1% 3%;
+  border-bottom: 1px solid #108dee;
 `;
 
 const FormWrapper = styled.div`
+  /* top: 6%; */
   position: relative;
   display: flex;
   height: 100%;
+  width: 90%;
   flex-direction: column;
   /* border: 1px solid red; */
+  align-items: center;
 `;
 
 const ButtonForm = styled.div`
+  width: 15%;
+  height: 20%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   /* border: 1px solid black; */
+  position: absolute;
+  right: 13%;
+  top: 120%;
 `;
 
 const Btn = styled.button`
-  width: 5%;
+  width: 40%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
@@ -132,9 +162,28 @@ const Btn = styled.button`
   border-radius: 4px;
   margin-right: 0;
   background: #108dee;
+  text-align: center;
 `;
 
-function WriteTips() {
+const BtnR = styled.button`
+  width: 40%;
+  height: 30px;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0 5px;
+  color: black;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 4px;
+  margin-right: 0;
+  text-align: center;
+`;
+
+// ================================================================================
+
+function WriteTips({ token }) {
+  const accessToken = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const [tip, setTip] = useState({
     title: "",
@@ -147,10 +196,10 @@ function WriteTips() {
     const file = e.target.files[0];
     const result = await postImage(file);
     console.log(result.data.imagePath);
-    setImage("http://localhost:8080" + result.data.imagePath);
+    // setImage("http://localhost:80" + result.data.imagePath);
     setTip({
       ...tip,
-      img: image,
+      img: "http://localhost:80" + result.data.imagePath,
     });
   };
 
@@ -158,7 +207,7 @@ function WriteTips() {
     const formData = new FormData();
     formData.append("image", file);
 
-    const result = await axios.post("http://localhost:8080/images", formData, {
+    const result = await axios.post("http://localhost:80/images", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
@@ -166,14 +215,19 @@ function WriteTips() {
   };
 
   const handleAddTip = async () => {
+    if (!accessToken) {
+      console.log("null");
+      return;
+    }
     const result = await axios.post(
-      "http://localhost:8080/tip",
-      { data: tip }
-      // {
-      //   headers: { Authorization: `Bearer ${accessToken}` },
-      // }
+      "http://localhost:80/tip",
+      { data: tip },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
     );
-    const tip_id = result.data.id;
+    const tip_id = result.data.data.id;
+    // console.log(result);
     navigate(`/tip/${tip_id}`);
   };
 
@@ -205,7 +259,7 @@ function WriteTips() {
           <FormWrapper>
             <ButtonForm>
               <Btn onClick={handleAddTip}>등록</Btn>
-              <Btn>취소</Btn>
+              <BtnR onClick={handleCancle}>취소</BtnR>
             </ButtonForm>
             <TitleInput
               placeholder="제목을 입력해 주세요."
@@ -220,7 +274,7 @@ function WriteTips() {
               onChange={handleInputValue}
             />
             <ImageInputForm for="input-image">
-              <img id="select-img" src={image} style={{ width: "20%" }}></img>
+              <img id="select-img" src={tip.img} style={{ width: "20%" }}></img>
             </ImageInputForm>
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>

@@ -9,7 +9,7 @@ const db = require("./db/connection");
 // const controllers = require("./controllers");
 const indexRouter = require("./routes");
 
-const port = 8080;
+const port = 80;
 
 const fs = require("fs");
 const util = require("util");

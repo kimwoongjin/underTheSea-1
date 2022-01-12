@@ -95,7 +95,7 @@ function App() {
         <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
-        <Route path="/writetips" element={<WriteTips />}></Route>
+        <Route path="/writetips" element={<WriteTips token={token} />}></Route>
         <Route path="/posttips" element={<PostTips />}></Route>
         <Route path="/manage" element={<Manage aquaInfo={aquaInfo} />}></Route>
         <Route path="/manage/detailinfo" element={<ManageDetail />}></Route>
