@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     container_name,
     size,
     theme,
-    level: 1,
+    level: 11,
   });
   return res.status(201).json({
     data: new_container.dataValues,

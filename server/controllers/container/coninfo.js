@@ -29,90 +29,34 @@ module.exports = async (req, res) => {
           fish_name: el.dataValues.fish_name,
           fish_num: el.dataValues.fish_num,
         });
-        // return `{fish_name: ${el.dataValues.fish_name}, fish_num:${el.dataValues.fish_num}}`;
       });
-      // const fish_list = await Promise.all(
-      //   fish_info_list.map(async (el) => {
-      //     const fish = await fishes.findOne({
-      //       where: { id: el.dataValues.fish_name },
-      //     });
-      //     console.log(fish.dataValues.fish_name);
-      //     return fish.dataValues.fish_name;
-      //   })
-      // );
 
-      // let feed_data = await feeds.findAll({
-      //   where: { container_id },
-      //   attributes: [
-      //     "type",
-      //     [
-      //       feeds.sequelize.fn(
-      //         "date_format",
-      //         feeds.sequelize.col("createdAt"),
-      //         "%Y-%m-%d"
-      //       ),
-      //       "date",
-      //     ],
-      //   ],
-      //   group: ["feeds.createdAt"],
-      // });
-
-      // feed_data = feed_data.filter((el) => {
-      //   return el.dataValues.date.split("-")[1] === month;
-      // });
-
-      // const feed_list = feed_data.map((el) => {
-      //   return { date: el.dataValues.date, type: el.dataValues.type };
-      // });
-
-      let feed_data = await feeds.findAndCountAll({
+      const feed_data = await feeds.findAndCountAll({
         where: { container_id },
-        order: [
-          ["createdAt", "DESC"],
-          ["type", "DESC"],
-        ],
-        attributes: [
-          "type",
-          [
-            feeds.sequelize.fn(
-              "date_format",
-              feeds.sequelize.col("createdAt"),
-              "%Y-%m-%d"
-            ),
-            "date",
-          ],
-        ],
-        group: ["feeds.createdAt", "feeds.type"],
+        attributes: ["createdAt", "type"],
+        group: ["createdAt", "type"],
+        order: [["createdAt", "ASC"]],
       });
+
       const feed_list = feed_data.count.filter((el) => {
         return el.createdAt.getMonth() + 1 === month;
       });
-      //return el.createdAt.split("-")[1] === month;
-      // objs.sort((a, b) =>
-      //   a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0
-      // );
 
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
-        attributes: [
-          "amount",
-          [
-            feeds.sequelize.fn(
-              "date_format",
-              feeds.sequelize.col("createdAt"),
-              "%Y-%m-%d"
-            ),
-            "date",
-          ],
-        ],
+        attributes: ["createdAt", "amount"],
+        order: [["createdAt", "ASC"]],
       });
+
       ex_water_data = ex_water_data.filter((el) => {
-        console.log("#$#$#$##@#@$#$", el.dataValues.date.split("-")[1]);
-        return Number(el.dataValues.date.split("-")[1]) === month;
+        return el.dataValues.createdAt.getMonth() + 1 === month;
       });
 
       const ex_water_list = ex_water_data.map((el) => {
-        return { date: el.dataValues.date, amount: el.dataValues.amount };
+        return {
+          createdAt: el.dataValues.createdAt,
+          amount: el.dataValues.amount,
+        };
       });
 
       let final = {

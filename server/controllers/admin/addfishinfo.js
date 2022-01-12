@@ -2,13 +2,12 @@ const { fishes } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
-  const userInfo = isAuthorized(req);
-  //console.log(userInfo);
-  //console.log(req.body);
-  if (!userInfo) {
-    return res.status(401).json({ message: "You are not authorized" });
-  }
-  console.log(req.body.data);
+  // const userInfo = isAuthorized(req);
+  // //console.log(userInfo);
+  // //console.log(req.body);
+  // if (!userInfo) {
+  //   return res.status(401).json({ message: "You are not authorized" });
+  // }
   const {
     fish_name,
     habitat,
@@ -20,7 +19,7 @@ module.exports = async (req, res) => {
     size,
     sci_name,
     ph,
-  } = req.body.data;
+  } = req.body;
 
   const check_new_fish = await fishes.findOne({ where: { fish_name } });
   if (check_new_fish) {
@@ -40,9 +39,6 @@ module.exports = async (req, res) => {
 
     const { id } = new_fish.dataValues;
 
-    return res.status(201).json({
-      data: new_fish.dataValues,
-      message: "Fish data is successfully added",
-    });
+    return res.redirect("/addfishinfo");
   }
 };
