@@ -20,6 +20,7 @@ function App() {
   //-----------------------------------------------
 
   const [aquaInfo, setAquaInfo] = useState({
+    container_id: "",
     container_name: "",
     size: "",
     theme: "",
@@ -72,6 +73,10 @@ function App() {
       .then((res) => {
         console.log("추가성공!");
         console.log("응답이 뭘까?", res);
+        setAquaInfo({
+          ...aquaInfo,
+          container_id: res.data.data.id,
+        });
         // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
         // message: "Container is successfully added"
       })

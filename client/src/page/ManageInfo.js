@@ -31,6 +31,8 @@ const ImgContainer = styled.div`
   height: 50%;
   overflow: hidden;
   cursor: pointer;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   /* border: 1px solid black; */
 `;
 const Img = styled.img`
@@ -55,8 +57,12 @@ const Content = styled.div`
 const Name = styled.div`
   /* position: absolute; */
   /* left: 5%; */
+  border-radius: 5px;
+  background: #e5e5e5;
+  text-align: center;
+  font-family: "Kfont";
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   /* border: 1px solid red; */
 `;
 
@@ -64,6 +70,7 @@ const Size = styled.div`
   /* position: absolute; */
   /* left: 5%; */
   /* top: 33%; */
+  font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
@@ -74,6 +81,7 @@ const Theme = styled.div`
   /* position: absolute; */
   /* left: 5%; */
   /* top: 33%; */
+  font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
@@ -98,9 +106,9 @@ function ManageInfo({ aquaInfo }) {
           </Link>
         </ImgContainer>
         <Content>
-          <Name>{aquaInfo.container_name}임시이름</Name>
+          <Name>{aquaInfo.container_name}</Name>
           <Size>사이즈: {aquaInfo.size}200L</Size>
-          <Theme>테마: {aquaInfo.theme}산호</Theme>
+          <Theme>테마: {aquaInfo.theme}</Theme>
         </Content>
       </Contents>
     </Container>

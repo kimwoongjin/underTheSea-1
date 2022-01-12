@@ -9,7 +9,7 @@ const TitleContainer = styled.div`
   justify-content: center;
   width: 100vw;
   height: 40vh;
-  border: 1px dashed red;
+  /* border: 1px dashed red; */
 `;
 
 const Title = styled.div`

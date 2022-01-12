@@ -15,6 +15,7 @@ const Container = styled.div`
   height: 390px;
   box-shadow: 5px 8px 7px 3px #c6c6c6;
   margin: 1%;
+  border-radius: 20px;
   /* background: #d1f8ff; */
   /* border: 1px solid black; */
 `;
@@ -23,12 +24,13 @@ const Contents = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   text-align: left;
+  border-radius: 20px;
   .icon {
     opacity: 0.6;
     position: absolute;
-    z-index: 999;
+    /* z-index: 999; */
     cursor: pointer;
     top: 42%;
     left: 40%;
