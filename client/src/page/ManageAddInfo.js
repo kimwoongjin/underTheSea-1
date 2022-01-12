@@ -189,15 +189,25 @@ function ManageAddInfo({ token }) {
   const containerAddRequest = () => {
     getWaterVolum();
     console.log("아쿠아인포", aquaInfo);
-    axios.post(
-      `http://localhost:80/container/add`,
-      { data: aquaInfo },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+
+    // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '', theme: 'FO', …}
+    // message: "Container is successfully added"
+
+    console.log(token);
+    axios
+      .post(
+        `http://localhost:80/container/add`,
+        { data: aquaInfo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("응답이 뭘까?", res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -240,6 +250,7 @@ function ManageAddInfo({ token }) {
               ></Input4>
             </Box1>
             <Text2>볼형 수조</Text2>
+
             <Input5
               name="size"
               type="text"
@@ -256,6 +267,7 @@ function ManageAddInfo({ token }) {
             </Box2>
           </Contents>
         </Form>
+        <img src="http://localhost:80/level/11" />
       </Container>
     </>
   );
