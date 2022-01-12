@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
 import ManageDetCard from "./ManageDetCard";
@@ -18,6 +18,7 @@ import {
   addfishModalOnAction,
   deadfishModalOnAction,
 } from "../store/actions";
+import axios from "axios";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -146,27 +147,28 @@ const BottomContainer = styled.div`
   justify-content: flex-end;
   width: 50%;
   height: 4vh;
+  margin-top: 1%;
   /* border: 1px solid red; */
 `;
 const AddfishBtn = styled.div`
   display: flex;
-  text-align: right;
-  justify-content: center;
+  /* text-align: right; */
+  justify-content: flex-end;
   align-items: center;
   color: #108dee;
   font-weight: bold;
-  width: 15%;
+  width: 11%;
   font-family: "Kfont";
   /* border: 1px solid blue; */
   cursor: pointer;
 `;
 const DeadfishBtn = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: right;
   align-items: center;
   color: #108dee;
-  width: 15%;
+  width: 11%;
   font-family: "Kfont";
   font-weight: bold;
   /* border: 1px solid blue; */
@@ -376,6 +378,8 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
+  const month = new Date().getMonth();
+
   const [feedingInfo, setFeedingInfo] = useState({
     pellet_num: 0,
     flake_num: 0,
@@ -383,6 +387,10 @@ function ManageDetail() {
     live_num: 0,
     food_type: "",
   });
+
+  useEffect(() => {
+    console.log(month);
+  }, []);
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
   const handleFoodtype = (e) => {

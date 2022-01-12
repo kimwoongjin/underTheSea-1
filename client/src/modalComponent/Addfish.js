@@ -20,8 +20,8 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 30%;
-  height: 60%;
+  width: 25%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -49,69 +49,56 @@ const ShowContainer = styled.div`
   justify-content: flex-end;
 `;
 
-const InfoShow = styled.div`
+const Form = styled.form`
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
-  height: 95%;
+  height: 80%;
+  /* border: 1px solid red; */
 `;
-const ThememContainer = styled.section`
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 30px;
-  border: 1px solid #e5e5e5;
+
+const FishType = styled.input`
+  box-sizing: border-box;
+  padding: 5px;
+  width: 100%;
+  height: 15%;
+  border: 1px solid #108dee;
   border-radius: 4px;
 `;
-const ThemeTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-  height: 90%;
-  font-weight: bold;
-  color: #108dee;
-  border-right: 1px solid #e5e5e5;
-  font-family: "Kfont";
-`;
-const ThemeShow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  height: 100%;
-`;
-const LastExchange = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 150px;
+
+const FishNum = styled.input`
+  box-sizing: border-box;
+  padding: 5px;
+  width: 100%;
+  height: 15%;
+  border: 1px solid #108dee;
   border-radius: 4px;
-  border: 1px solid #e5e5e5;
 `;
-const TopText = styled.div`
-  color: #108dee;
-  font-family: "Kfont";
-  margin-bottom: 1%;
+
+const Btn = styled.button`
+  width: 100%;
+  height: 20%;
+  border-style: none;
+  border-radius: 4px;
+  background: #108dee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   font-size: 1.25rem;
-`;
-const MiddleText = styled.div`
   font-weight: bold;
-  color: #108dee;
-  font-family: "Kfont";
-  margin-bottom: 1%;
-  font-size: 1.5rem;
-`;
-const BottomText = styled.div`
-  color: #108dee;
-  font-family: "Kfont";
-  font-size: 1.25rem;
+  position: relative;
+
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
 `;
 
 function Addfish() {
@@ -129,29 +116,11 @@ function Addfish() {
           />
         </CloseBtnContainer>
         <ShowContainer>
-          <InfoShow>
-            <ThememContainer>
-              <ThemeTitle>테마</ThemeTitle>
-              <ThemeShow>산호수조</ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>크기</ThemeTitle>
-              <ThemeShow>200L</ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>마릿수</ThemeTitle>
-              <ThemeShow>13마리</ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>마지막 환수일</ThemeTitle>
-              <ThemeShow>2021-12-24</ThemeShow>
-            </ThememContainer>
-            <LastExchange>
-              <TopText>마지막 환수일로부터</TopText>
-              <MiddleText>4일</MiddleText>
-              <BottomText>지났습니다!</BottomText>
-            </LastExchange>
-          </InfoShow>
+          <Form>
+            <FishType placeholder="어종을 입력해주세요"></FishType>
+            <FishNum placeholder="마릿수를 입력해주세요"></FishNum>
+            <Btn>전송!</Btn>
+          </Form>
         </ShowContainer>
       </ModalContainer>
     </DarkBackGround>

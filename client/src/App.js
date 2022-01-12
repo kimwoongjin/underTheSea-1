@@ -13,8 +13,13 @@ import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
 import Login from "./modalComponent/Login";
 import SignUp from "./modalComponent/SignUp";
+import { useState } from "react";
 
 function App() {
+  const [token, setToken] = useState("");
+  const handleToken = (token) => {
+    setToken(token);
+  };
   const state = useSelector((state) => state.modalReducer);
   const { isLoginModal, isSignupModal } = state;
 
@@ -30,10 +35,13 @@ function App() {
         <Route path="/posttips" element={<PostTips />}></Route>
         <Route path="/manage" element={<Manage />}></Route>
         <Route path="/manage/detailinfo" element={<ManageDetail />}></Route>
-        <Route path="/manage/addInfo" element={<ManageAddInfo />}></Route>
+        <Route
+          path="/manage/addInfo"
+          element={<ManageAddInfo token={token} />}
+        ></Route>
         <Route path="/mypage" element={<Mypage />}></Route>
       </Routes>
-      {isLoginModal && <Login />}
+      {isLoginModal && <Login handleToken={handleToken} />}
       {isSignupModal && <SignUp />}
     </BrowserRouter>
   );
