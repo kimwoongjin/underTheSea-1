@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
-
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../store/actions";
 import signupReducer from "../store/reducers/signupReducer";
-
 
 const DarkBackGround = styled.div`
   position: fixed;

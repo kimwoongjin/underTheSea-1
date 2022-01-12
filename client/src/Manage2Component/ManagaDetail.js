@@ -378,11 +378,7 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
-<<<<<<< HEAD
   const month = new Date().getMonth();
-=======
->>>>>>> 3b301c6110b38761d4a289a6f2166386527e0b10
-
   const [feedingInfo, setFeedingInfo] = useState({
     pellet_num: 0,
     flake_num: 0,
@@ -392,8 +388,50 @@ function ManageDetail() {
   });
 
   useEffect(() => {
-    console.log(month);
+    axios
+      .get(`http://localhost:80/container/id/${month}`)
+      .then((res) => {
+        const containerData = res.data;
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  // {
+  //   "data": {
+  //     "container_id": 1,
+  //     "user_id": 1,
+  //     "container_name": "JawsRocks",
+  //     "size": 100,
+  //     "theme": "SweetHome",
+  //     "fish_list": [
+  //       {
+  //         "fish_name":"Nemo",
+  //         "fish_num":5
+  //       },{...}
+  //       ],
+  //     "feed_list": [
+  //       {
+  //         "date": "2022-01-09",
+  //         "type": 1
+  //       },
+  //       {
+  //         "date": "2022-01-10",
+  //         "type": 2
+  //       }
+  //     ],
+  //     "ex_water_list": [
+  //       {
+  //         "date": "2022-01-09",
+  //         "amount": 100
+  //       },
+  //       {
+  //         "date": "2022-01-09",
+  //         "amount": 50
+  //       }
+  //     ],
+  //   },
+  //   "message": "Data is successfully returned"
+  // }
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
   const handleFoodtype = (e) => {
@@ -445,12 +483,10 @@ function ManageDetail() {
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-
   const onIncrease = () => {
     setCount((count) => count + 1);
     dispatch(modalOff);
   };
-
   // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
@@ -616,7 +652,6 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
-
       {isFeedingModal && (
         <FeedingInput
           addFeedingNum={addFeedingNum}
@@ -626,7 +661,6 @@ function ManageDetail() {
       )}
       {isAddfishModal && <AddFish />}
       {isDeadfishModal && <Deadfish />}
-
     </>
   );
 }

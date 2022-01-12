@@ -267,7 +267,7 @@ function ManageAddInfo({ token }) {
             </Box2>
           </Contents>
         </Form>
-        <img src="http://localhost:80/level/11" />
+        {/* <img src="http://localhost:80/level/11" /> */}
       </Container>
     </>
   );
