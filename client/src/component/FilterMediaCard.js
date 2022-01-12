@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { skimmerInfoModalOnAction } from "../store/actions";
+import { filterMediaModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -44,22 +44,22 @@ const Content = styled.div`
   padding: 10px;
   box-sizing: border-box;
 `;
-function SkimmerCard() {
+function FilterMediaCard() {
   const dispatch = useDispatch();
 
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={() => dispatch(skimmerInfoModalOnAction)}>
+    <Container onClick={() => dispatch(filterMediaModalOnAction)}>
       <ImgContainer>
-        <Img src="https://www.simplicityaquatics.com/wp-content/uploads/how-to-break-in-a-protein-skimmer@2x.jpg" />
+        <Img src="/여과재모음.jpeg" />
       </ImgContainer>
-      <Title>스키머란 무엇일까요?</Title>
+      <Title>여과재는 무엇일까요?</Title>
       <Content>
-        해수어를 키우려면 스키머를 필수라는데 스키머가 무엇일까요? 스키머에 관한
-        모든 것을 알려드립니다.
+        이걸 넣으면 물이 맑아지는 건가? 어떻게 여과한다는거지? 라는 의문을
+        풀어드립니다.
       </Content>
     </Container>
   );
 }
 
-export default SkimmerCard;
+export default FilterMediaCard;

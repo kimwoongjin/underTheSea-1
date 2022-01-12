@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { skimmerInfoModalOnAction } from "../store/actions";
+import { activationModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -44,22 +44,22 @@ const Content = styled.div`
   padding: 10px;
   box-sizing: border-box;
 `;
-function SkimmerCard() {
+function ActivationCard() {
   const dispatch = useDispatch();
 
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={() => dispatch(skimmerInfoModalOnAction)}>
+    <Container onClick={() => dispatch(activationModalOnAction)}>
       <ImgContainer>
-        <Img src="https://www.simplicityaquatics.com/wp-content/uploads/how-to-break-in-a-protein-skimmer@2x.jpg" />
+        <Img src="/물맞댐대표사진.jpeg" />
       </ImgContainer>
-      <Title>스키머란 무엇일까요?</Title>
+      <Title>물맞댐 방법</Title>
       <Content>
-        해수어를 키우려면 스키머를 필수라는데 스키머가 무엇일까요? 스키머에 관한
-        모든 것을 알려드립니다.
+        처음 물고기를 데려오고나서 바로 수조에 넣어도 될까요? 천천히 적응하는
+        시간이 필요합니다.
       </Content>
     </Container>
   );
 }
 
-export default SkimmerCard;
+export default ActivationCard;

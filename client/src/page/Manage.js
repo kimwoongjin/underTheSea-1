@@ -47,7 +47,7 @@ const OuterContainer = styled.div`
   align-items: center;
   flex-direction: column;
 `;
-
+//주간 피딩 14번 , 주간 환수 1번
 function Manage() {
   return (
     <>
