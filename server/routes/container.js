@@ -11,5 +11,6 @@ router.patch("/:container_id/fish", controllers.addfish);
 router.delete("/:container_id/fish", controllers.deletefish);
 router.post("/:container_id/feed", controllers.feed);
 router.post("/:container_id/ex_water", controllers.water);
+router.get("/all", controllers.allcontainer);
 
 module.exports = router;

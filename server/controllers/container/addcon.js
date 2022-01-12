@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   }
   console.log(req.body.data);
   const user_id = userInfo.id;
-  const { container_name, size, salinity, theme } = req.body.data;
+  const { container_name, size, theme } = req.body.data;
   const check_container = await containers.findOne({
     where: { container_name },
   });
@@ -20,9 +20,8 @@ module.exports = async (req, res) => {
     user_id,
     container_name,
     size,
-    salinity,
     theme,
-    level: 1,
+    level: 11,
   });
   return res.status(201).json({
     data: new_container.dataValues,
