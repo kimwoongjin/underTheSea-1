@@ -147,6 +147,7 @@ function Login() {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
+            localStorage.setItem("accessToken", res.data.token);
             navigate("/mypage");
           }
         })

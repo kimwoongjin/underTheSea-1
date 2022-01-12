@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { signoutAction, modalOff } from "../store/actions";
-import { useState } from "react";
+import { modalOff } from "../store/actions";
 // 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
@@ -25,7 +22,7 @@ const DarkBackGround = styled.div`
 const ModalContainer = styled.div`
   z-index: 999;
   width: 25%;
-  height: 55%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -38,7 +35,7 @@ const ModalContainer = styled.div`
   z-index: 999;
   border-radius: 20px;
 `;
-const CloseBtnContainer = styled.div`
+const CloseBtnContainer = styled.button`
   z-index: 999;
   position: absolute;
   right: 3%;
@@ -48,6 +45,8 @@ const CloseBtnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
+  background: none;
+  border: none;
   cursor: pointer;
 `;
 
@@ -73,14 +72,6 @@ const Text = styled.div`
   font-weight: 600;
 `;
 
-const CurPwd = styled.input`
-  margin-top: 20%;
-  width: calc(100%-10px);
-  height: 30px;
-  padding: 5px;
-  box-sizing: border-box;
-  margin-bottom: 15%;
-`;
 const NewPwd = styled.form`
   width: 100%;
   height: 40%;
@@ -89,6 +80,7 @@ const NewPwd = styled.form`
 `;
 
 const NewPwd1 = styled.input`
+  margin-top: 30%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
@@ -137,19 +129,8 @@ const ConfirmBtn = styled.button`
 `;
 //=======================================================================
 
-function PwdChange() {
-  //   const navigate = useNavigate();
+function Pwd() {
   const dispatch = useDispatch();
-  //   function signOut() {
-  //     axios
-  //       .delete("http://localhost:80/user", {
-  //         headers: { Authorization: `Bearer ${accessToken}` },
-  //       })
-  //       .then(() => {
-  //         dispatch(signoutAction);
-  //         navigate("/");
-  //       });
-  //   }
 
   return (
     <DarkBackGround>
@@ -158,6 +139,7 @@ function PwdChange() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
+            type="button"
             onClick={() => {
               dispatch(modalOff);
             }}
@@ -167,14 +149,9 @@ function PwdChange() {
           <TextForm>
             <Text>비밀번호 변경</Text>
           </TextForm>
-          <CurPwd placeholder="현재 비밀번호" type="password" name="cur_pwd" />
           <NewPwd>
-            <NewPwd1 placeholder="새 비밀번호" type="password" name="new_pwd" />
-            <NewPwd2
-              placeholder="새 비밀번호 확인"
-              type="password"
-              name="new_pwd_check"
-            />
+            <NewPwd1 placeholder="새 비밀번호" />
+            <NewPwd2 placeholder="새 비밀번호 확인" />
           </NewPwd>
           <Btn>
             <ConfirmBtn type="button">확인</ConfirmBtn>
@@ -185,4 +162,4 @@ function PwdChange() {
   );
 }
 
-export default PwdChange;
+export default Pwd;

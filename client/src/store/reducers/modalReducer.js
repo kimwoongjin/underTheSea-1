@@ -9,7 +9,7 @@ import {
   FEEDING_INPUT_MODAL_ON,
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
-  PWD_CHANGE_MODAL_ON,
+  PWD_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -22,7 +22,7 @@ const initialState = {
   isActivationModal: false,
   isFeedingModal: false,
   isSignoutModal: false,
-  isPwdChangeModal: false,
+  isPwdModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -52,8 +52,8 @@ const modalReducer = (prevState = initialState, action) => {
     case SIGN_OUT_MODAL_ON:
       state = { ...prevState, isSignoutModal: true };
       break;
-    case PWD_CHANGE_MODAL_ON:
-      state = { ...prevState, isPwdChangeModal: true };
+    case PWD_MODAL_ON:
+      state = { ...prevState, isPwdModal: true };
     case ACTIVATION_MODAL_ON:
       state = { ...prevState, isActivationModal: true };
       break;

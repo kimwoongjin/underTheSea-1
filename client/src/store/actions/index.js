@@ -4,9 +4,7 @@ import {
   LOG_IN_MODAL_ON,
   SIGN_UP_MODAL_ON,
   SIGN_OUT,
-  PWD_CHANGE,
   SIGN_OUT_MODAL_ON,
-  PWD_CHANGE_MODAL_ON,
   SKIMMER_INFO_MODAL_ON,
   SEA_BASIC_INFO_MODAL_ON,
   FILTER_MEDIA_MODAL_ON,
@@ -14,6 +12,7 @@ import {
   MY_AQUARIUM_INFO_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
   MODAL_OFF,
+  PWD_MODAL_ON,
 } from "./actionTypes";
 
 export const loginAction = (data) => ({
@@ -35,8 +34,8 @@ export const signoutAction = {
 export const signoutModalAction = {
   type: SIGN_OUT_MODAL_ON,
 };
-export const pwdchangeModalAction = {
-  type: PWD_CHANGE_MODAL_ON,
+export const pwdModalAction = {
+  type: PWD_MODAL_ON,
 };
 export const modalOff = {
   type: MODAL_OFF,
