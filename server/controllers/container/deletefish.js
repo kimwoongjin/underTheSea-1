@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
   } else {
     const container_id = req.params.container_id;
     const { fish_num, fish_name } = req.body.data;
+
     const check_container = await containers.findOne({
       where: { id: container_id },
     });
@@ -24,26 +25,19 @@ module.exports = async (req, res) => {
         where: { fish_name, container_id },
       });
       if (!container_fish) {
-        const new_container_fish = await container_fishes.create({
-          container_id,
-          fish_name,
-          fish_num,
-        });
-        return res.status(201).json({
-          data: { new_container_fish },
-          message: "The fish is successfully added",
+        return res.status(400).json({
+          message: "The fish is not in the container",
         });
       } else {
-        await container_fish.increment("fish_num", {
-          by: Number(fish_num),
+        container_fish = await container_fish.increment("fish_num", {
+          by: Number(fish_num) * -1,
         });
         container_fish = await container_fishes.findOne({
           where: { fish_name, container_id },
         });
-
         return res.status(201).json({
           data: { container_fish },
-          message: "The fish is successfully added",
+          message: "The fish is successfully removed",
         });
       }
     }

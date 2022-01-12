@@ -2,6 +2,7 @@ const { fishes, not_togethers } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+
   const userInfo = isAuthorized(req);
   //console.log(userInfo);
   //console.log(req.body);
@@ -21,6 +22,7 @@ module.exports = async (req, res) => {
     sci_name,
     ph,
   } = req.body.data;
+
   const check_new_fish = await fishes.findOne({ where: { fish_name } });
   if (check_new_fish) {
     return res.status(400).json({ message: "The fish is already in DB" });
@@ -29,6 +31,7 @@ module.exports = async (req, res) => {
       fish_name,
       habitat,
       temp,
+
       desc,
       fish_img,
       fresh_water,
