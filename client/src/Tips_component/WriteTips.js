@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Header from "../component/Header";
+
 import Header2 from "../component/Header2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,6 +19,7 @@ const Container = styled.div`
 
 const TopCover = styled.div`
   width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +59,7 @@ const SubTitle = styled.div`
   margin-bottom: 50px;
   /* border: 1px solid red; */
 `;
+// ------------------------------------------------------
 
 const InputContainer = styled.div`
   width: 90%;
@@ -67,6 +70,17 @@ const InputContainer = styled.div`
   align-items: center;
   /* border: 1px solid black; */
   top: 0%;
+`;
+
+const FormWrapper = styled.div`
+  /* top: 6%; */
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 90%;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  align-items: center;
 `;
 
 const TitleInput = styled.input`
@@ -85,7 +99,7 @@ const TitleInput = styled.input`
   font-size: 1.5rem;
   margin-bottom: 10px;
 `;
-
+//
 const ImageInputForm = styled.label`
   top: 60%;
   width: 93%;
@@ -105,7 +119,7 @@ const ImageInputForm = styled.label`
     cursor: pointer;
   }
 `;
-
+//
 const ImageInput = styled.input`
   width: 0;
   height: 0;
@@ -125,17 +139,6 @@ const TipInput = styled.textarea`
   /* margin-bottom: 10px; */
   padding: 0 0 1% 3%;
   border-bottom: 1px solid #108dee;
-`;
-
-const FormWrapper = styled.div`
-  /* top: 6%; */
-  position: relative;
-  display: flex;
-  height: 100%;
-  width: 90%;
-  flex-direction: column;
-  /* border: 1px solid red; */
-  align-items: center;
 `;
 
 const ButtonForm = styled.div`
@@ -164,7 +167,6 @@ const Btn = styled.button`
   background: #108dee;
   text-align: center;
 `;
-
 const BtnR = styled.button`
   width: 40%;
   height: 30px;
@@ -254,7 +256,12 @@ function WriteTips({ token }) {
           </TitleContainer>
           <SubTitle>나누고 싶은 경험을 적어주세요!</SubTitle>
           {/* <Swarm src="무리.png" /> */}
+          <ButtonForm>
+            <Btn>등록</Btn>
+            <BtnR>취소</BtnR>
+          </ButtonForm>
         </TopCover>
+        {/* ========================================================== */}
         <InputContainer>
           <FormWrapper>
             <ButtonForm>
