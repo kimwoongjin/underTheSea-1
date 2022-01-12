@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -127,7 +126,7 @@ const GoogleIcon = styled.img`
   width: 30%;
 `;
 
-function Login({ handleToken }) {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -149,10 +148,10 @@ function Login({ handleToken }) {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
-            handleToken(res.data.token);
+            localStorage.setItem("accessToken", res.data.token);
             dispatch(loginAction);
-            navigate("/mypage");
             dispatch(modalOff);
+            navigate("/");
           }
         })
         .catch((err) => {
