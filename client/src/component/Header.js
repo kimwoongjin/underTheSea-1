@@ -26,6 +26,17 @@ const Login = styled.div`
     color: #008eff;
   }
 `;
+
+const Manage = styled.div`
+  /* border: 1px solid red; */
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
+`;
+
 const Signup = styled.div`
   /* border: 1px solid red; */
   border-radius: 8px;
@@ -45,6 +56,27 @@ const Signup = styled.div`
     background: rgba(0, 0, 0, 0.05);
   }
 `;
+
+const Signout = styled.div`
+  /* border: 1px solid red; */
+  border-radius: 8px;
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  background: #008eff;
+  color: white;
+  position: relative;
+  :hover::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
+`;
+
 const Search = styled.div`
   /* border: 1px solid red; */
   padding: 10px;
@@ -76,7 +108,8 @@ const BtnContainer = styled.div`
 
 function Header() {
   const dispatch = useDispatch();
-
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
   return (
     <Container>
       <Img src="/로고.png" alt="" />
@@ -87,8 +120,22 @@ function Header() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
         </Link>
-        <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
-        <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup>
+        {isLogin ? (
+          <Link style={{ textDecoration: "none", color: "black" }} to="/manage">
+            <Manage>관리</Manage>
+          </Link>
+        ) : (
+          <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
+        )}
+        {/* <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login> */}
+        {isLogin ? (
+          <Signout>로그아웃</Signout>
+        ) : (
+          <Signup onClick={() => dispatch(signupModalOnAction)}>
+            회원가입
+          </Signup>
+        )}
+        {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
     </Container>
   );

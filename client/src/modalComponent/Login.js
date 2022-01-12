@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { loginAction } from "../store/actions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
+import { modalOff, loginAction } from "../store/actions";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -98,7 +97,7 @@ const LoginBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-const GoogleBtn = styled.button`
+const GoogleBtn = styled.a`
   width: 100%;
   height: 50px;
   background: white;
@@ -112,6 +111,7 @@ const GoogleBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+  box-sizing: border-box;
   :hover::before {
     content: "";
     position: absolute;
@@ -136,6 +136,7 @@ function Login() {
     email: "",
     user_pwd: "",
   });
+
   const handleInputValue = (e) => {
     setUserData({
       ...userData,
@@ -192,7 +193,7 @@ function Login() {
             로그인
           </LoginBtn>
 
-          <GoogleBtn type="button">
+          <GoogleBtn href="http://localhost:80/user/auth/google">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>

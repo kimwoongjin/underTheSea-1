@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 import Header2 from "../component/Header2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -14,6 +16,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const TopCover = styled.div`
   width: 100%;
 
@@ -96,20 +99,8 @@ const TitleInput = styled.input`
   font-size: 1.5rem;
   margin-bottom: 10px;
 `;
-const TipInput = styled.textarea`
-  position: absolute;
-  top: 25%;
-  width: 90%;
-  height: 30%;
-  padding: 10px;
-  border: none;
-  font-size: 1rem;
-  /* margin-bottom: 10px; */
-  padding: 0 0 1% 3%;
-  border-bottom: 1px solid #108dee;
-`;
-
-const ImgContainer = styled.label`
+//
+const ImageInputForm = styled.label`
   top: 60%;
   width: 93%;
   height: 25vh;
@@ -128,8 +119,27 @@ const ImgContainer = styled.label`
     cursor: pointer;
   }
 `;
+//
+const ImageInput = styled.input`
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+`;
 
-const ImageInput = styled.input``;
+const TipInput = styled.textarea`
+  position: absolute;
+  top: 25%;
+  width: 90%;
+  height: 30%;
+  padding: 10px;
+  border: none;
+  font-size: 1rem;
+  /* margin-bottom: 10px; */
+  padding: 0 0 1% 3%;
+  border-bottom: 1px solid #108dee;
+`;
 
 const ButtonForm = styled.div`
   width: 15%;
@@ -171,7 +181,70 @@ const BtnR = styled.button`
   margin-right: 0;
   text-align: center;
 `;
-function WriteTips() {
+
+// ================================================================================
+
+function WriteTips({ token }) {
+  const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+  const [tip, setTip] = useState({
+    title: "",
+    content: "",
+    img: "",
+  });
+  const [image, setImage] = useState("");
+
+  const selectFIle = async (e) => {
+    const file = e.target.files[0];
+    const result = await postImage(file);
+    console.log(result.data.imagePath);
+    // setImage("http://localhost:80" + result.data.imagePath);
+    setTip({
+      ...tip,
+      img: "http://localhost:80" + result.data.imagePath,
+    });
+  };
+
+  const postImage = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const result = await axios.post("http://localhost:80/images", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    return result;
+  };
+
+  const handleAddTip = async () => {
+    if (!accessToken) {
+      console.log("null");
+      return;
+    }
+    const result = await axios.post(
+      "http://localhost:80/tip",
+      { data: tip },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    const tip_id = result.data.data.id;
+    // console.log(result);
+    navigate(`/tip/${tip_id}`);
+  };
+
+  const handleCancle = () => {
+    setTip({});
+    setImage("");
+  };
+
+  const handleInputValue = (e) => {
+    setTip({
+      ...tip,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <>
       <Header2></Header2>
@@ -191,12 +264,26 @@ function WriteTips() {
         {/* ========================================================== */}
         <InputContainer>
           <FormWrapper>
-            <TitleInput placeholder="제목을 입력해 주세요." type="text" />
-            <TipInput placeholder="내용을 입력하세요" type="text" />
-            <ImgContainer className="input" for="input-file">
-              <ImageInput type="file" style={{ display: "none" }} />
-              {/* <FontAwesomeIcon size="4x" icon={faPlus} /> */}
-            </ImgContainer>
+            <ButtonForm>
+              <Btn onClick={handleAddTip}>등록</Btn>
+              <BtnR onClick={handleCancle}>취소</BtnR>
+            </ButtonForm>
+            <TitleInput
+              placeholder="제목을 입력해 주세요."
+              type="text"
+              name="title"
+              onChange={handleInputValue}
+            />
+            <TipInput
+              placeholder="내용을 입력하세요"
+              type="text"
+              name="content"
+              onChange={handleInputValue}
+            />
+            <ImageInputForm for="input-image">
+              <img id="select-img" src={tip.img} style={{ width: "20%" }}></img>
+            </ImageInputForm>
+            <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>
         </InputContainer>
       </Container>
