@@ -6,8 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { modalOff } from "../store/actions";
-
+import { modalOff, loginAction } from "../store/actions";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -99,7 +98,7 @@ const LoginBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-const GoogleBtn = styled.button`
+const GoogleBtn = styled.a`
   width: 100%;
   height: 50px;
   background: white;
@@ -113,6 +112,7 @@ const GoogleBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+  box-sizing: border-box;
   :hover::before {
     content: "";
     position: absolute;
@@ -127,13 +127,14 @@ const GoogleIcon = styled.img`
   width: 30%;
 `;
 
-function Login() {
+function Login({ handleToken }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
   });
+
   const handleInputValue = (e) => {
     setUserData({
       ...userData,
@@ -148,18 +149,17 @@ function Login() {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
+            handleToken(res.data.token);
+            dispatch(loginAction);
             navigate("/mypage");
+            dispatch(modalOff);
           }
         })
-        .then(() => {})
         .catch((err) => {
-          if (err) {
-          }
+          console.log(err);
         });
-    } else {
     }
   };
-
 
   return (
     <DarkBackGround>
@@ -177,21 +177,20 @@ function Login() {
             placeholder="이메일을 입력해주세요"
             type="email"
             name="email"
+            onChange={handleInputValue}
           />
           <Pwd
             placeholder="비밀번호를 입력해주세요"
             type="password"
             name="user_pwd"
+            onChange={handleInputValue}
           />
 
           <LoginBtn type="button" onClick={handleLogin}>
             로그인
           </LoginBtn>
 
-
-       
-
-          <GoogleBtn type="button">
+          <GoogleBtn href="http://localhost:80/user/auth/google">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>

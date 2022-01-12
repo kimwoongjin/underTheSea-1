@@ -3,6 +3,10 @@ import React from "react";
 import Header from "../component/Header";
 import { useState, useEffect } from "react";
 import SignOut from "../modalComponent/SignOut";
+import PwdChange from "../modalComponent/PwdChange";
+import { useSelector } from "react-redux";
+import { signoutModalAction, pwdchangeModalAction } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   position: relative;
@@ -138,13 +142,9 @@ function Mypage() {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const state = useSelector((state) => state.modalReducer);
+  const { isSignoutModal, isPwdChangeModal } = state;
+  const dispatch = useDispatch();
 
   const GetClick = (e) => {
     setCurrentClick(e.target.id);
@@ -174,14 +174,22 @@ function Mypage() {
         </TitleContainer>
       </Container>
       <Box1>
-        <ButtonL>비밀번호 변경</ButtonL>
-        <ButtonR onClick={openModal}>회원탈퇴</ButtonR>
-        {showModal ? (
-          <SignOut showModal={showModal} closeModal={closeModal} />
-        ) : (
-          ""
-        )}
+        <ButtonL
+          onClick={() => {
+            dispatch(pwdchangeModalAction);
+          }}
+        >
+          비밀번호 변경
+        </ButtonL>
+        <ButtonR
+          onClick={() => {
+            dispatch(signoutModalAction);
+          }}
+        >
+          회원탈퇴
+        </ButtonR>
       </Box1>
+
       <ContentContainer>
         <Box2>
           <Manage id="manage" onClick={GetClick}>
@@ -199,8 +207,13 @@ function Mypage() {
           <ManageText>현재 등록된 수조가 없습니다. </ManageText>
           {/* <ContentsText>현재 등록된 게시글이 없습니다. </ContentsText> */}
           {/* <CommentText>현재 등록된 댓글이 없습니다.</CommentText> */}
+          {/* input 태그 3개 
+            상태 : "" update만 하기 
+          */}
         </Box3>
       </ContentContainer>
+      {isSignoutModal && <SignOut />}
+      {isPwdChangeModal && <PwdChange />}
     </>
   );
 }

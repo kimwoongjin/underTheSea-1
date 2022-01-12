@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -47,11 +49,13 @@ const ContentContainer = styled.div`
   }
   h2 {
     padding-bottom: 5px;
+    font-family: "Kfont";
     box-sizing: border-box;
-    border-bottom: 2px solid #d2f7ff;
+    border-bottom: 2px solid #e5e5e5;
   }
   p {
     font-size: 18px;
+    font-family: "Kfont";
   }
 `;
 const IconContainer = styled.div`
@@ -67,7 +71,9 @@ const ImgContainer = styled.div`
   display: flex;
   p {
     margin-left: 20px;
+    font-family: "Kfont";
     div {
+      font-family: "Kfont";
       font-weight: bold;
       margin-top: 7px;
       margin-bottom: 5px;
@@ -93,8 +99,6 @@ const DryContainer = styled.div`
   display: flex;
 `;
 const Dry = styled.img`
-  /* margin-left: 20px; */
-  /* margin-right: 20px; */
   width: 20%;
 `;
 const WetContainer = styled.div`
@@ -104,12 +108,18 @@ const Wet = styled.img`
   width: 20%;
 `;
 function SkimmerInfo() {
+  const dispatch = useDispatch();
+
   return (
     <DarkBackGround>
       <ModalContainer>
         <IconContainer>
           <div className="btn">
-            <FontAwesomeIcon icon={faTimes} size="2x" />
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="2x"
+              onClick={() => dispatch(modalOff)}
+            />
           </div>
         </IconContainer>
         <ContentContainer>

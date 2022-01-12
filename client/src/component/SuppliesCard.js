@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { seaBasicInfoModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -26,6 +28,7 @@ const Title = styled.div`
   width: 260px;
   height: 40px;
   /* border: 1px solid black; */
+  font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
   font-weight: bold;
@@ -38,15 +41,17 @@ const Content = styled.div`
   width: 260px;
   height: 140px;
   /* border: 1px solid black; */
+  font-family: "Kfont";
   border-radius: 10px;
   background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
 `;
-function SuppliesCard({ handleSuppliesModal }) {
+function SuppliesCard() {
+  const dispatch = useDispatch();
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={handleSuppliesModal}>
+    <Container onClick={() => dispatch(seaBasicInfoModalOnAction)}>
       <ImgContainer>
         <Img src="https://mblogthumb-phinf.pstatic.net/MjAxNjExMTFfNzUg/MDAxNDc4ODQ3OTIwMzMx.-g3VP-eicS-jmQDfE_OE_VyHutifC59SewBQBgQNO_Yg.2NFPLYrpcEQ9YqLgH-UVgwZQIAnN5HeCgTRy29YDhU4g.JPEG.joyful_c/02.jpg?type=w2" />
       </ImgContainer>

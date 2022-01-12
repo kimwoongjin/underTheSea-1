@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { skimmerInfoModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -26,6 +28,7 @@ const Title = styled.div`
   width: 260px;
   height: 40px;
   /* border: 1px solid black; */
+  font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
   font-weight: bold;
@@ -37,16 +40,18 @@ const Title = styled.div`
 const Content = styled.div`
   width: 260px;
   height: 140px;
-  /* border: 1px solid black; */
+  font-family: "Kfont";
   border-radius: 10px;
-  background: #d2f7ff;
+  background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
 `;
-function SkimmerCard({ handleSkimmerModal }) {
+function SkimmerCard() {
+  const dispatch = useDispatch();
+
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={handleSkimmerModal}>
+    <Container onClick={() => dispatch(skimmerInfoModalOnAction)}>
       <ImgContainer>
         <Img src="https://www.simplicityaquatics.com/wp-content/uploads/how-to-break-in-a-protein-skimmer@2x.jpg" />
       </ImgContainer>

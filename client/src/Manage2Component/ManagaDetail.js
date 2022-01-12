@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
 import ManageDetCard from "./ManageDetCard";
@@ -8,6 +8,17 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import AddFish from "../modalComponent/Addfish";
+import Deadfish from "../modalComponent/Deadfish";
+import { useSelector, useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
+import {
+  myAquariumInfoModalOnAction,
+  feedingInputModalOnAction,
+  addfishModalOnAction,
+  deadfishModalOnAction,
+} from "../store/actions";
+import axios from "axios";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -19,7 +30,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
-  /* text-align: left; */
 `;
 
 const Title = styled.div`
@@ -40,8 +50,6 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid #108dee; */
-  /* border-bottom-left-radius: 25px; */
 `;
 
 const Text = styled.div`
@@ -50,7 +58,6 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
-  /* border: 1px solid #108dee; */
 `;
 
 const OuterContainer = styled.div`
@@ -79,7 +86,6 @@ const LevelText = styled.div`
   align-items: center;
   width: 50%;
   color: #008eff;
-  /* border: 1px solid red; */
   font-weight: bold;
   font-family: "Kfont";
 `;
@@ -94,13 +100,9 @@ const Levelinfo = styled.div`
   align-items: center;
   width: 50%;
   font-size: 1.2rem;
-  /* color: #008eff; */
-  /* border: 1px solid red; */
-  /* font-weight: bold; */
   font-family: "Kfont";
 `;
 const ImgContainer = styled.div`
-  /* margin: 2%; */
   width: 50%;
   height: 40%;
 `;
@@ -137,11 +139,43 @@ const MidContainer = styled.div`
   align-items: center;
   /* background: #00d2ff; */
   /* background-color: rgba(102, 178, 255, 0.2); */
-  background-color: rgba(224, 224, 224, 0.5);
+  background-color: rgba(51, 153, 255, 0.1);
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
+const BottomContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  height: 4vh;
+  margin-top: 1%;
+  /* border: 1px solid red; */
+`;
+const AddfishBtn = styled.div`
+  display: flex;
+  /* text-align: right; */
+  justify-content: flex-end;
+  align-items: center;
+  color: #108dee;
+  font-weight: bold;
+  width: 11%;
+  font-family: "Kfont";
+  /* border: 1px solid blue; */
+  cursor: pointer;
+`;
+const DeadfishBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  align-items: center;
+  color: #108dee;
+  width: 11%;
+  font-family: "Kfont";
+  font-weight: bold;
+  /* border: 1px solid blue; */
+  cursor: pointer;
+`;
 
-// const ProgressBar = styled.div`
+// const ProgressBar22 = styled.div`
 //   position: absolute;
 //   left: 0;
 //   width: ${(props) => (props.bar ? props.bar : "50%")};
@@ -152,6 +186,37 @@ const MidContainer = styled.div`
 //   background-color: #a2c523;
 // `;
 
+// const [data, setData] = useState({
+//   walks: [{ created_at: 0 }],
+//   goal: 0,
+//   users: [],
+// });
+
+// const [src, setSrc] = useState("");
+// const [display, setDisplay] = useState("none");
+// const [goal_percent, setGoal_Percent] = useState(0);
+// const [modal, setModal] = useState(false);
+// const Navigate = useNavigate();
+
+// const onCancel = () => {
+//   setModal(false);
+// };
+// const handleClick = () => {
+//   setModal(true);
+// };
+
+// useEffect(() => {
+//   loadingOn();
+// }, []);
+
+// useEffect(() => {
+//   if (data.goal) {
+//     setGoal_Percent(
+//       Math.min(100, Math.floor((100 * data.walks.length) / data.goal))
+//     );
+//   }
+// }, [data]);
+
 const ProgressBar = styled.div`
   padding: 2px;
   box-sizing: border-box;
@@ -159,7 +224,6 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
-  /* background: white; */
   border: 2px solid #108dee;
 `;
 const Progress = styled.div`
@@ -171,16 +235,10 @@ const Progress = styled.div`
 `;
 //--------------------------------------------
 const BtnContainer = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   width: 50%;
   height: 6vh;
-
-  /* .info {
-    background: white;
-    color: #108dee;
-  } */
 `;
 
 const Button = styled.button`
@@ -206,16 +264,6 @@ const Button = styled.button`
   }
 `;
 
-//--------------------------------------------
-const Counter = styled.div`
-  border: 1px solid black;
-  width: 50%;
-  height: 50px;
-  /* height: 12%; */
-  margin-top: 2%;
-  display: flex;
-`;
-
 //------------------- 캘린더 --------------------
 const CalendarContainer = styled.div`
   width: 50%;
@@ -224,7 +272,6 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid darkgrey; */
 `;
 
 const Control = styled.div`
@@ -303,45 +350,143 @@ const Day = styled.div`
 
 const FoodIconContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  border: 1px solid red;
+  height: 40%;
+  /* border: 1px solid red; */
+`;
+
+const FoodInnerContainer = styled.div`
+  display: flex;
+`;
+
+const FoodTypeAndNum = styled.div`
+  display: flex;
+`;
+
+const FeedingNum = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
 `;
 
 const FoodIcon = styled.img`
-  width: 25%;
-  border: 1px solid blue;
+  width: 40%;
+  /* border: 1px solid blue; */
 `;
 
 function ManageDetail() {
-  let feedingNum = 0;
+  const month = new Date().getMonth();
+  const [feedingInfo, setFeedingInfo] = useState({
+    pellet_num: 0,
+    flake_num: 0,
+    frozen_num: 0,
+    live_num: 0,
+    food_type: "",
+  });
 
-  const [infoModal, setInfoModal] = useState(false);
-  const [feedModal, setFeedModal] = useState(false);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:80/container/id/${month}`)
+      .then((res) => {
+        const containerData = res.data;
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // {
+  //   "data": {
+  //     "container_id": 1,
+  //     "user_id": 1,
+  //     "container_name": "JawsRocks",
+  //     "size": 100,
+  //     "theme": "SweetHome",
+  //     "fish_list": [
+  //       {
+  //         "fish_name":"Nemo",
+  //         "fish_num":5
+  //       },{...}
+  //       ],
+  //     "feed_list": [
+  //       {
+  //         "date": "2022-01-09",
+  //         "type": 1
+  //       },
+  //       {
+  //         "date": "2022-01-10",
+  //         "type": 2
+  //       }
+  //     ],
+  //     "ex_water_list": [
+  //       {
+  //         "date": "2022-01-09",
+  //         "amount": 100
+  //       },
+  //       {
+  //         "date": "2022-01-09",
+  //         "amount": 50
+  //       }
+  //     ],
+  //   },
+  //   "message": "Data is successfully returned"
+  // }
+
+  // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
+  const handleFoodtype = (e) => {
+    setFeedingInfo({
+      ...feedingInfo,
+      food_type: e.target.name,
+    });
+  };
+
+  const addFeedingNum = () => {
+    if (feedingInfo.food_type === "pellet") {
+      setFeedingInfo({
+        ...feedingInfo,
+        pellet_num: feedingInfo.pellet_num + 1,
+      });
+    } else if (feedingInfo.food_type === "flake") {
+      setFeedingInfo({
+        ...feedingInfo,
+        flake_num: feedingInfo.flake_num + 1,
+      });
+    } else if (feedingInfo.food_type === "frozen") {
+      setFeedingInfo({
+        ...feedingInfo,
+        frozen_num: feedingInfo.frozen_num + 1,
+      });
+    } else {
+      setFeedingInfo({
+        ...feedingInfo,
+        live_num: feedingInfo.live_num + 1,
+      });
+    }
+    dispatch(modalOff);
+  };
+
+  const state = useSelector((state) => state.modalReducer);
+  const {
+    isMyAquariumInfoModal,
+    isFeedingModal,
+    isAddfishModal,
+    isDeadfishModal,
+  } = state;
+  const dispatch = useDispatch();
+
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-
-  const feedingCounter = () => {
-    feedingNum++;
-    console.log(feedingNum);
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
   };
-  const InfoModalOn = () => {
-    setInfoModal(true);
-  };
-  const InfoModalOff = () => {
-    setInfoModal(false);
-  };
-  const feedingModalOn = () => {
-    setFeedModal(true);
-  };
-  const feedingModalOff = () => {
-    setFeedModal(false);
-  };
-
   // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
@@ -359,7 +504,6 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 return (
                   <Td key={index}>
@@ -367,10 +511,26 @@ function ManageDetail() {
                       {days.format("D")}
                     </Number>
                     <FoodIconContainer>
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
-                      <FoodIcon />
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/펠렛.png" />
+                          <FeedingNum>{feedingInfo.pellet_num}</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/플레이크.png" />
+                          <FeedingNum>{feedingInfo.flake_num}</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/냉동.png" />
+                          <FeedingNum>{feedingInfo.frozen_num}</FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/생먹이.png" />
+                          <FeedingNum>{feedingInfo.live_num}</FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -405,14 +565,8 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Lv>3</Lv> */}
-          {/* <Lv2></Lv2> */}
-          {/* <Lv3></Lv3> */}
           <Text>구피와 구구 어항</Text>
-          {/* <Icon></Icon> */}
         </TextContainer>
-
-        {/* <Img src="/물방울L.png" alt="" /> */}
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
@@ -428,7 +582,7 @@ function ManageDetail() {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>6</Levelinfo>
+              <Levelinfo></Levelinfo>
             </LevelCover>
             <Logo src="/로고.png" />
           </Level>
@@ -436,14 +590,26 @@ function ManageDetail() {
             <Progress></Progress>
           </ProgressBar>
           <BtnContainer>
-            <Button onClick={feedingModalOn}>피딩기록</Button>
-            <Button onClick={InfoModalOn} className="info">
+            <Button onClick={() => dispatch(feedingInputModalOnAction)}>
+              피딩기록
+            </Button>
+            <Button
+              onClick={() => dispatch(myAquariumInfoModalOnAction)}
+              className="info"
+            >
               수조정보
             </Button>
             <Button>환수기록</Button>
           </BtnContainer>
         </MidContainer>
-
+        <BottomContainer>
+          <AddfishBtn onClick={() => dispatch(addfishModalOnAction)}>
+            물고기추가
+          </AddfishBtn>
+          <DeadfishBtn onClick={() => dispatch(deadfishModalOnAction)}>
+            용궁기록
+          </DeadfishBtn>
+        </BottomContainer>
         {/* -------------------- 달력 ------------------- */}
         <CalendarContainer>
           <Control>
@@ -485,10 +651,16 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
-      {infoModal && <AquaInfo onCancel={InfoModalOff} visible={infoModal} />}
-      {feedModal && (
-        <FeedingInput onCancel={feedingModalOff} visible={feedModal} />
+      {isMyAquariumInfoModal && <AquaInfo />}
+      {isFeedingModal && (
+        <FeedingInput
+          addFeedingNum={addFeedingNum}
+          handleFoodtype={handleFoodtype}
+          feedingInfo={feedingInfo}
+        />
       )}
+      {isAddfishModal && <AddFish />}
+      {isDeadfishModal && <Deadfish />}
     </>
   );
 }

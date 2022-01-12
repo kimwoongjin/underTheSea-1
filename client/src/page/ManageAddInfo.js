@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../component/Header";
+import axios from "axios";
 
 const Container = styled.div`
   position: relative;
@@ -25,21 +26,38 @@ const Title = styled.div`
   font-size: 2rem;
   font-weight: bold;
 `;
+
+const Form = styled.form`
+  width: 60%;
+  border: 1px solid red;
+`;
+
 const Button = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.5% 2% 0.5% 2%;
   color: white;
-  border-radius: 20px;
+  border-radius: 4px;
   border: 1px solid #108dee;
   background: #108dee;
   margin: 1.5% 0 0 53%;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const Input1 = styled.input`
   margin-top: 2%;
-  width: 59%;
+  width: 100%;
   height: 30%;
+  box-sizing: border-box;
   font-weight: 700;
   font-size: 1.7rem;
   padding: 0.5% 0 0.5% 1%;
@@ -50,9 +68,9 @@ const Input1 = styled.input`
 const Contents = styled.div`
   position: relative;
   margin: 4% 0 15%;
-  width: 60%;
+  width: 100%;
   height: 100%;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   text-align: left;
   justify-content: center;
 `;
@@ -131,20 +149,67 @@ const Input6 = styled.input`
   border-radius: 10px;
   border: 3px solid #108dee;
 `;
-const Input7 = styled.input`
-  width: 46%;
-  height: 30%;
-  font-weight: 700;
-  font-size: 1.7rem;
-  padding: 0.7% 0 0.7% 1%;
-  border-radius: 10px;
-  border: 3px solid #108dee;
-`;
-function showText(e) {
-  console.log(e.target.value);
-}
 
-function ManageAddInfo() {
+function ManageAddInfo({ token }) {
+  const [aquaInfo, setAquaInfo] = useState({
+    container_name: "",
+    size: "",
+    theme: "",
+  });
+  const [size, setSize] = useState({
+    width: 0,
+    height: 0,
+    vertical: 0,
+  });
+  const handleInputValue = (e) => {
+    setAquaInfo({
+      ...aquaInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const getSize = (e) => {
+    setSize({
+      ...size,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const getWaterVolum = () => {
+    let waterVolum = Math.floor(
+      (size.width * size.height * size.vertical) / 1000
+    );
+    if (waterVolum > 0) {
+      setAquaInfo({
+        ...aquaInfo,
+        size: waterVolum,
+      });
+    }
+  };
+
+  const containerAddRequest = () => {
+    getWaterVolum();
+    console.log("아쿠아인포", aquaInfo);
+
+    // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '', theme: 'FO', …}
+    // message: "Container is successfully added"
+
+    console.log(token);
+    axios
+      .post(
+        `http://localhost:80/container/add`,
+        { data: aquaInfo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("응답이 뭘까?", res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header />
@@ -152,26 +217,57 @@ function ManageAddInfo() {
         <TitleContainer>
           <Title>어항 정보 추가</Title>
         </TitleContainer>
-        <Button>추가</Button>
-        <Input1 type="text" placeholder="수조명" onChange={showText}></Input1>
-        <Contents>
-          <Text1>직사각형 수조</Text1>
-          <Box1>
-            <Input2 type="text" placeholder="가로" onChange={showText}></Input2>
-            <Input3 type="text" placeholder="세로" onChange={showText}></Input3>
-            <Input4 type="text" placeholder="수위" onChange={showText}></Input4>
-          </Box1>
-          <Text2>볼형 수조</Text2>
-          <Input5 type="text" placeholder="물량" onChange={showText}></Input5>
-          <Box2>
-            <Input6 type="text" placeholder="테마" onChange={showText}></Input6>
-            <Input7
+        <Form>
+          <Button type="button" onClick={containerAddRequest}>
+            추가
+          </Button>
+          <Input1
+            name="container_name"
+            type="text"
+            placeholder="수조명"
+            onChange={handleInputValue}
+          ></Input1>
+          <Contents>
+            <Text1>직사각형 수조</Text1>
+            <Box1>
+              <Input2
+                name="width"
+                type="text"
+                placeholder="가로"
+                onChange={getSize}
+              ></Input2>
+              <Input3
+                name="vertical"
+                type="text"
+                placeholder="세로"
+                onChange={getSize}
+              ></Input3>
+              <Input4
+                name="height"
+                type="text"
+                placeholder="수위"
+                onChange={getSize}
+              ></Input4>
+            </Box1>
+            <Text2>볼형 수조</Text2>
+
+            <Input5
+              name="size"
               type="text"
-              placeholder="물고기 수"
-              onChange={showText}
-            ></Input7>
-          </Box2>
-        </Contents>
+              placeholder="물량"
+              onChange={handleInputValue}
+            ></Input5>
+            <Box2>
+              <Input6
+                name="theme"
+                type="text"
+                placeholder="테마"
+                onChange={handleInputValue}
+              ></Input6>
+            </Box2>
+          </Contents>
+        </Form>
+        {/* <img src="http://localhost:80/level/11" /> */}
       </Container>
     </>
   );

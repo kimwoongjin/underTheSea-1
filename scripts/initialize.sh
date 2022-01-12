@@ -2,6 +2,7 @@
 cd /home/ubuntu/underTheSea/server
 sudo npm install -g npm@latest
 sudo npm install
+sudo npm install dotenv
 sudo npm install pm2 -g
 sudo apt-get update
 sudo apt-get install authbind

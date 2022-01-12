@@ -8,7 +8,13 @@ import SkimmerCard from "../component/SkimmerCard";
 import SkimmerInfo from "../modalComponent/SkimmerInfo";
 import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import FilterMediaCard from "../component/FilterMediaCard";
+import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
+import ActivationCard from "../component/ActivationCard";
+import ActivationInfo from "../modalComponent/ActivationInfo";
+import RecommendCard from "../component/RecommendCard";
+import RecommendInfo from "../modalComponent/RecommendInfo";
 
 const Container = styled.div`
   width: 100%;
@@ -48,11 +54,15 @@ const InfoContainer = styled.div`
 `;
 
 function SeaWaterGuide() {
-  // isSkimmerModal: false,
-  // isSeaBasicInfoModal: false,
   const state = useSelector((state) => state.modalReducer);
-  const { isSkimmerModal, isSeaBasicInfoModal } = state;
-  const dispatch = useDispatch();
+  const {
+    isSkimmerModal,
+    isSeaBasicInfoModal,
+    isFilterMediaModal,
+    isActivationModal,
+    isRecommendModal,
+  } = state;
+
   return (
     <>
       <Container>
@@ -62,24 +72,18 @@ function SeaWaterGuide() {
           <div className="sub">해수어는 어떻게 시작할까?</div>
         </Title>
         <InfoContainer>
-          {/* 여따가 디스패치 걸어서 리덕스로 모듈 띄워야함 */}
           <SkimmerCard />
-          <SuppliesCard></SuppliesCard>
-          <GuideinfoCard></GuideinfoCard>
-          <GuideinfoCard></GuideinfoCard>
-          <GuideinfoCard></GuideinfoCard>
+          <SuppliesCard />
+          <FilterMediaCard />
+          <ActivationCard />
+          <RecommendCard />
           <GuideinfoCard></GuideinfoCard>
         </InfoContainer>
-        {/* {skimmerModal ? (
-          <SkimmerInfo onCancel={skimmerCancel} visible={skimmerModal} />
-        ) : (
-          ""
-        )}
-        {suppliesModal ? (
-          <SuppliesInfo onCancel={suppliesCancel} visible={suppliesModal} />
-        ) : (
-          ""
-        )} */}
+        {isSkimmerModal && <SkimmerInfo />}
+        {isSeaBasicInfoModal && <SuppliesInfo />}
+        {isFilterMediaModal && <FilterMediaInfo />}
+        {isActivationModal && <ActivationInfo />}
+        {isRecommendModal && <RecommendInfo />}
       </Container>
     </>
   );

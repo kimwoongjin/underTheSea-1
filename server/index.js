@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 // const { authToken } = require("./middleware/token");
 const db = require("./db/connection");
 // const controllers = require("./controllers");
@@ -43,6 +44,10 @@ app.get("/status", (req, res) => {
   });
 });
 
+app.get("/addfishinfo", (req, res) => {
+  res.sendFile(path.join(__dirname, "./views/addfishinfo.html"));
+});
+
 app.get("/images/:key", (req, res) => {
   console.log(req.params);
   const key = req.params.key;
@@ -53,14 +58,17 @@ app.get("/images/:key", (req, res) => {
 
 app.post("/images", upload.single("image"), async (req, res) => {
   const file = req.file;
+
   const result = await uploadFile(file);
   await unlinkFile(file.path);
   console.log(result);
-  const description = req.body.description;
-  console.log(description);
-  res.send({ imagePath: `/images/${result.Key}`, description });
+  res.send({ imagePath: `/images/${result.Key}` });
 });
 
+app.get("/level/:level_id", (req, res) => {
+  const level_id = req.params.level_id;
+  res.sendFile(`./level_imgs/${level_id}.png`, { root: __dirname });
+});
 app.use("/", indexRouter);
 
 let server;

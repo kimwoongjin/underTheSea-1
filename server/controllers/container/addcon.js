@@ -3,12 +3,13 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userInfo = isAuthorized(req);
+  console.log("오냐?", req.headers);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   }
   console.log(req.body.data);
   const user_id = userInfo.id;
-  const { container_name, size, salinity, theme, fish_id } = req.body.data;
+  const { container_name, size, theme } = req.body.data;
   const check_container = await containers.findOne({
     where: { container_name },
   });
@@ -19,10 +20,8 @@ module.exports = async (req, res) => {
     user_id,
     container_name,
     size,
-    salinity,
     theme,
-    fish_id,
-    level: 1,
+    level: 11,
   });
   return res.status(201).json({
     data: new_container.dataValues,

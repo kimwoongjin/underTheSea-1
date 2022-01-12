@@ -3,13 +3,21 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
+  const limit = 8;
+  const page_num = Number(req.params.page_num);
+  const offset = (page_num - 1) * limit;
 
   if (!userinfo) {
-    return res.status(200).json({ message: "You are not authorized" });
+    return res.status(401).json({ message: "You are not authorized" });
   } else {
     const user_id = userinfo.id;
 
-    const commnets_data = await comments.findAll({ where: { user_id } });
+    const commnets_data = await comments.findAll({
+      offset,
+      limit,
+      where: { user_id },
+      order: ["createAt", "DESC"],
+    });
 
     const user_comments = await Promise.all(
       commnets_data.map(async (el) => {

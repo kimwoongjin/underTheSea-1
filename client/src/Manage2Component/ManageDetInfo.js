@@ -6,46 +6,63 @@ import styled from "styled-components";
 //이름 영어나 한글로 통일 / 컴포넌트 이름 재설정 /  이미지 파일 정리
 
 const ContainerS = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  top: 15%;
+  /* background-color: rgba(51, 153, 255, 0.1); */
+  border: 2px solid #108dee;
+  border-radius: 10px;
   width: 100%;
-  height: 33vh;
+  height: 15vh;
   margin-bottom: 7%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const DetailImg = styled.div`
   position: relative;
-  width: 100%;
-  height: 90%;
+  overflow: hidden;
+  width: 25%;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  /* border-radius: 10px; */
   cursor: pointer;
-  /* border: 1px solid black; */
 `;
+
 const ImgD = styled.img`
+  position: relative;
   width: 100%;
   height: 100%;
+  /* border-top-left-radius: 10px; */
+  /* border-bottom-left-radius: 10px; */
 `;
+
 const Content = styled.div`
-  position: relative;
-  width: 20vw;
+  /* border: 1px solid red; */
+  display: flex;
+  width: 75%;
   height: 15vh;
-  text-align: left;
-  line-height: 200%;
-  /* border: 1px solid black; */
+  /* text-align: left; */
+  /* line-height: 200%; */
+`;
+
+const LeftInfo = styled.div`
+  width: 50%;
+  height: 100%;
+  border: 1px solid darkgrey;
+`;
+
+const RightInfo = styled.div`
+  width: 50%;
+  height: 100%;
+  /* border: 1px solid darkgrey; */
 `;
 
 const Name = styled.div`
-  position: absolute;
   font-weight: bold;
   font-size: 1.2rem;
 `;
 
 const TextD = styled.div`
-  position: absolute;
-  top: 39%;
   line-height: 130%;
   font-weight: 450;
 `;
@@ -59,10 +76,8 @@ function ManageDetInfo() {
         </DetailImg>
         {/* ----------------------------------------- */}
         <Content>
-          <Name>이름 : 체리바브</Name>
-          <TextD>
-            서식지 : <br></br>적정수온 :
-          </TextD>
+          <LeftInfo></LeftInfo>
+          <RightInfo></RightInfo>
         </Content>
       </ContainerS>
     </>

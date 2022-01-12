@@ -4,8 +4,15 @@ import {
   SKIMMER_INFO_MODAL_ON,
   SEA_BASIC_INFO_MODAL_ON,
   MY_AQUARIUM_INFO_MODAL_ON,
+  FILTER_MEDIA_MODAL_ON,
+  ACTIVATION_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
+  ADDFISH_MODAL_ON,
+  DEADFISH_MODAL_ON,
+  RECOMMENDINFO_MODAL_ON,
   MODAL_OFF,
+  SIGN_OUT_MODAL_ON,
+  PWD_CHANGE_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -14,7 +21,17 @@ const initialState = {
   isSkimmerModal: false,
   isSeaBasicInfoModal: false,
   isMyAquariumInfoModal: false,
+  isFilterMediaModal: false,
+  isActivationModal: false,
   isFeedingModal: false,
+
+  isAddfishModal: false,
+  isDeadfishModal: false,
+  isRecommendModal: false,
+
+  isSignoutModal: false,
+  isPwdChangeModal: false,
+
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -32,11 +49,31 @@ const modalReducer = (prevState = initialState, action) => {
     case SEA_BASIC_INFO_MODAL_ON:
       state = { ...prevState, isSeaBasicInfoModal: true };
       break;
+    case FILTER_MEDIA_MODAL_ON:
+      state = { ...prevState, isFilterMediaModal: true };
+      break;
     case MY_AQUARIUM_INFO_MODAL_ON:
       state = { ...prevState, isMyAquariumInfoModal: true };
       break;
     case FEEDING_INPUT_MODAL_ON:
       state = { ...prevState, isFeedingModal: true };
+      break;
+    case SIGN_OUT_MODAL_ON:
+      state = { ...prevState, isSignoutModal: true };
+      break;
+    case PWD_CHANGE_MODAL_ON:
+      state = { ...prevState, isPwdChangeModal: true };
+    case ACTIVATION_MODAL_ON:
+      state = { ...prevState, isActivationModal: true };
+      break;
+    case ADDFISH_MODAL_ON:
+      state = { ...prevState, isAddfishModal: true };
+      break;
+    case DEADFISH_MODAL_ON:
+      state = { ...prevState, isDeadfishModal: true };
+      break;
+    case RECOMMENDINFO_MODAL_ON:
+      state = { ...prevState, isRecommendModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

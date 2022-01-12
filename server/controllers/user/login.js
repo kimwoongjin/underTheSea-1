@@ -3,13 +3,13 @@ const { generateAccessToken } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const { email, user_pwd } = req.body.data;
-
+  console.log(email, user_pwd);
   if (!email || !user_pwd) {
-    return res.status(200).json({ message: "Not enough data" });
+    return res.status(400).json({ message: "Not enough data" });
   } else {
     const user = await users.findOne({ where: { email, user_pwd } });
     if (!user) {
-      return res.status(200).json({ message: "You don't have an account yet" });
+      return res.status(401).json({ message: "You don't have an account yet" });
     } else {
       delete user.dataValues.user_pwd;
 

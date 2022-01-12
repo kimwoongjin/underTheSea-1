@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
+import { useDispatch } from "react-redux";
+import { signoutAction, modalOff } from "../store/actions";
 // 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
@@ -128,12 +129,14 @@ const SignOutBtn = styled.button`
 
 function SignOut({ accessToken }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   function signOut() {
     axios
       .delete("http://localhost:80/user", {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then((res) => {
+      .then(() => {
+        dispatch(signoutAction);
         navigate("/");
       });
   }
@@ -142,7 +145,13 @@ function SignOut({ accessToken }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon icon={faTimes} size="2x" />
+          <FontAwesomeIcon
+            icon={faTimes}
+            size="2x"
+            onClick={() => {
+              dispatch(modalOff);
+            }}
+          />
         </CloseBtnContainer>
         <Form>
           <TextForm>
@@ -151,8 +160,17 @@ function SignOut({ accessToken }) {
             </Text>
           </TextForm>
           <Btn>
-            <CancleBtn type="button">아니요. 취소합니다.</CancleBtn>
-            <SignOutBtn type="button">네. 탈퇴합니다.</SignOutBtn>
+            <CancleBtn
+              type="button"
+              onClick={() => {
+                dispatch(modalOff);
+              }}
+            >
+              아니요. 취소합니다.
+            </CancleBtn>
+            <SignOutBtn type="button" onClick={signOut}>
+              네. 탈퇴합니다.
+            </SignOutBtn>
           </Btn>
         </Form>
       </ModalContainer>

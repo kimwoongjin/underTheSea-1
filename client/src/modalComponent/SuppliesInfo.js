@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -47,11 +48,13 @@ const ContentContainer = styled.div`
     margin-top: 50px;
   }
   h2 {
+    font-family: "Kfont";
     padding-bottom: 5px;
     box-sizing: border-box;
-    border-bottom: 2px solid #d2f7ff;
+    border-bottom: 2px solid #e5e5e5;
   }
   p {
+    font-family: "Kfont";
     font-size: 18px;
     line-height: 170%;
   }
@@ -59,12 +62,11 @@ const ContentContainer = styled.div`
 const IconContainer = styled.div`
   width: 95%;
   height: 5%;
-  /* margin-top: 5px; */
   display: flex;
   justify-content: flex-end;
-  /* border: 1px solid red; */
 `;
 const SubTitle = styled.div`
+  font-family: "Kfont";
   font-weight: bold;
   margin-top: 7px;
   margin-bottom: 5px;
@@ -84,12 +86,18 @@ const Rock = styled.img`
 `;
 
 function SuppliesInfo() {
+  const dispatch = useDispatch();
+
   return (
     <DarkBackGround>
       <ModalContainer>
         <IconContainer>
           <div className="btn">
-            <FontAwesomeIcon icon={faTimes} size="2x" />
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="2x"
+              onClick={() => dispatch(modalOff)}
+            />
           </div>
         </IconContainer>
         <ContentContainer>
