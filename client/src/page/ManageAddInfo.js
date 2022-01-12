@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import Header from "../component/Header";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { containerCardInfoShowAction } from "../store/actions";
 
 const Container = styled.div`
   position: relative;
@@ -29,7 +31,7 @@ const Title = styled.div`
 
 const Form = styled.form`
   width: 60%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const Button = styled.button`
@@ -70,7 +72,7 @@ const Contents = styled.div`
   margin: 4% 0 15%;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   text-align: left;
   justify-content: center;
 `;
@@ -150,65 +152,80 @@ const Input6 = styled.input`
   border: 3px solid #108dee;
 `;
 
-function ManageAddInfo({ token }) {
-  const [aquaInfo, setAquaInfo] = useState({
-    container_name: "",
-    size: "",
-    theme: "",
-  });
-  const [size, setSize] = useState({
-    width: 0,
-    height: 0,
-    vertical: 0,
-  });
-  const handleInputValue = (e) => {
-    setAquaInfo({
-      ...aquaInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
+function ManageAddInfo({
+  token,
+  handleInputValue,
+  getSize,
+  containerAddRequest,
+}) {
+  // const state = useSelector((state) => state.manageReducer);
+  // const { level_id, container_name, size, theme } = state;
+  // const dispatch = useDispatch();
 
-  const getSize = (e) => {
-    setSize({
-      ...size,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const getWaterVolum = () => {
-    let waterVolum = Math.floor(
-      (size.width * size.height * size.vertical) / 1000
-    );
-    if (waterVolum > 0) {
-      setAquaInfo({
-        ...aquaInfo,
-        size: waterVolum,
-      });
-    }
-  };
+  // export const containerCardInfoShowAction = (data) => ({
+  //   type: CONTAINER_CARD_INFO_SHOW,
+  //   payload: {
+  //     ...data,
+  //   },
 
-  const containerAddRequest = () => {
-    getWaterVolum();
-    console.log("아쿠아인포", aquaInfo);
+  // const [aquaInfo, setAquaInfo] = useState({
+  //   container_name: "",
+  //   size: "",
+  //   theme: "",
+  // });
+  // const [size, setSize] = useState({
+  //   width: 0,
+  //   height: 0,
+  //   vertical: 0,
+  // });
+  // const handleInputValue = (e) => {
+  //   setAquaInfo({
+  //     ...aquaInfo,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-    // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '', theme: 'FO', …}
-    // message: "Container is successfully added"
+  // const getSize = (e) => {
+  //   setSize({
+  //     ...size,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+  // const getWaterVolum = () => {
+  //   let waterVolum = Math.floor(
+  //     (size.width * size.height * size.vertical) / 1000
+  //   );
+  //   if (waterVolum > 0) {
+  //     setAquaInfo({
+  //       ...aquaInfo,
+  //       size: waterVolum,
+  //     });
+  //   }
+  // };
 
-    console.log(token);
-    axios
-      .post(
-        `http://localhost:80/container/add`,
-        { data: aquaInfo },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("응답이 뭘까?", res);
-      })
-      .catch((err) => console.log(err));
-  };
+  // const containerAddRequest = () => {
+  //   getWaterVolum();
+  //   console.log("아쿠아인포", aquaInfo);
+
+  //   console.log(token);
+  //   axios
+  //     .post(
+  //       `http://localhost:80/container/add`,
+  //       { data: aquaInfo },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("추가성공!");
+  //       console.log("응답이 뭘까?", res);
+  //       // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
+  //       // message: "Container is successfully added"
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <>
