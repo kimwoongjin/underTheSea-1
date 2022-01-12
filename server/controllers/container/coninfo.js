@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
-    const month = req.params.month;
+    const month = Number(req.params.month);
     const container = await containers.findOne({ where: { id: container_id } });
     if (!container) {
       return res.status(404).json({ message: "The container is not found" });
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
       });
-      console.log(fish_info_list);
+
       const fish_list = [];
       fish_info_list.map((el) => {
         fish_list.push({
@@ -41,8 +41,36 @@ module.exports = async (req, res) => {
       //   })
       // );
 
-      let feed_data = await feeds.findAll({
+      // let feed_data = await feeds.findAll({
+      //   where: { container_id },
+      //   attributes: [
+      //     "type",
+      //     [
+      //       feeds.sequelize.fn(
+      //         "date_format",
+      //         feeds.sequelize.col("createdAt"),
+      //         "%Y-%m-%d"
+      //       ),
+      //       "date",
+      //     ],
+      //   ],
+      //   group: ["feeds.createdAt"],
+      // });
+
+      // feed_data = feed_data.filter((el) => {
+      //   return el.dataValues.date.split("-")[1] === month;
+      // });
+
+      // const feed_list = feed_data.map((el) => {
+      //   return { date: el.dataValues.date, type: el.dataValues.type };
+      // });
+
+      let feed_data = await feeds.findAndCountAll({
         where: { container_id },
+        order: [
+          ["createdAt", "DESC"],
+          ["type", "DESC"],
+        ],
         attributes: [
           "type",
           [
@@ -54,14 +82,15 @@ module.exports = async (req, res) => {
             "date",
           ],
         ],
+        group: ["feeds.createdAt", "feeds.type"],
       });
-      feed_data = feed_data.filter((el) => {
-        return el.dataValues.date.split("-")[1] === month;
+      const feed_list = feed_data.count.filter((el) => {
+        return el.createdAt.getMonth() + 1 === month;
       });
-
-      const feed_list = feed_data.map((el) => {
-        return { date: el.dataValues.date, type: el.dataValues.type };
-      });
+      //return el.createdAt.split("-")[1] === month;
+      // objs.sort((a, b) =>
+      //   a.last_nom > b.last_nom ? 1 : b.last_nom > a.last_nom ? -1 : 0
+      // );
 
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
@@ -78,7 +107,8 @@ module.exports = async (req, res) => {
         ],
       });
       ex_water_data = ex_water_data.filter((el) => {
-        return el.dataValues.date.split("-")[1] === month;
+        console.log("#$#$#$##@#@$#$", el.dataValues.date.split("-")[1]);
+        return Number(el.dataValues.date.split("-")[1]) === month;
       });
 
       const ex_water_list = ex_water_data.map((el) => {
