@@ -378,7 +378,10 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
+<<<<<<< HEAD
   const month = new Date().getMonth();
+=======
+>>>>>>> 3b301c6110b38761d4a289a6f2166386527e0b10
 
   const [feedingInfo, setFeedingInfo] = useState({
     pellet_num: 0,
@@ -435,12 +438,18 @@ function ManageDetail() {
   const dispatch = useDispatch();
 
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
+
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
+  };
 
   // ------ 달력날짜 랜더링 ------ //
 
@@ -607,6 +616,7 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
+
       {isFeedingModal && (
         <FeedingInput
           addFeedingNum={addFeedingNum}
@@ -616,6 +626,7 @@ function ManageDetail() {
       )}
       {isAddfishModal && <AddFish />}
       {isDeadfishModal && <Deadfish />}
+
     </>
   );
 }

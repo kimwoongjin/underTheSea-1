@@ -98,7 +98,7 @@ const LoginBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-const GoogleBtn = styled.button`
+const GoogleBtn = styled.a`
   width: 100%;
   height: 50px;
   background: white;
@@ -112,6 +112,7 @@ const GoogleBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+  box-sizing: border-box;
   :hover::before {
     content: "";
     position: absolute;
@@ -155,10 +156,8 @@ function Login({ handleToken }) {
           }
         })
         .catch((err) => {
-          if (err) {
-          }
+          console.log(err);
         });
-    } else {
     }
   };
 
@@ -191,7 +190,7 @@ function Login({ handleToken }) {
             로그인
           </LoginBtn>
 
-          <GoogleBtn type="button">
+          <GoogleBtn href="http://localhost:80/user/auth/google">
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>

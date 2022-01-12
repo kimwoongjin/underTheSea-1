@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
   // 여기가 redirect uri 이므로
   // 여기서 다시 구글 token_url로 회원정보를 요청한다
   // 정보를 받고 db에 저장을 한 다음 redirect 를 이용해서 다시 메인화면으로 돌아간다.
-  console.log("hello");
   const { code } = req.query;
   //   console.log(req.query);
   try {
@@ -72,7 +71,7 @@ module.exports = async (req, res) => {
       httpOnly: true,
     });
 
-    return res.redirect("https://underthesea.ga");
+    return res.redirect("http://localhost:3000/mypage");
   } catch (error) {
     console.log(error);
   }

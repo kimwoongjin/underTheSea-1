@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       temp: DataTypes.STRING,
       desc: DataTypes.TEXT,
       fish_img: DataTypes.STRING,
+      fresh_water: DataTypes.BOOLEAN,
+      reefsafe: DataTypes.BOOLEAN,
+      size: DataTypes.STRING,
+      sci_name: DataTypes.STRING,
     },
     {
       sequelize,

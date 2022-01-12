@@ -23,6 +23,19 @@ module.exports = {
       fish_img: {
         type: Sequelize.STRING,
       },
+      fresh_water: {
+        type: Sequelize.BOOLEAN,
+      },
+      reefsafe: {
+        type: Sequelize.BOOLEAN,
+      },
+      size: {
+        type: Sequelize.STRING,
+      },
+      sci_name: {
+        type: Sequelize.STRING,
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -7,8 +7,7 @@ module.exports = async (req, res) => {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
-    const fish_name = req.body.data.fish_name;
-
+    const { fish_num, fish_name } = req.body.data;
     const check_container = await containers.findOne({
       where: { id: container_id },
     });
@@ -21,15 +20,32 @@ module.exports = async (req, res) => {
     } else if (!check_fish) {
       return res.status(404).json({ message: "The fish doesn't exist" });
     } else {
-      const fish_id = check_fish.dataValues.id;
-      const new_container_fish = await container_fishes.create({
-        container_id,
-        fish_id,
+      let container_fish = await container_fishes.findOne({
+        where: { fish_name, container_id },
       });
-      return res.status(201).json({
-        data: { new_container_fish },
-        message: "The fish is successfully added",
-      });
+      if (!container_fish) {
+        const new_container_fish = await container_fishes.create({
+          container_id,
+          fish_name,
+          fish_num,
+        });
+        return res.status(201).json({
+          data: { new_container_fish },
+          message: "The fish is successfully added",
+        });
+      } else {
+        await container_fish.increment("fish_num", {
+          by: Number(fish_num),
+        });
+        container_fish = await container_fishes.findOne({
+          where: { fish_name, container_id },
+        });
+
+        return res.status(201).json({
+          data: { container_fish },
+          message: "The fish is successfully added",
+        });
+      }
     }
   }
 };
