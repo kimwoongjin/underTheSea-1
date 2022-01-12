@@ -13,7 +13,6 @@ const authReducer = (prevState = userInfoState, action) => {
       state = {
         ...prevState,
         isLogin: true,
-        ...action.payload,
       };
       break;
     case LOG_OUT:

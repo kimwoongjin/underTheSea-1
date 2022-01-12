@@ -3,6 +3,7 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userInfo = isAuthorized(req);
+  console.log("오냐?", req.headers);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   }
