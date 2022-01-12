@@ -1,6 +1,7 @@
 import {
   LOG_IN,
   LOG_OUT,
+  SIGN_UP,
   LOG_IN_MODAL_ON,
   SIGN_UP_MODAL_ON,
   SIGN_OUT,
@@ -11,6 +12,9 @@ import {
   ACTIVATION_MODAL_ON,
   MY_AQUARIUM_INFO_MODAL_ON,
   FEEDING_INPUT_MODAL_ON,
+  ADDFISH_MODAL_ON,
+  DEADFISH_MODAL_ON,
+  RECOMMENDINFO_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
 } from "./actionTypes";
@@ -57,4 +61,16 @@ export const myAquariumInfoModalOnAction = {
 };
 export const feedingInputModalOnAction = {
   type: FEEDING_INPUT_MODAL_ON,
+};
+export const recommendInfoModalOnAction = {
+  type: RECOMMENDINFO_MODAL_ON,
+};
+export const signupAction = {
+  type: SIGN_UP,
+};
+export const addfishModalOnAction = {
+  type: ADDFISH_MODAL_ON,
+};
+export const deadfishModalOnAction = {
+  type: DEADFISH_MODAL_ON,
 };

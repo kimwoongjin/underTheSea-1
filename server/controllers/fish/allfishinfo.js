@@ -2,7 +2,6 @@ const { fishes } = require("../../models");
 
 module.exports = async (req, res) => {
   const limit = Number(req.params.limit);
-  console.log("Yoooooou:", limit);
   const fish_list = await fishes.findAll({ limit });
   if (!fish_list) {
     return res.status(404).json({ message: "Can't find the fish" });
