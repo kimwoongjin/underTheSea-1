@@ -20,9 +20,6 @@ module.exports = {
       theme: {
         type: Sequelize.STRING,
       },
-      fish_num: {
-        type: Sequelize.INTEGER,
-      },
       level: {
         type: Sequelize.INTEGER,
       },

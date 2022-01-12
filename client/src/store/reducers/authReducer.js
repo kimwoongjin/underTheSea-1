@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from "../actions/actionTypes";
+import { LOG_IN, LOG_OUT, SIGN_OUT } from "../actions/actionTypes";
 
 const userInfoState = {
   isLogin: false,
@@ -17,6 +17,9 @@ const authReducer = (prevState = userInfoState, action) => {
       };
       break;
     case LOG_OUT:
+      state = { ...userInfoState };
+      break;
+    case SIGN_OUT:
       state = { ...userInfoState };
       break;
     default:

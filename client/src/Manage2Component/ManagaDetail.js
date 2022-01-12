@@ -376,6 +376,7 @@ const FoodIcon = styled.img`
 `;
 
 function ManageDetail() {
+
   const [feedingInfo, setFeedingInfo] = useState({
     pellet_num: 0,
     flake_num: 0,
@@ -427,12 +428,18 @@ function ManageDetail() {
   const dispatch = useDispatch();
 
   const [getMoment, setMoment] = useState(moment());
+  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
+
+  const onIncrease = () => {
+    setCount((count) => count + 1);
+    dispatch(modalOff);
+  };
 
   // ------ 달력날짜 랜더링 ------ //
 
@@ -599,6 +606,7 @@ function ManageDetail() {
         <ManageDetCard />
       </OuterContainer>
       {isMyAquariumInfoModal && <AquaInfo />}
+
       {isFeedingModal && (
         <FeedingInput
           addFeedingNum={addFeedingNum}
@@ -608,6 +616,7 @@ function ManageDetail() {
       )}
       {isAddfishModal && <AddFish />}
       {isDeadfishModal && <Deadfish />}
+
     </>
   );
 }

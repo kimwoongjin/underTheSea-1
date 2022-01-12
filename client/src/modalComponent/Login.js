@@ -152,10 +152,8 @@ function Login() {
         })
         .then(() => {})
         .catch((err) => {
-          if (err) {
-          }
+          console.log(err);
         });
-    } else {
     }
   };
 
