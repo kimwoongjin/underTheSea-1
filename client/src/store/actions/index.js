@@ -17,6 +17,7 @@ import {
   ADDFISH_MODAL_ON,
   DEADFISH_MODAL_ON,
   RECOMMENDINFO_MODAL_ON,
+  CONTAINER_CARD_INFO_SHOW,
   MODAL_OFF,
 } from "./actionTypes";
 
@@ -74,3 +75,9 @@ export const addfishModalOnAction = {
 export const deadfishModalOnAction = {
   type: DEADFISH_MODAL_ON,
 };
+export const containerCardInfoShowAction = (data) => ({
+  type: CONTAINER_CARD_INFO_SHOW,
+  payload: {
+    ...data,
+  },
+});

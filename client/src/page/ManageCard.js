@@ -4,7 +4,7 @@ import ManageInfo from "./ManageInfo";
 import ManageAdd from "./ManageAdd";
 
 const Container = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 100%;
   height: 100%;
   display: flex;
@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 80%;
   height: 100%;
   display: flex;
@@ -22,13 +22,13 @@ const CardContainer = styled.div`
   justify-content: space-evenly;
   margin-top: 8%;
 `;
-
-function ManageCard() {
+// data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
+// message: "Container is successfully added"
+function ManageCard({ aquaInfo }) {
   return (
     <Container>
       <CardContainer>
-        <ManageInfo />
-        <ManageInfo />
+        <ManageInfo aquaInfo={aquaInfo} />
         <ManageAdd />
         <ManageAdd />
         <ManageAdd />
