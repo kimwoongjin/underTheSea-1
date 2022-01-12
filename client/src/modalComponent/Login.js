@@ -6,7 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { modalOff } from "../store/actions";
+import { modalOff, loginAction } from "../store/actions";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -127,13 +127,14 @@ const GoogleIcon = styled.img`
   width: 30%;
 `;
 
-function Login() {
+function Login({ handleToken }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
   });
+
   const handleInputValue = (e) => {
     setUserData({
       ...userData,
@@ -148,10 +149,12 @@ function Login() {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
+            handleToken(res.data.token);
+            dispatch(loginAction);
             navigate("/mypage");
+            dispatch(modalOff);
           }
         })
-        .then(() => {})
         .catch((err) => {
           console.log(err);
         });
