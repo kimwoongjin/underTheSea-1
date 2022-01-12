@@ -6,8 +6,9 @@ module.exports = {
     return sign(data, process.env.ACCESS_SECRET, { expiresIn: "1d" });
   },
   isAuthorized: (req) => {
-    const token = req.cookies.jwt;
-
+    // const token = req.cookies.jwt;
+    const authorization = req.headers.authorization;
+    const token = authorization.split(" ")[1];
     if (!token) {
       return null;
     }

@@ -19,10 +19,9 @@ import {
   PWD_MODAL_ON,
 } from "./actionTypes";
 
-export const loginAction = (data) => ({
+export const loginAction = {
   type: LOG_IN,
-  payload: { ...data },
-});
+};
 export const logoutAction = {
   type: LOG_OUT,
 };

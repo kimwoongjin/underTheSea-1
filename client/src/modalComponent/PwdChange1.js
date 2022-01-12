@@ -4,9 +4,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-// import { useDispatch } from "react-redux";
-// import { modalOff } from "../store/actions";
+import { useDispatch } from "react-redux";
+import { modalOff } from "../store/actions";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
@@ -25,7 +26,7 @@ const DarkBackGround = styled.div`
 const ModalContainer = styled.div`
   z-index: 999;
   width: 25%;
-  height: 50%;
+  height: 55%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -62,6 +63,52 @@ const Form = styled.form`
   position: relative;
 `;
 
+//성공메세지=======================================================================
+
+const PwdSuccess = styled.div`
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid red; */
+`;
+const PwdSuccessText = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: "Kfont";
+  margin-top: 20%;
+`;
+const CloseBtn = styled.button`
+  width: 100%;
+  height: 18%;
+  margin-bottom: 20%;
+  background: #108dee;
+  border-style: none;
+  padding: 3%;
+  border-radius: 4px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
+`;
+//비밀번호 창 =======================================================================
+
 const TextForm = styled.div`
   position: relative;
   display: flex;
@@ -71,7 +118,7 @@ const TextForm = styled.div`
 const Text = styled.div`
   position: relative;
   font-family: "Kfont";
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
 `;
 
@@ -81,14 +128,20 @@ const NewPwd = styled.form`
   display: flex;
   flex-direction: column;
 `;
-
-const NewPwd1 = styled.input`
-  margin-top: 30%;
+const CurPwd1 = styled.input`
+  margin-top: 23%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 10%;
+  margin-bottom: 15%;
+`;
+const NewPwd1 = styled.input`
+  width: calc(100%-10px);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  /* margin-bottom: 5%; */
 `;
 const NewPwd2 = styled.input`
   width: calc(100%-10px);
@@ -96,12 +149,32 @@ const NewPwd2 = styled.input`
   padding: 5px;
   box-sizing: border-box;
 `;
+const Warning = styled.div`
+  width: calc(100%-10px);
+  height: 20px;
+  font-size: 0.5rem;
+  /* margin-top: 10%; */
+  /* justify-content: flex-start; */
+  color: red;
+
+  padding: 2% 0 5% 2%;
+`;
+const Warning1 = styled.div`
+  width: calc(100%-10px);
+  height: 20px;
+  font-size: 0.5rem;
+  /* margin-top: 10%; */
+  /* justify-content: flex-start; */
+  color: red;
+
+  padding: 2% 0 5% 2%;
+`;
 
 const Btn = styled.div`
   display: flex;
   width: 100%;
   height: 25%;
-  flex-direction: row;
+  flex-direction: column;
   position: absolute;
   top: 80%;
   justify-content: space-between;
@@ -133,41 +206,27 @@ const ConfirmBtn = styled.button`
 //=======================================================================
 
 function PwdChange({ handleOff }) {
-  //   const navigate = useNavigate();
-
-  const [alertMessage, setAlertMessage] = useState(""); //메세지
-  const [isOpenAlert, setIsOpenAlert] = useState(false); //메세지alert
-
-  // //메세지 alert 핸들러
-  const openAlertHandler = () => {
-    setIsOpenAlert(!isOpenAlert);
-    setTimeout(() => setIsOpenAlert(false), 4000);
-  };
-
-  // //비밀번호 저장
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  //비밀번호 저장
   const [currentPwd, setCurrentPwd] = useState({
+    cur_pwd: "",
     new_pwd: "",
     verifyPassword: "",
   });
+  //상태 변경
+  const [password, setPassword] = useState(false);
+  //에러메세지
+  const [errorMsg, setErrorMsg] = useState("");
+  //새로운 비밀번호 = 새로운 비밀번호 확인
+  const onChangePasswordChk = () =>
+    currentPwd.new_pwd === currentPwd.verifyPassword;
+
   //유효성
   const checkPassword = (new_pwd) => {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(new_pwd);
   };
-  // //유효성
-  const [validation, setValidation] = useState({
-    password: false,
-    verifyPassword: false,
-  });
-
-  // //유효성을 위한 메세지
-  const [message, setMessage] = useState({
-    password: "비밀번호는 10글자 이상, 영문, 숫자 조합이어야 합니다.",
-    verifyPassword: "비밀번호를 확인해주세요.",
-  });
-
-  // //유효성
-  const isValidForPassword = validation.password && validation.verifyPassword;
 
   //------------------------------------------------------------------------------------
 
@@ -178,54 +237,63 @@ function PwdChange({ handleOff }) {
 
   const fixPasswordHandler = () => {
     const accessToken = localStorage.getItem("accessToken");
+    const { cur_pwd, new_pwd, verifyPassword } = currentPwd;
     //재확인
-    if (!accessToken) {
-      return;
+    if (!cur_pwd || !new_pwd || !verifyPassword) {
+      setErrorMsg("비밀번호를 확인해주세요");
+    } else if (!checkPassword(new_pwd) || !onChangePasswordChk()) {
+      setErrorMsg("올바른 정보를 입력해주세요");
     } else {
-      axios
-        .patch(
-          `${process.env.REACT_APP_API_URL}/user/password`,
-          { cur_pwd: { data: currentPwd } }, // 재확인
-          {
-            headers: { authorization: `Bearer ${accessToken}` },
-            withCredentials: true,
-          }
-        )
-        .then(() => {
-          setAlertMessage("패스워드가 변경되었습니다.");
-          openAlertHandler();
-        })
-        .catch((err) => {
-          setAlertMessage("잘못된 요청입니다.");
-          // openWarningAlertHandler(); //필요한가???
-          console.log(err);
-        });
+      setErrorMsg("");
+      if (!accessToken) {
+        return;
+      } else {
+        axios
+          .patch(
+            `http://localhost:80/user/password`,
+            {
+              data: { cur_pwd, new_pwd },
+            },
+            {
+              headers: { authorization: `Bearer ${accessToken}` },
+              withCredentials: true,
+            }
+          )
+          .then(() => {
+            setPassword(true);
+            navigate("/mypage");
+          })
+          .catch((err) => {
+            setErrorMsg("비밀번호를 확인해주세요.");
+            console.log(err);
+          });
+      }
     }
   };
   //------------------------------------------------------------------------------------
-  useEffect(() => {
-    setMessage({
-      ...message,
-      password:
-        currentPwd.new_pwd.length >= 10
-          ? checkPassword(currentPwd.new_pwd)
-            ? "사용할 수 있는 비밀번호 입니다."
-            : "비밀번호는 영문, 숫자 조합이어야 합니다."
-          : "비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.",
-      verifyPassword:
-        currentPwd.verifyPassword.length >= currentPwd.new_pwd.length &&
-        currentPwd.verifyPassword.length >= 10
-          ? currentPwd.verifyPassword === currentPwd.new_pwd
-            ? "비밀번호가 일치합니다."
-            : "비밀번호가 불일치합니다."
-          : "비밀번호를 확인해주세요.",
-    });
-    setValidation({
-      ...validation,
-      password: checkPassword(currentPwd.new_pwd),
-      verifyPassword: currentPwd.new_pwd === currentPwd.verifyPassword,
-    });
-  }, [currentPwd]);
+  // useEffect(() => {
+  //   setMessage({
+  //     ...message,
+  //     password:
+  //       currentPwd.new_pwd.length >= 8
+  //         ? checkPassword(currentPwd.new_pwd)
+  //           ? "사용할 수 있는 비밀번호 입니다."
+  //           : "비밀번호는 영문, 숫자 조합이어야 합니다."
+  //         : "비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.",
+  //     verifyPassword:
+  //       currentPwd.verifyPassword.length >= currentPwd.new_pwd.length &&
+  //       currentPwd.verifyPassword.length >= 8
+  //         ? currentPwd.verifyPassword === currentPwd.new_pwd
+  //           ? "비밀번호가 일치합니다."
+  //           : "비밀번호가 불일치합니다."
+  //         : "비밀번호를 확인해주세요.",
+  //   });
+  //   setValidation({
+  //     ...validation,
+  //     password: checkPassword(currentPwd.new_pwd),
+  //     verifyPassword: currentPwd.new_pwd === currentPwd.verifyPassword,
+  //   });
+  // }, [currentPwd]);
 
   return (
     <DarkBackGround>
@@ -242,44 +310,57 @@ function PwdChange({ handleOff }) {
           <TextForm>
             <Text>비밀번호 변경</Text>
           </TextForm>
-          <NewPwd>
-            <NewPwd1
-              placeholder="새 비밀번호"
-              type="password"
-              onChange={handleInputValue("new_pwd")}
-            />
-            {message.password ===
-            "비밀번호는 10글자 이상, 영문, 숫자 조합이어야 합니다." ? (
-              <div>{message.password}</div>
-            ) : message.password === "사용할 수 있는 비밀번호 입니다." ? (
-              <div>{message.password}</div>
-            ) : (
-              <div>{message.password}</div>
-            )}
-            <NewPwd2
-              placeholder="새 비밀번호 확인"
-              type="password"
-              onChange={handleInputValue("verifyPassword")}
-            />
-            {isValidForPassword ? (
+          {password ? (
+            <PwdSuccess>
+              <PwdSuccessText>
+                비밀번호가 변경되었습니다.<br></br>닫기를 눌러주세요.
+              </PwdSuccessText>
+              <CloseBtn onClick={handleOff}>닫기</CloseBtn>
+            </PwdSuccess>
+          ) : (
+            <NewPwd>
+              <CurPwd1
+                placeholder="현재 비밀번호"
+                type="password"
+                onChange={handleInputValue("cur_pwd")}
+              />
+              <NewPwd1
+                placeholder="새 비밀번호"
+                type="password"
+                autoComplete="on"
+                onChange={handleInputValue("new_pwd")}
+              />
+              {!currentPwd.new_pwd ? (
+                <Warning>
+                  비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
+                </Warning>
+              ) : currentPwd.new_pwd.length >= 8 ||
+                checkPassword(currentPwd.new_pwd) ? (
+                <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
+              ) : (
+                <Warning></Warning>
+              )}
+              <NewPwd2
+                placeholder="새 비밀번호 확인"
+                type="password"
+                required
+                autoComplete="on"
+                onChange={handleInputValue("verifyPassword")}
+              />
+              {onChangePasswordChk() || !currentPwd.verifyPassword ? (
+                <Warning>비밀번호가 일치합니다.</Warning>
+              ) : (
+                <Warning>비밀번호가 일치하지 않습니다.</Warning>
+              )}
+
               <Btn>
                 <ConfirmBtn type="button" onClick={fixPasswordHandler}>
                   확인
                 </ConfirmBtn>
+                <Warning1>{errorMsg}</Warning1>
               </Btn>
-            ) : (
-              <Btn>
-                <ConfirmBtn disabled={true}>확인</ConfirmBtn>
-              </Btn>
-            )}
-            {message.verifyPassword === "비밀번호를 확인해주세요." ? (
-              <div>{message.verifyPassword}</div>
-            ) : message.verifyPassword === "비밀번호가 일치합니다." ? (
-              <div>{message.verifyPassword}</div>
-            ) : (
-              <div>{message.verifyPassword}</div>
-            )}{" "}
-          </NewPwd>
+            </NewPwd>
+          )}
         </Form>
       </ModalContainer>
     </DarkBackGround>

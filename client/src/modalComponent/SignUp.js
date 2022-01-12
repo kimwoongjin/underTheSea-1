@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
-
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../store/actions";
-import signupReducer from "../store/reducers/signupReducer";
-
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -60,14 +58,14 @@ const Form = styled.form`
   flex-direction: column;
   /* border: 1px solid red; */
 `;
-const signupSuccess = styled.div`
+const SignupSuccess = styled.div`
   width: 80%;
   height: 60%;
   display: flex;
   flex-direction: column;
   /* border: 1px solid red; */
 `;
-const signupSuccessText = styled.div`
+const SignupSuccessText = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -201,7 +199,7 @@ function SignUp() {
 
   const handleSignup = () => {
     const { email, user_name, user_pwd, pwd_chk } = userData;
-    console.log("유저데이터", userData);
+    // console.log("유저데이터", userData);
     if (!email || !user_name || !user_pwd || !pwd_chk) {
       setErrorMsg("필수 정보를 모두 입력해주세요");
     } else if (
@@ -245,10 +243,10 @@ function SignUp() {
         </CloseBtnContainer>
         <Title>회원가입</Title>
         {signup ? (
-          <signupSuccess>
-            <signupSuccessText>회원가입에 성공했습니다!</signupSuccessText>
+          <SignupSuccess>
+            <SignupSuccessText>회원가입에 성공했습니다!</SignupSuccessText>
             <CloseBtn onClick={() => dispatch(modalOff)}>닫기</CloseBtn>
-          </signupSuccess>
+          </SignupSuccess>
         ) : (
           <Form>
             <Username
