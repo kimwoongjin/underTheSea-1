@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Header from "../component/Header";
 import Header2 from "../component/Header2";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -199,7 +198,7 @@ function WriteTips({ token }) {
     // setImage("http://localhost:80" + result.data.imagePath);
     setTip({
       ...tip,
-      img: "http://localhost:80" + result.data.imagePath,
+      img: result.data.imagePath,
     });
   };
 
@@ -227,8 +226,9 @@ function WriteTips({ token }) {
       }
     );
     const tip_id = result.data.data.id;
+    localStorage.setItem("tip_id", tip_id);
     // console.log(result);
-    navigate(`/tip/${tip_id}`);
+    navigate(`/posttips`);
   };
 
   const handleCancle = () => {
@@ -274,7 +274,11 @@ function WriteTips({ token }) {
               onChange={handleInputValue}
             />
             <ImageInputForm for="input-image">
-              <img id="select-img" src={tip.img} style={{ width: "20%" }}></img>
+              <img
+                id="select-img"
+                src={`http://localhost:80${tip.img}`}
+                style={{ width: "20%" }}
+              ></img>
             </ImageInputForm>
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>
