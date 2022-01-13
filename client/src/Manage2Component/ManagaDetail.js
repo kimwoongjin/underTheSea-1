@@ -407,13 +407,8 @@ function ManageDetail() {
           withCredentials: true,
         }
       )
-      .then((res) => {
+      .then(async (res) => {
         setContainerData(res.data);
-        console.log("응답데이타", res.data);
-        console.log(
-          "클릭한 수조정보 피딩목록-->",
-          containerData.data.feed_list
-        );
 
         // 컨테이너 정보안에 피드리스트가 있다.
         let feedingDay = containerData.data.feed_list.map((feed) => {
@@ -428,14 +423,13 @@ function ManageDetail() {
           };
         });
         feedingDay = feedingDay.sort((a, b) => a.date - b.date);
-        console.log("feedingDay->", feedingDay);
         setTodayFeeding(feedingDay);
-        console.log("투데이피딩 ", todayFeeding);
 
-        // console.log("날짜->", res.data.data.feed_list[1].createdAt);
+        localStorage.setItem("feed_list", JSON.stringify(feedingDay));
+        // console.log("Test2:", JSON.parse(test2));
       })
       .catch((err) => console.log(err));
-  }, [todayFeeding]);
+  }, []);
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
   const handleFoodtype = (e) => {
@@ -446,7 +440,6 @@ function ManageDetail() {
   };
 
   const addFeedingNum = () => {
-    console.log("푸드타입제대로들어가니?", feedingInfo);
     axios
       .post(
         `http://localhost:80/container/${container_id}/feed`,
@@ -479,8 +472,6 @@ function ManageDetail() {
           )
           .then((res) => {
             setFeedingData(res.data.data.feed_list);
-            console.log("스테이트 피딩정보", feedingData);
-            console.log("피딩정보", res.data.data.feed_list);
             dispatch(modalOff);
           })
       )
@@ -547,6 +538,8 @@ function ManageDetail() {
   // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
+    const feed_list = JSON.parse(localStorage.getItem("feed_list"));
+    console.log("Yeah~~~", feed_list);
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -561,7 +554,7 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-              if ("20220113" === days.format("YYYYMMDD")) {
+              if (feed_list[0].date === days.format("YYYYMMDD")) {
                 // console.log("feedingData[0].date", feedingData[0].date);
                 // console.log("데이즈포맷 ", typeof days.format("YYYYMMDD"));
                 return (
@@ -573,11 +566,11 @@ function ManageDetail() {
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
                           <FoodIcon src="/펠렛.png" />
-                          <FeedingNum>{feedingInfo.pellet_num}</FeedingNum>
+                          <FeedingNum>{feed_list[0].count}</FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/플레이크.png" />
-                          <FeedingNum>{feedingInfo.flake_num}</FeedingNum>
+                          <FeedingNum>{feed_list[1].count}</FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                       <FoodInnerContainer>
