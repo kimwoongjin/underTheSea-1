@@ -129,7 +129,7 @@ function Header() {
         )}
         {/* <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login> */}
         {isLogin ? (
-          <Signout>회원탈퇴</Signout>
+          <Signout>로그아웃</Signout>
         ) : (
           <Signup onClick={() => dispatch(signupModalOnAction)}>
             회원가입
