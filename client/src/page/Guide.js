@@ -52,6 +52,9 @@ function Guide() {
   const goToSeawater = () => {
     Navigate("/seawaterguide");
   };
+  const goToTips = () => {
+    Navigate("/honeytips");
+  };
   return (
     <>
       <Container>
@@ -60,7 +63,7 @@ function Guide() {
           <Seawater onClick={goToSeawater}>
             <SeaImg src="가이드타이틀이미지1.png" />
           </Seawater>
-          <Tips>Tips</Tips>
+          <Tips onClick={goToTips}>Tips</Tips>
           <Freshwater>
             <FreshImg src="가이드타이틀이미지2.png" />
           </Freshwater>

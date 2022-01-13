@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
   feeds.init(
     {
       container_id: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "feeds",
-      type: DataTypes.INTEGER,
     }
   );
   return feeds;

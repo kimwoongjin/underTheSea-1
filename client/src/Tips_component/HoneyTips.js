@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Header from "../component/Header";
 import Header2 from "../component/Header2";
 import TipCard from "../component/TipCard";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -87,6 +88,10 @@ const CardContainer = styled.div`
   /* border: 1px dashed darkcyan; */
 `;
 function HoneyTips() {
+  const navigate = useNavigate();
+  const goToNewTip = () => {
+    navigate("/writetips");
+  };
   return (
     <>
       <Header2></Header2>
@@ -100,7 +105,7 @@ function HoneyTips() {
           {/* <Swarm src="무리.png" /> */}
         </TopCover>
         <BtnContainer>
-          <Btn>새글쓰기</Btn>
+          <Btn onClick={goToNewTip}>새글쓰기</Btn>
         </BtnContainer>
         <CardContainer>
           <TipCard></TipCard>
