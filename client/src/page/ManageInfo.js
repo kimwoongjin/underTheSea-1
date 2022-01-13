@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   /* position: relative; */
@@ -88,27 +89,37 @@ const Theme = styled.div`
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ aquaInfo }) {
+function ManageInfo({ id, name, size, theme }) {
+  const [Id, setId] = useState("");
+  const navigate = useNavigate();
   // const [aquaInfo, setAquaInfo] = useState({
   //   container_name: "",
   //   size: "",
   //   theme: "",
   // });
+  const sendCardInfo = () => {
+    setId(id);
+    localStorage.setItem("container_id", id);
+    navigate("/manage/detailinfo");
+  };
   return (
-    <Container>
+    // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
+    // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
+    // 클릭했을때 수조 아이디만 넘어가고 그 아이디로 피딩기록, 환수기록 조회, 물고기종류와 마릿수
+    <Container onClick={sendCardInfo}>
       <Contents>
         <ImgContainer>
-          <Link
+          {/* <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/manage/detailinfo"
-          >
-            <Img src="http://localhost:80/level/11"></Img>
-          </Link>
+          > */}
+          <Img src="http://localhost:80/level/11"></Img>
+          {/* </Link> */}
         </ImgContainer>
         <Content>
-          <Name>{aquaInfo.container_name}</Name>
-          <Size>사이즈: {aquaInfo.size}200L</Size>
-          <Theme>테마: {aquaInfo.theme}</Theme>
+          <Name>{name}</Name>
+          <Size>사이즈: {size}L</Size>
+          <Theme>테마: {theme}</Theme>
         </Content>
       </Contents>
     </Container>

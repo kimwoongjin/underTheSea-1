@@ -127,7 +127,7 @@ const GoogleIcon = styled.img`
   width: 30%;
 `;
 
-function Login({ handleToken }) {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -149,7 +149,7 @@ function Login({ handleToken }) {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
-            handleToken(res.data.token);
+            localStorage.setItem("accessToken", res.data.token);
             dispatch(loginAction);
             navigate("/mypage");
             dispatch(modalOff);

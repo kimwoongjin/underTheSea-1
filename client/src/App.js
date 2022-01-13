@@ -13,10 +13,35 @@ import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
 import Login from "./modalComponent/Login";
 import SignUp from "./modalComponent/SignUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
+  const state = useSelector((state) => state.modalReducer);
+  const loginState = useSelector((state) => state.authReducer);
+  const { isLoginModal, isSignupModal } = state;
+  const { isLogin } = loginState;
+
+  const accessToken = localStorage.getItem("accessToken");
+  const [containerList, setContainerList] = useState([]);
+
+  useEffect(() => {
+    // 여기서 수조정보 조회
+    console.log("정보떳냐", aquaInfo);
+    axios
+      .get(`http://localhost:80/container/all`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("전체 수조목록", res.data.data);
+        setContainerList(res.data.data);
+        console.log("수조목록", containerList);
+      });
+  }, [isLogin]);
+
+  const idList = containerList.map((container) => container.id);
+
   //-----------------------------------------------
 
   const [aquaInfo, setAquaInfo] = useState({
@@ -56,17 +81,20 @@ function App() {
   };
 
   const containerAddRequest = () => {
+    // localStorage.setItem("accessToken", res.data.token);
+
+    const accessToken = localStorage.getItem("accessToken");
     getWaterVolum();
     console.log("아쿠아인포", aquaInfo);
 
-    console.log(token);
+    console.log("토큰!", token);
     axios
       .post(
         `http://localhost:80/container/add`,
         { data: aquaInfo },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -89,8 +117,6 @@ function App() {
   const handleToken = (token) => {
     setToken(token);
   };
-  const state = useSelector((state) => state.modalReducer);
-  const { isLoginModal, isSignupModal } = state;
 
   return (
     <BrowserRouter>
@@ -102,8 +128,14 @@ function App() {
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips />}></Route>
         <Route path="/posttips" element={<PostTips />}></Route>
-        <Route path="/manage" element={<Manage aquaInfo={aquaInfo} />}></Route>
-        <Route path="/manage/detailinfo" element={<ManageDetail />}></Route>
+        <Route
+          path="/manage"
+          element={<Manage aquaInfo={aquaInfo} containerList={containerList} />}
+        ></Route>
+        <Route
+          path="/manage/detailinfo"
+          element={<ManageDetail idList={idList} />}
+        ></Route>
         <Route
           path="/manage/addInfo"
           element={

@@ -377,8 +377,9 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail() {
-  const month = new Date().getMonth();
+function ManageDetail({ idList }) {
+  const container_id = localStorage.getItem("container_id");
+  const month = new Date().getMonth() + 1;
   const [feedingInfo, setFeedingInfo] = useState({
     pellet_num: 0,
     flake_num: 0,
@@ -386,15 +387,43 @@ function ManageDetail() {
     live_num: 0,
     food_type: "",
   });
+  const accessToken = localStorage.getItem("accessToken");
+  const [containerData, setContainerData] = useState("");
 
   useEffect(() => {
+    console.log("아이디목록", container_id);
     axios
-      .get(`http://localhost:80/container/id/${month}`)
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
-        const containerData = res.data;
+        setContainerData(res.data);
+
+        console.log("클릭한 수조정보", containerData);
+        console.log("날짜->", typeof res.data.data.feed_list[1].createdAt);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  //   data:
+  // container_id: 2
+  // container_name: "등록!"
+  // ex_water_list: []
+  // feed_list: []
+  // fish_list: []
+  // size: 216
+  // theme: "산호수조"
+  // user_id: 1
+  // [[Prototype]]: Object
+  // message: "Data is s
 
   // {
   //   "data": {
@@ -559,13 +588,39 @@ function ManageDetail() {
     return result;
   };
 
+  // data:
+  // container_id: 1
+  // container_name: "WOW"
+  // ex_water_list: Array(3)
+  // 0: {createdAt: '2022-01-11T13:46:46.000Z', amount: 20}
+  // 1: {createdAt: '2022-01-13T13:46:46.000Z', amount: 22}
+  // 2: {createdAt: '2022-01-20T13:46:46.000Z', amount: 13}
+  // length: 3
+  // [[Prototype]]: Array(0)
+  // feed_list: (4) [{…}, {…}, {…}, {…}]
+  // fish_list: (2) [{…}, {…}]
+  // size: 100
+  // theme: "N/A"
+  // user_id: 1
+  // [[Prototype]]:
+
+  //   feed_list: Array(4)
+  // 0:
+  // count: 3
+  // createdAt: "2022-01-11T07:32:16.000Z"
+  // type: 1
+  // [[Prototype]]: Object
+  // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
+  // 2: {createdAt: '2022-01-11T07:32:16.000Z', type: 3, count: 2}
+  // 3: {createdAt: '2022-01-11T07:32:16.000Z', type: 2, count: 3}
+
   return (
     <>
       <Header2 />
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          <Text>구피와 구구 어항</Text>
+          <Text>{containerData.data.container_name}</Text>
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}
