@@ -30,6 +30,7 @@ module.exports = {
   usermanage: require("./user/usermanage"),
   usertips: require("./user/usertips"),
   usercomments: require("./user/usercomments"),
+  commentinfo: require("./comment/commentinfo"),
   authgoogle: require("./user/authgoogle"),
   googlecallback: require("./user/googlecallback"),
 };

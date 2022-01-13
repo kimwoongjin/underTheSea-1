@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.div`
   /* position: relative; */
@@ -31,6 +33,8 @@ const ImgContainer = styled.div`
   height: 50%;
   overflow: hidden;
   cursor: pointer;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   /* border: 1px solid black; */
 `;
 const Img = styled.img`
@@ -55,8 +59,12 @@ const Content = styled.div`
 const Name = styled.div`
   /* position: absolute; */
   /* left: 5%; */
+  border-radius: 5px;
+  background: #e5e5e5;
+  text-align: center;
+  font-family: "Kfont";
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   /* border: 1px solid red; */
 `;
 
@@ -64,6 +72,7 @@ const Size = styled.div`
   /* position: absolute; */
   /* left: 5%; */
   /* top: 33%; */
+  font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
@@ -74,33 +83,42 @@ const Theme = styled.div`
   /* position: absolute; */
   /* left: 5%; */
   /* top: 33%; */
+  font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ aquaInfo }) {
+function ManageInfo({ id, name, size, theme }) {
+  // const [Id, setId] = useState("");
+  const navigate = useNavigate();
   // const [aquaInfo, setAquaInfo] = useState({
   //   container_name: "",
   //   size: "",
   //   theme: "",
   // });
+  const sendCardInfo = () => {
+    navigate(`${id}`);
+  };
   return (
-    <Container>
+    // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
+    // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
+    // 클릭했을때 수조 아이디만 넘어가고 그 아이디로 피딩기록, 환수기록 조회, 물고기종류와 마릿수
+    <Container onClick={sendCardInfo}>
       <Contents>
         <ImgContainer>
-          <Link
+          {/* <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/manage/detailinfo"
-          >
-            <Img src="http://localhost:80/level/11"></Img>
-          </Link>
+          > */}
+          <Img src="http://localhost:80/level/11"></Img>
+          {/* </Link> */}
         </ImgContainer>
         <Content>
-          <Name>{aquaInfo.container_name}임시이름</Name>
-          <Size>사이즈: {aquaInfo.size}200L</Size>
-          <Theme>테마: {aquaInfo.theme}산호</Theme>
+          <Name>{name}</Name>
+          <Size>사이즈: {size}L</Size>
+          <Theme>테마: {theme}</Theme>
         </Content>
       </Contents>
     </Container>

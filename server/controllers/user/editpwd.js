@@ -2,6 +2,7 @@ const { users } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+  console.log("============", req.body);
   const userinfo = isAuthorized(req);
   // console.log(userinfo);
 
