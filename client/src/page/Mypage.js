@@ -3,10 +3,12 @@ import React from "react";
 import Header from "../component/Header";
 import { useState, useEffect } from "react";
 import SignOut from "../modalComponent/SignOut";
-import PwdChange from "../modalComponent/PwdChange";
+import PwdChange1 from "../modalComponent/PwdChange1";
+
 import { useSelector } from "react-redux";
-import { signoutModalAction, pwdchangeModalAction } from "../store/actions";
+import { signoutModalAction, pwdModalAction } from "../store/actions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -141,9 +143,16 @@ const ManageText = styled.div`
 function Mypage() {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOn = () => {
+    setOpenModal(true);
+  };
+  const handleOff = () => {
+    setOpenModal(false);
+  };
   const state = useSelector((state) => state.modalReducer);
-  const { isSignoutModal, isPwdChangeModal } = state;
+  const { isSignoutModal, isPwdModal } = state;
   const dispatch = useDispatch();
 
   const GetClick = (e) => {
@@ -174,13 +183,8 @@ function Mypage() {
         </TitleContainer>
       </Container>
       <Box1>
-        <ButtonL
-          onClick={() => {
-            dispatch(pwdchangeModalAction);
-          }}
-        >
-          비밀번호 변경
-        </ButtonL>
+        <ButtonL onClick={handleOn}>비밀번호 변경</ButtonL>
+        {openModal && <PwdChange1 handleOff={handleOff} />}
         <ButtonR
           onClick={() => {
             dispatch(signoutModalAction);
@@ -211,9 +215,9 @@ function Mypage() {
             상태 : "" update만 하기 
           */}
         </Box3>
+        {/* {isPwdModal && <PwdChange1 />} */}
+        {isSignoutModal && <SignOut />}
       </ContentContainer>
-      {isSignoutModal && <SignOut />}
-      {isPwdChangeModal && <PwdChange />}
     </>
   );
 }
