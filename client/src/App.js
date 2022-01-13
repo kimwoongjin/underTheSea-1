@@ -17,6 +17,8 @@ import { useState } from "react";
 
 function App() {
   const [token, setToken] = useState("");
+  const [selConId, setSelConId] = "";
+  const handleSelConId = (selConId) => setSelConId(selConId);
   const handleToken = (token) => {
     setToken(token);
   };
