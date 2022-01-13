@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.div`
   /* position: relative; */
@@ -90,7 +91,7 @@ const Theme = styled.div`
 `;
 
 function ManageInfo({ id, name, size, theme }) {
-  const [Id, setId] = useState("");
+  // const [Id, setId] = useState("");
   const navigate = useNavigate();
   // const [aquaInfo, setAquaInfo] = useState({
   //   container_name: "",
@@ -98,9 +99,7 @@ function ManageInfo({ id, name, size, theme }) {
   //   theme: "",
   // });
   const sendCardInfo = () => {
-    setId(id);
-    localStorage.setItem("container_id", id);
-    navigate("/manage/detailinfo");
+    navigate(`${id}`);
   };
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요

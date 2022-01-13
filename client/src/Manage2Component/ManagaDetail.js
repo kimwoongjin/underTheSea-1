@@ -19,6 +19,7 @@ import {
   deadfishModalOnAction,
 } from "../store/actions";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 //경로 "/manage/detailinfo"의 전체 페이지
 //물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
@@ -377,21 +378,23 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail({ idList }) {
-  const container_id = localStorage.getItem("container_id");
+function ManageDetail() {
+  let params = useParams();
+  let container_id = params.container_id;
   const month = new Date().getMonth() + 1;
   const [feedingInfo, setFeedingInfo] = useState({
-    pellet_num: 0,
-    flake_num: 0,
-    frozen_num: 0,
-    live_num: 0,
+    // 컨테이너 아이디
+    container_id,
     food_type: "",
   });
+  const [feedingData, setFeedingData] = useState([]);
+  const [todayFeeding, setTodayFeeding] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
   const [containerData, setContainerData] = useState("");
 
   useEffect(() => {
-    console.log("아이디목록", container_id);
+    // console.log("파람스", params);
+    // console.log("아이디목록", container_id);
     axios
       .get(
         `http://localhost:80/container/${container_id}/${month}`,
@@ -406,61 +409,33 @@ function ManageDetail({ idList }) {
       )
       .then((res) => {
         setContainerData(res.data);
+        console.log("응답데이타", res.data);
+        console.log(
+          "클릭한 수조정보 피딩목록-->",
+          containerData.data.feed_list
+        );
 
-        console.log("클릭한 수조정보", containerData);
-        console.log("날짜->", typeof res.data.data.feed_list[1].createdAt);
+        // 컨테이너 정보안에 피드리스트가 있다.
+        let feedingDay = containerData.data.feed_list.map((feed) => {
+          let date = feed.createdAt
+            .split("-")[0]
+            .concat(feed.createdAt.split("-")[1])
+            .concat(feed.createdAt.split("-")[2].slice(0, 2));
+          return {
+            date,
+            type: feed.type,
+            count: feed.count,
+          };
+        });
+        feedingDay = feedingDay.sort((a, b) => a.date - b.date);
+        console.log("feedingDay->", feedingDay);
+        setTodayFeeding(feedingDay);
+        console.log("투데이피딩 ", todayFeeding);
+
+        // console.log("날짜->", res.data.data.feed_list[1].createdAt);
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  //   data:
-  // container_id: 2
-  // container_name: "등록!"
-  // ex_water_list: []
-  // feed_list: []
-  // fish_list: []
-  // size: 216
-  // theme: "산호수조"
-  // user_id: 1
-  // [[Prototype]]: Object
-  // message: "Data is s
-
-  // {
-  //   "data": {
-  //     "container_id": 1,
-  //     "user_id": 1,
-  //     "container_name": "JawsRocks",
-  //     "size": 100,
-  //     "theme": "SweetHome",
-  //     "fish_list": [
-  //       {
-  //         "fish_name":"Nemo",
-  //         "fish_num":5
-  //       },{...}
-  //       ],
-  //     "feed_list": [
-  //       {
-  //         "date": "2022-01-09",
-  //         "type": 1
-  //       },
-  //       {
-  //         "date": "2022-01-10",
-  //         "type": 2
-  //       }
-  //     ],
-  //     "ex_water_list": [
-  //       {
-  //         "date": "2022-01-09",
-  //         "amount": 100
-  //       },
-  //       {
-  //         "date": "2022-01-09",
-  //         "amount": 50
-  //       }
-  //     ],
-  //   },
-  //   "message": "Data is successfully returned"
-  // }
+  }, [todayFeeding]);
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
   const handleFoodtype = (e) => {
@@ -471,28 +446,81 @@ function ManageDetail({ idList }) {
   };
 
   const addFeedingNum = () => {
-    if (feedingInfo.food_type === "pellet") {
-      setFeedingInfo({
-        ...feedingInfo,
-        pellet_num: feedingInfo.pellet_num + 1,
-      });
-    } else if (feedingInfo.food_type === "flake") {
-      setFeedingInfo({
-        ...feedingInfo,
-        flake_num: feedingInfo.flake_num + 1,
-      });
-    } else if (feedingInfo.food_type === "frozen") {
-      setFeedingInfo({
-        ...feedingInfo,
-        frozen_num: feedingInfo.frozen_num + 1,
-      });
-    } else {
-      setFeedingInfo({
-        ...feedingInfo,
-        live_num: feedingInfo.live_num + 1,
-      });
-    }
-    dispatch(modalOff);
+    console.log("푸드타입제대로들어가니?", feedingInfo);
+    axios
+      .post(
+        `http://localhost:80/container/${container_id}/feed`,
+        {
+          data: feedingInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then(
+        // 여기서 수조정보 조회요청을 때리고 받아온 정보로 피딩정보를 업뎃하고
+        // 그걸로 달력에 보여주기
+        axios
+          .get(
+            `http://localhost:80/container/${container_id}/${month}`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            setFeedingData(res.data.data.feed_list);
+            console.log("스테이트 피딩정보", feedingData);
+            console.log("피딩정보", res.data.data.feed_list);
+            dispatch(modalOff);
+          })
+      )
+      .catch((err) => console.log(err));
+
+    // 0: {createdAt: '2022-01-11T07:32:16.000Z', type: 1, count: 3}
+    // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
+    // 2: {createdAt: '2022-01-11T07:32:16.000Z', type: 3, count: 2}
+    // 3: {createdAt: '2022-01-11T07:32:16.000Z', type: 2, count: 1}
+    // 4: {createdAt: '2022-01-13T05:10:47.000Z', type: 1, count: 1}
+    // 5: {createdAt: '2022-01-13T05:19:43.000Z', type: 2, count: 1}
+    // 6: {createdAt: '2022-01-13T05:21:17.000Z', type: 2, count: 1}
+    // 7: {createdAt: '2022-01-13T05:22:55.000Z', type: 2, count: 1}
+    // 8: {createdAt: '2022-01-13T05:25:11.000Z', type: 1, count: 1}
+    // 9: {createdAt: '2022-01-13T05:27:47.000Z', type: 3, count: 1}
+    // 10: {createdAt: '2022-01-13T05:30:54.000Z', type: 4, count: 1}
+    // 11: {createdAt: '2022-01-13T05:31:23.000Z', type: 3, count: 1}
+    // length: 12
+
+    // if (feedingInfo.food_type === "pellet") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     pellet_num: feedingInfo.pellet_num + 1,
+    //   });
+    // } else if (feedingInfo.food_type === "flake") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     flake_num: feedingInfo.flake_num + 1,
+    //   });
+    // } else if (feedingInfo.food_type === "frozen") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     frozen_num: feedingInfo.frozen_num + 1,
+    //   });
+    // } else {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     live_num: feedingInfo.live_num + 1,
+    //   });
+    // }
   };
 
   const state = useSelector((state) => state.modalReducer);
@@ -533,7 +561,9 @@ function ManageDetail({ idList }) {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-              if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
+              if ("20220113" === days.format("YYYYMMDD")) {
+                // console.log("feedingData[0].date", feedingData[0].date);
+                // console.log("데이즈포맷 ", typeof days.format("YYYYMMDD"));
                 return (
                   <Td key={index}>
                     <Number style={{ color: "#108dee" }}>
@@ -620,7 +650,8 @@ function ManageDetail({ idList }) {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          <Text>{containerData.data.container_name}</Text>
+          {/* <Text>{containerData.data.container_name}</Text> */}
+          <Text>수조</Text>
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}

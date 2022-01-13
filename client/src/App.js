@@ -133,7 +133,8 @@ function App() {
           element={<Manage aquaInfo={aquaInfo} containerList={containerList} />}
         ></Route>
         <Route
-          path="/manage/detailinfo"
+          path="/manage/:container_id"
+          /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
           element={<ManageDetail idList={idList} />}
         ></Route>
         <Route
