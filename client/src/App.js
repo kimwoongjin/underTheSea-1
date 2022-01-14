@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     // 여기서 수조정보 조회
-    console.log("정보떳냐", aquaInfo);
+    // console.log("정보떳냐", aquaInfo);
     axios
       .get(`http://localhost:80/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },

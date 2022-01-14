@@ -112,8 +112,8 @@ const CardContainer = styled.div`
 
 function Search() {
   // let refresh = window.location.search;
-
-  const [search, setSearch] = useState(""); //검색 물고기
+  const [word, setWord] = useState("");
+  const [search, setSearch] = useState(); //검색 물고기
   const [fish, setFish] = useState([]); //검색 전 추천 물고기
   const [options, setOptions] = useState([]); //60개 정보리스트
   //==================================================================
@@ -127,18 +127,20 @@ function Search() {
 
   // 검색 받아오기===========================================================
 
+  // useEffect(() => {
+  //   gotoSearch();
+  // }, []);
+
   const gotoSearch = () => {
+    //-----> 네임 리스트 <------
     // navigate(`/search?fish_name=${word}`);
-    // const queryString = decodeURI(window.location.search);
+    // const search = decodeURI(window.location.search);
+
     axios
-      .get(`http://localhost:80/fish/${search}`, {
-        headers: {
-          accept: "application/json",
-        },
-      })
+      .post(`http://localhost:80/fish`, { data: { fish_name: search } })
       .then((result) => {
         // if (!word || word === " ") return null;
-        // console.log(result, "=========");
+        // console.log(result.data, "배열입니까?");
         setSearch(result.data);
         setCurrentFIsh(true);
       })
@@ -201,22 +203,27 @@ function Search() {
 
     // input에 텍스트가 있는지 없는지 확인하는 코드
     value ? setHasText(true) : setHasText(false);
-    setSearch(value);
+    setWord(value);
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
+    // console.log(filterRegex, "너도 콘솔찍히니?");
     const resultOptions = options.filter((option) => option.match(filterRegex));
+    console.log(options, "너도 콘솔찍히니?");
     setOptions(resultOptions);
   };
 
   const handleDropDownClick = (clickedOption) => {
-    setSearch(clickedOption);
+    setWord(clickedOption);
+    // console.log(clickedOption, "옵션이니");
     const resultOptions = options.filter((option) => option === clickedOption);
+    // console.log(resultOptions, "맞니 아니니니");
+
     setOptions(resultOptions);
   };
 
   const handleDeleteButtonClick = () => {
-    setSearch("");
+    setWord("");
   };
 
   //엔터 키 이벤트
@@ -293,7 +300,7 @@ function Search() {
       <Container>
         {currentFish ? (
           <CardContainer>
-            <SearchInfo search={search} />
+            <SearchInfo search={search} />;
           </CardContainer>
         ) : (
           <CardContainer>

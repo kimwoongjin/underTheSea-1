@@ -125,32 +125,35 @@ const Desc = styled.div`
   border: 1px solid red;
 `;
 function SearchInfo({ search }) {
-  // console.log("+++++", search);
+  // console.log(search, "ㅅㅓ치입니다");
+
   return (
     // <OuterContainer>
     <Container>
       <Box id="box">
         <Front>
           <ImgContainer>
-            <Img src={"http://localhost:80" + search.fish_img}></Img>
+            <Img
+              src={"http://localhost:80" + search.map((el) => el.fish_img)}
+            ></Img>
           </ImgContainer>
           <Content>
-            <Name>{search.fish_name}</Name>
-            <Ename>{search.sci_name}</Ename>
+            <Name>{search.map((el) => el.fish_name)}</Name>
+            <Ename>{search.map((el) => el.sci_name)}</Ename>
           </Content>
         </Front>
         <Back>
           <Contents>
-            <NameB>{search.fish_name}</NameB>
-            <NamesB>{search.sci_name}</NamesB>
+            <NameB>{search.map((el) => el.fish_name)}</NameB>
+            <NamesB>{search.map((el) => el.sci_name)}</NamesB>
             <Text>
-              <Habitat>서식지: {search.habitat} </Habitat>
-              <Size>크기:{search.size} </Size>
-              <Temp>수온:{search.temp} </Temp>
+              <Habitat>서식지: {search.map((el) => el.habitat)} </Habitat>
+              <Size>크기:{search.map((el) => el.size)} </Size>
+              <Temp>수온:{search.map((el) => el.temp)} </Temp>
               <Desc>
                 주요특징:
                 <br />
-                {search.desc}
+                {search.map((el) => el.desc)}
               </Desc>
             </Text>
           </Contents>
