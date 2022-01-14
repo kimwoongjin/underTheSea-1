@@ -5,6 +5,7 @@ const {
   ex_waters,
 } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
+const sequelize = require("sequelize");
 
 module.exports = async (req, res) => {
   const userInfo = isAuthorized(req);
@@ -33,14 +34,39 @@ module.exports = async (req, res) => {
 
       const feed_data = await feeds.findAndCountAll({
         where: { container_id },
-        attributes: ["createdAt", "type"],
-        group: ["createdAt", "type"],
+        attributes: ["type"],
+        group: [sequelize.literal("DATE(createdAt)"), "type"],
+
         order: [["createdAt", "ASC"]],
       });
-
-      const feed_list = feed_data.count.filter((el) => {
-        return el.createdAt.getMonth() + 1 === month;
+      let feed_list = feed_data.count.map((el) => {
+        return {
+          createdAt: el["DATE(createdAt)"],
+          type: el.type,
+          count: el.count,
+        };
       });
+      feed_list = feed_list.filter((el) => {
+        return Number(el.createdAt.slice(5, 7)) === month;
+      });
+      feed_list.sort((a, b) => {
+        if (a.createdAt > b.createdAt) return 1;
+        if (a.createdAt < b.createdAt) return -1;
+        if (a.type > b.type) return 1;
+        if (a.type < b.type) return -1;
+      });
+
+      feed_list = feed_list.map((el) => {
+        return {
+          createdAt: `${el.createdAt.slice(2, 4)}${el.createdAt.slice(
+            5,
+            7
+          )}${el.createdAt.slice(8, 10)}`,
+          type: el.type,
+          count: el.count,
+        };
+      });
+      console.log("!!!!!!!!!!!!!!!#############", feed_list);
 
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
