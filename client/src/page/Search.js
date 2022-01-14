@@ -116,7 +116,9 @@ function Search() {
   const [search, setSearch] = useState(); //검색 물고기
   const [fish, setFish] = useState([]); //검색 전 추천 물고기
   const [options, setOptions] = useState([]); //60개 정보리스트
-  const [filterS, setFilterS] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [fish2, setFish2] = useState([]);
+  const [filteredOptions2, setFilteredOptions2] = useState([]);
   //==================================================================
   const [currentFish, setCurrentFIsh] = useState(false); //추천, 현재 상태
   const [selected, setSelected] = useState(-1);
@@ -160,6 +162,7 @@ function Search() {
         },
       })
       .then((result) => {
+        setFish2(result.data.data.fish_data);
         const list = result.data.data.fish_data.map((el) => el.fish_name);
         setOptions(list);
       })
@@ -209,8 +212,12 @@ function Search() {
     const filterRegex = new RegExp(value, "i");
 
     const resultOptions = options.filter((option) => option.match(filterRegex));
-
-    setFilterS(resultOptions);
+    const testOptions = fish2.filter((fish) =>
+      fish.fish_name.match(filterRegex)
+    );
+    console.log(testOptions, "YEAH~~~~~~~~~");
+    setFilteredOptions2(testOptions);
+    setFilteredOptions(resultOptions);
   };
 
   const handleDropDownClick = (clickedOption) => {
@@ -283,7 +290,7 @@ function Search() {
           </div>
           {hasText ? (
             <SearchDrop
-              options={filterS}
+              options={filteredOptions}
               handleDropDownClick={handleDropDownClick}
               selected={selected}
             />
@@ -299,7 +306,7 @@ function Search() {
       <Container>
         {currentFish ? (
           <CardContainer>
-            <SearchInfo search={search} />;
+            <SearchInfo search={filteredOptions2} />
           </CardContainer>
         ) : (
           <CardContainer>

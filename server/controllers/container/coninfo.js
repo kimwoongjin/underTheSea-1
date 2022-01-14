@@ -66,6 +66,7 @@ module.exports = async (req, res) => {
           count: el.count,
         };
       });
+
       console.log("!!!!!!!!!!!!!!!#############", feed_list);
 
       let ex_water_data = await ex_waters.findAll({
