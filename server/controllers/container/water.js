@@ -7,17 +7,19 @@ module.exports = async (req, res) => {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
+    const date = new Date();
+    const month = date.getMonth() + 1;
     const check_container = await containers.findOne({
       where: { id: container_id },
     });
     if (!check_container) {
       return res.status(404).json({ message: "The container doesn't exist" });
     } else {
-      const volume = req.body.volume;
-      await ex_waters.create({ container_id, volume });
+      const amount = req.body.data.amount;
+      await ex_waters.create({ container_id, amount });
       return res
-        .status(201)
-        .json({ message: "Your ex_water log is successfully recorded" });
+        .header("Authorization", req.headers.authorization)
+        .redirect(`http://localhost:80/container/${container_id}/${month}`);
     }
   }
 };
