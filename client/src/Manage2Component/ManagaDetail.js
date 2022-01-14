@@ -378,7 +378,7 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-const ManageDetail = async () => {
+function ManageDetail() {
   let params = useParams();
   let container_id = params.container_id;
   const month = new Date().getMonth() + 1;
@@ -388,42 +388,27 @@ const ManageDetail = async () => {
     food_type: "",
   });
   const accessToken = localStorage.getItem("accessToken");
-  // useEffect(async () => {
-  //   const conData = await axios.get(
-  //     `http://localhost:80/container/${container_id}/${month}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
+  const [containerData, setContainerData] = useState("");
 
-  //   // 컨테이너 정보안에 피드리스트가 있다.
-  //   const feedingDay = conData.data.data.feed_list;
-
-  //   localStorage.setItem("feed_list", JSON.stringify(feedingDay));
-  //   // console.log("Test2:", JSON.parse(test2));
-  // }, []);
-
-  const conData = await axios.get(
-    `http://localhost:80/container/${container_id}/${month}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+  useEffect(async () => {
+    const conData = await axios.get(
+      `http://localhost:80/container/${container_id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    },
-    {
-      withCredentials: true,
-    }
-  );
+      {
+        withCredentials: true,
+      }
+    );
 
-  localStorage.setItem(
-    "feed_list",
-    JSON.stringify(conData.data.data.feed_list)
-  );
+    // 컨테이너 정보안에 피드리스트가 있다.
+    const feedingDay = conData.data.data.feed_list;
+
+    localStorage.setItem("feed_list", JSON.stringify(feedingDay));
+    // console.log("Test2:", JSON.parse(test2));
+  }, []);
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
   const handleFoodtype = (e) => {
@@ -466,6 +451,42 @@ const ManageDetail = async () => {
     localStorage.setItem("feed_list", JSON.stringify(newCondata));
 
     dispatch(modalOff);
+
+    // 0: {createdAt: '2022-01-11T07:32:16.000Z', type: 1, count: 3}
+    // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
+    // 2: {createdAt: '2022-01-11T07:32:16.000Z', type: 3, count: 2}
+    // 3: {createdAt: '2022-01-11T07:32:16.000Z', type: 2, count: 1}
+    // 4: {createdAt: '2022-01-13T05:10:47.000Z', type: 1, count: 1}
+    // 5: {createdAt: '2022-01-13T05:19:43.000Z', type: 2, count: 1}
+    // 6: {createdAt: '2022-01-13T05:21:17.000Z', type: 2, count: 1}
+    // 7: {createdAt: '2022-01-13T05:22:55.000Z', type: 2, count: 1}
+    // 8: {createdAt: '2022-01-13T05:25:11.000Z', type: 1, count: 1}
+    // 9: {createdAt: '2022-01-13T05:27:47.000Z', type: 3, count: 1}
+    // 10: {createdAt: '2022-01-13T05:30:54.000Z', type: 4, count: 1}
+    // 11: {createdAt: '2022-01-13T05:31:23.000Z', type: 3, count: 1}
+    // length: 12
+
+    // if (feedingInfo.food_type === "pellet") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     pellet_num: feedingInfo.pellet_num + 1,
+    //   });
+    // } else if (feedingInfo.food_type === "flake") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     flake_num: feedingInfo.flake_num + 1,
+    //   });
+    // } else if (feedingInfo.food_type === "frozen") {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     frozen_num: feedingInfo.frozen_num + 1,
+    //   });
+    // } else {
+    //   setFeedingInfo({
+    //     ...feedingInfo,
+    //     live_num: feedingInfo.live_num + 1,
+    //   });
+    // }
   };
 
   const state = useSelector((state) => state.modalReducer);
@@ -492,9 +513,8 @@ const ManageDetail = async () => {
   // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
-    let feed_data = JSON.parse(localStorage.getItem("feed_list"));
-    console.log("feed_list", feed_data);
-    const feed_list = feed_data.data.data.feed_list;
+    let feed_list = JSON.parse(localStorage.getItem("feed_list"));
+
     let objobj = {};
     let final_list = feed_list.map((el1) => {
       let tempL = feed_list.filter((el2) => el1.createdAt === el2.createdAt);
@@ -503,9 +523,10 @@ const ManageDetail = async () => {
       objobj[el1.createdAt] = tl;
       return objobj;
     });
+    console.log(final_list, "$%$%$%");
 
     final_list = final_list[0];
-    console.log(final_list);
+    let dates = feed_list.map((el) => el.createdAt);
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -715,7 +736,7 @@ const ManageDetail = async () => {
       {isDeadfishModal && <Deadfish />}
     </>
   );
-};
+}
 export default ManageDetail;
 
 // const TestApiCall = async () {
