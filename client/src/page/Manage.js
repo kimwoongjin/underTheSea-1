@@ -9,7 +9,6 @@ const TitleContainer = styled.div`
   justify-content: center;
   width: 100vw;
   height: 40vh;
-  border: 1px dashed red;
 `;
 
 const Title = styled.div`
@@ -49,7 +48,7 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ aquaInfo }) {
+function Manage({ aquaInfo, containerList }) {
   return (
     <>
       <Header />
@@ -58,7 +57,7 @@ function Manage({ aquaInfo }) {
         <Text>당신의 어항을 관리해보세요!</Text>
         <Img src="작은해초.png" alt="" />
       </TitleContainer>
-      <ManageCard aquaInfo={aquaInfo} />
+      <ManageCard aquaInfo={aquaInfo} containerList={containerList} />
     </>
   );
 }

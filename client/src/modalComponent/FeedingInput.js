@@ -127,9 +127,7 @@ const Btn = styled.button`
   }
 `;
 
-
 function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
-
   const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
@@ -138,6 +136,7 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
   useEffect(() => {
     console.log(feedingInfo);
   }, []);
+  // 여기서
   return (
     <DarkBackGround>
       <ModalContainer>
@@ -153,10 +152,10 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
           <InfoShow>
             <Text>먹이 타입을 선택해주세요</Text>
             <ImgContainer>
-              <Img name="pellet" src="/펠렛.png" onClick={handleFoodtype} />
-              <Img name="flake" src="/플레이크.png" onClick={handleFoodtype} />
-              <Img name="frozen" src="/냉동.png" onClick={handleFoodtype} />
-              <Img name="live" src="/생먹이.png" onClick={handleFoodtype} />
+              <Img name="1" src="/펠렛.png" onClick={handleFoodtype} />
+              <Img name="2" src="/플레이크.png" onClick={handleFoodtype} />
+              <Img name="3" src="/냉동.png" onClick={handleFoodtype} />
+              <Img name="4" src="/생먹이.png" onClick={handleFoodtype} />
             </ImgContainer>
             <ImgNameContainer>
               <ImgName type={feedingInfo} name="pellet">
@@ -174,7 +173,6 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
             </ImgNameContainer>
 
             <Btn onClick={addFeedingNum}>선택완료</Btn>
-
           </InfoShow>
         </ShowContainer>
       </ModalContainer>
