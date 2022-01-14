@@ -36,7 +36,6 @@ function SearchCard({ word, setCurrentFIsh, currentFish }) {
         },
       })
       .then((result) => {
-        // console.log(result.data.data.fish_data, "---------------");
         setCurrentFIsh(false);
         setFish(result.data.data.fish_data);
       })

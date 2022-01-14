@@ -90,17 +90,13 @@ const Theme = styled.div`
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ id, name, size, theme }) {
-  // const [Id, setId] = useState("");
+function ManageInfo({ id, name, size, theme, level }) {
   const navigate = useNavigate();
-  // const [aquaInfo, setAquaInfo] = useState({
-  //   container_name: "",
-  //   size: "",
-  //   theme: "",
-  // });
+  console.log(name, level);
   const sendCardInfo = () => {
     navigate(`${id}`);
   };
+  const imgSrcUrl = "http://localhost:80/level/" + level;
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
     // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
@@ -108,12 +104,7 @@ function ManageInfo({ id, name, size, theme }) {
     <Container onClick={sendCardInfo}>
       <Contents>
         <ImgContainer>
-          {/* <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to="/manage/detailinfo"
-          > */}
-          <Img src="http://localhost:80/level/11"></Img>
-          {/* </Link> */}
+          <Img src={imgSrcUrl}></Img>
         </ImgContainer>
         <Content>
           <Name>{name}</Name>

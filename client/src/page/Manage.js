@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
 import ManageCard from "./ManageCard";
@@ -48,7 +48,14 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ aquaInfo, containerList }) {
+function Manage({ getAllConInfo }) {
+  useEffect(() => {
+    getAllConInfo();
+  }, []);
+  const con_list = JSON.parse(localStorage.getItem("allConInfo"));
+  // console.log("con_list FROM MANAGE:", con_list.data.data);
+  // console.log("con_list2 FROM MANAGE:", containerList);
+  // console.log("aquaInfo FROM MANAGE:", aquaInfo);
   return (
     <>
       <Header />
@@ -57,7 +64,7 @@ function Manage({ aquaInfo, containerList }) {
         <Text>당신의 어항을 관리해보세요!</Text>
         <Img src="작은해초.png" alt="" />
       </TitleContainer>
-      <ManageCard aquaInfo={aquaInfo} containerList={containerList} />
+      <ManageCard containerList={con_list.data.data} />
     </>
   );
 }
