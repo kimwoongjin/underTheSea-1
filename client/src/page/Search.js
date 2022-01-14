@@ -112,10 +112,11 @@ const CardContainer = styled.div`
 
 function Search() {
   // let refresh = window.location.search;
-  const [word, setWord] = useState("");
+  // const [word, setWord] = useState("");
   const [search, setSearch] = useState(); //검색 물고기
   const [fish, setFish] = useState([]); //검색 전 추천 물고기
   const [options, setOptions] = useState([]); //60개 정보리스트
+  const [filterS, setFilterS] = useState([]);
   //==================================================================
   const [currentFish, setCurrentFIsh] = useState(false); //추천, 현재 상태
   const [selected, setSelected] = useState(-1);
@@ -150,7 +151,7 @@ function Search() {
   };
 
   // 60개 리스트 받아오기===========================================================
-
+  //-----> 네임 리스트 <------
   useEffect(() => {
     axios
       .get(`http://localhost:80/fish/all/60`, {
@@ -160,7 +161,6 @@ function Search() {
       })
       .then((result) => {
         const list = result.data.data.fish_data.map((el) => el.fish_name);
-        // console.log(list, "---------------");
         setOptions(list);
       })
       .catch((err) => {
@@ -170,11 +170,11 @@ function Search() {
 
   // 검색 창 ===========================================================
 
-  useEffect(() => {
-    if (search === "") {
-      setHasText(false);
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   if (search === "") {
+  //     setHasText(false);
+  //   }
+  // }, [search]);
 
   // 추천 6개 카드  ===========================================================
 
@@ -203,27 +203,26 @@ function Search() {
 
     // input에 텍스트가 있는지 없는지 확인하는 코드
     value ? setHasText(true) : setHasText(false);
-    setWord(value);
+    setSearch(value);
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    // console.log(filterRegex, "너도 콘솔찍히니?");
+
     const resultOptions = options.filter((option) => option.match(filterRegex));
-    console.log(options, "너도 콘솔찍히니?");
-    setOptions(resultOptions);
+
+    setFilterS(resultOptions);
   };
 
   const handleDropDownClick = (clickedOption) => {
-    setWord(clickedOption);
-    // console.log(clickedOption, "옵션이니");
-    const resultOptions = options.filter((option) => option === clickedOption);
-    // console.log(resultOptions, "맞니 아니니니");
+    setSearch(clickedOption);
 
+    const resultOptions = options.filter((option) => option === clickedOption);
+    // console.log(resultOptions, "옵션이니");
     setOptions(resultOptions);
   };
 
   const handleDeleteButtonClick = () => {
-    setWord("");
+    setSearch("");
   };
 
   //엔터 키 이벤트
@@ -284,7 +283,7 @@ function Search() {
           </div>
           {hasText ? (
             <SearchDrop
-              options={options}
+              options={filterS}
               handleDropDownClick={handleDropDownClick}
               selected={selected}
             />

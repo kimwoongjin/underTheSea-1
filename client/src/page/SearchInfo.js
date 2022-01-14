@@ -125,7 +125,7 @@ const Desc = styled.div`
   border: 1px solid red;
 `;
 function SearchInfo({ search }) {
-  // console.log(search, "ㅅㅓ치입니다");
+  console.log(search, "ㅅㅓ치입니다");
 
   return (
     // <OuterContainer>
