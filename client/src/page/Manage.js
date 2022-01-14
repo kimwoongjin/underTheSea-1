@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../component/Header";
 import ManageCard from "./ManageCard";
 
-const Container = styled.div`
+const TitleContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -39,7 +39,7 @@ const Img = styled.img`
 `;
 
 const OuterContainer = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 100%;
   height: 170%;
   position: absolute;
@@ -48,17 +48,16 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage() {
+function Manage({ aquaInfo, containerList }) {
   return (
     <>
       <Header />
-      <Container>
+      <TitleContainer>
         <Title>My Aquarium</Title>
         <Text>당신의 어항을 관리해보세요!</Text>
         <Img src="작은해초.png" alt="" />
-      </Container>
-      <OuterContainer />
-      <ManageCard />
+      </TitleContainer>
+      <ManageCard aquaInfo={aquaInfo} containerList={containerList} />
     </>
   );
 }

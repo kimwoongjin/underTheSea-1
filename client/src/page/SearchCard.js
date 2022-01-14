@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import SearchInfo from "./SearchInfo";
+import SearchCurrent from "./SearchCurrent";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Container = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 100%;
   height: 100%;
   display: flex;
@@ -12,7 +15,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 80%;
   height: 100%;
   display: flex;
@@ -22,17 +25,41 @@ const CardContainer = styled.div`
   margin-top: 12%;
 `;
 
-function SearchCard() {
+function SearchCard({ word, setCurrentFIsh, currentFish }) {
+  const [fish, setFish] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:80/fish/all/6`, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+      .then((result) => {
+        // console.log(result.data.data.fish_data, "---------------");
+        setCurrentFIsh(false);
+        setFish(result.data.data.fish_data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
-      <CardContainer>
-        <SearchInfo />
-        <SearchInfo />
-        <SearchInfo />
-        <SearchInfo />
-        <SearchInfo />
-        <SearchInfo />
-      </CardContainer>
+      {currentFish ? (
+        <CardContainer>
+          {word.map((item) => (
+            <SearchInfo key={item.id} item={item} />
+          ))}
+        </CardContainer>
+      ) : (
+        <CardContainer>
+          {fish.map((item) => (
+            <SearchCurrent key={item.id} item={item} />
+          ))}
+        </CardContainer>
+      )}
     </Container>
   );
 }

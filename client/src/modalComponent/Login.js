@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { modalOff, loginAction } from "../store/actions";
@@ -126,10 +126,13 @@ const GoogleBtn = styled.a`
 const GoogleIcon = styled.img`
   width: 30%;
 `;
+//=========================================================================
 
-function Login({ handleToken }) {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
@@ -149,10 +152,11 @@ function Login({ handleToken }) {
         .post(`http://localhost:80/user/login`, { data: userData })
         .then((res) => {
           if (res.data.token) {
-            handleToken(res.data.token);
+            localStorage.setItem("accessToken", res.data.token);
             dispatch(loginAction);
-            navigate("/mypage");
+            // console.log("------------------", isLogin);
             dispatch(modalOff);
+            navigate("/");
           }
         })
         .catch((err) => {

@@ -13,15 +13,112 @@ import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
 import Login from "./modalComponent/Login";
 import SignUp from "./modalComponent/SignUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const state = useSelector((state) => state.modalReducer);
+  const loginState = useSelector((state) => state.authReducer);
+  const { isLoginModal, isSignupModal } = state;
+  const { isLogin } = loginState;
+
+  const accessToken = localStorage.getItem("accessToken");
+  const [containerList, setContainerList] = useState([]);
+
+  useEffect(() => {
+    // 여기서 수조정보 조회
+    // console.log("정보떳냐", aquaInfo);
+    axios
+      .get(`http://localhost:80/container/all`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("전체 수조목록", res.data.data);
+        setContainerList(res.data.data);
+        console.log("수조목록", containerList);
+      });
+  }, [isLogin]);
+
+  const idList = containerList.map((container) => container.id);
+
+  //-----------------------------------------------
+
+  const [aquaInfo, setAquaInfo] = useState({
+    container_id: "",
+    container_name: "",
+    size: "",
+    theme: "",
+  });
+  const [size, setSize] = useState({
+    width: 0,
+    height: 0,
+    vertical: 0,
+  });
+  const handleInputValue = (e) => {
+    setAquaInfo({
+      ...aquaInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const getSize = (e) => {
+    setSize({
+      ...size,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const getWaterVolum = () => {
+    let waterVolum = Math.floor(
+      (size.width * size.height * size.vertical) / 1000
+    );
+    if (waterVolum > 0) {
+      setAquaInfo({
+        ...aquaInfo,
+        size: waterVolum,
+      });
+    }
+  };
+
+  const containerAddRequest = () => {
+    // localStorage.setItem("accessToken", res.data.token);
+
+    const accessToken = localStorage.getItem("accessToken");
+    getWaterVolum();
+    console.log("아쿠아인포", aquaInfo);
+
+    console.log("토큰!", token);
+    axios
+      .post(
+        `http://localhost:80/container/add`,
+        { data: aquaInfo },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("추가성공!");
+        console.log("응답이 뭘까?", res);
+        setAquaInfo({
+          ...aquaInfo,
+          container_id: res.data.data.id,
+        });
+        // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
+        // message: "Container is successfully added"
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // ------------------------------------------
+
   const [token, setToken] = useState("");
+  const [selConId, setSelConId] = "";
+  const handleSelConId = (selConId) => setSelConId(selConId);
   const handleToken = (token) => {
     setToken(token);
   };
-  const state = useSelector((state) => state.modalReducer);
-  const { isLoginModal, isSignupModal } = state;
 
   return (
     <BrowserRouter>
@@ -31,13 +128,27 @@ function App() {
         <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
-        <Route path="/writetips" element={<WriteTips />}></Route>
+        <Route path="/writetips" element={<WriteTips token={token} />}></Route>
         <Route path="/posttips" element={<PostTips />}></Route>
-        <Route path="/manage" element={<Manage />}></Route>
-        <Route path="/manage/detailinfo" element={<ManageDetail />}></Route>
+        <Route
+          path="/manage"
+          element={<Manage aquaInfo={aquaInfo} containerList={containerList} />}
+        ></Route>
+        <Route
+          path="/manage/:container_id"
+          /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
+          element={<ManageDetail idList={idList} />}
+        ></Route>
         <Route
           path="/manage/addInfo"
-          element={<ManageAddInfo token={token} />}
+          element={
+            <ManageAddInfo
+              token={token}
+              handleInputValue={handleInputValue}
+              getSize={getSize}
+              containerAddRequest={containerAddRequest}
+            />
+          }
         ></Route>
         <Route path="/mypage" element={<Mypage />}></Route>
       </Routes>
