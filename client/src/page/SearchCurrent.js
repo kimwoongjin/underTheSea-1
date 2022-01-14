@@ -5,6 +5,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   top: 15%;
   width: 300px;
@@ -12,7 +13,7 @@ const Container = styled.div`
   border-radius: 20px;
   box-shadow: 0px 0px 20px #adb5bd;
   margin-bottom: 7%;
-  background: #d1f8ff;
+  /* background: #d1f8ff; */
   perspective: 1000px;
   #box:hover {
     transform: rotateY(-180deg);
@@ -25,9 +26,13 @@ const Box = styled.div`
   position: relative;
   color: black;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
   transition: 1s;
+  /* border: 1px solid black; */
 `;
 
 const Front = styled.div`
@@ -35,18 +40,6 @@ const Front = styled.div`
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
-`;
-
-const Back = styled.div`
-  width: 100%;
-  height: 100%;
-  background: white;
-  transform: rotateY(180deg);
-  position: absolute;
-  backface-visibility: hidden;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 20px;
 `;
 
 const ImgContainer = styled.div`
@@ -71,6 +64,7 @@ const Content = styled.div`
   text-align: left;
   line-height: 200%;
   margin: 10% 0 0 5%;
+  font-family: "Kfont";
   /* box-sizing: border-box; */
   /* border: 1px solid black; */
 `;
@@ -79,81 +73,99 @@ const Name = styled.div`
   font-size: 1.5rem;
 `;
 const Ename = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #828282;
 `;
+
+const Back = styled.div`
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: rotateY(180deg);
+  position: absolute;
+  backface-visibility: hidden;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  border-radius: 20px;
+`;
+
 const Contents = styled.div`
   position: relative;
-  width: 100%;
+  display: flex;
+  width: 90%;
   height: 93%;
   border: 1px solid black;
   margin-top: 7%;
   text-align: left;
+  flex-direction: column;
 `;
 const NameB = styled.div`
   position: absolute;
-  left: 5%;
+  display: flex;
+  top: 0%;
   font-weight: bold;
   font-size: 1.5rem;
 `;
 
 const NamesB = styled.div`
-  position: absolute;
   top: 8%;
-  left: 5%;
+  position: absolute;
   font-size: 0.7rem;
   color: #828282;
 `;
 const Text = styled.div`
   position: absolute;
-  left: 5%;
+  /* left: 5%; */
   top: 20%;
   line-height: 170%;
   font-weight: bold;
 `;
 const Habitat = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 const Temp = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 const Size = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const Desc = styled.div`
-  border: 1px solid red;
+  margin-top: 8%;
+  /* border: 1px solid red; */
 `;
-function SearchInfo({ search }) {
-  // console.log(search, "ㅅㅓ치입니다");
-
+const DescBottom = styled.div`
+  margin-top: 3%;
+  /* border: 1px solid red; */
+  line-height: 180%;
+  font-size: 0.9rem;
+  text-align: justify;
+`;
+function SearchCurrent({ item }) {
   return (
     // <OuterContainer>
     <Container>
       <Box id="box">
         <Front>
           <ImgContainer>
-            <Img
-              src={"http://localhost:80" + search.map((el) => el.fish_img)}
-            ></Img>
+            <Img src={"http://localhost:80" + item.fish_img} alt=""></Img>
           </ImgContainer>
           <Content>
-            <Name>{search.map((el) => el.fish_name)}</Name>
-            <Ename>{search.map((el) => el.sci_name)}</Ename>
+            <Name>{item.fish_name}</Name>
+            <Ename>{item.sci_name}</Ename>
           </Content>
         </Front>
         <Back>
           <Contents>
-            <NameB>{search.map((el) => el.fish_name)}</NameB>
-            <NamesB>{search.map((el) => el.sci_name)}</NamesB>
+            <NameB>{item.fish_name}</NameB>
+            <NamesB>{item.sci_name}</NamesB>
             <Text>
-              <Habitat>서식지: {search.map((el) => el.habitat)} </Habitat>
-              <Size>크기:{search.map((el) => el.size)} </Size>
-              <Temp>수온:{search.map((el) => el.temp)} </Temp>
+              <Habitat>서식지: {item.habitat}</Habitat>
+              <Size>크기: {item.size}cm</Size>
+              <Temp>수온: {item.temp}도</Temp>
               <Desc>
                 주요특징:
-                <br />
-                {search.map((el) => el.desc)}
+                <DescBottom>{item.desc}</DescBottom>
               </Desc>
             </Text>
           </Contents>
@@ -163,4 +175,4 @@ function SearchInfo({ search }) {
     // </OuterContainer>
   );
 }
-export default SearchInfo;
+export default SearchCurrent;

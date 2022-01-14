@@ -45,10 +45,10 @@ app.get("/status", (req, res) => {
 });
 
 app.get("/images/:key", (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   const key = req.params.key;
   const readStream = getFileStream(key);
-  console.log(readStream);
+  // console.log(readStream);
   readStream.pipe(res);
 });
 

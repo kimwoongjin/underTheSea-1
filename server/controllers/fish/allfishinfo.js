@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
     // const final = { fish_id: id, fish_name, habitat, temp, desc, fish_img };
 
     const fish_data = fish_list.map((el) => el.dataValues);
+    // console.log("----------", fish_data);
     return res.status(200).json({
       message: "The fish data is successfully returned",
       data: { fish_data },
