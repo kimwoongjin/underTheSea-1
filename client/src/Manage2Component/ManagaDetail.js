@@ -387,48 +387,27 @@ function ManageDetail() {
     container_id,
     food_type: "",
   });
-  const [feedingData, setFeedingData] = useState([]);
-  const [todayFeeding, setTodayFeeding] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
   const [containerData, setContainerData] = useState("");
 
-  useEffect(() => {
-    // console.log("파람스", params);
-    // console.log("아이디목록", container_id);
-    axios
-      .get(
-        `http://localhost:80/container/${container_id}/${month}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+  useEffect(async () => {
+    const conData = await axios.get(
+      `http://localhost:80/container/${container_id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        {
-          withCredentials: true,
-        }
-      )
-      .then(async (res) => {
-        setContainerData(res.data);
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
-        // 컨테이너 정보안에 피드리스트가 있다.
-        let feedingDay = containerData.data.feed_list.map((feed) => {
-          let date = feed.createdAt
-            .split("-")[0]
-            .concat(feed.createdAt.split("-")[1])
-            .concat(feed.createdAt.split("-")[2].slice(0, 2));
-          return {
-            date,
-            type: feed.type,
-            count: feed.count,
-          };
-        });
-        feedingDay = feedingDay.sort((a, b) => a.date - b.date);
-        setTodayFeeding(feedingDay);
+    // 컨테이너 정보안에 피드리스트가 있다.
+    const feedingDay = conData.data.data.feed_list;
 
-        localStorage.setItem("feed_list", JSON.stringify(feedingDay));
-        // console.log("Test2:", JSON.parse(test2));
-      })
-      .catch((err) => console.log(err));
+    localStorage.setItem("feed_list", JSON.stringify(feedingDay));
+    // console.log("Test2:", JSON.parse(test2));
   }, []);
 
   // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
@@ -439,43 +418,39 @@ function ManageDetail() {
     });
   };
 
-  const addFeedingNum = () => {
-    axios
-      .post(
-        `http://localhost:80/container/${container_id}/feed`,
-        {
-          data: feedingInfo,
+  const addFeedingNum = async () => {
+    await axios.post(
+      `http://localhost:80/container/${container_id}/feed`,
+      {
+        data: feedingInfo,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    // 여기서 수조정보 조회요청을 때리고 받아온 정보로 피딩정보를 업뎃하고
+    // 그걸로 달력에 보여주기
+    const newCondata = await axios.get(
+      `http://localhost:80/container/${container_id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        {
-          withCredentials: true,
-        }
-      )
-      .then(
-        // 여기서 수조정보 조회요청을 때리고 받아온 정보로 피딩정보를 업뎃하고
-        // 그걸로 달력에 보여주기
-        axios
-          .get(
-            `http://localhost:80/container/${container_id}/${month}`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            },
-            {
-              withCredentials: true,
-            }
-          )
-          .then((res) => {
-            setFeedingData(res.data.data.feed_list);
-            dispatch(modalOff);
-          })
-      )
-      .catch((err) => console.log(err));
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    console.log("TYTYTYTTYTY!!!!!!!!!!!!", newCondata);
+    localStorage.setItem("feed_list", JSON.stringify(newCondata));
+
+    dispatch(modalOff);
 
     // 0: {createdAt: '2022-01-11T07:32:16.000Z', type: 1, count: 3}
     // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
@@ -538,8 +513,20 @@ function ManageDetail() {
   // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
-    const feed_list = JSON.parse(localStorage.getItem("feed_list"));
-    console.log("Yeah~~~", feed_list);
+    let feed_list = JSON.parse(localStorage.getItem("feed_list"));
+
+    let objobj = {};
+    let final_list = feed_list.map((el1) => {
+      let tempL = feed_list.filter((el2) => el1.createdAt === el2.createdAt);
+      let tl = [0, 0, 0, 0];
+      tempL.forEach((el) => (tl[el.type - 1] = el.count));
+      objobj[el1.createdAt] = tl;
+      return objobj;
+    });
+    console.log(final_list, "$%$%$%");
+
+    final_list = final_list[0];
+    let dates = feed_list.map((el) => el.createdAt);
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -554,9 +541,8 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-              if (feed_list[0].date === days.format("YYYYMMDD")) {
-                // console.log("feedingData[0].date", feedingData[0].date);
-                // console.log("데이즈포맷 ", typeof days.format("YYYYMMDD"));
+
+              if (final_list[days.format("YYMMDD")]) {
                 return (
                   <Td key={index}>
                     <Number style={{ color: "#108dee" }}>
@@ -566,21 +552,29 @@ function ManageDetail() {
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
                           <FoodIcon src="/펠렛.png" />
-                          <FeedingNum>{feed_list[0].count}</FeedingNum>
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")][0]}
+                          </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/플레이크.png" />
-                          <FeedingNum>{feed_list[1].count}</FeedingNum>
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")][1]}
+                          </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
                           <FoodIcon src="/냉동.png" />
-                          <FeedingNum>{feedingInfo.frozen_num}</FeedingNum>
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")][2]}
+                          </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/생먹이.png" />
-                          <FeedingNum>{feedingInfo.live_num}</FeedingNum>
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")][3]}
+                          </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                     </FoodIconContainer>
@@ -744,3 +738,14 @@ function ManageDetail() {
   );
 }
 export default ManageDetail;
+
+// const TestApiCall = async () {
+//   try {
+//     const response = await axios.get('https://test.com/api/v1')
+//     const userId = response.data.userId;
+//     const response2 = await axios.get('https://test2.com/api/v2/' + userId);
+//     console.log("response >>", response2.data)
+//   } catch(err) {
+//     console.log("Error >>", err);
+//   }
+// }

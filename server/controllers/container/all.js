@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     });
 
     const container_list = all_container.map((el) => el.dataValues);
-    console.log(container_list);
+    //console.log(container_list);
     return res
       .status(200)
       .json({ data: container_list, message: "Data is successfully returned" });
