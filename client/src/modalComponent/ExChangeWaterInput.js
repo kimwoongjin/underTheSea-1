@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
@@ -19,7 +19,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 30%;
-  height: 30%;
+  height: 20%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -45,15 +45,16 @@ const ShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  /* border: 1px solid red; */
 `;
 
-const InfoShow = styled.div`
+const Form = styled.form`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 95%;
+  height: 90%;
 `;
 
 const Text = styled.div`
@@ -66,45 +67,16 @@ const Text = styled.div`
   font-size: 1.25rem;
 `;
 
-const ImgContainer = styled.div`
+const Input = styled.input`
+  box-sizing: border-box;
+  padding: 5px;
   width: 100%;
-  height: 30%;
-  display: flex;
-  justify-content: space-around;
-`;
-
-const Img = styled.img`
-  :hover {
-    background: #e5e5e5;
-    border-radius: 5px;
-  }
-  :visited {
-    background: #e5e5e5;
-    border-radius: 5px;
-  }
-`;
-
-const ImgNameContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-`;
-
-const ImgName = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Kfont";
-  ${(props) =>
-    props.type.food_type === props.name &&
-    css`
-      color: #108dee;
-    `};
+  height: 30px;
 `;
 
 const Btn = styled.button`
   width: 100%;
-  height: 20%;
+  height: 30px;
   border-style: none;
   border-radius: 4px;
   background: #108dee;
@@ -127,16 +99,9 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
+function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
   const dispatch = useDispatch();
-  const [foodType, setFoodType] = useState("");
-  const choiceFood = (e) => {
-    setFoodType(e.target.name);
-  };
-  useEffect(() => {
-    console.log(feedingInfo);
-  }, []);
-  // 여기서
+
   return (
     <DarkBackGround>
       <ModalContainer>
@@ -149,35 +114,21 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
           />
         </CloseBtnContainer>
         <ShowContainer>
-          <InfoShow>
-            <Text>먹이 타입을 선택해주세요</Text>
-            <ImgContainer>
-              <Img name="1" src="/펠렛.png" onClick={handleFoodtype} />
-              <Img name="2" src="/플레이크.png" onClick={handleFoodtype} />
-              <Img name="3" src="/냉동.png" onClick={handleFoodtype} />
-              <Img name="4" src="/생먹이.png" onClick={handleFoodtype} />
-            </ImgContainer>
-            <ImgNameContainer>
-              <ImgName type={feedingInfo} name="1">
-                펠렛
-              </ImgName>
-              <ImgName type={feedingInfo} name="2">
-                플레이크
-              </ImgName>
-              <ImgName type={feedingInfo} name="3">
-                냉동
-              </ImgName>
-              <ImgName type={feedingInfo} name="4">
-                생먹이
-              </ImgName>
-            </ImgNameContainer>
-
-            <Btn onClick={addFeedingNum}>선택완료</Btn>
-          </InfoShow>
+          <Form>
+            <Text>환수량을 입력해주세요</Text>
+            <Input
+              placeholder="환수량(L)을 입력해주세요"
+              type="number"
+              onChange={handleExwaterValue}
+            />
+            <Btn type="button" onClick={exwaterAddRequest}>
+              선택완료
+            </Btn>
+          </Form>
         </ShowContainer>
       </ModalContainer>
     </DarkBackGround>
   );
 }
 
-export default FeedingInput;
+export default ExChangeWaterInput;

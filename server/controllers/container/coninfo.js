@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
 
         order: [["createdAt", "ASC"]],
       });
+      console.log("피드데이타", feed_data);
       let feed_list = feed_data.count.map((el) => {
         return {
           createdAt: el["DATE(createdAt)"],
@@ -55,7 +56,7 @@ module.exports = async (req, res) => {
         if (a.type > b.type) return 1;
         if (a.type < b.type) return -1;
       });
-
+      console.log("피딩리스트~", feed_list);
       feed_list = feed_list.map((el) => {
         return {
           createdAt: `${el.createdAt.slice(2, 4)}${el.createdAt.slice(
@@ -66,8 +67,6 @@ module.exports = async (req, res) => {
           count: el.count,
         };
       });
-
-      console.log("!!!!!!!!!!!!!!!#############", feed_list);
 
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
@@ -86,7 +85,7 @@ module.exports = async (req, res) => {
         };
       });
       ex_water_list = ex_water_list.reverse();
-
+      console.log("환수목록", ex_water_list);
       let final = {
         container_id: id,
         user_id,

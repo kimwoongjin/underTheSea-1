@@ -13,6 +13,7 @@ import {
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
+  EXCHANGEWATER_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -24,7 +25,7 @@ const initialState = {
   isFilterMediaModal: false,
   isActivationModal: false,
   isFeedingModal: false,
-
+  isExchangeModal: false,
   isAddfishModal: false,
   isDeadfishModal: false,
   isRecommendModal: false,
@@ -73,6 +74,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case RECOMMENDINFO_MODAL_ON:
       state = { ...prevState, isRecommendModal: true };
+      break;
+    case EXCHANGEWATER_MODAL_ON:
+      state = { ...prevState, isExchangeModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

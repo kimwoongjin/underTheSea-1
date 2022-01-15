@@ -8,6 +8,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import ExChangeWaterInput from "../modalComponent/ExChangeWaterInput";
 import AddFish from "../modalComponent/Addfish";
 import Deadfish from "../modalComponent/Deadfish";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,8 +16,9 @@ import { modalOff } from "../store/actions";
 import {
   myAquariumInfoModalOnAction,
   feedingInputModalOnAction,
-  // addfishModalOnAction,
-  // deadfishModalOnAction,
+  exchangeWaterModalOnAction,
+  addfishModalOnAction,
+  deadfishModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -255,7 +257,8 @@ const Number = styled.span`
 const Td = styled.td`
   display: flex;
   border: 1px solid gray;
-  /* border-radius: 4px; */
+  /* justify-content: center; */
+  align-items: center;
   flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
@@ -292,11 +295,24 @@ const FoodIconContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 40%;
-  /* border: 1px solid red; */
+  /* border: 2px solid royalblue; */
 `;
 
 const FoodInnerContainer = styled.div`
   display: flex;
+  /* border: 1px dashed red; */
+`;
+
+const ExWaterRecord = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 90%;
+  height: 30%;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 1%;
 `;
 
 const FoodTypeAndNum = styled.div`
@@ -326,6 +342,38 @@ function ManageDetail() {
   });
   const accessToken = localStorage.getItem("accessToken");
   // console.log("엑세스토큰--> ", accessToken);
+  const [exwaterInfo, setExwaterInfo] = useState({
+    container_id,
+    volum: "",
+  });
+
+  const handleExwaterValue = (e) => {
+    setExwaterInfo({
+      ...exwaterInfo,
+      volum: e.target.value,
+    });
+  };
+  const exwaterAddRequest = () => {
+    axios
+      .post(
+        `http://localhost:80/${container_id}/ex_water`,
+        {
+          data: exwaterInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        dispatch(modalOff);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     console.log("유즈이펙트는 실행되니?", container_id);
@@ -344,34 +392,57 @@ function ManageDetail() {
       .then((res) => {
         console.log("response:", res.data.data);
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+        console.log("conInfo머냐", conInfo);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  // const getConInfo = () => {
-  //   axios
-  //     .get(
-  //       `http://localhost:80/container/${container_id}/${month}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       },
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log("response:", res.data.data);
-  //       localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-  //     });
-  // };
+  // container_id: 1
+  // container_name: "WOW"
+  // ex_water_list: Array(4)
+  // 0:
+  // amount: 13
+  // createdAt: "2022-01-20T13:46:46.000Z"
+  // [[Prototype]]: Object
+  // 1: {createdAt: '2022-01-14T08:44:39.000Z', amount: 1}
+  // 2: {createdAt: '2022-01-13T13:46:46.000Z', amount: 22}
+  // 3: {createdAt: '2022-01-11T13:46:46.000Z', amount: 20}
+  // length: 4
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
   // 이게 null이 들어온다
   console.log("conInfo", conInfo);
 
   const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+
+  // conInfo.ex_water_list;
+
+  // --------- 환수데이터 가공 ---------
+
+  let thisYear = new Date().getFullYear();
+  let thisMonth = new Date().getMonth() + 1;
+  let thisDay = new Date().getDate();
+  if (thisMonth < 10) {
+    thisMonth = "0" + String(thisMonth);
+  } else {
+    thisMonth = String(thisMonth);
+  }
+  thisYear = String(thisYear);
+  thisDay = String(thisDay);
+  const thisToday = thisYear + thisMonth + thisDay;
+  // thisToday
+
+  let todayEx = conInfo.ex_water_list.filter(
+    (el) => el.createdAt === thisToday
+  );
+  let exAmount = 0;
+  for (let i = 0; i < todayEx.length; i++) {
+    exAmount += todayEx[i].amount;
+  }
+
+  // -------------------------------
+
+  // --------- 피딩데이터 가공 ---------
 
   let final_list = {};
   conInfo.feed_list.forEach((el1) => {
@@ -384,6 +455,8 @@ function ManageDetail() {
     final_list[el1.createdAt] = array;
   });
 
+  // --------------------------------
+
   console.log("파이널 리스트 ", final_list);
 
   const feed_data = JSON.parse(localStorage.getItem("feed_list"));
@@ -395,6 +468,7 @@ function ManageDetail() {
     isFeedingModal,
     isAddfishModal,
     isDeadfishModal,
+    isExchangeModal,
   } = state;
   const dispatch = useDispatch();
   const [getMoment, setMoment] = useState(moment());
@@ -461,6 +535,8 @@ function ManageDetail() {
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                     </FoodIconContainer>
+
+                    <ExWaterRecord>40L</ExWaterRecord>
                   </Td>
                 );
               } else if (final_list[days.format("YYMMDD")]) {
@@ -497,6 +573,9 @@ function ManageDetail() {
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
+                      <FoodInnerContainer></FoodInnerContainer>
+                      {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
+                      <ExWaterRecord>40L</ExWaterRecord>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -577,16 +656,16 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          <Text>Hello</Text>
-          {/* <Text>{containerData.data.container_name}</Text> */}
-          <Text>수조</Text>
+          {/* <Text>Hello</Text> */}
+          <Text>{conInfo.container_name}</Text>
+          {/* <Text>수조</Text> */}
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
         <ImgContainer>
-          {/* <MainImg src={imgSrcUrl} alt="" /> */}
-          <MainImg src="/관리어항.png" alt="" />
+          <MainImg src={imgSrcUrl} alt="" />
+          {/* <MainImg src="/관리어항.png" alt="" /> */}
         </ImgContainer>
         {/* ----------------------------------------- */}
 
@@ -614,12 +693,18 @@ function ManageDetail() {
             >
               수조정보
             </Button>
-            <Button>환수기록</Button>
+            <Button onClick={() => dispatch(exchangeWaterModalOnAction)}>
+              환수기록
+            </Button>
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
-          <AddfishBtn>물고기추가</AddfishBtn>
-          <DeadfishBtn>용궁기록</DeadfishBtn>
+          <AddfishBtn onClick={() => dispatch(addfishModalOnAction)}>
+            물고기추가
+          </AddfishBtn>
+          <DeadfishBtn onClick={() => dispatch(deadfishModalOnAction)}>
+            용궁기록
+          </DeadfishBtn>
         </BottomContainer>
         {/* -------------------- 달력 ------------------- */}
         <CalendarContainer>
@@ -668,6 +753,12 @@ function ManageDetail() {
           addFeedingNum={addFeedingNum}
           handleFoodtype={handleFoodtype}
           feedingInfo={feedingInfo}
+        />
+      )}
+      {isExchangeModal && (
+        <ExChangeWaterInput
+          handleExwaterValue={handleExwaterValue}
+          exwaterAddRequest={exwaterAddRequest}
         />
       )}
       {isAddfishModal && <AddFish />}

@@ -20,65 +20,56 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 25%;
-  height: 30%;
+  width: 20%;
+  height: 25%;
   background: white;
   flex-direction: column;
   position: relative;
-  justify-content: center;
+  justify-content: space-between;
   display: flex;
   border-radius: 20px;
   align-items: center;
+  /* border: 2px dashed red; */
 `;
 const CloseBtnContainer = styled.div`
-  position: absolute;
-  top: 0px;
+  /* border: 1px dashed green; */
+  /* position: absolute; */
+  /* top: 0px; */
   width: 100%;
-  height: 10%;
+  height: 20%;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
 `;
 
-const ShowContainer = styled.div`
-  width: 90%;
-  height: 90%;
+const FormContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   height: 80%;
   /* border: 1px solid red; */
 `;
-
-const FishType = styled.input`
-  box-sizing: border-box;
-  padding: 5px;
-  width: 100%;
-  height: 15%;
-  border: 1px solid #108dee;
-  border-radius: 4px;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  /* border: 1px solid blue; */
 `;
 
-const FishNum = styled.input`
+const Input = styled.input`
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 15%;
-  border: 1px solid #108dee;
-  border-radius: 4px;
+  height: 20%;
 `;
 
 const Btn = styled.button`
   width: 100%;
-  height: 20%;
+  height: 25%;
   border-style: none;
   border-radius: 4px;
   background: #108dee;
@@ -100,8 +91,7 @@ const Btn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-
-function Addfish() {
+function Addfish({ handleExwaterValue, exwaterAddRequest }) {
   const dispatch = useDispatch();
 
   return (
@@ -115,13 +105,20 @@ function Addfish() {
             onClick={() => dispatch(modalOff)}
           />
         </CloseBtnContainer>
-        <ShowContainer>
+        <FormContainer>
           <Form>
-            <FishType placeholder="어종을 입력해주세요"></FishType>
-            <FishNum placeholder="마릿수를 입력해주세요"></FishNum>
-            <Btn>전송!</Btn>
+            <Input placeholder="어종을 입력해주세요" type="text"></Input>
+            <Input
+              placeholder="몇L 환수하셨나요?"
+              type="number"
+              onChange={handleExwaterValue}
+              required
+            ></Input>
+            <Btn type="button" onClick={exwaterAddRequest}>
+              환수기록
+            </Btn>
           </Form>
-        </ShowContainer>
+        </FormContainer>
       </ModalContainer>
     </DarkBackGround>
   );
