@@ -4,7 +4,7 @@ import React from "react";
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const DropDownContainer = styled.ul`
   background-color: #ffffff;
-  display: block;
+  /* display: block;
   margin-left: auto;
   margin-right: auto;
   list-style-type: none;
@@ -13,15 +13,19 @@ const DropDownContainer = styled.ul`
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 0px;
-  margin-top: -1px;
+  margin-top: -1px; */
   padding: 0.5rem 0;
   border: 1px solid rgb(223, 225, 229);
   border-radius: 0 0 1rem 1rem;
   box-shadow: ${boxShadow};
-  z-index: 3;
+  z-index: 999;
+  position: absolute;
+  width: 32vw;
+  margin: 0.2% 28.8%;
+  list-style-type: none;
 
   > li {
-    padding: 0 1rem;
+    padding: 0.2rem 1rem;
 
     &:hover {
       background-color: #eee;
