@@ -92,10 +92,10 @@ module.exports = async (req, res) => {
             amount: el.dataValues.amount,
           };
         });
-        console.log("@#$@#%$#%$^", ex_water_list);
         ex_water_list = ex_water_list.filter((el) => {
-          return Number(el.createdAt.slice(5, 7)) === month;
+          return Number(el.createdAt.slice(2, 4)) === month;
         });
+
         ex_water_list = ex_water_list.reverse();
       }
 
