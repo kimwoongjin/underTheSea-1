@@ -324,21 +324,21 @@ function ManageDetail() {
     container_id,
     food_type: "",
   });
-  const getConInfo = async () => {
-    const response = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    // console.log("response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-  };
+  // const getConInfo = async () => {
+  //   const response = await axios.get(
+  //     `http://localhost:80/container/${container_id}/${month}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  //   // console.log("response:", response.data.data);
+  //   localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+  // };
 
   const accessToken = localStorage.getItem("accessToken");
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
@@ -353,11 +353,11 @@ function ManageDetail() {
     one_day_list.forEach((el) => (array[el.type - 1] = el.count));
     final_list[el1.createdAt] = array;
   });
-  // console.log(final_list);
+  console.log(final_list);
 
-  useEffect(() => {
-    getConInfo();
-  });
+  // useEffect(() => {
+  //   getConInfo();
+  // }, []);
   //const feed_data = JSON.parse(localStorage.getItem("feed_list"));
   //console.log(feed_data);
 
