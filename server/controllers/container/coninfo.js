@@ -39,35 +39,38 @@ module.exports = async (req, res) => {
 
         order: [["createdAt", "ASC"]],
       });
-      let feed_list = feed_data.count.map((el) => {
-        return {
-          createdAt: el["DATE(createdAt)"],
-          type: el.type,
-          count: el.count,
-        };
-      });
-      feed_list = feed_list.filter((el) => {
-        return Number(el.createdAt.slice(5, 7)) === month;
-      });
-      feed_list.sort((a, b) => {
-        if (a.createdAt > b.createdAt) return 1;
-        if (a.createdAt < b.createdAt) return -1;
-        if (a.type > b.type) return 1;
-        if (a.type < b.type) return -1;
-      });
+      let feed_list = [];
+      if (!feed_data) {
+        feed_list = [];
+      } else {
+        feed_list = feed_data.count.map((el) => {
+          return {
+            createdAt: el["DATE(createdAt)"],
+            type: el.type,
+            count: el.count,
+          };
+        });
+        feed_list = feed_list.filter((el) => {
+          return Number(el.createdAt.slice(5, 7)) === month;
+        });
+        feed_list.sort((a, b) => {
+          if (a.createdAt > b.createdAt) return 1;
+          if (a.createdAt < b.createdAt) return -1;
+          if (a.type > b.type) return 1;
+          if (a.type < b.type) return -1;
+        });
 
-      feed_list = feed_list.map((el) => {
-        return {
-          createdAt: `${el.createdAt.slice(2, 4)}${el.createdAt.slice(
-            5,
-            7
-          )}${el.createdAt.slice(8, 10)}`,
-          type: el.type,
-          count: el.count,
-        };
-      });
-
-      console.log("!!!!!!!!!!!!!!!#############", feed_list);
+        feed_list = feed_list.map((el) => {
+          return {
+            createdAt: `${el.createdAt.slice(2, 4)}${el.createdAt.slice(
+              5,
+              7
+            )}${el.createdAt.slice(8, 10)}`,
+            type: el.type,
+            count: el.count,
+          };
+        });
+      }
 
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
@@ -75,17 +78,26 @@ module.exports = async (req, res) => {
         order: [["createdAt", "ASC"]],
       });
 
-      ex_water_data = ex_water_data.filter((el) => {
-        return el.dataValues.createdAt.getMonth() + 1 === month;
-      });
-
-      let ex_water_list = ex_water_data.map((el) => {
-        return {
-          createdAt: el.dataValues.createdAt,
-          amount: el.dataValues.amount,
-        };
-      });
-      ex_water_list = ex_water_list.reverse();
+      let ex_water_list = [];
+      if (!ex_water_data) {
+        ex_water_list = [];
+      } else {
+        ex_water_list = ex_water_data.map((el) => {
+          let fullDate = el.dataValues.createdAt.toISOString().slice(0, 10);
+          return {
+            createdAt: `${fullDate.slice(2, 4)}${fullDate.slice(
+              5,
+              7
+            )}${fullDate.slice(8, 10)}`,
+            amount: el.dataValues.amount,
+          };
+        });
+        console.log("@#$@#%$#%$^", ex_water_list);
+        ex_water_list = ex_water_list.filter((el) => {
+          return Number(el.createdAt.slice(5, 7)) === month;
+        });
+        ex_water_list = ex_water_list.reverse();
+      }
 
       let final = {
         container_id: id,
