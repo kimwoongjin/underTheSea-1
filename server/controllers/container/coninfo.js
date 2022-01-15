@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     if (!container) {
       return res.status(404).json({ message: "The container is not found" });
     } else {
-      const { id, user_id, container_name, size, salinity, theme } =
+      const { id, user_id, container_name, size, level, theme } =
         container.dataValues;
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
@@ -91,7 +91,7 @@ module.exports = async (req, res) => {
         user_id,
         container_name,
         size,
-        salinity,
+        level,
         theme,
         feed_list,
         ex_water_list,

@@ -21,13 +21,19 @@ function App() {
   const loginState = useSelector((state) => state.authReducer);
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
+  const getAllConInfo = async () => {
+    const response = await axios.get(`http://localhost:80/container/all`, {
+      headers: { authorization: `Bearer ${accessToken}` },
+      withCredentials: true,
+    });
+    console.log("res from MANAGE", response);
+    localStorage.setItem("allConInfo", JSON.stringify(response));
+  };
 
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
 
   useEffect(() => {
-    // 여기서 수조정보 조회
-    // console.log("정보떳냐", aquaInfo);
     axios
       .get(`http://localhost:80/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
@@ -132,7 +138,13 @@ function App() {
         <Route path="/posttips" element={<PostTips />}></Route>
         <Route
           path="/manage"
-          element={<Manage aquaInfo={aquaInfo} containerList={containerList} />}
+          element={
+            <Manage
+              aquaInfo={aquaInfo}
+              containerList={containerList}
+              getAllConInfo={getAllConInfo}
+            />
+          }
         ></Route>
         <Route
           path="/manage/:container_id"
