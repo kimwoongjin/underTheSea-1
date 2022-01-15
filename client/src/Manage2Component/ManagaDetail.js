@@ -447,7 +447,7 @@ function ManageDetail() {
         withCredentials: true,
       }
     );
-    console.log("TYTYTYTTYTY!!!!!!!!!!!!", newCondata);
+    // console.log("TYTYTYTTYTY!!!!!!!!!!!!", newCondata);
     localStorage.setItem("feed_list", JSON.stringify(newCondata));
 
     dispatch(modalOff);

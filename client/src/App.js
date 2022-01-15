@@ -34,9 +34,9 @@ function App() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("전체 수조목록", res.data.data);
+        // console.log("전체 수조목록", res.data.data);
         setContainerList(res.data.data);
-        console.log("수조목록", containerList);
+        // console.log("수조목록", containerList);
       });
   }, [isLogin]);
 
