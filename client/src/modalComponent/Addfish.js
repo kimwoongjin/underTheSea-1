@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -21,55 +19,65 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 25%;
+  height: 23%;
   background: white;
   flex-direction: column;
   position: relative;
-  justify-content: space-between;
+  justify-content: center;
   display: flex;
   border-radius: 20px;
   align-items: center;
-  /* border: 2px dashed red; */
 `;
 const CloseBtnContainer = styled.div`
-  /* border: 1px dashed green; */
-  /* position: absolute; */
-  /* top: 0px; */
+  position: absolute;
+  top: 0px;
   width: 100%;
-  height: 20%;
+  height: 10%;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
 `;
 
-const FormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
+const ShowContainer = styled.div`
+  width: 90%;
   height: 80%;
-  /* border: 1px solid red; */
-`;
-const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 90%;
-  height: 100%;
+  justify-content: flex-end;
+  /* border: 1px solid red; */
+`;
+
+const Form = styled.form`
   /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 95%;
+`;
+
+const Text = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+  font-family: "Kfont";
+  font-weight: bold;
+  font-size: 1.25rem;
 `;
 
 const Input = styled.input`
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 20%;
+  height: 30px;
 `;
 
 const Btn = styled.button`
   width: 100%;
-  height: 25%;
+  height: 30px;
   border-style: none;
   border-radius: 4px;
   background: #108dee;
@@ -91,7 +99,8 @@ const Btn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-function Addfish({ handleExwaterValue, exwaterAddRequest }) {
+
+function AddFish() {
   const dispatch = useDispatch();
 
   return (
@@ -101,27 +110,21 @@ function Addfish({ handleExwaterValue, exwaterAddRequest }) {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            color="#e5e5e5"
             onClick={() => dispatch(modalOff)}
+            color="#e5e5e5"
           />
         </CloseBtnContainer>
-        <FormContainer>
+        <ShowContainer>
           <Form>
-            <Input placeholder="어종을 입력해주세요" type="text"></Input>
-            <Input
-              placeholder="몇L 환수하셨나요?"
-              type="number"
-              onChange={handleExwaterValue}
-              required
-            ></Input>
-            <Btn type="button" onClick={exwaterAddRequest}>
-              환수기록
-            </Btn>
+            <Text>환수량을 입력해주세요</Text>
+            <Input placeholder="환수량(L)을 입력해주세요" type="number" />
+            <Input placeholder="환수량(L)을 입력해주세요" type="number" />
+            <Btn type="button">선택완료</Btn>
           </Form>
-        </FormContainer>
+        </ShowContainer>
       </ModalContainer>
     </DarkBackGround>
   );
 }
 
-export default Addfish;
+export default AddFish;

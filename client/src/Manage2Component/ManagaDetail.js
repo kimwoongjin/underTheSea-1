@@ -344,19 +344,19 @@ function ManageDetail() {
   // console.log("엑세스토큰--> ", accessToken);
   const [exwaterInfo, setExwaterInfo] = useState({
     container_id,
-    volum: "",
+    amount: "",
   });
 
   const handleExwaterValue = (e) => {
     setExwaterInfo({
       ...exwaterInfo,
-      volum: e.target.value,
+      amount: e.target.value,
     });
   };
   const exwaterAddRequest = () => {
     axios
       .post(
-        `http://localhost:80/${container_id}/ex_water`,
+        `http://localhost:80/container/${container_id}/ex_water`,
         {
           data: exwaterInfo,
         },
@@ -369,7 +369,8 @@ function ManageDetail() {
           withCredentials: true,
         }
       )
-      .then(() => {
+      .then((res) => {
+        console.log("환수기록추가응답 --> ", res);
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -449,7 +450,6 @@ function ManageDetail() {
     let one_day_list = conInfo.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
-    console.log("원데이리스트", one_day_list);
     let array = [0, 0, 0, 0];
     one_day_list.forEach((el) => (array[el.type - 1] = el.count));
     final_list[el1.createdAt] = array;
@@ -536,7 +536,7 @@ function ManageDetail() {
                       </FoodInnerContainer>
                     </FoodIconContainer>
 
-                    <ExWaterRecord>40L</ExWaterRecord>
+                    <ExWaterRecord>{exAmount}</ExWaterRecord>
                   </Td>
                 );
               } else if (final_list[days.format("YYMMDD")]) {
@@ -575,7 +575,7 @@ function ManageDetail() {
                       </FoodInnerContainer>
                       <FoodInnerContainer></FoodInnerContainer>
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
-                      <ExWaterRecord>40L</ExWaterRecord>
+                      <ExWaterRecord>{exAmount}</ExWaterRecord>
                     </FoodIconContainer>
                   </Td>
                 );
