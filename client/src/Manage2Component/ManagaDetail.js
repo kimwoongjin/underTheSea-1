@@ -15,8 +15,8 @@ import { modalOff } from "../store/actions";
 import {
   myAquariumInfoModalOnAction,
   feedingInputModalOnAction,
-  addfishModalOnAction,
-  deadfishModalOnAction,
+  // addfishModalOnAction,
+  // deadfishModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -322,44 +322,72 @@ function ManageDetail() {
   const month = new Date().getMonth() + 1;
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
-    food_type: "",
+    type: "",
   });
-  const getConInfo = async () => {
-    const response = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    // console.log("response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-  };
-
   const accessToken = localStorage.getItem("accessToken");
+  // console.log("엑세스토큰--> ", accessToken);
+
+  useEffect(() => {
+    console.log("유즈이펙트는 실행되니?", container_id);
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log("response:", res.data.data);
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // const getConInfo = () => {
+  //   axios
+  //     .get(
+  //       `http://localhost:80/container/${container_id}/${month}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       },
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("response:", res.data.data);
+  //       localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+  //     });
+  // };
+
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
+  // 이게 null이 들어온다
   console.log("conInfo", conInfo);
+
   const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+
   let final_list = {};
   conInfo.feed_list.forEach((el1) => {
     let one_day_list = conInfo.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
+    console.log("원데이리스트", one_day_list);
     let array = [0, 0, 0, 0];
     one_day_list.forEach((el) => (array[el.type - 1] = el.count));
     final_list[el1.createdAt] = array;
   });
-  // console.log(final_list);
 
-  useEffect(() => {
-    getConInfo();
-  });
-  //const feed_data = JSON.parse(localStorage.getItem("feed_list"));
-  //console.log(feed_data);
+  console.log("파이널 리스트 ", final_list);
+
+  const feed_data = JSON.parse(localStorage.getItem("feed_list"));
+  console.log(feed_data);
 
   const state = useSelector((state) => state.modalReducer);
   const {
@@ -394,7 +422,7 @@ function ManageDetail() {
                 .startOf("week")
                 .add(index, "day");
               if (
-                final_list[days.format("YYMMDD")] &&
+                // final_list[days.format("YYMMDD")] &&
                 moment().format("YYYYMMDD") === days.format("YYYYMMDD")
               ) {
                 //오늘이고 기록도 있을때
@@ -517,34 +545,39 @@ function ManageDetail() {
     });
   };
 
-  const addFeedingNum = async () => {
-    const response = await axios.post(
-      `http://localhost:80/container/${container_id}/feed`,
-      {
-        data: feedingInfo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+  const addFeedingNum = () => {
+    axios
+      .post(
+        `http://localhost:80/container/${container_id}/feed`,
+        {
+          data: feedingInfo,
         },
-      },
-      {
-        withCredentials: true,
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+        dispatch(modalOff);
+      });
 
     // console.log("feedingInfo", feedingInfo);
     // console.log("NEW!!!!!!!! response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    dispatch(modalOff);
   };
 
   return (
     <>
       <Header2 />
+
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
+          <Text>Hello</Text>
           {/* <Text>{containerData.data.container_name}</Text> */}
           <Text>수조</Text>
         </TextContainer>
@@ -552,7 +585,8 @@ function ManageDetail() {
       {/* ----------------------------------------- */}
       <OuterContainer>
         <ImgContainer>
-          <MainImg src={imgSrcUrl} alt="" />
+          {/* <MainImg src={imgSrcUrl} alt="" /> */}
+          <MainImg src="/관리어항.png" alt="" />
         </ImgContainer>
         {/* ----------------------------------------- */}
 
