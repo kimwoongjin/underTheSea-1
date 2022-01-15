@@ -79,12 +79,13 @@ module.exports = async (req, res) => {
         return el.dataValues.createdAt.getMonth() + 1 === month;
       });
 
-      const ex_water_list = ex_water_data.map((el) => {
+      let ex_water_list = ex_water_data.map((el) => {
         return {
           createdAt: el.dataValues.createdAt,
           amount: el.dataValues.amount,
         };
       });
+      ex_water_list = ex_water_list.reverse();
 
       let final = {
         container_id: id,
