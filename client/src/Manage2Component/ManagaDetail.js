@@ -334,8 +334,12 @@ const FoodIcon = styled.img`
 
 function ManageDetail() {
   let params = useParams();
+
   let container_id = params.container_id;
+
   const month = new Date().getMonth() + 1;
+
+  const [exWaterAmount, setExWaterAmount] = useState();
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
@@ -353,6 +357,33 @@ function ManageDetail() {
       amount: e.target.value,
     });
   };
+
+  // --------- 환수데이터 가공 ---------
+  // let exAmount = 0;
+
+  // let thisYear = new Date().getFullYear();
+  // let thisMonth = new Date().getMonth() + 1;
+  // let thisDay = new Date().getDate();
+  // if (thisMonth < 10) {
+  //   thisMonth = "0" + String(thisMonth);
+  // } else {
+  //   thisMonth = String(thisMonth);
+  // }
+  // thisYear = String(thisYear);
+  // thisDay = String(thisDay);
+  // const thisToday = thisYear + thisMonth + thisDay;
+  // // thisToday
+
+  // let todayEx = conInfo.ex_water_list.filter(
+  //   (el) => el.createdAt === thisToday
+  // );
+
+  // for (let i = 0; i < todayEx.length; i++) {
+  //   exAmount += todayEx[i].amount;
+  // }
+
+  // -------------------------------
+
   const exwaterAddRequest = () => {
     axios
       .post(
@@ -370,14 +401,18 @@ function ManageDetail() {
         }
       )
       .then((res) => {
-        console.log("환수기록추가응답 --> ", res);
+        console.log("환수기록추가응답 --> ", res.data.data.ex_water_list);
+
+        // let water = getExAmount();
+        // console.log("환수총량", exAmount);
+        // setExWaterAmount(water);
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    console.log("유즈이펙트는 실행되니?", container_id);
+    // console.log("유즈이펙트는 실행되니?", container_id);
     axios
       .get(
         `http://localhost:80/container/${container_id}/${month}`,
@@ -393,7 +428,9 @@ function ManageDetail() {
       .then((res) => {
         console.log("response:", res.data.data);
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-        console.log("conInfo머냐", conInfo);
+        // localStorage.setItem("waterInfo", JSON.stringify(res.data.data));
+
+        // console.log("conInfo머냐", conInfo);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -411,15 +448,15 @@ function ManageDetail() {
   // length: 4
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  // 이게 null이 들어온다
-  console.log("conInfo", conInfo);
+  // const waterInfo = JSON.parse(localStorage.getItem("waterInfo"));
 
-  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  let total = 0;
+  for (let i = 0; i < conInfo.fish_list.length; i++) {
+    total += conInfo.fish_list[i].fish_num;
+  }
+  console.log("토탈", total);
 
-  // conInfo.ex_water_list;
-
-  // --------- 환수데이터 가공 ---------
-
+  let exAmount = 0;
   let thisYear = new Date().getFullYear();
   let thisMonth = new Date().getMonth() + 1;
   let thisDay = new Date().getDate();
@@ -430,18 +467,17 @@ function ManageDetail() {
   }
   thisYear = String(thisYear);
   thisDay = String(thisDay);
-  const thisToday = thisYear + thisMonth + thisDay;
-  // thisToday
-
+  let thisToday = thisYear + thisMonth + thisDay;
+  thisToday = thisToday.slice(2);
   let todayEx = conInfo.ex_water_list.filter(
     (el) => el.createdAt === thisToday
   );
-  let exAmount = 0;
+
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
 
-  // -------------------------------
+  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
 
   // --------- 피딩데이터 가공 ---------
 
@@ -459,8 +495,8 @@ function ManageDetail() {
 
   console.log("파이널 리스트 ", final_list);
 
-  const feed_data = JSON.parse(localStorage.getItem("feed_list"));
-  console.log(feed_data);
+  // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
+  // console.log(feed_data);
 
   const state = useSelector((state) => state.modalReducer);
   const {
@@ -510,13 +546,17 @@ function ManageDetail() {
                         <FoodTypeAndNum>
                           <FoodIcon src="/펠렛.png" />
                           <FeedingNum>
-                            {final_list[days.format("YYMMDD")][0]}
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][0]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/플레이크.png" />
                           <FeedingNum>
-                            {final_list[days.format("YYMMDD")][1]}
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][1]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
@@ -524,19 +564,22 @@ function ManageDetail() {
                         <FoodTypeAndNum>
                           <FoodIcon src="/냉동.png" />
                           <FeedingNum>
-                            {final_list[days.format("YYMMDD")][2]}
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][2]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="/생먹이.png" />
                           <FeedingNum>
-                            {final_list[days.format("YYMMDD")][3]}
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][3]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                     </FoodIconContainer>
-
-                    <ExWaterRecord>{exAmount}</ExWaterRecord>
+                    <ExWaterRecord>{exAmount}L</ExWaterRecord>
                   </Td>
                 );
               } else if (final_list[days.format("YYMMDD")]) {
@@ -575,7 +618,7 @@ function ManageDetail() {
                       </FoodInnerContainer>
                       <FoodInnerContainer></FoodInnerContainer>
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
-                      <ExWaterRecord>{exAmount}</ExWaterRecord>
+                      <ExWaterRecord></ExWaterRecord>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -747,7 +790,14 @@ function ManageDetail() {
 
         <ManageDetCard />
       </OuterContainer>
-      {isMyAquariumInfoModal && <AquaInfo />}
+      {isMyAquariumInfoModal && (
+        <AquaInfo
+          conInfo={conInfo}
+          total={total}
+          container_id={container_id}
+          month={month}
+        />
+      )}
       {isFeedingModal && (
         <FeedingInput
           addFeedingNum={addFeedingNum}
@@ -761,8 +811,8 @@ function ManageDetail() {
           exwaterAddRequest={exwaterAddRequest}
         />
       )}
-      {isAddfishModal && <AddFish />}
-      {isDeadfishModal && <Deadfish />}
+      {isAddfishModal && <AddFish container_id={container_id} />}
+      {isDeadfishModal && <Deadfish container_id={container_id} />}
     </>
   );
 }

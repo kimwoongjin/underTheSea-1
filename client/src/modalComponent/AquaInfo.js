@@ -114,8 +114,107 @@ const BottomText = styled.div`
   font-size: 1.25rem;
 `;
 
-function AquaInfo() {
+// 환수목록받아온거에서 가장끝번 인덱스
+function AquaInfo({ conInfo, container_id, month }) {
   const dispatch = useDispatch();
+  const [diff, setDiff] = useState(0);
+  const [dateInfo, setDateInfo] = useState({
+    thisYear: "",
+    thisMonth: "",
+    thisDay: "",
+  });
+  const accessToken = localStorage.getItem("accessToken");
+  const [myAquaInfo, setMyAquaInfo] = useState("");
+  let total = 0;
+  useEffect(() => {
+    // console.log("유즈이펙트는 실행되니?", container_id);
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setMyAquaInfo(res.data.data);
+        console.log("res.data.data", res.data.data);
+        console.log("환수기록", myAquaInfo.ex_water_list);
+        let lastExDay =
+          "20" +
+          res.data.data.ex_water_list[res.data.data.ex_water_list.length - 1]
+            .createdAt;
+        console.log("lastExDay", lastExDay);
+        let thisYear = Number(lastExDay.slice(0, 4));
+        let thisMonth = Number(lastExDay.slice(4, 6));
+        let thisDay = Number(lastExDay.slice(6));
+        // lastExDay =
+        //   String(thisYear) + "-" + String(thisMonth) + "-" + String(thisDay);
+        let lastDay = new Date(thisYear, thisMonth - 1, thisDay);
+        let curDay = new Date().getTime();
+        console.log("curday", curDay);
+        console.log("lastday", lastDay);
+        // let dayFromExwater = curDay - lastDay.getTime();
+        let showDiff =
+          Math.ceil((curDay - lastDay.getTime()) / (1000 * 3600 * 24)) - 1;
+        // let showDiff = dayFromExwater / 1000 / 60 / 60 / 24;
+        // setDiff(showDiff);
+        console.log("차이", typeof thisMonth);
+        if (thisMonth < 10) {
+          thisMonth = "0" + String(thisMonth);
+        }
+        setDiff(showDiff);
+        setDateInfo({
+          ...dateInfo,
+          thisYear,
+          thisMonth,
+          thisDay,
+        });
+        let LENGTH = res.data.data.fish_list.length;
+        if (LENGTH) {
+          for (let i = 0; i < LENGTH; i++) {
+            total += res.data.data.fish_list[i].fish_num;
+          }
+          console.log("total", total);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  console.log("차이2", diff);
+  // if (myAquaInfo.ex_water_list) {
+  //   console.log("환수기록", myAquaInfo.ex_water_list);
+  //   let lastExDay =
+  //     "20" +
+  //     myAquaInfo.ex_water_list[myAquaInfo.ex_water_list.length - 1].createdAt;
+  //   console.log("lastExDay", lastExDay);
+  //   let thisYear = Number(lastExDay.slice(0, 4));
+  //   let thisMonth = Number(lastExDay.slice(4, 6));
+  //   let thisDay = Number(lastExDay.slice(6));
+  //   // lastExDay =
+  //   //   String(thisYear) + "-" + String(thisMonth) + "-" + String(thisDay);
+  //   let lastDay = new Date(thisYear, thisMonth - 1, thisDay);
+  //   let curDay = new Date().getTime();
+  //   console.log("curday", curDay);
+  //   console.log("lastday", lastDay);
+  //   // let dayFromExwater = curDay - lastDay.getTime();
+  //   let showDiff =
+  //     Math.ceil((curDay - lastDay.getTime()) / (1000 * 3600 * 24)) - 1;
+  //   // let showDiff = dayFromExwater / 1000 / 60 / 60 / 24;
+  //   // setDiff(showDiff);
+  //   console.log("차이", showDiff);
+
+  //   let LENGTH = myAquaInfo.fish_list.length;
+  //   if (LENGTH) {
+  //     for (let i = 0; i < LENGTH; i++) {
+  //       total += myAquaInfo.fish_list[i].fish_num;
+  //     }
+  //     console.log("total", total);
+  //   }
+  // }
 
   return (
     <DarkBackGround>
@@ -132,23 +231,26 @@ function AquaInfo() {
           <InfoShow>
             <ThememContainer>
               <ThemeTitle>테마</ThemeTitle>
-              <ThemeShow>산호수조</ThemeShow>
+              <ThemeShow>{myAquaInfo.theme}</ThemeShow>
             </ThememContainer>
             <ThememContainer>
               <ThemeTitle>크기</ThemeTitle>
-              <ThemeShow>200L</ThemeShow>
+              <ThemeShow>{myAquaInfo.size}L</ThemeShow>
             </ThememContainer>
             <ThememContainer>
               <ThemeTitle>마릿수</ThemeTitle>
-              <ThemeShow>13마리</ThemeShow>
+              <ThemeShow>마리</ThemeShow>
             </ThememContainer>
             <ThememContainer>
               <ThemeTitle>마지막 환수일</ThemeTitle>
-              <ThemeShow>2021-12-24</ThemeShow>
+              {/* <ThemeShow>{lastExDay}</ThemeShow> */}
+              <ThemeShow>
+                {dateInfo.thisYear}-{dateInfo.thisMonth}-{dateInfo.thisDay}
+              </ThemeShow>
             </ThememContainer>
             <LastExchange>
               <TopText>마지막 환수일로부터</TopText>
-              <MiddleText>4일</MiddleText>
+              <MiddleText>{diff}일</MiddleText>
               <BottomText>지났습니다!</BottomText>
             </LastExchange>
           </InfoShow>

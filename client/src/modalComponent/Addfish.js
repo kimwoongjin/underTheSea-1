@@ -1,9 +1,10 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -100,8 +101,44 @@ const Btn = styled.button`
   }
 `;
 
-function AddFish() {
+function AddFish({ container_id }) {
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
+  const [fishInfo, setFishInfo] = useState({
+    fish_name: "",
+    fish_num: "",
+  });
+
+  const handleInputValue = (e) => {
+    setFishInfo({
+      ...fishInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const fishAddRequest = () => {
+    console.log("추가 물고기정보", fishInfo);
+    console.log("수조아이디", container_id);
+    axios
+      .patch(
+        `http://localhost:80/container/${container_id}/fish`,
+        {
+          data: fishInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        dispatch(modalOff);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <DarkBackGround>
@@ -116,10 +153,22 @@ function AddFish() {
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
-            <Text>환수량을 입력해주세요</Text>
-            <Input placeholder="환수량(L)을 입력해주세요" type="number" />
-            <Input placeholder="환수량(L)을 입력해주세요" type="number" />
-            <Btn type="button">선택완료</Btn>
+            <Text>추가정보를 입력해주세요</Text>
+            <Input
+              placeholder="어종을 입력해주세요"
+              type="text"
+              name="fish_name"
+              onChange={handleInputValue}
+            />
+            <Input
+              placeholder="마릿수를 입력해주세요"
+              type="number"
+              name="fish_num"
+              onChange={handleInputValue}
+            />
+            <Btn type="button" onClick={fishAddRequest}>
+              물고기추가
+            </Btn>
           </Form>
         </ShowContainer>
       </ModalContainer>
