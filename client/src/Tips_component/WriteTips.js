@@ -111,13 +111,7 @@ const ImageInputForm = styled.label`
   color: white;
   cursor: pointer;
   border: 1px dashed #108dee;
-  .input {
-    padding: 6px 25px;
-    background-color: #ff6600;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-  }
+  box-sizing: border-box;
 `;
 //
 const ImageInput = styled.input`
@@ -142,18 +136,15 @@ const TipInput = styled.textarea`
 `;
 
 const ButtonForm = styled.div`
-  width: 15%;
-  height: 20%;
+  width: 70%;
+  /* margin-top: 80px; */
   display: flex;
-  justify-content: space-evenly;
-  /* border: 1px solid black; */
-  position: absolute;
-  right: 13%;
-  top: 120%;
+  justify-content: flex-end;
+  /* border: 1px dashed darkcyan; */
 `;
 
 const Btn = styled.button`
-  width: 40%;
+  width: 15%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
@@ -166,9 +157,10 @@ const Btn = styled.button`
   margin-right: 0;
   background: #108dee;
   text-align: center;
+  cursor: pointer;
 `;
 const BtnR = styled.button`
-  width: 40%;
+  width: 15%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
@@ -180,6 +172,7 @@ const BtnR = styled.button`
   border-radius: 4px;
   margin-right: 0;
   text-align: center;
+  cursor: pointer;
 `;
 
 // ================================================================================
@@ -198,7 +191,6 @@ function WriteTips({ token }) {
     const file = e.target.files[0];
     const result = await postImage(file);
     console.log(result.data.imagePath);
-    // setImage("http://localhost:80" + result.data.imagePath);
     setTip({
       ...tip,
       img: result.data.imagePath,
@@ -216,9 +208,15 @@ function WriteTips({ token }) {
     return result;
   };
 
+  // 게시물 등록
   const handleAddTip = async () => {
     if (!accessToken) {
       console.log("null");
+      return;
+    }
+    if (!tip.title) {
+      console.log("invalid title");
+      alert("제목을 입력해주세요");
       return;
     }
     const result = await axios.post(
@@ -234,11 +232,14 @@ function WriteTips({ token }) {
     navigate(`/posttips`);
   };
 
+  // 게시물 등록 취소
   const handleCancle = () => {
     setTip({});
     setImage("");
+    navigate("/honeytips");
   };
 
+  // 텍스트 입력
   const handleInputValue = (e) => {
     setTip({
       ...tip,
@@ -256,19 +257,14 @@ function WriteTips({ token }) {
             <Starfish src="불가사리.png" />
           </TitleContainer>
           <SubTitle>나누고 싶은 경험을 적어주세요!</SubTitle>
-          {/* <Swarm src="무리.png" /> */}
-          <ButtonForm>
-            <Btn>등록</Btn>
-            <BtnR>취소</BtnR>
-          </ButtonForm>
         </TopCover>
         {/* ========================================================== */}
+        <ButtonForm>
+          <Btn onClick={handleAddTip}>등록</Btn>
+          <BtnR onClick={handleCancle}>취소</BtnR>
+        </ButtonForm>
         <InputContainer>
           <FormWrapper>
-            <ButtonForm>
-              <Btn onClick={handleAddTip}>등록</Btn>
-              <BtnR onClick={handleCancle}>취소</BtnR>
-            </ButtonForm>
             <TitleInput
               placeholder="제목을 입력해 주세요."
               type="text"
@@ -282,11 +278,17 @@ function WriteTips({ token }) {
               onChange={handleInputValue}
             />
             <ImageInputForm for="input-image">
-              <img
-                id="select-img"
-                src={`http://localhost:80${tip.img}`}
-                style={{ width: "20%" }}
-              ></img>
+              {tip.img ? (
+                <img
+                  id="select-img"
+                  src={`http://localhost:80${tip.img}`}
+                  style={{
+                    boxSizing: "border-box",
+                  }}
+                ></img>
+              ) : (
+                <div>Upload Image</div>
+              )}
             </ImageInputForm>
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>

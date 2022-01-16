@@ -21,10 +21,10 @@ module.exports = async (req, res) => {
 
     const user_tips = tips_data.map((el) => {
       return {
-        tip_id: el.id,
-        title: el.title,
-        content: el.content,
-        created_at: el.updatedAt,
+        tip_id: el.dataValues.id,
+        title: el.dataValues.title,
+        content: el.dataValues.content,
+        created_at: el.dataValues.updatedAt,
       };
     });
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
 import CommentTips from "./CommentTips";
@@ -58,6 +59,18 @@ const SubTitle = styled.div`
   /* border: 1px solid red; */
 `;
 
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  width: 70%;
+  height: 100%;
+  border: 1px solid #a0d5fd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+`;
+
 const BtnContainer = styled.div`
   width: 70%;
   /* margin-top: 80px; */
@@ -66,21 +79,62 @@ const BtnContainer = styled.div`
   /* border: 1px dashed darkcyan; */
 `;
 
-const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const BtnL = styled.button`
+  width: 15%;
+  height: 30px;
+  box-sizing: border-box;
   align-items: center;
-  margin-top: 50px;
-  width: 70%;
-  height: 100%;
-  border: 1px solid #a0d5fd;
+  margin: 0 5px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-style: none;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-right: 0;
+  background: #108dee;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const Btn = styled.button`
+  width: 15%;
+  height: 30px;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0 5px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 4px;
+  margin-right: 0;
+  background: #108dee;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const BtnR = styled.button`
+  width: 15%;
+  height: 30px;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0 5px;
+  color: black;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 4px;
+  margin-right: 0;
+  text-align: center;
+  cursor: pointer;
 `;
 
 function PostTips() {
   const [tipData, setTipData] = useState({});
   const [comment, setComment] = useState([]);
+  const [isWriter, setIsWriter] = useState(false);
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const tip_id = localStorage.getItem("tip_id");
 
@@ -100,11 +154,12 @@ function PostTips() {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res.data.data)
+        // console.log(res.data);
         localStorage.setItem("user_name", res.data.data.user_name);
         setTipData({
           ...res.data.data,
         });
+        setIsWriter(res.data.data.isWriter);
       })
       .catch((err) => {
         console.log(err);
@@ -121,7 +176,8 @@ function PostTips() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res.data);
+        setUserName(res.data.user_name);
         setComment([...res.data.data]);
       });
   };
@@ -165,6 +221,25 @@ function PostTips() {
       });
   };
 
+  // 목록으로 이동
+  const goToList = () => {
+    navigate("/honeytips");
+  };
+
+  const deleteTip = () => {
+    axios
+      .delete(`http://localhost:80/tip/${tip_id}`, {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      })
+      .then((result) => {
+        navigate("/honeytips");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header2></Header2>
@@ -176,10 +251,22 @@ function PostTips() {
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
         </TopCover>
+        <BtnContainer>
+          <BtnL onClick={goToList}>목록</BtnL>
+          {isWriter ? (
+            <>
+              <Btn>수정</Btn>
+              <BtnR onClick={deleteTip}>삭제</BtnR>
+            </>
+          ) : (
+            <></>
+          )}
+        </BtnContainer>
         <PostContainer>
           <ContentTips tipData={tipData}></ContentTips>
           <CommentTips
             comment={comment}
+            userName={userName}
             handleUploadComment={handleUploadComment}
             handleDeleteComment={handleDeleteComment}
           ></CommentTips>
