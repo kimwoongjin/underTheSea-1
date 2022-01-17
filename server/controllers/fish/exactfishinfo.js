@@ -2,7 +2,7 @@ const { fishes } = require("../../models");
 const Sequelize = require("sequelize");
 
 module.exports = async (req, res) => {
-  //   console.log(req, "-------------");
+  // console.log(req, "-------------");
   const fish_name = req.body.data.fish_name;
   // console.log(fish_name);
   let fish = await fishes.findOne({

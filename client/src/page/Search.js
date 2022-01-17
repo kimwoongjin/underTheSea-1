@@ -106,12 +106,8 @@ const CardContainer = styled.div`
   margin-top: 8%;
   position: relative;
 `;
-// const DropDown = styled.ul``;
 
 function Search() {
-  // let refresh = window.location.search;
-  // const [word, setWord] = useState("");
-  const [search, setSearch] = useState(); //검색할 물고기
   const [fish, setFish] = useState([]); //첫 랜딩될 화면 페이지
   const [options, setOptions] = useState([]); //60개의 물고기의 이름값
   const [fish2, setFish2] = useState([]); // 60개의 물고기 정보값
@@ -124,43 +120,15 @@ function Search() {
   //==================================================================
   const [test, setTest] = useState();
   const [xxx, setXxx] = useState();
-  // const handleInput = (e) => {
-  //   setSearch(e.target.value);
-  // };
 
   // 검색 받아오기===========================================================
 
-  // useEffect(() => {
-  //   gotoSearch();
-  // }, []);
-
-  // const gotoSearch = () => {
-  //   //-----> 네임 리스트 <------
-  //   // navigate(`/search?fish_name=${word}`);
-  //   // const search = decodeURI(window.location.search);
-
-  //   axios
-  //     .post(`http://localhost:80/fish`, { data: { fish_name: search } })
-  //     .then(() => {
-  //       // if (!word || word === " ") return null;
-  //       // console.log(result.data, "배열입니까?");
-  //       setCurrentFIsh(true);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const gotoSearch = () => {
-    //-----> 네임 리스트 <------
-    // navigate(`/search?fish_name=${word}`);
-    // const search = decodeURI(window.location.search);
-
     axios
-      .post(`http://localhost:80/fishone`, { data: { fish_name: test } })
+      .post(`http://localhost:80/fish/one`, { data: { fish_name: test } })
       .then((result) => {
-        // if (!word || word === " ") return null;
-        console.log(result.data, "배열입니까?");
+        console.log(result, "물고기 한마리");
+        // setFilteredOptions2(result);
         setCurrentFIsh(true);
       })
       .catch((err) => {
@@ -168,7 +136,7 @@ function Search() {
       });
   };
   // 60개 리스트 받아오기===========================================================
-  //-----> 네임 리스트 <------
+
   useEffect(() => {
     axios
       .get(`http://localhost:80/fish/all/60`, {
@@ -181,6 +149,24 @@ function Search() {
         setFish2(result.data.data.fish_data);
         const list = result.data.data.fish_data.map((el) => el.fish_name);
         setOptions(list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:80/fish/fishnamelist`, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        // setFish2(result.data.data.fish_data);
+        // const list = result.data.data.fish_data.map((el) => el.fish_name);
+        // setOptions(list);
       })
       .catch((err) => {
         console.log(err);
@@ -205,7 +191,6 @@ function Search() {
         },
       })
       .then((result) => {
-        // console.log(result.data.data.fish_data, "---------------");
         setCurrentFIsh(false);
         setFish(result.data.data.fish_data);
       })
@@ -213,24 +198,6 @@ function Search() {
         console.log(err);
       });
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .post(`http://localhost:80/fishone`, { data: { fish_name: test } })
-  //     .then((result) => {
-  //       console.log(result.data, "---------------");
-  //       // const name = result.data.map((el) => el.fish_name);
-  //       // setTest(name);
-  //       // setFish2(result.data.data.fish_data);
-  //       // const list = result.data.data.fish_data.map((el) => el.fish_name);
-  //       // setOptions(list);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // console.log(test, "+++++++++");
 
   // 인풋 드랍다운  ===========================================================
 
@@ -252,14 +219,15 @@ function Search() {
 
     setFilteredOptions2(testOptions);
     // console.log(resultOptions, "리저릍야야ㅑ");
-    //매치된 이름을 통해 정보가 필터링 되어서 들어온다. [{}{}]
+    // 매치된 이름을 통해 정보가 필터링 되어서 들어온다. [{}{}]
     setFilteredOptions(resultOptions);
     // console.log(testOptions, "난 테스트야");
-    //매치된 이름만 필터링되어서 들어온다. ['','']
+    // 매치된 이름만 필터링되어서 들어온다. ['','']
   };
 
   const handleDropDownClick = (clickedOption) => {
     setTest(clickedOption); //
+    // console.log(clickedOption, "클릭이벤트");
 
     const resultOptions = options.filter((option) => option === clickedOption);
     // console.log(resultOptions, "옵션이니");
@@ -267,7 +235,7 @@ function Search() {
   };
 
   const handleDeleteButtonClick = () => {
-    setSearch("");
+    setTest("");
   };
 
   //엔터 키 이벤트
@@ -320,7 +288,7 @@ function Search() {
             type="text"
             placeholder="어종명으로 검색해주세요."
             onChange={handleInputChange}
-            value={search}
+            value={test}
             onKeyUp={handleKeyUp}
           />
           <div className="delete-button" onClick={handleDeleteButtonClick}>
