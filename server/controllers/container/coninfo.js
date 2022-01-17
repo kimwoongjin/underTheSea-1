@@ -27,8 +27,22 @@ module.exports = async (req, res) => {
       const fish_name_list = fish_info_list.map(
         (el) => el.dataValues.fish_name
       );
-      const fish_list = await fishes.findAll({
+      let fish_list = await fishes.findAll({
         where: { fish_name: [fish_name_list] },
+      });
+      fish_list_final = [];
+      fish_list.map(async (el) => {
+        let fishName = el.dataValues.fish_name;
+        let fish_container_data = await container_fishes.findOne({
+          where: { fish_name: fishName },
+        });
+
+        let result = {
+          ...el.dataValues,
+          fish_num: fish_container_data.dataValues.fish_num,
+        };
+        fish_list_final.push(result);
+        return result;
       });
 
       const feed_data = await feeds.findAndCountAll({
@@ -107,7 +121,7 @@ module.exports = async (req, res) => {
         theme,
         feed_list,
         ex_water_list,
-        fish_list,
+        fish_list: fish_list_final,
       };
       return res
         .status(200)
