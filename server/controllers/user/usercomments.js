@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
   } else {
     const user_id = userinfo.id;
 
-    console.log("I'm here!!!!!!!!!!!!!!!!!", page_num);
     const commnets_data = await comments.findAll({
       offset,
       limit,
