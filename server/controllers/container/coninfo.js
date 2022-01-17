@@ -24,19 +24,42 @@ module.exports = async (req, res) => {
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
       });
-      const fish_name_list = fish_info_list.map(
-        (el) => el.dataValues.fish_name
-      );
-      const fish_list = await fishes.findAll({
-        where: { fish_name: [fish_name_list] },
-      });
+
+      console.log("You've reached here", fish_info_list);
+
+      let fish_list_final = [];
+      if (fish_info_list.length === 0) {
+        fish_list_final = [];
+      } else {
+        const fish_name_list = fish_info_list.map(
+          (el) => el.dataValues.fish_name
+        );
+        let fish_list = await fishes.findAll({
+          where: { fish_name: [fish_name_list] },
+        });
+        fish_list.map(async (el) => {
+          let fishName = el.dataValues.fish_name;
+          let fish_container_data = await container_fishes.findOne({
+            where: { fish_name: fishName },
+          });
+
+          let result = {
+            ...el.dataValues,
+            fish_num: fish_container_data.dataValues.fish_num,
+          };
+          fish_list_final.push(result);
+          return result;
+        });
+      }
 
       const feed_data = await feeds.findAndCountAll({
         where: { container_id },
         attributes: ["type"],
         group: [sequelize.literal("DATE(createdAt)"), "type"],
-
-        order: [["createdAt", "ASC"]],
+        order: [
+          ["createdAt", "ASC"],
+          ["type", "ASC"],
+        ],
       });
       let feed_list = [];
       if (!feed_data) {
@@ -74,7 +97,7 @@ module.exports = async (req, res) => {
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
         attributes: ["createdAt", "amount"],
-        order: [["createdAt", "ASC"]],
+        order: [["createdAt", "DESC"]],
       });
 
       let ex_water_list = [];
@@ -94,8 +117,6 @@ module.exports = async (req, res) => {
         ex_water_list = ex_water_list.filter((el) => {
           return Number(el.createdAt.slice(2, 4)) === month;
         });
-
-        ex_water_list = ex_water_list.reverse();
       }
 
       let final = {
@@ -107,7 +128,7 @@ module.exports = async (req, res) => {
         theme,
         feed_list,
         ex_water_list,
-        fish_list,
+        fish_list: fish_list_final,
       };
       return res
         .status(200)

@@ -33,8 +33,6 @@ module.exports = async (req, res) => {
     })
   );
 
-  console.log(all_tip_data);
-
   return res.status(200).json({
     data: all_tip_data,
     tip_num,

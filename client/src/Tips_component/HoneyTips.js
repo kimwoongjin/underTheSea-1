@@ -82,6 +82,9 @@ const Btn = styled.button`
   border-style: none;
   background: #108dee;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 const TipListContainer = styled.div`

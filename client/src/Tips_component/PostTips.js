@@ -94,6 +94,9 @@ const BtnL = styled.button`
   background: #108dee;
   text-align: center;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 const Btn = styled.button`
@@ -111,6 +114,9 @@ const Btn = styled.button`
   background: #108dee;
   text-align: center;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 const BtnR = styled.button`
@@ -127,6 +133,9 @@ const BtnR = styled.button`
   margin-right: 0;
   text-align: center;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 function PostTips() {
@@ -226,6 +235,7 @@ function PostTips() {
     navigate("/honeytips");
   };
 
+  // 게시글 삭제
   const deleteTip = () => {
     axios
       .delete(`http://localhost:80/tip/${tip_id}`, {
@@ -238,6 +248,12 @@ function PostTips() {
         navigate("/honeytips");
       })
       .catch((err) => console.log(err));
+  };
+
+  // 게시글 수정
+  const editTip = () => {
+    localStorage.setItem("edit_tip", true);
+    navigate("/writetips");
   };
 
   return (
@@ -255,7 +271,7 @@ function PostTips() {
           <BtnL onClick={goToList}>목록</BtnL>
           {isWriter ? (
             <>
-              <Btn>수정</Btn>
+              <Btn onClick={editTip}>수정</Btn>
               <BtnR onClick={deleteTip}>삭제</BtnR>
             </>
           ) : (
