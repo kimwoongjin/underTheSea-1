@@ -25,3 +25,6 @@ export const PWD_MODAL_ON = "PWD_MODAL_ON";
 
 // ManageCard
 export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
+
+// ManageDetail
+export const GET_CONTAINER_INFO = "GET_CONTAINER_INFO";

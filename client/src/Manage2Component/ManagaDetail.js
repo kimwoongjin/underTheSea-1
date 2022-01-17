@@ -11,6 +11,7 @@ import AquaInfo from "../modalComponent/AquaInfo";
 import ExChangeWaterInput from "../modalComponent/ExChangeWaterInput";
 import AddFish from "../modalComponent/Addfish";
 import Deadfish from "../modalComponent/Deadfish";
+import Footer from "../component/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 import {
@@ -29,6 +30,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
+  background-color: rgba(51, 153, 255, 0.1);
 `;
 
 const Title = styled.div`
@@ -65,6 +67,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: rgba(51, 153, 255, 0.1);
 `;
 
 const Level = styled.div`
@@ -225,7 +228,8 @@ const Control = styled.div`
 `;
 
 const CalendarBtn = styled.button`
-  background: white;
+  /* background: white; */
+  background-color: rgba(51, 153, 255, 0);
   width: 40px;
   height: 30px;
   border-style: none;
@@ -256,14 +260,15 @@ const Number = styled.span`
 
 const Td = styled.td`
   display: flex;
-  border: 1px solid gray;
+  /* border: 1px solid rgba(51, 153, 255, 0.3); */
   /* justify-content: center; */
+  background: white;
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
-  /* margin: 1px; */
+  margin: 1px;
 `;
 const WeekContainer = styled.div`
   width: 100%;
@@ -357,6 +362,27 @@ function ManageDetail({ tt }) {
     });
   };
 
+  useEffect(() => {
+    // console.log("유즈이펙트는 실행되니?", container_id);
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log("response:", res.data.data);
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   // --------- 환수데이터 가공 ---------
   // let exAmount = 0;
 
@@ -409,27 +435,6 @@ function ManageDetail({ tt }) {
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    // console.log("유즈이펙트는 실행되니?", container_id);
-    axios
-      .get(
-        `http://localhost:80/container/${container_id}/${month}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log("response:", res.data.data);
-        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   // container_id: 1
   // container_name: "WOW"
@@ -832,6 +837,7 @@ function ManageDetail({ tt }) {
       )}
       {isAddfishModal && <AddFish container_id={container_id} />}
       {isDeadfishModal && <Deadfish container_id={container_id} />}
+      <Footer />
     </>
   );
 }
