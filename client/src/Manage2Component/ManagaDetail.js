@@ -8,22 +8,21 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import FeedingInput from "../modalComponent/FeedingInput";
 import AquaInfo from "../modalComponent/AquaInfo";
+import ExChangeWaterInput from "../modalComponent/ExChangeWaterInput";
 import AddFish from "../modalComponent/Addfish";
 import Deadfish from "../modalComponent/Deadfish";
+import Footer from "../component/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 import {
   myAquariumInfoModalOnAction,
   feedingInputModalOnAction,
+  exchangeWaterModalOnAction,
   addfishModalOnAction,
   deadfishModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
-//경로 "/manage/detailinfo"의 전체 페이지
-//물고기 수, 레벨, 어항 이미지, 버튼, 횟수 넘버 기재
-//manage 페이지 카드정보 import 순서 manageDetail > manageDetCard > manageInfo
 
 const Container = styled.div`
   position: relative;
@@ -31,6 +30,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
+  background-color: rgba(51, 153, 255, 0.1);
 `;
 
 const Title = styled.div`
@@ -67,6 +67,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: rgba(51, 153, 255, 0.1);
 `;
 
 const Level = styled.div`
@@ -112,22 +113,6 @@ const MainImg = styled.img`
   width: 100%;
   height: 100%;
 `;
-
-//--------------------------------------------
-
-//--------------------------------------------
-// const MidContainer = styled.div`
-//   width: 100%;
-//   /* border: 1px solid red; */
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   margin-top: 1%;
-//   align-items: center;
-//   /* background: #bdc3c7; */
-//   /* background-color: rgba(0, 0, 0, 0.1); */
-//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-// `;
 
 const MidContainer = styled.div`
   width: 100%;
@@ -175,48 +160,6 @@ const DeadfishBtn = styled.div`
   /* border: 1px solid blue; */
   cursor: pointer;
 `;
-
-// const ProgressBar22 = styled.div`
-//   position: absolute;
-//   left: 0;
-//   width: ${(props) => (props.bar ? props.bar : "50%")};
-//   height: 100%;
-//   border-top-left-radius: 10px;
-//   border-bottom-left-radius: 10px;
-//   box-shadow: -5px 0 0 0 #bbdd3e inset;
-//   background-color: #a2c523;
-// `;
-
-// const [data, setData] = useState({
-//   walks: [{ created_at: 0 }],
-//   goal: 0,
-//   users: [],
-// });
-
-// const [src, setSrc] = useState("");
-// const [display, setDisplay] = useState("none");
-// const [goal_percent, setGoal_Percent] = useState(0);
-// const [modal, setModal] = useState(false);
-// const Navigate = useNavigate();
-
-// const onCancel = () => {
-//   setModal(false);
-// };
-// const handleClick = () => {
-//   setModal(true);
-// };
-
-// useEffect(() => {
-//   loadingOn();
-// }, []);
-
-// useEffect(() => {
-//   if (data.goal) {
-//     setGoal_Percent(
-//       Math.min(100, Math.floor((100 * data.walks.length) / data.goal))
-//     );
-//   }
-// }, [data]);
 
 const ProgressBar = styled.div`
   padding: 2px;
@@ -285,7 +228,8 @@ const Control = styled.div`
 `;
 
 const CalendarBtn = styled.button`
-  background: white;
+  /* background: white; */
+  background-color: rgba(51, 153, 255, 0);
   width: 40px;
   height: 30px;
   border-style: none;
@@ -316,13 +260,15 @@ const Number = styled.span`
 
 const Td = styled.td`
   display: flex;
-  border: 1px solid gray;
-  /* border-radius: 4px; */
+  /* border: 1px solid rgba(51, 153, 255, 0.3); */
+  /* justify-content: center; */
+  background: white;
+  align-items: center;
   flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
-  /* margin: 1px; */
+  margin: 1px;
 `;
 const WeekContainer = styled.div`
   width: 100%;
@@ -354,11 +300,24 @@ const FoodIconContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 40%;
-  /* border: 1px solid red; */
+  /* border: 2px solid royalblue; */
 `;
 
 const FoodInnerContainer = styled.div`
   display: flex;
+  /* border: 1px dashed red; */
+`;
+
+const ExWaterRecord = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 90%;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 2px;
 `;
 
 const FoodTypeAndNum = styled.div`
@@ -378,116 +337,211 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail() {
+function ManageDetail({ tt }) {
   let params = useParams();
+
   let container_id = params.container_id;
+
   const month = new Date().getMonth() + 1;
+
   const [feedingInfo, setFeedingInfo] = useState({
-    // 컨테이너 아이디
     container_id,
-    food_type: "",
+    type: "",
   });
   const accessToken = localStorage.getItem("accessToken");
-  const [containerData, setContainerData] = useState("");
+  // console.log("엑세스토큰--> ", accessToken);
+  const [exwaterInfo, setExwaterInfo] = useState({
+    container_id,
+    amount: "",
+  });
 
-  useEffect(async () => {
-    const conData = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-
-    // 컨테이너 정보안에 피드리스트가 있다.
-    const feedingDay = conData.data.data.feed_list;
-
-    localStorage.setItem("feed_list", JSON.stringify(feedingDay));
-    // console.log("Test2:", JSON.parse(test2));
-  }, []);
-
-  // 타입을 눌렀을 때는 푸드 타입만 바꾸고 선택완료를 누르면 타입과 같은 피딩횟수의 숫자가 상승
-  const handleFoodtype = (e) => {
-    setFeedingInfo({
-      ...feedingInfo,
-      food_type: e.target.name,
+  const handleExwaterValue = (e) => {
+    setExwaterInfo({
+      ...exwaterInfo,
+      amount: e.target.value,
     });
   };
+  // ----------------- 일주일 뽑기 ------------------
 
-  const addFeedingNum = async () => {
-    await axios.post(
-      `http://localhost:80/container/${container_id}/feed`,
-      {
-        data: feedingInfo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+  // const getCurrentWeek = () => {
+  //   const day = new Date();
+  //   const sunday = day.getTime() - 86400000 * day.getDay();
+  //   day.setTime(sunday);
+  //   const result = [day.toISOString().slice(0, 10)];
+  //   for (let i = 1; i < 7; i++) {
+  //     day.setTime(day.getTime() + 86400000);
+  //     result.push(day.toISOString().slice(0, 10));
+  //   }
+  //   return result;
+  // }
+
+  // console.log("환수객체", exWaterObj);
+  // {220116: 50, 220117: 40}
+  // console.log("피딩객체", final_list);
+  // { 220115: [1,2,3,4], 220114: [2,1,4,0]}
+  // let exp = [];
+  // let thisWeek = getCurrentWeek();
+  // let curWeek = thisWeek.map((day) => day = day.split('-').join('').slice(2))
+  /* 오늘이 2020-10-31인 경우, 
+  [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
+  // 여기서 현재 환수객체랑 피딩객체
+  // for(let key in exWaterObj) {
+  //   if(curWeek.includes(key.))
+  // }
+
+  // ---------------------------------------------------
+  useEffect(() => {
+    // console.log("유즈이펙트는 실행되니?", container_id);
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      },
-      {
-        withCredentials: true,
-      }
-    );
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        // console.log("response:", res.data.data);
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-    // 여기서 수조정보 조회요청을 때리고 받아온 정보로 피딩정보를 업뎃하고
-    // 그걸로 달력에 보여주기
-    const newCondata = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+  // --------- 환수데이터 가공 ---------
+  // let exAmount = 0;
+
+  // let thisYear = new Date().getFullYear();
+  // let thisMonth = new Date().getMonth() + 1;
+  // let thisDay = new Date().getDate();
+  // if (thisMonth < 10) {
+  //   thisMonth = "0" + String(thisMonth);
+  // } else {
+  //   thisMonth = String(thisMonth);
+  // }
+  // thisYear = String(thisYear);
+  // thisDay = String(thisDay);
+  // const thisToday = thisYear + thisMonth + thisDay;
+  // // thisToday
+
+  // let todayEx = conInfo.ex_water_list.filter(
+  //   (el) => el.createdAt === thisToday
+  // );
+
+  // for (let i = 0; i < todayEx.length; i++) {
+  //   exAmount += todayEx[i].amount;
+  // }
+
+  // -------------------------------
+
+  const exwaterAddRequest = () => {
+    axios
+      .post(
+        `http://localhost:80/container/${container_id}/ex_water`,
+        {
+          data: exwaterInfo,
         },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    console.log("TYTYTYTTYTY!!!!!!!!!!!!", newCondata);
-    localStorage.setItem("feed_list", JSON.stringify(newCondata));
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        // console.log("환수기록추가응답 --> ", res.data.data.ex_water_list);
 
-    dispatch(modalOff);
-
-    // 0: {createdAt: '2022-01-11T07:32:16.000Z', type: 1, count: 3}
-    // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
-    // 2: {createdAt: '2022-01-11T07:32:16.000Z', type: 3, count: 2}
-    // 3: {createdAt: '2022-01-11T07:32:16.000Z', type: 2, count: 1}
-    // 4: {createdAt: '2022-01-13T05:10:47.000Z', type: 1, count: 1}
-    // 5: {createdAt: '2022-01-13T05:19:43.000Z', type: 2, count: 1}
-    // 6: {createdAt: '2022-01-13T05:21:17.000Z', type: 2, count: 1}
-    // 7: {createdAt: '2022-01-13T05:22:55.000Z', type: 2, count: 1}
-    // 8: {createdAt: '2022-01-13T05:25:11.000Z', type: 1, count: 1}
-    // 9: {createdAt: '2022-01-13T05:27:47.000Z', type: 3, count: 1}
-    // 10: {createdAt: '2022-01-13T05:30:54.000Z', type: 4, count: 1}
-    // 11: {createdAt: '2022-01-13T05:31:23.000Z', type: 3, count: 1}
-    // length: 12
-
-    // if (feedingInfo.food_type === "pellet") {
-    //   setFeedingInfo({
-    //     ...feedingInfo,
-    //     pellet_num: feedingInfo.pellet_num + 1,
-    //   });
-    // } else if (feedingInfo.food_type === "flake") {
-    //   setFeedingInfo({
-    //     ...feedingInfo,
-    //     flake_num: feedingInfo.flake_num + 1,
-    //   });
-    // } else if (feedingInfo.food_type === "frozen") {
-    //   setFeedingInfo({
-    //     ...feedingInfo,
-    //     frozen_num: feedingInfo.frozen_num + 1,
-    //   });
-    // } else {
-    //   setFeedingInfo({
-    //     ...feedingInfo,
-    //     live_num: feedingInfo.live_num + 1,
-    //   });
-    // }
+        // let water = getExAmount();
+        // console.log("환수총량", exAmount);
+        // setExWaterAmount(water);
+        dispatch(modalOff);
+      })
+      .catch((err) => console.log(err));
   };
+
+  // container_id: 1
+  // container_name: "WOW"
+  // ex_water_list: Array(4)
+  // 0:
+  // amount: 13
+  // createdAt: "2022-01-20T13:46:46.000Z"
+  // [[Prototype]]: Object
+  // 1: {createdAt: '2022-01-14T08:44:39.000Z', amount: 1}
+  // 2: {createdAt: '2022-01-13T13:46:46.000Z', amount: 22}
+  // 3: {createdAt: '2022-01-11T13:46:46.000Z', amount: 20}
+  // length: 4
+
+  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
+  // console.log("conInfo", conInfo);
+
+  // ----- 해당수조 총 물고기수 ------
+  let total = 0;
+  for (let i = 0; i < conInfo.fish_list.length; i++) {
+    total += conInfo.fish_list[i].fish_num;
+  }
+  // console.log("토탈", total);
+  // ----------------------------
+
+  let exWater = {};
+  let exAmount = 0;
+  let thisYear = new Date().getFullYear();
+  let thisMonth = new Date().getMonth() + 1;
+  let thisDay = new Date().getDate();
+  if (thisMonth < 10) {
+    thisMonth = "0" + String(thisMonth);
+  } else {
+    thisMonth = String(thisMonth);
+  }
+  thisYear = String(thisYear);
+  thisDay = String(thisDay);
+  let thisToday = thisYear + thisMonth + thisDay;
+  thisToday = thisToday.slice(2);
+  let todayEx = conInfo.ex_water_list.filter(
+    (el) => el.createdAt === thisToday
+  );
+
+  for (let i = 0; i < todayEx.length; i++) {
+    exAmount += todayEx[i].amount;
+  }
+
+  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
+  // 환수데이터가공
+
+  let exWaterObj = {};
+  conInfo.ex_water_list.forEach((el) => {
+    if (!exWaterObj[el.createdAt]) {
+      exWaterObj[el.createdAt] = el.amount;
+    } else {
+      exWaterObj[el.createdAt] += el.amount;
+    }
+
+    // console.log(oneDayList)
+  });
+
+  // --------- 피딩데이터 가공 ---------
+
+  let final_list = {};
+  conInfo.feed_list.forEach((el1) => {
+    let one_day_list = conInfo.feed_list.filter(
+      (el2) => el1.createdAt === el2.createdAt
+    );
+    let array = [0, 0, 0, 0];
+    one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+    final_list[el1.createdAt] = array;
+  });
+
+  // --------------------------------
+  // console.log("환수객체", exWaterObj);
+  // console.log("피딩객체", final_list);
+
+  // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
+  // console.log(feed_data);
 
   const state = useSelector((state) => state.modalReducer);
   const {
@@ -495,38 +549,19 @@ function ManageDetail() {
     isFeedingModal,
     isAddfishModal,
     isDeadfishModal,
+    isExchangeModal,
   } = state;
   const dispatch = useDispatch();
-
   const [getMoment, setMoment] = useState(moment());
-  const [count, setCount] = useState(0);
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-  const onIncrease = () => {
-    setCount((count) => count + 1);
-    dispatch(modalOff);
-  };
-  // ------ 달력날짜 랜더링 ------ //
 
   const calendarArr = () => {
-    let feed_list = JSON.parse(localStorage.getItem("feed_list"));
-
-    let objobj = {};
-    let final_list = feed_list.map((el1) => {
-      let tempL = feed_list.filter((el2) => el1.createdAt === el2.createdAt);
-      let tl = [0, 0, 0, 0];
-      tempL.forEach((el) => (tl[el.type - 1] = el.count));
-      objobj[el1.createdAt] = tl;
-      return objobj;
-    });
-    console.log(final_list, "$%$%$%");
-
-    final_list = final_list[0];
-    let dates = feed_list.map((el) => el.createdAt);
+    // console.log("From Cal", final_list);
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -541,13 +576,64 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-
-              if (final_list[days.format("YYMMDD")]) {
+              if (
+                // final_list[days.format("YYMMDD")] &&
+                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
+              ) {
+                //오늘이고 기록도 있을때
                 return (
                   <Td key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
+                    <FoodIconContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/펠렛.png" />
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][0]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/플레이크.png" />
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][1]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/냉동.png" />
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][2]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="/생먹이.png" />
+                          <FeedingNum>
+                            {final_list[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : final_list[days.format("YYMMDD")][3]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                    </FoodIconContainer>
+                    <ExWaterRecord>
+                      {exWaterObj[days.format("YYMMDD")]}L
+                    </ExWaterRecord>
+                  </Td>
+                );
+              } else if (final_list[days.format("YYMMDD")]) {
+                //오늘은 아니지만 기록이 있을 때
+                return (
+                  <Td key={index}>
+                    <Number>{days.format("D")}</Number>
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
@@ -577,11 +663,31 @@ function ManageDetail() {
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
+                      <FoodInnerContainer></FoodInnerContainer>
+                      {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
+                      <ExWaterRecord>
+                        {exWaterObj[days.format("YYMMDD")] === undefined
+                          ? 0
+                          : exWaterObj[days.format("YYMMDD")]}
+                        L
+                      </ExWaterRecord>
                     </FoodIconContainer>
+                  </Td>
+                );
+              } else if (
+                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
+              ) {
+                //오늘
+                return (
+                  <Td key={index}>
+                    <Number style={{ color: "#108dee" }}>
+                      {days.format("D")}
+                    </Number>
                   </Td>
                 );
               } else if (days.format("MM") !== today.format("MM")) {
                 return (
+                  //지난 달
                   <Td
                     key={index}
                     style={{
@@ -593,6 +699,7 @@ function ManageDetail() {
                 );
               } else {
                 return (
+                  //모든 경우를 제외한 평범한 날
                   <Td key={index}>
                     <Number>{days.format("D")}</Number>
                   </Td>
@@ -605,46 +712,54 @@ function ManageDetail() {
     return result;
   };
 
-  // data:
-  // container_id: 1
-  // container_name: "WOW"
-  // ex_water_list: Array(3)
-  // 0: {createdAt: '2022-01-11T13:46:46.000Z', amount: 20}
-  // 1: {createdAt: '2022-01-13T13:46:46.000Z', amount: 22}
-  // 2: {createdAt: '2022-01-20T13:46:46.000Z', amount: 13}
-  // length: 3
-  // [[Prototype]]: Array(0)
-  // feed_list: (4) [{…}, {…}, {…}, {…}]
-  // fish_list: (2) [{…}, {…}]
-  // size: 100
-  // theme: "N/A"
-  // user_id: 1
-  // [[Prototype]]:
+  const handleFoodtype = (e) => {
+    setFeedingInfo({
+      ...feedingInfo,
+      type: e.target.name,
+    });
+  };
 
-  //   feed_list: Array(4)
-  // 0:
-  // count: 3
-  // createdAt: "2022-01-11T07:32:16.000Z"
-  // type: 1
-  // [[Prototype]]: Object
-  // 1: {createdAt: '2022-01-12T07:32:16.000Z', type: 2, count: 2}
-  // 2: {createdAt: '2022-01-11T07:32:16.000Z', type: 3, count: 2}
-  // 3: {createdAt: '2022-01-11T07:32:16.000Z', type: 2, count: 3}
+  const addFeedingNum = () => {
+    axios
+      .post(
+        `http://localhost:80/container/${container_id}/feed`,
+        {
+          data: feedingInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        dispatch(modalOff);
+      });
+
+    // console.log("feedingInfo", feedingInfo);
+    // console.log("NEW!!!!!!!! response:", response.data.data);
+  };
 
   return (
     <>
       <Header2 />
+
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Text>{containerData.data.container_name}</Text> */}
-          <Text>수조</Text>
+          {/* <Text>Hello</Text> */}
+          <Text>{conInfo.container_name}</Text>
+          {/* <Text>수조</Text> */}
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
         <ImgContainer>
-          <MainImg src="/관리어항.png" alt="" />
+          <MainImg src={imgSrcUrl} alt="" />
+          {/* <MainImg src="/관리어항.png" alt="" /> */}
         </ImgContainer>
         {/* ----------------------------------------- */}
 
@@ -672,7 +787,9 @@ function ManageDetail() {
             >
               수조정보
             </Button>
-            <Button>환수기록</Button>
+            <Button onClick={() => dispatch(exchangeWaterModalOnAction)}>
+              환수기록
+            </Button>
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
@@ -722,9 +839,16 @@ function ManageDetail() {
 
         {/* ----------------------------------------- */}
 
-        <ManageDetCard />
+        <ManageDetCard conInfo={conInfo} />
       </OuterContainer>
-      {isMyAquariumInfoModal && <AquaInfo />}
+      {isMyAquariumInfoModal && (
+        <AquaInfo
+          conInfo={conInfo}
+          total={total}
+          container_id={container_id}
+          month={month}
+        />
+      )}
       {isFeedingModal && (
         <FeedingInput
           addFeedingNum={addFeedingNum}
@@ -732,20 +856,16 @@ function ManageDetail() {
           feedingInfo={feedingInfo}
         />
       )}
-      {isAddfishModal && <AddFish />}
-      {isDeadfishModal && <Deadfish />}
+      {isExchangeModal && (
+        <ExChangeWaterInput
+          handleExwaterValue={handleExwaterValue}
+          exwaterAddRequest={exwaterAddRequest}
+        />
+      )}
+      {isAddfishModal && <AddFish container_id={container_id} />}
+      {isDeadfishModal && <Deadfish container_id={container_id} />}
+      <Footer />
     </>
   );
 }
 export default ManageDetail;
-
-// const TestApiCall = async () {
-//   try {
-//     const response = await axios.get('https://test.com/api/v1')
-//     const userId = response.data.userId;
-//     const response2 = await axios.get('https://test2.com/api/v2/' + userId);
-//     console.log("response >>", response2.data)
-//   } catch(err) {
-//     console.log("Error >>", err);
-//   }
-// }

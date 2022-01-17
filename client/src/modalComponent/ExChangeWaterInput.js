@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -20,7 +19,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 23%;
+  height: 20%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -42,7 +41,7 @@ const CloseBtnContainer = styled.div`
 
 const ShowContainer = styled.div`
   width: 90%;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -50,13 +49,12 @@ const ShowContainer = styled.div`
 `;
 
 const Form = styled.form`
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 95%;
+  height: 90%;
 `;
 
 const Text = styled.div`
@@ -101,35 +99,8 @@ const Btn = styled.button`
   }
 `;
 
-function Deadfish({ container_id }) {
+function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
   const dispatch = useDispatch();
-  const accessToken = localStorage.getItem("accessToken");
-  const [fishDeadInfo, setFishDeadInfo] = useState({
-    fish_name: "",
-    fish_num: "",
-  });
-
-  const handleInputValue = (e) => {
-    setFishDeadInfo({
-      ...fishDeadInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const fishRemoveRequest = () => {
-    axios
-      .delete(`http://localhost:80/container/${container_id}/fish`, {
-        data: fishDeadInfo,
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      })
-      .then(() => {
-        dispatch(modalOff);
-      })
-      .catch((err) => console.log(err));
-  };
 
   return (
     <DarkBackGround>
@@ -144,21 +115,14 @@ function Deadfish({ container_id }) {
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
-            <Text>폐사정보를 입력해주세요</Text>
+            <Text>환수량을 입력해주세요</Text>
             <Input
-              placeholder="어종을 입력해주세요"
-              type="text"
-              name="fish_name"
-              onChange={handleInputValue}
-            />
-            <Input
-              placeholder="마릿수를 입력해주세요"
+              placeholder="환수량(L)을 입력해주세요"
               type="number"
-              name="fish_num"
-              onChange={handleInputValue}
+              onChange={handleExwaterValue}
             />
-            <Btn type="button" onClick={fishRemoveRequest}>
-              폐사기록추가
+            <Btn type="button" onClick={exwaterAddRequest}>
+              선택완료
             </Btn>
           </Form>
         </ShowContainer>
@@ -167,4 +131,4 @@ function Deadfish({ container_id }) {
   );
 }
 
-export default Deadfish;
+export default ExChangeWaterInput;

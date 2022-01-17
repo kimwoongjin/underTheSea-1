@@ -19,24 +19,52 @@ import axios from "axios";
 function App() {
   const state = useSelector((state) => state.modalReducer);
   const loginState = useSelector((state) => state.authReducer);
+  const conData = useSelector((state) => state.conInfoReducer);
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
+
+  const [tt, setTt] = useState("T.T");
+
+  const month = new Date().getMonth() + 1;
+
+  const getAllConInfo = async () => {
+    const response = await axios.get(`http://localhost:80/container/all`, {
+      headers: { authorization: `Bearer ${accessToken}` },
+      withCredentials: true,
+    });
+    // console.log("res from MANAGE", response);
+    localStorage.setItem("allConInfo", JSON.stringify(response));
+  };
+  const getConInfo = async (id) => {
+    const response = await axios.get(
+      `http://localhost:80/container/${id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    // console.log("response:", response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+    return response.data.data;
+  };
 
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
 
   useEffect(() => {
-    // 여기서 수조정보 조회
-    // console.log("정보떳냐", aquaInfo);
     axios
       .get(`http://localhost:80/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((res) => {
-        console.log("전체 수조목록", res.data.data);
+        // console.log("전체 수조목록", res.data.data);
         setContainerList(res.data.data);
-        console.log("수조목록", containerList);
+        // console.log("수조목록", containerList);
       });
   }, [isLogin]);
 
@@ -132,12 +160,19 @@ function App() {
         <Route path="/posttips" element={<PostTips />}></Route>
         <Route
           path="/manage"
-          element={<Manage aquaInfo={aquaInfo} containerList={containerList} />}
+          element={
+            <Manage
+              aquaInfo={aquaInfo}
+              containerList={containerList}
+              getAllConInfo={getAllConInfo}
+              getConInfo={getConInfo}
+            />
+          }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} />}
+          element={<ManageDetail idList={idList} tt={tt} />}
         ></Route>
         <Route
           path="/manage/addInfo"
