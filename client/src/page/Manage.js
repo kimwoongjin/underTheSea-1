@@ -66,7 +66,8 @@ function Manage({ getAllConInfo, getConInfo }) {
         <Img src="작은해초.png" alt="" />
       </TitleContainer>
       {/* <ManageCard /> */}
-      <ManageCard containerList={con_list.data.data} />
+      {/* <ManageCard containerList={con_list.data.data} /> */}
+      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} />
     </>
   );
 }
