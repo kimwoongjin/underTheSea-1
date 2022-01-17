@@ -185,7 +185,6 @@ function PostTips() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         setUserName(res.data.user_name);
         setComment([...res.data.data]);
       });
@@ -232,6 +231,7 @@ function PostTips() {
 
   // 목록으로 이동
   const goToList = () => {
+    localStorage.setItem("tip_id", null);
     navigate("/honeytips");
   };
 

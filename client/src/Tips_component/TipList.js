@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 const TipContainer = styled.div`
   position: relative;
   width: 95%;
+  height: 60px;
   display: flex;
   margin-bottom: 1px;
   border-top: 1px solid #808080;
   cursor: pointer;
-  z-index: 100;
+  align-items: center;
+  //   z-index: 100;
   &:hover {
     background-color: #f7f7f4;
     color: black;
@@ -17,47 +19,54 @@ const TipContainer = styled.div`
 
 const TipTitle = styled.div`
   position: relative;
-  z-index: 1;
+  //   z-index: 1;
   flex: 6;
   width: 90%;
-  height: 30%;
+  height: 50%;
+  margin-top: 5px;
   /* border: 1px solid red; */
-  margin-top: 8px;
-  margin-bottom: 5px;
+  align-items: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
 `;
 
 const TipWriter = styled.div`
   flex: 2;
   width: 90%;
-  height: 20%;
+  height: 50%;
+  margin-top: 5px;
   font-size: 0.9rem;
   /* border: 1px solid black; */
-  margin-top: 8px;
-  margin-bottom: 5px;
+  font-family: "Kfont";
+  box-sizing: border-box;
 `;
 
 const TipDate = styled.div`
   flex: 2;
   width: 90%;
-  height: 10%;
+  height: 50%;
+  margin-top: 7px;
   font-size: 0.8rem;
   color: #808080;
   /* border: 1px solid black; */
-  margin-top: 8px;
-  margin-bottom: 5px;
+  font-family: "Kfont";
   text-align: center;
+  box-sizing: border-box;
 `;
 
 function TipList({ tip }) {
   const navigate = useNavigate();
   const date = tip.created_at.split("T")[0];
   //   console.log(tip.tip_id);
+
+  // 게시물 선택&조회
   const handleSelectTip = (e) => {
     localStorage.setItem("tip_id", e.target.id);
     const tip_id = localStorage.getItem("tip_id");
     // console.log(e.target.id);
     navigate(`/posttips`);
   };
+
   return (
     <>
       <TipContainer>

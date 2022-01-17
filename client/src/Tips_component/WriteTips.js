@@ -199,13 +199,15 @@ function WriteTips({ token }) {
     img: "",
   });
   const [image, setImage] = useState("");
-
-  console.log("tipdata", tip);
+  const [isEdit, setIsEdit] = useState(edit_tip);
 
   // 수정버튼을 누르고 들어왔을 때
   useEffect(() => {
-    console.log("edit?????", edit_tip);
-    if (edit_tip) {
+    getTipData();
+  }, []);
+
+  const getTipData = () => {
+    if (isEdit === "true") {
       axios
         .get(`http://localhost:80/tip/${tip_id}`, {
           headers: {
@@ -225,7 +227,7 @@ function WriteTips({ token }) {
     } else {
       return;
     }
-  }, []);
+  };
 
   // 이미지 파일 선택
   const selectFIle = async (e) => {
@@ -270,7 +272,6 @@ function WriteTips({ token }) {
     );
     const tip_id = result.data.data.id;
     localStorage.setItem("tip_id", tip_id);
-    // console.log(result);
     navigate(`/posttips`);
   };
 
@@ -294,6 +295,26 @@ function WriteTips({ token }) {
     });
   };
 
+  // 게시물 수정
+  const handleEditTip = () => {
+    axios
+      .patch(
+        `http://localhost:80/tip/${tip_id}`,
+        { data: tip },
+        {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("edit_tip", false);
+        navigate("/posttips");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header2></Header2>
@@ -307,25 +328,48 @@ function WriteTips({ token }) {
         </TopCover>
         {/* ========================================================== */}
         <ButtonForm>
-          <Btn onClick={handleAddTip}>등록</Btn>
+          {isEdit === "true" ? (
+            <Btn onClick={handleEditTip}>수정</Btn>
+          ) : (
+            <Btn onClick={handleAddTip}>등록</Btn>
+          )}
           <BtnR onClick={handleCancle}>취소</BtnR>
         </ButtonForm>
         <InputContainer>
           <FormWrapper>
-            <TitleInput
-              placeholder="제목을 입력해 주세요."
-              type="text"
-              name="title"
-              onChange={handleInputValue}
-              value={tip.title}
-            />
-            <TipInput
-              placeholder="내용을 입력하세요"
-              type="text"
-              name="content"
-              onChange={handleInputValue}
-              value={tip.content}
-            />
+            {isEdit === "true" ? (
+              <>
+                <TitleInput
+                  placeholder="제목을 입력해 주세요."
+                  type="text"
+                  name="title"
+                  onChange={handleInputValue}
+                  value={tip.title}
+                />
+                <TipInput
+                  placeholder="내용을 입력하세요"
+                  type="text"
+                  name="content"
+                  onChange={handleInputValue}
+                  value={tip.content}
+                />
+              </>
+            ) : (
+              <>
+                <TitleInput
+                  placeholder="제목을 입력해 주세요."
+                  type="text"
+                  name="title"
+                  onChange={handleInputValue}
+                />
+                <TipInput
+                  placeholder="내용을 입력하세요"
+                  type="text"
+                  name="content"
+                  onChange={handleInputValue}
+                />
+              </>
+            )}
             <ImageInputForm for="input-image">
               {tip.img ? (
                 <img
@@ -336,7 +380,7 @@ function WriteTips({ token }) {
                   }}
                 ></img>
               ) : (
-                <div>Upload Image</div>
+                <></>
               )}
             </ImageInputForm>
             <ImageInput id="input-image" onChange={selectFIle} type="file" />

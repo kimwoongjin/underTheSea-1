@@ -176,6 +176,7 @@ function HoneyTips() {
     }
   };
 
+  // 이전페이지
   const goToPre = () => {
     if (pageNum === 1) {
       return;
@@ -184,6 +185,7 @@ function HoneyTips() {
     setPageNum(page - 1);
   };
 
+  // 다음페이지
   const goToNext = () => {
     if (pageNum === tipLength.length) {
       return;
@@ -191,6 +193,7 @@ function HoneyTips() {
     setPageNum(pageNum + 1);
   };
 
+  // 페이지 선택
   const selectPageNum = (e) => {
     // console.log(e.target.id);
     setPageNum(e.target.id);
