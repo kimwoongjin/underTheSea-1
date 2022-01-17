@@ -451,7 +451,7 @@ function ManageDetail({ tt }) {
   for (let i = 0; i < conInfo.fish_list.length; i++) {
     total += conInfo.fish_list[i].fish_num;
   }
-  console.log("토탈", total);
+  // console.log("토탈", total);
   // ----------------------------
 
   let exWater = {};
