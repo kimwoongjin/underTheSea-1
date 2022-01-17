@@ -15,6 +15,7 @@ module.exports = {
   fishinfo: require("./fish/fishinfo"),
   allfishinfo: require("./fish/allfishinfo"),
   exactfishinfo: require("./fish/exactfishinfo"),
+  fishnamelist: require("./fish/fishnamelist"),
   addcomment: require("./comment/addcomment"),
   tipscomment: require("./comment/tipscomment"),
   addtip: require("./tip/addtip"),
