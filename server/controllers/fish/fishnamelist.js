@@ -5,5 +5,10 @@ module.exports = async (req, res) => {
   fish_list = fish_list.map((el) => {
     return el.dataValues.fish_name;
   });
-  return res.status(200).json(fish_list);
+  return res
+    .status(200)
+    .json({
+      data: fish_list,
+      message: "The fish data is successfully returned",
+    });
 };
