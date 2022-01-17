@@ -123,6 +123,7 @@ function AquaInfo({ conInfo, container_id, month }) {
     thisMonth: "",
     thisDay: "",
   });
+  const [fishNum, setFishNum] = useState(0);
   const accessToken = localStorage.getItem("accessToken");
   const [myAquaInfo, setMyAquaInfo] = useState("");
   let total = 0;
@@ -143,7 +144,7 @@ function AquaInfo({ conInfo, container_id, month }) {
       .then((res) => {
         setMyAquaInfo(res.data.data);
         console.log("res.data.data", res.data.data);
-        console.log("환수기록", myAquaInfo.ex_water_list);
+
         let lastExDay =
           "20" +
           res.data.data.ex_water_list[res.data.data.ex_water_list.length - 1]
@@ -179,12 +180,12 @@ function AquaInfo({ conInfo, container_id, month }) {
           for (let i = 0; i < LENGTH; i++) {
             total += res.data.data.fish_list[i].fish_num;
           }
-          console.log("total", total);
+          setFishNum(total);
         }
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log("차이2", diff);
+  console.log("토탈~~", total);
   // if (myAquaInfo.ex_water_list) {
   //   console.log("환수기록", myAquaInfo.ex_water_list);
   //   let lastExDay =
@@ -239,7 +240,7 @@ function AquaInfo({ conInfo, container_id, month }) {
             </ThememContainer>
             <ThememContainer>
               <ThemeTitle>마릿수</ThemeTitle>
-              <ThemeShow>마리</ThemeShow>
+              <ThemeShow>{fishNum}마리</ThemeShow>
             </ThememContainer>
             <ThememContainer>
               <ThemeTitle>마지막 환수일</ThemeTitle>

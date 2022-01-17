@@ -339,7 +339,6 @@ function ManageDetail() {
 
   const month = new Date().getMonth() + 1;
 
-  const [exWaterAmount, setExWaterAmount] = useState();
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
@@ -427,6 +426,7 @@ function ManageDetail() {
       )
       .then((res) => {
         console.log("response:", res.data.data);
+
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
         // localStorage.setItem("waterInfo", JSON.stringify(res.data.data));
 
@@ -448,14 +448,17 @@ function ManageDetail() {
   // length: 4
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  // const waterInfo = JSON.parse(localStorage.getItem("waterInfo"));
+  console.log("conInfo", conInfo);
 
+  // ----- 해당수조 총 물고기수 ------
   let total = 0;
   for (let i = 0; i < conInfo.fish_list.length; i++) {
     total += conInfo.fish_list[i].fish_num;
   }
   console.log("토탈", total);
+  // ----------------------------
 
+  let exWater = {};
   let exAmount = 0;
   let thisYear = new Date().getFullYear();
   let thisMonth = new Date().getMonth() + 1;
@@ -478,6 +481,20 @@ function ManageDetail() {
   }
 
   const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
+  // 환수데이터가공
+
+  let exWaterObj = {};
+  conInfo.ex_water_list.forEach((el) => {
+    if (!exWaterObj[el.createdAt]) {
+      exWaterObj[el.createdAt] = el.amount;
+    } else {
+      exWaterObj[el.createdAt] += el.amount;
+    }
+
+    // console.log(oneDayList)
+  });
+  console.log("환수객체", exWaterObj);
 
   // --------- 피딩데이터 가공 ---------
 
@@ -579,7 +596,9 @@ function ManageDetail() {
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
                     </FoodIconContainer>
-                    <ExWaterRecord>{exAmount}L</ExWaterRecord>
+                    <ExWaterRecord>
+                      {exWaterObj[days.format("YYMMDD")]}L
+                    </ExWaterRecord>
                   </Td>
                 );
               } else if (final_list[days.format("YYMMDD")]) {
@@ -618,7 +637,9 @@ function ManageDetail() {
                       </FoodInnerContainer>
                       <FoodInnerContainer></FoodInnerContainer>
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
-                      <ExWaterRecord></ExWaterRecord>
+                      <ExWaterRecord>
+                        {exWaterObj[days.format("YYMMDD")]}
+                      </ExWaterRecord>
                     </FoodIconContainer>
                   </Td>
                 );
@@ -684,7 +705,6 @@ function ManageDetail() {
         }
       )
       .then((res) => {
-        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
         dispatch(modalOff);
       });
 
@@ -788,7 +808,7 @@ function ManageDetail() {
 
         {/* ----------------------------------------- */}
 
-        <ManageDetCard />
+        <ManageDetCard conInfo={conInfo} />
       </OuterContainer>
       {isMyAquariumInfoModal && (
         <AquaInfo

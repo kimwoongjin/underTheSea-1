@@ -96,7 +96,7 @@ const ImgName = styled.div`
   align-items: center;
   font-family: "Kfont";
   ${(props) =>
-    props.type.food_type === props.name &&
+    props.feedingInfo.type === props.name &&
     css`
       color: #108dee;
     `};
@@ -134,7 +134,7 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
     setFoodType(e.target.name);
   };
   useEffect(() => {
-    console.log(feedingInfo);
+    console.log("피딩인포", feedingInfo);
   }, []);
   // 여기서
   return (
@@ -158,16 +158,16 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
               <Img name="4" src="/생먹이.png" onClick={handleFoodtype} />
             </ImgContainer>
             <ImgNameContainer>
-              <ImgName type={feedingInfo} name="1">
+              <ImgName feedingInfo={feedingInfo} name="1">
                 펠렛
               </ImgName>
-              <ImgName type={feedingInfo} name="2">
+              <ImgName feedingInfo={feedingInfo} name="2">
                 플레이크
               </ImgName>
-              <ImgName type={feedingInfo} name="3">
+              <ImgName feedingInfo={feedingInfo} name="3">
                 냉동
               </ImgName>
-              <ImgName type={feedingInfo} name="4">
+              <ImgName feedingInfo={feedingInfo} name="4">
                 생먹이
               </ImgName>
             </ImgNameContainer>
