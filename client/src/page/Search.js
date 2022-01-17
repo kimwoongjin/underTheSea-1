@@ -29,8 +29,8 @@ const InputContainer = styled.div`
   justify-content: start;
   width: 100%;
   height: 100%;
-  font-family: "Kfont";
-  border: 1px solid black; */
+  font-family: "Kfont"; */
+  /* border: 1px solid black; */
   /* margin-top: 8rem; */
   width: 30vw;
   background-color: #ffffff;

@@ -214,7 +214,9 @@ function WriteTips({ token }) {
           withCredentials: true,
         })
         .then((res) => {
+          console.log("res데이타", res.data);
           const { data: tip_data } = res.data;
+          console.log("팁데이타", tip_data);
           setTip({
             ...tip_data,
           });
@@ -277,10 +279,12 @@ function WriteTips({ token }) {
   // 게시물 등록 취소
   const handleCancle = () => {
     setTip({
+      ...tip,
       title: "",
       content: "",
       img: "",
     });
+    console.log("팁초기화됨?", tip);
     setImage("");
     localStorage.setItem("edit_tip", false);
     navigate(-1);

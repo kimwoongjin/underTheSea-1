@@ -22,11 +22,16 @@ export const ADDFISH_MODAL_ON = "ADDFISH_MODAL_ON";
 export const DEADFISH_MODAL_ON = "DEADFISH_MODAL_ON";
 export const RECOMMENDINFO_MODAL_ON = "RECOMMENDINFO_MODAL_ON";
 export const EXCHANGEWATER_MODAL_ON = "EXCHANGEWATER_MODAL_ON";
+export const WSDINFO_MODAL_ON = "WSDINFO_MODAL_ON";
 export const MODAL_OFF = "MODAL_OFF";
 export const PWD_MODAL_ON = "PWD_MODAL_ON";
 
 // ManageCard
 export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
+
+
+// ManageDetail
+export const GET_CONTAINER_INFO = "GET_CONTAINER_INFO";
 
 export const getConData = async () => {
   const condata = await axios.get(
@@ -45,3 +50,4 @@ export const getConData = async () => {
     payload: condata.data,
   };
 };
+
