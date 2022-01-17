@@ -45,6 +45,7 @@ const Starfish = styled.img`
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
+  font-family: "Kfont";
   font-size: 1.8rem;
   font-weight: bold;
   margin-top: 40px;
@@ -55,6 +56,7 @@ const Title = styled.div`
 const SubTitle = styled.div`
   margin-top: 15px;
   color: #808080;
+  font-family: "Kfont";
   font-size: 1.25rem;
   margin-bottom: 50px;
   /* border: 1px solid red; */
@@ -96,6 +98,7 @@ const TitleInput = styled.input`
   /* box-sizing: border-box; */
   /* border: 1px solid #108dee; */
   /* border-radius: 4px; */
+  font-family: "Kfont";
   font-size: 1.5rem;
   margin-bottom: 10px;
 `;
@@ -129,6 +132,7 @@ const TipInput = styled.textarea`
   height: 30%;
   padding: 10px;
   border: none;
+  font-family: "Kfont";
   font-size: 1rem;
   /* margin-bottom: 10px; */
   padding: 0 0 1% 3%;
@@ -150,6 +154,7 @@ const Btn = styled.button`
   align-items: center;
   margin: 0 5px;
   color: white;
+  font-family: "Kfont";
   font-size: 1.25rem;
   font-weight: bold;
   border-style: none;
@@ -158,6 +163,9 @@ const Btn = styled.button`
   background: #108dee;
   text-align: center;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 const BtnR = styled.button`
   width: 15%;
@@ -173,12 +181,17 @@ const BtnR = styled.button`
   margin-right: 0;
   text-align: center;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 // ================================================================================
 
 function WriteTips({ token }) {
   const accessToken = localStorage.getItem("accessToken");
+  const edit_tip = localStorage.getItem("edit_tip");
+  const tip_id = localStorage.getItem("tip_id");
   const navigate = useNavigate();
   const [tip, setTip] = useState({
     title: "",
@@ -187,6 +200,36 @@ function WriteTips({ token }) {
   });
   const [image, setImage] = useState("");
 
+  console.log("tipdata", tip);
+
+  // 수정버튼을 누르고 들어왔을 때
+  useEffect(() => {
+    console.log("edit?????", edit_tip);
+    if (edit_tip) {
+      axios
+        .get(`http://localhost:80/tip/${tip_id}`, {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log("res데이타", res.data);
+          const { data: tip_data } = res.data;
+          console.log("팁데이타", tip_data);
+          setTip({
+            ...tip_data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return;
+    }
+  }, []);
+
+  // 이미지 파일 선택
   const selectFIle = async (e) => {
     const file = e.target.files[0];
     const result = await postImage(file);
@@ -197,6 +240,7 @@ function WriteTips({ token }) {
     });
   };
 
+  // 이미지 파일 저장
   const postImage = async (file) => {
     const formData = new FormData();
     formData.append("image", file);
@@ -234,9 +278,16 @@ function WriteTips({ token }) {
 
   // 게시물 등록 취소
   const handleCancle = () => {
-    setTip({});
+    setTip({
+      ...tip,
+      title: "",
+      content: "",
+      img: "",
+    });
+    console.log("팁초기화됨?", tip);
     setImage("");
-    navigate("/honeytips");
+    localStorage.setItem("edit_tip", false);
+    navigate(-1);
   };
 
   // 텍스트 입력
@@ -270,12 +321,14 @@ function WriteTips({ token }) {
               type="text"
               name="title"
               onChange={handleInputValue}
+              value={tip.title}
             />
             <TipInput
               placeholder="내용을 입력하세요"
               type="text"
               name="content"
               onChange={handleInputValue}
+              value={tip.content}
             />
             <ImageInputForm for="input-image">
               {tip.img ? (

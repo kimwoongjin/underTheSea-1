@@ -19,6 +19,7 @@ import axios from "axios";
 function App() {
   const state = useSelector((state) => state.modalReducer);
   const loginState = useSelector((state) => state.authReducer);
+  const conData = useSelector((state) => state.conInfoReducer);
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
 
