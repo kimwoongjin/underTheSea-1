@@ -332,7 +332,7 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail({ tt }) {
+function ManageDetail() {
   let params = useParams();
 
   let container_id = params.container_id;
@@ -405,6 +405,7 @@ function ManageDetail({ tt }) {
         // let water = getExAmount();
         // console.log("환수총량", exAmount);
         // setExWaterAmount(water);
+        levelup();
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -506,7 +507,44 @@ function ManageDetail({ tt }) {
 
   // --------------------------------
 
-  console.log("파이널 리스트 ", final_list);
+  console.log("파이널 리스트 ", conInfo.feed_list);
+
+  const levelup = async () => {
+    function getWeekDates() {
+      let now = new Date();
+      let dayOfWeek = now.getDay(); //0-6
+      let numDay = now.getDate();
+
+      let start = new Date(now); //copy
+      start.setDate(numDay - dayOfWeek);
+      start.setHours(0, 0, 0, 0);
+
+      let end = new Date(now); //copy
+      end.setDate(numDay + (7 - dayOfWeek));
+      end.setHours(0, 0, 0, 0);
+      start = moment(start).format(`YYMMDD`);
+      end = moment(end).format(`YYMMDD`);
+      return [start, end];
+    }
+
+    let [start, end] = getWeekDates();
+
+    let filterd_feed_list = conInfo.feed_list.filter((el) => {
+      let day = el.createdAt;
+      return day >= start && day <= end;
+    });
+    let filter_water_list = conInfo.ex_water_list.filter((el) => {
+      console.log("WHAT WHAT", el);
+      let day = el.createdAt;
+      return day >= start && day <= end;
+    });
+    console.log(
+      `feed count:${filterd_feed_list.length}, water count: ${filter_water_list.length}`
+    );
+    if (filterd_feed_list.length >= 13 && filter_water_list.length === 1) {
+      axios.get("http://localhost:80/container/level");
+    }
+  };
 
   // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
   // console.log(feed_data);
@@ -704,6 +742,7 @@ function ManageDetail({ tt }) {
         }
       )
       .then((res) => {
+        levelup();
         dispatch(modalOff);
       });
 

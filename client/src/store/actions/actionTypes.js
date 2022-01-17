@@ -28,20 +28,20 @@ export const PWD_MODAL_ON = "PWD_MODAL_ON";
 // ManageCard
 export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
 
-export const getConData = async () => {
-  const condata = await axios.get(
-    `http://localhost:80/container/${container_id}/${month}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-    {
-      withCredentials: true,
-    }
-  );
-  return {
-    type: "GET_CON_INFO",
-    payload: condata.data,
-  };
-};
+// export const getConData = async () => {
+//   const condata = await axios.get(
+//     `http://localhost:80/container/${container_id}/${month}`,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     },
+//     {
+//       withCredentials: true,
+//     }
+//   );
+//   return {
+//     type: "GET_CON_INFO",
+//     payload: condata.data,
+//   };
+// };
