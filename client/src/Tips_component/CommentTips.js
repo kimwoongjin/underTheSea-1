@@ -120,6 +120,9 @@ const AddcommentBtn = styled.button`
   border: 1px solid #108dee;
   background-color: white;
   cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 function CommentTips({
