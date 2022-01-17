@@ -24,26 +24,33 @@ module.exports = async (req, res) => {
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
       });
-      const fish_name_list = fish_info_list.map(
-        (el) => el.dataValues.fish_name
-      );
-      let fish_list = await fishes.findAll({
-        where: { fish_name: [fish_name_list] },
-      });
-      fish_list_final = [];
-      fish_list.map(async (el) => {
-        let fishName = el.dataValues.fish_name;
-        let fish_container_data = await container_fishes.findOne({
-          where: { fish_name: fishName },
-        });
 
-        let result = {
-          ...el.dataValues,
-          fish_num: fish_container_data.dataValues.fish_num,
-        };
-        fish_list_final.push(result);
-        return result;
-      });
+      console.log("You've reached here", fish_info_list);
+
+      let fish_list_final = [];
+      if (fish_info_list.length === 0) {
+        fish_list_final = [];
+      } else {
+        const fish_name_list = fish_info_list.map(
+          (el) => el.dataValues.fish_name
+        );
+        let fish_list = await fishes.findAll({
+          where: { fish_name: [fish_name_list] },
+        });
+        fish_list.map(async (el) => {
+          let fishName = el.dataValues.fish_name;
+          let fish_container_data = await container_fishes.findOne({
+            where: { fish_name: fishName },
+          });
+
+          let result = {
+            ...el.dataValues,
+            fish_num: fish_container_data.dataValues.fish_num,
+          };
+          fish_list_final.push(result);
+          return result;
+        });
+      }
 
       const feed_data = await feeds.findAndCountAll({
         where: { container_id },
