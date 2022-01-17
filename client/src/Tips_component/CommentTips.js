@@ -71,6 +71,7 @@ const CommentDeleteBtn = styled.button`
   border-style: none;
   background: none;
   margin-left: 15px;
+  cursor: pointer;
   /* margin-right: 0; */
 `;
 
@@ -118,11 +119,16 @@ const AddcommentBtn = styled.button`
   margin-top: 15px;
   border: 1px solid #108dee;
   background-color: white;
+  cursor: pointer;
 `;
 
-function CommentTips({ comment, handleUploadComment, handleDeleteComment }) {
+function CommentTips({
+  comment,
+  userName,
+  handleUploadComment,
+  handleDeleteComment,
+}) {
   const [newComment, setNewComment] = useState({});
-  const user_name = localStorage.getItem("user_name");
 
   // 댓글 작성
   const handleInputComment = (e) => {
@@ -162,18 +168,25 @@ function CommentTips({ comment, handleUploadComment, handleDeleteComment }) {
                 <Comment>
                   <CommentWriter>{el.comment_user_name}</CommentWriter>
                   <CommentContent>{el.comment_content}</CommentContent>
-                  <CommnetDate>{el.updated_at}</CommnetDate>
+                  <CommnetDate>
+                    {el.updated_at.split("T")[0]}&nbsp;
+                    {el.updated_at.split("T")[1].split(".")[0]}
+                  </CommnetDate>
                 </Comment>
-                <CommentDeleteBtn value={el.comment_id} onClick={Delete}>
-                  X
-                </CommentDeleteBtn>
+                {el.isWriter ? (
+                  <CommentDeleteBtn value={el.comment_id} onClick={Delete}>
+                    X
+                  </CommentDeleteBtn>
+                ) : (
+                  <></>
+                )}
               </SmallCommentForm>
             );
           })
         )}
       </CommentForm>
       <CommentInputContainer>
-        <AddCommentForm>{user_name}</AddCommentForm>
+        <AddCommentForm>{userName}</AddCommentForm>
         <CommentInput
           type="text"
           placeholder="입력"
