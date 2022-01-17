@@ -3,6 +3,7 @@ const {
   containers,
   feeds,
   ex_waters,
+  fishes,
 } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 const sequelize = require("sequelize");
@@ -23,13 +24,11 @@ module.exports = async (req, res) => {
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
       });
-
-      const fish_list = [];
-      fish_info_list.map((el) => {
-        fish_list.push({
-          fish_name: el.dataValues.fish_name,
-          fish_num: el.dataValues.fish_num,
-        });
+      const fish_name_list = fish_info_list.map(
+        (el) => el.dataValues.fish_name
+      );
+      const fish_list = await fishes.findAll({
+        where: { fish_name: [fish_name_list] },
       });
 
       const feed_data = await feeds.findAndCountAll({

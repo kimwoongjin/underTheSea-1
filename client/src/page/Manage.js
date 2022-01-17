@@ -48,7 +48,7 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ getAllConInfo }) {
+function Manage({ getAllConInfo, getConInfo }) {
   useEffect(() => {
     console.log("관리페이지 왜 안뜨는데");
     getAllConInfo();

@@ -332,7 +332,7 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail() {
+function ManageDetail({ tt }) {
   let params = useParams();
 
   let container_id = params.container_id;

@@ -90,28 +90,14 @@ const Theme = styled.div`
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ id, name, size, theme, level }) {
+function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   const navigate = useNavigate();
   console.log(name, level);
   const month = new Date().getMonth() + 1;
-  const accessToken = localStorage.getItem("accessToken");
-  const getConInfo = async () => {
-    const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    // console.log("response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-  };
-  const sendCardInfo = () => {
-    getConInfo();
+
+  const sendCardInfo = async () => {
+    let newData = await getConInfo(id);
+    console.log("ID and NEW CONINFO:", id, newData);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;

@@ -21,7 +21,6 @@ function App() {
   const loginState = useSelector((state) => state.authReducer);
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
-
   const getAllConInfo = async () => {
     const response = await axios.get(`http://localhost:80/container/all`, {
       headers: { authorization: `Bearer ${accessToken}` },
@@ -29,6 +28,22 @@ function App() {
     });
     console.log("res from MANAGE", response);
     localStorage.setItem("allConInfo", JSON.stringify(response));
+  };
+  const getConInfo = async (id) => {
+    const response = await axios.get(
+      `http://localhost:80/container/${id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    console.log("response:", response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+    return response.data.data;
   };
 
   const accessToken = localStorage.getItem("accessToken");
@@ -144,13 +159,14 @@ function App() {
               aquaInfo={aquaInfo}
               containerList={containerList}
               getAllConInfo={getAllConInfo}
+              getConInfo={getConInfo}
             />
           }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} />}
+          element={<ManageDetail idList={idList} tt={tt} />}
         ></Route>
         <Route
           path="/manage/addInfo"
