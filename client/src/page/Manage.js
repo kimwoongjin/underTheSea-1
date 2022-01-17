@@ -54,7 +54,7 @@ function Manage({ getAllConInfo, getConInfo }) {
     getAllConInfo();
   }, []);
   const con_list = JSON.parse(localStorage.getItem("allConInfo"));
-  console.log("con_list FROM MANAGE:", con_list.data.data);
+  // console.log("con_list FROM MANAGE:", con_list.data.data);
   // console.log("con_list2 FROM MANAGE:", containerList);
   // console.log("aquaInfo FROM MANAGE:", aquaInfo);
   return (
@@ -67,7 +67,8 @@ function Manage({ getAllConInfo, getConInfo }) {
       </TitleContainer>
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
-      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} />
+      {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
+      <ManageCard containerList={con_list} getConInfo={getConInfo} />
     </>
   );
 }
