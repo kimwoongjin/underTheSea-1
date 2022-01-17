@@ -109,11 +109,15 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
+          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
           <Name>{name}</Name>
+          {/* <Name>이름</Name> */}
           <Size>사이즈: {size}L</Size>
+          {/* <Size>사이즈: 200L</Size> */}
           <Theme>테마: {theme}</Theme>
+          {/* <Theme>테마: 산호</Theme> */}
         </Content>
       </Contents>
     </Container>

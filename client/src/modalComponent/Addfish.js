@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -20,8 +19,8 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 25%;
-  height: 30%;
+  width: 20%;
+  height: 23%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -43,42 +42,43 @@ const CloseBtnContainer = styled.div`
 
 const ShowContainer = styled.div`
   width: 90%;
-  height: 90%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 80%;
   /* border: 1px solid red; */
 `;
 
-const FishType = styled.input`
-  box-sizing: border-box;
-  padding: 5px;
+const Form = styled.form`
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 15%;
-  border: 1px solid #108dee;
-  border-radius: 4px;
+  height: 95%;
 `;
 
-const FishNum = styled.input`
+const Text = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+  font-family: "Kfont";
+  font-weight: bold;
+  font-size: 1.25rem;
+`;
+
+const Input = styled.input`
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 15%;
-  border: 1px solid #108dee;
-  border-radius: 4px;
+  height: 30px;
 `;
 
 const Btn = styled.button`
   width: 100%;
-  height: 20%;
+  height: 30px;
   border-style: none;
   border-radius: 4px;
   background: #108dee;
@@ -101,8 +101,44 @@ const Btn = styled.button`
   }
 `;
 
-function Addfish() {
+function AddFish({ container_id }) {
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
+  const [fishInfo, setFishInfo] = useState({
+    fish_name: "",
+    fish_num: "",
+  });
+
+  const handleInputValue = (e) => {
+    setFishInfo({
+      ...fishInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const fishAddRequest = () => {
+    console.log("추가 물고기정보", fishInfo);
+    console.log("수조아이디", container_id);
+    axios
+      .patch(
+        `http://localhost:80/container/${container_id}/fish`,
+        {
+          data: fishInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        dispatch(modalOff);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <DarkBackGround>
@@ -111,15 +147,28 @@ function Addfish() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
-            color="#e5e5e5"
             onClick={() => dispatch(modalOff)}
+            color="#e5e5e5"
           />
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
-            <FishType placeholder="어종을 입력해주세요"></FishType>
-            <FishNum placeholder="마릿수를 입력해주세요"></FishNum>
-            <Btn>전송!</Btn>
+            <Text>추가정보를 입력해주세요</Text>
+            <Input
+              placeholder="어종을 입력해주세요"
+              type="text"
+              name="fish_name"
+              onChange={handleInputValue}
+            />
+            <Input
+              placeholder="마릿수를 입력해주세요"
+              type="number"
+              name="fish_num"
+              onChange={handleInputValue}
+            />
+            <Btn type="button" onClick={fishAddRequest}>
+              물고기추가
+            </Btn>
           </Form>
         </ShowContainer>
       </ModalContainer>
@@ -127,4 +176,4 @@ function Addfish() {
   );
 }
 
-export default Addfish;
+export default AddFish;

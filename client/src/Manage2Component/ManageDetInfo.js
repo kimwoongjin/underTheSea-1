@@ -46,20 +46,70 @@ const Content = styled.div`
 `;
 
 const LeftInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 50%;
   height: 100%;
-  border: 1px solid darkgrey;
+  /* border: 1px solid darkgrey; */
 `;
 
 const RightInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   /* border: 1px solid darkgrey; */
 `;
 
 const Name = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  /* background-color: rgba(51, 153, 255, 0.1); */
+  background: #108dee;
+  color: white;
+  width: 80%;
+  height: 20%;
   font-weight: bold;
   font-size: 1.2rem;
+  font-family: "Kfont";
+  border: 2px solid #108dee;
+  /* border: 1px solid red; */
+`;
+
+const HabitatContainer = styled.div`
+  border-radius: 5px;
+  /* background-color: rgba(51, 153, 255, 0.1); */
+  background: #108dee;
+  overflow: hidden;
+  display: flex;
+  width: 80%;
+  height: 20%;
+  border: 2px solid #108dee;
+`;
+
+const Habitat = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-family: "Kfont";
+  width: 50%;
+`;
+
+const HabitatShow = styled.div`
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kfont";
+  /* border-top-right-radius: 4px; */
+  /* border-bottom-right-radius: 4px; */
+  width: 50%;
 `;
 
 const TextD = styled.div`
@@ -67,19 +117,34 @@ const TextD = styled.div`
   font-weight: 450;
 `;
 
-function ManageDetInfo() {
+function ManageDetInfo({ conInfo }) {
   return (
     <>
-      <ContainerS>
-        <DetailImg>
-          <ImgD src="/체리바브.jpeg" alt="" />
-        </DetailImg>
-        {/* ----------------------------------------- */}
-        <Content>
-          <LeftInfo></LeftInfo>
-          <RightInfo></RightInfo>
-        </Content>
-      </ContainerS>
+      {conInfo.fish_list.map((el, idx) => {
+        return (
+          <ContainerS key={idx}>
+            <DetailImg>
+              <ImgD src="/체리바브.jpeg" alt="" />
+            </DetailImg>
+            {/* ----------------------------------------- */}
+            <Content>
+              <LeftInfo>
+                <Name>{el.fish_name}</Name>
+                <HabitatContainer>
+                  <Habitat>서식지</Habitat>
+                  <HabitatShow>아마존</HabitatShow>
+                </HabitatContainer>
+                <HabitatContainer>
+                  <Habitat>서식지</Habitat>
+                  <HabitatShow>아마존</HabitatShow>
+                </HabitatContainer>
+                {/* <Name>{el.fish_name}</Name> */}
+              </LeftInfo>
+              <RightInfo></RightInfo>
+            </Content>
+          </ContainerS>
+        );
+      })}
     </>
   );
 }
