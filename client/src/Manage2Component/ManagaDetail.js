@@ -316,7 +316,7 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail() {
+function ManageDetail({ tt }) {
   let params = useParams();
   let container_id = params.container_id;
   const month = new Date().getMonth() + 1;
@@ -353,7 +353,8 @@ function ManageDetail() {
     one_day_list.forEach((el) => (array[el.type - 1] = el.count));
     final_list[el1.createdAt] = array;
   });
-  console.log(final_list);
+  setTimeout("t.t");
+  console.log(tt);
 
   // useEffect(() => {
   //   getConInfo();
@@ -545,8 +546,8 @@ function ManageDetail() {
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Text>{containerData.data.container_name}</Text> */}
-          <Text>수조</Text>
+          <Text>{conInfo.container_name}</Text>
+          {/* <Text>수조</Text> */}
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}
