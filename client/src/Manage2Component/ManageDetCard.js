@@ -31,11 +31,11 @@ const CardContainer = styled.div`
   justify-content: space-evenly;
   /* margin-top: 4%; */
 `;
-function ManageDetCard() {
+function ManageDetCard({ conInfo }) {
   return (
     <Container>
       <CardContainer>
-        <ManageDetInfo />
+        <ManageDetInfo conInfo={conInfo} />
       </CardContainer>
     </Container>
   );

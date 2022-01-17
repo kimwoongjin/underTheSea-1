@@ -2,12 +2,13 @@ const { container_fishes, containers, fishes } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+  console.log("req바디", req.body);
   const userInfo = isAuthorized(req);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
-    const { fish_num, fish_name } = req.body.data;
+    const { fish_num, fish_name } = req.body;
 
     const check_container = await containers.findOne({
       where: { id: container_id },

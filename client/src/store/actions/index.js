@@ -16,6 +16,7 @@ import {
   DEADFISH_MODAL_ON,
   RECOMMENDINFO_MODAL_ON,
   CONTAINER_CARD_INFO_SHOW,
+  EXCHANGEWATER_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
 } from "./actionTypes";
@@ -64,6 +65,9 @@ export const feedingInputModalOnAction = {
 };
 export const recommendInfoModalOnAction = {
   type: RECOMMENDINFO_MODAL_ON,
+};
+export const exchangeWaterModalOnAction = {
+  type: EXCHANGEWATER_MODAL_ON,
 };
 export const signupAction = {
   type: SIGN_UP,
