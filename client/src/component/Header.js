@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* border: 1px solid black; */
 `;
 
 const Img = styled.img`
@@ -28,6 +29,16 @@ const Login = styled.div`
 `;
 
 const Manage = styled.div`
+  /* border: 1px solid red; */
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
+`;
+
+const Mypage = styled.div`
   /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
@@ -102,7 +113,7 @@ const BtnContainer = styled.div`
   /* border: 1px solid red; */
   justify-content: space-around;
   margin-right: 2%;
-  width: 300px;
+  width: 400px;
   font-family: "Kfont";
 `;
 
@@ -121,13 +132,23 @@ function Header() {
           <Search>검색</Search>
         </Link>
         {isLogin ? (
-          <Link style={{ textDecoration: "none", color: "black" }} to="/manage">
-            <Manage>관리</Manage>
-          </Link>
+          <>
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to="/manage"
+            >
+              <Manage>관리</Manage>
+            </Link>
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to="/mypage"
+            >
+              <Mypage>마이페이지</Mypage>
+            </Link>
+          </>
         ) : (
           <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
         )}
-        {/* <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login> */}
         {isLogin ? (
           <Signout>로그아웃</Signout>
         ) : (

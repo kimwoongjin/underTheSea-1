@@ -490,7 +490,7 @@ function ManageDetail({ tt }) {
 
     // console.log(oneDayList)
   });
-  console.log("환수객체", exWaterObj);
+  // console.log("환수객체", exWaterObj);
 
   // --------- 피딩데이터 가공 ---------
 
@@ -506,7 +506,7 @@ function ManageDetail({ tt }) {
 
   // --------------------------------
 
-  console.log("파이널 리스트 ", final_list);
+  // console.log("파이널 리스트 ", final_list);
 
   // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
   // console.log(feed_data);
