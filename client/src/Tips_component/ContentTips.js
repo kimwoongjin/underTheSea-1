@@ -64,6 +64,14 @@ const ContentBox = styled.div`
 `;
 
 function ContentTips({ tipData }) {
+  // console.log(typeof tipData.createdAt);
+  let date, time;
+  if (tipData.createdAt) {
+    date = tipData.createdAt.split("T")[0];
+    time = tipData.createdAt.split("T")[1].split(".")[0];
+  }
+  // const
+  // const date = tip.created_at.split("T")[0];
   return (
     <>
       <PostTitle>{tipData.title}</PostTitle>
@@ -71,14 +79,21 @@ function ContentTips({ tipData }) {
         <WriterIcon>:)</WriterIcon>
         <WriterInfo>
           <Writer>{tipData.user_name}</Writer>
-          <Date>{tipData.createdAt}</Date>
+          <Date>
+            {date}&nbsp;
+            {time}
+          </Date>
         </WriterInfo>
       </WriterCover>
       <Content>
-        <img
-          src={`http://localhost:80${tipData.img}`}
-          style={{ width: "300px", height: "250px" }}
-        ></img>
+        {tipData.img ? (
+          <img
+            src={`http://localhost:80${tipData.img}`}
+            style={{ width: "300px", height: "250px" }}
+          ></img>
+        ) : (
+          <></>
+        )}
         <ContentBox>{tipData.content}</ContentBox>
       </Content>
     </>

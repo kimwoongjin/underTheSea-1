@@ -7,19 +7,19 @@ import SearchInfo from "./SearchInfo";
 import { useEffect } from "react";
 import SearchDrop from "./SearchDrop";
 
-const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
-const activeBorderRadius = "1rem 1rem 0 0";
-const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
+// const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
+// const activeBorderRadius = "1rem 1rem 0 0";
+// const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
 
 const Auto = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   /* border: 1px solid red; */
-  width: 50%;
+  width: 100%;
   height: 7.5vh;
   position: relative;
-  margin: 10% 0 0 20%;
+  margin-top: 10%;
 `;
 
 const InputContainer = styled.div`
@@ -32,20 +32,13 @@ const InputContainer = styled.div`
   font-family: "Kfont";
   border: 1px solid black; */
   /* margin-top: 8rem; */
+  width: 30vw;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
   padding: 1rem;
-  border: 1px solid rgb(223, 225, 229);
-  border-radius: ${(props) =>
-    props.hasText ? activeBorderRadius : inactiveBorderRadius};
-  z-index: 3;
-  box-shadow: ${(props) => (props.hasText ? boxShadow : 0)};
-
-  &:focus-within {
-    box-shadow: ${boxShadow};
-  }
-
+  margin-right: 2%;
+  border-bottom: 5px solid #108dee;
   .hi {
     /* border: none;
     background: none;
@@ -56,33 +49,36 @@ const InputContainer = styled.div`
     text-align: center;
     font-weight: 700;
     font-size: 20px; */
+
     flex: 1 0 0;
     background-color: transparent;
-    border: none;
     margin: 0;
     padding: 0;
     outline: none;
-    font-size: 16px;
+    border: none;
+    font-size: 1.2rem;
+    font-family: "Kfont";
+    text-align: center;
   }
 `;
 
 const Button = styled.button`
-  position: absolute;
   width: 8vw;
   height: 5vh;
   font-size: 1.5rem;
   color: white;
   background: #108dee;
   border-radius: 5px;
+  font-weight: bold;
+  font-family: "Kfont";
   border: 2px solid #108dee;
   cursor: pointer;
-  border: 1px solid black;
-  right: 0%;
 `;
 
 const Text = styled.div`
   position: absolute;
-  top: 115%;
+  top: 47%;
+  left: 36%;
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -97,6 +93,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: absolute;
 `;
 const CardContainer = styled.div`
   /* border: 1px solid black; */
@@ -106,13 +103,14 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 12%;
+  margin-top: 8%;
+  position: relative;
 `;
 // const DropDown = styled.ul``;
 
 function Search() {
   // let refresh = window.location.search;
-  const [word, setWord] = useState("");
+  // const [word, setWord] = useState("");
   const [search, setSearch] = useState(); //검색 물고기
   const [fish, setFish] = useState([]); //검색 전 추천 물고기
   const [options, setOptions] = useState([]); //60개 정보리스트
@@ -141,10 +139,9 @@ function Search() {
 
     axios
       .post(`http://localhost:80/fish`, { data: { fish_name: search } })
-      .then((result) => {
+      .then(() => {
         // if (!word || word === " ") return null;
         // console.log(result.data, "배열입니까?");
-        setSearch(result.data);
         setCurrentFIsh(true);
       })
       .catch((err) => {
@@ -153,7 +150,7 @@ function Search() {
   };
 
   // 60개 리스트 받아오기===========================================================
-
+  //-----> 네임 리스트 <------
   useEffect(() => {
     axios
       .get(`http://localhost:80/fish/all/60`, {
@@ -164,7 +161,6 @@ function Search() {
       .then((result) => {
         setFish2(result.data.data.fish_data);
         const list = result.data.data.fish_data.map((el) => el.fish_name);
-        // console.log(list, "---------------");
         setOptions(list);
       })
       .catch((err) => {
@@ -174,11 +170,11 @@ function Search() {
 
   // 검색 창 ===========================================================
 
-  useEffect(() => {
-    if (search === "") {
-      setHasText(false);
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   if (search === "") {
+  //     setHasText(false);
+  //   }
+  // }, [search]);
 
   // 추천 6개 카드  ===========================================================
 
@@ -207,31 +203,30 @@ function Search() {
 
     // input에 텍스트가 있는지 없는지 확인하는 코드
     value ? setHasText(true) : setHasText(false);
-    setWord(value);
+    setSearch(value);
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    // console.log(filterRegex, "너도 콘솔찍히니?");
+
     const resultOptions = options.filter((option) => option.match(filterRegex));
     const testOptions = fish2.filter((fish) =>
       fish.fish_name.match(filterRegex)
     );
-    console.log(testOptions, "YEAH~~~~~~~~~");
+
     setFilteredOptions2(testOptions);
     setFilteredOptions(resultOptions);
   };
 
   const handleDropDownClick = (clickedOption) => {
-    setWord(clickedOption);
-    // console.log(clickedOption, "옵션이니");
-    const resultOptions = options.filter((option) => option === clickedOption);
-    // console.log(resultOptions, "맞니 아니니니");
+    setSearch(clickedOption);
 
+    const resultOptions = options.filter((option) => option === clickedOption);
+    // console.log(resultOptions, "옵션이니");
     setOptions(resultOptions);
   };
 
   const handleDeleteButtonClick = () => {
-    setWord("");
+    setSearch("");
   };
 
   //엔터 키 이벤트
@@ -290,17 +285,16 @@ function Search() {
           <div className="delete-button" onClick={handleDeleteButtonClick}>
             &times;
           </div>
-          {hasText ? (
-            <SearchDrop
-              options={filteredOptions}
-              handleDropDownClick={handleDropDownClick}
-              selected={selected}
-            />
-          ) : null}
-          <Button onClick={gotoSearch}>search</Button>
         </InputContainer>
+        <Button onClick={gotoSearch}>Search</Button>
       </Auto>
-
+      {hasText ? (
+        <SearchDrop
+          options={filteredOptions}
+          handleDropDownClick={handleDropDownClick}
+          selected={selected}
+        />
+      ) : null}
       <Text>카드를 클릭하면 세부 정부를 확인할 수 있습니다.</Text>
 
       {/* ============================================================= */}
