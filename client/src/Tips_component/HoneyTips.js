@@ -1,8 +1,10 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Header from "../component/Header";
 import Header2 from "../component/Header2";
-import TipCard from "../component/TipCard";
-import { useNavigate } from "react-router-dom";
+import TipList from "./TipList";
 
 const Container = styled.div`
   width: 100%;
@@ -12,6 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // background-color: #f7f7f4;
 `;
 const TopCover = styled.div`
   width: 100%;
@@ -78,23 +81,124 @@ const Btn = styled.button`
   margin-right: 28px;
   border-style: none;
   background: #108dee;
+  cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
-const CardContainer = styled.div`
+
+const TipListContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
   width: 70%;
-  /* border: 1px dashed darkcyan; */
+  height: 100%;
+  border: 1px solid #a0d5fd;
+  border-radius: 4px;
+  margin-bottom: 10px;
 `;
+
+const TipListHeadContainer = styled.div`
+  width: 95%;
+  display: flex;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  border-bottom: 4px solid #108dee;
+  font-weight: bold;
+`;
+
+const TipListTitle = styled.div`
+  flex: 6;
+  text-align: center;
+`;
+
+const TipListWriter = styled.div`
+  flex: 2;
+  text-align: start;
+`;
+
+const TipListDate = styled.div`
+  flex: 2;
+  text-align: center;
+`;
+
+const PageBtnForm = styled.form`
+  display: flex;
+  width: 95%;
+  justify-content: center;
+  border-top: 1px solid #808080;
+  margin-bottom: 5px;
+`;
+
+const PageBtn = styled.div`
+  align-text: center;
+  border-style: none;
+  background-color: #ffffff;
+  border-bottom: 1px solid black;
+  margin: 2px;
+  cursor: pointer;
+`;
+
 function HoneyTips() {
+  const [tipList, setTipList] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [tipLength, setTipLength] = useState([]);
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem("accessToken");
+
   const goToNewTip = () => {
     navigate("/writetips");
   };
+
+  useEffect(() => {
+    handleTipList();
+  }, [pageNum]);
+
+  const handleTipList = async () => {
+    const result = await axios.get(`http://localhost:80/tip/all/${pageNum}`, {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+      withCredentials: true,
+    });
+    // console.log(result.data.data);
+    const { data: list } = result.data;
+    setTipList([...list]);
+    const page_length = Math.floor(result.data.tip_num / 10);
+    if (result.data.tip_num % 10 !== 0) {
+      const page = new Array(page_length + 1).fill(0);
+      // console.log(page);
+      setTipLength([...page]);
+    } else {
+      const page = Array(page_length).fill(0);
+      setTipLength([...page]);
+    }
+  };
+
+  const goToPre = () => {
+    if (pageNum === 1) {
+      return;
+    }
+    const page = pageNum;
+    setPageNum(page - 1);
+  };
+
+  const goToNext = () => {
+    if (pageNum === tipLength.length) {
+      return;
+    }
+    setPageNum(pageNum + 1);
+  };
+
+  const selectPageNum = (e) => {
+    // console.log(e.target.id);
+    setPageNum(e.target.id);
+  };
+
   return (
     <>
-      <Header2></Header2>
+      <Header></Header>
       <Container>
         <TopCover>
           <TitleContainer>
@@ -107,12 +211,28 @@ function HoneyTips() {
         <BtnContainer>
           <Btn onClick={goToNewTip}>새글쓰기</Btn>
         </BtnContainer>
-        <CardContainer>
-          <TipCard></TipCard>
-          <TipCard></TipCard>
-          <TipCard></TipCard>
-          <TipCard></TipCard>
-        </CardContainer>
+        <TipListContainer>
+          <TipListHeadContainer>
+            <div style={{ flex: "0.5" }}></div>
+            <TipListTitle>제목</TipListTitle>
+            <TipListWriter>작성자</TipListWriter>
+            <TipListDate>작성일</TipListDate>
+          </TipListHeadContainer>
+          {tipList.map((el, idx) => {
+            return <TipList key={idx} value={el.tip_id} tip={el}></TipList>;
+          })}
+          <PageBtnForm>
+            <PageBtn onClick={goToPre}>이전</PageBtn>
+            {tipLength.map((el, idx) => {
+              return (
+                <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                  {idx + 1}
+                </PageBtn>
+              );
+            })}
+            <PageBtn onClick={goToNext}>다음</PageBtn>
+          </PageBtnForm>
+        </TipListContainer>
       </Container>
     </>
   );

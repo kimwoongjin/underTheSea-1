@@ -45,6 +45,7 @@ const Starfish = styled.img`
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
+  font-family: "Kfont";
   font-size: 1.8rem;
   font-weight: bold;
   margin-top: 40px;
@@ -55,6 +56,7 @@ const Title = styled.div`
 const SubTitle = styled.div`
   margin-top: 15px;
   color: #808080;
+  font-family: "Kfont";
   font-size: 1.25rem;
   margin-bottom: 50px;
   /* border: 1px solid red; */
@@ -96,6 +98,7 @@ const TitleInput = styled.input`
   /* box-sizing: border-box; */
   /* border: 1px solid #108dee; */
   /* border-radius: 4px; */
+  font-family: "Kfont";
   font-size: 1.5rem;
   margin-bottom: 10px;
 `;
@@ -111,13 +114,7 @@ const ImageInputForm = styled.label`
   color: white;
   cursor: pointer;
   border: 1px dashed #108dee;
-  .input {
-    padding: 6px 25px;
-    background-color: #ff6600;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-  }
+  box-sizing: border-box;
 `;
 //
 const ImageInput = styled.input`
@@ -135,6 +132,7 @@ const TipInput = styled.textarea`
   height: 30%;
   padding: 10px;
   border: none;
+  font-family: "Kfont";
   font-size: 1rem;
   /* margin-bottom: 10px; */
   padding: 0 0 1% 3%;
@@ -142,23 +140,21 @@ const TipInput = styled.textarea`
 `;
 
 const ButtonForm = styled.div`
-  width: 15%;
-  height: 20%;
+  width: 70%;
+  /* margin-top: 80px; */
   display: flex;
-  justify-content: space-evenly;
-  /* border: 1px solid black; */
-  position: absolute;
-  right: 13%;
-  top: 120%;
+  justify-content: flex-end;
+  /* border: 1px dashed darkcyan; */
 `;
 
 const Btn = styled.button`
-  width: 40%;
+  width: 15%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
   margin: 0 5px;
   color: white;
+  font-family: "Kfont";
   font-size: 1.25rem;
   font-weight: bold;
   border-style: none;
@@ -166,9 +162,13 @@ const Btn = styled.button`
   margin-right: 0;
   background: #108dee;
   text-align: center;
+  cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 const BtnR = styled.button`
-  width: 40%;
+  width: 15%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
@@ -180,12 +180,18 @@ const BtnR = styled.button`
   border-radius: 4px;
   margin-right: 0;
   text-align: center;
+  cursor: pointer;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 // ================================================================================
 
 function WriteTips({ token }) {
   const accessToken = localStorage.getItem("accessToken");
+  const edit_tip = localStorage.getItem("edit_tip");
+  const tip_id = localStorage.getItem("tip_id");
   const navigate = useNavigate();
   const [tip, setTip] = useState({
     title: "",
@@ -194,17 +200,45 @@ function WriteTips({ token }) {
   });
   const [image, setImage] = useState("");
 
+  console.log("tipdata", tip);
+
+  // 수정버튼을 누르고 들어왔을 때
+  useEffect(() => {
+    console.log("edit?????", edit_tip);
+    if (edit_tip) {
+      axios
+        .get(`http://localhost:80/tip/${tip_id}`, {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        })
+        .then((res) => {
+          const { data: tip_data } = res.data;
+          setTip({
+            ...tip_data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return;
+    }
+  }, []);
+
+  // 이미지 파일 선택
   const selectFIle = async (e) => {
     const file = e.target.files[0];
     const result = await postImage(file);
     console.log(result.data.imagePath);
-    // setImage("http://localhost:80" + result.data.imagePath);
     setTip({
       ...tip,
       img: result.data.imagePath,
     });
   };
 
+  // 이미지 파일 저장
   const postImage = async (file) => {
     const formData = new FormData();
     formData.append("image", file);
@@ -216,9 +250,15 @@ function WriteTips({ token }) {
     return result;
   };
 
+  // 게시물 등록
   const handleAddTip = async () => {
     if (!accessToken) {
       console.log("null");
+      return;
+    }
+    if (!tip.title) {
+      console.log("invalid title");
+      alert("제목을 입력해주세요");
       return;
     }
     const result = await axios.post(
@@ -234,11 +274,19 @@ function WriteTips({ token }) {
     navigate(`/posttips`);
   };
 
+  // 게시물 등록 취소
   const handleCancle = () => {
-    setTip({});
+    setTip({
+      title: "",
+      content: "",
+      img: "",
+    });
     setImage("");
+    localStorage.setItem("edit_tip", false);
+    navigate(-1);
   };
 
+  // 텍스트 입력
   const handleInputValue = (e) => {
     setTip({
       ...tip,
@@ -256,37 +304,40 @@ function WriteTips({ token }) {
             <Starfish src="불가사리.png" />
           </TitleContainer>
           <SubTitle>나누고 싶은 경험을 적어주세요!</SubTitle>
-          {/* <Swarm src="무리.png" /> */}
-          <ButtonForm>
-            <Btn>등록</Btn>
-            <BtnR>취소</BtnR>
-          </ButtonForm>
         </TopCover>
         {/* ========================================================== */}
+        <ButtonForm>
+          <Btn onClick={handleAddTip}>등록</Btn>
+          <BtnR onClick={handleCancle}>취소</BtnR>
+        </ButtonForm>
         <InputContainer>
           <FormWrapper>
-            <ButtonForm>
-              <Btn onClick={handleAddTip}>등록</Btn>
-              <BtnR onClick={handleCancle}>취소</BtnR>
-            </ButtonForm>
             <TitleInput
               placeholder="제목을 입력해 주세요."
               type="text"
               name="title"
               onChange={handleInputValue}
+              value={tip.title}
             />
             <TipInput
               placeholder="내용을 입력하세요"
               type="text"
               name="content"
               onChange={handleInputValue}
+              value={tip.content}
             />
             <ImageInputForm for="input-image">
-              <img
-                id="select-img"
-                src={`http://localhost:80${tip.img}`}
-                style={{ width: "20%" }}
-              ></img>
+              {tip.img ? (
+                <img
+                  id="select-img"
+                  src={`http://localhost:80${tip.img}`}
+                  style={{
+                    boxSizing: "border-box",
+                  }}
+                ></img>
+              ) : (
+                <div>Upload Image</div>
+              )}
             </ImageInputForm>
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>
