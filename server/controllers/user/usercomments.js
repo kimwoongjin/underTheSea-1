@@ -12,25 +12,31 @@ module.exports = async (req, res) => {
   } else {
     const user_id = userinfo.id;
 
+    console.log("I'm here!!!!!!!!!!!!!!!!!", page_num);
     const commnets_data = await comments.findAll({
       offset,
       limit,
       where: { user_id },
-      order: ["createAt", "DESC"],
+      order: [["createdAt", "DESC"]],
     });
 
-    const user_comments = await Promise.all(
-      commnets_data.map(async (el) => {
-        const comment_tip = await tips.findOne({ where: { id: el.tip_id } });
-        return {
-          tip_id: comment_tip.dataValues.id,
-          tip_title: comment_tip.dataValues.title,
-          tip_id: el.dataValues.tip_id,
-          content: el.dataValues.content,
-          created_at: el.dataValues.createdAt,
-        };
-      })
-    );
+    let user_comments = [];
+    if (!commnets_data) {
+      user_comments = [];
+    } else {
+      user_comments = await Promise.all(
+        commnets_data.map(async (el) => {
+          const comment_tip = await tips.findOne({ where: { id: el.tip_id } });
+          return {
+            tip_id: comment_tip.dataValues.id,
+            tip_title: comment_tip.dataValues.title,
+            tip_id: el.dataValues.tip_id,
+            content: el.dataValues.content,
+            createdAt: el.dataValues.createdAt,
+          };
+        })
+      );
+    }
 
     return res.status(200).json({
       data: user_comments,

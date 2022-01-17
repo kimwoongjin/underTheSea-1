@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction, signupModalOnAction } from "../store/actions";
 
 const Container = styled.div`
+  /* position: fixed; */
   width: 100vw;
   height: 10vh;
-  /* background: #d2f7ff; */
+  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  z-index: 99;
 `;
 
 const Img = styled.img`

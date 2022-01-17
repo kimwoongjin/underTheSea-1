@@ -48,8 +48,9 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ getAllConInfo }) {
+function Manage({ getAllConInfo, getConInfo }) {
   useEffect(() => {
+    console.log("관리페이지 왜 안뜨는데");
     getAllConInfo();
   }, []);
   const con_list = JSON.parse(localStorage.getItem("allConInfo"));
@@ -64,7 +65,10 @@ function Manage({ getAllConInfo }) {
         <Text>당신의 어항을 관리해보세요!</Text>
         <Img src="작은해초.png" alt="" />
       </TitleContainer>
-      <ManageCard containerList={con_list.data.data} />
+      {/* <ManageCard /> */}
+      {/* <ManageCard containerList={con_list.data.data} /> */}
+      {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
+      <ManageCard containerList={con_list} getConInfo={getConInfo} />
     </>
   );
 }

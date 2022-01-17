@@ -4,11 +4,10 @@ import Header from "../component/Header";
 import { useState, useEffect } from "react";
 import SignOut from "../modalComponent/SignOut";
 import PwdChange1 from "../modalComponent/PwdChange1";
-
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { signoutModalAction, pwdModalAction } from "../store/actions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -144,6 +143,22 @@ function Mypage() {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState("manage");
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:80/user/comments`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        console.log(result, "0000000000");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleOn = () => {
     setOpenModal(true);
