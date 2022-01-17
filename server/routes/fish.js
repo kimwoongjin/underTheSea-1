@@ -7,5 +7,6 @@ const router = express.Router();
 router.post("/include", controllers.fishinfo);
 router.get("/all/:limit", controllers.allfishinfo);
 router.post("/one", controllers.exactfishinfo);
+router.get("/fishnamelist", controllers.fishnamelist);
 
 module.exports = router;
