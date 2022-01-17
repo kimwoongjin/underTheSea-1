@@ -48,6 +48,8 @@ const Content = styled.div`
 
 const LeftInfo = styled.div`
   display: flex;
+  box-sizing: border-box;
+  padding: 10px 0px;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -174,7 +176,7 @@ function ManageDetInfo({ conInfo }) {
                 </HabitatContainer>
                 <HabitatContainer>
                   <Habitat>마릿수</Habitat>
-                  <HabitatShow>{el.temp}</HabitatShow>
+                  <HabitatShow>{el.fish_num}</HabitatShow>
                 </HabitatContainer>
               </LeftInfo>
               <RightInfo>

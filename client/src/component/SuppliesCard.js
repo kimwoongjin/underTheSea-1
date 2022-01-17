@@ -11,6 +11,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 30px;
+  transition: all 0.3s;
+  :hover {
+    transform: matrix(1, 0, 0, 1, 0, -10);
+    box-shadow: 0px 0px 30px #adb5bd;
+    transition: all 0.3s;
+  }
 `;
 const ImgContainer = styled.div`
   width: 100%;

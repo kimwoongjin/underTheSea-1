@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction, signupModalOnAction } from "../store/actions";
 
 const Container = styled.div`
-  position: fixed;
+  /* position: fixed; */
   width: 100vw;
   height: 10vh;
   background: white;

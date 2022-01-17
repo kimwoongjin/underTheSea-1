@@ -361,7 +361,35 @@ function ManageDetail({ tt }) {
       amount: e.target.value,
     });
   };
+  // ----------------- 일주일 뽑기 ------------------
 
+  // const getCurrentWeek = () => {
+  //   const day = new Date();
+  //   const sunday = day.getTime() - 86400000 * day.getDay();
+  //   day.setTime(sunday);
+  //   const result = [day.toISOString().slice(0, 10)];
+  //   for (let i = 1; i < 7; i++) {
+  //     day.setTime(day.getTime() + 86400000);
+  //     result.push(day.toISOString().slice(0, 10));
+  //   }
+  //   return result;
+  // }
+
+  // console.log("환수객체", exWaterObj);
+  // {220116: 50, 220117: 40}
+  // console.log("피딩객체", final_list);
+  // { 220115: [1,2,3,4], 220114: [2,1,4,0]}
+  // let exp = [];
+  // let thisWeek = getCurrentWeek();
+  // let curWeek = thisWeek.map((day) => day = day.split('-').join('').slice(2))
+  /* 오늘이 2020-10-31인 경우, 
+  [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
+  // 여기서 현재 환수객체랑 피딩객체
+  // for(let key in exWaterObj) {
+  //   if(curWeek.includes(key.))
+  // }
+
+  // ---------------------------------------------------
   useEffect(() => {
     // console.log("유즈이펙트는 실행되니?", container_id);
     axios
@@ -377,7 +405,7 @@ function ManageDetail({ tt }) {
         }
       )
       .then((res) => {
-        console.log("response:", res.data.data);
+        // console.log("response:", res.data.data);
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
       })
       .catch((err) => console.log(err));
@@ -426,7 +454,7 @@ function ManageDetail({ tt }) {
         }
       )
       .then((res) => {
-        console.log("환수기록추가응답 --> ", res.data.data.ex_water_list);
+        // console.log("환수기록추가응답 --> ", res.data.data.ex_water_list);
 
         // let water = getExAmount();
         // console.log("환수총량", exAmount);
@@ -449,14 +477,14 @@ function ManageDetail({ tt }) {
   // length: 4
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  console.log("conInfo", conInfo);
+  // console.log("conInfo", conInfo);
 
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
   for (let i = 0; i < conInfo.fish_list.length; i++) {
     total += conInfo.fish_list[i].fish_num;
   }
-  console.log("토탈", total);
+  // console.log("토탈", total);
   // ----------------------------
 
   let exWater = {};
@@ -495,7 +523,6 @@ function ManageDetail({ tt }) {
 
     // console.log(oneDayList)
   });
-  console.log("환수객체", exWaterObj);
 
   // --------- 피딩데이터 가공 ---------
 
@@ -510,8 +537,8 @@ function ManageDetail({ tt }) {
   });
 
   // --------------------------------
-
-  console.log("파이널 리스트 ", final_list);
+  console.log("환수객체", exWaterObj);
+  console.log("피딩객체", final_list);
 
   // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
   // console.log(feed_data);
