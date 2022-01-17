@@ -309,10 +309,10 @@ const ExWaterRecord = styled.div`
   align-items: center;
   font-size: 1.2rem;
   width: 90%;
-  height: 30%;
+  height: 30px;
   border: 1px solid gray;
   border-radius: 4px;
-  margin-top: 1%;
+  margin-top: 2px;
 `;
 
 const FoodTypeAndNum = styled.div`
@@ -426,11 +426,7 @@ function ManageDetail() {
       )
       .then((res) => {
         console.log("response:", res.data.data);
-
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-        // localStorage.setItem("waterInfo", JSON.stringify(res.data.data));
-
-        // console.log("conInfo머냐", conInfo);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -638,7 +634,10 @@ function ManageDetail() {
                       <FoodInnerContainer></FoodInnerContainer>
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
                       <ExWaterRecord>
-                        {exWaterObj[days.format("YYMMDD")]}
+                        {exWaterObj[days.format("YYMMDD")] === undefined
+                          ? 0
+                          : exWaterObj[days.format("YYMMDD")]}
+                        L
                       </ExWaterRecord>
                     </FoodIconContainer>
                   </Td>

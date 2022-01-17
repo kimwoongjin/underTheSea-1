@@ -120,9 +120,9 @@ const TextD = styled.div`
 function ManageDetInfo({ conInfo }) {
   return (
     <>
-      {conInfo.fish_list.map((el) => {
+      {conInfo.fish_list.map((el, idx) => {
         return (
-          <ContainerS>
+          <ContainerS key={idx}>
             <DetailImg>
               <ImgD src="/체리바브.jpeg" alt="" />
             </DetailImg>
