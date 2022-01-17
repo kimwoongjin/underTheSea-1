@@ -90,10 +90,14 @@ const Theme = styled.div`
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ id, name, size, theme, level }) {
+function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   const navigate = useNavigate();
   console.log(name, level);
-  const sendCardInfo = () => {
+  const month = new Date().getMonth() + 1;
+
+  const sendCardInfo = async () => {
+    let newData = await getConInfo(id);
+    console.log("ID and NEW CONINFO:", id, newData);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;
@@ -105,11 +109,15 @@ function ManageInfo({ id, name, size, theme, level }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
+          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
           <Name>{name}</Name>
+          {/* <Name>이름</Name> */}
           <Size>사이즈: {size}L</Size>
+          {/* <Size>사이즈: 200L</Size> */}
           <Theme>테마: {theme}</Theme>
+          {/* <Theme>테마: 산호</Theme> */}
         </Content>
       </Contents>
     </Container>
