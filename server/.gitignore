@@ -1,0 +1,7 @@
+/node_modules 
+node_modules/
+.env 
+*localhost* 
+*package-lock.json 
+*.pem
+**/node_modules
