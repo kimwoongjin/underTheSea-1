@@ -435,7 +435,10 @@ function ManageDetail() {
             withCredentials: true,
           }
         )
-        .then((res) => {});
+        .then((res) => {
+          localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+          console.log("res--->", res);
+        });
     }
   }, []);
   // --------- 환수데이터 가공 ---------
