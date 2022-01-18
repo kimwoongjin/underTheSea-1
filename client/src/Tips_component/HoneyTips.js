@@ -14,6 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 25px;
   // background-color: #f7f7f4;
 `;
 const TopCover = styled.div`
@@ -72,13 +73,13 @@ const BtnContainer = styled.div`
   /* border: 1px dashed darkcyan; */
 `;
 const Btn = styled.button`
-  width: 120px;
-  height: 40px;
+  width: 90px;
+  height: 30px;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 4px;
-  margin-right: 28px;
+  margin-right: 0;
   border-style: none;
   background: #108dee;
   cursor: pointer;
@@ -103,23 +104,28 @@ const TipListHeadContainer = styled.div`
   width: 95%;
   display: flex;
   font-size: 1.5rem;
-  margin-top: 20px;
+  margin-top: 30px;
+  // margin-bottom: 10px;
   border-bottom: 4px solid #108dee;
+  // box-shadow: 0px 5px 5px -3px #828282;
   font-weight: bold;
 `;
 
 const TipListTitle = styled.div`
   flex: 6;
-  text-align: center;
+  margin-bottom: 30px;
+  text-align: start;
 `;
 
 const TipListWriter = styled.div`
   flex: 2;
+  margin-bottom: 30px;
   text-align: start;
 `;
 
 const TipListDate = styled.div`
   flex: 2;
+  margin-bottom: 30px;
   text-align: center;
 `;
 
@@ -127,8 +133,9 @@ const PageBtnForm = styled.form`
   display: flex;
   width: 95%;
   justify-content: center;
-  border-top: 1px solid #808080;
-  margin-bottom: 5px;
+  // border-top: 1px solid #808080;
+  padding-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const PageBtn = styled.div`
@@ -136,7 +143,8 @@ const PageBtn = styled.div`
   border-style: none;
   background-color: #ffffff;
   border-bottom: 1px solid black;
-  margin: 2px;
+  margin: 5px;
+  font-size: 18px;
   cursor: pointer;
 `;
 

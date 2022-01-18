@@ -4,6 +4,7 @@ const { isAuthorized } = require("../tokenFunction");
 module.exports = async (req, res) => {
   // console.log(req, "pppppppppp");
   const userinfo = isAuthorized(req);
+  console.log(userinfo);
 
   if (!userinfo) {
     return res.status(401).json({ message: "You are not authorized" });
@@ -18,7 +19,8 @@ module.exports = async (req, res) => {
         const ex_water_data = await ex_waters.findAll({
           where: { container_id },
         });
-        const last_ex_water = ex_water_data.reverse()[0].dataValues.createAt;
+        console.log(ex_water_data);
+        // const last_ex_water = ex_water_data.reverse()[0].dataValues.createAt;
 
         return {
           container_id: el.dataValues.id,
@@ -26,7 +28,7 @@ module.exports = async (req, res) => {
           size: el.dataValues.size,
           level_img: el.dataValues.level_img,
           fish_num: el.dataValues.fish_num,
-          last_ex_water: last_ex_water,
+          // last_ex_water: last_ex_water,
           theme: el.dataValues.theme,
         };
       })

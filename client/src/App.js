@@ -27,14 +27,15 @@ function App() {
 
   const month = new Date().getMonth() + 1;
 
-  const getAllConInfo = async () => {
-    const response = await axios.get(`http://localhost:80/container/all`, {
-      headers: { authorization: `Bearer ${accessToken}` },
-      withCredentials: true,
-    });
-    // console.log("res from MANAGE", response);
-    localStorage.setItem("allConInfo", JSON.stringify(response));
-  };
+  // const getAllConInfo = async () => {
+  //   const response = await axios.get(`http://localhost:80/container/all`, {
+  //     headers: { authorization: `Bearer ${accessToken}` },
+  //     withCredentials: true,
+  //   });
+  //   // console.log("res from MANAGE", response);
+  //   localStorage.setItem("allConInfo", JSON.stringify(response));
+  // };
+
   const getConInfo = async (id) => {
     const response = await axios.get(
       `http://localhost:80/container/${id}/${month}`,

@@ -3,9 +3,9 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
-  const limit = 8;
-  const page_num = Number(req.params.page_num);
-  const offset = (page_num - 1) * limit;
+  // const limit = 8;
+  // const page_num = Number(req.params.page_num);
+  // const offset = (page_num - 1) * limit;
 
   if (!userinfo) {
     return res.status(401).json({ message: "You are not authorized" });
@@ -13,10 +13,10 @@ module.exports = async (req, res) => {
     const user_id = userinfo.id;
 
     const tips_data = await tips.findAll({
-      offset,
-      limit,
+      // offset,
+      // limit,
       where: { user_id },
-      order: ["createAt", "DESC"],
+      order: [["createdAt", "DESC"]],
     });
 
     const user_tips = tips_data.map((el) => {

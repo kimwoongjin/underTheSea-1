@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCaretSquareRight } from "@fortawesome/free-regular-svg-icons";
+import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 
 const TipContainer = styled.div`
   position: relative;
@@ -7,7 +12,7 @@ const TipContainer = styled.div`
   height: 60px;
   display: flex;
   margin-bottom: 1px;
-  border-top: 1px solid #808080;
+  border-bottom: 1px solid #808080;
   cursor: pointer;
   align-items: center;
   //   z-index: 100;
@@ -70,7 +75,14 @@ function TipList({ tip }) {
   return (
     <>
       <TipContainer>
-        <div style={{ flex: "0.5" }}></div>
+        <div style={{ flex: "0.5", alignItems: "center" }}>
+          <FontAwesomeIcon
+            size="1x"
+            icon={faAngleDoubleRight}
+            color="#828282"
+          ></FontAwesomeIcon>
+        </div>
+
         <TipTitle id={tip.tip_id} onClick={handleSelectTip}>
           {tip.title}
         </TipTitle>

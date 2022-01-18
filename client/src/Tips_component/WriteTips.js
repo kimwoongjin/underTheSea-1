@@ -104,17 +104,18 @@ const TitleInput = styled.input`
 `;
 //
 const ImageInputForm = styled.label`
+  display: flex;
   top: 60%;
-  width: 93%;
+  width: 40%;
   height: 25vh;
   position: absolute;
-  border: 1px solid black;
   bottom: 10%;
   border-radius: 4px;
   color: white;
   cursor: pointer;
   border: 1px dashed #108dee;
   box-sizing: border-box;
+  justify-content: center;
 `;
 //
 const ImageInput = styled.input`
@@ -374,19 +375,46 @@ function WriteTips({ token }) {
                 />
               </>
             )}
-            <ImageInputForm for="input-image">
-              {tip.img ? (
+            {tip.img ? (
+              <>
+                <ImageInputForm
+                  for="input-image"
+                  style={{ borderStyle: "none" }}
+                >
+                  {/* {tip.img ? ( */}
+                  <img
+                    id="select-img"
+                    src={`http://localhost:80${tip.img}`}
+                    style={{
+                      objectFit: "cover",
+                      // width: "100%",
+                      // height: "100%",
+                    }}
+                  ></img>
+                  {/* ) : (
+                <></>
+              )} */}
+                </ImageInputForm>
+              </>
+            ) : (
+              <>
+                <ImageInputForm for="input-image">
+                  {/* {tip.img ? (
                 <img
                   id="select-img"
                   src={`http://localhost:80${tip.img}`}
                   style={{
-                    boxSizing: "border-box",
+                    objectFit: "cover",
+                    // width: "100%",
+                    // height: "100%",
                   }}
                 ></img>
-              ) : (
-                <></>
-              )}
-            </ImageInputForm>
+              ) : ( */}
+                  <></>
+                  {/* )} */}
+                </ImageInputForm>
+              </>
+            )}
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>
         </InputContainer>
