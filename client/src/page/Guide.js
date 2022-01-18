@@ -29,14 +29,29 @@ const Tips = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #80808;
+  }
 `;
 const SeaImg = styled.img`
   width: 100%;
   height: 100%;
+  :hover {
+    filter: brightness(90%);
+    transform: scale(1.05);
+    transition: all 300ms ease-in;
+  }
 `;
 const FreshImg = styled.img`
   width: 100%;
   height: 100%;
+  :hover {
+    filter: brightness(90%);
+    transform: scale(1.05);
+    transition: all 300ms ease-in;
+  }
 `;
 const Freshwater = styled.div`
   width: 33vw;

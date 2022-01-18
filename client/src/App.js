@@ -155,7 +155,7 @@ function App() {
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips token={token} />}></Route>
-        <Route path="/posttips" element={<PostTips />}></Route>
+        <Route path="/posttips/:tip_id" element={<PostTips />}></Route>
         <Route
           path="/manage"
           element={
