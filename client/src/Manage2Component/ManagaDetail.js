@@ -616,7 +616,6 @@ function ManageDetail() {
           }
         )
         .then((res) => {
-          console.log("이게 찍히면 응답은 제대로 들어오는거다", res);
           localStorage.setItem("conInfo", JSON.stringify(res.data.data));
           if (
             res.message === "You've already leveled up this week" ||
