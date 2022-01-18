@@ -127,15 +127,18 @@ const SignOutBtn = styled.button`
 `;
 //=======================================================================
 
-function SignOut({ accessToken }) {
+function SignOut() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
+
   function signOut() {
     axios
       .delete("http://localhost:80/user", {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then(() => {
+      .then((result) => {
+        console.log(result, "!!!!!!!!");
         dispatch(signoutAction);
         navigate("/");
       });

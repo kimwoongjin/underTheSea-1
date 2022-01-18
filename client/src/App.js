@@ -26,15 +26,14 @@ function App() {
   const [tt, setTt] = useState("T.T");
 
   const month = new Date().getMonth() + 1;
-
-  const getAllConInfo = async () => {
-    const response = await axios.get(`http://localhost:80/container/all`, {
-      headers: { authorization: `Bearer ${accessToken}` },
-      withCredentials: true,
-    });
-    // console.log("res from MANAGE", response);
-    localStorage.setItem("allConInfo", JSON.stringify(response));
-  };
+  // const getAllConInfo = async () => {
+  //   const response = await axios.get(`http://localhost:80/container/all`, {
+  //     headers: { authorization: `Bearer ${accessToken}` },
+  //     withCredentials: true,
+  //   });
+  //   console.log("res from MANAGE", response);
+  //   localStorage.setItem("allConInfo", JSON.stringify(response));
+  // };
   const getConInfo = async (id) => {
     const response = await axios.get(
       `http://localhost:80/container/${id}/${month}`,
@@ -138,7 +137,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-
   // ------------------------------------------
 
   const [token, setToken] = useState("");
@@ -164,7 +162,6 @@ function App() {
             <Manage
               aquaInfo={aquaInfo}
               containerList={containerList}
-              getAllConInfo={getAllConInfo}
               getConInfo={getConInfo}
             />
           }
@@ -192,5 +189,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

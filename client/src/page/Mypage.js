@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { signoutModalAction, pwdModalAction } from "../store/actions";
 import { useDispatch } from "react-redux";
+import MypageContent from "./MypageContent";
 
 const Container = styled.div`
   position: relative;
@@ -65,6 +66,7 @@ const ContentContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   /* border: 1px solid black; */
@@ -95,39 +97,69 @@ const Contents = styled.div`
   border-right: 3px solid black;
   cursor: pointer;
 `;
+
 const Comment = styled.div`
   /* border: 1px solid #108dee; */
   width: 24%;
   margin-left: 10%;
   cursor: pointer;
 `;
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  width: 55vw;
+  height: 5vh;
+  font-size: 1.5rem;
+  font-family: "Kfont";
+  font-weight: bold;
+  /* border: 1px solid black; */
+  border-bottom: 1px solid black;
+  padding: 3% 0 3%;
+
+  .box {
+    border-right: 2px solid black;
+    height: 3vh;
+    margin-left: 56.5%;
+  }
+  .title {
+    display: flex;
+    margin-left: 2%;
+  }
+  .date {
+    display: flex;
+    margin-left: 2%;
+  }
+`;
+
 const Box3 = styled.div`
   border: 1px solid #108dee;
   margin-top: 4%;
   width: 70vw;
   height: 80vh;
-  display: flex;
   margin-bottom: 10%;
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
-
-const BoxImg = styled.img`
-  position: absolute;
-  top: 15%;
-  width: 20%;
-`;
+//==========잠시 주석=================
+// const BoxImg = styled.img`
+//   position: absolute;
+//   top: 15%;
+//   width: 20%;
+// `;
+//==========잠시 주석=================
 
 // 내용이 없을 시 박스와 함께 manage, contents, comment 문구가 나타나야 한다.
 
-const ManageText = styled.div`
-  z-index: 99;
-  position: absolute;
-  top: 56%;
-  font-size: 1.5rem;
-`;
+//==========잠시 주석=================
+// const ManageText = styled.div`
+//   z-index: 99;
+//   position: absolute;
+//   top: 56%;
+//   font-size: 1.5rem;
+// `;
+//==========잠시 주석=================
 // const ContentsText = styled.div`
 //   position: absolute;
 //   top: 56%;
@@ -145,15 +177,52 @@ function Mypage() {
   const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("manage");
   const accessToken = localStorage.getItem("accessToken");
+  //========================================================================
+
+  const [manageInfo, setManageInfo] = useState([]);
+  const [commentInfo, setCommentInfo] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:80/user/manage`, {
+  //       headers: { authorization: `Bearer ${accessToken}` },
+  //       withCredentials: true,
+  //     })
+  //     .then((result) => {
+  //       setManageInfo([...result.data.data]);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+  // console.log(manageInfo, "%%%%%%%");
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:80/user/comments/1`, {
+  //       headers: { authorization: `Bearer ${accessToken}` },
+  //       withCredentials: true,
+  //     })
+  //     .then((result) => {
+  //       // console.log(result.data.data, "1111111");
+
+  //       setCommentInfo([...result.data.data]);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  const [test, setTest] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/user/comments`, {
+      .get(`http://localhost:80/user/tips`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
-        console.log(result, "0000000000");
+        setTest([...result.data.data]);
+        // console.log(result.data.data, ";;;;;;");
       })
       .catch((err) => {
         console.log(err);
@@ -174,20 +243,20 @@ function Mypage() {
     setCurrentClick(e.target.id);
   };
 
-  useEffect(
-    (e) => {
-      if (currentClick !== null) {
-        let current = document.getElementById(currentClick);
-        current.style.color = "white";
-      }
-      if (prevClick !== null) {
-        let prev = document.getElementById(prevClick);
-        prev.style.color = "black";
-      }
-      setPrevClick(currentClick);
-    },
-    [currentClick]
-  );
+  // useEffect(
+  //   (e) => {
+  //     if (currentClick !== null) {
+  //       let current = document.getElementById(currentClick);
+  //       current.style.color = "white";
+  //     }
+  //     if (prevClick !== null) {
+  //       let prev = document.getElementById(prevClick);
+  //       prev.style.color = "black";
+  //     }
+  //     setPrevClick(currentClick);
+  //   },
+  //   [currentClick]
+  // );
 
   return (
     <>
@@ -222,8 +291,18 @@ function Mypage() {
           </Comment>
         </Box2>
         <Box3>
-          <BoxImg src="/빈박스.png" alt="" />
-          <ManageText>현재 등록된 수조가 없습니다. </ManageText>
+          <Head>
+            <div className="title">작성한 글 제목</div>
+            <div className="box"></div>
+            <div className="date">날짜</div>
+          </Head>
+
+          {test.map((el) => (
+            <MypageContent el={el} key={el.id} />
+          ))}
+
+          {/* <BoxImg src="/빈박스.png" alt="" /> */}
+          {/* <ManageText>현재 등록된 수조가 없습니다. </ManageText> */}
           {/* <ContentsText>현재 등록된 게시글이 없습니다. </ContentsText> */}
           {/* <CommentText>현재 등록된 댓글이 없습니다.</CommentText> */}
           {/* input 태그 3개 
