@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginModalOnAction } from "../store/actions";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../component/Header";
@@ -153,8 +155,12 @@ function HoneyTips() {
   const [pageNum, setPageNum] = useState(1);
   const [tipLength, setTipLength] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
 
+  // 새글쓰기 페이지로 이동
   const goToNewTip = () => {
     navigate("/writetips");
   };
@@ -163,6 +169,7 @@ function HoneyTips() {
     handleTipList();
   }, [pageNum]);
 
+  // 페이지 숫자에 따른 게시물 조회
   const handleTipList = async () => {
     const result = await axios.get(`http://localhost:80/tip/all/${pageNum}`, {
       headers: {
@@ -170,13 +177,13 @@ function HoneyTips() {
       },
       withCredentials: true,
     });
-    // console.log(result.data.data);
     const { data: list } = result.data;
     setTipList([...list]);
-    const page_length = Math.floor(result.data.tip_num / 10);
-    if (result.data.tip_num % 10 !== 0) {
+
+    // 페이지네이션을 위해 전체 갯수와 같은 길이의 배열 생성
+    const page_length = Math.floor(result.data.tip_num / 12);
+    if (result.data.tip_num % 12 !== 0) {
       const page = new Array(page_length + 1).fill(0);
-      // console.log(page);
       setTipLength([...page]);
     } else {
       const page = Array(page_length).fill(0);
@@ -203,7 +210,6 @@ function HoneyTips() {
 
   // 페이지 선택
   const selectPageNum = (e) => {
-    // console.log(e.target.id);
     setPageNum(e.target.id);
   };
 
@@ -220,7 +226,11 @@ function HoneyTips() {
           {/* <Swarm src="무리.png" /> */}
         </TopCover>
         <BtnContainer>
-          <Btn onClick={goToNewTip}>새글쓰기</Btn>
+          {isLogin ? (
+            <Btn onClick={goToNewTip}>새글쓰기</Btn>
+          ) : (
+            <Btn onClick={() => dispatch(loginModalOnAction)}>새글쓰기</Btn>
+          )}
         </BtnContainer>
         <TipListContainer>
           <TipListHeadContainer>
@@ -230,7 +240,7 @@ function HoneyTips() {
             <TipListDate>작성일</TipListDate>
           </TipListHeadContainer>
           {tipList.map((el, idx) => {
-            return <TipList key={idx} value={el.tip_id} tip={el}></TipList>;
+            return <TipList key={idx} tip_id={el.tip_id} tip={el}></TipList>;
           })}
           <PageBtnForm>
             <PageBtn onClick={goToPre}>이전</PageBtn>

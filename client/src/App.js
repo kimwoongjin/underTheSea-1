@@ -26,25 +26,14 @@ function App() {
   const [tt, setTt] = useState("T.T");
 
   const month = new Date().getMonth() + 1;
-<<<<<<< HEAD
-
-=======
->>>>>>> 9f4b386431d5520b7df88ec725f96f49fbf94e57
   // const getAllConInfo = async () => {
   //   const response = await axios.get(`http://localhost:80/container/all`, {
   //     headers: { authorization: `Bearer ${accessToken}` },
   //     withCredentials: true,
   //   });
-<<<<<<< HEAD
-  //   // console.log("res from MANAGE", response);
-  //   localStorage.setItem("allConInfo", JSON.stringify(response));
-  // };
-
-=======
   //   console.log("res from MANAGE", response);
   //   localStorage.setItem("allConInfo", JSON.stringify(response));
   // };
->>>>>>> 9f4b386431d5520b7df88ec725f96f49fbf94e57
   const getConInfo = async (id) => {
     const response = await axios.get(
       `http://localhost:80/container/${id}/${month}`,
@@ -166,7 +155,7 @@ function App() {
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips token={token} />}></Route>
-        <Route path="/posttips" element={<PostTips />}></Route>
+        <Route path="/posttips/:tip_id" element={<PostTips />}></Route>
         <Route
           path="/manage"
           element={

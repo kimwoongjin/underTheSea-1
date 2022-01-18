@@ -59,17 +59,17 @@ const TipDate = styled.div`
   box-sizing: border-box;
 `;
 
-function TipList({ tip }) {
+function TipList({ tip_id, tip }) {
   const navigate = useNavigate();
   const date = tip.created_at.split("T")[0];
   //   console.log(tip.tip_id);
 
   // 게시물 선택&조회
   const handleSelectTip = (e) => {
-    localStorage.setItem("tip_id", e.target.id);
-    const tip_id = localStorage.getItem("tip_id");
+    // localStorage.setItem("tip_id", e.target.id);
+    // const tip_id = localStorage.getItem("tip_id");
     // console.log(e.target.id);
-    navigate(`/posttips`);
+    navigate(`/posttips/${tip_id}`);
   };
 
   return (
@@ -83,7 +83,7 @@ function TipList({ tip }) {
           ></FontAwesomeIcon>
         </div>
 
-        <TipTitle id={tip.tip_id} onClick={handleSelectTip}>
+        <TipTitle id={tip_id} onClick={handleSelectTip}>
           {tip.title}
         </TipTitle>
         <TipWriter>{tip.user_name}</TipWriter>

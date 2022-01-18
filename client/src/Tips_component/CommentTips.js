@@ -1,4 +1,5 @@
 import React, { useState, memo } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
@@ -141,6 +142,8 @@ function CommentTips({
 }) {
   const [newComment, setNewComment] = useState({});
   const [isEdit, setIsEdit] = useState(false);
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
 
   // 댓글 작성
   const handleInputComment = (e) => {
@@ -205,9 +208,9 @@ function CommentTips({
                     <FontAwesomeIcon
                       id={el.comment_id}
                       onClick={Delete}
-                      size="2x"
+                      size="1x"
                       icon={faTimesCircle}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", color: "gray" }}
                     />
                     {/* </CommentDeleteBtn> */}
                   </>
@@ -220,13 +223,19 @@ function CommentTips({
         )}
       </CommentForm>
       <CommentInputContainer>
-        <AddCommentForm>{userName}</AddCommentForm>
-        <CommentInput
-          type="text"
-          placeholder="입력"
-          onChange={handleInputComment}
-        ></CommentInput>
-        <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+        {isLogin ? (
+          <>
+            <AddCommentForm>{userName}</AddCommentForm>
+            <CommentInput
+              type="text"
+              placeholder="입력"
+              onChange={handleInputComment}
+            ></CommentInput>
+            <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+          </>
+        ) : (
+          <></>
+        )}
       </CommentInputContainer>
     </>
   );

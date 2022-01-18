@@ -20,10 +20,6 @@ module.exports = async (req, res) => {
           where: { container_id },
           order: [["createdAt", "DESC"]],
         });
-<<<<<<< HEAD
-        console.log(ex_water_data);
-        // const last_ex_water = ex_water_data.reverse()[0].dataValues.createAt;
-=======
 
         let last_ex_water = "";
         if (ex_water_data.length === 0) {
@@ -31,7 +27,6 @@ module.exports = async (req, res) => {
         } else {
           last_ex_water = ex_water_data[0].dataValues.createdAt;
         }
->>>>>>> 9f4b386431d5520b7df88ec725f96f49fbf94e57
 
         return {
           container_id: el.dataValues.id,
