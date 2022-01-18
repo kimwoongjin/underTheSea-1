@@ -17,9 +17,13 @@ import {
   RECOMMENDINFO_MODAL_ON,
   CONTAINER_CARD_INFO_SHOW,
   EXCHANGEWATER_MODAL_ON,
+  WSDINFO_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
+  GET_CONTAINER_INFO,
 } from "./actionTypes";
+import axios from "axios";
+// import coninfoApi from "../../../api/getConinfo";
 
 export const loginAction = {
   type: LOG_IN,
@@ -69,6 +73,9 @@ export const recommendInfoModalOnAction = {
 export const exchangeWaterModalOnAction = {
   type: EXCHANGEWATER_MODAL_ON,
 };
+export const wsdInfoModalOnAction = {
+  type: WSDINFO_MODAL_ON,
+};
 export const signupAction = {
   type: SIGN_UP,
 };
@@ -78,6 +85,13 @@ export const addfishModalOnAction = {
 export const deadfishModalOnAction = {
   type: DEADFISH_MODAL_ON,
 };
+// export const getContainerInfoAction = async () => {
+//   const conInfo = await coninfoApi();
+//   return {
+//     type: GET_CONTAINER_INFO,
+//     payload: conInfo.data,
+//   };
+// };
 export const containerCardInfoShowAction = (data) => ({
   type: CONTAINER_CARD_INFO_SHOW,
   payload: {

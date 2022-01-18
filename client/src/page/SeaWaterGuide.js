@@ -9,12 +9,15 @@ import SkimmerInfo from "../modalComponent/SkimmerInfo";
 import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
 import { useSelector } from "react-redux";
+import Footer from "../component/Footer";
 import FilterMediaCard from "../component/FilterMediaCard";
 import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
 import ActivationCard from "../component/ActivationCard";
 import ActivationInfo from "../modalComponent/ActivationInfo";
 import RecommendCard from "../component/RecommendCard";
 import RecommendInfo from "../modalComponent/RecommendInfo";
+import WSDCard from "../component/WSDCard";
+import WSDInfo from "../modalComponent/WSDInfo";
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +33,9 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 140px;
+  font-family: "Kfont";
+  /* margin-bottom: 140px; */
+  /* border: 1px solid red; */
   align-items: center;
   font-weight: bold;
   font-size: 2rem;
@@ -41,14 +46,42 @@ const Title = styled.div`
     margin-top: 5px;
     font-size: 1.25rem;
     font-weight: normal;
+    font-family: "Kfont";
   }
 `;
 
+const SearchContainer = styled.div`
+  position: relative;
+  width: 70%;
+  height: 20vh;
+  /* border: 1px solid blue; */
+`;
+
+const Select = styled.select`
+  width: 160px;
+  height: 40px;
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  bottom: 15%;
+  border: 2px solid #108dee;
+
+  /* -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; */
+`;
+const Option = styled.option`
+  background: black;
+  /* color: red; */
+  /* border: 2px solid #108dee; */
+`;
+
 const InfoContainer = styled.div`
-  width: 80%;
+  width: 70%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   flex-wrap: wrap;
   /* border: 2px dashed red; */
 `;
@@ -61,7 +94,19 @@ function SeaWaterGuide() {
     isFilterMediaModal,
     isActivationModal,
     isRecommendModal,
+    isWSDInfoModal,
   } = state;
+
+  const [cardTag, setCardTag] = useState({
+    tag: "all",
+  });
+
+  const handleInputValue = (e) => {
+    setCardTag({
+      ...cardTag,
+      tag: e.target.value,
+    });
+  };
 
   return (
     <>
@@ -71,20 +116,36 @@ function SeaWaterGuide() {
           Saltwater Fish Guide
           <div className="sub">해수어는 어떻게 시작할까?</div>
         </Title>
+        <SearchContainer>
+          <Select name="카테고리" onChange={handleInputValue}>
+            <Option value="all">전체보기</Option>
+            <Option value="basic">기본정보</Option>
+            <Option value="equipment">용품정보</Option>
+            <Option value="disease">질병정보</Option>
+          </Select>
+        </SearchContainer>
         <InfoContainer>
-          <SkimmerCard />
-          <SuppliesCard />
-          <FilterMediaCard />
-          <ActivationCard />
-          <RecommendCard />
-          <GuideinfoCard></GuideinfoCard>
+          {cardTag.tag === "all" && <SuppliesCard />}
+          {cardTag.tag === "all" && <ActivationCard />}
+          {cardTag.tag === "all" && <RecommendCard />}
+          {cardTag.tag === "all" && <SkimmerCard />}
+          {cardTag.tag === "all" && <FilterMediaCard />}
+          {cardTag.tag === "all" && <WSDCard />}
+          {cardTag.tag === "basic" && <SuppliesCard />}
+          {cardTag.tag === "basic" && <ActivationCard />}
+          {cardTag.tag === "basic" && <RecommendCard />}
+          {cardTag.tag === "equipment" && <SkimmerCard />}
+          {cardTag.tag === "equipment" && <FilterMediaCard />}
+          {cardTag.tag === "disease" && <WSDCard />}
         </InfoContainer>
         {isSkimmerModal && <SkimmerInfo />}
         {isSeaBasicInfoModal && <SuppliesInfo />}
         {isFilterMediaModal && <FilterMediaInfo />}
         {isActivationModal && <ActivationInfo />}
         {isRecommendModal && <RecommendInfo />}
+        {isWSDInfoModal && <WSDInfo />}
       </Container>
+      <Footer />
     </>
   );
 }

@@ -10,6 +10,7 @@ import {
   ADDFISH_MODAL_ON,
   DEADFISH_MODAL_ON,
   RECOMMENDINFO_MODAL_ON,
+  WSDINFO_MODAL_ON,
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
@@ -29,7 +30,7 @@ const initialState = {
   isAddfishModal: false,
   isDeadfishModal: false,
   isRecommendModal: false,
-
+  isWSDInfoModal: false,
   isSignoutModal: false,
   isPwdModal: false,
 };
@@ -77,6 +78,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case EXCHANGEWATER_MODAL_ON:
       state = { ...prevState, isExchangeModal: true };
+      break;
+    case WSDINFO_MODAL_ON:
+      state = { ...prevState, isWSDInfoModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

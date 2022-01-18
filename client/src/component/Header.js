@@ -7,9 +7,12 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   background: #d2f7ff;
+  /* box-shadow: 0px 0px 10px #adb5bd; */
+  /* background: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* z-index: 999; */
 `;
 
 const Img = styled.img`
@@ -59,7 +62,7 @@ const Signup = styled.div`
 
 const Signout = styled.div`
   /* border: 1px solid red; */
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;

@@ -5,18 +5,22 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Container = styled.div`
-  /* position: relative; */
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* top: 15%; */
   width: 25%;
   height: 390px;
-  box-shadow: 5px 8px 7px 3px #c6c6c6;
-  margin: 1%;
+  /* box-shadow: 5px 8px 7px 3px #c6c6c6; */
+  box-shadow: 0px 0px 20px #adb5bd;
+  margin: 3%;
   /* background: #d1f8ff; */
   border-radius: 20px;
-  /* border: 1px solid black; */
+  transition: all 0.3s;
+  :hover {
+    transform: matrix(1, 0, 0, 1, 0, -10);
+    box-shadow: 0px 0px 30px #adb5bd;
+    transition: all 0.3s;
+  }
 `;
 
 const Contents = styled.div`
@@ -43,12 +47,14 @@ const Img = styled.img`
   /* opacity: 0.8; */
 `;
 const Content = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  /* align-items: center; */
   width: 100%;
   height: 50%;
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
   /* margin-top: 2%; */
   line-height: 200%;
@@ -57,36 +63,62 @@ const Content = styled.div`
 `;
 
 const Name = styled.div`
+  /* width: 80%; */
   /* position: absolute; */
   /* left: 5%; */
   border-radius: 5px;
-  background: #e5e5e5;
+  /* background: #e5e5e5; */
   text-align: center;
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.3rem;
-  /* border: 1px solid red; */
+  border: 1px solid red;
+`;
+
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kfont";
+  line-height: 170%;
+  font-weight: 450;
+  font-size: 1.25rem;
+  border: 1px solid red;
 `;
 
 const Size = styled.div`
-  /* position: absolute; */
-  /* left: 5%; */
-  /* top: 33%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
-  /* border: 1px solid red; */
+  border: 1px solid red;
 `;
 
 const Theme = styled.div`
-  /* position: absolute; */
-  /* left: 5%; */
-  /* top: 33%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Kfont";
   line-height: 170%;
   font-weight: 450;
   font-size: 1.25rem;
+  border: 1px solid red;
+`;
+const BottomBack = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+`;
+const Seaweed = styled.img`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 30%;
   /* border: 1px solid red; */
 `;
 
@@ -113,11 +145,10 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
         </ImgContainer>
         <Content>
           <Name>{name}</Name>
-          {/* <Name>이름</Name> */}
-          <Size>사이즈: {size}L</Size>
-          {/* <Size>사이즈: 200L</Size> */}
-          <Theme>테마: {theme}</Theme>
-          {/* <Theme>테마: 산호</Theme> */}
+          <Text>사이즈</Text>
+          <Size>{size}L</Size>
+          <Text>테마</Text>
+          <Theme>{theme}</Theme>
         </Content>
       </Contents>
     </Container>

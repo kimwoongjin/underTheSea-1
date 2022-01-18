@@ -26,12 +26,13 @@ function App() {
   const [tt, setTt] = useState("T.T");
 
   const month = new Date().getMonth() + 1;
+
   const getAllConInfo = async () => {
     const response = await axios.get(`http://localhost:80/container/all`, {
       headers: { authorization: `Bearer ${accessToken}` },
       withCredentials: true,
     });
-    console.log("res from MANAGE", response);
+    // console.log("res from MANAGE", response);
     localStorage.setItem("allConInfo", JSON.stringify(response));
   };
   const getConInfo = async (id) => {
@@ -46,7 +47,7 @@ function App() {
         withCredentials: true,
       }
     );
-    console.log("response:", response.data.data);
+    // console.log("response:", response.data.data);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     return response.data.data;
   };

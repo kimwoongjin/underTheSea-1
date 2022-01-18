@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction, signupModalOnAction } from "../store/actions";
 
 const Container = styled.div`
+  /* position: fixed; */
   width: 100vw;
   height: 10vh;
-  /* background: #d2f7ff; */
+  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 0px 10px #adb5bd;
+  /* border-bottom: 1px solid lightgray; */
+  z-index: 99;
 `;
 
 const Img = styled.img`
@@ -59,7 +63,7 @@ const Signup = styled.div`
 
 const Logout = styled.div`
   /* border: 1px solid red; */
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
