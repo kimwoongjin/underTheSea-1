@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
       let dayOfWeek = now.getDay(); //0-6
       let numDay = now.getDate();
       let start = new Date(now); //copy
+      const month = now.getMonth() + 1;
 
       start.setHours(0, 0, 0, 0);
       start.setDate(numDay - dayOfWeek);
@@ -31,9 +32,12 @@ module.exports = async (req, res) => {
           await container.increment("level", { by: 10 });
           container.last_lv_up = now;
           await container.save();
-          return res.status(200).json({
-            message: `The container is successfully leveled up`,
-          });
+          return res
+            .header("Authorization", req.headers.authorization)
+            .redirect(`http://localhost:80/container/${container_id}/${month}`);
+          // return res.status(200).json({
+          //   message: `The container is successfully leveled up`,
+          // });
         }
       } else {
         return res.status(200).json({
