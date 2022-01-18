@@ -357,7 +357,7 @@ const FoodIcon = styled.img`
   /* border: 1px solid blue; */
 `;
 
-function ManageDetail({ tt }) {
+function ManageDetail() {
   let params = useParams();
 
   let container_id = params.container_id;
@@ -486,6 +486,7 @@ function ManageDetail({ tt }) {
         // let water = getExAmount();
         // console.log("환수총량", exAmount);
         // setExWaterAmount(water);
+        levelup();
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -779,6 +780,7 @@ function ManageDetail({ tt }) {
         }
       )
       .then((res) => {
+        levelup();
         dispatch(modalOff);
       });
 

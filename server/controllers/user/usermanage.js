@@ -15,10 +15,18 @@ module.exports = async (req, res) => {
     const user_container = await Promise.all(
       container_data.map(async (el) => {
         const container_id = el.dataValues.id;
+
         const ex_water_data = await ex_waters.findAll({
           where: { container_id },
+          order: [["createdAt", "DESC"]],
         });
-        const last_ex_water = ex_water_data.reverse()[0].dataValues.createAt;
+
+        let last_ex_water = "";
+        if (ex_water_data.length === 0) {
+          last_ex_water = "";
+        } else {
+          last_ex_water = ex_water_data[0].dataValues.createdAt;
+        }
 
         return {
           container_id: el.dataValues.id,

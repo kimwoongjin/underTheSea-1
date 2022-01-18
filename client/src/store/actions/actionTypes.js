@@ -29,9 +29,12 @@ export const PWD_MODAL_ON = "PWD_MODAL_ON";
 // ManageCard
 export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
 
+<<<<<<< HEAD
 // ManageDetail
 export const GET_CONTAINER_INFO = "GET_CONTAINER_INFO";
 
+=======
+>>>>>>> 19128c2047c1bb429e39f2d6e187051efe0f9447
 // export const getConData = async () => {
 //   const condata = await axios.get(
 //     `http://localhost:80/container/${container_id}/${month}`,
