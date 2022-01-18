@@ -256,7 +256,7 @@ function Search() {
           </CardContainer>
         )}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

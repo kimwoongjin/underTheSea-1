@@ -2,7 +2,9 @@ const { containers } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+  console.log("서버에서 받는요청", req.headers);
   const userInfo = isAuthorized(req);
+  console.log("userInfo ==>", userInfo);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
