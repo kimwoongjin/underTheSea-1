@@ -152,10 +152,30 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
           <InfoShow>
             <Text>먹이 타입을 선택해주세요</Text>
             <ImgContainer>
-              <Img name="1" src="/펠렛.png" onClick={handleFoodtype} />
-              <Img name="2" src="/플레이크.png" onClick={handleFoodtype} />
-              <Img name="3" src="/냉동.png" onClick={handleFoodtype} />
-              <Img name="4" src="/생먹이.png" onClick={handleFoodtype} />
+              <Img
+                name="1"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%8E%A0%EB%A0%9B.png"
+                alit="/펠렛.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="2"
+                src="/https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%94%8C%EB%A0%88%EC%9D%B4%ED%81%AC.png"
+                alt="/플레이크.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="3"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%83%89%EB%8F%99.png"
+                alt="/냉동.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="4"
+                src="/생먹이.png"
+                alt="/생먹이.png"
+                onClick={handleFoodtype}
+              />
             </ImgContainer>
             <ImgNameContainer>
               <ImgName feedingInfo={feedingInfo} name="1">

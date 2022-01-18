@@ -71,7 +71,10 @@ function Manage({ getAllConInfo, getConInfo }) {
       <TitleContainer>
         <Title>My Aquarium</Title>
         <Text>당신의 어항을 관리해보세요!</Text>
-        <Img src="작은해초.png" alt="" />
+        <Img
+          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%9E%91%EC%9D%80%ED%95%B4%EC%B4%88.png"
+          alt="작은해초.png"
+        />
       </TitleContainer>
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
