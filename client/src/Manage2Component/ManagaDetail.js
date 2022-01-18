@@ -407,6 +407,7 @@ function ManageDetail() {
 
   const getCurrentWeek = () => {
     const day = new Date();
+    day.setHours(day.getHours() + 9);
     const sunday = day.getTime() - 86400000 * day.getDay();
     day.setTime(sunday);
     const result = [day.toISOString().slice(0, 10)];

@@ -76,11 +76,17 @@ function Guide() {
         <Header2></Header2>
         <MiddleContainer>
           <Seawater onClick={goToSeawater}>
-            <SeaImg src="가이드타이틀이미지1.png" />
+            <SeaImg
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EA%B0%80%EC%9D%B4%EB%93%9C%ED%83%80%EC%9D%B4%ED%8B%80%EC%9D%B4%EB%AF%B8%EC%A7%801.png"
+              alt="가이드타이틀이미지1.png"
+            />
           </Seawater>
           <Tips onClick={goToTips}>Tips</Tips>
           <Freshwater>
-            <FreshImg src="가이드타이틀이미지2.png" />
+            <FreshImg
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EA%B0%80%EC%9D%B4%EB%93%9C%ED%83%80%EC%9D%B4%ED%8B%80%EC%9D%B4%EB%AF%B8%EC%A7%802.png"
+              alt="가이드타이틀이미지2.png"
+            />
           </Freshwater>
         </MiddleContainer>
       </Container>
