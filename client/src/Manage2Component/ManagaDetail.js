@@ -486,7 +486,7 @@ function ManageDetail() {
         // let water = getExAmount();
         // console.log("환수총량", exAmount);
         // setExWaterAmount(water);
-        levelup();
+
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -780,7 +780,6 @@ function ManageDetail() {
         }
       )
       .then((res) => {
-        levelup();
         dispatch(modalOff);
       });
 
