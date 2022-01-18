@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
 import ManageCard from "./ManageCard";
+import { useState } from "react";
+import axios from "axios";
 
 const TitleContainer = styled.div`
   position: relative;
@@ -49,14 +51,20 @@ const OuterContainer = styled.div`
 `;
 //주간 피딩 14번 , 주간 환수 1번
 function Manage({ getAllConInfo, getConInfo }) {
+  const [containerList, setContainerList] = useState([]);
+  const accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
-    console.log("관리페이지 왜 안뜨는데");
-    getAllConInfo();
+    axios
+      .get(`http://localhost:80/container/all`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setContainerList([...res.data.data]);
+      });
   }, []);
-  const con_list = JSON.parse(localStorage.getItem("allConInfo"));
-  // console.log("con_list FROM MANAGE:", con_list.data.data);
-  // console.log("con_list2 FROM MANAGE:", containerList);
-  // console.log("aquaInfo FROM MANAGE:", aquaInfo);
+
   return (
     <>
       <Header />
@@ -68,7 +76,7 @@ function Manage({ getAllConInfo, getConInfo }) {
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
       {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
-      <ManageCard containerList={con_list} getConInfo={getConInfo} />
+      <ManageCard containerList={containerList} getConInfo={getConInfo} />
     </>
   );
 }

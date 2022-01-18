@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginModalOnAction, signupModalOnAction } from "../store/actions";
+import {
+  loginModalOnAction,
+  logoutAction,
+  signupModalOnAction,
+} from "../store/actions";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -121,6 +126,33 @@ function Header() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
+  const accessToken = localStorage.getItem("accessToken");
+  // console.log(accessToken, "QQQQQQQQ");
+
+  const handleLogout = () => {
+    axios
+      .post(
+        `http://localhost:80/user/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("accessToken", "");
+        dispatch(logoutAction);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Container>
       <Img src="/로고.png" alt="" />
@@ -145,16 +177,22 @@ function Header() {
             >
               <Mypage>마이페이지</Mypage>
             </Link>
+            {/* <Signout onClick={handleLogout}>로그아웃</Signout> */}
           </>
         ) : (
-          <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
+          <>
+            <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
+            <Signup onClick={() => dispatch(signupModalOnAction)}>
+              회원가입
+            </Signup>
+          </>
         )}
-        {isLogin ? (
-          <Signout>로그아웃</Signout>
+        {!isLogin ? (
+          <></>
         ) : (
-          <Signup onClick={() => dispatch(signupModalOnAction)}>
-            회원가입
-          </Signup>
+          <>
+            <Signout onClick={handleLogout}>로그아웃</Signout>
+          </>
         )}
         {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
