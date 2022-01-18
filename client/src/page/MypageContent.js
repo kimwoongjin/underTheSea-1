@@ -7,36 +7,54 @@ import Mypage from "./Mypage";
 
 const Container = styled.div`
   position: relative;
-  width: 95%;
-  display: flex;
+  width: 90%;
+  display: column;
   margin-bottom: 1px;
   z-index: 100;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 10%;
+`;
+
+const BoxContainer = styled.div`
+  display: flex;
+  margin: 0;
+  width: 55vw;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 2%;
+  margin-left: 6.5%;
+  border-bottom: 1px solid #cccccc;
 `;
 
 const Box = styled.div`
   position: relative;
-  z-index: 1;
+  //   z-index: 1;
   flex: 6;
-  width: 90%;
-  height: 30%;
-  /* border: 1px solid red; */
-  margin-top: 8px;
-  margin-bottom: 5px;
+  width: 30%;
+  height: 50%;
+  margin: 0;
+  align-items: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  margin-top: 1%;
+  padding-left: 2%;
+  padding-bottom: 2.5%;
 `;
 
 const Box1 = styled.div`
   flex: 2;
-  width: 90%;
-  height: 10%;
-  font-size: 0.8rem;
-  color: #808080;
+  width: 30%;
+  height: 50%;
+  font-size: 0.9rem;
   /* border: 1px solid black; */
-  margin-top: 8px;
-  margin-bottom: 5px;
-  text-align: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  margin-left: 29%;
+  font-size: 0.9rem;
+  color: #828282;
+  padding-bottom: 2.5%;
 `;
 const Head = styled.div`
   display: flex;
@@ -55,7 +73,7 @@ const Head = styled.div`
     display: flex;
     padding-left: 2%;
     /* border: 1px solid black; */
-    margin-right: 70%;
+    margin-right: 65.5%;
   }
   .date {
     display: flex;
@@ -69,6 +87,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  margin: 15% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -108,8 +127,10 @@ function MypageContent({ test }) {
               // console.log(el, "//////");
               return (
                 <>
-                  <Box key={el.id}>{el.title}</Box>
-                  <Box1>{date}</Box1>
+                  <BoxContainer>
+                    <Box key={el.id}>{el.title}</Box>
+                    <Box1>{date}</Box1>
+                  </BoxContainer>
                 </>
               );
             })}

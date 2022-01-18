@@ -20,8 +20,8 @@ const Box2 = styled.div`
 const Manage = styled.div`
   /* border: 1px solid #108dee; */
   width: 24%;
-  margin-left: 10%;
-  font-size: 1.5rem;
+  margin-left: 12%;
+  font-size: 1.7rem;
   background: none;
   border: none;
   z-index: 999;
@@ -31,8 +31,8 @@ const Manage = styled.div`
 const Contents = styled.div`
   /* border: 1px solid #108dee; */
   width: 24%;
-  margin-left: 10%;
-  font-size: 1.5rem;
+  margin-left: 12%;
+  font-size: 1.7rem;
   background: none;
   border: none;
   z-index: 999;
@@ -44,7 +44,7 @@ const Comment = styled.div`
   /* border: 1px solid #108dee; */
   width: 24%;
   margin-left: 10%;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   z-index: 999;
   background: none;
   border: none;

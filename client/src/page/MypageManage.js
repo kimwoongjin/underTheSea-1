@@ -1,49 +1,58 @@
 import styled from "styled-components";
 import React from "react";
-import Header from "../component/Header";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Mypage from "./Mypage";
 
 const Container = styled.div`
   position: relative;
-  width: 95%;
-  display: flex;
+  width: 90%;
+  display: column;
   margin-bottom: 1px;
   z-index: 100;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 10%;
+
+  /* border: 1px solid black; */
+`;
+
+const BoxContainer = styled.div`
+  display: flex;
+  margin: 0;
+  width: 55vw;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 2%;
+  margin-left: 6.5%;
+  border-bottom: 1px solid #cccccc;
 `;
 
 const Box = styled.div`
   position: relative;
-  z-index: 1;
+  //   z-index: 1;
   flex: 6;
-  width: 55vw;
-  height: 10%;
-  border-bottom: 1px solid black;
+  width: 30%;
+  height: 50%;
+  margin: 0;
+  align-items: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  margin-top: 1%;
+  padding-left: 2%;
+  padding-bottom: 2.5%;
 `;
 
 const Box2 = styled.div`
   flex: 2;
-  width: 55vw;
-  height: 10%;
+  width: 30%;
+  height: 50%;
   font-size: 0.9rem;
-  border-bottom: 1px solid black;
   /* border: 1px solid black; */
+  font-family: "Kfont";
+  box-sizing: border-box;
+  margin-left: 31%;
+  padding-bottom: 2.5%;
 `;
 
-const Box1 = styled.div`
-  flex: 2;
-  width: 55vw;
-  height: 10%;
-  font-size: 0.8rem;
-  color: #808080;
-  /* border: 1px solid black; */
-
-  text-align: center;
-`;
 const Head = styled.div`
   display: flex;
   align-items: center;
@@ -61,15 +70,11 @@ const Head = styled.div`
     display: flex;
     padding-left: 2%;
     /* border: 1px solid black; */
-    margin-right: 25%;
+    margin-right: 70%;
   }
   .comment {
     display: flex;
-    margin-right: 25%;
-    /* border: 1px solid black; */
-  }
-  .date {
-    display: flex;
+
     /* border: 1px solid black; */
   }
 `;
@@ -80,6 +85,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  margin: 15% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -99,7 +105,6 @@ function MypageManage({ manageInfo }) {
       <Head>
         <div className="title">어항 이름</div>
         <div className="comment">수조크기</div>
-        <div className="date">최근 환수 날짜</div>
       </Head>
       <Container>
         {manageInfo.length === 0 ? (
@@ -112,12 +117,12 @@ function MypageManage({ manageInfo }) {
         ) : (
           <>
             {manageInfo.map((el) => {
-              const date = el.last_ex_water.split("T")[0];
               return (
                 <>
-                  <Box key={el.id}>{el.container_name}</Box>
-                  <Box2>{el.size}</Box2>
-                  <Box1>{date}</Box1>
+                  <BoxContainer>
+                    <Box key={el.id}>{el.container_name}</Box>
+                    <Box2>{el.size}</Box2>
+                  </BoxContainer>
                 </>
               );
             })}

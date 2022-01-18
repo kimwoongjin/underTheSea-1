@@ -85,21 +85,7 @@ const Box3 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 `;
-
-// const BoxImg = styled.img`
-//   position: absolute;
-//   bottom: 0%;
-//   width: 15%;
-// `;
-
-// const Notice = styled.div`
-//   z-index: 99;
-//   position: absolute;
-//   top: 56%;
-//   font-size: 1.5rem;
-// `;
 
 function Mypage() {
   const [openModal, setOpenModal] = useState(false);
@@ -108,7 +94,6 @@ function Mypage() {
   const [test, setTest] = useState([]);
   const [manageInfo, setManageInfo] = useState([]);
   const [commentInfo, setCommentInfo] = useState([]);
-  const [notData, setNotData] = useState(false);
 
   useEffect(() => {
     manageHandler();
