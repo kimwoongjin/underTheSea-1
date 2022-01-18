@@ -29,11 +29,15 @@ module.exports = async (req, res) => {
       if (container.dataValues.last_lv_up <= start) {
         const level = Number(String(container.dataValues.level)[0]);
         if (level === 6) {
-          return res.status(200).json({ message: "You've reached max level" });
+          // return res.status(200).json({ message: "You've reached max level" });
+          return res
+            .header("Authorization", req.headers.authorization)
+            .redirect(`http://localhost:80/container/${container_id}/${month}`);
         } else {
           await container.increment("level", { by: 10 });
           container.last_lv_up = now;
           await container.save();
+          console.log("Hello");
           return res
             .header("Authorization", req.headers.authorization)
             .redirect(`http://localhost:80/container/${container_id}/${month}`);
@@ -42,9 +46,12 @@ module.exports = async (req, res) => {
           // });
         }
       } else {
-        return res.status(200).json({
-          message: "You've already leveled up this week",
-        });
+        return res
+          .header("Authorization", req.headers.authorization)
+          .redirect(`http://localhost:80/container/${container_id}/${month}`);
+        // return res.status(200).json({
+        //   message: "You've already leveled up this week",
+        // });
       }
     }
   }

@@ -389,6 +389,7 @@ function ManageDetail() {
     type: "",
   });
   const [expArr, setExpArr] = useState([]);
+  const [progressBar, SetProgressBar] = useState(0);
   const accessToken = localStorage.getItem("accessToken");
   // console.log("엑세스토큰--> ", accessToken);
   const [exwaterInfo, setExwaterInfo] = useState({
@@ -416,42 +417,9 @@ function ManageDetail() {
     return result;
   };
 
-  // console.log("환수객체", exWaterObj);
-  // {220116: 50, 220117: 40}
-  // console.log("피딩객체", final_list);
-  // { 220115: [1,2,3,4], 220114: [2,1,4,0]}
-
-  // ---------------------------------------------------
-
-  // --------- 환수데이터 가공 ---------
-  // let exAmount = 0;
-
-  // let thisYear = new Date().getFullYear();
-  // let thisMonth = new Date().getMonth() + 1;
-  // let thisDay = new Date().getDate();
-  // if (thisMonth < 10) {
-  //   thisMonth = "0" + String(thisMonth);
-  // } else {
-  //   thisMonth = String(thisMonth);
-  // }
-  // thisYear = String(thisYear);
-  // thisDay = String(thisDay);
-  // const thisToday = thisYear + thisMonth + thisDay;
-  // // thisToday
-
-  // let todayEx = conInfo.ex_water_list.filter(
-  //   (el) => el.createdAt === thisToday
-  // );
-
-  // for (let i = 0; i < todayEx.length; i++) {
-  //   exAmount += todayEx[i].amount;
-  // }
-
-  // -------------------------------
-
-  const exwaterAddRequest = () => {
-    axios
-      .post(
+  const exwaterAddRequest = async () => {
+    try {
+      const response = await axios.post(
         `http://localhost:80/container/${container_id}/ex_water`,
         {
           data: exwaterInfo,
@@ -464,11 +432,60 @@ function ManageDetail() {
         {
           withCredentials: true,
         }
-      )
-      .then((res) => {
-        dispatch(modalOff);
-      })
-      .catch((err) => console.log(err));
+      );
+      localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+
+      //---------------
+
+      let exWaterObj = {};
+      conInfo.ex_water_list.forEach((el) => {
+        if (!exWaterObj[el.createdAt]) {
+          exWaterObj[el.createdAt] = el.amount;
+        } else {
+          exWaterObj[el.createdAt] += el.amount;
+        }
+
+        // console.log(oneDayList)
+      });
+
+      // --------- 피딩데이터 가공 ---------
+
+      let final_list = {};
+      conInfo.feed_list.forEach((el1) => {
+        let one_day_list = conInfo.feed_list.filter(
+          (el2) => el1.createdAt === el2.createdAt
+        );
+        let array = [0, 0, 0, 0];
+        one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+        final_list[el1.createdAt] = array;
+      });
+
+      //---------------
+      let temp = [];
+      for (let key in final_list) {
+        if (curWeek.includes(key)) {
+          let sum = final_list[key].reduce((a, b) => a + b);
+          for (let i = 0; i < sum; i++) {
+            temp.push(1);
+          }
+        }
+      }
+      if (!expArr.includes(2)) {
+        for (let key in exWaterObj) {
+          if (curWeek.includes(key)) temp.push(2);
+          break;
+        }
+      }
+      setExpArr(temp);
+      console.log("temp", temp);
+      EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+      console.log("경험치바", EXP);
+      SetProgressBar(EXP);
+      // console.log("환수기록추가에 expArr", expArr);
+      dispatch(modalOff);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // container_id: 1
@@ -599,7 +616,13 @@ function ManageDetail() {
         )
         .then((res) => {
           localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+          if (
+            res.message === "You've already leveled up this week" ||
+            res.message === "You've reached max level"
+          ) {
+          }
           console.log("res--->", res);
+          SetProgressBar([]);
           setExpArr([]);
         })
         .catch((err) => console.log(err));
@@ -872,58 +895,17 @@ function ManageDetail() {
         }
       }
       setExpArr(temp);
-      console.log("temp", temp);
-      EXP = expArr.length === 0 ? 0 : Math.floor((expArr.length / 15) * 100);
+      console.log("임시배열 temp", temp);
+      EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
       console.log("피딩기록추가에 exp", expArr);
+      console.log("피딩기록추가에 EXP", EXP);
+      SetProgressBar(EXP);
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
     }
-    // axios
-    //   .post(
-    //     `http://localhost:80/container/${container_id}/feed`,
-    //     {
-    //       data: feedingInfo,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //       },
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   )
-    //   .then((res) => {
-    //     // 이안에서
-    //     console.log("피딩기록추가에 피딩객체", final_list);
-    //     // 220118: (4) [2, 0, 2, 0]
-    //     let temp = [];
-    //     for (let key in final_list) {
-    //       if (curWeek.includes(key)) {
-    //         let sum = final_list[key].reduce((a, b) => a + b);
-    //         for (let i = 0; i < sum; i++) {
-    //           temp.push(1);
-    //         }
-    //       }
-    //     }
-    //     if (!expArr.includes(2)) {
-    //       for (let key in exWaterObj) {
-    //         if (curWeek.includes(key)) temp.push(2);
-    //         break;
-    //       }
-    //     }
-    //     setExpArr(temp);
-    //     console.log("temp", temp);
-    //     EXP = expArr.length === 0 ? 0 : Math.floor((expArr.length / 15) * 100);
-    //     console.log("피딩기록추가에 exp", expArr);
-    //     dispatch(modalOff);
-    // });
-
-    // console.log("feedingInfo", feedingInfo);
-    // console.log("NEW!!!!!!!! response:", response.data.data);
   };
-
+  console.log("밖에있는 경험치", progressBar);
   return (
     <>
       <Header2 />
@@ -956,7 +938,7 @@ function ManageDetail() {
             <Logo src="/로고.png" />
           </Level>
           <ProgressBar>
-            <Progress EXP={`${EXP}%`}></Progress>
+            <Progress EXP={`${progressBar}%`}></Progress>
           </ProgressBar>
           <BtnContainer>
             <Button onClick={() => dispatch(feedingInputModalOnAction)}>
