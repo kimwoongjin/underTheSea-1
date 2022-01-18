@@ -30,7 +30,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
-  background-color: rgba(51, 153, 255, 0.1);
+  /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
 const Title = styled.div`
@@ -67,7 +67,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgba(51, 153, 255, 0.1);
+  /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
 const Level = styled.div`
@@ -125,7 +125,8 @@ const MidContainer = styled.div`
   align-items: center;
   /* background: #00d2ff; */
   /* background-color: rgba(102, 178, 255, 0.2); */
-  background-color: rgba(51, 153, 255, 0.1);
+  /* background-color: rgba(51, 153, 255, 0.1); */
+  /* background-color: #e5e5e5; */
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 const BottomContainer = styled.div`
@@ -170,8 +171,24 @@ const ProgressBar = styled.div`
   height: 4vh;
   border: 2px solid #108dee;
 `;
+
+// const goal_percent = dog.walk_goal
+//     ? Math.min(100, Math.floor((100 * dog.walk_num) / dog.walk_goal))
+//     : 0;
+
+// bar가 지금 골퍼센트임
+// const ProgressBar = styled.div`
+//   position: absolute;
+//   left: 0;
+//   width: ${(props) => (props.bar ? props.bar : "50%")};
+//   height: 100%;
+//   border-top-left-radius: 10px;
+//   border-bottom-left-radius: 10px;
+//   box-shadow: -5px 0 0 0 #bbdd3e inset;
+//   background-color: #a2c523;
+// `;
 const Progress = styled.div`
-  width: 15%;
+  width: ${(props) => props.EXP};
   height: 3vh;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -191,7 +208,7 @@ const Button = styled.button`
   border-radius: 5px;
   font-weight: bold;
   font-family: "Kfont";
-
+  cursor: pointer;
   background: #108dee;
   border: 2px solid #108dee;
   color: white;
@@ -252,15 +269,18 @@ const Tr = styled.tr`
   flex-direction: row;
 `;
 const Number = styled.span`
+  box-sizing: border-box;
+  padding-left: 5px;
   display: flex;
   width: 100%;
   height: 20px;
-  /* border-bottom: 1px solid black; */
+  /* border: 1px solid black; */
 `;
 
 const Td = styled.td`
   display: flex;
   /* border: 1px solid rgba(51, 153, 255, 0.3); */
+  border: 1px solid black;
   /* justify-content: center; */
   background: white;
   align-items: center;
@@ -268,7 +288,7 @@ const Td = styled.td`
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
-  margin: 1px;
+  /* margin: 1px; */
 `;
 const WeekContainer = styled.div`
   width: 100%;
@@ -363,35 +383,25 @@ function ManageDetail({ tt }) {
   };
   // ----------------- 일주일 뽑기 ------------------
 
-  // const getCurrentWeek = () => {
-  //   const day = new Date();
-  //   const sunday = day.getTime() - 86400000 * day.getDay();
-  //   day.setTime(sunday);
-  //   const result = [day.toISOString().slice(0, 10)];
-  //   for (let i = 1; i < 7; i++) {
-  //     day.setTime(day.getTime() + 86400000);
-  //     result.push(day.toISOString().slice(0, 10));
-  //   }
-  //   return result;
-  // }
+  const getCurrentWeek = () => {
+    const day = new Date();
+    const sunday = day.getTime() - 86400000 * day.getDay();
+    day.setTime(sunday);
+    const result = [day.toISOString().slice(0, 10)];
+    for (let i = 1; i < 7; i++) {
+      day.setTime(day.getTime() + 86400000);
+      result.push(day.toISOString().slice(0, 10));
+    }
+    return result;
+  };
 
   // console.log("환수객체", exWaterObj);
   // {220116: 50, 220117: 40}
   // console.log("피딩객체", final_list);
   // { 220115: [1,2,3,4], 220114: [2,1,4,0]}
-  // let exp = [];
-  // let thisWeek = getCurrentWeek();
-  // let curWeek = thisWeek.map((day) => day = day.split('-').join('').slice(2))
-  /* 오늘이 2020-10-31인 경우, 
-  [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
-  // 여기서 현재 환수객체랑 피딩객체
-  // for(let key in exWaterObj) {
-  //   if(curWeek.includes(key.))
-  // }
 
   // ---------------------------------------------------
   useEffect(() => {
-    // console.log("유즈이펙트는 실행되니?", container_id);
     axios
       .get(
         `http://localhost:80/container/${container_id}/${month}`,
@@ -411,6 +421,23 @@ function ManageDetail({ tt }) {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    if (exp.length === 15 && exp.includes(2)) {
+      axios
+        .patch(
+          `http://localhost:80/container/${container_id}/level`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {});
+    }
+  }, []);
   // --------- 환수데이터 가공 ---------
   // let exAmount = 0;
 
@@ -477,7 +504,7 @@ function ManageDetail({ tt }) {
   // length: 4
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  // console.log("conInfo", conInfo);
+  console.log("conInfo", conInfo);
 
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
@@ -537,12 +564,28 @@ function ManageDetail({ tt }) {
   });
 
   // --------------------------------
-  // console.log("환수객체", exWaterObj);
-  // console.log("피딩객체", final_list);
+  console.log("환수객체", exWaterObj);
+  console.log("피딩객체", final_list);
 
+  let exp = [];
+  let thisWeek = getCurrentWeek();
+  let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
+  /* 오늘이 2020-10-31인 경우, 
+  [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
+  // 여기서 현재 환수객체랑 피딩객체
+  for (let key in final_list) {
+    if (curWeek.includes(key)) exp.push(1);
+  }
+
+  for (let key in exWaterObj) {
+    if (curWeek.includes(key)) exp.push(2);
+    break;
+  }
+  console.log("경험치배열--->", exp);
   // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
   // console.log(feed_data);
-
+  const EXP = exp.length === 0 ? 0 : Math.floor((exp.length / 15) * 100);
+  console.log("경험치바--->", EXP);
   const state = useSelector((state) => state.modalReducer);
   const {
     isMyAquariumInfoModal,
@@ -775,7 +818,7 @@ function ManageDetail({ tt }) {
             <Logo src="/로고.png" />
           </Level>
           <ProgressBar>
-            <Progress></Progress>
+            <Progress EXP={`${EXP}%`}></Progress>
           </ProgressBar>
           <BtnContainer>
             <Button onClick={() => dispatch(feedingInputModalOnAction)}>

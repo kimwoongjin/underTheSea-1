@@ -7,10 +7,12 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   background: #d2f7ff;
+  /* box-shadow: 0px 0px 10px #adb5bd; */
+  /* background: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
+  /* z-index: 999; */
 `;
 
 const Img = styled.img`
@@ -29,16 +31,6 @@ const Login = styled.div`
 `;
 
 const Manage = styled.div`
-  /* border: 1px solid red; */
-  padding: 10px;
-  font-family: "Kfont";
-  cursor: pointer;
-  :hover {
-    color: #008eff;
-  }
-`;
-
-const Mypage = styled.div`
   /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
@@ -70,7 +62,7 @@ const Signup = styled.div`
 
 const Signout = styled.div`
   /* border: 1px solid red; */
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -113,7 +105,7 @@ const BtnContainer = styled.div`
   /* border: 1px solid red; */
   justify-content: space-around;
   margin-right: 2%;
-  width: 400px;
+  width: 300px;
   font-family: "Kfont";
 `;
 
@@ -132,23 +124,13 @@ function Header() {
           <Search>검색</Search>
         </Link>
         {isLogin ? (
-          <>
-            <Link
-              style={{ textDecoration: "none", color: "black" }}
-              to="/manage"
-            >
-              <Manage>관리</Manage>
-            </Link>
-            <Link
-              style={{ textDecoration: "none", color: "black" }}
-              to="/mypage"
-            >
-              <Mypage>마이페이지</Mypage>
-            </Link>
-          </>
+          <Link style={{ textDecoration: "none", color: "black" }} to="/manage">
+            <Manage>관리</Manage>
+          </Link>
         ) : (
           <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login>
         )}
+        {/* <Login onClick={() => dispatch(loginModalOnAction)}>로그인</Login> */}
         {isLogin ? (
           <Signout>로그아웃</Signout>
         ) : (

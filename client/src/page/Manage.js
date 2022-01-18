@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import ManageCard from "./ManageCard";
 
 const TitleContainer = styled.div`
@@ -54,12 +55,12 @@ function Manage({ getAllConInfo, getConInfo }) {
     getAllConInfo();
   }, []);
   const con_list = JSON.parse(localStorage.getItem("allConInfo"));
-  // console.log("con_list FROM MANAGE:", con_list.data.data);
+  console.log("컨_리스트", con_list);
   // console.log("con_list2 FROM MANAGE:", containerList);
   // console.log("aquaInfo FROM MANAGE:", aquaInfo);
   return (
     <>
-      <Header />
+      <Header2 />
       <TitleContainer>
         <Title>My Aquarium</Title>
         <Text>당신의 어항을 관리해보세요!</Text>
@@ -67,8 +68,8 @@ function Manage({ getAllConInfo, getConInfo }) {
       </TitleContainer>
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
-      {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
-      <ManageCard containerList={con_list} getConInfo={getConInfo} />
+      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} />
+      {/* <ManageCard containerList={con_list} getConInfo={getConInfo} /> */}
     </>
   );
 }

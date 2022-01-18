@@ -9,12 +9,14 @@ const ContainerS = styled.div`
   display: flex;
   align-items: center;
   /* background-color: rgba(51, 153, 255, 0.1); */
-  border-top: 2px solid #108dee;
-  border-bottom: 2px solid #108dee;
-  /* border-radius: 10px; */
+  /* border-top: 2px solid #108dee; */
+  /* border-bottom: 2px solid #108dee; */
+  box-shadow: 0px 0px 10px #adb5bd;
+  border-radius: 10px;
   width: 100%;
   height: 20vh;
   margin-bottom: 7%;
+
   /* border: 1px solid red; */
 `;
 
@@ -71,12 +73,14 @@ const RightInfo = styled.div`
 const FishDesc = styled.div`
   box-sizing: border-box;
   padding-left: 15px;
+  padding-right: 10px;
   width: 100%;
   height: 90%;
-  color: #108dee;
+  /* color: #108dee; */
   font-size: 1rem;
   line-height: 140%;
-  border-left: 1.5px solid #108dee;
+  /* border-left: 1.5px solid #108dee; */
+  border-left: 1.5px solid #e5e5e5;
 `;
 
 const Name = styled.div`
@@ -86,7 +90,7 @@ const Name = styled.div`
   /* border-radius: 5px; */
   /* border-bottom: 2px solid #108dee; */
   /* background-color: rgba(51, 153, 255, 0.1); */
-  color: #108dee;
+  /* color: #108dee; */
   /* background: #108dee; */
   /* color: white; */
   width: 80%;
@@ -119,7 +123,7 @@ const Habitat = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #108dee;
+  /* color: #108dee; */
   font-weight: bold;
   font-family: "Kfont";
   /* border: 1px solid red; */
@@ -129,7 +133,7 @@ const Habitat = styled.div`
 
 const HabitatShow = styled.div`
   /* background: white; */
-  color: #108dee;
+  /* color: #108dee; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +156,7 @@ function ManageDetInfo({ conInfo }) {
         return (
           <ContainerS key={idx}>
             <DetailImg>
-              <ImgD src={el.fish_img} alt="" />
+              <ImgD src={el.fish_img} alt="이미지" />
             </DetailImg>
             {/* ----------------------------------------- */}
             <Content>
