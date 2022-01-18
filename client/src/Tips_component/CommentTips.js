@@ -1,5 +1,8 @@
 import React, { useState, memo } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 const CommentForm = styled.div`
   position: relative;
@@ -7,6 +10,7 @@ const CommentForm = styled.div`
   height: 100%;
   display: column;
   margin-bottom: 2px;
+  font-family: "Kfont";
   /* border: 1px solid red; */
   justify-content: center;
 `;
@@ -40,9 +44,20 @@ const CommentWriter = styled.div`
   height: 30%;
   /* border: 1px solid red; */
   margin-top: 0.5px;
+  font-family: "Kfont";
 `;
 
 const CommentContent = styled.div`
+  width: 90%;
+  height: 20%;
+  font-size: 0.9rem;
+  /* border: 1px solid black; */
+  margin-top: 0.5px;
+  margin-bottom: 10px;
+  font-family: "Kfont";
+`;
+
+const EditComment = styled.input`
   width: 90%;
   height: 20%;
   font-size: 0.9rem;
@@ -61,18 +76,12 @@ const CommnetDate = styled.div`
 `;
 
 const CommentDeleteBtn = styled.button`
-  bottom: 8px;
-  right: -20px;
-  width: 80px;
-  height: 30px;
-  color: gray;
-  /* font-size: 1.25rem; */
-  /* font-weight: bold; */
-  border-style: none;
+  width: 5px;
+  height: 5px;
+  border: 1px solid red;
   background: none;
   margin-left: 15px;
   cursor: pointer;
-  /* margin-right: 0; */
 `;
 
 const CommentInputContainer = styled.form`
@@ -132,12 +141,20 @@ function CommentTips({
   handleDeleteComment,
 }) {
   const [newComment, setNewComment] = useState({});
+  const [isEdit, setIsEdit] = useState(false);
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
 
   // 댓글 작성
   const handleInputComment = (e) => {
     setNewComment({
       content: e.target.value,
     });
+  };
+
+  // 댓글 수정
+  const editComment = () => {
+    setIsEdit(true);
   };
 
   // 댓글 업로드 버튼
@@ -147,7 +164,8 @@ function CommentTips({
 
   // 댓글 삭제 버튼
   const Delete = (e) => {
-    handleDeleteComment(e.target.value);
+    // console.log(e.target.id);
+    handleDeleteComment(e.target.id);
   };
 
   return (
@@ -170,16 +188,32 @@ function CommentTips({
               <SmallCommentForm key={idx}>
                 <Comment>
                   <CommentWriter>{el.comment_user_name}</CommentWriter>
-                  <CommentContent>{el.comment_content}</CommentContent>
+                  {isEdit ? (
+                    <EditComment
+                      type="text"
+                      value={el.comment_content}
+                      onChange={handleInputComment}
+                    ></EditComment>
+                  ) : (
+                    <CommentContent>{el.comment_content}</CommentContent>
+                  )}
                   <CommnetDate>
                     {el.updated_at.split("T")[0]}&nbsp;
                     {el.updated_at.split("T")[1].split(".")[0]}
                   </CommnetDate>
                 </Comment>
                 {el.isWriter ? (
-                  <CommentDeleteBtn value={el.comment_id} onClick={Delete}>
-                    X
-                  </CommentDeleteBtn>
+                  <>
+                    {/* <CommentDeleteBtn value={el.comment_id} onClick={Delete}> */}
+                    <FontAwesomeIcon
+                      id={el.comment_id}
+                      onClick={Delete}
+                      size="1x"
+                      icon={faTimesCircle}
+                      style={{ cursor: "pointer", color: "gray" }}
+                    />
+                    {/* </CommentDeleteBtn> */}
+                  </>
                 ) : (
                   <></>
                 )}
@@ -189,13 +223,19 @@ function CommentTips({
         )}
       </CommentForm>
       <CommentInputContainer>
-        <AddCommentForm>{userName}</AddCommentForm>
-        <CommentInput
-          type="text"
-          placeholder="입력"
-          onChange={handleInputComment}
-        ></CommentInput>
-        <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+        {isLogin ? (
+          <>
+            <AddCommentForm>{userName}</AddCommentForm>
+            <CommentInput
+              type="text"
+              placeholder="입력"
+              onChange={handleInputComment}
+            ></CommentInput>
+            <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+          </>
+        ) : (
+          <></>
+        )}
       </CommentInputContainer>
     </>
   );

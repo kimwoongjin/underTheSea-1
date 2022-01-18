@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginModalOnAction } from "../store/actions";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../component/Header";
@@ -14,6 +16,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 25px;
   // background-color: #f7f7f4;
 `;
 const TopCover = styled.div`
@@ -72,13 +75,13 @@ const BtnContainer = styled.div`
   /* border: 1px dashed darkcyan; */
 `;
 const Btn = styled.button`
-  width: 120px;
-  height: 40px;
+  width: 90px;
+  height: 30px;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 4px;
-  margin-right: 28px;
+  margin-right: 0;
   border-style: none;
   background: #108dee;
   cursor: pointer;
@@ -103,23 +106,28 @@ const TipListHeadContainer = styled.div`
   width: 95%;
   display: flex;
   font-size: 1.5rem;
-  margin-top: 20px;
+  margin-top: 30px;
+  // margin-bottom: 10px;
   border-bottom: 4px solid #108dee;
+  // box-shadow: 0px 5px 5px -3px #828282;
   font-weight: bold;
 `;
 
 const TipListTitle = styled.div`
   flex: 6;
-  text-align: center;
+  margin-bottom: 30px;
+  text-align: start;
 `;
 
 const TipListWriter = styled.div`
   flex: 2;
+  margin-bottom: 30px;
   text-align: start;
 `;
 
 const TipListDate = styled.div`
   flex: 2;
+  margin-bottom: 30px;
   text-align: center;
 `;
 
@@ -127,8 +135,9 @@ const PageBtnForm = styled.form`
   display: flex;
   width: 95%;
   justify-content: center;
-  border-top: 1px solid #808080;
-  margin-bottom: 5px;
+  // border-top: 1px solid #808080;
+  padding-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const PageBtn = styled.div`
@@ -136,7 +145,8 @@ const PageBtn = styled.div`
   border-style: none;
   background-color: #ffffff;
   border-bottom: 1px solid black;
-  margin: 2px;
+  margin: 5px;
+  font-size: 18px;
   cursor: pointer;
 `;
 
@@ -145,8 +155,12 @@ function HoneyTips() {
   const [pageNum, setPageNum] = useState(1);
   const [tipLength, setTipLength] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
 
+  // 새글쓰기 페이지로 이동
   const goToNewTip = () => {
     navigate("/writetips");
   };
@@ -155,6 +169,7 @@ function HoneyTips() {
     handleTipList();
   }, [pageNum]);
 
+  // 페이지 숫자에 따른 게시물 조회
   const handleTipList = async () => {
     const result = await axios.get(`http://localhost:80/tip/all/${pageNum}`, {
       headers: {
@@ -162,13 +177,13 @@ function HoneyTips() {
       },
       withCredentials: true,
     });
-    // console.log(result.data.data);
     const { data: list } = result.data;
     setTipList([...list]);
-    const page_length = Math.floor(result.data.tip_num / 10);
-    if (result.data.tip_num % 10 !== 0) {
+
+    // 페이지네이션을 위해 전체 갯수와 같은 길이의 배열 생성
+    const page_length = Math.floor(result.data.tip_num / 12);
+    if (result.data.tip_num % 12 !== 0) {
       const page = new Array(page_length + 1).fill(0);
-      // console.log(page);
       setTipLength([...page]);
     } else {
       const page = Array(page_length).fill(0);
@@ -176,6 +191,7 @@ function HoneyTips() {
     }
   };
 
+  // 이전페이지
   const goToPre = () => {
     if (pageNum === 1) {
       return;
@@ -184,6 +200,7 @@ function HoneyTips() {
     setPageNum(page - 1);
   };
 
+  // 다음페이지
   const goToNext = () => {
     if (pageNum === tipLength.length) {
       return;
@@ -191,8 +208,8 @@ function HoneyTips() {
     setPageNum(pageNum + 1);
   };
 
+  // 페이지 선택
   const selectPageNum = (e) => {
-    // console.log(e.target.id);
     setPageNum(e.target.id);
   };
 
@@ -209,7 +226,11 @@ function HoneyTips() {
           {/* <Swarm src="무리.png" /> */}
         </TopCover>
         <BtnContainer>
-          <Btn onClick={goToNewTip}>새글쓰기</Btn>
+          {isLogin ? (
+            <Btn onClick={goToNewTip}>새글쓰기</Btn>
+          ) : (
+            <Btn onClick={() => dispatch(loginModalOnAction)}>새글쓰기</Btn>
+          )}
         </BtnContainer>
         <TipListContainer>
           <TipListHeadContainer>
@@ -219,7 +240,7 @@ function HoneyTips() {
             <TipListDate>작성일</TipListDate>
           </TipListHeadContainer>
           {tipList.map((el, idx) => {
-            return <TipList key={idx} value={el.tip_id} tip={el}></TipList>;
+            return <TipList key={idx} tip_id={el.tip_id} tip={el}></TipList>;
           })}
           <PageBtnForm>
             <PageBtn onClick={goToPre}>이전</PageBtn>

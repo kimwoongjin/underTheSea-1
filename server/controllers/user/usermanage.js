@@ -3,6 +3,7 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
+  console.log(userinfo);
 
   if (!userinfo) {
     return res.status(401).json({ message: "You are not authorized" });
@@ -33,7 +34,7 @@ module.exports = async (req, res) => {
           size: el.dataValues.size,
           level_img: el.dataValues.level_img,
           fish_num: el.dataValues.fish_num,
-          last_ex_water: last_ex_water,
+          // last_ex_water: last_ex_water,
           theme: el.dataValues.theme,
         };
       })

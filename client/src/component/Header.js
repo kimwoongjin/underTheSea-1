@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginModalOnAction,
@@ -125,11 +125,15 @@ const BtnContainer = styled.div`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
   // console.log(accessToken, "QQQQQQQQ");
+  const goToHome = () => {
+    navigate("/");
+  };
 
   const handleLogout = () => {
     axios
@@ -157,7 +161,7 @@ function Header() {
 
   return (
     <Container>
-      <Img src="/로고.png" alt="" />
+      <Img src="/로고.png" alt="" onClick={goToHome} />
       <BtnContainer>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide>가이드</Guide>

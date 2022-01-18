@@ -15,6 +15,7 @@ import {
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
   EXCHANGEWATER_MODAL_ON,
+  HELP_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -33,6 +34,7 @@ const initialState = {
   isWSDInfoModal: false,
   isSignoutModal: false,
   isPwdModal: false,
+  isHelpModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -82,6 +84,8 @@ const modalReducer = (prevState = initialState, action) => {
     case WSDINFO_MODAL_ON:
       state = { ...prevState, isWSDInfoModal: true };
       break;
+    case HELP_MODAL_ON:
+      state = { ...prevState, isHelpModal: true };
     case MODAL_OFF:
       state = { ...initialState };
       break;
