@@ -11,7 +11,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid lightgray;
+  box-shadow: 0px 0px 10px #adb5bd;
+  /* border-bottom: 1px solid lightgray; */
   z-index: 99;
 `;
 
@@ -62,7 +63,7 @@ const Signup = styled.div`
 
 const Logout = styled.div`
   /* border: 1px solid red; */
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;

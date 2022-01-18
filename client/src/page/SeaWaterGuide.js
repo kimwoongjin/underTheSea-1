@@ -97,10 +97,13 @@ function SeaWaterGuide() {
     isWSDInfoModal,
   } = state;
 
-  const [cardTag, setCardTag] = useState();
+  const [cardTag, setCardTag] = useState({
+    tag: "all",
+  });
 
   const handleInputValue = (e) => {
     setCardTag({
+      ...cardTag,
       tag: e.target.value,
     });
   };

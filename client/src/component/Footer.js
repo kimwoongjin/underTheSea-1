@@ -94,7 +94,7 @@ const Copy = styled.div`
 function Footer() {
   return (
     <Container>
-      <LogoTag src="Footer.png" alt="" />
+      <LogoTag src="/Footer.png" alt="" />
       <AboutTag>
         About us<br></br>
         <a id="repo" href="https://github.com/codestates/underTheSea">

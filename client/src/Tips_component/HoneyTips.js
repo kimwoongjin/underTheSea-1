@@ -139,7 +139,7 @@ const PageBtnForm = styled.form`
 `;
 
 const PageBtn = styled.div`
-  align-text: center;
+  align-items: center;
   border-style: none;
   background-color: #ffffff;
   border-bottom: 1px solid black;
