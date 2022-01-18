@@ -27,11 +27,7 @@ const CardContainer = styled.div`
 // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
 // message: "Container is successfully added"
 function ManageCard({ containerList, getConInfo }) {
-<<<<<<< HEAD
   // console.log(containerList, "!!!!!!!!!!!");
-=======
-  console.log(containerList, "매니지카드에서 찍히는 수조목록");
->>>>>>> dd6f00c12001b3faf650db98572af8c5ee2d1304
   return (
     <Container>
       <CardContainer>

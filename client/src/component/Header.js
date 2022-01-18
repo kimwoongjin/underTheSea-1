@@ -45,6 +45,16 @@ const Manage = styled.div`
   }
 `;
 
+const Mypage = styled.div`
+  /* border: 1px solid red; */
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
+`;
+
 const Signup = styled.div`
   /* border: 1px solid red; */
   border-radius: 8px;
@@ -110,7 +120,7 @@ const BtnContainer = styled.div`
   /* border: 1px solid red; */
   justify-content: space-around;
   margin-right: 2%;
-  width: 300px;
+  width: 370px;
   font-family: "Kfont";
 `;
 
