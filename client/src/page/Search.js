@@ -17,7 +17,7 @@ const Auto = styled.div`
   height: 7.5vh;
   position: relative;
   margin-top: 10%;
-
+  border: 1.25px dashed red;
   .bottom {
     width: 30vw;
     display: flex;
@@ -104,14 +104,15 @@ const Text = styled.div`
 `;
 
 const Container = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute; */
+  margin-bottom: 10%;
 `;
 const CardContainer = styled.div`
   /* border: 1px solid black; */
@@ -268,7 +269,7 @@ function Search() {
           </CardContainer>
         )}
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
