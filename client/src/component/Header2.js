@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 
 const Container = styled.div`
-  /* position: fixed; */
+  // position: fixed;
   width: 100vw;
   height: 10vh;
   background: white;
@@ -24,6 +24,7 @@ const Container = styled.div`
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
@@ -128,11 +129,12 @@ const BtnContainer = styled.div`
 function Header2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
-  const accessToken = localStorage.getItem("accessToken");
-  // console.log(accessToken, "QQQQQQQQ");
-  const goToHome = () => {
+
+  // 로고 클릭시 메인으로
+  const goToMain = () => {
     navigate("/");
   };
 

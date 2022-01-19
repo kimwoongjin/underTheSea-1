@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const user_id = userinfo.id;
+    const user_name = userinfo.user_name;
 
     const container_data = await containers.findAll({ where: { user_id } });
 
@@ -41,7 +42,7 @@ module.exports = async (req, res) => {
     );
 
     return res.status(200).json({
-      data: user_container,
+      data: { ...user_container, user_name },
       message: "User's container data is successfully returned",
     });
   }

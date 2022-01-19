@@ -3,7 +3,7 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
-  console.log("토큰이 없다면..........".userinfo);
+  // console.log("토큰이 없다면..........".userinfo);
   const tip_id = req.params.tip_id;
   let isWriter = false;
   let user_id;
@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
 
   // 게시물 데이터 조회
   const tip_data = await tips.findOne({ where: { id: tip_id } });
+
   // 게시물을 작성한 유저정보 조회
   const tip_user_data = await users.findOne({
     where: { id: tip_data.dataValues.user_id },
