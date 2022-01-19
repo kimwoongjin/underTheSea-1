@@ -129,12 +129,11 @@ const BtnContainer = styled.div`
 function Header2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
-
-  // 로고 클릭시 메인으로
-  const goToMain = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  // console.log(accessToken, "QQQQQQQQ");
+  const goToHome = () => {
     navigate("/");
   };
 
@@ -154,6 +153,7 @@ function Header2() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })

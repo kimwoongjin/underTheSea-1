@@ -127,7 +127,7 @@ function LandingSearch() {
         alt="무리.png"
       />
       <TextContainer>
-        <MainText>Fish Searching</MainText>
+        <MainText>물고기 검색</MainText>
         <SearchText>
           다양한 물고기의 종류를 알고 싶으시다면<br></br>
           어종명으로 검색해보세요.<br></br>자세한 정보를 알려드립니다.

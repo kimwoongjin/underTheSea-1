@@ -21,7 +21,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 23%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
