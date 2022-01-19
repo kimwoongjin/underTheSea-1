@@ -120,7 +120,7 @@ function ActivationInfo() {
           </p>
           <h2 className="structure">물맞댐 방법</h2>
           <ImgContainer>
-            <Skimmer src="물맞댐.png" />
+            <Skimmer src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%AC%BC%EB%A7%9E%EB%8C%90.png" />
             <p>
               <div className="sub-title">1. 수온맞댐</div>
               처음 포장해온 봉지 그대로 수조에 30분 ~ 1시간 가량 띄워주어 수온을

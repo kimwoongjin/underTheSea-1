@@ -156,7 +156,7 @@ function ManageDetInfo({ conInfo }) {
         return (
           <ContainerS key={idx}>
             <DetailImg>
-              <ImgD src={el.fish_img} alt="이미지" />
+              <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
             </DetailImg>
             {/* ----------------------------------------- */}
             <Content>

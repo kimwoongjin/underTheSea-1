@@ -8,11 +8,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 25%;
+  width: 30%;
   height: 390px;
   /* box-shadow: 5px 8px 7px 3px #c6c6c6; */
   box-shadow: 0px 0px 20px #adb5bd;
-  margin: 3%;
+  margin-bottom: 3%;
   /* background: #d1f8ff; */
   border-radius: 20px;
   transition: all 0.3s;
@@ -124,7 +124,7 @@ const Seaweed = styled.img`
 
 function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   const navigate = useNavigate();
-  console.log(name, level);
+  // console.log(name, level);
   const month = new Date().getMonth() + 1;
 
   const sendCardInfo = async () => {

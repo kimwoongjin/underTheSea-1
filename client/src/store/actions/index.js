@@ -18,6 +18,8 @@ import {
   CONTAINER_CARD_INFO_SHOW,
   EXCHANGEWATER_MODAL_ON,
   WSDINFO_MODAL_ON,
+  HELP_MODAL_ON,
+  ADD_CONTAINER_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
   GET_CONTAINER_INFO,
@@ -75,6 +77,12 @@ export const exchangeWaterModalOnAction = {
 };
 export const wsdInfoModalOnAction = {
   type: WSDINFO_MODAL_ON,
+};
+export const helpInfoModalOnAction = {
+  type: HELP_MODAL_ON,
+};
+export const addcontainerModalOnAction = {
+  type: ADD_CONTAINER_MODAL_ON,
 };
 export const signupAction = {
   type: SIGN_UP,

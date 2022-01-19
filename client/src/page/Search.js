@@ -5,6 +5,7 @@ import axios from "axios";
 import SearchCurrent from "./SearchCurrent";
 import SearchInfo from "./SearchInfo";
 import { useEffect } from "react";
+import Footer from "../component/Footer";
 
 const Auto = styled.div`
   display: flex;
@@ -255,6 +256,7 @@ function Search() {
           </CardContainer>
         )}
       </Container>
+      {/* <Footer /> */}
     </>
   );
 }

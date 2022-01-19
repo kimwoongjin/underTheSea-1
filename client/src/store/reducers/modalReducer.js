@@ -11,10 +11,12 @@ import {
   DEADFISH_MODAL_ON,
   RECOMMENDINFO_MODAL_ON,
   WSDINFO_MODAL_ON,
+  ADD_CONTAINER_MODAL_ON,
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
   EXCHANGEWATER_MODAL_ON,
+  HELP_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -33,6 +35,8 @@ const initialState = {
   isWSDInfoModal: false,
   isSignoutModal: false,
   isPwdModal: false,
+  isHelpModal: false,
+  isAddContainerModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -64,6 +68,7 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case PWD_MODAL_ON:
       state = { ...prevState, isPwdModal: true };
+      break;
     case ACTIVATION_MODAL_ON:
       state = { ...prevState, isActivationModal: true };
       break;
@@ -81,6 +86,12 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case WSDINFO_MODAL_ON:
       state = { ...prevState, isWSDInfoModal: true };
+      break;
+    case ADD_CONTAINER_MODAL_ON:
+      state = { ...prevState, isAddContainerModal: true };
+      break;
+    case HELP_MODAL_ON:
+      state = { ...prevState, isHelpModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };
