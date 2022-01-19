@@ -131,7 +131,7 @@ function Header() {
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
-  // console.log(accessToken, "QQQQQQQQ");
+
   const goToHome = () => {
     navigate("/");
   };
