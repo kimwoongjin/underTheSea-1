@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.get("/", function (req, res) {
   res.status(200).send("hello world!!!!!!!!!!!");
 });
+
 app.get("/status", (req, res) => {
   db.query("use uts", (err) => {
     if (err) {
@@ -50,6 +51,9 @@ app.get("/images/:key", (req, res) => {
   const readStream = getFileStream(key);
   // console.log(readStream);
   readStream.pipe(res);
+});
+app.get("/addfishinfo", (req, res) => {
+  res.sendFile(path.join(__dirname, "./views/addfishinfo.html"));
 });
 
 app.post("/images", upload.single("image"), async (req, res) => {
