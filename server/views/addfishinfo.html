@@ -6,15 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript" src = ""></script>
     <style>
-      #show{
+      .form {
+        display: flex;
+        flex-direction: row;
+        height: 30px;
+      }
+      #show {
         width: 20%;
-      },
-      #myform2{
+      }
+      
+      #myform2 {
         display: flex;
         align-items: center;
       }
+    body {
+      cursor: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"),
+        default;
+    }
+
     </style>
-    <link rel="stylesheet" href="addfishinfo.css">
     <title>Add Fish Info</title>
   </head>
   <body>
@@ -45,12 +55,24 @@
 
     <form class = "form" action="http://localhost:3000/" method="GET">
       <button >메인으로</button>
-    <br><br><br>  
-    <button onclick={play}></button>
+     </form><br><br><br> 
+
+    <div onclick={play}>Water Drop</div>
     <audio
     id="audio_play"
     src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
   ></audio>
+  <script>
+    const play = () => {
+        let audio = document.getElementById("audio_play");
+        if (audio.paused) {
+          audio.play()
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      };
+  </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script>
@@ -74,17 +96,7 @@
         
       });
 
-      const play = () => {
-    
-    var audio = document.getElementById("audio_play");
-
-    if (audio.paused) {
-      audio.play();
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
+      
      
     </script>
     

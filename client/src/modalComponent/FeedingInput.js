@@ -154,25 +154,25 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
             <ImgContainer>
               <Img
                 name="1"
-                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%8E%A0%EB%A0%9B.png"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png"
                 alit="/펠렛.png"
                 onClick={handleFoodtype}
               />
               <Img
                 name="2"
-                src="/https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%94%8C%EB%A0%88%EC%9D%B4%ED%81%AC.png"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png"
                 alt="/플레이크.png"
                 onClick={handleFoodtype}
               />
               <Img
                 name="3"
-                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%83%89%EB%8F%99.png"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png"
                 alt="/냉동.png"
                 onClick={handleFoodtype}
               />
               <Img
                 name="4"
-                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%83%9D%EB%A8%B9%EC%9D%B4.png"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png"
                 alt="/생먹이.png"
                 onClick={handleFoodtype}
               />

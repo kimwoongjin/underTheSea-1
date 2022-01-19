@@ -128,7 +128,6 @@ const BtnContainer = styled.div`
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");

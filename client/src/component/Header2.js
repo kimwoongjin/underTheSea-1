@@ -129,12 +129,16 @@ const BtnContainer = styled.div`
 function Header2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
 
+  const accessToken = localStorage.getItem("accessToken");
+
   // 로고 클릭시 메인으로
   const goToMain = () => {
+    navigate("/");
+  };
+  const goToHome = () => {
     navigate("/");
   };
 
