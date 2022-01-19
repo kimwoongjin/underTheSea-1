@@ -131,13 +131,9 @@ function Header2() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
-<<<<<<< HEAD
 
   const accessToken = localStorage.getItem("accessToken");
 
-=======
-  const accessToken = localStorage.getItem("accessToken");
->>>>>>> f7ab9c8ee7176626e946439dbcd64b371eb85020
   // 로고 클릭시 메인으로
   const goToMain = () => {
     navigate("/");

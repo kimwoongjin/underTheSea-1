@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
         where: { container_id },
       });
 
-      // console.log("You've reached here", fish_info_list);
+      console.log("You've reached here", fish_info_list);
 
       let fish_list_final = [];
       if (fish_info_list.length === 0) {
@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         fish_list.map(async (el) => {
           let fishName = el.dataValues.fish_name;
           let fish_container_data = await container_fishes.findOne({
-            where: { fish_name: fishName },
+            where: { fish_name: fishName, container_id },
           });
 
           let result = {

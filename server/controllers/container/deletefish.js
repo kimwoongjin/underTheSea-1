@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
           message: "The fish is not in the container",
         });
       } else {
+        console.log(container_fish);
         container_fish = await container_fish.increment("fish_num", {
           by: Number(fish_num) * -1,
         });

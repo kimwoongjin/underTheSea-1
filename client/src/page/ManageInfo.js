@@ -138,7 +138,7 @@ const Seaweed = styled.img`
   /* border: 1px solid red; */
 `;
 
-function ManageInfo({ id, name, size, theme, level, getConInfo }) {
+function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const navigate = useNavigate();
   const month = new Date().getMonth() + 1;
   const accessToken = localStorage.getItem("accessToken");
@@ -159,7 +159,16 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   };
 
   const sendCardInfo = async () => {
-    let newData = await getConInfo(id);
+    const response = await axios.get(
+      `http://localhost:80/container/${id}/${month}`,
+      {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      }
+    );
+    handleCondata(response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+    console.log("!!!!!!!!!!!!!!!!!", response.data.data);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;

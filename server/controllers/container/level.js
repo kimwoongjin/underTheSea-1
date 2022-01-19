@@ -40,7 +40,9 @@ module.exports = async (req, res) => {
           console.log("Hello");
           return res
             .header("Authorization", req.headers.authorization)
-            .redirect(`http://localhost:80/container/${container_id}/${month}`);
+            .redirect(
+              `http://localhost:80/container/info/${container_id}/${month}`
+            );
           // return res.status(200).json({
           //   message: `The container is successfully leveled up`,
           // });
@@ -48,7 +50,9 @@ module.exports = async (req, res) => {
       } else {
         return res
           .header("Authorization", req.headers.authorization)
-          .redirect(`http://localhost:80/container/${container_id}/${month}`);
+          .redirect(
+            `http://localhost:80/container/level/${container_id}/${month}`
+          );
         // return res.status(200).json({
         //   message: "You've already leveled up this week",
         // });

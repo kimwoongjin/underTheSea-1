@@ -70,6 +70,7 @@ const OuterContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 15%;
+  /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
 const Level = styled.div`
@@ -128,6 +129,11 @@ const MidContainer = styled.div`
   justify-content: space-evenly;
   margin-top: 1%;
   align-items: center;
+  /* background: #00d2ff; */
+  /* background-color: rgba(102, 178, 255, 0.2); */
+  /* background-color: rgba(51, 153, 255, 0.1); */
+  /* background-color: #e5e5e5; */
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 const BottomContainer = styled.div`
   display: flex;
@@ -186,6 +192,22 @@ const ProgressBar = styled.div`
   height: 4vh;
   border: 2px solid #108dee;
 `;
+
+// const goal_percent = dog.walk_goal
+//     ? Math.min(100, Math.floor((100 * dog.walk_num) / dog.walk_goal))
+//     : 0;
+
+// bar가 지금 골퍼센트임
+// const ProgressBar = styled.div`
+//   position: absolute;
+//   left: 0;
+//   width: ${(props) => (props.bar ? props.bar : "50%")};
+//   height: 100%;
+//   border-top-left-radius: 10px;
+//   border-bottom-left-radius: 10px;
+//   box-shadow: -5px 0 0 0 #bbdd3e inset;
+//   background-color: #a2c523;
+// `;
 const Progress = styled.div`
   width: ${(props) => props.EXP};
   height: 3vh;
@@ -312,6 +334,7 @@ const Day = styled.div`
   /* margin: 1px; */
   /* border: 1px solid black; */
 `;
+// 지금 해야되는거는 피딩기록하는 버튼을 누르면 버튼을 누른 숫자만큼 클릭한 날에 달력에 정보가 보여야해
 
 const FoodIconContainer = styled.div`
   display: flex;
@@ -354,35 +377,27 @@ const FoodIcon = styled.img`
   width: 40%;
   /* border: 1px solid blue; */
 `;
+
 function ManageDetail({ condata, handleCondata }) {
-  //
-
-  //변수 선언부분
   const params = useParams();
-  const container_id = params.container_id;
   let exAmount = 0;
-  let exWaterObj = {};
   const month = new Date().getMonth() + 1;
-  let todayString = new Date().toISOString().split("T")[0].split("-");
-  todayString = todayString[0].slice(2) + todayString[1] + todayString[2];
-
-  const accessToken = localStorage.getItem("accessToken");
-  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-
-  const [finalList, setFinalList] = useState([]);
-  const [progressBar, setProgressBar] = useState(0);
-  const [getMoment, setMoment] = useState(moment());
-
-  const [exwaterInfo, setExwaterInfo] = useState({
-    container_id,
-    amount: "",
-  });
+  let today = new Date().toISOString().split("T")[0].split("-");
+  today = today[0].slice(2) + today[1] + today[2];
+  const container_id = params.container_id;
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
   });
-
-  const dispatch = useDispatch();
+  const [finalList, setFinalList] = userState([]);
+  const [expArr, setExpArr] = useState([]);
+  const [progressBar, SetProgressBar] = useState(0);
+  const accessToken = localStorage.getItem("accessToken");
+  const [exwaterInfo, setExwaterInfo] = useState({
+    container_id,
+    amount: "",
+  });
+  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
   const state = useSelector((state) => state.modalReducer);
   const {
     isMyAquariumInfoModal,
@@ -393,32 +408,29 @@ function ManageDetail({ condata, handleCondata }) {
     isHelpModal,
   } = state;
 
+  const dispatch = useDispatch();
+  const [getMoment, setMoment] = useState(moment());
   const today = getMoment; // today == moment()   입니다.
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-  console.log(today, todayString);
-  //함수선언부분
-  //
-  // [...'220119', '220120', '220121'] 형태로 return
-  const GetCurrentWeek = () => {
+
+  const getCurrentWeek = () => {
     const day = new Date();
     day.setHours(day.getHours() + 9);
     const sunday = day.getTime() - 86400000 * day.getDay();
     day.setTime(sunday);
-    let result = [day.toISOString().slice(0, 10)];
+    const result = [day.toISOString().slice(0, 10)];
     for (let i = 1; i < 7; i++) {
       day.setTime(day.getTime() + 86400000);
       result.push(day.toISOString().slice(0, 10));
     }
-    result = result.map((day) => (day = day.split("-").join("").slice(2)));
     return result;
   };
-  //
-  // return 값 없음. 그냥 바로 condata 갱신
-  const UpdateConInfo = async () => {
+
+  const getConinfo = async () => {
     const res = await axios.get(
       `http://localhost:80/container/${container_id}/${month}`,
       {
@@ -429,65 +441,22 @@ function ManageDetail({ condata, handleCondata }) {
     console.log("RES FROM getConinfo", res.data);
     handleCondata(res.data.data);
   };
-  //
-  //
-  const AddFeedRequest = async () => {
-    const response = await axios.post(
-      `http://localhost:80/container/${container_id}/feed`,
-      {
-        data: feedingInfo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
-  };
-  //
-  //
-  const AddWaterRequest = async () => {
-    const response = await axios.post(
-      `http://localhost:80/container/${container_id}/ex_water`,
-      {
-        data: exwaterInfo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
-  };
 
-  const LevelUpRequest = async () => {
-    const response = await axios.patch(
-      `http://localhost:80/container/${container_id}/level`,
-      {},
-      {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      }
-    );
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
-  };
+  const getFinalList = () => {
+    let thisWeek = getCurrentWeek();
 
-  //
-  // return 값 없음. 바로 finalList 갱신
-  const UpdateFinalList = () => {
+    let curWeek = thisWeek.map(
+      (day) => (day = day.split("-").join("").slice(2))
+    );
+
+    let exWaterObj = {};
+    condata.ex_water_list.forEach((el) => {
+      if (!exWaterObj[el.createdAt]) {
+        exWaterObj[el.createdAt] = el.amount;
+      } else {
+        exWaterObj[el.createdAt] += el.amount;
+      }
+    });
     let final_list = {};
     condata.feed_list.forEach((el1) => {
       let one_day_list = condata.feed_list.filter(
@@ -497,47 +466,209 @@ function ManageDetail({ condata, handleCondata }) {
       one_day_list.forEach((el) => (array[el.type - 1] = el.count));
       final_list[el1.createdAt] = array;
     });
-    setFinalList(final_list);
-  };
-  //
-  // return값 없음. 바로 progressBar 갱신  && 조건 충족하면 레벨 업도 요청
-  const UpdateProgressBar = () => {
+
+    //---------------
     let temp = [];
-    const curWeek = GetCurrentWeek();
-    condata.ex_water_list.forEach((el) => {
-      if (!exWaterObj[el.createdAt]) {
-        exWaterObj[el.createdAt] = el.amount;
-      } else {
-        exWaterObj[el.createdAt] += el.amount;
-      }
-    });
-    for (let key in finalList) {
+    for (let key in final_list) {
       if (curWeek.includes(key)) {
-        let sum = finalList[key].reduce((a, b) => a + b);
+        let sum = final_list[key].reduce((a, b) => a + b);
         for (let i = 0; i < sum; i++) {
           temp.push(1);
         }
       }
     }
-    if (!temp.includes(2)) {
+
+    setExpArr(temp);
+    if (!expArr.includes(2)) {
       for (let key in exWaterObj) {
         if (curWeek.includes(key)) temp.push(2);
         break;
       }
     }
+    setExpArr(temp);
+    console.log("temp", temp);
+    EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+    console.log("경험치바", EXP);
+    SetProgressBar(EXP);
+    setFinalList(final_list);
+  };
 
-    if (temp.length >= 15 && temp.includes(2)) {
-      LevelUpRequest();
+  const handleExwaterValue = (e) => {
+    setExwaterInfo({
+      ...exwaterInfo,
+      amount: e.target.value,
+    });
+  };
+
+  const exwaterAddRequest = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:80/container/${container_id}/ex_water`,
+        {
+          data: exwaterInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+      handleCondata(response.data.data);
+      getFinalList();
+      console.log("FROM 443", condata);
+
+      dispatch(modalOff);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  if (condata.length === 0) {
+    console.log("CONDATA is EMPTY");
+    getConinfo();
+  }
+  getFinalList();
+
+  // ----- 해당수조 총 물고기수 ------
+  let total = 0;
+  for (let i = 0; i < condata.fish_list.length; i++) {
+    total += condata.fish_list[i].fish_num;
+  }
+  // console.log("토탈", total);
+  // ----------------------------
+
+  let todayEx = condata.ex_water_list.filter((el) => el.createdAt === today);
+
+  for (let i = 0; i < todayEx.length; i++) {
+    exAmount += todayEx[i].amount;
+  }
+
+  const imgSrcUrl = "http://localhost:80/level/" + condata.level;
+  // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
+  // 환수데이터가공
+
+  exWaterObj = {};
+  condata.ex_water_list.forEach((el) => {
+    if (!exWaterObj[el.createdAt]) {
+      exWaterObj[el.createdAt] = el.amount;
+    } else {
+      exWaterObj[el.createdAt] += el.amount;
     }
 
-    setProgressBar(Math.floor((temp.length * 100) / 15));
-  };
-  //
-  // 캘린더 어레이 레이아웃을 리턴
+    // console.log(oneDayList)
+  });
+
+  let exp = [];
+
+  // const levelUpRequest = () => {
+  // for (let key in final_list) {
+  //   if (curWeek.includes(key)) exp.push(1);
+  // }
+
+  // for (let key in exWaterObj) {
+  //   if (curWeek.includes(key)) exp.push(2);
+  //   break;
+  // }
+  useEffect(() => {
+    // console.log("조건문밖 요청", expArr);
+    // console.log("경험치길이", expArr.length);
+    // console.log("환수포함여부", expArr.includes(2));
+    if (expArr.length >= 15 && expArr.includes(2)) {
+      // console.log("조건문안 요청", expArr);
+      axios
+        .patch(
+          `http://localhost:80/container/${container_id}/level`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+          handleCondata(res.data.data);
+          if (
+            res.message === "You've already leveled up this week" ||
+            res.message === "You've reached max level"
+          ) {
+          }
+          console.log("res--->", res);
+          SetProgressBar([]);
+          setExpArr([]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [expArr]);
+  // console.log("렙업요청안의 경험치배열", expArr);
+
+  // };
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        // console.log("response:", res.data.data);
+        // levelUpRequest();
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+        handleCondata(res.data.data);
+
+        let final_list = {};
+        condata.feed_list.forEach((el1) => {
+          let one_day_list = condata.feed_list.filter(
+            (el2) => el1.createdAt === el2.createdAt
+          );
+          let array = [0, 0, 0, 0];
+          one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+          final_list[el1.createdAt] = array;
+        });
+
+        //---------------
+        let temp = [];
+        for (let key in final_list) {
+          if (curWeek.includes(key)) {
+            let sum = final_list[key].reduce((a, b) => a + b);
+            for (let i = 0; i < sum; i++) {
+              temp.push(1);
+            }
+          }
+        }
+        if (!expArr.includes(2)) {
+          for (let key in exWaterObj) {
+            if (curWeek.includes(key)) temp.push(2);
+            break;
+          }
+        }
+        setExpArr(temp);
+        console.log("랜더링 되자마자 temp", temp);
+        console.log("랜더링 되자마자 expArr", expArr);
+        EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+        console.log("피딩기록추가에 exp", expArr);
+        console.log("피딩기록추가에 EXP", EXP);
+        SetProgressBar(EXP);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const calendarArr = () => {
+    // console.log("From Cal", final_list);
     let result = [];
     let week = firstWeek;
-    console.log("condata when calendarArr runs", condata);
     for (week; week <= lastWeek; week++) {
       result = result.concat(
         <Tr key={week}>
@@ -550,7 +681,10 @@ function ManageDetail({ condata, handleCondata }) {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-              if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
+              if (
+                // final_list[days.format("YYMMDD")] &&
+                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
+              ) {
                 //오늘이고 기록도 있을때
                 return (
                   <Td key={index}>
@@ -562,17 +696,17 @@ function ManageDetail({ condata, handleCondata }) {
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
+                            {final_list[days.format("YYMMDD")] === undefined
                               ? 0
-                              : finalList[days.format("YYMMDD")][0]}
+                              : final_list[days.format("YYMMDD")][0]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
+                            {final_list[days.format("YYMMDD")] === undefined
                               ? 0
-                              : finalList[days.format("YYMMDD")][1]}
+                              : final_list[days.format("YYMMDD")][1]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
@@ -580,17 +714,17 @@ function ManageDetail({ condata, handleCondata }) {
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
+                            {final_list[days.format("YYMMDD")] === undefined
                               ? 0
-                              : finalList[days.format("YYMMDD")][2]}
+                              : final_list[days.format("YYMMDD")][2]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
+                            {final_list[days.format("YYMMDD")] === undefined
                               ? 0
-                              : finalList[days.format("YYMMDD")][3]}
+                              : final_list[days.format("YYMMDD")][3]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
@@ -600,7 +734,7 @@ function ManageDetail({ condata, handleCondata }) {
                     </ExWaterRecord>
                   </Td>
                 );
-              } else if (finalList[days.format("YYMMDD")]) {
+              } else if (final_list[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때
                 return (
                   <Td key={index}>
@@ -610,13 +744,13 @@ function ManageDetail({ condata, handleCondata }) {
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")][0]}
+                            {final_list[days.format("YYMMDD")][0]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")][1]}
+                            {final_list[days.format("YYMMDD")][1]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
@@ -624,13 +758,13 @@ function ManageDetail({ condata, handleCondata }) {
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")][2]}
+                            {final_list[days.format("YYMMDD")][2]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
                           <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
                           <FeedingNum>
-                            {finalList[days.format("YYMMDD")][3]}
+                            {final_list[days.format("YYMMDD")][3]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
@@ -682,79 +816,101 @@ function ManageDetail({ condata, handleCondata }) {
     }
     return result;
   };
-  //
 
-  //
-  // handler 함수 선언
-  const handleExwaterValue = (e) => {
-    setExwaterInfo({
-      ...exwaterInfo,
-      amount: e.target.value,
-    });
-  };
-  //
-  //
-  const handleFeedAddRequest = async () => {
-    try {
-      AddFeedRequest();
-      UpdateFinalList();
-      UpdateProgressBar();
-      dispatch(modalOff);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  //
-  //
-  const handleExwaterAddRequest = async () => {
-    try {
-      AddWaterRequest();
-      UpdateFinalList();
-      UpdateProgressBar();
-      dispatch(modalOff);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  //
-  //
   const handleFoodtype = (e) => {
     setFeedingInfo({
       ...feedingInfo,
       type: e.target.name,
     });
   };
+  let EXP;
 
-  //
-  // 함수 실행 부분
-  useEffect(() => {
-    UpdateConInfo();
-    UpdateFinalList();
-    UpdateProgressBar();
-  }, []);
+  const addFeedingNum = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:80/container/${container_id}/feed`,
+        {
+          data: feedingInfo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("비동기응답", response.data.data);
+      // setExpArr()
+      localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+      handleCondata(response.data.data);
 
-  let total = 0;
-  for (let i = 0; i < condata.fish_list.length; i++) {
-    total += condata.fish_list[i].fish_num;
-  }
-  let todayEx = condata.ex_water_list.filter(
-    (el) => el.createdAt === todayString
-  );
+      //---------------
 
-  for (let i = 0; i < todayEx.length; i++) {
-    exAmount += todayEx[i].amount;
-  }
-  const imgSrcUrl = "http://localhost:80/level/" + condata.level;
-  console.log("PLZ", condata);
+      let exWaterObj = {};
+      condata.ex_water_list.forEach((el) => {
+        if (!exWaterObj[el.createdAt]) {
+          exWaterObj[el.createdAt] = el.amount;
+        } else {
+          exWaterObj[el.createdAt] += el.amount;
+        }
+
+        // console.log(oneDayList)
+      });
+
+      // --------- 피딩데이터 가공 ---------
+
+      let final_list = {};
+      condata.feed_list.forEach((el1) => {
+        let one_day_list = condata.feed_list.filter(
+          (el2) => el1.createdAt === el2.createdAt
+        );
+        let array = [0, 0, 0, 0];
+        one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+        final_list[el1.createdAt] = array;
+      });
+
+      let temp = [];
+      for (let key in final_list) {
+        if (curWeek.includes(key)) {
+          let sum = final_list[key].reduce((a, b) => a + b);
+          for (let i = 0; i < sum; i++) {
+            temp.push(1);
+          }
+        }
+      }
+      if (!expArr.includes(2)) {
+        for (let key in exWaterObj) {
+          if (curWeek.includes(key)) temp.push(2);
+          break;
+        }
+      }
+      setExpArr(temp);
+      console.log("임시배열 temp", temp);
+      EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+      console.log("피딩기록추가에 exp", expArr);
+      console.log("피딩기록추가에 EXP", EXP);
+      SetProgressBar(EXP);
+      dispatch(modalOff);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log("밖에있는 경험치", progressBar);
   return (
     <>
       <Header2 />
+
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
+          {/* <Text>Hello</Text> */}
           <Text>{condata.container_name}</Text>
+          {/* <Text>수조</Text> */}
         </TextContainer>
       </Container>
+      {/* ----------------------------------------- */}
       <OuterContainer>
         <ImgContainer>
           <MainImg src={imgSrcUrl} alt="" />
@@ -860,7 +1016,7 @@ function ManageDetail({ condata, handleCondata }) {
       )}
       {isFeedingModal && (
         <FeedingInput
-          handleFeedAddRequest={handleFeedAddRequest}
+          addFeedingNum={addFeedingNum}
           handleFoodtype={handleFoodtype}
           feedingInfo={feedingInfo}
         />
@@ -868,7 +1024,7 @@ function ManageDetail({ condata, handleCondata }) {
       {isExchangeModal && (
         <ExChangeWaterInput
           handleExwaterValue={handleExwaterValue}
-          handleExwaterAddRequest={handleExwaterAddRequest}
+          exwaterAddRequest={exwaterAddRequest}
         />
       )}
       {isAddfishModal && <AddFish container_id={container_id} />}
@@ -878,5 +1034,4 @@ function ManageDetail({ condata, handleCondata }) {
     </>
   );
 }
-
 export default ManageDetail;

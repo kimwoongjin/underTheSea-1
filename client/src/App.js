@@ -24,8 +24,6 @@ function App() {
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
 
-  const [tt, setTt] = useState("T.T");
-
   const month = new Date().getMonth() + 1;
   // const getAllConInfo = async () => {
   //   const response = await axios.get(`http://localhost:80/container/all`, {
@@ -35,22 +33,22 @@ function App() {
   //   console.log("res from MANAGE", response);
   //   localStorage.setItem("allConInfo", JSON.stringify(response));
   // };
-  const getConInfo = async (id) => {
-    const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    // console.log("response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    return response.data.data;
-  };
+  // const getConInfo = async (id) => {
+  //   const response = await axios.get(
+  //     `http://localhost:80/container/${id}/${month}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  //   // console.log("response:", response.data.data);
+  //   localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+  //   return response.data.data;
+  // };
 
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
@@ -78,6 +76,7 @@ function App() {
     size: "",
     theme: "",
   });
+  const [condata, setCondata] = useState({});
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -146,6 +145,7 @@ function App() {
   const handleToken = (token) => {
     setToken(token);
   };
+  const handleCondata = (e) => setCondata(e);
 
   return (
     <BrowserRouter>
@@ -164,14 +164,20 @@ function App() {
             <Manage
               aquaInfo={aquaInfo}
               containerList={containerList}
-              getConInfo={getConInfo}
+              handleCondata={handleCondata}
             />
           }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} tt={tt} />}
+          element={
+            <ManageDetail
+              idList={idList}
+              condata={condata}
+              handleCondata={handleCondata}
+            />
+          }
         ></Route>
         <Route
           path="/manage/addInfo"

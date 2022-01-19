@@ -149,10 +149,10 @@ const TextD = styled.div`
   font-weight: 450;
 `;
 
-function ManageDetInfo({ conInfo }) {
+function ManageDetInfo({ condata }) {
   return (
     <>
-      {conInfo.fish_list.map((el, idx) => {
+      {condata.fish_list.map((el, idx) => {
         return (
           <ContainerS key={idx}>
             <DetailImg>
