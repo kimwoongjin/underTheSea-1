@@ -60,7 +60,7 @@ function FilterMediaCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(filterMediaModalOnAction)}>
       <ImgContainer>
-        <Img src="/여과재모음.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/여과재모음.jpeg" />
       </ImgContainer>
       <Title>여과재는 무엇일까요?</Title>
       <Content>

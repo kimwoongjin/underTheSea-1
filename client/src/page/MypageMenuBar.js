@@ -24,7 +24,7 @@ const Manage = styled.div`
   font-size: 1.7rem;
   background: none;
   border: none;
-  z-index: 999;
+  /* z-index: 999; */
   border-right: 3px solid black;
   cursor: pointer;
 `;
@@ -35,7 +35,7 @@ const Contents = styled.div`
   font-size: 1.7rem;
   background: none;
   border: none;
-  z-index: 999;
+  /* z-index: 999; */
   border-right: 3px solid black;
   cursor: pointer;
 `;
@@ -45,7 +45,7 @@ const Comment = styled.div`
   width: 24%;
   margin-left: 10%;
   font-size: 1.7rem;
-  z-index: 999;
+  /* z-index: 999; */
   background: none;
   border: none;
   cursor: pointer;

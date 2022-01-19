@@ -77,6 +77,7 @@ const ContentContainer = styled.div`
 `;
 
 const Box3 = styled.div`
+  /* position: relative; */
   border: 1px solid #108dee;
   margin-top: 4%;
   width: 70vw;

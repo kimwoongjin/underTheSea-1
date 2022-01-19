@@ -9,7 +9,7 @@ const Container = styled.div`
   z-index: 100;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 9%;
 
   /* border: 1px solid black; */
 `;
@@ -21,14 +21,13 @@ const BoxContainer = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
   align-items: center;
-  margin-top: 2%;
+  margin-top: 0%;
   margin-left: 6.5%;
   border-bottom: 1px solid #cccccc;
 `;
 
 const Box = styled.div`
   position: relative;
-  //   z-index: 1;
   flex: 6;
   width: 30%;
   height: 50%;
@@ -36,7 +35,7 @@ const Box = styled.div`
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-top: 1%;
+  margin-top: 0%;
   padding-left: 2%;
   padding-bottom: 2.5%;
 `;

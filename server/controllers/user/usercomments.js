@@ -19,23 +19,20 @@ module.exports = async (req, res) => {
       order: [["createdAt", "DESC"]],
     });
 
-    let user_comments = [];
-    if (!commnets_data) {
-      user_comments = [];
-    } else {
-      user_comments = await Promise.all(
-        commnets_data.map(async (el) => {
-          const comment_tip = await tips.findOne({ where: { id: el.tip_id } });
-          return {
-            tip_id: comment_tip.dataValues.id,
-            tip_title: comment_tip.dataValues.title,
-            tip_id: el.dataValues.tip_id,
-            content: el.dataValues.content,
-            createdAt: el.dataValues.createdAt,
-          };
-        })
-      );
-    }
+    const user_comments = await Promise.all(
+      commnets_data.map(async (el) => {
+        const tip_id = el.dataValues.tip_id;
+        const comment_tip = await tips.findOne({
+          where: { id: tip_id },
+        });
+        return {
+          tip_title: comment_tip.dataValues.title,
+          tip_id,
+          content: el.dataValues.content,
+          createdAt: el.dataValues.createdAt,
+        };
+      })
+    );
 
     return res.status(200).json({
       data: user_comments,
