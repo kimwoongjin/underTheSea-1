@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   background: white;
-  /* box-shadow: 0px 0px 10px #adb5bd; */
+  box-shadow: 0px 0px 5px #adb5bd;
   /* background: white; */
   display: flex;
   align-items: center;
@@ -131,9 +131,13 @@ function Header2() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
+<<<<<<< HEAD
 
   const accessToken = localStorage.getItem("accessToken");
 
+=======
+  const accessToken = localStorage.getItem("accessToken");
+>>>>>>> f7ab9c8ee7176626e946439dbcd64b371eb85020
   // 로고 클릭시 메인으로
   const goToMain = () => {
     navigate("/");
@@ -158,6 +162,7 @@ function Header2() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })

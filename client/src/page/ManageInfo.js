@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ const ImgContainer = styled.div`
   cursor: pointer;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  /* border: 1px solid black; */
+  border: 1px solid gray;
 `;
 const Img = styled.img`
   width: 100%;
@@ -59,7 +60,22 @@ const Content = styled.div`
   /* margin-top: 2%; */
   line-height: 200%;
   margin: auto;
-  /* border: 1px solid black; */
+  border: 1px solid black;
+  .delete {
+    position: absolute;
+    width: 20%;
+    height: 15%;
+    bottom: 5%;
+    right: 5%;
+    font-size: 0.9rem;
+    border: none;
+    background: #57b7ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: "Kfont";
+    z-index: 999;
+  }
 `;
 
 const Name = styled.div`
@@ -124,12 +140,26 @@ const Seaweed = styled.img`
 
 function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   const navigate = useNavigate();
-  // console.log(name, level);
   const month = new Date().getMonth() + 1;
+  const accessToken = localStorage.getItem("accessToken");
+
+  const DeleteHandler = () => {
+    axios
+      .delete(`http://localhost:80/container/${id}`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        console.log(result, "수조를 삭제 ");
+        navigate("/manage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const sendCardInfo = async () => {
     let newData = await getConInfo(id);
-    console.log("ID and NEW CONINFO:", id, newData);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;
@@ -149,6 +179,9 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
           <Size>{size}L</Size>
           <Text>테마</Text>
           <Theme>{theme}</Theme>
+          <button className="delete" onClick={DeleteHandler}>
+            삭제
+          </button>
         </Content>
       </Contents>
     </Container>

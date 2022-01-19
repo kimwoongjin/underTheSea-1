@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import axios from "axios";
 import SearchCurrent from "./SearchCurrent";
 import SearchInfo from "./SearchInfo";
@@ -80,6 +81,16 @@ const Button = styled.button`
   font-family: "Kfont";
   border: 2px solid #108dee;
   cursor: pointer;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
 `;
 
 const Text = styled.div`
@@ -210,7 +221,8 @@ function Search() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <Header2 />
       <Auto>
         <InputContainer>
           <input
