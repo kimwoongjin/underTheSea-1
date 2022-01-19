@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 
 const Container = styled.div`
+  /* position: fixed; */
   width: 100vw;
   height: 10vh;
   background: white;
@@ -17,7 +18,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* z-index: 999; */
+  z-index: 999;
 `;
 
 const Img = styled.img`

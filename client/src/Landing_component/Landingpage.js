@@ -76,22 +76,22 @@ const Fish3 = styled.img`
   right: 4%;
 `;
 const TilteContainer = styled.div`
+  position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  /* border: 4px solid red; */
 `;
 const MainImg = styled.img`
-  position: absolute;
-  top: 12%;
-  left: 37%;
-  width: 30%;
+  width: 80%;
 `;
 
 const Contents = styled.div`
   position: absolute;
   color: #092011;
   font-size: 1.5rem;
-  top: 51%;
-  left: 41.5%;
+  top: 62%;
   font-weight: 460;
   line-height: 170%;
   text-align: center;

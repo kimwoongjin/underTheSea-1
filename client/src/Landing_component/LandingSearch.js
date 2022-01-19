@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import "./Landingpage.css";
 
 const Container = styled.div`
@@ -61,46 +62,49 @@ const Fish = styled.img`
 `;
 
 const TextContainer = styled.div`
+  position: absolute;
+  left: 10%;
   display: flex;
   flex-direction: column;
-  .icon {
-    position: absolute;
-    z-index: 999;
-    top: 64%;
-    left: 43%;
-  }
+  /* border: 2px dashed red; */
 `;
 
 const SearchTitle = styled.div`
-  position: absolute;
+  /* border: 1px solid blue; */
+  /* position: absolute; */
   z-index: 999;
   color: black;
   font-size: 2rem;
-  top: 63%;
-  left: 34%;
+  display: flex;
+  /* top: 63%; */
+  /* left: 34%; */
+  margin-top: 5px;
   font-family: "SCBfont";
 `;
 
 const SearchText = styled.div`
-  position: absolute;
-  text-align: right;
+  /* border: 1px solid red; */
+  /* position: absolute; */
+  text-align: left;
   z-index: 999;
+  /* margin-right: 10px; */
   /* font-weight: 650; */
   color: #092011;
   font-size: 1.4rem;
-  top: 42%;
-  left: 28%;
+  /* top: 42%; */
+  /* left: 28%; */
   line-height: 150%;
   font-family: "Kfont";
 `;
 const MainText = styled.div`
-  position: absolute;
   font-weight: 900;
   font-size: 2.7rem;
-  top: 28%;
-  left: 26%;
+  margin-bottom: 10px;
   color: #092011;
   font-family: "SCBfont";
+`;
+const IconCover = styled.div`
+  margin-left: 10px;
 `;
 
 function LandingSearch() {
@@ -125,13 +129,17 @@ function LandingSearch() {
       <TextContainer>
         <MainText>Fish Searching</MainText>
         <SearchText>
-          다양한 물고기의 종류를<br></br>알고 싶으시다면<br></br>
+          다양한 물고기의 종류를 알고 싶으시다면<br></br>
           어종명으로 검색해보세요.<br></br>자세한 정보를 알려드립니다.
         </SearchText>
-        <SearchTitle>Search</SearchTitle>
-        <div className="icon">
-          <FontAwesomeIcon size="2x" icon={faAngleDoubleRight} />
-        </div>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/search">
+          <SearchTitle>
+            Search
+            <IconCover>
+              <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
+            </IconCover>
+          </SearchTitle>
+        </Link>
       </TextContainer>
       {/* <Sqaure /> */}
     </Container>
