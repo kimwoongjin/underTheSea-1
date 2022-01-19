@@ -110,10 +110,22 @@ const IconCover = styled.div`
 function LandingSearch() {
   return (
     <Container>
-      <ManImg src="메인남자인물.png" alt="" />
-      <CoralL src="해초.png" />
-      <CoralS src="해초.png" />
-      <Fish src="무리.png" />
+      <ManImg
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인남자인물.png"
+        alt="메인남자인물.png"
+      />
+      <CoralL
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png"
+        alt="해초.png"
+      />
+      <CoralS
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png"
+        alt="해초.png"
+      />
+      <Fish
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/무리.png"
+        alt="무리.png"
+      />
       <TextContainer>
         <MainText>Fish Searching</MainText>
         <SearchText>

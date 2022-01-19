@@ -35,4 +35,6 @@ module.exports = {
   commentinfo: require("./comment/commentinfo"),
   authgoogle: require("./user/authgoogle"),
   googlecallback: require("./user/googlecallback"),
+  authkakako: require("./user/authkakao"),
+  kakaocallback: require("./user/kakaocallback"),
 };

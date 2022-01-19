@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import axios from "axios";
 
 const DarkBackGround = styled.div`
@@ -104,11 +105,15 @@ const Btn = styled.button`
 function Deadfish({ container_id }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
+  const [fishList, setFishList] = useState([]);
   const [fishDeadInfo, setFishDeadInfo] = useState({
     fish_name: "",
     fish_num: "",
   });
-
+  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
+  const fish_list2 = conInfo.fish_list.map((el) => {
+    return el.fish_name;
+  });
   const handleInputValue = (e) => {
     setFishDeadInfo({
       ...fishDeadInfo,
@@ -150,7 +155,18 @@ function Deadfish({ container_id }) {
               type="text"
               name="fish_name"
               onChange={handleInputValue}
+              list="fishName"
             />
+            <datalist id="fishName">
+              {fish_list2.map((el) => (
+                <option
+                  className="fish-option"
+                  value={el}
+                  label={el}
+                  key={el.id}
+                ></option>
+              ))}
+            </datalist>
             <Input
               placeholder="마릿수를 입력해주세요"
               type="number"

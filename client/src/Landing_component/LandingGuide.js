@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faAngleDoubleRight, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
   width: 100vw;
@@ -70,14 +73,25 @@ const IconCover = styled.div`
 `;
 
 function LandingGuide() {
+  const play = () => {
+    var audio = document.getElementById("audio_play");
+    console.log("Music is my life");
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
   return (
-    <Container>
+    <Container onclick={play}>
+      <audio id="audio_play" src="waterdrop.mp3"></audio>
       <WomanImgL
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%A9%94%EC%9D%B8%EC%97%AC%EC%9E%90%EC%9D%B8%EB%AC%BC1.png"
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물1.png"
         alt="메인여자인물1.png"
       />
       <WomanImgR
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%A9%94%EC%9D%B8%EC%97%AC%EC%9E%90%EC%9D%B8%EB%AC%BC2.png"
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물2.png"
         alt="메인여자인물2.png"
       />
       <TextContainer>
