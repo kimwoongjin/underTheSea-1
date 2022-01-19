@@ -32,7 +32,7 @@ const Tips = styled.div`
   font-family: "Kfont";
   cursor: pointer;
   :hover {
-    color: #80808;
+    color: "#80808";
   }
 `;
 const SeaImg = styled.img`

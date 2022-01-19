@@ -5,6 +5,8 @@ import Header2 from "../component/Header2";
 import ManageCard from "./ManageCard";
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import AddContainer from "../modalComponent/AddContainer";
 
 const TitleContainer = styled.div`
   position: relative;
@@ -54,6 +56,9 @@ const OuterContainer = styled.div`
 function Manage({ getAllConInfo, getConInfo }) {
   const [containerList, setContainerList] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
+  const state = useSelector((state) => state.modalReducer);
+  const { isAddContainerModal } = state;
+
   useEffect(() => {
     axios
       .get(`http://localhost:80/container/all`, {
@@ -76,7 +81,12 @@ function Manage({ getAllConInfo, getConInfo }) {
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
       {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
-      <ManageCard containerList={containerList} getConInfo={getConInfo} />
+      <ManageCard
+        containerList={containerList}
+        getConInfo={getConInfo}
+        isAddContainerModal={isAddContainerModal}
+      />
+      {/* {isAddContainerModal && <AddContainer />} */}
     </>
   );
 }

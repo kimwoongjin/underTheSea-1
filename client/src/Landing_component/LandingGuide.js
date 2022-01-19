@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -31,47 +32,43 @@ const WomanImgR = styled.img`
   bottom: 25%;
 `;
 const TextContainer = styled.div`
+  position: absolute;
+  left: 10%;
+  bottom: 50%;
   display: flex;
   flex-direction: column;
-  .icon {
-    position: absolute;
-    z-index: 999;
-    top: 67.5%;
-    left: 15%;
-  }
+  /* border: 2px dashed red; */
 `;
 
 const SearchTitle = styled.div`
-  position: absolute;
-  z-index: 999;
+  display: flex;
   color: #092011;
   font-size: 2rem;
-  top: 67%;
-  left: 7%;
   font-weight: 650;
+  margin-top: 5px;
 `;
 
 const SearchText = styled.div`
-  position: absolute;
   text-align: left;
   z-index: 999;
-  font-weight: 650;
-  font-size: 1.5rem;
-  top: 54%;
-  left: 7%;
-  line-height: 150%;
   color: #092011;
+  font-size: 1.5rem;
+  line-height: 150%;
+  font-family: "Kfont";
 `;
 const MainText = styled.div`
-  position: absolute;
   text-align: left;
   font-size: 2.7rem;
-  left: 7%;
+  margin-bottom: 10px;
   line-height: 120%;
-  top: 28%;
   font-weight: 750;
   color: #092011;
 `;
+
+const IconCover = styled.div`
+  margin-left: 10px;
+`;
+
 function LandingGuide() {
   return (
     <Container>
@@ -79,15 +76,19 @@ function LandingGuide() {
       <WomanImgR src="메인여자인물2.png" alt="" />
       <TextContainer>
         <MainText>
-          Saltwater fish<br></br>Freshwater fish<br></br> Tips
+          Saltwater fish<br></br>Freshwater fish Tips
         </MainText>
         <SearchText>
-          물고기 정보에서 <br></br>관리까지 가이드를 해드립니다.
+          사육정보를 확인하고 자신만의 노하우를 공유해주세요!
         </SearchText>
-        <SearchTitle>Guide</SearchTitle>
-        <div className="icon">
-          <FontAwesomeIcon size="2x" icon={faAngleDoubleRight} />
-        </div>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
+          <SearchTitle>
+            Guide
+            <IconCover>
+              <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
+            </IconCover>
+          </SearchTitle>
+        </Link>
       </TextContainer>
     </Container>
   );
