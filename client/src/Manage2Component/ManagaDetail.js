@@ -69,6 +69,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 15%;
   /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
@@ -379,11 +380,10 @@ const FoodIcon = styled.img`
 
 function ManageDetail() {
   let params = useParams();
-
   let container_id = params.container_id;
 
   const month = new Date().getMonth() + 1;
-
+  const [conData, setConData] = useState({});
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
@@ -418,6 +418,10 @@ function ManageDetail() {
     return result;
   };
 
+  let thisWeek = getCurrentWeek();
+
+  let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
+
   const exwaterAddRequest = async () => {
     try {
       const response = await axios.post(
@@ -435,6 +439,7 @@ function ManageDetail() {
         }
       );
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+      setConData(response.data.data);
 
       //---------------
 
@@ -452,8 +457,8 @@ function ManageDetail() {
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conInfo.feed_list.forEach((el1) => {
-        let one_day_list = conInfo.feed_list.filter(
+      conData.feed_list.forEach((el1) => {
+        let one_day_list = conData.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];
@@ -471,6 +476,7 @@ function ManageDetail() {
           }
         }
       }
+
       if (!expArr.includes(2)) {
         for (let key in exWaterObj) {
           if (curWeek.includes(key)) temp.push(2);
@@ -482,6 +488,7 @@ function ManageDetail() {
       EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
       console.log("경험치바", EXP);
       SetProgressBar(EXP);
+
       // console.log("환수기록추가에 expArr", expArr);
       dispatch(modalOff);
     } catch (err) {
@@ -489,25 +496,11 @@ function ManageDetail() {
     }
   };
 
-  // container_id: 1
-  // container_name: "WOW"
-  // ex_water_list: Array(4)
-  // 0:
-  // amount: 13
-  // createdAt: "2022-01-20T13:46:46.000Z"
-  // [[Prototype]]: Object
-  // 1: {createdAt: '2022-01-14T08:44:39.000Z', amount: 1}
-  // 2: {createdAt: '2022-01-13T13:46:46.000Z', amount: 22}
-  // 3: {createdAt: '2022-01-11T13:46:46.000Z', amount: 20}
-  // length: 4
-
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  console.log("conInfo", conInfo);
-
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
-  for (let i = 0; i < conInfo.fish_list.length; i++) {
-    total += conInfo.fish_list[i].fish_num;
+  for (let i = 0; i < conData.fish_list.length; i++) {
+    total += conData.fish_list[i].fish_num;
   }
   // console.log("토탈", total);
   // ----------------------------
@@ -526,7 +519,7 @@ function ManageDetail() {
   thisDay = String(thisDay);
   let thisToday = thisYear + thisMonth + thisDay;
   thisToday = thisToday.slice(2);
-  let todayEx = conInfo.ex_water_list.filter(
+  let todayEx = conData.ex_water_list.filter(
     (el) => el.createdAt === thisToday
   );
 
@@ -534,12 +527,12 @@ function ManageDetail() {
     exAmount += todayEx[i].amount;
   }
 
-  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  const imgSrcUrl = "http://localhost:80/level/" + conData.level;
   // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
   // 환수데이터가공
 
   let exWaterObj = {};
-  conInfo.ex_water_list.forEach((el) => {
+  conData.ex_water_list.forEach((el) => {
     if (!exWaterObj[el.createdAt]) {
       exWaterObj[el.createdAt] = el.amount;
     } else {
@@ -552,8 +545,8 @@ function ManageDetail() {
   // --------- 피딩데이터 가공 ---------
 
   let final_list = {};
-  conInfo.feed_list.forEach((el1) => {
-    let one_day_list = conInfo.feed_list.filter(
+  conData.feed_list.forEach((el1) => {
+    let one_day_list = conData.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
     let array = [0, 0, 0, 0];
@@ -566,8 +559,7 @@ function ManageDetail() {
   // console.log("피딩객체", final_list);
 
   let exp = [];
-  let thisWeek = getCurrentWeek();
-  let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
+
   /* 오늘이 2020-10-31인 경우, 
   [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
   // 여기서 현재 환수객체랑 피딩객체
@@ -599,11 +591,11 @@ function ManageDetail() {
   //   break;
   // }
   useEffect(() => {
-    console.log("조건문밖 요청", expArr);
-    console.log("경험치길이", expArr.length);
-    console.log("환수포함여부", expArr.includes(2));
+    // console.log("조건문밖 요청", expArr);
+    // console.log("경험치길이", expArr.length);
+    // console.log("환수포함여부", expArr.includes(2));
     if (expArr.length >= 15 && expArr.includes(2)) {
-      console.log("조건문안 요청", expArr);
+      // console.log("조건문안 요청", expArr);
       axios
         .patch(
           `http://localhost:80/container/${container_id}/level`,
@@ -647,12 +639,60 @@ function ManageDetail() {
         }
       )
       .then((res) => {
-        console.log("response:", res.data.data);
+        // console.log("response:", res.data.data);
         // levelUpRequest();
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+
+        let final_list = {};
+        conInfo.feed_list.forEach((el1) => {
+          let one_day_list = conInfo.feed_list.filter(
+            (el2) => el1.createdAt === el2.createdAt
+          );
+          let array = [0, 0, 0, 0];
+          one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+          final_list[el1.createdAt] = array;
+        });
+
+        //---------------
+        let temp = [];
+        for (let key in final_list) {
+          if (curWeek.includes(key)) {
+            let sum = final_list[key].reduce((a, b) => a + b);
+            for (let i = 0; i < sum; i++) {
+              temp.push(1);
+            }
+          }
+        }
+        if (!expArr.includes(2)) {
+          for (let key in exWaterObj) {
+            if (curWeek.includes(key)) temp.push(2);
+            break;
+          }
+        }
+        setExpArr(temp);
+        console.log("랜더링 되자마자 temp", temp);
+        console.log("랜더링 되자마자 expArr", expArr);
+        EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+        console.log("피딩기록추가에 exp", expArr);
+        console.log("피딩기록추가에 EXP", EXP);
+        SetProgressBar(EXP);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // conInfo에서 ex리스트랑 feed리스트를 받아와서
+  // 일주일 단위로 자른다
+  // feed리스트의 길이만큼 경험치배열에 1을 넣고 환수목록에 이번주내역이 있으면 2를 추가한다.
+
+  // let thisWeek = getCurrentWeek();
+
+  // let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
+
+  // let progressExp = [];
+  // let Flist = conInfo.feed_list.filter(el => {
+  // if(curWeek.includes(el.createdAt)) return true
+  // })
+  // 이제 Flist의 길이만큼 배열에 넣는다.
 
   const dispatch = useDispatch();
   const [getMoment, setMoment] = useState(moment());
@@ -823,17 +863,6 @@ function ManageDetail() {
   };
   let EXP;
 
-  // const TestApiCall = async () {
-  //   try {
-  //     const response = await axios.get('https://test.com/api/v1')
-  //     const userId = response.data.userId;
-  //     const response2 = await axios.get('https://test2.com/api/v2/' + userId);
-  //     console.log("response >>", response2.data)
-  //   } catch(err) {
-  //     console.log("Error >>", err);
-  //   }
-  // }
-
   const addFeedingNum = async () => {
     try {
       const response = await axios.post(
@@ -853,11 +882,12 @@ function ManageDetail() {
       console.log("비동기응답", response.data.data);
       // setExpArr()
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+      setConData(response.data.data);
 
       //---------------
 
       let exWaterObj = {};
-      conInfo.ex_water_list.forEach((el) => {
+      conData.ex_water_list.forEach((el) => {
         if (!exWaterObj[el.createdAt]) {
           exWaterObj[el.createdAt] = el.amount;
         } else {
@@ -870,8 +900,8 @@ function ManageDetail() {
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conInfo.feed_list.forEach((el1) => {
-        let one_day_list = conInfo.feed_list.filter(
+      conData.feed_list.forEach((el1) => {
+        let one_day_list = conData.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];

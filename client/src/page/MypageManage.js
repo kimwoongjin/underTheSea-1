@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Container = styled.div`
   position: relative;
@@ -55,24 +57,31 @@ const Box2 = styled.div`
 const Head = styled.div`
   display: flex;
   align-items: center;
-  width: 55vw;
-  height: 5vh;
+  width: 78%;
+  height: 5%;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
-  position: absolute;
-  bottom: 10%;
+  position: relative;
+  top: 10%;
   padding-bottom: 0.5%;
+  box-sizing: border-box;
 
   .title {
     display: flex;
     padding-left: 2%;
     /* border: 1px solid black; */
-    margin-right: 70%;
+    /* margin-right: 70%; */
+    flex: 6;
+    box-sizing: border-box;
+    position: relative;
   }
   .comment {
+    flex: 2;
     display: flex;
+    box-sizing: border-box;
+    position: relative;
 
     /* border: 1px solid black; */
   }
@@ -98,7 +107,26 @@ const Notice = styled.div`
   margin-left: 2%;
 `;
 
-function MypageManage({ manageInfo }) {
+function MypageManage() {
+  const [manageInfo, setManageInfo] = useState([]);
+  const accessToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    manageHandler();
+  }, []);
+  const manageHandler = () => {
+    axios
+      .get(`http://localhost:80/user/manage`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        setManageInfo([...result.data.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Head>
@@ -109,13 +137,17 @@ function MypageManage({ manageInfo }) {
         {manageInfo.length === 0 ? (
           <>
             <Empty>
-              <BoxImg src="/빈박스.png" alt="" />
+              <BoxImg
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/빈박스.png"
+                alt=""
+              />
               <Notice>현재 등록된 정보가 없습니다. </Notice>
             </Empty>
           </>
         ) : (
           <>
             {manageInfo.map((el) => {
+              // console.log(el, "?????????");
               return (
                 <>
                   <BoxContainer>

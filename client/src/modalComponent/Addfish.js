@@ -21,7 +21,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 23%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -122,7 +122,7 @@ function AddFish({ container_id }) {
     console.log("추가 물고기정보", fishInfo);
     console.log("수조아이디", container_id);
     axios
-      .patch(
+      .post(
         `http://localhost:80/container/${container_id}/fish`,
         {
           data: fishInfo,

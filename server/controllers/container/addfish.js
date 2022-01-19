@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
   } else {
     const container_id = req.params.container_id;
     const { fish_num, fish_name } = req.body.data;
+    console.log("컨테이너아이디", container_id, fish_name, fish_num);
     // console.log("check_fish", check_fish);
     const check_container = await containers.findOne({
       where: { id: container_id },
@@ -16,7 +17,8 @@ module.exports = async (req, res) => {
     const check_fish = await fishes.findOne({
       where: { fish_name },
     });
-    console.log("check_fish", check_fish);
+    // console.log("check_fish", check_fish);
+    console.log("체크컨테이너", check_container);
 
     if (!check_container) {
       return res.status(404).json({ message: "The container doesn't exist" });

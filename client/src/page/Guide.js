@@ -156,6 +156,9 @@ function Guide() {
   const goToTips = () => {
     Navigate("/honeytips");
   };
+  const goToFreshwater = () => {
+    Navigate("/freshwaterguide");
+  };
   return (
     <>
       <Container>
@@ -177,7 +180,7 @@ function Guide() {
               </MiddleBox>
             </BigBox>
           </Tips>
-          <Freshwater>
+          <Freshwater onClick={goToFreshwater}>
             <BigBox>
               <SeaImg src="프레시워터.jpeg" className="image" />
               <MiddleBox className="overlay">

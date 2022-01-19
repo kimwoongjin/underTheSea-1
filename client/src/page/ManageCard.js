@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addcontainerModalOnAction } from "../store/actions";
 
 const Container = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -17,13 +17,14 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const CardContainer = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 60%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10%;
   /* margin-top: 8%; */
 `;
 

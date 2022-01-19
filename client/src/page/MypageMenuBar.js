@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
 
 const Box2 = styled.div`
   /* border: 1px solid #108dee; */
