@@ -127,6 +127,7 @@ const BtnContainer = styled.div`
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
@@ -168,11 +169,6 @@ function Header() {
       audio.pause();
       audio.currentTime = 0;
     }
-  };
-
-  // 로고 클릭시 메인으로
-  const goToMain = () => {
-    navigate("/");
   };
 
   return (

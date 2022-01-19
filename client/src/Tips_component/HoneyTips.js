@@ -209,7 +209,7 @@ function HoneyTips() {
     if (pageNum === 1) {
       return;
     }
-    const page = pageNum;
+    const page = Number(pageNum);
     setPageNum(page - 1);
   };
 
@@ -218,12 +218,14 @@ function HoneyTips() {
     if (pageNum === tipLength.length) {
       return;
     }
+    const page = Number(pageNum);
     setPageNum(pageNum + 1);
   };
 
   // 페이지 선택
   const selectPageNum = (e) => {
-    setPageNum(e.target.id);
+    const page = Number(e.target.id);
+    setPageNum(page);
   };
 
   return (
