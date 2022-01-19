@@ -90,78 +90,26 @@ const Box3 = styled.div`
 
 function Mypage() {
   const [openModal, setOpenModal] = useState(false);
-  const accessToken = localStorage.getItem("accessToken");
+  const [currentPage, setCurrentPage] = useState("manage");
   //========================================================================
-  const [test, setTest] = useState([]);
-  const [manageInfo, setManageInfo] = useState([]);
-  const [commentInfo, setCommentInfo] = useState([]);
+  const state = useSelector((state) => state.modalReducer);
+  const { isSignoutModal } = state;
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    manageHandler();
-    commentHandler();
-    content();
-  }, []);
-
-  const manageHandler = () => {
-    axios
-      .get(`http://localhost:80/user/manage`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
-      .then((result) => {
-        setManageInfo([...result.data.data]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const commentHandler = () => {
-    axios
-      .get(`http://localhost:80/user/comments/1`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
-      .then((result) => {
-        setCommentInfo([...result.data.data]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const content = () => {
-    axios
-      .get(`http://localhost:80/user/tips`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
-      .then((result) => {
-        setTest([...result.data.data]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const handleOn = () => {
     setOpenModal(true);
   };
   const handleOff = () => {
     setOpenModal(false);
   };
-  const state = useSelector((state) => state.modalReducer);
-  const { isSignoutModal } = state;
-  const dispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState("manage");
 
   function pageRender() {
     if (currentPage === "manage") {
-      return <MypageManage manageInfo={manageInfo} />;
+      return <MypageManage />;
     } else if (currentPage === "comment") {
-      return <MypageComment commentInfo={commentInfo} />;
+      return <MypageComment />;
     } else if (currentPage === "contents") {
-      return <MypageContent test={test} />;
+      return <MypageContent />;
     }
   }
 

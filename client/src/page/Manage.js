@@ -67,7 +67,7 @@ function Manage({ getAllConInfo, getConInfo }) {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setContainerList([...res.data.data]);
       });
   }, []);
