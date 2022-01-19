@@ -258,6 +258,7 @@ function PostTips() {
   // 게시글 수정
   const editTip = () => {
     localStorage.setItem("edit_tip", true);
+    localStorage.setItem("tip_id", tipData.id);
     navigate("/writetips");
   };
 
@@ -268,7 +269,7 @@ function PostTips() {
         <TopCover>
           <TitleContainer>
             <Title>정보공유 게시판</Title>
-            <Starfish src="불가사리.png" />
+            {/* <Starfish src="불가사리.png" /> */}
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
         </TopCover>

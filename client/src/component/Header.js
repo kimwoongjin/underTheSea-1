@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginModalOnAction,
@@ -23,6 +23,7 @@ const Container = styled.div`
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
@@ -126,6 +127,7 @@ const BtnContainer = styled.div`
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
@@ -155,9 +157,14 @@ function Header() {
       });
   };
 
+  // 로고 클릭시 메인으로
+  const goToMain = () => {
+    navigate("/");
+  };
+
   return (
     <Container>
-      <Img src="/로고.png" alt="" />
+      <Img src="/로고.png" alt="" onClick={goToMain} />
       <BtnContainer>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide>가이드</Guide>

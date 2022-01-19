@@ -9,6 +9,7 @@ import Header2 from "../component/Header2";
 import TipList from "./TipList";
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   /* border: 1px solid red; */
@@ -28,7 +29,18 @@ const TopCover = styled.div`
   /* border-bottom: 2px solid #808080; */
   flex-direction: column;
   /* background-image: url("투명바다1.png"); */
+  overflow: hidden;
 `;
+
+const Img = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  z-index: -1;
+`;
+
 const Swarm = styled.img`
   position: absolute;
   top: 80px;
@@ -37,7 +49,7 @@ const Swarm = styled.img`
   width: 14%;
 `;
 const TitleContainer = styled.div`
-  width: 5.7%;
+  width: 20%;
   display: flex;
   /* border: 1px solid green; */
   position: relative;
@@ -57,11 +69,12 @@ const Title = styled.div`
   margin-top: 60px;
   padding-bottom: 5px;
   box-sizing: border-box;
+  text-align: center;
   border-bottom: 5px solid #108dee;
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
-  color: #808080;
+  color: #4a4a4a;
   font-size: 1.25rem;
   margin-bottom: 50px;
   /* border: 1px solid red; */
@@ -69,7 +82,7 @@ const SubTitle = styled.div`
 
 const BtnContainer = styled.div`
   width: 70%;
-  /* margin-top: 80px; */
+  margin-top: 1.5%;
   display: flex;
   justify-content: flex-end;
   /* border: 1px dashed darkcyan; */
@@ -144,7 +157,7 @@ const PageBtn = styled.div`
   align-items: center;
   border-style: none;
   background-color: #ffffff;
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
@@ -215,12 +228,13 @@ function HoneyTips() {
 
   return (
     <>
-      <Header></Header>
+      <Header2></Header2>
       <Container>
         <TopCover>
+          <Img src="게시판베너사진.jpeg"></Img>
           <TitleContainer>
             <Title>Board</Title>
-            <Starfish src="불가사리.png" />
+            {/* <Starfish src="불가사리.png" /> */}
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
           {/* <Swarm src="무리.png" /> */}

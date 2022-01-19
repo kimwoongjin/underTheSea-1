@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction, signupModalOnAction } from "../store/actions";
 
 const Container = styled.div`
-  /* position: fixed; */
+  // position: fixed;
   width: 100vw;
   height: 10vh;
   background: white;
@@ -19,6 +19,7 @@ const Container = styled.div`
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
@@ -112,11 +113,17 @@ const BtnContainer = styled.div`
 
 function Header2() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
+
+  // 로고 클릭시 메인으로
+  const goToMain = () => {
+    navigate("/");
+  };
   return (
     <Container>
-      <Img src="/로고.png" alt="" />
+      <Img src="/로고.png" alt="" onClick={goToMain} />
       <BtnContainer>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide>가이드</Guide>
