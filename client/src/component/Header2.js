@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   background: white;
-  /* box-shadow: 0px 0px 10px #adb5bd; */
+  box-shadow: 0px 0px 5px #adb5bd;
   /* background: white; */
   display: flex;
   align-items: center;
