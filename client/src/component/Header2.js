@@ -156,6 +156,7 @@ function Header2() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })

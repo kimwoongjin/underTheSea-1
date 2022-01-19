@@ -93,9 +93,7 @@ function LandingGuide() {
         alt="메인여자인물2.png"
       />
       <TextContainer>
-        <MainText>
-          Saltwater fish<br></br>Freshwater fish Tips
-        </MainText>
+        <MainText>해수어와 담수어 사육정보</MainText>
         <SearchText>
           사육정보를 확인하고 자신만의 노하우를 공유해주세요!
         </SearchText>

@@ -39,7 +39,7 @@ const Title = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 2rem;
-  background-image: url("투명바다1.png");
+  background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png");
   /* background-image: url("투명바다2.png"); */
   /* background-image: url("투명바다3.png"); */
   .sub {

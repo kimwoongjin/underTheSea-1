@@ -89,11 +89,7 @@ function LandingManage() {
         alt="해파리.png"
       />
       <TextContainer>
-        <MainText>
-          Weekly Aquarium
-          <br />
-          Management
-        </MainText>
+        <MainText>주간 수족관 관리</MainText>
         <SearchText>
           어항 관리가 필요하세요?<br></br>Under the Sea에서 도와드립니다.
         </SearchText>

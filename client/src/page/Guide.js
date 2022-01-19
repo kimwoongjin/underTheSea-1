@@ -188,7 +188,7 @@ function Guide() {
           </Tips>
           <Freshwater>
             <BigBox>
-              <SeaImg src="가이드타이틀이미지2.png" className="image" />
+              <SeaImg src="초록바다사진.jpeg" className="image" />
               <MiddleBox className="overlay">
                 <TextForm className="text">FRESH WATER</TextForm>
               </MiddleBox>
