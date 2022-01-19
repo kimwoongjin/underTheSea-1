@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Container = styled.div`
   position: relative;
@@ -112,7 +114,27 @@ const Notice = styled.div`
   margin-left: 2%;
 `;
 
-function MypageComment({ commentInfo }) {
+function MypageComment() {
+  const accessToken = localStorage.getItem("accessToken");
+  const [commentInfo, setCommentInfo] = useState([]);
+
+  useEffect(() => {
+    commentHandler();
+  });
+  const commentHandler = () => {
+    axios
+      .get(`http://localhost:80/user/comments/1`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        setCommentInfo([...result.data.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Head>
@@ -124,7 +146,10 @@ function MypageComment({ commentInfo }) {
         {commentInfo.length === 0 ? (
           <>
             <Empty>
-              <BoxImg src="/빈박스.png" alt="" />
+              <BoxImg
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/빈박스.png"
+                alt=""
+              />
               <Notice>현재 등록된 정보가 없습니다.</Notice>
             </Empty>
           </>

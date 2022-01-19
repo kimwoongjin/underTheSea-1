@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -62,8 +63,8 @@ const Content = styled.div`
   border: 1px solid black;
   .delete {
     position: absolute;
-    width: 17%;
-    height: 12%;
+    width: 20%;
+    height: 15%;
     bottom: 5%;
     right: 5%;
     font-size: 0.9rem;
@@ -73,6 +74,7 @@ const Content = styled.div`
     color: white;
     font-weight: bold;
     font-family: "Kfont";
+    z-index: 999;
   }
 `;
 
@@ -138,12 +140,26 @@ const Seaweed = styled.img`
 
 function ManageInfo({ id, name, size, theme, level, getConInfo }) {
   const navigate = useNavigate();
-  // console.log(name, level);
   const month = new Date().getMonth() + 1;
+  const accessToken = localStorage.getItem("accessToken");
+
+  const DeleteHandler = () => {
+    axios
+      .delete(`http://localhost:80/container/${id}`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        console.log(result, "수조를 삭제 ");
+        navigate("/manage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const sendCardInfo = async () => {
     let newData = await getConInfo(id);
-    console.log("ID and NEW CONINFO:", id, newData);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;
@@ -163,7 +179,9 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
           <Size>{size}L</Size>
           <Text>테마</Text>
           <Theme>{theme}</Theme>
-          <button className="delete">삭제</button>
+          <button className="delete" onClick={DeleteHandler}>
+            삭제
+          </button>
         </Content>
       </Contents>
     </Container>
