@@ -136,7 +136,8 @@ function AddFish({ container_id }) {
           withCredentials: true,
         }
       )
-      .then(() => {
+      .then((res) => {
+        console.log("물고기추가응답", res);
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));

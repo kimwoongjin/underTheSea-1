@@ -5,19 +5,21 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
+  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 
 const Container = styled.div`
+  // position: fixed;
   width: 100vw;
   height: 10vh;
+  background: white;
+  box-shadow: 0px 0px 5px #adb5bd;
   background: #d2f7ff;
-  /* box-shadow: 0px 0px 10px #adb5bd; */
-  /* background: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* z-index: 999; */
+  z-index: 999;
 `;
 
 const Img = styled.img`
@@ -131,7 +133,8 @@ function Header() {
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
-  // console.log(accessToken, "QQQQQQQQ");
+  // 로고 클릭시 메인으로
+
   const goToHome = () => {
     navigate("/");
   };
@@ -152,6 +155,7 @@ function Header() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })
@@ -161,19 +165,15 @@ function Header() {
   };
   const play = () => {
     console.log("Play damm it!!");
-    var audio = document.getElementById("audio_play");
 
+    var audio = document.getElementById("audio_play");
+    console.log("Play damm it!!");
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
       audio.currentTime = 0;
     }
-  };
-
-  // 로고 클릭시 메인으로
-  const goToMain = () => {
-    navigate("/");
   };
 
   return (
@@ -189,7 +189,8 @@ function Header() {
       />
       <BtnContainer onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide>가이드</Guide>
+          <Guide onclick={play}>가이드</Guide>{" "}
+          <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
@@ -200,7 +201,8 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage>관리</Manage>
+              <Manage onclick={play}>관리</Manage>
+              <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}

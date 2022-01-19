@@ -17,7 +17,7 @@ const Auto = styled.div`
   height: 7.5vh;
   position: relative;
   margin-top: 10%;
-  border: 1.25px dashed red;
+  /* border: 1.25px dashed red; */
   .bottom {
     width: 30vw;
     display: flex;
@@ -29,30 +29,21 @@ const Auto = styled.div`
 `;
 
 const InputContainer = styled.div`
-  /* position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: 100%;
-  height: 100%;
-  font-family: "Kfont"; */
   /* border: 1px solid black; */
-  /* margin-top: 8rem; */
   width: 30vw;
   height: 7vh;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
   margin-right: 2%;
-  /* border: 1px solid black; */
-
+  border-bottom: 2px solid #108dee;
   .fish-input {
-    flex: 1 0 0;
+    /* flex: 1 0 0; */
     background-color: transparent;
     margin: 0;
     padding: 0;
     outline: none;
-    /* border: 1px solid black; */
+    /* border: 3px solid black; */
     border: none;
     width: 40vw;
     font-size: 1.2rem;
@@ -65,15 +56,16 @@ const InputContainer = styled.div`
     font-weight: bold;
     position: absolute;
     /* border: 1px solid black; */
+    color: #e5e5e5;
     padding: 0.8% 0 0.8%;
-    right: 42%;
+    right: 41%;
   }
 `;
 
 const Button = styled.button`
   width: 8vw;
   height: 5vh;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: white;
   background: #108dee;
   border-radius: 5px;
@@ -94,9 +86,11 @@ const Button = styled.button`
 `;
 
 const Text = styled.div`
-  position: absolute;
-  top: 53%;
-  left: 36%;
+  /* position: absolute; */
+  /* top: 53%; */
+  /* left: 36%; */
+  margin-top: 5%;
+  /* color: #e5e5e5; */
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -104,7 +98,7 @@ const Text = styled.div`
 `;
 
 const Container = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   /* height: 100%; */
   display: flex;
@@ -249,8 +243,8 @@ function Search() {
             ))}
           </datalist>
         </InputContainer>
-        <Button onClick={gotoSearch}>Search</Button>
-        <div className="bottom"></div>
+        <Button onClick={gotoSearch}>검색</Button>
+        {/* <div className="bottom"></div> */}
       </Auto>
       <Text>카드를 클릭하면 세부 정부를 확인할 수 있습니다.</Text>
 

@@ -32,7 +32,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
-  /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
 const Title = styled.div`
@@ -70,7 +69,15 @@ const OuterContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 15%;
-  /* background-color: rgba(51, 153, 255, 0.1); */
+`;
+
+const FishCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
 `;
 
 const Level = styled.div`
@@ -89,11 +96,9 @@ const LevelText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 50%; */
   color: #008eff;
   font-weight: bold;
   font-family: "Kfont";
-  /* border: 1px solid red; */
 `;
 
 const Logo = styled.img`
@@ -107,7 +112,6 @@ const Levelinfo = styled.div`
   width: 50%;
   font-size: 1.2rem;
   margin-left: 10px;
-  /* border: 1px solid red; */
   font-family: "Kfont";
 `;
 const ImgContainer = styled.div`
@@ -122,18 +126,12 @@ const MainImg = styled.img`
 
 const MidContainer = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
   height: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   margin-top: 1%;
   align-items: center;
-  /* background: #00d2ff; */
-  /* background-color: rgba(102, 178, 255, 0.2); */
-  /* background-color: rgba(51, 153, 255, 0.1); */
-  /* background-color: #e5e5e5; */
-  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 `;
 const BottomContainer = styled.div`
   display: flex;
@@ -141,33 +139,26 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
-  /* border: 1px solid red; */
 `;
 
 const HelpBtn = styled.div`
   display: flex;
-  /* text-align: right; */
   justify-content: flex-end;
   align-items: center;
   color: #108dee;
   font-weight: bold;
-  /* width: 11%; */
   font-family: "Kfont";
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 
 const AddfishBtn = styled.div`
   display: flex;
-  /* text-align: right; */
   justify-content: flex-end;
   align-items: center;
   color: #108dee;
   font-weight: bold;
   margin: 0px 20px;
-  /* width: 11%; */
   font-family: "Kfont";
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 const DeadfishBtn = styled.div`
@@ -176,10 +167,8 @@ const DeadfishBtn = styled.div`
   text-align: right;
   align-items: center;
   color: #108dee;
-  /* width: 11%; */
   font-family: "Kfont";
   font-weight: bold;
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 
@@ -193,21 +182,6 @@ const ProgressBar = styled.div`
   border: 2px solid #108dee;
 `;
 
-// const goal_percent = dog.walk_goal
-//     ? Math.min(100, Math.floor((100 * dog.walk_num) / dog.walk_goal))
-//     : 0;
-
-// bar가 지금 골퍼센트임
-// const ProgressBar = styled.div`
-//   position: absolute;
-//   left: 0;
-//   width: ${(props) => (props.bar ? props.bar : "50%")};
-//   height: 100%;
-//   border-top-left-radius: 10px;
-//   border-bottom-left-radius: 10px;
-//   box-shadow: -5px 0 0 0 #bbdd3e inset;
-//   background-color: #a2c523;
-// `;
 const Progress = styled.div`
   width: ${(props) => props.EXP};
   height: 3vh;
@@ -215,7 +189,7 @@ const Progress = styled.div`
   border-bottom-left-radius: 5px;
   background: linear-gradient(#00d2ff, #3a7bd5);
 `;
-//--------------------------------------------
+
 const BtnContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -247,6 +221,7 @@ const Button = styled.button`
 `;
 
 //------------------- 캘린더 --------------------
+
 const CalendarContainer = styled.div`
   width: 50%;
   margin-top: 40px;
@@ -266,7 +241,6 @@ const Control = styled.div`
 `;
 
 const CalendarBtn = styled.button`
-  /* background: white; */
   background-color: rgba(51, 153, 255, 0);
   width: 40px;
   height: 30px;
@@ -277,13 +251,9 @@ const Span = styled.span`
   font-size: 1.5rem;
 `;
 
-const Table = styled.table`
-  /* border: 1px solid gray; */
-`;
+const Table = styled.table``;
 
-const Tbody = styled.tbody`
-  /* border: 1px dashed blue; */
-`;
+const Tbody = styled.tbody``;
 
 const Tr = styled.tr`
   display: flex;
@@ -295,21 +265,17 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
-  /* border: 1px solid black; */
 `;
 
 const Td = styled.td`
   display: flex;
-  /* border: 1px solid rgba(51, 153, 255, 0.3); */
   border: 1px solid black;
-  /* justify-content: center; */
   background: white;
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
-  /* margin: 1px; */
 `;
 const WeekContainer = styled.div`
   width: 100%;
@@ -317,7 +283,6 @@ const WeekContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  /* border: 1px solid red; */
   .sun {
     color: red;
   }
@@ -371,34 +336,133 @@ const FoodIcon = styled.img`
   width: 40%;
 `;
 
+// -----------------------------------------------
+
+const ContainerS = styled.div`
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 10px #adb5bd;
+  border-radius: 10px;
+  width: 50%;
+  height: 20vh;
+  margin-bottom: 7%;
+`;
+
+const DetailImg = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 25%;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+`;
+
+const ImgD = styled.img`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 75%;
+  height: 20vh;
+`;
+
+const LeftInfo = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 0px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+`;
+
+const RightInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+`;
+
+const FishDesc = styled.div`
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 10px;
+  width: 100%;
+  height: 90%;
+  font-size: 1rem;
+  line-height: 140%;
+  border-left: 1.5px solid #e5e5e5;
+`;
+
+const Name = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 20%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: "Kfont";
+`;
+
+const HabitatContainer = styled.div`
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+
+const Habitat = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
+`;
+
+const HabitatShow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
+`;
+
+// -----------------------------------------------
+
 function ManageDetail() {
   let params = useParams();
-
   let container_id = params.container_id;
-
   const month = new Date().getMonth() + 1;
-  const [conData, setConData] = useState({});
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
   });
   const [expArr, setExpArr] = useState([]);
-
-  // 실제 width값을 쓰이는 상태
   const [progressBar, SetProgressBar] = useState(0);
   const accessToken = localStorage.getItem("accessToken");
-  // console.log("엑세스토큰--> ", accessToken);
   const [exwaterInfo, setExwaterInfo] = useState({
     container_id,
     amount: "",
   });
-
   const handleExwaterValue = (e) => {
     setExwaterInfo({
       ...exwaterInfo,
       amount: e.target.value,
     });
   };
+
   // ----------------- 일주일 뽑기 ------------------
 
   const getCurrentWeek = () => {
@@ -415,8 +479,65 @@ function ManageDetail() {
   };
 
   let thisWeek = getCurrentWeek();
-
   let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:80/container/${container_id}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+        let final_list = {};
+        conInfo.feed_list.forEach((el1) => {
+          let one_day_list = conInfo.feed_list.filter(
+            (el2) => el1.createdAt === el2.createdAt
+          );
+          let array = [0, 0, 0, 0];
+          one_day_list.forEach((el) => (array[el.type - 1] = el.count));
+          final_list[el1.createdAt] = array;
+        });
+
+        let temp = [];
+        for (let key in final_list) {
+          if (curWeek.includes(key)) {
+            let sum = final_list[key].reduce((a, b) => a + b);
+            for (let i = 0; i < sum; i++) {
+              temp.push(1);
+            }
+          }
+        }
+
+        let exWaterObj = {};
+        conInfo.ex_water_list.forEach((el) => {
+          if (!exWaterObj[el.createdAt]) {
+            exWaterObj[el.createdAt] = el.amount;
+          } else {
+            exWaterObj[el.createdAt] += el.amount;
+          }
+        });
+
+        if (!expArr.includes(2)) {
+          for (let key in exWaterObj) {
+            if (curWeek.includes(key)) temp.push(2);
+            break;
+          }
+        }
+
+        setExpArr(temp);
+        EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
+        SetProgressBar(EXP);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const exwaterAddRequest = async () => {
     try {
@@ -435,9 +556,8 @@ function ManageDetail() {
         }
       );
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-      setConData(response.data.data);
-      console.log("환수요청안에 conData", conData);
-      //---------------
+
+      // --------------------------------
 
       let exWaterObj = {};
       conInfo.ex_water_list.forEach((el) => {
@@ -446,15 +566,13 @@ function ManageDetail() {
         } else {
           exWaterObj[el.createdAt] += el.amount;
         }
-
-        // console.log(oneDayList)
       });
 
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conData.feed_list.forEach((el1) => {
-        let one_day_list = conData.feed_list.filter(
+      conInfo.feed_list.forEach((el1) => {
+        let one_day_list = conInfo.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];
@@ -462,7 +580,8 @@ function ManageDetail() {
         final_list[el1.createdAt] = array;
       });
 
-      //---------------
+      // --------------------------------
+
       let temp = [];
       for (let key in final_list) {
         if (curWeek.includes(key)) {
@@ -480,12 +599,8 @@ function ManageDetail() {
         }
       }
       setExpArr(temp);
-      console.log("temp", temp);
       EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
-      console.log("경험치바", EXP);
       SetProgressBar(EXP);
-
-      // console.log("환수기록추가에 expArr", expArr);
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
@@ -493,13 +608,14 @@ function ManageDetail() {
   };
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
+
   // ----- 해당수조 총 물고기수 ------
+
   let total = 0;
-  // 여기서 랜스를 못 읽어 (원래 conData 였음)
-  for (let i = 0; i < conData.fish_list.length; i++) {
+  for (let i = 0; i < conInfo.fish_list.length; i++) {
     total += conInfo.fish_list[i].fish_num;
   }
-  // console.log("토탈", total);
+
   // ----------------------------
 
   let exWater = {};
@@ -516,36 +632,31 @@ function ManageDetail() {
   thisDay = String(thisDay);
   let thisToday = thisYear + thisMonth + thisDay;
   thisToday = thisToday.slice(2);
-  // 여기도 conData 였음
-  let todayEx = conData.ex_water_list.filter(
+  let todayEx = conInfo.ex_water_list.filter(
     (el) => el.createdAt === thisToday
   );
 
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  //                                                conData 였음
-  const imgSrcUrl = "http://localhost:80/level/" + conData.level;
-  // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
-  // 환수데이터가공
+
+  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+
+  // --------- 환수데이터가공 ---------
 
   let exWaterObj = {};
-  // 여기도 conData 였음
   conInfo.ex_water_list.forEach((el) => {
     if (!exWaterObj[el.createdAt]) {
       exWaterObj[el.createdAt] = el.amount;
     } else {
       exWaterObj[el.createdAt] += el.amount;
     }
-
-    // console.log(oneDayList)
   });
 
   // --------- 피딩데이터 가공 ---------
 
   let final_list = {};
-  // 여기도 conData 였음
-  conData.feed_list.forEach((el1) => {
+  conInfo.feed_list.forEach((el1) => {
     let one_day_list = conInfo.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
@@ -555,22 +666,7 @@ function ManageDetail() {
   });
 
   // --------------------------------
-  // console.log("환수객체", exWaterObj);
-  // console.log("피딩객체", final_list);
 
-  let exp = [];
-
-  /* 오늘이 2020-10-31인 경우, 
-  [ '2020-10-25', '2020-10-26', '2020-10-27', '2020-10-28', '2020-10-29', '2020-10-30', '2020-10-31' ] */
-  // 여기서 현재 환수객체랑 피딩객체
-
-  // console.log("경험치배열--->", exp);
-  // const feed_data = JSON.parse(localStorage.getItem("feed_list"));
-  // console.log(feed_data);
-
-  // const EXP = exp.length === 0 ? 0 : Math.floor((exp.length / 15) * 100);
-
-  // console.log("경험치바--->", EXP);
   const state = useSelector((state) => state.modalReducer);
   const {
     isMyAquariumInfoModal,
@@ -580,122 +676,6 @@ function ManageDetail() {
     isExchangeModal,
     isHelpModal,
   } = state;
-
-  // const levelUpRequest = () => {
-  // for (let key in final_list) {
-  //   if (curWeek.includes(key)) exp.push(1);
-  // }
-
-  // for (let key in exWaterObj) {
-  //   if (curWeek.includes(key)) exp.push(2);
-  //   break;
-  // }
-  useEffect(() => {
-    // console.log("조건문밖 요청", expArr);
-    // console.log("경험치길이", expArr.length);
-    // console.log("환수포함여부", expArr.includes(2));
-    if (expArr.length >= 15 && expArr.includes(2)) {
-      // console.log("조건문안 요청", expArr);
-      axios
-        .patch(
-          `http://localhost:80/container/${container_id}/level`,
-          {},
-          {
-            headers: {
-              authorization: `Bearer ${accessToken}`,
-            },
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-          if (
-            res.message === "You've already leveled up this week" ||
-            res.message === "You've reached max level"
-          ) {
-          }
-          console.log("res--->", res);
-          SetProgressBar([]);
-          setExpArr([]);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [expArr]);
-  // console.log("렙업요청안의 경험치배열", expArr);
-
-  // };
-
-  useEffect(() => {
-    axios
-      .get(
-        `http://localhost:80/container/${container_id}/${month}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        // console.log("response:", res.data.data);
-        // levelUpRequest();
-        localStorage.setItem("conInfo", JSON.stringify(res.data.data));
-
-        setConData(res.data.data);
-        console.log("페이지 랜더되자마자 컨데이터", conData);
-
-        let final_list = {};
-        conInfo.feed_list.forEach((el1) => {
-          let one_day_list = conInfo.feed_list.filter(
-            (el2) => el1.createdAt === el2.createdAt
-          );
-          let array = [0, 0, 0, 0];
-          one_day_list.forEach((el) => (array[el.type - 1] = el.count));
-          final_list[el1.createdAt] = array;
-        });
-
-        //---------------
-        let temp = [];
-        for (let key in final_list) {
-          if (curWeek.includes(key)) {
-            let sum = final_list[key].reduce((a, b) => a + b);
-            for (let i = 0; i < sum; i++) {
-              temp.push(1);
-            }
-          }
-        }
-        if (!expArr.includes(2)) {
-          for (let key in exWaterObj) {
-            if (curWeek.includes(key)) temp.push(2);
-            break;
-          }
-        }
-        setExpArr(temp);
-        console.log("랜더링 되자마자 temp", temp);
-        console.log("랜더링 되자마자 expArr", expArr);
-        EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
-        console.log("피딩기록추가에 exp", expArr);
-        console.log("피딩기록추가에 EXP", EXP);
-        SetProgressBar(EXP);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  // conInfo에서 ex리스트랑 feed리스트를 받아와서
-  // 일주일 단위로 자른다
-  // feed리스트의 길이만큼 경험치배열에 1을 넣고 환수목록에 이번주내역이 있으면 2를 추가한다.
-
-  // let thisWeek = getCurrentWeek();
-
-  // let curWeek = thisWeek.map((day) => (day = day.split("-").join("").slice(2)));
-
-  // let progressExp = [];
-  // let Flist = conInfo.feed_list.filter(el => {
-  // if(curWeek.includes(el.createdAt)) return true
-  // })
-  // 이제 Flist의 길이만큼 배열에 넣는다.
 
   const dispatch = useDispatch();
   const [getMoment, setMoment] = useState(moment());
@@ -707,7 +687,6 @@ function ManageDetail() {
       : today.clone().endOf("month").week();
 
   const calendarArr = () => {
-    // console.log("From Cal", final_list);
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -722,10 +701,7 @@ function ManageDetail() {
                 .week(week)
                 .startOf("week")
                 .add(index, "day");
-              if (
-                // final_list[days.format("YYMMDD")] &&
-                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
-              ) {
+              if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
                   <Td key={index}>
@@ -882,28 +858,23 @@ function ManageDetail() {
           withCredentials: true,
         }
       );
-      console.log("비동기응답", response.data.data);
-      // setExpArr()
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-      setConData(response.data.data);
 
       //---------------
 
       let exWaterObj = {};
-      conData.ex_water_list.forEach((el) => {
+      conInfo.ex_water_list.forEach((el) => {
         if (!exWaterObj[el.createdAt]) {
           exWaterObj[el.createdAt] = el.amount;
         } else {
           exWaterObj[el.createdAt] += el.amount;
         }
-
-        // console.log(oneDayList)
       });
 
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conData.feed_list.forEach((el1) => {
+      conInfo.feed_list.forEach((el1) => {
         let one_day_list = conInfo.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
@@ -912,7 +883,8 @@ function ManageDetail() {
         final_list[el1.createdAt] = array;
       });
 
-      //---------------
+      // --------------------------------
+
       let temp = [];
       for (let key in final_list) {
         if (curWeek.includes(key)) {
@@ -929,41 +901,56 @@ function ManageDetail() {
         }
       }
       setExpArr(temp);
-      console.log("임시배열 temp", temp);
       EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
-      console.log("피딩기록추가에 exp", expArr);
-      console.log("피딩기록추가에 EXP", EXP);
       SetProgressBar(EXP);
+      if (expArr.length >= 15 && expArr.includes(2)) {
+        axios
+          .patch(
+            `http://localhost:80/container/level/${container_id}`,
+            {},
+            {
+              headers: {
+                authorization: `Bearer ${accessToken}`,
+              },
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+            if (
+              res.message === "You've already leveled up this week" ||
+              res.message === "You've reached max level"
+            ) {
+            }
+            // SetProgressBar([]);
+            // setExpArr([]);
+          })
+          .catch((err) => console.log(err));
+      }
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log("밖에있는 경험치", progressBar);
+
   return (
     <>
       <Header2 />
-
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          {/* <Text>Hello</Text> */}
           <Text>{conInfo.container_name}</Text>
-          {/* <Text>수조</Text> */}
         </TextContainer>
       </Container>
       {/* ----------------------------------------- */}
       <OuterContainer>
         <ImgContainer>
           <MainImg src={imgSrcUrl} alt="" />
-          {/* <MainImg src="/관리어항.png" alt="" /> */}
         </ImgContainer>
+
         {/* ----------------------------------------- */}
 
-        {/* ----------------------- */}
-
         <MidContainer>
-          {/* ----------------------------------------- */}
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
@@ -1008,7 +995,9 @@ function ManageDetail() {
             용궁기록
           </DeadfishBtn>
         </BottomContainer>
+
         {/* -------------------- 달력 ------------------- */}
+
         <CalendarContainer>
           <Control>
             <CalendarBtn
@@ -1047,8 +1036,48 @@ function ManageDetail() {
 
         {/* ----------------------------------------- */}
 
-        <ManageDetCard conInfo={conInfo} />
+        {/* <ManageDetCard conInfo={conInfo} /> */}
       </OuterContainer>
+      <FishCardContainer>
+        {conInfo.fish_list.map((el, idx) => {
+          return (
+            <ContainerS key={idx}>
+              <DetailImg>
+                <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+              </DetailImg>
+              {/* ----------------------------------------- */}
+              <Content>
+                <LeftInfo>
+                  <Name>{el.fish_name}</Name>
+
+                  <HabitatContainer>
+                    <Habitat>종류</Habitat>
+                    <HabitatShow>
+                      {el.fresh_water ? "담수어" : "해수어"}
+                    </HabitatShow>
+                  </HabitatContainer>
+                  <HabitatContainer>
+                    <Habitat>적정수온</Habitat>
+                    <HabitatShow>{el.temp}</HabitatShow>
+                  </HabitatContainer>
+
+                  <HabitatContainer>
+                    <Habitat>산호합사</Habitat>
+                    <HabitatShow>{el.reefsafe ? "O" : "X"}</HabitatShow>
+                  </HabitatContainer>
+                  <HabitatContainer>
+                    <Habitat>마릿수</Habitat>
+                    <HabitatShow>{el.fish_num}</HabitatShow>
+                  </HabitatContainer>
+                </LeftInfo>
+                <RightInfo>
+                  <FishDesc>{el.desc}</FishDesc>
+                </RightInfo>
+              </Content>
+            </ContainerS>
+          );
+        })}
+      </FishCardContainer>
       {isMyAquariumInfoModal && (
         <AquaInfo
           conInfo={conInfo}

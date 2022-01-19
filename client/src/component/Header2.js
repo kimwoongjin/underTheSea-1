@@ -5,6 +5,7 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
+  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 
@@ -133,13 +134,10 @@ function Header2() {
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
   // 로고 클릭시 메인으로
-  const goToMain = () => {
-    navigate("/");
-  };
+
   const goToHome = () => {
     navigate("/");
   };
-
   const handleLogout = () => {
     axios
       .post(
@@ -164,6 +162,7 @@ function Header2() {
         console.log(err);
       });
   };
+
   const play = () => {
     console.log("Play damm it!!");
 
