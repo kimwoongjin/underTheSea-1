@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,16 +20,14 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 30%;
-  height: 60%;
+  width: 40%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
   justify-content: center;
   display: flex;
   border-radius: 20px;
-  align-items: center;
-  background-color: lightgrey;
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -43,91 +41,83 @@ const CloseBtnContainer = styled.div`
 `;
 
 const ShowContainer = styled.div`
-  width: 90%;
+  width: 100%;
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: scroll;
 `;
 
 const InfoShow = styled.div`
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 95%;
-  padding: 10px;
 `;
+
+const Title = styled.div`
+  width: 90%;
+  font-size: 1.25rem;
+  font-family: "Kfont";
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
 const Content = styled.section`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  border: 1px solid #e5e5e5;
-  background: skyblue;
-  padding: 10px;
-
-  border-radius: 20px;
+  width: 90%;
+  font-family: "Kfont";
+  line-height: 150%;
 `;
 const ImgShow = styled.img`
-  width: 500px;
-  height: 450px;
+  width: 45%;
 `;
-const ThememContainer = styled.section`
-  display: flex;
-  align-items: center;
+const ImgCover = styled.div`
   width: 90%;
-  height: 30px;
-  border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  display: flex;
+  margin-top: 5px;
+  justify-content: space-between;
+  align-items: center;
 `;
-const ThemeTitle = styled.div`
+const LevelInfoCover = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0px;
+  width: 90%;
+`;
+
+const LevelInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  align-items: center;
+  width: 45%;
+`;
+const BtnCover = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 40px;
+  margin: 10px 0px;
+`;
+const Button = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
-  height: 90%;
-  font-weight: bold;
-  color: #108dee;
-  border-right: 1px solid #e5e5e5;
-  font-family: "Kfont";
-`;
-const ThemeShow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
+  width: 45%;
   height: 100%;
-`;
-const LastExchange = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 150px;
-  border-radius: 4px;
-  border: 1px solid #e5e5e5;
-`;
-const TopText = styled.div`
-  color: #108dee;
-  font-family: "Kfont";
-  margin-bottom: 1%;
-  font-size: 1.25rem;
-`;
-const MiddleText = styled.div`
+  border-radius: 5px;
   font-weight: bold;
-  color: #108dee;
   font-family: "Kfont";
-  margin-bottom: 1%;
-  font-size: 1.5rem;
-`;
-const BottomText = styled.div`
-  color: #108dee;
-  font-family: "Kfont";
-  font-size: 1.25rem;
+  background: #108dee;
+  border: 2px solid #108dee;
+  color: white;
+  font-size: 1rem;
 `;
 
 // 환수목록받아온거에서 가장끝번 인덱스
@@ -147,18 +137,35 @@ function HelpInfo() {
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>
-            <ImgShow
+            {/* <ImgShow
               src="https://iconmage.s3.ap-northeast-2.amazonaws.com/level.png"
               alt="level"
-            />
+            /> */}
+            <Title>여기는 어떤 페이지인가요?</Title>
             <Content>
-              레벨시스템을 통해 더욱 의욕적으로 수조를 관리 할 수 있게
-              도와드립니다.<br></br>
-              <br></br> 한 주 동안 <br></br>
-              14번 이상 사료를 주고 <br></br>
-              1번 이상 물을 갈아 주어<br></br>
-              당신의 수조 레벨을 높여 보세요.
-              <br></br>레벨이 높아지면 수조에 물고기들이 점점 늘어나요!
+              underTheSea에서는 수조에 먹이를 준 횟수와 환수량을 기록할 수
+              있습니다. 한 주 동안 총 14회의 피딩과 1회의 환수를 기록하시면
+              레벨이 올라가고 메인이미지가 바뀌게 됩니다. 일일 2회의 피딩과
+              주1회의 환수를 권장 드리며 추후 레벨에 따른 혜택을 준비중입니다.
+            </Content>
+            <ImgCover>
+              <ImgShow src="http://localhost:80/level/11" />
+              <FontAwesomeIcon icon={faArrowRight} size="2x" />
+              <ImgShow src="http://localhost:80/level/61" />
+            </ImgCover>
+            <LevelInfoCover>
+              <LevelInfo>Lv. 1</LevelInfo>
+              {/* <LevelInfo></LevelInfo> */}
+              <LevelInfo>Lv. 6</LevelInfo>
+            </LevelInfoCover>
+            <BtnCover>
+              <Button>피딩기록</Button>
+              <Button>환수기록</Button>
+            </BtnCover>
+            <Content>
+              환수기록 버튼을 누르면 4가지의 먹이 타입중 하나를 선택하여
+              피딩횟수를 추가할 수 있습니다. 환수기록 버튼은 환수량(L)을
+              입력하고 추가 기록시 일일 총량이 달력에 기록됩니다.
             </Content>
           </InfoShow>
         </ShowContainer>

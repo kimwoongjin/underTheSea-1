@@ -160,7 +160,7 @@ function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
               />
               <Img
                 name="2"
-                src="/https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%94%8C%EB%A0%88%EC%9D%B4%ED%81%AC.png"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png"
                 alt="/플레이크.png"
                 onClick={handleFoodtype}
               />

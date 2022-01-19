@@ -60,7 +60,7 @@ function ActivationCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(activationModalOnAction)}>
       <ImgContainer>
-        <Img src="/물맞댐대표사진.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물맞댐대표사진.jpeg" />
       </ImgContainer>
       <Title>물맞댐 방법</Title>
       <Content>

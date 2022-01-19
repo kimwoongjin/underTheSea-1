@@ -60,7 +60,7 @@ function RecommendCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(recommendInfoModalOnAction)}>
       <ImgContainer>
-        <Img src="/추천카드커버.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/추천카드커버.jpeg" />
       </ImgContainer>
       <Title>입문자 추천어종</Title>
       <Content>

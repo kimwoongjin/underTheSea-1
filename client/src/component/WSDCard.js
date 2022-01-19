@@ -60,7 +60,7 @@ function WSDCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(wsdInfoModalOnAction)}>
       <ImgContainer>
-        <Img src="/해수어백점병.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해수어백점병.jpeg" />
       </ImgContainer>
       <Title>백점병이 무엇일까요?</Title>
       <Content>
