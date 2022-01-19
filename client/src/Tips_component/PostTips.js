@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
 import CommentTips from "./CommentTips";
@@ -144,17 +145,21 @@ function PostTips() {
   const [isWriter, setIsWriter] = useState(false);
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
+  const params = useParams();
+  const tip_id = params.tip_id;
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
-  const tip_id = localStorage.getItem("tip_id");
+  // const tip_id = localStorage.getItem("tip_id");
 
   // 선택한 게시물 댓글 렌더링
   useEffect(() => {
-    handlePostTip();
+    handlePostTip(tip_id);
     handleComment();
   }, []);
 
   // 해당 게시물 조회
-  const handlePostTip = () => {
+  const handlePostTip = (tip_id) => {
     axios
       .get(`http://localhost:80/tip/${tip_id}`, {
         headers: {
@@ -185,7 +190,6 @@ function PostTips() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         setUserName(res.data.user_name);
         setComment([...res.data.data]);
       });
@@ -232,6 +236,7 @@ function PostTips() {
 
   // 목록으로 이동
   const goToList = () => {
+    localStorage.setItem("tip_id", null);
     navigate("/honeytips");
   };
 
@@ -253,6 +258,7 @@ function PostTips() {
   // 게시글 수정
   const editTip = () => {
     localStorage.setItem("edit_tip", true);
+    localStorage.setItem("tip_id", tipData.id);
     navigate("/writetips");
   };
 
@@ -263,13 +269,13 @@ function PostTips() {
         <TopCover>
           <TitleContainer>
             <Title>정보공유 게시판</Title>
-            <Starfish src="불가사리.png" />
+            {/* <Starfish src="불가사리.png" /> */}
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
         </TopCover>
         <BtnContainer>
           <BtnL onClick={goToList}>목록</BtnL>
-          {isWriter ? (
+          {isWriter && isLogin ? (
             <>
               <Btn onClick={editTip}>수정</Btn>
               <BtnR onClick={deleteTip}>삭제</BtnR>

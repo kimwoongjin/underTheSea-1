@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         fish_list.map(async (el) => {
           let fishName = el.dataValues.fish_name;
           let fish_container_data = await container_fishes.findOne({
-            where: { fish_name: fishName },
+            where: { fish_name: fishName, container_id },
           });
 
           let result = {
@@ -56,8 +56,10 @@ module.exports = async (req, res) => {
         where: { container_id },
         attributes: ["type"],
         group: [sequelize.literal("DATE(createdAt)"), "type"],
-
-        order: [["createdAt", "ASC"]],
+        order: [
+          ["createdAt", "ASC"],
+          ["type", "ASC"],
+        ],
       });
       let feed_list = [];
       if (!feed_data) {
@@ -95,7 +97,7 @@ module.exports = async (req, res) => {
       let ex_water_data = await ex_waters.findAll({
         where: { container_id },
         attributes: ["createdAt", "amount"],
-        order: [["createdAt", "ASC"]],
+        order: [["createdAt", "DESC"]],
       });
 
       let ex_water_list = [];
@@ -115,8 +117,6 @@ module.exports = async (req, res) => {
         ex_water_list = ex_water_list.filter((el) => {
           return Number(el.createdAt.slice(2, 4)) === month;
         });
-
-        ex_water_list = ex_water_list.reverse();
       }
 
       let final = {
@@ -130,6 +130,7 @@ module.exports = async (req, res) => {
         ex_water_list,
         fish_list: fish_list_final,
       };
+
       return res
         .status(200)
         .json({ data: final, message: "Data is successfully returned" });

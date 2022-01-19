@@ -8,6 +8,7 @@ import ManageAddInfo from "./page/ManageAddInfo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SeaWaterGuide from "./page/SeaWaterGuide";
+import FreshWaterGuide from "./page/FreshWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
@@ -23,33 +24,31 @@ function App() {
   const { isLoginModal, isSignupModal } = state;
   const { isLogin } = loginState;
 
-  const [tt, setTt] = useState("T.T");
-
   const month = new Date().getMonth() + 1;
-  const getAllConInfo = async () => {
-    const response = await axios.get(`http://localhost:80/container/all`, {
-      headers: { authorization: `Bearer ${accessToken}` },
-      withCredentials: true,
-    });
-    console.log("res from MANAGE", response);
-    localStorage.setItem("allConInfo", JSON.stringify(response));
-  };
-  const getConInfo = async (id) => {
-    const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    console.log("response:", response.data.data);
-    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    return response.data.data;
-  };
+  // const getAllConInfo = async () => {
+  //   const response = await axios.get(`http://localhost:80/container/all`, {
+  //     headers: { authorization: `Bearer ${accessToken}` },
+  //     withCredentials: true,
+  //   });
+  //   console.log("res from MANAGE", response);
+  //   localStorage.setItem("allConInfo", JSON.stringify(response));
+  // };
+  // const getConInfo = async (id) => {
+  //   const response = await axios.get(
+  //     `http://localhost:80/container/${id}/${month}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  //   // console.log("response:", response.data.data);
+  //   localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+  //   return response.data.data;
+  // };
 
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
@@ -77,6 +76,7 @@ function App() {
     size: "",
     theme: "",
   });
+  const [condata, setCondata] = useState({});
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -137,7 +137,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-
   // ------------------------------------------
 
   const [token, setToken] = useState("");
@@ -146,6 +145,7 @@ function App() {
   const handleToken = (token) => {
     setToken(token);
   };
+  const handleCondata = (e) => setCondata(e);
 
   return (
     <BrowserRouter>
@@ -153,25 +153,31 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/guide" element={<Guide />}></Route>
         <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
+        <Route path="/freshwaterguide" element={<FreshWaterGuide />}></Route>
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips token={token} />}></Route>
-        <Route path="/posttips" element={<PostTips />}></Route>
+        <Route path="/posttips/:tip_id" element={<PostTips />}></Route>
         <Route
           path="/manage"
           element={
             <Manage
               aquaInfo={aquaInfo}
               containerList={containerList}
-              getAllConInfo={getAllConInfo}
-              getConInfo={getConInfo}
+              handleCondata={handleCondata}
             />
           }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} tt={tt} />}
+          element={
+            <ManageDetail
+              idList={idList}
+              condata={condata}
+              handleCondata={handleCondata}
+            />
+          }
         ></Route>
         <Route
           path="/manage/addInfo"
@@ -191,5 +197,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

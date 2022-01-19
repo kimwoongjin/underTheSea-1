@@ -39,7 +39,7 @@ const Title = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 2rem;
-  background-image: url("투명바다1.png");
+  background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png");
   /* background-image: url("투명바다2.png"); */
   /* background-image: url("투명바다3.png"); */
   .sub {
@@ -84,6 +84,7 @@ const InfoContainer = styled.div`
   /* justify-content: space-evenly; */
   flex-wrap: wrap;
   /* border: 2px dashed red; */
+  margin-bottom: 10%;
 `;
 
 function SeaWaterGuide() {
@@ -97,10 +98,13 @@ function SeaWaterGuide() {
     isWSDInfoModal,
   } = state;
 
-  const [cardTag, setCardTag] = useState();
+  const [cardTag, setCardTag] = useState({
+    tag: "all",
+  });
 
   const handleInputValue = (e) => {
     setCardTag({
+      ...cardTag,
       tag: e.target.value,
     });
   };

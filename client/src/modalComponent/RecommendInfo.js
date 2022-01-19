@@ -137,10 +137,22 @@ function RecommendInfo() {
             <br /> 갖고있어 입문하는 단계에서 시작하기 어렵습니다. 충분한
             준비과정을 마쳤다면 다음의 어종으로 시작하는 것을 추천합니다.
             <ImgContainer>
-              <Img src="/니모.jpeg" />
-              <Img src="/파이어고비.jpeg" />
-              <Img src="/블루탱.jpeg" />
-              <Img src="/옐로우탱.jpeg" />
+              <Img
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%8B%88%EB%AA%A8.jpeg"
+                alt="니모"
+              />
+              <Img
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%ED%8C%8C%EC%9D%B4%EC%96%B4%EA%B3%A0%EB%B9%84.jpeg"
+                alt="파이어고비"
+              />
+              <Img
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%B8%94%EB%A3%A8%ED%83%B1.jpeg"
+                alt="블루탱"
+              />
+              <Img
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%98%90%EB%A1%9C%EC%9A%B0%ED%83%B1.jpeg"
+                alt="/옐로우탱.jpeg"
+              />
             </ImgContainer>
             <NameCover>
               <Name>퍼큘라 크라운</Name>

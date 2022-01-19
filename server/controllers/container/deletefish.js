@@ -2,7 +2,6 @@ const { container_fishes, containers, fishes } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
-  console.log("req바디", req.body);
   const userInfo = isAuthorized(req);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
@@ -30,6 +29,7 @@ module.exports = async (req, res) => {
           message: "The fish is not in the container",
         });
       } else {
+        console.log(container_fish);
         container_fish = await container_fish.increment("fish_num", {
           by: Number(fish_num) * -1,
         });

@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import ManageCard from "./ManageCard";
+import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import AddContainer from "../modalComponent/AddContainer";
+import Footer from "../component/Footer";
 
 const TitleContainer = styled.div`
   position: relative;
@@ -48,26 +54,44 @@ const OuterContainer = styled.div`
   flex-direction: column;
 `;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ getAllConInfo, getConInfo }) {
+function Manage({ getAllConInfo, handleCondata }) {
+  const [containerList, setContainerList] = useState([]);
+  const accessToken = localStorage.getItem("accessToken");
+  const state = useSelector((state) => state.modalReducer);
+  const { isAddContainerModal } = state;
+
   useEffect(() => {
-    console.log("관리페이지 왜 안뜨는데");
-    getAllConInfo();
+    axios
+      .get(`http://localhost:80/container/all`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        // console.log(res.data);
+        setContainerList([...res.data.data]);
+      });
   }, []);
-  const con_list = JSON.parse(localStorage.getItem("allConInfo"));
-  console.log("con_list FROM MANAGE:", con_list.data.data);
-  // console.log("con_list2 FROM MANAGE:", containerList);
-  // console.log("aquaInfo FROM MANAGE:", aquaInfo);
   return (
     <>
-      <Header />
+      <Header2 />
       <TitleContainer>
         <Title>My Aquarium</Title>
         <Text>당신의 어항을 관리해보세요!</Text>
-        <Img src="작은해초.png" alt="" />
+        <Img
+          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%9E%91%EC%9D%80%ED%95%B4%EC%B4%88.png"
+          alt="작은해초.png"
+        />
       </TitleContainer>
       {/* <ManageCard /> */}
-      {/* <ManageCard containerList={con_list.data.data} /> */}
-      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} />
+      {/* <ManageCard containerList={con_list.data.data} />
+      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
+      <ManageCard
+        containerList={containerList}
+        isAddContainerModal={isAddContainerModal}
+        handleCondata={handleCondata}
+      />
+      {isAddContainerModal && <AddContainer />}
+      <Footer />
     </>
   );
 }

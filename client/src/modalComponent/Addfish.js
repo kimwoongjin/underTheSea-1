@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import axios from "axios";
 
 const DarkBackGround = styled.div`
@@ -20,7 +21,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 23%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -104,6 +105,7 @@ const Btn = styled.button`
 function AddFish({ container_id }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
+  const [fishList, setFishList] = useState([]);
   const [fishInfo, setFishInfo] = useState({
     fish_name: "",
     fish_num: "",
@@ -120,7 +122,7 @@ function AddFish({ container_id }) {
     console.log("추가 물고기정보", fishInfo);
     console.log("수조아이디", container_id);
     axios
-      .patch(
+      .post(
         `http://localhost:80/container/${container_id}/fish`,
         {
           data: fishInfo,
@@ -139,6 +141,21 @@ function AddFish({ container_id }) {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:80/fish/fishnamelist`, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+      .then((result) => {
+        setFishList(result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <DarkBackGround>
@@ -159,7 +176,18 @@ function AddFish({ container_id }) {
               type="text"
               name="fish_name"
               onChange={handleInputValue}
+              list="fishName"
             />
+            <datalist id="fishName">
+              {fishList.map((el) => (
+                <option
+                  className="fish-option"
+                  value={el}
+                  label={el}
+                  key={el.id}
+                ></option>
+              ))}
+            </datalist>
             <Input
               placeholder="마릿수를 입력해주세요"
               type="number"

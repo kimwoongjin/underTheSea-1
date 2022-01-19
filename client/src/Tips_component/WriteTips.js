@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 import Header2 from "../component/Header2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -104,17 +103,18 @@ const TitleInput = styled.input`
 `;
 //
 const ImageInputForm = styled.label`
+  display: flex;
   top: 60%;
-  width: 93%;
+  width: 40%;
   height: 25vh;
   position: absolute;
-  border: 1px solid black;
   bottom: 10%;
   border-radius: 4px;
   color: white;
   cursor: pointer;
   border: 1px dashed #108dee;
   box-sizing: border-box;
+  justify-content: center;
 `;
 //
 const ImageInput = styled.input`
@@ -188,7 +188,7 @@ const BtnR = styled.button`
 
 // ================================================================================
 
-function WriteTips({ token }) {
+function WriteTips() {
   const accessToken = localStorage.getItem("accessToken");
   const edit_tip = localStorage.getItem("edit_tip");
   const tip_id = localStorage.getItem("tip_id");
@@ -199,13 +199,15 @@ function WriteTips({ token }) {
     img: "",
   });
   const [image, setImage] = useState("");
-
-  console.log("tipdata", tip);
+  const [isEdit, setIsEdit] = useState(edit_tip);
 
   // 수정버튼을 누르고 들어왔을 때
   useEffect(() => {
-    console.log("edit?????", edit_tip);
-    if (edit_tip) {
+    getTipData();
+  }, []);
+
+  const getTipData = () => {
+    if (isEdit === "true") {
       axios
         .get(`http://localhost:80/tip/${tip_id}`, {
           headers: {
@@ -227,7 +229,7 @@ function WriteTips({ token }) {
     } else {
       return;
     }
-  }, []);
+  };
 
   // 이미지 파일 선택
   const selectFIle = async (e) => {
@@ -271,9 +273,7 @@ function WriteTips({ token }) {
       }
     );
     const tip_id = result.data.data.id;
-    localStorage.setItem("tip_id", tip_id);
-    // console.log(result);
-    navigate(`/posttips`);
+    navigate(`/posttips/${tip_id}`);
   };
 
   // 게시물 등록 취소
@@ -298,6 +298,26 @@ function WriteTips({ token }) {
     });
   };
 
+  // 게시물 수정
+  const handleEditTip = () => {
+    axios
+      .patch(
+        `http://localhost:80/tip/${tip_id}`,
+        { data: tip },
+        {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("edit_tip", false);
+        navigate(`/posttips/${tip_id}`);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header2></Header2>
@@ -311,38 +331,88 @@ function WriteTips({ token }) {
         </TopCover>
         {/* ========================================================== */}
         <ButtonForm>
-          <Btn onClick={handleAddTip}>등록</Btn>
+          {isEdit === "true" ? (
+            <Btn onClick={handleEditTip}>수정</Btn>
+          ) : (
+            <Btn onClick={handleAddTip}>등록</Btn>
+          )}
           <BtnR onClick={handleCancle}>취소</BtnR>
         </ButtonForm>
         <InputContainer>
           <FormWrapper>
-            <TitleInput
-              placeholder="제목을 입력해 주세요."
-              type="text"
-              name="title"
-              onChange={handleInputValue}
-              value={tip.title}
-            />
-            <TipInput
-              placeholder="내용을 입력하세요"
-              type="text"
-              name="content"
-              onChange={handleInputValue}
-              value={tip.content}
-            />
-            <ImageInputForm for="input-image">
-              {tip.img ? (
+            {isEdit === "true" ? (
+              <>
+                <TitleInput
+                  placeholder="제목을 입력해 주세요."
+                  type="text"
+                  name="title"
+                  onChange={handleInputValue}
+                  value={tip.title}
+                />
+                <TipInput
+                  placeholder="내용을 입력하세요"
+                  type="text"
+                  name="content"
+                  onChange={handleInputValue}
+                  value={tip.content}
+                />
+              </>
+            ) : (
+              <>
+                <TitleInput
+                  placeholder="제목을 입력해 주세요."
+                  type="text"
+                  name="title"
+                  onChange={handleInputValue}
+                />
+                <TipInput
+                  placeholder="내용을 입력하세요"
+                  type="text"
+                  name="content"
+                  onChange={handleInputValue}
+                />
+              </>
+            )}
+            {tip.img ? (
+              <>
+                <ImageInputForm
+                  for="input-image"
+                  style={{ borderStyle: "none" }}
+                >
+                  {/* {tip.img ? ( */}
+                  <img
+                    id="select-img"
+                    src={`http://localhost:80${tip.img}`}
+                    style={{
+                      objectFit: "cover",
+                      // width: "100%",
+                      // height: "100%",
+                    }}
+                  ></img>
+                  {/* ) : (
+                <></>
+              )} */}
+                </ImageInputForm>
+              </>
+            ) : (
+              <>
+                <ImageInputForm for="input-image">
+                  {/* {tip.img ? (
                 <img
                   id="select-img"
                   src={`http://localhost:80${tip.img}`}
                   style={{
-                    boxSizing: "border-box",
+                    objectFit: "cover",
+                    // width: "100%",
+                    // height: "100%",
                   }}
                 ></img>
-              ) : (
-                <div>Upload Image</div>
-              )}
-            </ImageInputForm>
+              ) : ( */}
+                  <></>
+                  {/* )} */}
+                </ImageInputForm>
+              </>
+            )}
             <ImageInput id="input-image" onChange={selectFIle} type="file" />
           </FormWrapper>
         </InputContainer>

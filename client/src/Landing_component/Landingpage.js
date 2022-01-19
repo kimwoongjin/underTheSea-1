@@ -76,22 +76,22 @@ const Fish3 = styled.img`
   right: 4%;
 `;
 const TilteContainer = styled.div`
+  position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  /* border: 4px solid red; */
 `;
 const MainImg = styled.img`
-  position: absolute;
-  top: 12%;
-  left: 37%;
-  width: 30%;
+  width: 80%;
 `;
 
 const Contents = styled.div`
   position: absolute;
   color: #092011;
   font-size: 1.5rem;
-  top: 51%;
-  left: 41.5%;
+  top: 62%;
   font-weight: 460;
   line-height: 170%;
   text-align: center;
@@ -101,23 +101,23 @@ const Contents = styled.div`
 function Landingpage() {
   return (
     <Container>
-      <Coral src="해초.png" />
-      <SeaWeed src="작은해초.png" />
-      <SeaWeedL src="해초L.png" />
-      <Shark src="상어.png" />
-      <JellyFish src="해파리.png" />
+      <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />
+      <SeaWeed src="https://iconmage.s3.ap-northeast-2.amazonaws.com/작은해초.png" />
+      <SeaWeedL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초L.png" />
+      <Shark src="https://iconmage.s3.ap-northeast-2.amazonaws.com/상어.png" />
+      <JellyFish src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png" />
       <TilteContainer>
-        <MainImg src="/메인1.png"></MainImg>
+        <MainImg src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인1.png"></MainImg>
         <Contents>
           당신의 물 속 세상을 만나보세요.
           <br></br> Under The Sea가 함께합니다.
         </Contents>
       </TilteContainer>
-      <Fish1 src="물고기1.png" />
-      <Fish3 src="물고기3.png" />
-      <BubbleL src="물방울L.png" />
-      <BubbleM src="물방울M1.png" />
-      <BubbleR src="물방울R.png" />
+      <Fish1 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기1.png" />
+      <Fish3 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기3.png" />
+      <BubbleL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울L.png" />
+      <BubbleM src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울M1.png" />
+      <BubbleR src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울R.png" />
     </Container>
   );
 }

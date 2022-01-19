@@ -6,6 +6,7 @@ const PostTitle = styled.div`
   font-size: 2rem;
   margin-top: 20px;
   /* border: 1px solid red; */
+  font-family: "Kfont";
   font-weight: bold;
 `;
 
@@ -37,6 +38,7 @@ const Writer = styled.div`
   width: 100%;
   color: #808080;
   font-size: 1rem;
+  font-family: "Kfont";
   /* border: 1px solid red; */
 `;
 
@@ -44,6 +46,7 @@ const Date = styled.div`
   width: 100%;
   color: #808080;
   font-size: 0.8rem;
+  font-family: "Kfont";
   /* border: 1px solid red; */
 `;
 const Content = styled.div`
@@ -53,6 +56,7 @@ const Content = styled.div`
   height: 300px;
   padding-bottom: 20px;
   margin-top: 20px;
+  font-family: "Kfont";
   border-bottom: 4px solid #108dee;
   white-space: normal;
   align-items: center;
@@ -61,6 +65,7 @@ const Content = styled.div`
 const ContentBox = styled.div`
   width: 90%;
   box-sizing: border-box;
+  font-family: "Kfont";
 `;
 
 function ContentTips({ tipData }) {
