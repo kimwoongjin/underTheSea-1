@@ -11,7 +11,7 @@ const Container = styled.div`
   z-index: 100;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 9%;
 
   /* border: 1px solid black; */
 `;
@@ -23,14 +23,13 @@ const BoxContainer = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
   align-items: center;
-  margin-top: 2%;
+  margin-top: 0%;
   margin-left: 6.5%;
   border-bottom: 1px solid #cccccc;
 `;
 
 const Box = styled.div`
   position: relative;
-  //   z-index: 1;
   flex: 6;
   width: 30%;
   height: 50%;
@@ -38,7 +37,7 @@ const Box = styled.div`
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-top: 1%;
+  margin-top: 0%;
   padding-left: 2%;
   padding-bottom: 2.5%;
 `;
@@ -108,24 +107,74 @@ const Notice = styled.div`
   margin-left: 2%;
 `;
 
+const PageBtnForm = styled.form`
+  display: flex;
+  width: 95%;
+  justify-content: center;
+  padding-top: 15px;
+  margin-bottom: 15px;
+`;
+
+const PageBtn = styled.div`
+  align-items: center;
+  border-style: none;
+  background-color: #ffffff;
+  margin: 5px;
+  font-size: 18px;
+  cursor: pointer;
+`;
+
 function MypageManage() {
   const [manageInfo, setManageInfo] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [manageLength, setManageLength] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
-    manageHandler();
-  }, []);
-  const manageHandler = () => {
+    manageHandler(pageNum);
+  }, [pageNum]);
+
+  const manageHandler = (page_num) => {
     axios
-      .get(`http://localhost:80/user/manage`, {
+      .get(`http://localhost:80/user/manage/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
         setManageInfo([...result.data.data]);
+        const page_length = Math.floor(result.data.length / 7);
+        if (result.data.length % 7 !== 0) {
+          const page = new Array(page_length + 1).fill(0);
+          setManageLength([...page]);
+        } else {
+          const page = Array(page_length).fill(0);
+          setManageLength([...page]);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // 이전페이지
+  const goToPre = () => {
+    if (pageNum === 1) {
+      return;
+    }
+    const page = pageNum;
+    setPageNum(page - 1);
+  };
+
+  // 다음페이지
+  const goToNext = () => {
+    if (pageNum === manageLength.length) {
+      return;
+    }
+    setPageNum(pageNum + 1);
+  };
+
+  // 페이지 선택
+  const selectPageNum = (e) => {
+    setPageNum(e.target.id);
   };
 
   return (
@@ -147,12 +196,12 @@ function MypageManage() {
           </>
         ) : (
           <>
-            {manageInfo.map((el) => {
+            {manageInfo.map((el, idx) => {
               // console.log(el, "?????????");
               return (
                 <>
                   <BoxContainer>
-                    <Box key={el.id}>{el.container_name}</Box>
+                    <Box key={idx}>{el.container_name}</Box>
                     <Box2>{el.size}</Box2>
                   </BoxContainer>
                 </>
@@ -161,6 +210,17 @@ function MypageManage() {
           </>
         )}
       </Container>
+      <PageBtnForm>
+        <PageBtn onClick={goToPre}>이전</PageBtn>
+        {manageLength.map((el, idx) => {
+          return (
+            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+              {idx + 1}
+            </PageBtn>
+          );
+        })}
+        <PageBtn onClick={goToNext}>다음</PageBtn>
+      </PageBtnForm>
     </>
   );
 }
