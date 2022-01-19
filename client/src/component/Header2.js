@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100vw;
   height: 10vh;
   background: white;
-  /* box-shadow: 0px 0px 10px #adb5bd; */
+  box-shadow: 0px 0px 5px #adb5bd;
   /* background: white; */
   display: flex;
   align-items: center;
@@ -127,15 +127,18 @@ const BtnContainer = styled.div`
 `;
 
 function Header2() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
 
+<<<<<<< HEAD
   const goToMain = () => {
     navigate("/");
   };
+=======
+>>>>>>> 3d5db83c76fe20392c0dd52f14009ad63271d486
   const goToHome = () => {
     navigate("/");
   };

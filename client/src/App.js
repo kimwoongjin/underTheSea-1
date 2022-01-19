@@ -8,6 +8,7 @@ import ManageAddInfo from "./page/ManageAddInfo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SeaWaterGuide from "./page/SeaWaterGuide";
+import FreshWaterGuide from "./page/FreshWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
@@ -152,6 +153,7 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/guide" element={<Guide />}></Route>
         <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
+        <Route path="/freshwaterguide" element={<FreshWaterGuide />}></Route>
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips token={token} />}></Route>

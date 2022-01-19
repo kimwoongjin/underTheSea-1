@@ -383,7 +383,7 @@ function ManageDetail() {
   let container_id = params.container_id;
 
   const month = new Date().getMonth() + 1;
-
+  const [conData, setConData] = useState({});
   const [feedingInfo, setFeedingInfo] = useState({
     container_id,
     type: "",
@@ -439,6 +439,7 @@ function ManageDetail() {
         }
       );
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+      setConData(response.data.data);
 
       //---------------
 
@@ -456,8 +457,8 @@ function ManageDetail() {
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conInfo.feed_list.forEach((el1) => {
-        let one_day_list = conInfo.feed_list.filter(
+      conData.feed_list.forEach((el1) => {
+        let one_day_list = conData.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];
@@ -487,6 +488,7 @@ function ManageDetail() {
       EXP = temp.length === 0 ? 0 : Math.floor((temp.length * 100) / 15);
       console.log("경험치바", EXP);
       SetProgressBar(EXP);
+
       // console.log("환수기록추가에 expArr", expArr);
       dispatch(modalOff);
     } catch (err) {
@@ -495,12 +497,10 @@ function ManageDetail() {
   };
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  // console.log("conInfo", conInfo);
-
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
-  for (let i = 0; i < conInfo.fish_list.length; i++) {
-    total += conInfo.fish_list[i].fish_num;
+  for (let i = 0; i < conData.fish_list.length; i++) {
+    total += conData.fish_list[i].fish_num;
   }
   // console.log("토탈", total);
   // ----------------------------
@@ -519,7 +519,7 @@ function ManageDetail() {
   thisDay = String(thisDay);
   let thisToday = thisYear + thisMonth + thisDay;
   thisToday = thisToday.slice(2);
-  let todayEx = conInfo.ex_water_list.filter(
+  let todayEx = conData.ex_water_list.filter(
     (el) => el.createdAt === thisToday
   );
 
@@ -527,12 +527,12 @@ function ManageDetail() {
     exAmount += todayEx[i].amount;
   }
 
-  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  const imgSrcUrl = "http://localhost:80/level/" + conData.level;
   // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
   // 환수데이터가공
 
   let exWaterObj = {};
-  conInfo.ex_water_list.forEach((el) => {
+  conData.ex_water_list.forEach((el) => {
     if (!exWaterObj[el.createdAt]) {
       exWaterObj[el.createdAt] = el.amount;
     } else {
@@ -545,8 +545,8 @@ function ManageDetail() {
   // --------- 피딩데이터 가공 ---------
 
   let final_list = {};
-  conInfo.feed_list.forEach((el1) => {
-    let one_day_list = conInfo.feed_list.filter(
+  conData.feed_list.forEach((el1) => {
+    let one_day_list = conData.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
     let array = [0, 0, 0, 0];
@@ -882,11 +882,12 @@ function ManageDetail() {
       console.log("비동기응답", response.data.data);
       // setExpArr()
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-      console.log("피딩기록 추가하고 나오는 conInfo", conInfo);
+      setConData(response.data.data);
+
       //---------------
 
       let exWaterObj = {};
-      conInfo.ex_water_list.forEach((el) => {
+      conData.ex_water_list.forEach((el) => {
         if (!exWaterObj[el.createdAt]) {
           exWaterObj[el.createdAt] = el.amount;
         } else {
@@ -899,8 +900,8 @@ function ManageDetail() {
       // --------- 피딩데이터 가공 ---------
 
       let final_list = {};
-      conInfo.feed_list.forEach((el1) => {
-        let one_day_list = conInfo.feed_list.filter(
+      conData.feed_list.forEach((el1) => {
+        let one_day_list = conData.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];

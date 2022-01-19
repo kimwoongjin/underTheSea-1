@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import { useState, useEffect } from "react";
 import SignOut from "../modalComponent/SignOut";
 import PwdChange1 from "../modalComponent/PwdChange1";
@@ -77,6 +78,7 @@ const ContentContainer = styled.div`
 `;
 
 const Box3 = styled.div`
+  /* position: relative; */
   border: 1px solid #108dee;
   margin-top: 4%;
   width: 70vw;
@@ -114,7 +116,8 @@ function Mypage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <Header2 />
       <Container>
         <TitleContainer>
           <Title>000님 환영합니다!</Title>
