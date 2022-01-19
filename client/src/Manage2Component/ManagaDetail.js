@@ -331,22 +331,17 @@ const Day = styled.div`
   text-align: center;
   width: 7vw;
   height: 3vh;
-  /* margin: 1px; */
-  /* border: 1px solid black; */
 `;
-// 지금 해야되는거는 피딩기록하는 버튼을 누르면 버튼을 누른 숫자만큼 클릭한 날에 달력에 정보가 보여야해
 
 const FoodIconContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 40%;
-  /* border: 2px solid royalblue; */
 `;
 
 const FoodInnerContainer = styled.div`
   display: flex;
-  /* border: 1px dashed red; */
 `;
 
 const ExWaterRecord = styled.div`
@@ -370,16 +365,15 @@ const FeedingNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
 `;
 
 const FoodIcon = styled.img`
   width: 40%;
-  /* border: 1px solid blue; */
 `;
 
 function ManageDetail() {
   let params = useParams();
+
   let container_id = params.container_id;
 
   const month = new Date().getMonth() + 1;
@@ -389,6 +383,8 @@ function ManageDetail() {
     type: "",
   });
   const [expArr, setExpArr] = useState([]);
+
+  // 실제 width값을 쓰이는 상태
   const [progressBar, SetProgressBar] = useState(0);
   const accessToken = localStorage.getItem("accessToken");
   // console.log("엑세스토큰--> ", accessToken);
@@ -440,7 +436,7 @@ function ManageDetail() {
       );
       localStorage.setItem("conInfo", JSON.stringify(response.data.data));
       setConData(response.data.data);
-
+      console.log("환수요청안에 conData", conData);
       //---------------
 
       let exWaterObj = {};
@@ -499,8 +495,9 @@ function ManageDetail() {
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
+  // 여기서 랜스를 못 읽어 (원래 conData 였음)
   for (let i = 0; i < conData.fish_list.length; i++) {
-    total += conData.fish_list[i].fish_num;
+    total += conInfo.fish_list[i].fish_num;
   }
   // console.log("토탈", total);
   // ----------------------------
@@ -519,6 +516,7 @@ function ManageDetail() {
   thisDay = String(thisDay);
   let thisToday = thisYear + thisMonth + thisDay;
   thisToday = thisToday.slice(2);
+  // 여기도 conData 였음
   let todayEx = conData.ex_water_list.filter(
     (el) => el.createdAt === thisToday
   );
@@ -526,13 +524,14 @@ function ManageDetail() {
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-
+  //                                                conData 였음
   const imgSrcUrl = "http://localhost:80/level/" + conData.level;
   // const conExInfo = JSON.parse(localStorage.getItem("conExInfo"));
   // 환수데이터가공
 
   let exWaterObj = {};
-  conData.ex_water_list.forEach((el) => {
+  // 여기도 conData 였음
+  conInfo.ex_water_list.forEach((el) => {
     if (!exWaterObj[el.createdAt]) {
       exWaterObj[el.createdAt] = el.amount;
     } else {
@@ -545,8 +544,9 @@ function ManageDetail() {
   // --------- 피딩데이터 가공 ---------
 
   let final_list = {};
+  // 여기도 conData 였음
   conData.feed_list.forEach((el1) => {
-    let one_day_list = conData.feed_list.filter(
+    let one_day_list = conInfo.feed_list.filter(
       (el2) => el1.createdAt === el2.createdAt
     );
     let array = [0, 0, 0, 0];
@@ -642,6 +642,9 @@ function ManageDetail() {
         // console.log("response:", res.data.data);
         // levelUpRequest();
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
+
+        setConData(res.data.data);
+        console.log("페이지 랜더되자마자 컨데이터", conData);
 
         let final_list = {};
         conInfo.feed_list.forEach((el1) => {
@@ -901,7 +904,7 @@ function ManageDetail() {
 
       let final_list = {};
       conData.feed_list.forEach((el1) => {
-        let one_day_list = conData.feed_list.filter(
+        let one_day_list = conInfo.feed_list.filter(
           (el2) => el1.createdAt === el2.createdAt
         );
         let array = [0, 0, 0, 0];
