@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 import Header2 from "../component/Header2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -189,7 +188,7 @@ const BtnR = styled.button`
 
 // ================================================================================
 
-function WriteTips({ token }) {
+function WriteTips() {
   const accessToken = localStorage.getItem("accessToken");
   const edit_tip = localStorage.getItem("edit_tip");
   const tip_id = localStorage.getItem("tip_id");
@@ -274,8 +273,7 @@ function WriteTips({ token }) {
       }
     );
     const tip_id = result.data.data.id;
-    localStorage.setItem("tip_id", tip_id);
-    navigate(`/posttips`);
+    navigate(`/posttips/${tip_id}`);
   };
 
   // 게시물 등록 취소
@@ -315,7 +313,7 @@ function WriteTips({ token }) {
       )
       .then((res) => {
         localStorage.setItem("edit_tip", false);
-        navigate("/posttips");
+        navigate(`/posttips/${tip_id}`);
       })
       .catch((err) => console.log(err));
   };

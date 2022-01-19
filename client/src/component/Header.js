@@ -23,6 +23,7 @@ const Container = styled.div`
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
@@ -127,6 +128,7 @@ const BtnContainer = styled.div`
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
@@ -158,11 +160,35 @@ function Header() {
         console.log(err);
       });
   };
+  const play = () => {
+    console.log("Play damm it!!");
+    var audio = document.getElementById("audio_play");
+
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
+
+  // 로고 클릭시 메인으로
+  const goToMain = () => {
+    navigate("/");
+  };
 
   return (
     <Container>
-      <Img src="/로고.png" alt="" onClick={goToHome} />
-      <BtnContainer>
+      <audio
+        id="audio_play"
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
+      ></audio>
+      <Img
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
+        alt=""
+        onClick={goToHome}
+      />
+      <BtnContainer onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide>가이드</Guide>
         </Link>

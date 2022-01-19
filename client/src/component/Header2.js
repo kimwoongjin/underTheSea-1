@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 
 const Container = styled.div`
+  // position: fixed;
   width: 100vw;
   height: 10vh;
   background: white;
@@ -17,12 +18,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* z-index: 999; */
+  z-index: 999;
 `;
 
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
@@ -127,11 +129,12 @@ const BtnContainer = styled.div`
 function Header2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
-  const accessToken = localStorage.getItem("accessToken");
-  // console.log(accessToken, "QQQQQQQQ");
-  const goToHome = () => {
+
+  // 로고 클릭시 메인으로
+  const goToMain = () => {
     navigate("/");
   };
 
@@ -158,13 +161,34 @@ function Header2() {
         console.log(err);
       });
   };
+  const play = () => {
+    console.log("Play damm it!!");
+
+    var audio = document.getElementById("audio_play");
+    console.log("Play damm it!!");
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
 
   return (
     <Container>
-      <Img src="/로고.png" alt="" onClick={goToHome} />
-      <BtnContainer>
+      <audio
+        id="audio_play"
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
+      ></audio>
+      <Img
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
+        alt=""
+        onClick={goToHome}
+      />
+      <BtnContainer onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide>가이드</Guide>
+          <Guide onclick={play}>가이드</Guide>{" "}
+          <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
@@ -175,7 +199,8 @@ function Header2() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage>관리</Manage>
+              <Manage onclick={play}>관리</Manage>
+              <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}
