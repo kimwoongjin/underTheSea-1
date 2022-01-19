@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import AddContainer from "../modalComponent/AddContainer";
+import Footer from "../component/Footer";
 
 const TitleContainer = styled.div`
   position: relative;
@@ -90,6 +91,7 @@ function Manage({ getAllConInfo, getConInfo }) {
         isAddContainerModal={isAddContainerModal}
       />
       {/* {isAddContainerModal && <AddContainer />} */}
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import { useState, useEffect } from "react";
 import SignOut from "../modalComponent/SignOut";
 import PwdChange1 from "../modalComponent/PwdChange1";
@@ -166,7 +167,8 @@ function Mypage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <Header2 />
       <Container>
         <TitleContainer>
           <Title>000님 환영합니다!</Title>

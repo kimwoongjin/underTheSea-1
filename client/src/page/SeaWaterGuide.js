@@ -84,6 +84,7 @@ const InfoContainer = styled.div`
   /* justify-content: space-evenly; */
   flex-wrap: wrap;
   /* border: 2px dashed red; */
+  margin-bottom: 10%;
 `;
 
 function SeaWaterGuide() {
