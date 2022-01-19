@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
       where: { fish_name },
     });
 
+    console.log("Are you here?", userInfo);
     if (!check_container) {
       return res.status(404).json({ message: "The container doesn't exist" });
     } else if (!check_fish) {
@@ -29,10 +30,21 @@ module.exports = async (req, res) => {
           message: "The fish is not in the container",
         });
       } else {
-        console.log(container_fish);
-        container_fish = await container_fish.increment("fish_num", {
-          by: Number(fish_num) * -1,
-        });
+        console.log(
+          "%%%%%%%%%%",
+          typeof container_fish.dataValues.fish_num,
+          typeof fish_num
+        );
+        if (container_fish.dataValues.fish_num < fish_num) {
+          container_fish = await container_fish.increment("fish_num", {
+            by: Number(container_fish.dataValues.fish_num) * -1,
+          });
+        } else {
+          container_fish = await container_fish.increment("fish_num", {
+            by: Number(fish_num) * -1,
+          });
+        }
+
         container_fish = await container_fishes.findOne({
           where: { fish_name, container_id },
         });
