@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import React from "react";
-import Header from "../component/Header";
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import Mypage from "./Mypage";
+import { useState } from "react";
 
 const Container = styled.div`
   position: relative;
@@ -101,11 +99,26 @@ const Notice = styled.div`
   margin-left: 2%;
 `;
 
-function MypageContent({ test }) {
-  // console.log(test, ";;;;;;;;;");
-  // return test.map((el) => {
-  //   const date = el.created_at.split("T")[0];
+function MypageContent() {
+  const accessToken = localStorage.getItem("accessToken");
+  const [test, setTest] = useState([]);
 
+  useEffect(() => {
+    content();
+  });
+  const content = () => {
+    axios
+      .get(`http://localhost:80/user/tips`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        setTest([...result.data.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <Head>
@@ -116,7 +129,10 @@ function MypageContent({ test }) {
         {test.length === 0 ? (
           <>
             <Empty>
-              <BoxImg src="/빈박스.png" alt="" />
+              <BoxImg
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/빈박스.png"
+                alt=""
+              />
               <Notice>현재 등록된 정보가 없습니다. </Notice>
             </Empty>
           </>

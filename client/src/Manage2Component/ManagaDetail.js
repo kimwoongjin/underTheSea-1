@@ -380,7 +380,6 @@ const FoodIcon = styled.img`
 
 function ManageDetail() {
   let params = useParams();
-
   let container_id = params.container_id;
 
   const month = new Date().getMonth() + 1;
@@ -496,7 +495,7 @@ function ManageDetail() {
   };
 
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  console.log("conInfo", conInfo);
+  // console.log("conInfo", conInfo);
 
   // ----- 해당수조 총 물고기수 ------
   let total = 0;
@@ -592,11 +591,11 @@ function ManageDetail() {
   //   break;
   // }
   useEffect(() => {
-    console.log("조건문밖 요청", expArr);
-    console.log("경험치길이", expArr.length);
-    console.log("환수포함여부", expArr.includes(2));
+    // console.log("조건문밖 요청", expArr);
+    // console.log("경험치길이", expArr.length);
+    // console.log("환수포함여부", expArr.includes(2));
     if (expArr.length >= 15 && expArr.includes(2)) {
-      console.log("조건문안 요청", expArr);
+      // console.log("조건문안 요청", expArr);
       axios
         .patch(
           `http://localhost:80/container/${container_id}/level`,
@@ -640,7 +639,7 @@ function ManageDetail() {
         }
       )
       .then((res) => {
-        console.log("response:", res.data.data);
+        // console.log("response:", res.data.data);
         // levelUpRequest();
         localStorage.setItem("conInfo", JSON.stringify(res.data.data));
 
