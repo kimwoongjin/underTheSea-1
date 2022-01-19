@@ -72,8 +72,14 @@ const IconCover = styled.div`
 function LandingGuide() {
   return (
     <Container>
-      <WomanImgL src="메인여자인물1.png" alt="" />
-      <WomanImgR src="메인여자인물2.png" alt="" />
+      <WomanImgL
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%A9%94%EC%9D%B8%EC%97%AC%EC%9E%90%EC%9D%B8%EB%AC%BC1.png"
+        alt="메인여자인물1.png"
+      />
+      <WomanImgR
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%A9%94%EC%9D%B8%EC%97%AC%EC%9E%90%EC%9D%B8%EB%AC%BC2.png"
+        alt="메인여자인물2.png"
+      />
       <TextContainer>
         <MainText>
           Saltwater fish<br></br>Freshwater fish Tips
