@@ -39,7 +39,7 @@ const ImgContainer = styled.div`
   cursor: pointer;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  /* border: 1px solid black; */
+  border: 1px solid gray;
 `;
 const Img = styled.img`
   width: 100%;
@@ -59,7 +59,21 @@ const Content = styled.div`
   /* margin-top: 2%; */
   line-height: 200%;
   margin: auto;
-  /* border: 1px solid black; */
+  border: 1px solid black;
+  .delete {
+    position: absolute;
+    width: 17%;
+    height: 12%;
+    bottom: 5%;
+    right: 5%;
+    font-size: 0.9rem;
+    border: none;
+    background: #57b7ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: "Kfont";
+  }
 `;
 
 const Name = styled.div`
@@ -149,6 +163,7 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
           <Size>{size}L</Size>
           <Text>테마</Text>
           <Theme>{theme}</Theme>
+          <button className="delete">삭제</button>
         </Content>
       </Contents>
     </Container>
