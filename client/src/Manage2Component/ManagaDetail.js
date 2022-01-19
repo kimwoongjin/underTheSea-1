@@ -692,7 +692,7 @@ function ManageDetail() {
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/펠렛.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")] === undefined
                               ? 0
@@ -700,7 +700,7 @@ function ManageDetail() {
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/플레이크.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")] === undefined
                               ? 0
@@ -710,7 +710,7 @@ function ManageDetail() {
                       </FoodInnerContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/냉동.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")] === undefined
                               ? 0
@@ -718,7 +718,7 @@ function ManageDetail() {
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/생먹이.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")] === undefined
                               ? 0
@@ -740,13 +740,13 @@ function ManageDetail() {
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/펠렛.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")][0]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/플레이크.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")][1]}
                           </FeedingNum>
@@ -754,13 +754,13 @@ function ManageDetail() {
                       </FoodInnerContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/냉동.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")][2]}
                           </FeedingNum>
                         </FoodTypeAndNum>
                         <FoodTypeAndNum>
-                          <FoodIcon src="/생먹이.png" />
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
                           <FeedingNum>
                             {final_list[days.format("YYMMDD")][3]}
                           </FeedingNum>
@@ -936,7 +936,10 @@ function ManageDetail() {
               <LevelText>Lv.</LevelText>
               <Levelinfo>{Math.floor(conInfo.level / 10)}</Levelinfo>
             </LevelCover>
-            <Logo src="/로고.png" />
+            <Logo
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
+              alt="/로고.png"
+            />
           </Level>
           <ProgressBar>
             <Progress EXP={`${progressBar}%`}></Progress>
@@ -957,7 +960,12 @@ function ManageDetail() {
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
-          <HelpBtn onClick={() => dispatch(helpInfoModalOnAction)}>
+          <HelpBtn
+            onClick={() => {
+              dispatch(helpInfoModalOnAction);
+              console.log(isHelpModal);
+            }}
+          >
             도움말
           </HelpBtn>
           <AddfishBtn onClick={() => dispatch(addfishModalOnAction)}>

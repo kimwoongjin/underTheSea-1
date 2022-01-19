@@ -29,6 +29,7 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  background-color: lightgrey;
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -56,6 +57,21 @@ const InfoShow = styled.div`
   align-items: center;
   width: 100%;
   height: 95%;
+  padding: 10px;
+`;
+const Content = styled.section`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  background: skyblue;
+  padding: 10px;
+
+  border-radius: 20px;
+`;
+const ImgShow = styled.img`
+  width: 500px;
+  height: 450px;
 `;
 const ThememContainer = styled.section`
   display: flex;
@@ -131,24 +147,19 @@ function HelpInfo() {
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>
-            <ThememContainer>
-              <ThemeTitle>테마</ThemeTitle>
-              <ThemeShow></ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>크기</ThemeTitle>
-              <ThemeShow></ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>마릿수</ThemeTitle>
-              <ThemeShow></ThemeShow>
-            </ThememContainer>
-            <ThememContainer>
-              <ThemeTitle>마지막 환수일</ThemeTitle>
-
-              <ThemeShow></ThemeShow>
-            </ThememContainer>
-            <LastExchange></LastExchange>
+            <ImgShow
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/level.png"
+              alt="level"
+            />
+            <Content>
+              레벨시스템을 통해 더욱 의욕적으로 수조를 관리 할 수 있게
+              도와드립니다.<br></br>
+              <br></br> 한 주 동안 <br></br>
+              14번 이상 사료를 주고 <br></br>
+              1번 이상 물을 갈아 주어<br></br>
+              당신의 수조 레벨을 높여 보세요.
+              <br></br>레벨이 높아지면 수조에 물고기들이 점점 늘어나요!
+            </Content>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>

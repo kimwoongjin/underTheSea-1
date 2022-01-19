@@ -91,8 +91,14 @@ const MainText = styled.div`
 function LandingManage() {
   return (
     <Container>
-      <WomanImg src="메인여자인물3.png" alt="" />
-      <Fish src="해파리.png" />
+      <WomanImg
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물3.png"
+        alt="메인여자인물3.png"
+      />
+      <Fish
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png"
+        alt="해파리.png"
+      />
       <TextContainer>
         <MainText>주간 어항 관리</MainText>
         <SearchText>

@@ -46,7 +46,11 @@
     <form class = "form" action="http://localhost:3000/" method="GET">
       <button >메인으로</button>
     <br><br><br>  
-
+    <button onclick={play}></button>
+    <audio
+    id="audio_play"
+    src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
+  ></audio>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script>
@@ -69,6 +73,18 @@
         show.src = result.data.imagePath;
         
       });
+
+      const play = () => {
+    
+    var audio = document.getElementById("audio_play");
+
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
      
     </script>
     

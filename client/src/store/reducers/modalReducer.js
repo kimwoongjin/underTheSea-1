@@ -86,6 +86,7 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case HELP_MODAL_ON:
       state = { ...prevState, isHelpModal: true };
+      break;
     case MODAL_OFF:
       state = { ...initialState };
       break;
