@@ -3,32 +3,63 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  width: 55.5vw;
+  height: 5%;
+  font-size: 1.3rem;
+  font-family: "Kfont";
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  /* border: 1px solid black; */
+  position: relative;
+  top: 10.8%;
+  padding-bottom: 0.5%;
+  box-sizing: border-box;
+
+  .title {
+    display: flex;
+    padding-left: 2%;
+    /* border: 1px solid black; */
+    flex: 6;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .date {
+    flex: 2;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    /* border: 1px solid black; */
+  }
+`;
 const Container = styled.div`
   position: relative;
-  width: 90%;
   display: column;
-  margin-bottom: 1px;
-  z-index: 100;
+  width: 90%;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  /* margin-bottom: 1px; */
+  z-index: 100;
+  margin-top: 9%;
 `;
 
 const BoxContainer = styled.div`
   display: flex;
   margin: 0;
-  width: 55vw;
+  width: 55.5vw;
   /* border: 1px solid red; */
   box-sizing: border-box;
   align-items: center;
-  margin-top: 2%;
-  margin-left: 6.5%;
+  position: relative;
+  bottom: 3%;
+  margin-left: 6%;
   border-bottom: 1px solid #cccccc;
 `;
 
 const Box = styled.div`
   position: relative;
-  //   z-index: 1;
   flex: 6;
   width: 30%;
   height: 50%;
@@ -36,9 +67,8 @@ const Box = styled.div`
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-top: 1%;
-  padding-left: 2%;
-  padding-bottom: 2.5%;
+  /* border: 1px solid black; */
+  padding: 2.5% 0 2.6% 3%;
 `;
 
 const Box1 = styled.div`
@@ -49,34 +79,7 @@ const Box1 = styled.div`
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-left: 29%;
-  font-size: 0.9rem;
-  color: #828282;
-  padding-bottom: 2.5%;
-`;
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  width: 55vw;
-  height: 5vh;
-  font-size: 1.3rem;
-  font-family: "Kfont";
-  font-weight: bold;
-  border-bottom: 1px solid black;
-  position: absolute;
-  bottom: 10%;
-  padding-bottom: 0.5%;
-
-  .title {
-    display: flex;
-    padding-left: 2%;
-    /* border: 1px solid black; */
-    margin-right: 65.5%;
-  }
-  .date {
-    display: flex;
-    /* border: 1px solid black; */
-  }
+  padding: 2.8% 0 2.7%;
 `;
 
 const Empty = styled.div`

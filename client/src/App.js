@@ -6,7 +6,7 @@ import Mypage from "./page/Mypage";
 import ManageDetail from "./Manage2Component/ManagaDetail";
 import ManageAddInfo from "./page/ManageAddInfo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SeaWaterGuide from "./page/SeaWaterGuide";
 import FreshWaterGuide from "./page/FreshWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
@@ -17,39 +17,52 @@ import Logout from "./modalComponent/Logout";
 import SignUp from "./modalComponent/SignUp";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { loginAction, loginModalOnAction } from "./store/actions";
+import { Howl, Howler } from "howler";
 
 function App() {
   const state = useSelector((state) => state.modalReducer);
   const loginState = useSelector((state) => state.authReducer);
   const conData = useSelector((state) => state.conInfoReducer);
+  const dispatch = useDispatch();
   const { isLoginModal, isSignupModal, isLogoutModal } = state;
   const { isLogin } = loginState;
 
   const month = new Date().getMonth() + 1;
-  // const getAllConInfo = async () => {
-  //   const response = await axios.get(`http://localhost:80/container/all`, {
-  //     headers: { authorization: `Bearer ${accessToken}` },
-  //     withCredentials: true,
-  //   });
-  //   console.log("res from MANAGE", response);
-  //   localStorage.setItem("allConInfo", JSON.stringify(response));
-  // };
-  // const getConInfo = async (id) => {
-  //   const response = await axios.get(
-  //     `http://localhost:80/container/${id}/${month}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  //   // console.log("response:", response.data.data);
-  //   localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-  //   return response.data.data;
-  // };
+
+  // 구글 소셜 로그인
+  const url = new URL(window.location.href);
+  const authorizationCode = url.searchParams.get("code");
+  // 소셜로그인 토큰 받아오기
+  const getAccessToken = (authorizationCode) => {
+    axios
+      .post(`http://localhost:80/user/auth/google/callback`, {
+        authorizationCode,
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("accessToken", res.data.data.token);
+        dispatch(loginAction);
+        console.log(isLogin, "???????????????");
+      });
+  };
+
+  // 로그인 상태 확인
+  const checkLogin = (accessToken) => {
+    axios
+      .get(`http://localhost:80/user/status`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const result = res.data.status;
+        if (result === 1) {
+          dispatch(loginAction);
+        } else if (result === 2) {
+          dispatch(loginModalOnAction);
+        }
+      });
+  };
 
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
@@ -65,7 +78,11 @@ function App() {
         setContainerList(res.data.data);
         // console.log("수조목록", containerList);
       });
-  }, [isLogin]);
+    if (authorizationCode) {
+      getAccessToken(authorizationCode);
+    }
+    checkLogin(accessToken);
+  }, []);
 
   const idList = containerList.map((container) => container.id);
 
