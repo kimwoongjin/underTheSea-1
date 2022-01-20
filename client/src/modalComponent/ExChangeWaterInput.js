@@ -99,7 +99,7 @@ const Btn = styled.button`
   }
 `;
 
-function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
+function ExChangeWaterInput({ handleExwaterValue, handleExwaterAddRequest }) {
   const dispatch = useDispatch();
 
   return (
@@ -121,7 +121,7 @@ function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
               type="number"
               onChange={handleExwaterValue}
             />
-            <Btn type="button" onClick={exwaterAddRequest}>
+            <Btn type="button" onClick={handleExwaterAddRequest}>
               선택완료
             </Btn>
           </Form>

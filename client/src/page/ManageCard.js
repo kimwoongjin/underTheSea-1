@@ -81,7 +81,7 @@ const Btn = styled.button`
 // 이 페이지가 딱 켜지면 수조 정보 조회 요청을 딱 보내야함
 // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
 // message: "Container is successfully added"
-function ManageCard({ containerList, getConInfo, isAddContainerModal }) {
+function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
   const dispatch = useDispatch();
 
   return (
@@ -101,7 +101,7 @@ function ManageCard({ containerList, getConInfo, isAddContainerModal }) {
               size={container.size}
               theme={container.theme}
               level={container.level}
-              getConInfo={getConInfo}
+              handleCondata={handleCondata}
             ></ManageInfo>
           );
         })}

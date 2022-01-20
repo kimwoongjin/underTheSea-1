@@ -46,7 +46,7 @@ const Img = styled.img`
 `;
 
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ getAllConInfo, getConInfo }) {
+function Manage({ getAllConInfo, handleCondata }) {
   const [containerList, setContainerList] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
   const state = useSelector((state) => state.modalReducer);
@@ -66,13 +66,19 @@ function Manage({ getAllConInfo, getConInfo }) {
   return (
     <>
       <Header2 />
-      <TitleContainer src="/관리.jpg"></TitleContainer>
+      <TitleContainer src="/관리.jpg">
+        {/* <Title>My Aquarium</Title> */}
+        {/* <Text>당신의 어항을 관리해보세요!</Text> */}
+      </TitleContainer>
+      {/* <ManageCard /> */}
+      {/* <ManageCard containerList={con_list.data.data} />
+      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
       <ManageCard
         containerList={containerList}
-        getConInfo={getConInfo}
         isAddContainerModal={isAddContainerModal}
+        handleCondata={handleCondata}
       />
-      {/* {isAddContainerModal && <AddContainer />} */}
+      {isAddContainerModal && <AddContainer />}
       <Footer />
     </>
   );
