@@ -3,68 +3,18 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 
-const Container = styled.div`
-  position: relative;
-  width: 90%;
-  display: column;
-  margin-bottom: 1px;
-  z-index: 100;
-  justify-content: center;
-  align-items: center;
-  margin-top: 9%;
-
-  /* border: 1px solid black; */
-`;
-
-const BoxContainer = styled.div`
-  display: flex;
-  margin: 0;
-  width: 55vw;
-  /* border: 1px solid red; */
-  box-sizing: border-box;
-  align-items: center;
-  margin-top: 0%;
-  margin-left: 6.5%;
-  border-bottom: 1px solid #cccccc;
-`;
-
-const Box = styled.div`
-  position: relative;
-  flex: 6;
-  width: 30%;
-  height: 50%;
-  margin: 0;
-  align-items: center;
-  font-family: "Kfont";
-  box-sizing: border-box;
-  margin-top: 0%;
-  padding-left: 2%;
-  padding-bottom: 2.5%;
-`;
-
-const Box2 = styled.div`
-  flex: 2;
-  width: 30%;
-  height: 50%;
-  font-size: 0.9rem;
-  /* border: 1px solid black; */
-  font-family: "Kfont";
-  box-sizing: border-box;
-  margin-left: 31%;
-  padding-bottom: 2.5%;
-`;
-
 const Head = styled.div`
   display: flex;
   align-items: center;
-  width: 78%;
+  width: 55.5vw;
   height: 5%;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
+  /* border: 1px solid black; */
   position: relative;
-  top: 10%;
+  top: 10.8%;
   padding-bottom: 0.5%;
   box-sizing: border-box;
 
@@ -72,7 +22,6 @@ const Head = styled.div`
     display: flex;
     padding-left: 2%;
     /* border: 1px solid black; */
-    /* margin-right: 70%; */
     flex: 6;
     box-sizing: border-box;
     position: relative;
@@ -86,6 +35,57 @@ const Head = styled.div`
     /* border: 1px solid black; */
   }
 `;
+const Container = styled.div`
+  position: relative;
+  display: column;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 1px; */
+  z-index: 100;
+  margin-top: 9%;
+  /* border: 1px solid black; */
+`;
+
+const BoxContainer = styled.div`
+  display: flex;
+  margin: 0;
+  width: 55.5vw;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  bottom: 3%;
+  margin-left: 6%;
+  border-bottom: 1px solid #cccccc;
+`;
+
+const Box = styled.div`
+  position: relative;
+  flex: 6;
+  width: 30%;
+  height: 50%;
+  margin: 0;
+  align-items: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  padding: 2.5% 0 2.6% 2%;
+`;
+
+const Box2 = styled.div`
+  flex: 2;
+  width: 30%;
+  height: 50%;
+  font-size: 0.9rem;
+  /* border: 1px solid black; */
+  font-family: "Kfont";
+  box-sizing: border-box;
+  padding: 2.8% 0 2.7% 2%;
+`;
+//+0.3
+//+0.2
+//=======================================================================
 
 const Empty = styled.div`
   display: flex;

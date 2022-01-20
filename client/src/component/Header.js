@@ -21,7 +21,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  z-index: 999;
   position: relative;
 
   .toogleBtn {
