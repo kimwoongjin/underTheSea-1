@@ -18,6 +18,12 @@ import RecommendCard from "../component/RecommendCard";
 import RecommendInfo from "../modalComponent/RecommendInfo";
 import WSDCard from "../component/WSDCard";
 import WSDInfo from "../modalComponent/WSDInfo";
+import LymphoCard from "../component/LymphoCard";
+import LymphoInfo from "../modalComponent/LymphoInfo";
+import HowToManageCard from "../component/HowToManageCard";
+import HowToManageInfo from "../modalComponent/HowToManageInfo";
+import WordCard from "../component/WordCard";
+import WordInfo from "../modalComponent/WordInfo";
 
 const Container = styled.div`
   width: 100%;
@@ -96,6 +102,9 @@ function SeaWaterGuide() {
     isActivationModal,
     isRecommendModal,
     isWSDInfoModal,
+    isLymphoModal,
+    isHtmModal,
+    isWordModal,
   } = state;
 
   const [cardTag, setCardTag] = useState({
@@ -132,12 +141,18 @@ function SeaWaterGuide() {
           {cardTag.tag === "all" && <SkimmerCard />}
           {cardTag.tag === "all" && <FilterMediaCard />}
           {cardTag.tag === "all" && <WSDCard />}
+          {cardTag.tag === "all" && <LymphoCard />}
+          {cardTag.tag === "all" && <HowToManageCard />}
+          {cardTag.tag === "all" && <WordCard />}
           {cardTag.tag === "basic" && <SuppliesCard />}
           {cardTag.tag === "basic" && <ActivationCard />}
           {cardTag.tag === "basic" && <RecommendCard />}
+          {cardTag.tag === "basic" && <HowToManageCard />}
+          {cardTag.tag === "basic" && <WordCard />}
           {cardTag.tag === "equipment" && <SkimmerCard />}
           {cardTag.tag === "equipment" && <FilterMediaCard />}
           {cardTag.tag === "disease" && <WSDCard />}
+          {cardTag.tag === "disease" && <LymphoCard />}
         </InfoContainer>
         {isSkimmerModal && <SkimmerInfo />}
         {isSeaBasicInfoModal && <SuppliesInfo />}
@@ -145,6 +160,9 @@ function SeaWaterGuide() {
         {isActivationModal && <ActivationInfo />}
         {isRecommendModal && <RecommendInfo />}
         {isWSDInfoModal && <WSDInfo />}
+        {isLymphoModal && <LymphoInfo />}
+        {isHtmModal && <HowToManageInfo />}
+        {isWordModal && <WordInfo />}
       </Container>
       <Footer />
     </>
