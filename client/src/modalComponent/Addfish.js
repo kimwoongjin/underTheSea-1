@@ -136,7 +136,8 @@ function AddFish({ container_id }) {
           withCredentials: true,
         }
       )
-      .then(() => {
+      .then((res) => {
+        console.log("물고기추가응답", res);
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -181,6 +182,7 @@ function AddFish({ container_id }) {
             <datalist id="fishName">
               {fishList.map((el, idx) => (
                 <option
+                  key={idx}
                   className="fish-option"
                   value={el}
                   label={el}

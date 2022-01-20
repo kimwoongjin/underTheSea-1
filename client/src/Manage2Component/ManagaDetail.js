@@ -32,7 +32,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 40vh;
-  /* background-color: rgba(51, 153, 255, 0.1); */
 `;
 
 const Title = styled.div`
@@ -72,6 +71,15 @@ const OuterContainer = styled.div`
   margin-bottom: 15%;
 `;
 
+const FishCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+`;
+
 const Level = styled.div`
   display: flex;
   justify-content: space-between;
@@ -88,11 +96,9 @@ const LevelText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 50%; */
   color: #008eff;
   font-weight: bold;
   font-family: "Kfont";
-  /* border: 1px solid red; */
 `;
 
 const Logo = styled.img`
@@ -106,7 +112,6 @@ const Levelinfo = styled.div`
   width: 50%;
   font-size: 1.2rem;
   margin-left: 10px;
-  /* border: 1px solid red; */
   font-family: "Kfont";
 `;
 const ImgContainer = styled.div`
@@ -121,7 +126,6 @@ const MainImg = styled.img`
 
 const MidContainer = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
   height: 20vh;
   display: flex;
   flex-direction: column;
@@ -135,33 +139,26 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
-  /* border: 1px solid red; */
 `;
 
 const HelpBtn = styled.div`
   display: flex;
-  /* text-align: right; */
   justify-content: flex-end;
   align-items: center;
   color: #108dee;
   font-weight: bold;
-  /* width: 11%; */
   font-family: "Kfont";
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 
 const AddfishBtn = styled.div`
   display: flex;
-  /* text-align: right; */
   justify-content: flex-end;
   align-items: center;
   color: #108dee;
   font-weight: bold;
   margin: 0px 20px;
-  /* width: 11%; */
   font-family: "Kfont";
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 const DeadfishBtn = styled.div`
@@ -170,10 +167,8 @@ const DeadfishBtn = styled.div`
   text-align: right;
   align-items: center;
   color: #108dee;
-  /* width: 11%; */
   font-family: "Kfont";
   font-weight: bold;
-  /* border: 1px solid blue; */
   cursor: pointer;
 `;
 
@@ -193,7 +188,7 @@ const Progress = styled.div`
   border-bottom-left-radius: 5px;
   background: linear-gradient(#00d2ff, #3a7bd5);
 `;
-//--------------------------------------------
+
 const BtnContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -225,6 +220,7 @@ const Button = styled.button`
 `;
 
 //------------------- 캘린더 --------------------
+
 const CalendarContainer = styled.div`
   width: 50%;
   margin-top: 40px;
@@ -244,7 +240,6 @@ const Control = styled.div`
 `;
 
 const CalendarBtn = styled.button`
-  /* background: white; */
   background-color: rgba(51, 153, 255, 0);
   width: 40px;
   height: 30px;
@@ -255,13 +250,9 @@ const Span = styled.span`
   font-size: 1.5rem;
 `;
 
-const Table = styled.table`
-  /* border: 1px solid gray; */
-`;
+const Table = styled.table``;
 
-const Tbody = styled.tbody`
-  /* border: 1px dashed blue; */
-`;
+const Tbody = styled.tbody``;
 
 const Tr = styled.tr`
   display: flex;
@@ -273,21 +264,17 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
-  /* border: 1px solid black; */
 `;
 
 const Td = styled.td`
   display: flex;
-  /* border: 1px solid rgba(51, 153, 255, 0.3); */
   border: 1px solid black;
-  /* justify-content: center; */
   background: white;
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
-  /* margin: 1px; */
 `;
 const WeekContainer = styled.div`
   width: 100%;
@@ -295,7 +282,6 @@ const WeekContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  /* border: 1px solid red; */
   .sun {
     color: red;
   }
@@ -309,8 +295,6 @@ const Day = styled.div`
   text-align: center;
   width: 7vw;
   height: 3vh;
-  /* margin: 1px; */
-  /* border: 1px solid black; */
 `;
 
 const FoodIconContainer = styled.div`
@@ -318,12 +302,10 @@ const FoodIconContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 40%;
-  /* border: 2px solid royalblue; */
 `;
 
 const FoodInnerContainer = styled.div`
   display: flex;
-  /* border: 1px dashed red; */
 `;
 
 const ExWaterRecord = styled.div`
@@ -347,12 +329,10 @@ const FeedingNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
 `;
 
 const FoodIcon = styled.img`
   width: 40%;
-  /* border: 1px solid blue; */
 `;
 function ManageDetail({ condata, setCondata }) {
   //
@@ -798,12 +778,10 @@ function ManageDetail({ condata, setCondata }) {
         <ImgContainer>
           <MainImg src={imgSrcUrl} alt="" />
         </ImgContainer>
+
         {/* ----------------------------------------- */}
 
-        {/* ----------------------- */}
-
         <MidContainer>
-          {/* ----------------------------------------- */}
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
@@ -848,7 +826,9 @@ function ManageDetail({ condata, setCondata }) {
             용궁기록
           </DeadfishBtn>
         </BottomContainer>
+
         {/* -------------------- 달력 ------------------- */}
+
         <CalendarContainer>
           <Control>
             <CalendarBtn
@@ -889,6 +869,46 @@ function ManageDetail({ condata, setCondata }) {
 
         {/* <ManageDetCard condata={condata} /> */}
       </OuterContainer>
+      <FishCardContainer>
+        {conInfo.fish_list.map((el, idx) => {
+          return (
+            <ContainerS key={idx}>
+              <DetailImg>
+                <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+              </DetailImg>
+              {/* ----------------------------------------- */}
+              <Content>
+                <LeftInfo>
+                  <Name>{el.fish_name}</Name>
+
+                  <HabitatContainer>
+                    <Habitat>종류</Habitat>
+                    <HabitatShow>
+                      {el.fresh_water ? "담수어" : "해수어"}
+                    </HabitatShow>
+                  </HabitatContainer>
+                  <HabitatContainer>
+                    <Habitat>적정수온</Habitat>
+                    <HabitatShow>{el.temp}</HabitatShow>
+                  </HabitatContainer>
+
+                  <HabitatContainer>
+                    <Habitat>산호합사</Habitat>
+                    <HabitatShow>{el.reefsafe ? "O" : "X"}</HabitatShow>
+                  </HabitatContainer>
+                  <HabitatContainer>
+                    <Habitat>마릿수</Habitat>
+                    <HabitatShow>{el.fish_num}</HabitatShow>
+                  </HabitatContainer>
+                </LeftInfo>
+                <RightInfo>
+                  <FishDesc>{el.desc}</FishDesc>
+                </RightInfo>
+              </Content>
+            </ContainerS>
+          );
+        })}
+      </FishCardContainer>
       {isMyAquariumInfoModal && (
         <AquaInfo
           condata={condata}

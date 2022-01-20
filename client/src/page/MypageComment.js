@@ -114,25 +114,80 @@ const Notice = styled.div`
   margin-left: 2%;
 `;
 
+const PageBtnForm = styled.form`
+  display: flex;
+  width: 95%;
+  justify-content: center;
+  padding-top: 15px;
+  margin-bottom: 15px;
+`;
+
+const PageBtn = styled.div`
+  align-items: center;
+  border-style: none;
+  background-color: #ffffff;
+  margin: 5px;
+  font-size: 18px;
+  cursor: pointer;
+`;
+
 function MypageComment() {
   const accessToken = localStorage.getItem("accessToken");
   const [commentInfo, setCommentInfo] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [commentLength, setCommentLength] = useState([]);
 
   useEffect(() => {
-    commentHandler();
-  });
-  const commentHandler = () => {
+    commentHandler(pageNum);
+  }, [pageNum]);
+  const commentHandler = (page_num) => {
     axios
-      .get(`http://localhost:80/user/comments/1`, {
+      .get(`http://localhost:80/user/comments/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
         setCommentInfo([...result.data.data]);
+        console.log(result.data);
+        const page_length = Math.floor(result.data.length / 7);
+        if (result.data.length % 7 !== 0) {
+          const page = new Array(page_length + 1).fill(0);
+          setCommentLength([...page]);
+        } else {
+          const page = Array(page_length).fill(0);
+          setCommentLength([...page]);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // 이전페이지
+  const goToPre = () => {
+    if (pageNum === 1) {
+      return;
+    }
+    const page = Number(pageNum);
+    setPageNum(page - 1);
+    console.log(pageNum);
+  };
+
+  // 다음페이지
+  const goToNext = () => {
+    if (pageNum === commentLength.length) {
+      return;
+    }
+    const page = Number(pageNum);
+    setPageNum(pageNum + 1);
+    console.log(pageNum);
+  };
+
+  // 페이지 선택
+  const selectPageNum = (e) => {
+    const page = Number(e.target.id);
+    setPageNum(page);
+    console.log(pageNum);
   };
 
   return (
@@ -171,6 +226,17 @@ function MypageComment() {
           </>
         )}
       </Container>
+      <PageBtnForm>
+        <PageBtn onClick={goToPre}>이전</PageBtn>
+        {commentLength.map((el, idx) => {
+          return (
+            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+              {idx + 1}
+            </PageBtn>
+          );
+        })}
+        <PageBtn onClick={goToNext}>다음</PageBtn>
+      </PageBtnForm>
     </>
   );
   // });

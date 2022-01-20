@@ -4,6 +4,9 @@ const { isAuthorized } = require("../tokenFunction");
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
   const limit = 7;
+  const page_num = req.params.page_num;
+  const offset = (page_num - 1) * limit;
+  // console.log(userinfo);
 
   if (!userinfo) {
     return res.status(401).json({ message: "You are not authorized" });
@@ -11,7 +14,14 @@ module.exports = async (req, res) => {
     const user_id = userinfo.id;
     const user_name = userinfo.user_name;
 
+    const container = await containers.findAll({
+      where: { user_id },
+    });
+
+    const container_length = container.length;
+
     const container_data = await containers.findAll({
+      offset,
       limit,
       where: { user_id },
     });
@@ -46,6 +56,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       data: user_container,
+      length: container_length,
       user_name,
       message: "User's container data is successfully returned",
     });

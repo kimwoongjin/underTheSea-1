@@ -13,6 +13,7 @@ import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
 import Login from "./modalComponent/Login";
+import Logout from "./modalComponent/Logout";
 import SignUp from "./modalComponent/SignUp";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -21,7 +22,7 @@ function App() {
   const state = useSelector((state) => state.modalReducer);
   const loginState = useSelector((state) => state.authReducer);
   const conData = useSelector((state) => state.conInfoReducer);
-  const { isLoginModal, isSignupModal } = state;
+  const { isLoginModal, isSignupModal, isLogoutModal } = state;
   const { isLogin } = loginState;
 
   const month = new Date().getMonth() + 1;
@@ -193,6 +194,7 @@ function App() {
         <Route path="/mypage" element={<Mypage />}></Route>
       </Routes>
       {isLoginModal && <Login handleToken={handleToken} />}
+      {isLogoutModal && <Logout />}
       {isSignupModal && <SignUp />}
     </BrowserRouter>
   );

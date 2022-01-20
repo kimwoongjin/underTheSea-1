@@ -12,7 +12,6 @@ const TipContainer = styled.div`
   border-bottom: 1px solid #808080;
   cursor: pointer;
   align-items: center;
-  //   z-index: 100;
   &:hover {
     background-color: #f7f7f4;
     color: black;

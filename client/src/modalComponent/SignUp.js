@@ -23,7 +23,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 25%;
-  height: 60%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -56,6 +56,7 @@ const Form = styled.form`
   width: 80%;
   height: 60%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   /* border: 1px solid red; */
 `;
@@ -136,7 +137,7 @@ const Warning = styled.div`
 const SignupBtn = styled.button`
   width: 100%;
   height: 50px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   background: #108dee;
   border-style: none;
   padding: 10px;
@@ -240,6 +241,7 @@ function SignUp() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
+            color="#e5e5e5"
             onClick={() => dispatch(modalOff)}
           />
         </CloseBtnContainer>
