@@ -25,8 +25,6 @@ module.exports = async (req, res) => {
         where: { container_id },
       });
 
-      console.log("You've reached here", fish_info_list);
-
       let fish_list_final = [];
       if (fish_info_list.length === 0) {
         fish_list_final = [];
@@ -130,6 +128,7 @@ module.exports = async (req, res) => {
         ex_water_list,
         fish_list: fish_list_final,
       };
+      console.log("NEW CONTAINER INFO FROM CONINFO", final);
 
       return res
         .status(200)

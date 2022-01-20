@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
       where: { fish_name },
     });
 
-    console.log("Are you here?", userInfo);
     if (!check_container) {
       return res.status(404).json({ message: "The container doesn't exist" });
     } else if (!check_fish) {

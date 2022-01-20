@@ -4,7 +4,6 @@ const { isAuthorized } = require("../tokenFunction");
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
   const limit = 7;
-  // console.log(userinfo);
 
   if (!userinfo) {
     return res.status(401).json({ message: "You are not authorized" });

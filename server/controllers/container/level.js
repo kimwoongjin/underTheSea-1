@@ -2,9 +2,7 @@ const { containers } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
-  console.log("서버에서 받는요청", req.headers);
   const userInfo = isAuthorized(req);
-  console.log("userInfo ==>", userInfo);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
@@ -21,11 +19,7 @@ module.exports = async (req, res) => {
 
       start.setHours(0, 0, 0, 0);
       start.setDate(numDay - dayOfWeek);
-      console.log(
-        container.dataValues.last_lv_up >= start,
-        container.dataValues.last_lv_up,
-        start
-      );
+
       if (container.dataValues.last_lv_up <= start) {
         const level = Number(String(container.dataValues.level)[0]);
         if (level === 6) {
@@ -39,7 +33,6 @@ module.exports = async (req, res) => {
           await container.increment("level", { by: 10 });
           container.last_lv_up = now;
           await container.save();
-          console.log("Hello");
           return res
             .header("Authorization", req.headers.authorization)
             .redirect(
