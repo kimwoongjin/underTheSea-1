@@ -74,7 +74,7 @@ const Content = styled.div`
     color: white;
     font-weight: bold;
     font-family: "Kfont";
-    z-index: 999;
+    /* z-index: 999; */
   }
 `;
 

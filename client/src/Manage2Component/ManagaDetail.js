@@ -642,8 +642,7 @@ function ManageDetail() {
 
   const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
 
-  // --------- 환수데이터가공 ---------
-
+  // 환수데이터가공
   let exWaterObj = {};
   conInfo.ex_water_list.forEach((el) => {
     if (!exWaterObj[el.createdAt]) {
@@ -651,6 +650,8 @@ function ManageDetail() {
     } else {
       exWaterObj[el.createdAt] += el.amount;
     }
+
+    // console.log(oneDayList)
   });
 
   // --------- 피딩데이터 가공 ---------
@@ -667,6 +668,7 @@ function ManageDetail() {
 
   // --------------------------------
 
+  let exp = [];
   const state = useSelector((state) => state.modalReducer);
   const {
     isMyAquariumInfoModal,
