@@ -12,12 +12,15 @@ import {
   RECOMMENDINFO_MODAL_ON,
   WSDINFO_MODAL_ON,
   ADD_CONTAINER_MODAL_ON,
+  LYMPHO_MODAL_ON,
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
   EXCHANGEWATER_MODAL_ON,
   HELP_MODAL_ON,
   LOG_OUT_MODAL_ON,
+  HTM_MODAL_ON,
+  WORD_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -39,6 +42,9 @@ const initialState = {
   isPwdModal: false,
   isHelpModal: false,
   isAddContainerModal: false,
+  isLymphoModal: false,
+  isHtmModal: false,
+  isWordModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -55,6 +61,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case SEA_BASIC_INFO_MODAL_ON:
       state = { ...prevState, isSeaBasicInfoModal: true };
+      break;
+    case HTM_MODAL_ON:
+      state = { ...prevState, isHtmModal: true };
       break;
     case FILTER_MEDIA_MODAL_ON:
       state = { ...prevState, isFilterMediaModal: true };
@@ -97,6 +106,12 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case LOG_OUT_MODAL_ON:
       state = { ...prevState, isLogoutModal: true };
+      break;
+    case LYMPHO_MODAL_ON:
+      state = { ...prevState, isLymphoModal: true };
+      break;
+    case WORD_MODAL_ON:
+      state = { ...prevState, isWordModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

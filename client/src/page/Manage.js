@@ -9,13 +9,13 @@ import { useSelector } from "react-redux";
 import AddContainer from "../modalComponent/AddContainer";
 import Footer from "../component/Footer";
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.img`
   position: relative;
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 40vh;
-  border: 1px solid red;
+  height: 60vh;
+  /* border: 1px solid red; */
 `;
 
 const Title = styled.div`
@@ -45,15 +45,6 @@ const Img = styled.img`
   height: 43%;
 `;
 
-const OuterContainer = styled.div`
-  border: 1px solid black;
-  width: 100%;
-  height: 170%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
 //주간 피딩 14번 , 주간 환수 1번
 function Manage({ getAllConInfo, getConInfo }) {
   const [containerList, setContainerList] = useState([]);
@@ -75,7 +66,7 @@ function Manage({ getAllConInfo, getConInfo }) {
   return (
     <>
       <Header2 />
-      <TitleContainer>
+      <TitleContainer src="/관리.jpg">
         {/* <Title>My Aquarium</Title> */}
         {/* <Text>당신의 어항을 관리해보세요!</Text> */}
       </TitleContainer>

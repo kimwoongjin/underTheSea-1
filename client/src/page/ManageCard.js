@@ -8,17 +8,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { addcontainerModalOnAction } from "../store/actions";
 
 const Container = styled.div`
-  /* border: 1px solid black; */
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* border: 1px solid red; */
 `;
 const CardContainer = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 60%;
   height: 100%;
   display: flex;
@@ -26,7 +24,6 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10%;
-  /* margin-top: 8%; */
 `;
 const TitleCover = styled.div`
   display: flex;
@@ -34,9 +31,8 @@ const TitleCover = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Title = styled.div`
-  /* position: absolute; */
-  /* top: 50%; */
   font-weight: bold;
   font-size: 1.8rem;
   text-align: center;
@@ -45,8 +41,6 @@ const Title = styled.div`
 `;
 
 const Text = styled.div`
-  /* position: absolute; */
-  /* top: 65%; */
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -55,12 +49,11 @@ const Text = styled.div`
 
 const BtnCover = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 60%;
   height: 100%;
   height: 150px;
-  /* border: 1px dashed blue; */
 `;
 
 const Btn = styled.button`
@@ -93,10 +86,6 @@ function ManageCard({ containerList, getConInfo, isAddContainerModal }) {
   return (
     <Container>
       <BtnCover>
-        <TitleCover>
-          <Title>My Aquarium</Title>
-          <Text>당신의 어항을 관리해보세요!</Text>
-        </TitleCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
       </BtnCover>
 

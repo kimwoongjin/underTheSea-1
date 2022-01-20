@@ -26,6 +26,9 @@ export const WSDINFO_MODAL_ON = "WSDINFO_MODAL_ON";
 export const ADD_CONTAINER_MODAL_ON = "ADD_CONTAINER_MODAL_ON";
 export const HELP_MODAL_ON = "HELP_MODAL_ON";
 export const LOG_OUT_MODAL_ON = "LOG_OUT_MODAL_ON";
+export const LYMPHO_MODAL_ON = "LYMPHO_MODAL_ON";
+export const HTM_MODAL_ON = "HTM_MODAL_ON";
+export const WORD_MODAL_ON = "WORD_MODAL_ON";
 export const MODAL_OFF = "MODAL_OFF";
 export const PWD_MODAL_ON = "PWD_MODAL_ON";
 
@@ -34,21 +37,3 @@ export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
 
 // ManageDetail
 export const GET_CONTAINER_INFO = "GET_CONTAINER_INFO";
-
-// export const getConData = async () => {
-//   const condata = await axios.get(
-//     `http://localhost:80/container/${container_id}/${month}`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     },
-//     {
-//       withCredentials: true,
-//     }
-//   );
-//   return {
-//     type: "GET_CON_INFO",
-//     payload: condata.data,
-//   };
-// };
