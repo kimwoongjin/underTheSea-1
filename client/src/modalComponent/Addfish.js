@@ -179,12 +179,12 @@ function AddFish({ container_id }) {
               list="fishName"
             />
             <datalist id="fishName">
-              {fishList.map((el) => (
+              {fishList.map((el, idx) => (
                 <option
                   className="fish-option"
                   value={el}
                   label={el}
-                  key={el.id}
+                  key={idx}
                 ></option>
               ))}
             </datalist>

@@ -361,14 +361,13 @@ function ManageDetail({ condata, handleCondata }) {
   const params = useParams();
   const container_id = params.container_id;
   let exAmount = 0;
-  let exWaterObj = {};
   const month = new Date().getMonth() + 1;
   let todayString = new Date().toISOString().split("T")[0].split("-");
   todayString = todayString[0].slice(2) + todayString[1] + todayString[2];
 
   const accessToken = localStorage.getItem("accessToken");
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-
+  const [exWaterObj, setExWaterObj] = useState({});
   const [finalList, setFinalList] = useState([]);
   const [progressBar, setProgressBar] = useState(0);
   const [getMoment, setMoment] = useState(moment());
@@ -399,7 +398,6 @@ function ManageDetail({ condata, handleCondata }) {
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-  console.log(today, todayString);
   //함수선언부분
   //
   // [...'220119', '220120', '220121'] 형태로 return
@@ -430,7 +428,7 @@ function ManageDetail({ condata, handleCondata }) {
     handleCondata(res.data.data);
   };
   //
-  //
+  //return 값 없음. 그냥 바로 condata 갱신
   const AddFeedRequest = async () => {
     const response = await axios.post(
       `http://localhost:80/container/${container_id}/feed`,
@@ -450,7 +448,7 @@ function ManageDetail({ condata, handleCondata }) {
     handleCondata(response.data.data);
   };
   //
-  //
+  //return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
       `http://localhost:80/container/${container_id}/ex_water`,
@@ -468,8 +466,11 @@ function ManageDetail({ condata, handleCondata }) {
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     handleCondata(response.data.data);
+    console.log("condata after response", response.data.data);
+    console.log("condata after AddWaterRequest", condata);
   };
-
+  //
+  //return 값 없음. 그냥 바로 condata 갱신
   const LevelUpRequest = async () => {
     const response = await axios.patch(
       `http://localhost:80/container/${container_id}/level`,
@@ -505,6 +506,7 @@ function ManageDetail({ condata, handleCondata }) {
     let temp = [];
     const curWeek = GetCurrentWeek();
     condata.ex_water_list.forEach((el) => {
+      let date = el.createdAt;
       if (!exWaterObj[el.createdAt]) {
         exWaterObj[el.createdAt] = el.amount;
       } else {
@@ -699,6 +701,7 @@ function ManageDetail({ condata, handleCondata }) {
       AddFeedRequest();
       UpdateFinalList();
       UpdateProgressBar();
+      console.log("condata after Feeding", condata);
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
@@ -746,6 +749,7 @@ function ManageDetail({ condata, handleCondata }) {
   }
   const imgSrcUrl = "http://localhost:80/level/" + condata.level;
   console.log("PLZ", condata);
+  console.log("exWaterObj", exWaterObj);
   return (
     <>
       <Header2 />
