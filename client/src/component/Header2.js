@@ -133,12 +133,6 @@ function Header2() {
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
 
-<<<<<<< HEAD
-  const goToMain = () => {
-    navigate("/");
-  };
-=======
->>>>>>> 3d5db83c76fe20392c0dd52f14009ad63271d486
   const goToHome = () => {
     navigate("/");
   };
