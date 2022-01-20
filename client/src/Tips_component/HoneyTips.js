@@ -17,7 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   // background-color: #f7f7f4;
 `;
 const TopCover = styled.div`
@@ -113,7 +113,7 @@ const TipListContainer = styled.div`
   height: 100%;
   border: 1px solid #a0d5fd;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 10%;
 `;
 
 const TipListHeadContainer = styled.div`
@@ -270,8 +270,8 @@ function HoneyTips() {
             <PageBtn onClick={goToNext}>다음</PageBtn>
           </PageBtnForm>
         </TipListContainer>
+        <Footer />
       </Container>
-      <Footer></Footer>
     </>
   );
 }

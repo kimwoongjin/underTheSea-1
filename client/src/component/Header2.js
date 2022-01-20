@@ -5,6 +5,7 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
+  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 
@@ -136,7 +137,6 @@ function Header2() {
   const goToHome = () => {
     navigate("/");
   };
-
   const handleLogout = () => {
     axios
       .post(
@@ -161,6 +161,7 @@ function Header2() {
         console.log(err);
       });
   };
+
   const play = () => {
     console.log("Play damm it!!");
 

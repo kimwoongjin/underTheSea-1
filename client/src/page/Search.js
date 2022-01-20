@@ -81,7 +81,7 @@ const Button = styled.button`
   bottom: 46%;
   width: 8vw;
   height: 5vh;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: white;
   background: #108dee;
   border-radius: 5px;
@@ -113,7 +113,7 @@ const Text = styled.div`
 const Container = styled.div`
   /* border: 1px solid black; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,8 +258,8 @@ function Search() {
             ))}
           </datalist>
         </InputContainer>
-        <Button onClick={gotoSearch}>Search</Button>
-        <div className="bottom"></div>
+        <Button onClick={gotoSearch}>검색</Button>
+        {/* <div className="bottom"></div> */}
       </Auto>
       <Text>카드를 클릭하면 세부 정부를 확인할 수 있습니다.</Text>
 

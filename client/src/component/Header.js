@@ -5,6 +5,7 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
+  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,7 +33,7 @@ const Container = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
     padding: 8px 24px;
@@ -40,7 +41,7 @@ const Container = styled.div`
     .toogleBtn {
       display: block;
     }
-  }
+  } */
 `;
 
 const Img = styled.img`
@@ -152,7 +153,7 @@ const BtnContainer = styled.div`
   margin-right: 0;
   margin-right: 3%;
   /* border: 1px solid red; */
-  justify-content: space-around;
+  justify-content: space-between;
 
   @media screen and (max-width: 780px) {
     flex-direction: column;
@@ -174,7 +175,8 @@ function Header() {
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
-  const accessToken = localStorage.getItem("menu");
+  const accessToken = localStorage.getItem("accessToken");
+  // 로고 클릭시 메인으로
 
   const goToHome = () => {
     navigate("/");
@@ -196,6 +198,7 @@ function Header() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })
@@ -206,7 +209,7 @@ function Header() {
   const play = () => {
     console.log("Play damm it!!");
     var audio = document.getElementById("audio_play");
-
+    console.log("Play damm it!!");
     if (audio.paused) {
       audio.play();
     } else {
@@ -228,7 +231,8 @@ function Header() {
       />
       <BtnContainer className="menu" onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide>가이드</Guide>
+          <Guide onclick={play}>가이드</Guide>{" "}
+          <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
@@ -239,7 +243,8 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage>관리</Manage>
+              <Manage onclick={play}>관리</Manage>
+              <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}

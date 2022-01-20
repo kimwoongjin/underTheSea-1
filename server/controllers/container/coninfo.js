@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         fish_list.map(async (el) => {
           let fishName = el.dataValues.fish_name;
           let fish_container_data = await container_fishes.findOne({
-            where: { fish_name: fishName },
+            where: { fish_name: fishName, container_id },
           });
 
           let result = {
