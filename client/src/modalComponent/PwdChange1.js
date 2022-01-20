@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -124,50 +123,53 @@ const Text = styled.div`
 
 const NewPwd = styled.form`
   width: 100%;
-  height: 40%;
+  height: 70%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 const CurPwd1 = styled.input`
-  margin-top: 23%;
+  margin-top: 9%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
+  z-index: 100;
 `;
 const NewPwd1 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
+  margin-bottom: 2%;
   box-sizing: border-box;
-  /* margin-bottom: 5%; */
+  z-index: 100;
 `;
 const NewPwd2 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
+  margin-bottom: 2%;
+  z-index: 100;
 `;
 const Warning = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 7%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
-
-  padding: 2% 0 5% 2%;
+  position: relative;
+  bottom: 14%;
+  padding-left: 2%;
 `;
 const Warning1 = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 15%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
-
-  padding: 2% 0 5% 2%;
+  position: relative;
+  bottom: 80%;
+  padding-left: 2%;
 `;
 
 const Btn = styled.div`

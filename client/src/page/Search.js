@@ -232,7 +232,11 @@ function Search() {
     <>
       <Header2 />
       <MainImg>
-        <img className="img" src="메인서치2.jpeg" alt=""></img>
+        <img
+          className="img"
+          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A5%E1%84%8E%E1%85%B5%E1%86%BC.jpg"
+          alt=""
+        ></img>
       </MainImg>
       <Auto>
         <InputContainer>

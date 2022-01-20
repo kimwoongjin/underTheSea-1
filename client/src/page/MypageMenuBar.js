@@ -9,42 +9,52 @@ const Box2 = styled.div`
   height: 8vh;
   display: flex;
   align-items: center;
-  background: #108dee;
+  justify-content: center;
+  background: #ace0ff;
   font-size: 2rem;
   font-weight: bold;
 `;
 const Manage = styled.div`
-  /* border: 1px solid #108dee; */
-  width: 24%;
-  margin-left: 12%;
+  /* border: 1px solid black; */
+  width: 16%;
+  height: 60%;
   font-size: 1.7rem;
   background: none;
-  border: none;
-  /* z-index: 999; */
-  border-right: 3px solid black;
-  cursor: pointer;
+  text-align: center;
+  margin-right: 10%;
+  :hover {
+    background: #cccccc;
+    cursor: pointer;
+  }
 `;
 const Contents = styled.div`
-  /* border: 1px solid #108dee; */
-  width: 24%;
-  margin-left: 12%;
+  /* border: 1px solid black; */
+  width: 16%;
+  height: 60%;
   font-size: 1.7rem;
   background: none;
-  border: none;
+  text-align: center;
+  margin-right: 10%;
   /* z-index: 999; */
-  border-right: 3px solid black;
   cursor: pointer;
+  :hover {
+    background: #cccccc;
+  }
 `;
 
 const Comment = styled.div`
-  /* border: 1px solid #108dee; */
-  width: 24%;
-  margin-left: 10%;
+  /* border: 1px solid black; */
+  width: 16%;
+  height: 60%;
   font-size: 1.7rem;
+  text-align: center;
   /* z-index: 999; */
   background: none;
-  border: none;
+
   cursor: pointer;
+  :hover {
+    background: #cccccc;
+  }
 `;
 
 function MypageMenuBar({ setCurrentPage }) {
