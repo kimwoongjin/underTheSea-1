@@ -31,6 +31,7 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  /* z-index: 9999; */
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;

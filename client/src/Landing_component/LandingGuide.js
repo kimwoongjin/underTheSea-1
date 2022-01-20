@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const WomanImgL = styled.img`
   position: absolute;
-  z-index: 999;
+  /* z-index: 999; */
   width: 29%;
   height: 47%;
   right: 35%;
@@ -26,7 +26,7 @@ const WomanImgL = styled.img`
 `;
 const WomanImgR = styled.img`
   position: absolute;
-  z-index: 999;
+  /* z-index: 999; */
   width: 27%;
   height: 63%;
   right: 7%;
@@ -51,7 +51,7 @@ const SearchTitle = styled.div`
 
 const SearchText = styled.div`
   text-align: left;
-  z-index: 999;
+  /* z-index: 999; */
   color: #092011;
   font-size: 1.5rem;
   line-height: 150%;

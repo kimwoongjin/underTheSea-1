@@ -9,10 +9,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 30%;
+  width: 28%;
   height: 390px;
   box-shadow: 0px 0px 20px #adb5bd;
-  margin-bottom: 3%;
+  margin-right: 40px;
+  margin-bottom: 40px;
   border-radius: 20px;
   transition: all 0.3s;
   :hover {
