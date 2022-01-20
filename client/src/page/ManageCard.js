@@ -15,9 +15,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  /* border: 1px solid red; */
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
+  border: 1px solid black;
   width: 60%;
   height: 100%;
   display: flex;
@@ -27,10 +28,34 @@ const CardContainer = styled.div`
   margin-bottom: 10%;
   /* margin-top: 8%; */
 `;
+const TitleCover = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const Title = styled.div`
+  /* position: absolute; */
+  /* top: 50%; */
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-align: center;
+  line-height: 180%;
+  color: #008eff;
+`;
+
+const Text = styled.div`
+  /* position: absolute; */
+  /* top: 65%; */
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 180%;
+`;
 
 const BtnCover = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 60%;
   height: 100%;
@@ -68,6 +93,10 @@ function ManageCard({ containerList, getConInfo, isAddContainerModal }) {
   return (
     <Container>
       <BtnCover>
+        <TitleCover>
+          <Title>My Aquarium</Title>
+          <Text>당신의 어항을 관리해보세요!</Text>
+        </TitleCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
       </BtnCover>
 

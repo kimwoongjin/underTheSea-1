@@ -15,6 +15,7 @@ const TitleContainer = styled.div`
   justify-content: center;
   width: 100vw;
   height: 40vh;
+  border: 1px solid red;
 `;
 
 const Title = styled.div`
@@ -75,12 +76,8 @@ function Manage({ getAllConInfo, getConInfo }) {
     <>
       <Header2 />
       <TitleContainer>
-        <Title>My Aquarium</Title>
-        <Text>당신의 어항을 관리해보세요!</Text>
-        <Img
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%9E%91%EC%9D%80%ED%95%B4%EC%B4%88.png"
-          alt="작은해초.png"
-        />
+        {/* <Title>My Aquarium</Title> */}
+        {/* <Text>당신의 어항을 관리해보세요!</Text> */}
       </TitleContainer>
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} /> */}
