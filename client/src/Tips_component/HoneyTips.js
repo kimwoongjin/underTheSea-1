@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction } from "../store/actions";
 import axios from "axios";
 import styled from "styled-components";
-import Header from "../component/Header";
 import Header2 from "../component/Header2";
+import Footer from "../component/Footer";
 import TipList from "./TipList";
 import Footer from "../component/Footer";
 
@@ -23,6 +23,7 @@ const Container = styled.div`
 `;
 const TopCover = styled.div`
   width: 100%;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +72,7 @@ const Title = styled.div`
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  border-bottom: 5px solid #108dee;
+  border-bottom: 3px solid #108dee;
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
@@ -83,13 +84,13 @@ const SubTitle = styled.div`
 
 const BtnContainer = styled.div`
   width: 70%;
-  margin-top: 5%;
+  margin-top: 3%;
   display: flex;
   justify-content: flex-end;
   /* border: 1px dashed darkcyan; */
 `;
 const Btn = styled.button`
-  width: 90px;
+  width: 80px;
   height: 30px;
   color: white;
   font-size: 1rem;
@@ -121,10 +122,9 @@ const TipListHeadContainer = styled.div`
   display: flex;
   font-size: 1.5rem;
   margin-top: 30px;
-  // margin-bottom: 10px;
   border-bottom: 4px solid #108dee;
-  // box-shadow: 0px 5px 5px -3px #828282;
   font-weight: bold;
+  /* background-color: #f7f7f4; */
 `;
 
 const TipListTitle = styled.div`
@@ -210,7 +210,7 @@ function HoneyTips() {
     if (pageNum === 1) {
       return;
     }
-    const page = pageNum;
+    const page = Number(pageNum);
     setPageNum(page - 1);
   };
 
@@ -219,12 +219,14 @@ function HoneyTips() {
     if (pageNum === tipLength.length) {
       return;
     }
+    const page = Number(pageNum);
     setPageNum(pageNum + 1);
   };
 
   // 페이지 선택
   const selectPageNum = (e) => {
-    setPageNum(e.target.id);
+    const page = Number(e.target.id);
+    setPageNum(page);
   };
 
   return (
@@ -242,9 +244,9 @@ function HoneyTips() {
         </TopCover>
         <BtnContainer>
           {isLogin ? (
-            <Btn onClick={goToNewTip}>새글쓰기</Btn>
+            <Btn onClick={goToNewTip}>글쓰기</Btn>
           ) : (
-            <Btn onClick={() => dispatch(loginModalOnAction)}>새글쓰기</Btn>
+            <Btn onClick={() => dispatch(loginModalOnAction)}>글쓰기</Btn>
           )}
         </BtnContainer>
         <TipListContainer>
@@ -271,6 +273,7 @@ function HoneyTips() {
         </TipListContainer>
         <Footer />
       </Container>
+      <Footer></Footer>
     </>
   );
 }

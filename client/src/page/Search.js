@@ -8,6 +8,17 @@ import SearchInfo from "./SearchInfo";
 import { useEffect } from "react";
 import Footer from "../component/Footer";
 
+const MainImg = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const Auto = styled.div`
   display: flex;
   justify-content: center;
@@ -16,36 +27,40 @@ const Auto = styled.div`
   width: 100%;
   height: 7.5vh;
   position: relative;
-  margin-top: 10%;
-  /* border: 1.25px dashed red; */
+  margin-top: 5%;
+  flex-direction: column;
+  padding-top: 2%;
+
   .bottom {
     width: 30vw;
     display: flex;
     border-bottom: 5px solid #108dee;
-    position: absolute;
-    bottom: 3%;
-    left: 29.8%;
+    position: relative;
+    outline: none;
+    bottom: 55%;
+    right: 1%;
   }
 `;
 
 const InputContainer = styled.div`
-  /* border: 1px solid black; */
+  position: relative;
   width: 30vw;
   height: 7vh;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
   margin-right: 2%;
-  border-bottom: 2px solid #108dee;
+  top: 20%;
+
   .fish-input {
+    position: relative;
     /* flex: 1 0 0; */
     background-color: transparent;
-    margin: 0;
+    margin: 0%;
     padding: 0;
     outline: none;
-    /* border: 3px solid black; */
     border: none;
-    width: 40vw;
+    width: 30vw;
     font-size: 1.2rem;
     font-family: "Kfont";
     text-align: center;
@@ -54,15 +69,16 @@ const InputContainer = styled.div`
   .delete-button {
     font-size: 1.5rem;
     font-weight: bold;
-    position: absolute;
+    position: relative;
     /* border: 1px solid black; */
-    color: #e5e5e5;
-    padding: 0.8% 0 0.8%;
-    right: 41%;
+    padding: 0.8% 0 3%;
   }
 `;
 
 const Button = styled.button`
+  position: relative;
+  left: 20%;
+  bottom: 46%;
   width: 8vw;
   height: 5vh;
   font-size: 1.25rem;
@@ -86,11 +102,8 @@ const Button = styled.button`
 `;
 
 const Text = styled.div`
-  /* position: absolute; */
-  /* top: 53%; */
-  /* left: 36%; */
-  margin-top: 5%;
-  /* color: #e5e5e5; */
+  position: relative;
+  margin-top: 10%;
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -105,7 +118,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* position: absolute; */
+  position: relative;
+  margin-top: 5%;
   margin-bottom: 10%;
 `;
 const CardContainer = styled.div`
@@ -116,7 +130,6 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 8%;
   position: relative;
 `;
 
@@ -216,8 +229,10 @@ function Search() {
 
   return (
     <>
-      {/* <Header /> */}
-      <Header2 />
+      <Header />
+      <MainImg>
+        <img className="img" src="메인서치2.jpeg" alt=""></img>
+      </MainImg>
       <Auto>
         <InputContainer>
           <input
