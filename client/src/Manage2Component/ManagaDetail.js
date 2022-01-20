@@ -426,6 +426,7 @@ function ManageDetail({ condata, handleCondata }) {
     );
     console.log("RES FROM getConinfo", res.data);
     handleCondata(res.data.data);
+    console.log("UpdateConInf called and condata is:", condata);
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
@@ -446,6 +447,7 @@ function ManageDetail({ condata, handleCondata }) {
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     handleCondata(response.data.data);
+    console.log("AddFeedRequest called and condata is:", condata);
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
@@ -466,8 +468,7 @@ function ManageDetail({ condata, handleCondata }) {
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     handleCondata(response.data.data);
-    console.log("condata after response", response.data.data);
-    console.log("condata after AddWaterRequest", condata);
+    console.log("AddWaterRequest called and condata is:", condata);
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
@@ -484,6 +485,7 @@ function ManageDetail({ condata, handleCondata }) {
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     handleCondata(response.data.data);
+    console.log("LevelUpRequest called and condata is:", condata);
   };
 
   //
@@ -499,10 +501,12 @@ function ManageDetail({ condata, handleCondata }) {
       final_list[el1.createdAt] = array;
     });
     setFinalList(final_list);
+    console.log("UpdateFinalList called and finalList is:", finalList);
   };
   //
   // return값 없음. 바로 progressBar 갱신  && 조건 충족하면 레벨 업도 요청
   const UpdateProgressBar = () => {
+    console.log("UpdateProgressBar called and condata is:", condata);
     let temp = [];
     const curWeek = GetCurrentWeek();
     condata.ex_water_list.forEach((el) => {
@@ -537,9 +541,9 @@ function ManageDetail({ condata, handleCondata }) {
   //
   // 캘린더 어레이 레이아웃을 리턴
   const calendarArr = () => {
+    console.log("calendarArr called", condata);
     let result = [];
     let week = firstWeek;
-    console.log("condata when calendarArr runs", condata);
     for (week; week <= lastWeek; week++) {
       result = result.concat(
         <Tr key={week}>
@@ -701,7 +705,7 @@ function ManageDetail({ condata, handleCondata }) {
       AddFeedRequest();
       UpdateFinalList();
       UpdateProgressBar();
-      console.log("condata after Feeding", condata);
+      console.log("handleFeedAddRequest called and condata is:", condata);
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
@@ -714,6 +718,7 @@ function ManageDetail({ condata, handleCondata }) {
       AddWaterRequest();
       UpdateFinalList();
       UpdateProgressBar();
+      console.log("handleExwaterAddRequest called and condata is:", condata);
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
@@ -748,8 +753,6 @@ function ManageDetail({ condata, handleCondata }) {
     exAmount += todayEx[i].amount;
   }
   const imgSrcUrl = "http://localhost:80/level/" + condata.level;
-  console.log("PLZ", condata);
-  console.log("exWaterObj", exWaterObj);
   return (
     <>
       <Header2 />
