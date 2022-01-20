@@ -3,6 +3,7 @@ import {
   LOG_OUT,
   SIGN_UP,
   LOG_IN_MODAL_ON,
+  LOG_OUT_MODAL_ON,
   SIGN_UP_MODAL_ON,
   SIGN_OUT,
   SIGN_OUT_MODAL_ON,
@@ -83,6 +84,9 @@ export const helpInfoModalOnAction = {
 };
 export const addcontainerModalOnAction = {
   type: ADD_CONTAINER_MODAL_ON,
+};
+export const logoutModalOnAction = {
+  type: LOG_OUT_MODAL_ON,
 };
 export const signupAction = {
   type: SIGN_UP,

@@ -125,7 +125,7 @@ function AquaInfo({ conInfo, container_id, month }) {
   });
   const [fishNum, setFishNum] = useState(0);
   const accessToken = localStorage.getItem("accessToken");
-  const [myAquaInfo, setMyAquaInfo] = useState("");
+  const [myAquaInfo, setMyAquaInfo] = useState({});
   let total = 0;
   useEffect(() => {
     // console.log("유즈이펙트는 실행되니?", container_id);
@@ -142,13 +142,11 @@ function AquaInfo({ conInfo, container_id, month }) {
         }
       )
       .then((res) => {
+        console.log("응답데이터 -> ", res.data.data);
         setMyAquaInfo(res.data.data);
-        console.log("res.data.data", res.data.data);
+        console.log("마이아쿠아인포", myAquaInfo);
 
-        let lastExDay =
-          "20" +
-          res.data.data.ex_water_list[res.data.data.ex_water_list.length - 1]
-            .createdAt;
+        let lastExDay = "20" + res.data.data.ex_water_list[0].createdAt;
         console.log("lastExDay", lastExDay);
         let thisYear = Number(lastExDay.slice(0, 4));
         let thisMonth = Number(lastExDay.slice(4, 6));
@@ -176,6 +174,7 @@ function AquaInfo({ conInfo, container_id, month }) {
           thisDay,
         });
         let LENGTH = res.data.data.fish_list.length;
+        console.log("랜스", LENGTH);
         if (LENGTH) {
           for (let i = 0; i < LENGTH; i++) {
             total += res.data.data.fish_list[i].fish_num;
@@ -185,7 +184,7 @@ function AquaInfo({ conInfo, container_id, month }) {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log("토탈~~", total);
+  console.log("토탈~~", fishNum);
   // if (myAquaInfo.ex_water_list) {
   //   console.log("환수기록", myAquaInfo.ex_water_list);
   //   let lastExDay =

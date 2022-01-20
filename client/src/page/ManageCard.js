@@ -46,6 +46,17 @@ const Btn = styled.button`
   color: white;
   font-size: 1.25rem;
   border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  :hover::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
 `;
 
 // 이 페이지가 딱 켜지면 수조 정보 조회 요청을 딱 보내야함

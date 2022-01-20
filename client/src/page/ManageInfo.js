@@ -74,7 +74,7 @@ const Content = styled.div`
     color: white;
     font-weight: bold;
     font-family: "Kfont";
-    z-index: 999;
+    /* z-index: 999; */
   }
 `;
 
@@ -150,7 +150,6 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
         withCredentials: true,
       })
       .then((result) => {
-        console.log(result, "수조를 삭제 ");
         navigate("/manage");
       })
       .catch((err) => {
@@ -168,7 +167,6 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
     );
     handleCondata(response.data.data);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    console.log("!!!!!!!!!!!!!!!!!", response.data.data);
     navigate(`${id}`);
   };
   const imgSrcUrl = "http://localhost:80/level/" + level;

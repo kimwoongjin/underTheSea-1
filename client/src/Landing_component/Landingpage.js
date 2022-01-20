@@ -68,12 +68,14 @@ const Fish1 = styled.img`
   position: absolute;
   top: 10%;
   right: 17%;
+  z-index: 100;
 `;
 const Fish3 = styled.img`
   width: 9%;
   position: absolute;
   bottom: 43%;
   right: 4%;
+  z-index: 100;
 `;
 const TilteContainer = styled.div`
   position: relative;

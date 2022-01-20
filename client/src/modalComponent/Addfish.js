@@ -136,7 +136,8 @@ function AddFish({ container_id }) {
           withCredentials: true,
         }
       )
-      .then(() => {
+      .then((response) => {
+        localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -179,12 +180,13 @@ function AddFish({ container_id }) {
               list="fishName"
             />
             <datalist id="fishName">
-              {fishList.map((el) => (
+              {fishList.map((el, idx) => (
                 <option
+                  key={idx}
                   className="fish-option"
                   value={el}
                   label={el}
-                  key={el.id}
+                  key={idx}
                 ></option>
               ))}
             </datalist>

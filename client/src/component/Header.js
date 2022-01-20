@@ -5,19 +5,43 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
+  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Container = styled.div`
-  width: 100vw;
-  height: 10vh;
-  background: #d2f7ff;
   /* box-shadow: 0px 0px 10px #adb5bd; */
   /* background: white; */
+  width: 100%;
+  background: #d2f7ff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* z-index: 999; */
+  padding: 8px 12px;
+  z-index: 999;
+  position: relative;
+
+  .toogleBtn {
+    position: absolute;
+    right: 70px;
+    font-size: 22px;
+    color: black;
+    z-index: 999;
+    display: none;
+  }
+
+  /* @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 24px;
+
+    .toogleBtn {
+      display: block;
+    }
+  } */
 `;
 
 const Img = styled.img`
@@ -30,6 +54,7 @@ const Login = styled.div`
   /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
+  z-index: 999;
   cursor: pointer;
   :hover {
     color: #008eff;
@@ -58,6 +83,7 @@ const Mypage = styled.div`
 
 const Signup = styled.div`
   /* border: 1px solid red; */
+  z-index: 999;
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
@@ -78,6 +104,8 @@ const Signup = styled.div`
 
 const Signout = styled.div`
   /* border: 1px solid red; */
+
+  z-index: 999;
   border-radius: 5px;
   padding: 10px;
   font-family: "Kfont";
@@ -98,6 +126,8 @@ const Signout = styled.div`
 
 const Search = styled.div`
   /* border: 1px solid red; */
+  position: relative;
+  z-index: 999;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -120,18 +150,34 @@ const BtnContainer = styled.div`
   font-size: 1.1rem;
   /* border: 1px solid red; */
   justify-content: space-around;
-  margin-right: 2%;
-  width: 370px;
+  margin-left: 55%;
+  width: 390px;
   font-family: "Kfont";
+  /* border: 1px solid red; */
+  /* 
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    display: none;
+  } */
 `;
 
 function Header() {
-  const navigate = useNavigate();
+  const [status, setStatus] = useState(false);
+
+  const onClickHandler = (e) => {
+    setStatus((prevStatus) => (prevStatus ? false : true));
+  };
+  //========================================================================
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
-  // console.log(accessToken, "QQQQQQQQ");
+  // 로고 클릭시 메인으로
+
   const goToHome = () => {
     navigate("/");
   };
@@ -152,6 +198,7 @@ function Header() {
       )
       .then((res) => {
         localStorage.setItem("accessToken", "");
+        navigate("/");
         dispatch(logoutAction);
         console.log(res);
       })
@@ -162,18 +209,13 @@ function Header() {
   const play = () => {
     console.log("Play damm it!!");
     var audio = document.getElementById("audio_play");
-
+    console.log("Play damm it!!");
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
       audio.currentTime = 0;
     }
-  };
-
-  // 로고 클릭시 메인으로
-  const goToMain = () => {
-    navigate("/");
   };
 
   return (
@@ -187,9 +229,10 @@ function Header() {
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer onclick={play}>
+      <BtnContainer className="menu" onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide>가이드</Guide>
+          <Guide onclick={play}>가이드</Guide>{" "}
+          <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
@@ -200,7 +243,8 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage>관리</Manage>
+              <Manage onclick={play}>관리</Manage>
+              <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}
@@ -227,6 +271,7 @@ function Header() {
         )}
         {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
+      )<FontAwesomeIcon className="toogleBtn" icon={faBars}></FontAwesomeIcon>
     </Container>
   );
 }

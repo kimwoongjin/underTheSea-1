@@ -46,7 +46,7 @@ const ShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: scroll;
+  /* overflow: scroll; */
 `;
 
 const InfoShow = styled.div`
@@ -79,7 +79,7 @@ const ImgShow = styled.img`
 const ImgCover = styled.div`
   width: 90%;
   display: flex;
-  margin-top: 5px;
+  margin-top: 15px;
   justify-content: space-between;
   align-items: center;
 `;

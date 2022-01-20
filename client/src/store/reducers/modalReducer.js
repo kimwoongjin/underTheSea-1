@@ -17,10 +17,12 @@ import {
   PWD_MODAL_ON,
   EXCHANGEWATER_MODAL_ON,
   HELP_MODAL_ON,
+  LOG_OUT_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
   isLoginModal: false,
+  isLogoutModal: false,
   isSignupModal: false,
   isSkimmerModal: false,
   isSeaBasicInfoModal: false,
@@ -92,6 +94,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case HELP_MODAL_ON:
       state = { ...prevState, isHelpModal: true };
+      break;
+    case LOG_OUT_MODAL_ON:
+      state = { ...prevState, isLogoutModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

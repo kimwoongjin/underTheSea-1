@@ -21,6 +21,8 @@ module.exports = async (req, res) => {
     } else if (!check_fish) {
       return res.status(404).json({ message: "The fish doesn't exist" });
     } else {
+      let now = new Date();
+      const month = now.getMonth() + 1;
       let container_fish = await container_fishes.findOne({
         where: { fish_name, container_id },
       });
@@ -29,17 +31,31 @@ module.exports = async (req, res) => {
           message: "The fish is not in the container",
         });
       } else {
-        console.log(container_fish);
-        container_fish = await container_fish.increment("fish_num", {
-          by: Number(fish_num) * -1,
-        });
+        if (container_fish.dataValues.fish_num <= fish_num) {
+          // container_fish = await container_fish.increment("fish_num", {
+          //   by: Number(container_fish.dataValues.fish_num) * -1,
+          // });
+          await container_fishes.destroy({
+            where: { container_id, fish_name },
+          });
+        } else {
+          container_fish = await container_fish.increment("fish_num", {
+            by: Number(fish_num) * -1,
+          });
+        }
+
         container_fish = await container_fishes.findOne({
           where: { fish_name, container_id },
         });
-        return res.status(201).json({
-          data: { container_fish },
-          message: "The fish is successfully removed",
-        });
+        return res
+          .header("Authorization", req.headers.authorization)
+          .redirect(
+            `http://localhost:80/container/info/${container_id}/${month}`
+          );
+        // return res.status(201).json({
+        //   data: { container_fish },
+        //   message: "The fish is successfully removed",
+        // });
       }
     }
   }
