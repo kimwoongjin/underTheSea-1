@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { lymphoModalOnAction } from "../store/actions";
+import { wordModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -35,8 +35,8 @@ const Title = styled.div`
   width: 260px;
   height: 40px;
   /* border: 1px solid black; */
-  font-family: "Kfont";
   margin: 10px 0px;
+  font-family: "Kfont";
   font-size: 1.25rem;
   font-weight: bold;
   display: flex;
@@ -45,30 +45,30 @@ const Title = styled.div`
   box-sizing: border-box;
 `;
 const Content = styled.div`
-  font-family: "Kfont";
   width: 260px;
   height: 140px;
+  font-family: "Kfont";
   border-radius: 10px;
   background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
 `;
-function LymphoCard() {
+function WordCard() {
   const dispatch = useDispatch();
 
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={() => dispatch(lymphoModalOnAction)}>
+    <Container onClick={() => dispatch(wordModalOnAction)}>
       <ImgContainer>
-        <Img src="/림포카드커버.png" />
+        <Img src="/문코랄.jpeg" />
       </ImgContainer>
-      <Title>림포란 무엇일까요?</Title>
+      <Title>물생활용어모음</Title>
       <Content>
-        흰 곰팡이처럼 보이는 덩어리들이 달리기 시작한 물고기를 발견하셨나요?
-        림포일 가능성이 높습니다.
+        처음 접하면 어려울 수 있는 해수어키우기에 사용되는 여러가지 용어들의
+        의미를 모았습니다.
       </Content>
     </Container>
   );
 }
 
-export default LymphoCard;
+export default WordCard;

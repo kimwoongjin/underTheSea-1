@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { lymphoModalOnAction } from "../store/actions";
+import { htmModalOnAction } from "../store/actions";
 
 const Container = styled.div`
   width: 300px;
@@ -53,22 +53,19 @@ const Content = styled.div`
   padding: 10px;
   box-sizing: border-box;
 `;
-function LymphoCard() {
+function HowToManageCard() {
   const dispatch = useDispatch();
 
   return (
     // 컨테이너를 클릭하면 모달상태가 변경되야함
-    <Container onClick={() => dispatch(lymphoModalOnAction)}>
+    <Container onClick={() => dispatch(htmModalOnAction)}>
       <ImgContainer>
-        <Img src="/림포카드커버.png" />
+        <Img src="/관리방법.jpeg" />
       </ImgContainer>
-      <Title>림포란 무엇일까요?</Title>
-      <Content>
-        흰 곰팡이처럼 보이는 덩어리들이 달리기 시작한 물고기를 발견하셨나요?
-        림포일 가능성이 높습니다.
-      </Content>
+      <Title>쉽고 효과적인 3가지 관리법</Title>
+      <Content>정말 쉽지만 효과가 좋은 3가지 관리방법을 알려드립니다!</Content>
     </Container>
   );
 }
 
-export default LymphoCard;
+export default HowToManageCard;

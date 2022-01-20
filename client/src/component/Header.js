@@ -147,19 +147,26 @@ const Guide = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
-  /* border: 1px solid red; */
   justify-content: space-around;
   margin-left: 55%;
   width: 390px;
   font-family: "Kfont";
+
+  /* display: flex; */
+  /* font-size: 1.1rem; */
+  /* position: relative; */
+  /* width: 400px; */
+  /* margin-right: 0; */
+  /* margin-right: 3%; */
   /* border: 1px solid red; */
-  /* 
+  /* justify-content: space-between; */
+
   @media screen and (max-width: 780px) {
     flex-direction: column;
     align-items: center;
     width: 100%;
     display: none;
-  } */
+  }
 `;
 
 function Header() {

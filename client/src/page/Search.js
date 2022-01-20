@@ -64,6 +64,7 @@ const InputContainer = styled.div`
     font-size: 1.2rem;
     font-family: "Kfont";
     text-align: center;
+    border-bottom: 2px solid #108dee;
   }
 
   .delete-button {
@@ -229,7 +230,7 @@ function Search() {
 
   return (
     <>
-      <Header />
+      <Header2 />
       <MainImg>
         <img
           className="img"
