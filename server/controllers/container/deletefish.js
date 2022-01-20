@@ -30,11 +30,6 @@ module.exports = async (req, res) => {
           message: "The fish is not in the container",
         });
       } else {
-        console.log(
-          "%%%%%%%%%%",
-          typeof container_fish.dataValues.fish_num,
-          typeof fish_num
-        );
         if (container_fish.dataValues.fish_num < fish_num) {
           container_fish = await container_fish.increment("fish_num", {
             by: Number(container_fish.dataValues.fish_num) * -1,

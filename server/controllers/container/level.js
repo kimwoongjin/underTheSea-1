@@ -32,7 +32,9 @@ module.exports = async (req, res) => {
           // return res.status(200).json({ message: "You've reached max level" });
           return res
             .header("Authorization", req.headers.authorization)
-            .redirect(`http://localhost:80/container/${container_id}/${month}`);
+            .redirect(
+              `http://localhost:80/container/info/${container_id}/${month}`
+            );
         } else {
           await container.increment("level", { by: 10 });
           container.last_lv_up = now;
@@ -51,7 +53,7 @@ module.exports = async (req, res) => {
         return res
           .header("Authorization", req.headers.authorization)
           .redirect(
-            `http://localhost:80/container/level/${container_id}/${month}`
+            `http://localhost:80/container/info/${container_id}/${month}`
           );
         // return res.status(200).json({
         //   message: "You've already leveled up this week",
