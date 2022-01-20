@@ -354,7 +354,7 @@ const FoodIcon = styled.img`
   width: 40%;
   /* border: 1px solid blue; */
 `;
-function ManageDetail({ condata, handleCondata }) {
+function ManageDetail({ condata, setCondata }) {
   //
 
   //변수 선언부분
@@ -368,7 +368,7 @@ function ManageDetail({ condata, handleCondata }) {
   const accessToken = localStorage.getItem("accessToken");
   const conInfo = JSON.parse(localStorage.getItem("conInfo"));
   const [exWaterObj, setExWaterObj] = useState({});
-  const [finalList, setFinalList] = useState([]);
+  const [finalList, setFinalList] = useState({});
   const [progressBar, setProgressBar] = useState(0);
   const [getMoment, setMoment] = useState(moment());
 
@@ -417,16 +417,26 @@ function ManageDetail({ condata, handleCondata }) {
   //
   // return 값 없음. 그냥 바로 condata 갱신
   const UpdateConInfo = async () => {
-    const res = await axios.get(
+    await axios
+      .get(`http://localhost:80/container/${container_id}/${month}`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setCondata(response.data.data);
+        UpdateFinalList();
+      });
+
+    const response = await axios.get(
       `http://localhost:80/container/${container_id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       }
     );
-    console.log("RES FROM getConinfo", res.data);
-    handleCondata(res.data.data);
-    console.log("UpdateConInf called and condata is:", condata);
+    await setCondata(response.data.data);
+    console.log("UpdateConInfo called and condata is:", condata);
+    UpdateFinalList();
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
@@ -445,8 +455,9 @@ function ManageDetail({ condata, handleCondata }) {
         withCredentials: true,
       }
     );
+    console.log("AddFeedRequest called and response is:", response.data.data);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
+    setCondata(response.data.data);
     console.log("AddFeedRequest called and condata is:", condata);
   };
   //
@@ -467,7 +478,8 @@ function ManageDetail({ condata, handleCondata }) {
       }
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
+    setCondata(response.data.data);
+    UpdateProgressBar();
     console.log("AddWaterRequest called and condata is:", condata);
   };
   //
@@ -484,7 +496,7 @@ function ManageDetail({ condata, handleCondata }) {
       }
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
-    handleCondata(response.data.data);
+    setCondata(response.data.data);
     console.log("LevelUpRequest called and condata is:", condata);
   };
 
@@ -500,23 +512,33 @@ function ManageDetail({ condata, handleCondata }) {
       one_day_list.forEach((el) => (array[el.type - 1] = el.count));
       final_list[el1.createdAt] = array;
     });
-    setFinalList(final_list);
-    console.log("UpdateFinalList called and finalList is:", finalList);
+    setFinalList({ ...finalList, ...final_list });
+    console.log(
+      "UpdateFinalList called and finalList is:",
+      finalList,
+      "and condata is:",
+      condata
+    );
   };
   //
   // return값 없음. 바로 progressBar 갱신  && 조건 충족하면 레벨 업도 요청
   const UpdateProgressBar = () => {
     console.log("UpdateProgressBar called and condata is:", condata);
     let temp = [];
+    let tempObj = {};
     const curWeek = GetCurrentWeek();
+
     condata.ex_water_list.forEach((el) => {
       let date = el.createdAt;
-      if (!exWaterObj[el.createdAt]) {
-        exWaterObj[el.createdAt] = el.amount;
+      if (!tempObj[el.createdAt]) {
+        tempObj[el.createdAt] = el.amount;
       } else {
-        exWaterObj[el.createdAt] += el.amount;
+        tempObj[el.createdAt] += el.amount;
       }
     });
+    setExWaterObj(tempObj);
+    console.log("UpdateProgressBar called and exWaterObj is:", exWaterObj);
+
     for (let key in finalList) {
       if (curWeek.includes(key)) {
         let sum = finalList[key].reduce((a, b) => a + b);
@@ -541,7 +563,12 @@ function ManageDetail({ condata, handleCondata }) {
   //
   // 캘린더 어레이 레이아웃을 리턴
   const calendarArr = () => {
-    console.log("calendarArr called", condata);
+    console.log(
+      "calendarArr called and condata is:",
+      condata,
+      "and finalList is :",
+      finalList
+    );
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -718,7 +745,12 @@ function ManageDetail({ condata, handleCondata }) {
       AddWaterRequest();
       UpdateFinalList();
       UpdateProgressBar();
-      console.log("handleExwaterAddRequest called and condata is:", condata);
+      console.log(
+        "handleExwaterAddRequest called and condata is:",
+        condata,
+        "and exWaterObj:",
+        exWaterObj
+      );
       dispatch(modalOff);
     } catch (err) {
       console.log(err);
@@ -737,8 +769,8 @@ function ManageDetail({ condata, handleCondata }) {
   // 함수 실행 부분
   useEffect(() => {
     UpdateConInfo();
-    UpdateFinalList();
     UpdateProgressBar();
+    UpdateFinalList();
   }, []);
 
   let total = 0;

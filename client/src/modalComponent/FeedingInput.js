@@ -133,9 +133,9 @@ function FeedingInput({ handleFeedAddRequest, handleFoodtype, feedingInfo }) {
   const choiceFood = (e) => {
     setFoodType(e.target.name);
   };
-  useEffect(() => {
-    console.log("피딩인포", feedingInfo);
-  }, []);
+  // useEffect(() => {
+  //   console.log("피딩인포", feedingInfo);
+  // }, []);
   // 여기서
   return (
     <DarkBackGround>

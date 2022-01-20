@@ -175,7 +175,7 @@ function App() {
             <ManageDetail
               idList={idList}
               condata={condata}
-              handleCondata={handleCondata}
+              setCondata={setCondata}
             />
           }
         ></Route>
