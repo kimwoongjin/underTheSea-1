@@ -61,6 +61,97 @@ const Text = styled.div`
   text-align: center;
   line-height: 180%;
 `;
+const ContainerS = styled.div`
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 10px #adb5bd;
+  border-radius: 10px;
+  width: 50%;
+  height: 20vh;
+  margin-bottom: 7%;
+`;
+const HabitatContainer = styled.div`
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+const FishDesc = styled.div`
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 10px;
+  width: 100%;
+  height: 90%;
+  font-size: 1rem;
+  line-height: 140%;
+  border-left: 1.5px solid #e5e5e5;
+`;
+const RightInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+`;
+const HabitatShow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
+`;
+
+const Habitat = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
+`;
+const Name = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 20%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: "Kfont";
+`;
+const LeftInfo = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 0px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+`;
+const ImgD = styled.img`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+const Content = styled.div`
+  display: flex;
+  width: 75%;
+  height: 20vh;
+`;
+const DetailImg = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 25%;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+`;
 
 const OuterContainer = styled.div`
   width: 100%;
@@ -346,9 +437,9 @@ function ManageDetail({ condata, setCondata }) {
   todayString = todayString[0].slice(2) + todayString[1] + todayString[2];
 
   const accessToken = localStorage.getItem("accessToken");
-  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
-  const [exWaterObj, setExWaterObj] = useState({});
-  const [finalList, setFinalList] = useState({});
+  let conInfo = JSON.parse(localStorage.getItem("conInfo"));
+  let exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
+  let finalList = JSON.parse(localStorage.getItem("finalList"));
   const [progressBar, setProgressBar] = useState(0);
   const [getMoment, setMoment] = useState(moment());
 
@@ -403,6 +494,7 @@ function ManageDetail({ condata, setCondata }) {
         withCredentials: true,
       })
       .then((response) => {
+        localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         setCondata(response.data.data);
         UpdateFinalList();
       });
@@ -414,7 +506,8 @@ function ManageDetail({ condata, setCondata }) {
         withCredentials: true,
       }
     );
-    await setCondata(response.data.data);
+    setCondata(response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     console.log("UpdateConInfo called and condata is:", condata);
     UpdateFinalList();
   };
@@ -435,10 +528,10 @@ function ManageDetail({ condata, setCondata }) {
         withCredentials: true,
       }
     );
-    console.log("AddFeedRequest called and response is:", response.data.data);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
-    console.log("AddFeedRequest called and condata is:", condata);
+    conInfo = JSON.parse(localStorage.getItem("conInfo"));
+    console.log("AddFeedRequest called and conInfo is:", conInfo);
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
@@ -459,6 +552,7 @@ function ManageDetail({ condata, setCondata }) {
     );
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
+    conInfo = JSON.parse(localStorage.getItem("conInfo"));
     UpdateProgressBar();
     console.log("AddWaterRequest called and condata is:", condata);
   };
@@ -466,7 +560,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const LevelUpRequest = async () => {
     const response = await axios.patch(
-      `http://localhost:80/container/${container_id}/level`,
+      `http://localhost:80/container/level/${container_id}`,
       {},
       {
         headers: {
@@ -484,40 +578,46 @@ function ManageDetail({ condata, setCondata }) {
   // return 값 없음. 바로 finalList 갱신
   const UpdateFinalList = () => {
     let final_list = {};
-    condata.feed_list.forEach((el1) => {
-      let one_day_list = condata.feed_list.filter(
+    conInfo.feed_list.forEach((el1) => {
+      let one_day_list = conInfo.feed_list.filter(
         (el2) => el1.createdAt === el2.createdAt
       );
       let array = [0, 0, 0, 0];
       one_day_list.forEach((el) => (array[el.type - 1] = el.count));
       final_list[el1.createdAt] = array;
     });
-    setFinalList({ ...finalList, ...final_list });
+    localStorage.setItem("finalList", JSON.stringify(final_list));
+    finalList = JSON.parse(localStorage.getItem("finalList"));
     console.log(
       "UpdateFinalList called and finalList is:",
       finalList,
-      "and condata is:",
-      condata
+      "and conInfo is:",
+      conInfo
     );
   };
   //
-  // return값 없음. 바로 progressBar 갱신  && 조건 충족하면 레벨 업도 요청
-  const UpdateProgressBar = () => {
-    console.log("UpdateProgressBar called and condata is:", condata);
-    let temp = [];
+  // return 값 없음. 바로 ExWaterObj 갱신
+  const UpdateExWaterObj = () => {
     let tempObj = {};
-    const curWeek = GetCurrentWeek();
 
-    condata.ex_water_list.forEach((el) => {
-      let date = el.createdAt;
+    conInfo.ex_water_list.forEach((el) => {
       if (!tempObj[el.createdAt]) {
         tempObj[el.createdAt] = el.amount;
       } else {
         tempObj[el.createdAt] += el.amount;
       }
     });
-    setExWaterObj(tempObj);
-    console.log("UpdateProgressBar called and exWaterObj is:", exWaterObj);
+    localStorage.setItem("exWaterObj", JSON.stringify(tempObj));
+    exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
+  };
+  //
+  // return값 없음. 바로 progressBar 갱신  && 조건 충족하면 레벨 업도 요청
+  const UpdateProgressBar = () => {
+    console.log("UpdateProgressBar called and condata is:", condata);
+    finalList = JSON.parse(localStorage.getItem("finalList"));
+    exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
+    let temp = [];
+    const curWeek = GetCurrentWeek();
 
     for (let key in finalList) {
       if (curWeek.includes(key)) {
@@ -543,12 +643,18 @@ function ManageDetail({ condata, setCondata }) {
   //
   // 캘린더 어레이 레이아웃을 리턴
   const calendarArr = () => {
+    UpdateFinalList();
+    UpdateExWaterObj();
+    conInfo = JSON.parse(localStorage.getItem("conInfo"));
+    finalList = JSON.parse(localStorage.getItem("finalList"));
+    exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
     console.log(
-      "calendarArr called and condata is:",
-      condata,
+      "calendarArr called and conInfo is:",
+      conInfo,
       "and finalList is :",
       finalList
     );
+
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -650,10 +756,7 @@ function ManageDetail({ condata, setCondata }) {
                       <FoodInnerContainer></FoodInnerContainer>
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
                       <ExWaterRecord>
-                        {exWaterObj[days.format("YYMMDD")] === undefined
-                          ? 0
-                          : exWaterObj[days.format("YYMMDD")]}
-                        L
+                        {exWaterObj[days.format("YYMMDD")] || 0}L
                       </ExWaterRecord>
                     </FoodIconContainer>
                   </Td>
@@ -754,24 +857,24 @@ function ManageDetail({ condata, setCondata }) {
   }, []);
 
   let total = 0;
-  for (let i = 0; i < condata.fish_list.length; i++) {
-    total += condata.fish_list[i].fish_num;
+  for (let i = 0; i < conInfo.fish_list.length; i++) {
+    total += conInfo.fish_list[i].fish_num;
   }
-  let todayEx = condata.ex_water_list.filter(
+  let todayEx = conInfo.ex_water_list.filter(
     (el) => el.createdAt === todayString
   );
 
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  const imgSrcUrl = "http://localhost:80/level/" + condata.level;
+  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
   return (
     <>
       <Header2 />
       <Container>
         <Title>My Aquarium</Title>
         <TextContainer>
-          <Text>{condata.container_name}</Text>
+          <Text>{conInfo.container_name}</Text>
         </TextContainer>
       </Container>
       <OuterContainer>
@@ -785,7 +888,7 @@ function ManageDetail({ condata, setCondata }) {
           <Level>
             <LevelCover>
               <LevelText>Lv.</LevelText>
-              <Levelinfo>{Math.floor(condata.level / 10)}</Levelinfo>
+              <Levelinfo>{Math.floor(conInfo.level / 10)}</Levelinfo>
             </LevelCover>
             <Logo
               src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
@@ -911,7 +1014,7 @@ function ManageDetail({ condata, setCondata }) {
       </FishCardContainer>
       {isMyAquariumInfoModal && (
         <AquaInfo
-          condata={condata}
+          conInfo={conInfo}
           total={total}
           container_id={container_id}
           month={month}

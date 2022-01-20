@@ -130,7 +130,8 @@ function Deadfish({ container_id }) {
         },
         withCredentials: true,
       })
-      .then(() => {
+      .then((response) => {
+        localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
