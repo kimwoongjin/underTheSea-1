@@ -147,7 +147,6 @@ const Guide = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
-  /* border: 1px solid red; */
   justify-content: space-around;
   margin-left: 55%;
   width: 390px;
