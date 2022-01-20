@@ -16,7 +16,7 @@ const Container = styled.div`
   /* box-shadow: 0px 0px 10px #adb5bd; */
   /* background: white; */
   width: 100%;
-
+  background: #d2f7ff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -147,12 +147,19 @@ const Guide = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
-  position: relative;
-  width: 400px;
-  margin-right: 0;
-  margin-right: 3%;
+  justify-content: space-around;
+  margin-left: 55%;
+  width: 390px;
+  font-family: "Kfont";
+
+  /* display: flex; */
+  /* font-size: 1.1rem; */
+  /* position: relative; */
+  /* width: 400px; */
+  /* margin-right: 0; */
+  /* margin-right: 3%; */
   /* border: 1px solid red; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   @media screen and (max-width: 780px) {
     flex-direction: column;
