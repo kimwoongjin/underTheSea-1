@@ -111,10 +111,11 @@ const HabitatShow = styled.div`
   height: 100%;
 `;
 
+
 function ManageDetInfo({ conInfo }) {
   return (
     <>
-      {conInfo.fish_list.map((el, idx) => {
+      {condata.fish_list.map((el, idx) => {
         return (
           <ContainerS key={idx}>
             <DetailImg>
