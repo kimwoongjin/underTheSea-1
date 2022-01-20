@@ -7,7 +7,6 @@ import styled from "styled-components";
 import Header2 from "../component/Header2";
 import Footer from "../component/Footer";
 import TipList from "./TipList";
-import Footer from "../component/Footer";
 
 const Container = styled.div`
   position: relative;
@@ -273,7 +272,6 @@ function HoneyTips() {
         </TipListContainer>
         <Footer />
       </Container>
-      <Footer></Footer>
     </>
   );
 }

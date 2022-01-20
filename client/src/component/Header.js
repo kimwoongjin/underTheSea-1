@@ -33,7 +33,7 @@ const Container = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
     padding: 8px 24px;
@@ -41,7 +41,7 @@ const Container = styled.div`
     .toogleBtn {
       display: block;
     }
-  }
+  } */
 `;
 
 const Img = styled.img`
@@ -153,7 +153,7 @@ const BtnContainer = styled.div`
   margin-right: 0;
   margin-right: 3%;
   /* border: 1px solid red; */
-  justify-content: space-around;
+  justify-content: space-between;
 
   @media screen and (max-width: 780px) {
     flex-direction: column;
@@ -208,7 +208,6 @@ function Header() {
   };
   const play = () => {
     console.log("Play damm it!!");
-
     var audio = document.getElementById("audio_play");
     console.log("Play damm it!!");
     if (audio.paused) {
