@@ -109,8 +109,8 @@ const GoogleBtn = styled.a`
   padding: 5px;
   font-size: 1.25rem;
   font-weight: bold;
-  position: relative;
   box-sizing: border-box;
+  position: relative;
   :hover::before {
     content: "";
     position: absolute;
@@ -185,6 +185,7 @@ function Login() {
             icon={faTimes}
             size="2x"
             onClick={() => dispatch(modalOff)}
+            color="#e5e5e5"
           />
         </CloseBtnContainer>
         <Title>로그인</Title>

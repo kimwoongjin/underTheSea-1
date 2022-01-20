@@ -111,12 +111,8 @@ const HabitatShow = styled.div`
   height: 100%;
 `;
 
-const TextD = styled.div`
-  line-height: 130%;
-  font-weight: 450;
-`;
 
-function ManageDetInfo({ condata }) {
+function ManageDetInfo({ conInfo }) {
   return (
     <>
       {condata.fish_list.map((el, idx) => {

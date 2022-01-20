@@ -31,6 +31,7 @@ const TopCover = styled.div`
 const TitleContainer = styled.div`
   width: 8%;
   display: flex;
+  margin-top: 5%;
   /* border: 1px solid green; */
   position: relative;
 `;
@@ -325,7 +326,7 @@ function WriteTips() {
         <TopCover>
           <TitleContainer>
             <Title>Write tip</Title>
-            <Starfish src="불가사리.png" />
+            {/* <Starfish src="불가사리.png" /> */}
           </TitleContainer>
           <SubTitle>나누고 싶은 경험을 적어주세요!</SubTitle>
         </TopCover>
