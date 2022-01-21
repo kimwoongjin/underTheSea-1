@@ -18,7 +18,6 @@ const Container = styled.div`
 
 const WomanImg = styled.img`
   position: absolute;
-  /* z-index: 999; */
   width: 40%;
   height: 70%;
   left: 10%;
@@ -27,7 +26,6 @@ const WomanImg = styled.img`
 
 const Fish = styled.img`
   position: absolute;
-  z-index: 999;
   width: 9%;
   height: 15%;
   top: 13%;

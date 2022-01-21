@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
+import useSound from "use-sound";
 import axios from "axios";
+import sounds from "../component/waterdrop.mp3";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -115,24 +117,27 @@ const Btn = styled.button`
 `;
 const TypeSelectContainer = styled.div`
   display: flex;
-
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 1px solid red; */
-    margin: 5px;
-    img {
-      /* border: 1px solid red; */
-      width: 100%;
-    }
-  }
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+const Selection = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 5px;
+`;
+const SelImg = styled.img`
+  display: flex;
+  justify-content: space-evenly;
+  width: 80px;
 `;
 
 function AddContainer() {
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
-
+  const [play] = useSound(sounds);
   const [addConInfo, setAddConInfo] = useState({
     container_name: "",
     size: 0,
@@ -146,14 +151,12 @@ function AddContainer() {
   const handleInputValue = (e) => {
     setAddConInfo({
       ...addConInfo,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value || 11,
     });
+    play();
   };
 
   const addContainerRequest = () => {
-    // getWaterVolum();
-    // console.log("addConInfo!!", addConInfo);
-    // console.log("size@!", size);
     console.log(addConInfo.type);
     axios
       .post(
@@ -176,27 +179,8 @@ function AddContainer() {
         },
         { withCredentials: true }
       )
-      .then((res) => {
-        console.log("추가성공!");
-        console.log("응답이 뭘까?", res);
-        // setAquaInfo({
-        //   ...aquaInfo,
-        //   container_id: res.data.data.id,
-        // });
-        // data: {id: 3, user_id: 1, container_name: '예쁜수족관', size: '20', theme: 'FO', …}
-        // message: "Container is successfully added"
-      })
       .catch((err) => console.log(err));
   };
-
-  //   useEffect(() => {
-  //     total = Math.floor((size.width * size.height * size.vertical) / 1000);
-  //     setSize({
-  //       ...size,
-  //       total: total,
-  //     });
-  //     console.log("size!", size);
-  //   }, [size]);
 
   return (
     <DarkBackGround>
@@ -246,51 +230,47 @@ function AddContainer() {
               onChange={handleInputValue}
             />
             <TypeSelectContainer>
-              <label>
-                <img src="http://localhost:80/level/11" />
+              <Selection>
+                <SelImg src="http://localhost:80/level/11" alt="Type A" />
 
-                {/* <br></br> */}
                 <input
                   type="radio"
                   name="type"
                   value="11"
-                  checked
                   onChange={handleInputValue}
                 />
-              </label>
-              {/* <br></br> */}
-              <label>
-                <img src="http://localhost:80/level/12" />
-                {/* <br></br> */}
+              </Selection>
+              <Selection>
+                <SelImg src="http://localhost:80/level/12" alt="Type B" />
+
                 <input
                   type="radio"
                   name="type"
                   value="12"
                   onChange={handleInputValue}
                 />
-              </label>
-              {/* <br></br> */}
-              <label>
-                <img src="http://localhost:80/level/13" />
-                {/* <br></br> */}
+              </Selection>
+
+              <Selection>
+                <SelImg src="http://localhost:80/level/13" alt="Type C" />
+
                 <input
                   type="radio"
                   name="type"
                   value="13"
                   onChange={handleInputValue}
                 />
-              </label>
-              {/* <br></br> */}
-              <label>
-                <img src="http://localhost:80/level/14" />
-                {/* <br></br> */}
+              </Selection>
+              <Selection>
+                <SelImg src="http://localhost:80/level/14" alt="Type D" />
+
                 <input
                   type="radio"
                   name="type"
                   value="14"
                   onChange={handleInputValue}
                 />
-              </label>
+              </Selection>
             </TypeSelectContainer>
 
             <Btn onClick={addContainerRequest}>추가하기</Btn>

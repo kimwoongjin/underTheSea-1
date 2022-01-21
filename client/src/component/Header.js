@@ -11,6 +11,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import waterDrop from "./waterdrop.mp3";
 
 const Container = styled.div`
   width: 100vw;
@@ -230,17 +231,6 @@ function Header() {
       .catch((err) => {
         console.log(err);
       });
-  };
-  const play = () => {
-    console.log("Play damm it!!");
-    var audio = document.getElementById("audio_play");
-    console.log("Play damm it!!");
-    if (audio.paused) {
-      audio.play();
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-    }
   };
 
   return (
