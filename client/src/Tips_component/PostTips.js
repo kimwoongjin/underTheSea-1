@@ -34,13 +34,7 @@ const TitleContainer = styled.div`
   /* border: 1px solid green; */
   position: relative;
 `;
-const Starfish = styled.img`
-  position: absolute;
-  right: -40px;
-  bottom: 35px;
-  width: 35%;
-  height: 35%;
-`;
+
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
@@ -269,7 +263,6 @@ function PostTips() {
         <TopCover>
           <TitleContainer>
             <Title>정보공유 게시판</Title>
-            {/* <Starfish src="불가사리.png" /> */}
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
         </TopCover>
