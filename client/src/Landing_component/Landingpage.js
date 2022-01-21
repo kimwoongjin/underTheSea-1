@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 import "./Landingpage.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
 const Container = styled.div`
   width: 100vw;
@@ -105,7 +104,6 @@ const Contents = styled.div`
 
 function Landingpage() {
   gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin(MotionPathPlugin)
   return (
     <Container>
       <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />
