@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
@@ -11,6 +16,13 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   background: linear-gradient(to top, #a8f2ff, #d2f7ff);
+
+  .txt1 {
+    z-index: 999;
+  }
+  .txt2 {
+    z-index: 999;
+  }
 `;
 
 const WomanImg = styled.img`
@@ -25,7 +37,7 @@ const Fish = styled.img`
   position: absolute;
   width: 9%;
   height: 15%;
-  top: 13%;
+  top: 30%;
   right: 7%;
 `;
 
@@ -76,6 +88,35 @@ const IconCover = styled.div`
 `;
 
 function LandingManage() {
+  useEffect(() => {
+    const txtTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".txt3",
+        start: "100px 60%",
+        end: "top 20%",
+        toggleActions: "play none restart pause",
+        // markers: true,
+        // markers: { startColor: "red", endColor: "blue", fontSize: "20px" },
+      },
+    });
+    txtTimeline.from(".txt3", { opacity: 0, y: 50, duration: 1 });
+    txtTimeline.from(".txt4", { opacity: 0, y: 50, duration: 1 });
+    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
+
+    gsap.to(".fish", {
+      scrollTrigger: {
+        trigger: ".txt3",
+        start: "100px 60%",
+        end: "top 20%",
+        // markers: true,
+      },
+      y: -100,
+      x: 30,
+      ease: "none",
+      duration: 0.5,
+    });
+  }, []);
+
   return (
     <Container>
       <WomanImg
@@ -83,15 +124,16 @@ function LandingManage() {
         alt="메인여자인물3.png"
       />
       <Fish
+        className="fish"
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png"
         alt="해파리.png"
       />
       <TextContainer>
-        <MainText>주간 수족관 관리</MainText>
-        <SearchText>
+        <MainText className="txt3">주간 수족관 관리</MainText>
+        <SearchText className="txt3">
           어항 관리가 필요하세요?<br></br>Under the Sea에서 도와드립니다.
         </SearchText>
-        <SearchTitle>
+        <SearchTitle className="txt4">
           Management
           <IconCover>
             <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />

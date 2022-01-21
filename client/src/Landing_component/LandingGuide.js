@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { useEffect } from "react";
 import { faAngleDoubleRight, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
@@ -68,6 +72,22 @@ const IconCover = styled.div`
 `;
 
 function LandingGuide() {
+  useEffect(() => {
+    const txtTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".txt5",
+        start: "100px 60%",
+        end: "top 20%",
+        toggleActions: "play none restart pause",
+        // markers: true,
+        // markers: { startColor: "red", endColor: "blue", fontSize: "20px" },
+      },
+    });
+    txtTimeline.from(".txt5", { opacity: 0, y: 50, duration: 1 });
+    txtTimeline.from(".txt6", { opacity: 0, y: 50, duration: 1 });
+    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
+  }, []);
+
   const play = () => {
     var audio = document.getElementById("audio_play");
     console.log("Music is my life");
@@ -90,12 +110,12 @@ function LandingGuide() {
         alt="메인여자인물2.png"
       />
       <TextContainer>
-        <MainText>해수어와 담수어 사육정보</MainText>
-        <SearchText>
+        <MainText className="txt5">해수어와 담수어 사육정보</MainText>
+        <SearchText className="txt5">
           사육정보를 확인하고 자신만의 노하우를 공유해주세요!
         </SearchText>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <SearchTitle>
+          <SearchTitle className="txt6">
             Guide
             <IconCover>
               <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
