@@ -215,7 +215,7 @@ function SignUp() {
     } else {
       setErrorMsg("");
       axios
-        .post(`http://localhost:80/user/signup`, {
+        .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
           data: {
             email,
             user_name,

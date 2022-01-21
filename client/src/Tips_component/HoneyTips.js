@@ -190,12 +190,15 @@ function HoneyTips() {
 
   // 페이지 숫자에 따른 게시물 조회
   const handleTipList = async () => {
-    const result = await axios.get(`http://localhost:80/tip/all/${pageNum}`, {
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-      },
-      withCredentials: true,
-    });
+    const result = await axios.get(
+      `${process.env.REACT_APP_API_URL}/tip/all/${pageNum}`,
+      {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      }
+    );
     const { data: list } = result.data;
     setTipList([...list]);
 

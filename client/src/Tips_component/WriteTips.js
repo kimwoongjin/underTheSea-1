@@ -239,7 +239,7 @@ function WriteTips() {
   const getTipData = () => {
     if (isEdit === "true") {
       axios
-        .get(`http://localhost:80/tip/${tip_id}`, {
+        .get(`${process.env.REACT_APP_API_URL}/tip/${tip_id}`, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
@@ -277,9 +277,13 @@ function WriteTips() {
     const formData = new FormData();
     formData.append("image", file);
 
-    const result = await axios.post("http://localhost:80/images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const result = await axios.post(
+      `${process.env.REACT_APP_API_URL}/images`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
 
     return result;
   };
@@ -296,7 +300,7 @@ function WriteTips() {
       return;
     }
     const result = await axios.post(
-      "http://localhost:80/tip",
+      `${process.env.REACT_APP_API_URL}/tip`,
       { data: tip },
       {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -332,7 +336,7 @@ function WriteTips() {
   const handleEditTip = () => {
     axios
       .patch(
-        `http://localhost:80/tip/${tip_id}`,
+        `${process.env.REACT_APP_API_URL}/tip/${tip_id}`,
         { data: tip },
         {
           headers: {
@@ -400,7 +404,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`http://localhost:80${tip.img}`}
+                      src={`${process.env.REACT_APP_API_URL}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",
@@ -449,7 +453,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`http://localhost:80${tip.img}`}
+                      src={`${process.env.REACT_APP_API_URL}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",

@@ -169,7 +169,7 @@ function Mypage() {
 
   const manageHandler = () => {
     axios
-      .get(`http://localhost:80/user/manage/1`, {
+      .get(`${process.env.REACT_APP_API_URL}/user/manage/1`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })

@@ -57,7 +57,7 @@ function Manage({ getAllConInfo, handleCondata }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/container/all`, {
+      .get(`${process.env.REACT_APP_API_URL}/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })

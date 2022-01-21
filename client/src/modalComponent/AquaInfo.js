@@ -144,7 +144,7 @@ function AquaInfo({ conInfo, container_id, month }) {
     // console.log("유즈이펙트는 실행되니?", container_id);
     axios
       .get(
-        `http://localhost:80/container/${container_id}/${month}`,
+        `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

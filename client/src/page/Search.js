@@ -149,7 +149,9 @@ function Search() {
 
   const gotoSearch = () => {
     axios
-      .post(`http://localhost:80/fish/one`, { data: { fish_name: input } })
+      .post(`${process.env.REACT_APP_API_URL}/fish/one`, {
+        data: { fish_name: input },
+      })
       .then((result) => {
         console.log(result, "물고기 한마리");
         setCurrentFIsh(true);
@@ -162,7 +164,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/all/63`, {
+      .get(`${process.env.REACT_APP_API_URL}/fish/all/63`, {
         headers: {
           accept: "application/json",
         },
@@ -178,7 +180,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/fishnamelist`, {
+      .get(`${process.env.REACT_APP_API_URL}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },
@@ -196,7 +198,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/all/6`, {
+      .get(`${process.env.REACT_APP_API_URL}/fish/all/6`, {
         headers: {
           accept: "application/json",
         },

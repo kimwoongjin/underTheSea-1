@@ -211,7 +211,7 @@ function Header() {
   const handleLogout = () => {
     axios
       .post(
-        `http://localhost:80/user/logout`,
+        `${process.env.REACT_APP_API_URL}/user/logout`,
         {},
         {
           headers: {

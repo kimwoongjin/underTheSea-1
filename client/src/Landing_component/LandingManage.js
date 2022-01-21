@@ -143,7 +143,11 @@ function LandingManage() {
         </SearchText>
 
         {isLogin ? (
-          <Link style={{ textDecoration: "none", color: "black" }} to="/manage">
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/manage"
+            className="txt9"
+          >
             <SearchTitle>
               Management
               <IconCover>
@@ -152,7 +156,10 @@ function LandingManage() {
             </SearchTitle>
           </Link>
         ) : (
-          <SearchTitle onClick={() => dispatch(signupModalOnAction)}>
+          <SearchTitle
+            onClick={() => dispatch(signupModalOnAction)}
+            className="txt9"
+          >
             Management
             <IconCover>
               <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />

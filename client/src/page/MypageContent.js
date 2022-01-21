@@ -130,7 +130,7 @@ function MypageContent() {
   }, [pageNum]);
   const content = (page_num) => {
     axios
-      .get(`http://localhost:80/user/tips/${page_num}`, {
+      .get(`${process.env.REACT_APP_API_URL}/user/tips/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
