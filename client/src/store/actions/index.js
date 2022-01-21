@@ -23,6 +23,7 @@ import {
   ADD_CONTAINER_MODAL_ON,
   LYMPHO_MODAL_ON,
   WORD_MODAL_ON,
+  LEVEL_UP_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
   HTM_MODAL_ON,
@@ -98,6 +99,9 @@ export const logoutModalOnAction = {
 };
 export const signupAction = {
   type: SIGN_UP,
+};
+export const levelupModalOnAction = {
+  type: LEVEL_UP_MODAL_ON,
 };
 export const addfishModalOnAction = {
   type: ADDFISH_MODAL_ON,

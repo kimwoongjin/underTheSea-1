@@ -21,6 +21,7 @@ import {
   LOG_OUT_MODAL_ON,
   HTM_MODAL_ON,
   WORD_MODAL_ON,
+  LEVEL_UP_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
   isLymphoModal: false,
   isHtmModal: false,
   isWordModal: false,
+  isLevelupModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -112,6 +114,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case WORD_MODAL_ON:
       state = { ...prevState, isWordModal: true };
+      break;
+    case LEVEL_UP_MODAL_ON:
+      state = { ...prevState, isLevelupModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

@@ -29,6 +29,7 @@ export const LOG_OUT_MODAL_ON = "LOG_OUT_MODAL_ON";
 export const LYMPHO_MODAL_ON = "LYMPHO_MODAL_ON";
 export const HTM_MODAL_ON = "HTM_MODAL_ON";
 export const WORD_MODAL_ON = "WORD_MODAL_ON";
+export const LEVEL_UP_MODAL_ON = "LEVEL_UP_MODAL_ON";
 export const MODAL_OFF = "MODAL_OFF";
 export const PWD_MODAL_ON = "PWD_MODAL_ON";
 
