@@ -22,7 +22,9 @@ const CommentForm = styled.div`
   }
 
   .writer {
-    display: flex;
+    width: 80%;
+    display: column;
+    /* flex-direction: column; */
     margin-bottom: 15px;
   }
 `;
@@ -46,7 +48,7 @@ const SmallCommentForm = styled.div`
 const Comment = styled.div`
   width: 100%;
   height: 95%;
-  display: column;
+  display: flex;
   padding: 0;
   margin-top: 2px;
 `;
@@ -57,39 +59,41 @@ const CommentWriter = styled.div`
   width: 90%;
   height: 30%;
   /* border: 1px solid red; */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   font-family: "Kfont";
   display: flex;
   padding-top: 0.5%;
+  padding-left: 1%;
   position: relative;
-  right: 1%;
+  /* right: 1%; */
 `;
 
 const CommentContent = styled.div`
   width: 90%;
   height: 20%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   /* border: 1px solid black; */
   margin-top: 0.5px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   padding-left: 1%;
   font-family: "Kfont";
 `;
 
 const CommnetDate = styled.div`
   width: 90%;
-  height: 10%;
+  height: 20%;
   font-size: 0.8rem;
+  padding-left: 1%;
   color: #808080;
   /* border: 1px solid black; */
   margin-top: 0.5px;
 `;
 
 const WriterIcon = styled.div`
-  width: 4vw;
-  height: 4.8vh;
+  width: 10%;
+  height: 30%;
   position: relative;
-  right: 1%;
+  /* right: 1%; */
 
   .userImg {
     width: 100%;
@@ -177,9 +181,9 @@ function CommentTips({
   };
 
   // 댓글 수정
-  const editComment = () => {
-    setIsEdit(true);
-  };
+  // const editComment = () => {
+  //   setIsEdit(true);
+  // };
 
   // 댓글 업로드 버튼
   const Upload = () => {
@@ -203,17 +207,17 @@ function CommentTips({
             return (
               <SmallCommentForm key={idx}>
                 <Comment>
+                  <WriterIcon>
+                    <img className="userImg" src="/유저2.png" alt=""></img>
+                  </WriterIcon>
                   <div className="writer">
-                    <WriterIcon>
-                      <img className="userImg" src="/유저2.png" alt=""></img>
-                    </WriterIcon>
                     <CommentWriter>{el.comment_user_name}</CommentWriter>
+                    <CommentContent>{el.comment_content}</CommentContent>
+                    <CommnetDate>
+                      {el.updated_at.split("T")[0]}&nbsp;
+                      {el.updated_at.split("T")[1].split(".")[0]}
+                    </CommnetDate>
                   </div>
-                  <CommentContent>{el.comment_content}</CommentContent>
-                  <CommnetDate>
-                    {el.updated_at.split("T")[0]}&nbsp;
-                    {el.updated_at.split("T")[1].split(".")[0]}
-                  </CommnetDate>
                 </Comment>
                 {el.isWriter ? (
                   <>
