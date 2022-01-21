@@ -15,7 +15,10 @@ const TitleContainer = styled.img`
   justify-content: center;
   width: 100vw;
   height: 60vh;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const Title = styled.div`

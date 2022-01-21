@@ -1,9 +1,11 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const DarkBackGround = styled.div`
   position: fixed;
@@ -19,7 +21,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 20%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -38,7 +40,6 @@ const CloseBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
 const CloseBtn = styled.div`
   cursor: pointer;
   font-size: 2rem;
@@ -53,64 +54,31 @@ const ShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* border: 1px solid red; */
 `;
 
-const Form = styled.form`
+const InfoShow = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 90%;
+  height: 80%;
+`;
+
+const Img = styled.img`
+  width: 60%;
 `;
 
 const Text = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 20%;
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
   @media screen and (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 `;
 
-const Input = styled.input`
-  box-sizing: border-box;
-  padding: 5px;
-  width: 100%;
-  height: 30px;
-`;
-
-const Btn = styled.button`
-  width: 100%;
-  height: 30px;
-  border-style: none;
-  border-radius: 4px;
-  background: #108dee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: bold;
-  position: relative;
-
-  :hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.07);
-  }
-`;
-
-function ExChangeWaterInput({ handleExwaterValue, handleExwaterAddRequest }) {
+function Levelup() {
   const dispatch = useDispatch();
 
   return (
@@ -120,27 +88,20 @@ function ExChangeWaterInput({ handleExwaterValue, handleExwaterAddRequest }) {
           <CloseBtn>
             <FontAwesomeIcon
               icon={faTimes}
-              onClick={() => dispatch(modalOff)}
               color="#e5e5e5"
+              onClick={() => dispatch(modalOff)}
             />
           </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
-          <Form>
-            <Text>환수량을 입력해주세요</Text>
-            <Input
-              placeholder="환수량(L)을 입력해주세요"
-              type="number"
-              onChange={handleExwaterValue}
-            />
-            <Btn type="button" onClick={handleExwaterAddRequest}>
-              선택완료
-            </Btn>
-          </Form>
+          <InfoShow>
+            <Img src="/폭죽.png" />
+            <Text>레벨업 성공!!</Text>
+          </InfoShow>
         </ShowContainer>
       </ModalContainer>
     </DarkBackGround>
   );
 }
 
-export default ExChangeWaterInput;
+export default Levelup;
