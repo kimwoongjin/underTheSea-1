@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 import { Link } from "react-router-dom";
 import { signupModalOnAction } from "../store/actions";
 import { useSelector, useDispatch } from "react-redux";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;

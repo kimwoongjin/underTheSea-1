@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction } from "../store/actions";
 import axios from "axios";
@@ -184,6 +184,7 @@ function HoneyTips() {
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
     handleTipList();
   }, [pageNum]);
 
@@ -264,15 +265,21 @@ function HoneyTips() {
             return <TipList key={idx} tip_id={el.tip_id} tip={el}></TipList>;
           })}
           <PageBtnForm>
-            <PageBtn onClick={goToPre}>이전</PageBtn>
-            {tipLength.map((el, idx) => {
-              return (
-                <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-                  {idx + 1}
-                </PageBtn>
-              );
-            })}
-            <PageBtn onClick={goToNext}>다음</PageBtn>
+            {tipLength.length > 1 ? (
+              <>
+                <PageBtn onClick={goToPre}>이전</PageBtn>
+                {tipLength.map((el, idx) => {
+                  return (
+                    <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                      {idx + 1}
+                    </PageBtn>
+                  );
+                })}
+                <PageBtn onClick={goToNext}>다음</PageBtn>
+              </>
+            ) : (
+              <></>
+            )}
           </PageBtnForm>
         </TipListContainer>
         <Footer />

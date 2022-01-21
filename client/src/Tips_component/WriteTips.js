@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../component/Footer";
 
 const Container = styled.div`
@@ -220,6 +220,7 @@ function WriteTips() {
   const accessToken = localStorage.getItem("accessToken");
   const edit_tip = localStorage.getItem("edit_tip");
   const tip_id = localStorage.getItem("tip_id");
+  // const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tip, setTip] = useState({
     title: "",
@@ -231,6 +232,7 @@ function WriteTips() {
 
   // 수정버튼을 누르고 들어왔을 때
   useEffect(() => {
+    window.scroll(0, 0);
     getTipData();
   }, []);
 
