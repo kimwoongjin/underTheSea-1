@@ -111,6 +111,9 @@ const Btn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
+const TypeSelectContainer = styled.div`
+  display: flex;
+`;
 
 function AddContainer() {
   const accessToken = localStorage.getItem("accessToken");
@@ -123,6 +126,7 @@ function AddContainer() {
     width: 0,
     height: 0,
     vertical: 0,
+    type: 0,
   });
 
   const handleInputValue = (e) => {
@@ -156,6 +160,7 @@ function AddContainer() {
     // getWaterVolum();
     // console.log("addConInfo!!", addConInfo);
     // console.log("size@!", size);
+    console.log(addConInfo.type);
     axios
       .post(
         `http://localhost:80/container/add`,
@@ -167,6 +172,7 @@ function AddContainer() {
                 1000
             ),
             theme: addConInfo.theme,
+            type: addConInfo.type,
           },
         },
         {
@@ -238,12 +244,61 @@ function AddContainer() {
                 onChange={handleInputValue}
               />
             </MidInputContainer>
+
             <Input
               name="theme"
               placeholder="테마를 입력해주세요"
               type="text"
               onChange={handleInputValue}
             />
+            <TypeSelectContainer>
+              <label>
+                <img src="http://localhost:80/level/11" width="40px" />
+
+                <br></br>
+                <input
+                  type="radio"
+                  name="type"
+                  value="11"
+                  checked
+                  onChange={handleInputValue}
+                />
+              </label>
+              <br></br>
+              <label>
+                <img src="http://localhost:80/level/12" width="40px" />
+                <br></br>
+                <input
+                  type="radio"
+                  name="type"
+                  value="12"
+                  onChange={handleInputValue}
+                />
+              </label>
+              <br></br>
+              <label>
+                <img src="http://localhost:80/level/13" width="40px" />
+                <br></br>
+                <input
+                  type="radio"
+                  name="type"
+                  value="13"
+                  onChange={handleInputValue}
+                />
+              </label>
+              <br></br>
+              <label>
+                <img src="http://localhost:80/level/14" width="40px" />
+                <br></br>
+                <input
+                  type="radio"
+                  name="type"
+                  value="14"
+                  onChange={handleInputValue}
+                />
+              </label>
+            </TypeSelectContainer>
+
             <Btn onClick={addContainerRequest}>추가하기</Btn>
           </InfoShow>
         </ShowContainer>

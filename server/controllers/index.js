@@ -37,4 +37,5 @@ module.exports = {
   googlecallback: require("./user/googlecallback"),
   authkakako: require("./user/authkakao"),
   kakaocallback: require("./user/kakaocallback"),
+  checkstatus: require("./user/checkstatus"),
 };

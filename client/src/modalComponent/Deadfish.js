@@ -130,7 +130,8 @@ function Deadfish({ container_id }) {
         },
         withCredentials: true,
       })
-      .then(() => {
+      .then((response) => {
+        localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -158,12 +159,12 @@ function Deadfish({ container_id }) {
               list="fishName"
             />
             <datalist id="fishName">
-              {fish_list2.map((el) => (
+              {fish_list2.map((el, idx) => (
                 <option
                   className="fish-option"
                   value={el}
                   label={el}
-                  key={el.id}
+                  key={idx}
                 ></option>
               ))}
             </datalist>
