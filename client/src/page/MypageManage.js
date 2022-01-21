@@ -135,7 +135,7 @@ function MypageManage() {
 
   const manageHandler = (page_num) => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/manage/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/manage/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })

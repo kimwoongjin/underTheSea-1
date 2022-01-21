@@ -134,7 +134,7 @@ function AddFish({ container_id }) {
     console.log("수조아이디", container_id);
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/container/${container_id}/fish`,
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
         {
           data: fishInfo,
         },
@@ -156,7 +156,7 @@ function AddFish({ container_id }) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fish/fishnamelist`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },

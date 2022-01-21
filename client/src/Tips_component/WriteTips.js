@@ -239,7 +239,7 @@ function WriteTips() {
   const getTipData = () => {
     if (isEdit === "true") {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/tip/${tip_id}`, {
+        .get(`${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
@@ -278,7 +278,7 @@ function WriteTips() {
     formData.append("image", file);
 
     const result = await axios.post(
-      `${process.env.REACT_APP_API_URL}/images`,
+      `${process.env.REACT_APP_SERVER_API}/images`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -300,7 +300,7 @@ function WriteTips() {
       return;
     }
     const result = await axios.post(
-      `${process.env.REACT_APP_API_URL}/tip`,
+      `${process.env.REACT_APP_SERVER_API}/tip`,
       { data: tip },
       {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -336,7 +336,7 @@ function WriteTips() {
   const handleEditTip = () => {
     axios
       .patch(
-        `${process.env.REACT_APP_API_URL}/tip/${tip_id}`,
+        `${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`,
         { data: tip },
         {
           headers: {
@@ -404,7 +404,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`${process.env.REACT_APP_API_URL}${tip.img}`}
+                      src={`${process.env.REACT_APP_SERVER_API}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",
@@ -453,7 +453,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`${process.env.REACT_APP_API_URL}${tip.img}`}
+                      src={`${process.env.REACT_APP_SERVER_API}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",

@@ -149,7 +149,7 @@ function Search() {
 
   const gotoSearch = () => {
     axios
-      .post(`${process.env.REACT_APP_API_URL}/fish/one`, {
+      .post(`${process.env.REACT_APP_SERVER_API}/fish/one`, {
         data: { fish_name: input },
       })
       .then((result) => {
@@ -164,7 +164,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fish/all/63`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/63`, {
         headers: {
           accept: "application/json",
         },
@@ -180,7 +180,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fish/fishnamelist`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },
@@ -198,7 +198,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fish/all/6`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/6`, {
         headers: {
           accept: "application/json",
         },

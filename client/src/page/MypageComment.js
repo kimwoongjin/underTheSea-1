@@ -147,7 +147,7 @@ function MypageComment() {
   }, [pageNum]);
   const commentHandler = (page_num) => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/comments/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/comments/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })

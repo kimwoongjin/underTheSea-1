@@ -167,7 +167,7 @@ function AddContainer() {
     if (addConInfo.type !== 0) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/container/add`,
+          `${process.env.REACT_APP_SERVER_API}/container/add`,
           {
             data: {
               container_name: addConInfo.container_name,
@@ -245,7 +245,7 @@ function AddContainer() {
             <TypeSelectContainer>
               <Selection>
                 <SelImg
-                  src={process.env.REACT_APP_API_URL + `/level/11`}
+                  src={process.env.REACT_APP_SERVER_API + `/level/11`}
                   alt="Type A"
                 />
 
@@ -258,7 +258,7 @@ function AddContainer() {
               </Selection>
               <Selection>
                 <SelImg
-                  src={process.env.REACT_APP_API_URL + `/level/12`}
+                  src={process.env.REACT_APP_SERVER_API + `/level/12`}
                   alt="Type B"
                 />
 
@@ -272,7 +272,7 @@ function AddContainer() {
 
               <Selection>
                 <SelImg
-                  src={process.env.REACT_APP_API_URL + `/level/13`}
+                  src={process.env.REACT_APP_SERVER_API + `/level/13`}
                   alt="Type C"
                 />
 
@@ -285,7 +285,7 @@ function AddContainer() {
               </Selection>
               <Selection>
                 <SelImg
-                  src={process.env.REACT_APP_API_URL + `/level/14`}
+                  src={process.env.REACT_APP_SERVER_API + `/level/14`}
                   alt="Type D"
                 />
 

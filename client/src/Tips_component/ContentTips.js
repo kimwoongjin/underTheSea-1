@@ -111,7 +111,7 @@ function ContentTips({ tipData }) {
       <Content>
         {tipData.img ? (
           <img
-            src={`${process.env.REACT_APP_API_URL}${tipData.img}`}
+            src={`${process.env.REACT_APP_SERVER_API}${tipData.img}`}
             style={{ width: "300px", height: "250px" }}
           ></img>
         ) : (

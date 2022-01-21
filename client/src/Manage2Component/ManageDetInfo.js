@@ -120,7 +120,7 @@ function ManageDetInfo() {
           <ContainerS key={idx}>
             <DetailImg>
               <ImgD
-                src={`${process.env.REACT_APP_API_URL}${el.fish_img}`}
+                src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
                 alt="이미지"
               />
             </DetailImg>

@@ -215,7 +215,7 @@ function SignUp() {
     } else {
       setErrorMsg("");
       axios
-        .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
+        .post(`${process.env.REACT_APP_SERVER_API}/user/signup`, {
           data: {
             email,
             user_name,

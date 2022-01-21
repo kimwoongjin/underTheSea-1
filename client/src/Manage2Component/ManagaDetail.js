@@ -504,7 +504,7 @@ function ManageDetail({ condata, setCondata }) {
   const UpdateConInfo = async () => {
     await axios
       .get(
-        `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`,
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
         {
           headers: { authorization: `Bearer ${accessToken}` },
           withCredentials: true,
@@ -517,7 +517,7 @@ function ManageDetail({ condata, setCondata }) {
       });
 
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
@@ -532,7 +532,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const AddFeedRequest = async () => {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/container/${container_id}/feed`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/feed`,
       {
         data: feedingInfo,
       },
@@ -555,7 +555,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/container/${container_id}/ex_water`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/ex_water`,
       {
         data: exwaterInfo,
       },
@@ -578,7 +578,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const LevelUpRequest = async () => {
     const response = await axios.patch(
-      `${process.env.REACT_APP_API_URL}/container/level/${container_id}`,
+      `${process.env.REACT_APP_SERVER_API}/container/level/${container_id}`,
       {},
       {
         headers: {
@@ -900,7 +900,8 @@ function ManageDetail({ condata, setCondata }) {
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  const imgSrcUrl = `${process.env.REACT_APP_API_URL}/level/` + conInfo.level;
+  const imgSrcUrl =
+    `${process.env.REACT_APP_SERVER_API}/level/` + conInfo.level;
   return (
     <>
       <Header2 />
@@ -1014,7 +1015,7 @@ function ManageDetail({ condata, setCondata }) {
             <ContainerS key={idx}>
               <DetailImg>
                 <ImgD
-                  src={`${process.env.REACT_APP_API_URL}${el.fish_img}`}
+                  src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
                   alt="이미지"
                 />
               </DetailImg>

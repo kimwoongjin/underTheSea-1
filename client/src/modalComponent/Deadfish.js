@@ -134,7 +134,7 @@ function Deadfish({ container_id }) {
   const fishRemoveRequest = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/container/${container_id}/fish`,
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
         {
           data: fishDeadInfo,
           headers: {

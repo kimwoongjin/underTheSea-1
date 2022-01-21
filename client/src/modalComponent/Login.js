@@ -159,7 +159,9 @@ function Login() {
 
     if (email && user_pwd) {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/user/login`, { data: userData })
+        .post(`${process.env.REACT_APP_SERVER_API}/user/login`, {
+          data: userData,
+        })
         .then((res) => {
           // console.log(res.message);
           // if (res.status === 401) {
@@ -211,7 +213,9 @@ function Login() {
             로그인
           </LoginBtn>
 
-          <GoogleBtn href={process.env.REACT_APP_API_URL + `/user/auth/google`}>
+          <GoogleBtn
+            href={process.env.REACT_APP_SERVER_API + `/user/auth/google`}
+          >
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>

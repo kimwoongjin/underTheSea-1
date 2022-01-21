@@ -153,7 +153,7 @@ function SearchInfo({ filteredFish }) {
         <Box id="box">
           <Front>
             <ImgContainer>
-              <Img src={process.env.REACT_APP_API_URL + el.fish_img}></Img>
+              <Img src={process.env.REACT_APP_SERVER_API + el.fish_img}></Img>
             </ImgContainer>
             <Content>
               <Name>{el.fish_name}</Name>
