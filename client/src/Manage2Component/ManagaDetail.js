@@ -22,9 +22,11 @@ import {
   addfishModalOnAction,
   deadfishModalOnAction,
   helpInfoModalOnAction,
+  levelupModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Levelup from "../modalComponent/Levelup";
 
 const Container = styled.div`
   position: relative;
@@ -60,6 +62,9 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
+  @media screen and (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 `;
 const ContainerS = styled.div`
   display: flex;
@@ -69,6 +74,9 @@ const ContainerS = styled.div`
   width: 50%;
   height: 20vh;
   margin-bottom: 7%;
+  /* @media screen and (max-width: 768px) {
+    flex-direction: column;
+  } */
 `;
 const HabitatContainer = styled.div`
   border-radius: 5px;
@@ -94,6 +102,9 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
+  @media screen and (max-width: 868px) {
+    display: none;
+  }
 `;
 const HabitatShow = styled.div`
   display: flex;
@@ -132,6 +143,9 @@ const LeftInfo = styled.div`
   align-items: center;
   width: 40%;
   height: 100%;
+  @media screen and (max-width: 868px) {
+    width: 100%;
+  }
 `;
 const ImgD = styled.img`
   position: relative;
@@ -273,6 +287,7 @@ const ProgressBar = styled.div`
   border: 2px solid #108dee;
 `;
 const Progress = styled.div`
+  transition: all 1s;
   width: ${(props) => props.EXP};
   height: 3vh;
   border-top-left-radius: 5px;
@@ -426,8 +441,6 @@ const FoodIcon = styled.img`
   width: 40%;
 `;
 function ManageDetail({ condata, setCondata }) {
-  //
-
   //변수 선언부분
   const params = useParams();
   const container_id = params.container_id;
@@ -461,6 +474,7 @@ function ManageDetail({ condata, setCondata }) {
     isDeadfishModal,
     isExchangeModal,
     isHelpModal,
+    isLevelupModal,
   } = state;
 
   const today = getMoment; // today == moment()   입니다.
@@ -531,6 +545,7 @@ function ManageDetail({ condata, setCondata }) {
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
+    UpdateProgressBar();
     console.log("AddFeedRequest called and conInfo is:", conInfo);
   };
   //
@@ -633,9 +648,24 @@ function ManageDetail({ condata, setCondata }) {
         break;
       }
     }
-
+    console.log("conInfo.last_lv_up@@@", conInfo.last_lv_up);
+    // last_lv_up: "2022-01-21T05:39:45.000Z"
     if (temp.length >= 15 && temp.includes(2)) {
       LevelUpRequest();
+      if (!conInfo.last_lv_up) {
+        dispatch(levelupModalOnAction);
+      } else {
+        // console.log("conInfo.last_lv_up ----->>", typeof conInfo.last_lv_up);
+        let lastLvUp = conInfo.last_lv_up.split("T")[0].split("-");
+        lastLvUp = lastLvUp[0].slice(2) + lastLvUp[1] + lastLvUp[2];
+        console.log("라스트업", lastLvUp);
+        if (!curWeek.includes(lastLvUp)) {
+          dispatch(levelupModalOnAction);
+        }
+      }
+      // let lastLvUp
+
+      // 2022-01-21T05:56:51.000Z
     }
 
     setProgressBar(Math.floor((temp.length * 100) / 15));
@@ -914,6 +944,9 @@ function ManageDetail({ condata, setCondata }) {
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
+          {/* <button onClick={() => dispatch(levelupModalOnAction)}>
+            임시버튼
+          </button> */}
           <HelpBtn
             onClick={() => {
               dispatch(helpInfoModalOnAction);
@@ -1036,6 +1069,7 @@ function ManageDetail({ condata, setCondata }) {
       {isAddfishModal && <AddFish container_id={container_id} />}
       {isDeadfishModal && <Deadfish container_id={container_id} />}
       {isHelpModal && <HelpInfo />}
+      {isLevelupModal && <Levelup />}
       <Footer />
     </>
   );

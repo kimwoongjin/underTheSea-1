@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import "./Landingpage.css";
 
 const Container = styled.div`
@@ -50,9 +50,9 @@ const BubbleR = styled.img`
   right: 11%;
   bottom: 18%;
 `;
+
 const Shark = styled.img`
   position: absolute;
-  /* -webkit-transform: rotate(30deg) */
   left: 2%;
   width: 13%;
   top: 22%;
@@ -63,12 +63,14 @@ const JellyFish = styled.img`
   left: 24%;
   bottom: 30%;
 `;
+
 const Fish1 = styled.img`
   width: 13%;
   position: absolute;
   top: 10%;
   right: 17%;
 `;
+
 const Fish3 = styled.img`
   width: 9%;
   position: absolute;

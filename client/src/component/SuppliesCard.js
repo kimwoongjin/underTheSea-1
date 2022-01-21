@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 35px;
   transition: all 0.3s;
   :hover {
     transform: matrix(1, 0, 0, 1, 0, -10);
