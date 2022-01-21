@@ -9,7 +9,7 @@ const TipContainer = styled.div`
   height: 60px;
   display: flex;
   margin-bottom: 1px;
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid #cccccc;
   cursor: pointer;
   align-items: center;
   &:hover {

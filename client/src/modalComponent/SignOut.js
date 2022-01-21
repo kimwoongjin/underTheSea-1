@@ -34,11 +34,11 @@ const ModalContainer = styled.div`
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  z-index: 999;
+
   border-radius: 20px;
 `;
 const CloseBtnContainer = styled.div`
-  z-index: 999;
+  
   position: absolute;
   right: 3%;
   top: 0%;
@@ -51,7 +51,7 @@ const CloseBtnContainer = styled.div`
 `;
 
 const Form = styled.form`
-  z-index: 999;
+
   width: 80%;
   height: 60%;
   display: flex;
@@ -82,7 +82,7 @@ const Btn = styled.div`
   justify-content: space-between;
 `;
 const CancleBtn = styled.button`
-  z-index: 999;
+  
   width: 45%;
   height: 90%;
   background: #e1e1e1;
@@ -104,7 +104,7 @@ const CancleBtn = styled.button`
   }
 `;
 const SignOutBtn = styled.button`
-  z-index: 999;
+ 
   width: 45%;
   height: 90%;
   background: #0474e8;

@@ -111,7 +111,11 @@ const HabitatShow = styled.div`
   height: 100%;
 `;
 
+<<<<<<< HEAD
 function ManageDetInfo({}) {
+=======
+function ManageDetInfo() {
+>>>>>>> d18dcc9c1d7e4fce2ae0f15da33f0c9d9b71ed7c
   let conInfo = JSON.parse(localStorage.getItem("conInfo"));
   return (
     <>

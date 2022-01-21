@@ -43,7 +43,6 @@ function App() {
         console.log(res);
         localStorage.setItem("accessToken", res.data.data.token);
         dispatch(loginAction);
-        console.log(isLogin, "???????????????");
       });
   };
 
@@ -64,6 +63,26 @@ function App() {
       });
   };
 
+<<<<<<< HEAD
+=======
+  const getConInfo = async (id) => {
+    const response = await axios.get(
+      `http://localhost:80/container/${id}/${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    // console.log("response:", response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
+    return response.data.data;
+  };
+
+>>>>>>> d18dcc9c1d7e4fce2ae0f15da33f0c9d9b71ed7c
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
 
@@ -155,7 +174,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-  // ------------------------------------------
 
   const [token, setToken] = useState("");
   const [selConId, setSelConId] = "";

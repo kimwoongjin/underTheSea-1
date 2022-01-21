@@ -13,7 +13,6 @@ const LogoTag = styled.img`
   top: 20%;
   left: 8%;
   width: 13vw;
-  z-index: 999;
 `;
 const AboutTag = styled.div`
   position: absolute;
