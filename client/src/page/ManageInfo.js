@@ -9,11 +9,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  left: 3%;
   width: 28%;
   height: 390px;
   box-shadow: 0px 0px 20px #adb5bd;
-  margin-right: 40px;
-  margin-bottom: 40px;
+  margin-right: 5%;
+  margin-bottom: 80px;
   border-radius: 20px;
   transition: all 0.3s;
   :hover {
@@ -39,12 +41,15 @@ const ImgContainer = styled.div`
   height: 50%;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 `;
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 105%;
+  height: 105%;
 `;
 const Content = styled.div`
   position: relative;

@@ -123,7 +123,6 @@ function LandingSearch() {
     });
     txtTimeline.from(".txt1", { opacity: 0, y: 50, duration: 1 });
     txtTimeline.from(".txt2", { opacity: 0, y: 50, duration: 1 });
-    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
   }, []);
 
   return (
@@ -154,7 +153,7 @@ function LandingSearch() {
         </SearchText>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <SearchTitle className="txt2">
-            Search
+            검색페이지
             <IconCover>
               <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
             </IconCover>
