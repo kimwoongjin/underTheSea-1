@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,18 +8,26 @@ import {
   logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Container = styled.div`
-  // position: fixed;
   width: 100vw;
   height: 10vh;
   background: white;
   box-shadow: 0px 0px 5px #adb5bd;
-  /* background: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 999;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    ${(props) =>
+      props.toggle &&
+      css`
+        height: 55vh;
+      `}
+  }
 `;
 
 const Img = styled.img`
@@ -82,6 +90,8 @@ const Signout = styled.div`
   /* border: 1px solid red; */
   border-radius: 5px;
   padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;
   background: #008eff;
@@ -96,6 +106,9 @@ const Signout = styled.div`
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
   }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2%;
+  }
 `;
 
 const Search = styled.div`
@@ -105,6 +118,20 @@ const Search = styled.div`
   cursor: pointer;
   :hover {
     color: #008eff;
+  }
+  @media screen and (max-width: 768px) {
+    ${(props) =>
+      props.toggle &&
+      css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 90%;
+        :hover {
+          background: #e5e5e5;
+        }
+      `}
   }
 `;
 const Guide = styled.div`
@@ -116,27 +143,67 @@ const Guide = styled.div`
     color: #008eff;
   }
 `;
+const Bars = styled.div`
+  position: absolute;
+  display: none;
+  /* font-size: 20px; */
+  /* border: 1px solid red; */
+  top: 16px;
+  right: 32px;
+  cursor: pointer;
+  color: #e5e5e5;
+  z-index: 999;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
 
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
-  /* border: 1px solid red; */
   justify-content: space-around;
   margin-right: 2%;
   width: 370px;
   font-family: "Kfont";
+
+  @media screen and (max-width: 768px) {
+    display: none;
+    ${(props) =>
+      props.toggle &&
+      css`
+        border: 1px solid red;
+        margin-top: 25px;
+        display: flex;
+        width: 100%;
+        background: white;
+        align-items: center;
+        flex-direction: column;
+        height: 350px;
+        margin-bottom: 2%;
+        z-index: 99;
+      `}
+  }
 `;
 
 function Header2() {
+  const [status, setStatus] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const onClickHandler = (e) => {
+    setStatus((prevStatus) => (prevStatus ? false : true));
+  };
+  //========================================================================
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
+  // 로고 클릭시 메인으로
 
   const goToHome = () => {
     navigate("/");
   };
+
   const handleLogout = () => {
     axios
       .post(
@@ -161,10 +228,8 @@ function Header2() {
         console.log(err);
       });
   };
-
   const play = () => {
     console.log("Play damm it!!");
-
     var audio = document.getElementById("audio_play");
     console.log("Play damm it!!");
     if (audio.paused) {
@@ -176,7 +241,7 @@ function Header2() {
   };
 
   return (
-    <Container>
+    <Container toggle={toggle}>
       <audio
         id="audio_play"
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
@@ -186,13 +251,15 @@ function Header2() {
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer onclick={play}>
+      <BtnContainer className="menu" onclick={play}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide onclick={play}>가이드</Guide>{" "}
+          <Guide onclick={play} toggle={toggle}>
+            가이드
+          </Guide>
           <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <Search>검색</Search>
+          <Search toggle={toggle}>검색</Search>
         </Link>
         {isLogin ? (
           <>
@@ -200,14 +267,16 @@ function Header2() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage onclick={play}>관리</Manage>
+              <Manage onclick={play} toggle={toggle}>
+                관리
+              </Manage>
               <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}
               to="/mypage"
             >
-              <Mypage>마이페이지</Mypage>
+              <Mypage toggle={toggle}>마이페이지</Mypage>
             </Link>
             {/* <Signout onClick={handleLogout}>로그아웃</Signout> */}
           </>
@@ -228,6 +297,9 @@ function Header2() {
         )}
         {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
+      <Bars toggle={toggle}>
+        <FontAwesomeIcon className="toogleBtn" icon={faBars}></FontAwesomeIcon>
+      </Bars>
     </Container>
   );
 }

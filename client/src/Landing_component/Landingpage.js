@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import "./Landingpage.css";
 
 const Container = styled.div`
@@ -50,12 +50,26 @@ const BubbleR = styled.img`
   right: 11%;
   bottom: 18%;
 `;
+
+const sharkMove = keyframes`
+0% {
+  left: 2%;
+ }
+ 50% {
+   top: 30%
+ }
+ 100% {
+  left: 100%;
+`;
+
 const Shark = styled.img`
   position: absolute;
-  /* -webkit-transform: rotate(30deg) */
   left: 2%;
   width: 13%;
   top: 22%;
+  /* animation-timing-function: ease-in-out; */
+  /* animation-duration: 7s; */
+  animation: ${sharkMove} 4s infinite ease-in-out;
 `;
 const JellyFish = styled.img`
   width: 9%;
@@ -63,12 +77,32 @@ const JellyFish = styled.img`
   left: 24%;
   bottom: 30%;
 `;
+const fish1Move = keyframes`
+ 0% {
+  right: 17%;
+ }
+ 50% {
+   top: 5%
+ }
+ 100% {
+  right: 100%;
+}
+`;
+
 const Fish1 = styled.img`
   width: 13%;
   position: absolute;
+  /* border: 1px solid red; */
   top: 10%;
   right: 17%;
+  /* animation-fill-mode: forwards; */
+
+  /* animation-timing-function: linear; */
+  /* animation-duration: 10s; */
+  animation: ${fish1Move} 8s infinite ease-out;
+  /* animation-name: ${fish1Move} infinite; */
 `;
+
 const Fish3 = styled.img`
   width: 9%;
   position: absolute;

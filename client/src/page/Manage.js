@@ -66,7 +66,7 @@ function Manage({ getAllConInfo, handleCondata }) {
   return (
     <>
       <Header2 />
-      <TitleContainer src="/관리.jpg">
+      <TitleContainer src="/관리배너.jpg">
         {/* <Title>My Aquarium</Title> */}
         {/* <Text>당신의 어항을 관리해보세요!</Text> */}
       </TitleContainer>

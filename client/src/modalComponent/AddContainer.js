@@ -20,8 +20,9 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 30%;
-  height: 35%;
+  height: 50%;
   background: white;
+  /* border: 2px dashed blue; */
   flex-direction: column;
   position: relative;
   justify-content: center;
@@ -36,17 +37,18 @@ const CloseBtnContainer = styled.div`
   height: 10%;
   padding: 10px;
   box-sizing: border-box;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: flex-end;
 `;
 
 const ShowContainer = styled.div`
   width: 90%;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   /* border: 1px solid green; */
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 const InfoShow = styled.form`
@@ -113,6 +115,18 @@ const Btn = styled.button`
 `;
 const TypeSelectContainer = styled.div`
   display: flex;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid red; */
+    margin: 5px;
+    img {
+      /* border: 1px solid red; */
+      width: 100%;
+    }
+  }
 `;
 
 function AddContainer() {
@@ -135,26 +149,6 @@ function AddContainer() {
       [e.target.name]: e.target.value,
     });
   };
-
-  //   const getWaterVolum = () => {
-  //     let waterVolum = Math.floor(
-  //       (size.width * size.height * size.vertical) / 1000
-  //     );
-  //     if (waterVolum > 0) {
-  //       setAddConInfo({
-  //         ...addConInfo,
-  //         size: waterVolum,
-  //       });
-  //     }
-  //   };
-
-  //   const getSize = (e) => {
-  //     setSize({
-  //       ...size,
-  //       [e.target.name]: e.target.value,
-  //     });
-  //   };
-  // req.body.data = { container_name: '', size: 0, theme: '', '': '독고테마' }
 
   const addContainerRequest = () => {
     // getWaterVolum();
@@ -253,9 +247,9 @@ function AddContainer() {
             />
             <TypeSelectContainer>
               <label>
-                <img src="http://localhost:80/level/11" width="40px" />
+                <img src="http://localhost:80/level/11" />
 
-                <br></br>
+                {/* <br></br> */}
                 <input
                   type="radio"
                   name="type"
@@ -264,10 +258,10 @@ function AddContainer() {
                   onChange={handleInputValue}
                 />
               </label>
-              <br></br>
+              {/* <br></br> */}
               <label>
-                <img src="http://localhost:80/level/12" width="40px" />
-                <br></br>
+                <img src="http://localhost:80/level/12" />
+                {/* <br></br> */}
                 <input
                   type="radio"
                   name="type"
@@ -275,10 +269,10 @@ function AddContainer() {
                   onChange={handleInputValue}
                 />
               </label>
-              <br></br>
+              {/* <br></br> */}
               <label>
-                <img src="http://localhost:80/level/13" width="40px" />
-                <br></br>
+                <img src="http://localhost:80/level/13" />
+                {/* <br></br> */}
                 <input
                   type="radio"
                   name="type"
@@ -286,10 +280,10 @@ function AddContainer() {
                   onChange={handleInputValue}
                 />
               </label>
-              <br></br>
+              {/* <br></br> */}
               <label>
-                <img src="http://localhost:80/level/14" width="40px" />
-                <br></br>
+                <img src="http://localhost:80/level/14" />
+                {/* <br></br> */}
                 <input
                   type="radio"
                   name="type"
