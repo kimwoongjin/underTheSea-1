@@ -63,8 +63,6 @@ function App() {
       });
   };
 
-<<<<<<< HEAD
-=======
   const getConInfo = async (id) => {
     const response = await axios.get(
       `http://localhost:80/container/${id}/${month}`,
@@ -82,7 +80,6 @@ function App() {
     return response.data.data;
   };
 
->>>>>>> d18dcc9c1d7e4fce2ae0f15da33f0c9d9b71ed7c
   const accessToken = localStorage.getItem("accessToken");
   const [containerList, setContainerList] = useState([]);
 

@@ -22,8 +22,9 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 30%;
-  height: 35%;
+  height: 50%;
   background: white;
+  /* border: 2px dashed blue; */
   flex-direction: column;
   position: relative;
   justify-content: center;
@@ -38,17 +39,18 @@ const CloseBtnContainer = styled.div`
   height: 10%;
   padding: 10px;
   box-sizing: border-box;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: flex-end;
 `;
 
 const ShowContainer = styled.div`
   width: 90%;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   /* border: 1px solid green; */
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 const InfoShow = styled.form`

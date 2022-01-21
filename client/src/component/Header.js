@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,47 +14,34 @@ import { useState } from "react";
 import waterDrop from "./waterdrop.mp3";
 
 const Container = styled.div`
-  /* box-shadow: 0px 0px 10px #adb5bd; */
-  /* background: white; */
-  width: 100%;
+  width: 100vw;
+  height: 10vh;
+  background: white;
   background: #d2f7ff;
+  box-shadow: 0px 0px 5px #adb5bd;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  position: relative;
-
-  .toogleBtn {
-    position: absolute;
-    right: 70px;
-    font-size: 22px;
-    color: black;
-    z-index: 999;
-    display: none;
-  }
-
-  /* @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 8px 24px;
-
-    .toogleBtn {
-      display: block;
-    }
-  } */
+    /* height: 12vh; */
+  }
 `;
 
 const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 17vw;
+    margin-top: 1%;
+  }
 `;
 
 const Login = styled.div`
   /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
-  z-index: 999;
   cursor: pointer;
   :hover {
     color: #008eff;
@@ -83,7 +70,6 @@ const Mypage = styled.div`
 
 const Signup = styled.div`
   /* border: 1px solid red; */
-  z-index: 999;
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
@@ -104,10 +90,10 @@ const Signup = styled.div`
 
 const Signout = styled.div`
   /* border: 1px solid red; */
-
-  z-index: 999;
   border-radius: 5px;
   padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;
   background: #008eff;
@@ -122,17 +108,30 @@ const Signout = styled.div`
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
   }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2%;
+    box-sizing: border-box;
+  }
 `;
 
 const Search = styled.div`
   /* border: 1px solid red; */
-  position: relative;
-  z-index: 999;
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
   :hover {
     color: #008eff;
+  }
+  @media screen and (max-width: 768px) {
+    ${(props) =>
+      props.toggle &&
+      css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        /* width: 90%; */
+      `}
   }
 `;
 const Guide = styled.div`
@@ -144,39 +143,60 @@ const Guide = styled.div`
     color: #008eff;
   }
 `;
+const Bars = styled.div`
+  position: absolute;
+  display: none;
+  font-size: 20px;
+  /* border: 1px solid red; */
+  top: 20px;
+  right: 32px;
+  cursor: pointer;
+  color: #e5e5e5;
+  z-index: 999;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
 
 const BtnContainer = styled.div`
   display: flex;
   font-size: 1.1rem;
   justify-content: space-around;
-  margin-left: 55%;
-  width: 390px;
+  margin-right: 2%;
+  width: 370px;
   font-family: "Kfont";
 
-  /* display: flex; */
-  /* font-size: 1.1rem; */
-  /* position: relative; */
-  /* width: 400px; */
-  /* margin-right: 0; */
-  /* margin-right: 3%; */
-  /* border: 1px solid red; */
-  /* justify-content: space-between; */
-
-  @media screen and (max-width: 780px) {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  @media screen and (max-width: 768px) {
     display: none;
+    ${(props) =>
+      props.toggle &&
+      css`
+        /* border: 1px solid red; */
+        /* background: black; */
+        margin-top: 3vh;
+        margin-right: 0;
+        display: flex;
+        width: 100%;
+        background: white;
+        align-items: center;
+        flex-direction: column;
+        height: 350px;
+        margin-bottom: 2%;
+        z-index: 99;
+      `}
   }
 `;
 
 function Header() {
   const [status, setStatus] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const onClickHandler = (e) => {
     setStatus((prevStatus) => (prevStatus ? false : true));
   };
   //========================================================================
-
+  const showToggle = () => {
+    setToggle(!toggle);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
@@ -214,18 +234,19 @@ function Header() {
   };
 
   return (
-    <Container>
+    <Container toggle={toggle}>
       <Img
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer className="menu">
+      <BtnContainer className="menu" toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide>가이드</Guide>{" "}
+          <Guide toggle={toggle}>가이드</Guide>
+          <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <Search>검색</Search>
+          <Search toggle={toggle}>검색</Search>
         </Link>
         {isLogin ? (
           <>
@@ -233,13 +254,14 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage>관리</Manage>
+              <Manage toggle={toggle}>관리</Manage>
+              <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}
               to="/mypage"
             >
-              <Mypage>마이페이지</Mypage>
+              <Mypage toggle={toggle}>마이페이지</Mypage>
             </Link>
             {/* <Signout onClick={handleLogout}>로그아웃</Signout> */}
           </>
@@ -260,7 +282,9 @@ function Header() {
         )}
         {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
-      )<FontAwesomeIcon className="toogleBtn" icon={faBars}></FontAwesomeIcon>
+      <Bars toggle={toggle} onClick={showToggle}>
+        <FontAwesomeIcon className="toogleBtn" icon={faBars}></FontAwesomeIcon>
+      </Bars>
     </Container>
   );
 }
