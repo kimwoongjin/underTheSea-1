@@ -27,8 +27,6 @@ function App() {
   const { isLoginModal, isSignupModal, isLogoutModal } = state;
   const { isLogin } = loginState;
 
-  const [tt, setTt] = useState("T.T");
-
   const month = new Date().getMonth() + 1;
 
   // 구글 소셜 로그인
@@ -111,6 +109,7 @@ function App() {
     size: "",
     theme: "",
   });
+  const [condata, setCondata] = useState({});
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -171,7 +170,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-  // ------------------------------------------
 
   const [token, setToken] = useState("");
   const [selConId, setSelConId] = "";
@@ -179,6 +177,7 @@ function App() {
   const handleToken = (token) => {
     setToken(token);
   };
+  const handleCondata = (e) => setCondata(e);
 
   return (
     <BrowserRouter>
@@ -197,14 +196,20 @@ function App() {
             <Manage
               aquaInfo={aquaInfo}
               containerList={containerList}
-              getConInfo={getConInfo}
+              handleCondata={handleCondata}
             />
           }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} tt={tt} />}
+          element={
+            <ManageDetail
+              idList={idList}
+              condata={condata}
+              setCondata={setCondata}
+            />
+          }
         ></Route>
         <Route
           path="/manage/addInfo"

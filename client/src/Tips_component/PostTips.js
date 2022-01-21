@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Header2 from "../component/Header2";
 import CommentTips from "./CommentTips";
 import ContentTips from "./ContentTips";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
   width: 100vw;
@@ -15,6 +16,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "Kfont";
 `;
 
 const TopCover = styled.div`
@@ -40,14 +42,13 @@ const Title = styled.div`
   /* border: 1px solid blue; */
   font-size: 1.8rem;
   font-weight: bold;
-  margin-top: 40px;
+  margin-top: 60%;
   padding-bottom: 5px;
   box-sizing: border-box;
-  border-bottom: 5px solid #108dee;
+  /* border-bottom: 5px solid #108dee; */
   text-align: center;
 `;
 const SubTitle = styled.div`
-  margin-top: 15px;
   color: #808080;
   font-size: 1.25rem;
   margin-bottom: 50px;
@@ -58,70 +59,70 @@ const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 14px;
   width: 70%;
   height: 100%;
-  border: 1px solid #a0d5fd;
+  border: 1px solid #a7d9ff;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 10%;
 `;
 
 const BtnContainer = styled.div`
   width: 70%;
-  /* margin-top: 80px; */
+  margin-top: 45px;
   display: flex;
   justify-content: flex-end;
   /* border: 1px dashed darkcyan; */
 `;
 
 const BtnL = styled.button`
-  width: 15%;
+  width: 7%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
-  margin: 0 5px;
+  margin: 0 8px;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border-style: none;
   border-radius: 4px;
-  margin-right: 0;
   background: #108dee;
   text-align: center;
   cursor: pointer;
   :hover {
-    filter: brightness(95%);
+    /* filter: brightness(95%); */
+    background: #cccccc;
   }
 `;
 
 const Btn = styled.button`
-  width: 15%;
+  width: 7%;
   height: 30px;
+  font-size: 1.1rem;
   box-sizing: border-box;
   align-items: center;
-  margin: 0 5px;
+  margin: 0 8px;
   color: white;
-  font-size: 1.25rem;
   font-weight: bold;
   border-style: none;
   border-radius: 4px;
-  margin-right: 0;
   background: #108dee;
   text-align: center;
   cursor: pointer;
   :hover {
-    filter: brightness(95%);
+    /* filter: brightness(95%); */
+    background: #cccccc;
   }
 `;
 
 const BtnR = styled.button`
-  width: 15%;
+  width: 7%;
   height: 30px;
+  font-size: 1.1rem;
   box-sizing: border-box;
   align-items: center;
   margin: 0 5px;
   color: black;
-  font-size: 1.25rem;
   font-weight: bold;
   border-style: none;
   border-radius: 4px;
@@ -129,7 +130,8 @@ const BtnR = styled.button`
   text-align: center;
   cursor: pointer;
   :hover {
-    filter: brightness(95%);
+    /* filter: brightness(95%); */
+    background: #cccccc;
   }
 `;
 
@@ -287,6 +289,7 @@ function PostTips() {
           ></CommentTips>
         </PostContainer>
       </Container>
+      <Footer />
     </>
   );
 }

@@ -38,7 +38,7 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35;
+  opacity: 0.2;
   z-index: -1;
 `;
 
@@ -65,19 +65,20 @@ const Starfish = styled.img`
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-top: 60px;
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  border-bottom: 3px solid #108dee;
+  /* border-bottom: 3px solid black; */
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
-  color: #4a4a4a;
+  /* color: #4a4a4a; */
   font-size: 1.25rem;
   margin-bottom: 50px;
+  font-weight: 500;
   /* border: 1px solid red; */
 `;
 
@@ -111,7 +112,7 @@ const TipListContainer = styled.div`
   margin-top: 15px;
   width: 70%;
   height: 100%;
-  border: 1px solid #a0d5fd;
+  border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
 `;
@@ -121,7 +122,7 @@ const TipListHeadContainer = styled.div`
   display: flex;
   font-size: 1.5rem;
   margin-top: 30px;
-  border-bottom: 4px solid #108dee;
+  border-bottom: 3px solid #a7d9ff;
   font-weight: bold;
   /* background-color: #f7f7f4; */
 `;
@@ -149,8 +150,8 @@ const PageBtnForm = styled.form`
   width: 95%;
   justify-content: center;
   // border-top: 1px solid #808080;
-  padding-top: 15px;
-  margin-bottom: 15px;
+  padding-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const PageBtn = styled.div`
