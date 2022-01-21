@@ -16,35 +16,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
   width: 60%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-between; */
   margin-bottom: 10%;
-`;
-const TitleCover = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 1.8rem;
-  text-align: center;
-  line-height: 180%;
-  color: #008eff;
-`;
-
-const Text = styled.div`
-  font-weight: bold;
-  font-size: 1.4rem;
-  text-align: center;
-  line-height: 180%;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const BtnCover = styled.div`
@@ -54,7 +35,10 @@ const BtnCover = styled.div`
   width: 60%;
   height: 100%;
   height: 150px;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    /* border: 1px solid red; */
+  }
 `;
 
 const Btn = styled.button`

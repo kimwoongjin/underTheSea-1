@@ -72,6 +72,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Input = styled.input`
@@ -132,6 +135,9 @@ const SelImg = styled.img`
   display: flex;
   justify-content: space-evenly;
   width: 80px;
+  @media screen and (max-width: 768px) {
+    width: 40px;
+  }
 `;
 
 function AddContainer() {

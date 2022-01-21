@@ -60,6 +60,9 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
+  @media screen and (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 `;
 const ContainerS = styled.div`
   display: flex;
@@ -69,6 +72,9 @@ const ContainerS = styled.div`
   width: 50%;
   height: 20vh;
   margin-bottom: 7%;
+  /* @media screen and (max-width: 768px) {
+    flex-direction: column;
+  } */
 `;
 const HabitatContainer = styled.div`
   border-radius: 5px;
@@ -94,6 +100,9 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
+  @media screen and (max-width: 868px) {
+    display: none;
+  }
 `;
 const HabitatShow = styled.div`
   display: flex;
@@ -132,6 +141,9 @@ const LeftInfo = styled.div`
   align-items: center;
   width: 40%;
   height: 100%;
+  @media screen and (max-width: 868px) {
+    width: 100%;
+  }
 `;
 const ImgD = styled.img`
   position: relative;
