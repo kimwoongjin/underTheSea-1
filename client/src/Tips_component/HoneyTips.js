@@ -18,7 +18,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   /* margin-bottom: 25px; */
-  // background-color: #f7f7f4;
+  /* background-color: #f7f7f4; */
 `;
 const TopCover = styled.div`
   width: 100%;
@@ -31,6 +31,7 @@ const TopCover = styled.div`
   flex-direction: column;
   /* background-image: url("투명바다1.png"); */
   overflow: hidden;
+  box-shadow: 0px 2px 10px gray;
 `;
 
 const Img = styled.img`
@@ -42,32 +43,34 @@ const Img = styled.img`
   z-index: -1;
 `;
 
-const Swarm = styled.img`
-  position: absolute;
-  top: 80px;
-  left: 80px;
-  bottom: 0px;
-  width: 14%;
-`;
+// const Swarm = styled.img`
+//   position: absolute;
+//   top: 80px;
+//   left: 80px;
+//   bottom: 0px;
+//   width: 14%;
+// `;
+
 const TitleContainer = styled.div`
   width: 20%;
   display: flex;
   /* border: 1px solid green; */
   position: relative;
 `;
-const Starfish = styled.img`
-  position: absolute;
-  right: -30px;
-  bottom: 20px;
-  width: 50%;
-  height: 50%;
-`;
+// const Starfish = styled.img`
+//   position: absolute;
+//   right: -30px;
+//   bottom: 20px;
+//   width: 50%;
+//   height: 50%;
+// `;
+
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
   font-size: 3rem;
   font-weight: bold;
-  margin-top: 60px;
+  margin-top: 10%;
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
@@ -79,6 +82,7 @@ const SubTitle = styled.div`
   font-size: 1.25rem;
   margin-bottom: 50px;
   font-weight: 500;
+  color: #808080;
   /* border: 1px solid red; */
 `;
 

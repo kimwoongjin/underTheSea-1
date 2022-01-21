@@ -40,6 +40,13 @@ const CloseBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
 
 const ShowContainer = styled.div`
   width: 90%;
@@ -56,31 +63,38 @@ const InfoShow = styled.div`
   align-items: center;
   width: 100%;
   height: 95%;
+  /* border: 1px solid red; */
 `;
 const ThememContainer = styled.section`
   display: flex;
   align-items: center;
   width: 90%;
-  height: 30px;
+  height: 10%;
   border: 1px solid #e5e5e5;
   border-radius: 4px;
+  @media screen and (max-width: 768px) {
+    height: 12%;
+  }
 `;
 const ThemeTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 35%;
   height: 90%;
   font-weight: bold;
   color: #108dee;
   border-right: 1px solid #e5e5e5;
   font-family: "Kfont";
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 const ThemeShow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 65%;
   height: 100%;
 `;
 const LastExchange = styled.div`
@@ -114,7 +128,6 @@ const BottomText = styled.div`
   font-size: 1.25rem;
 `;
 
-// 환수목록받아온거에서 가장끝번 인덱스
 function AquaInfo({ conInfo, container_id, month }) {
   const dispatch = useDispatch();
   const [diff, setDiff] = useState(0);
@@ -151,17 +164,12 @@ function AquaInfo({ conInfo, container_id, month }) {
         let thisYear = Number(lastExDay.slice(0, 4));
         let thisMonth = Number(lastExDay.slice(4, 6));
         let thisDay = Number(lastExDay.slice(6));
-        // lastExDay =
-        //   String(thisYear) + "-" + String(thisMonth) + "-" + String(thisDay);
         let lastDay = new Date(thisYear, thisMonth - 1, thisDay);
         let curDay = new Date().getTime();
         console.log("curday", curDay);
         console.log("lastday", lastDay);
-        // let dayFromExwater = curDay - lastDay.getTime();
         let showDiff =
           Math.ceil((curDay - lastDay.getTime()) / (1000 * 3600 * 24)) - 1;
-        // let showDiff = dayFromExwater / 1000 / 60 / 60 / 24;
-        // setDiff(showDiff);
         console.log("차이", typeof thisMonth);
         if (thisMonth < 10) {
           thisMonth = "0" + String(thisMonth);
@@ -220,12 +228,13 @@ function AquaInfo({ conInfo, container_id, month }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            color="#e5e5e5"
-            onClick={() => dispatch(modalOff)}
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              color="#e5e5e5"
+              onClick={() => dispatch(modalOff)}
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>

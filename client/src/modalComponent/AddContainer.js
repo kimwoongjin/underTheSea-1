@@ -72,6 +72,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Input = styled.input`
@@ -132,6 +135,9 @@ const SelImg = styled.img`
   display: flex;
   justify-content: space-evenly;
   width: 80px;
+  @media screen and (max-width: 768px) {
+    width: 40px;
+  }
 `;
 
 function AddContainer() {
@@ -158,28 +164,30 @@ function AddContainer() {
 
   const addContainerRequest = () => {
     console.log(addConInfo.type);
-    axios
-      .post(
-        `http://localhost:80/container/add`,
-        {
-          data: {
-            container_name: addConInfo.container_name,
-            size: Math.floor(
-              (addConInfo.width * addConInfo.height * addConInfo.vertical) /
-                1000
-            ),
-            theme: addConInfo.theme,
-            type: addConInfo.type,
+    if (addConInfo.type !== 0) {
+      axios
+        .post(
+          `http://localhost:80/container/add`,
+          {
+            data: {
+              container_name: addConInfo.container_name,
+              size: Math.floor(
+                (addConInfo.width * addConInfo.height * addConInfo.vertical) /
+                  1000
+              ),
+              theme: addConInfo.theme,
+              type: addConInfo.type,
+            },
           },
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           },
-        },
-        { withCredentials: true }
-      )
-      .catch((err) => console.log(err));
+          { withCredentials: true }
+        )
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -201,6 +209,7 @@ function AddContainer() {
               placeholder="자신의 수족관 이름을 입력해주세요"
               type="text"
               onChange={handleInputValue}
+              required
             />
             <MidInputContainer>
               <SizeInput
@@ -208,18 +217,21 @@ function AddContainer() {
                 placeholder="가로"
                 type="number"
                 onChange={handleInputValue}
+                required
               />
               <SizeInput
                 name="height"
                 placeholder="세로"
                 type="number"
                 onChange={handleInputValue}
+                required
               />
               <SizeInput
                 name="vertical"
                 placeholder="높이(수위)"
                 type="number"
                 onChange={handleInputValue}
+                required
               />
             </MidInputContainer>
 
@@ -228,6 +240,7 @@ function AddContainer() {
               placeholder="테마를 입력해주세요"
               type="text"
               onChange={handleInputValue}
+              required
             />
             <TypeSelectContainer>
               <Selection>

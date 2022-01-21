@@ -16,35 +16,33 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const CardContainer = styled.div`
-  /* border: 1px solid black; */
   width: 60%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-between; */
   margin-bottom: 10%;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
-const TitleCover = styled.div`
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 40vh;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 1.8rem;
-  text-align: center;
-  line-height: 180%;
-  color: #008eff;
-`;
+const Img = styled.img``;
 
 const Text = styled.div`
+  font-family: "Kfont";
   font-weight: bold;
-  font-size: 1.4rem;
-  text-align: center;
-  line-height: 180%;
+  font-size: 1.25rem;
 `;
 
 const BtnCover = styled.div`
@@ -54,7 +52,9 @@ const BtnCover = styled.div`
   width: 60%;
   height: 100%;
   height: 150px;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const Btn = styled.button`
@@ -92,23 +92,26 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
 
       <CardContainer>
         {/* <Btn></Btn> */}
-        {containerList.map((container, idx) => {
-          return (
-            <ManageInfo
-              id={container.id}
-              key={idx}
-              name={container.container_name}
-              size={container.size}
-              theme={container.theme}
-              level={container.level}
-              handleCondata={handleCondata}
-            ></ManageInfo>
-          );
-        })}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
+        {containerList.length !== 0 ? (
+          containerList.map((container, idx) => {
+            return (
+              <ManageInfo
+                id={container.id}
+                key={idx}
+                name={container.container_name}
+                size={container.size}
+                theme={container.theme}
+                level={container.level}
+                handleCondata={handleCondata}
+              ></ManageInfo>
+            );
+          })
+        ) : (
+          <EmptyBox>
+            <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/빈박스.png" />
+            <Text>수조를 등록해주세요!</Text>
+          </EmptyBox>
+        )}
       </CardContainer>
       {isAddContainerModal && <AddContainer />}
     </Container>

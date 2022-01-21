@@ -19,28 +19,41 @@ const WriterCover = styled.div`
 `;
 
 const WriterIcon = styled.div`
-  width: 2.7vw;
+  /* width: 2.7vw;
   height: 5vh;
   border-radius: 60px;
   border: 1px solid gray;
   text-align: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 10px; */
+  /* width: 5.1vw;
+  height: 6.6vh; */
+  width: 10%;
+  height: 10%;
+  position: relative;
+  .userImg {
+    /* object-fit: contain; */
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const WriterInfo = styled.div`
   width: 90%;
+  /* height: 60%; */
   /* border: 1px solid red; */
   display: column;
-  margin-bottom: 20px;
-  margin-left: 9px;
+  /* margin-bottom: 10px; */
+  /* margin-left: 3px; */
 `;
+
 const Writer = styled.div`
   width: 100%;
   /* color: #808080; */
   font-size: 1rem;
   font-family: "Kfont";
   /* border: 1px solid red; */
+  margin: 1% 0 1%;
 `;
 
 const Date = styled.div`
@@ -50,6 +63,7 @@ const Date = styled.div`
   font-family: "Kfont";
   /* border: 1px solid red; */
 `;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -83,7 +97,9 @@ function ContentTips({ tipData }) {
     <>
       <PostTitle>{tipData.title}</PostTitle>
       <WriterCover>
-        <WriterIcon>:)</WriterIcon>
+        <WriterIcon>
+          <img className="userImg" src="/유저2.png" alt=""></img>
+        </WriterIcon>
         <WriterInfo>
           <Writer>{tipData.user_name}</Writer>
           <Date>

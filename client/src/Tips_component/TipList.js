@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDoubleRight,
+  faBullseye,
+  faFish,
+} from "@fortawesome/free-solid-svg-icons";
+import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
 
 const TipContainer = styled.div`
   position: relative;
@@ -74,7 +79,7 @@ function TipList({ tip_id, tip }) {
         <div style={{ flex: "0.5", alignItems: "center" }}>
           <FontAwesomeIcon
             size="1x"
-            icon={faAngleDoubleRight}
+            icon={faFish}
             color="#828282"
           ></FontAwesomeIcon>
         </div>

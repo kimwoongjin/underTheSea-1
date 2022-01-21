@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     if (!container) {
       return res.status(404).json({ message: "The container is not found" });
     } else {
-      const { id, user_id, container_name, size, level, theme } =
+      const { id, user_id, container_name, size, level, theme, last_lv_up } =
         container.dataValues;
       const fish_info_list = await container_fishes.findAll({
         where: { container_id },
@@ -128,6 +128,7 @@ module.exports = async (req, res) => {
         feed_list,
         ex_water_list,
         fish_list: fish_list_final,
+        last_lv_up,
       };
       console.log("NEW CONTAINER INFO FROM CONINFO", final);
 

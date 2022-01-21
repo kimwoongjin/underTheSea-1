@@ -38,6 +38,13 @@ const CloseBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
 
 const ShowContainer = styled.div`
   width: 90%;
@@ -64,6 +71,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -81,6 +91,9 @@ const Img = styled.img`
   :visited {
     background: #e5e5e5;
     border-radius: 5px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 20%;
   }
 `;
 
@@ -100,6 +113,9 @@ const ImgName = styled.div`
     css`
       color: #108dee;
     `};
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Btn = styled.button`
@@ -141,12 +157,14 @@ function FeedingInput({ handleFeedAddRequest, handleFoodtype, feedingInfo }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              // size="2x"
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>
