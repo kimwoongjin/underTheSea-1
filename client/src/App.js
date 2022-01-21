@@ -42,7 +42,6 @@ function App() {
         console.log(res);
         localStorage.setItem("accessToken", res.data.data.token);
         dispatch(loginAction);
-        console.log(isLogin, "???????????????");
       });
   };
 
