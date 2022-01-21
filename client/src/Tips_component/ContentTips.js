@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const PostTitle = styled.div`
   width: 95%;
-  font-size: 2rem;
-  margin-top: 20px;
+  font-size: 1.6rem;
+  margin-top: 40px;
   /* border: 1px solid red; */
   font-family: "Kfont";
   font-weight: bold;
@@ -12,15 +12,16 @@ const PostTitle = styled.div`
 
 const WriterCover = styled.div`
   width: 95%;
-  margin-top: 10px;
+  margin-top: 30px;
   display: flex;
-  border-bottom: 4px solid #108dee;
+  border-bottom: 3px solid #a7d9ff;
   /* border: 1px solid red; */
 `;
 
 const WriterIcon = styled.div`
-  width: 3.5%;
-  border-radius: 50px;
+  width: 2.7vw;
+  height: 5vh;
+  border-radius: 60px;
   border: 1px solid gray;
   text-align: center;
   justify-content: center;
@@ -31,12 +32,12 @@ const WriterInfo = styled.div`
   width: 90%;
   /* border: 1px solid red; */
   display: column;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  margin-bottom: 20px;
+  margin-left: 9px;
 `;
 const Writer = styled.div`
   width: 100%;
-  color: #808080;
+  /* color: #808080; */
   font-size: 1rem;
   font-family: "Kfont";
   /* border: 1px solid red; */
@@ -55,11 +56,12 @@ const Content = styled.div`
   width: 95%;
   height: 300px;
   padding-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 30px;
   font-family: "Kfont";
-  border-bottom: 4px solid #108dee;
+  border-bottom: 3px solid #a7d9ff;
   white-space: normal;
   align-items: center;
+  margin-bottom: 2%;
 `;
 
 const ContentBox = styled.div`

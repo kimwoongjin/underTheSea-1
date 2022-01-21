@@ -36,7 +36,6 @@ const ManImg = styled.img`
   bottom: 18%;
 `;
 const CoralL = styled.img`
-  z-index: 999;
   position: absolute;
   width: 15%;
   height: 27%;
@@ -44,7 +43,6 @@ const CoralL = styled.img`
   left: 2%;
 `;
 const CoralS = styled.img`
-  z-index: 999;
   position: absolute;
   width: 10%;
   height: 18%;
@@ -54,7 +52,6 @@ const CoralS = styled.img`
 
 const Fish = styled.img`
   position: absolute;
-  z-index: 999;
   width: 13%;
   height: 15%;
   top: 7%;
