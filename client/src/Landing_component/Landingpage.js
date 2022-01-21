@@ -12,6 +12,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  #flightPath {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2px;
+  }
 `;
 
 const SeaWeed = styled.img`
@@ -52,18 +58,36 @@ const BubbleR = styled.img`
   right: 11%;
   bottom: 18%;
 `;
+const rotate = keyframes`
+  50% {
+    transform: translateX(500px) translateY(-100px);
+  }
+  30%{ transform: translateX(350px);
+  }
+`;
+const jelly = keyframes`
+  50% {
+    transform: translateY(-80px);
+  }
+  20% { 
+    transform: translateX(50px);
+  }
+`;
 
 const Shark = styled.img`
   position: absolute;
-  left: 2%;
+  left: -15%;
   width: 13%;
   top: 22%;
+  animation: ${rotate} 7s linear infinite;
 `;
+
 const JellyFish = styled.img`
   width: 9%;
   position: absolute;
   left: 24%;
   bottom: 30%;
+  animation: ${jelly} 4s linear infinite;
 `;
 
 const Fish1 = styled.img`
@@ -104,6 +128,7 @@ const Contents = styled.div`
 
 function Landingpage() {
   gsap.registerPlugin(ScrollTrigger);
+
   return (
     <Container>
       <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />

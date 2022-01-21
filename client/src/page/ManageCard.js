@@ -14,14 +14,17 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border: 1px solid black;
+  margin-top: 5%;
 `;
 const CardContainer = styled.div`
-  width: 60%;
+  width: 75%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 10%;
+  justify-content: space-evenly;
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
