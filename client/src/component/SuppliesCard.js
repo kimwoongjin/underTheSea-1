@@ -11,7 +11,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 35px;
   transition: all 0.3s;
   :hover {
     transform: matrix(1, 0, 0, 1, 0, -10);
@@ -34,7 +33,6 @@ const Img = styled.img`
 const Title = styled.div`
   width: 260px;
   height: 40px;
-  /* border: 1px solid black; */
   font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
@@ -47,7 +45,6 @@ const Title = styled.div`
 const Content = styled.div`
   width: 260px;
   height: 140px;
-  /* border: 1px solid black; */
   font-family: "Kfont";
   border-radius: 10px;
   background: #e5e5e5;

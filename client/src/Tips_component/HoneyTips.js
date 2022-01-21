@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 const TopCover = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +31,7 @@ const TopCover = styled.div`
   flex-direction: column;
   /* background-image: url("투명바다1.png"); */
   overflow: hidden;
-  box-shadow: 0px 2px 10px gray;
+  /* box-shadow: 0px 2px 10px gray; */
 `;
 
 const Img = styled.img`
@@ -67,23 +67,19 @@ const TitleContainer = styled.div`
 
 const Title = styled.div`
   width: 100%;
-  /* border: 1px solid blue; */
   font-size: 3rem;
   font-weight: bold;
   margin-top: 10%;
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  /* border-bottom: 3px solid black; */
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
-  /* color: #4a4a4a; */
   font-size: 1.25rem;
   margin-bottom: 50px;
   font-weight: 500;
   color: #808080;
-  /* border: 1px solid red; */
 `;
 
 const BtnContainer = styled.div`

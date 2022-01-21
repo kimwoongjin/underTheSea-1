@@ -1,21 +1,19 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   position: relative;
-  left: 3%;
-  width: 28%;
-  height: 390px;
-  box-shadow: 0px 0px 20px #adb5bd;
   margin-right: 5%;
-  margin-bottom: 80px;
+  width: 280px;
+  height: 380px;
+  box-shadow: 0px 0px 20px #adb5bd;
   border-radius: 20px;
   transition: all 0.3s;
   :hover {
@@ -25,7 +23,6 @@ const Container = styled.div`
   }
   @media screen and (max-width: 768px) {
     width: 60%;
-    /* height: 12vh; */
   }
 `;
 
@@ -38,7 +35,7 @@ const Contents = styled.div`
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 55%;
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -49,26 +46,26 @@ const ImgContainer = styled.div`
 `;
 const Img = styled.img`
   width: 105%;
-  height: 105%;
+  height: 113%;
 `;
 const Content = styled.div`
-  position: relative;
+  /* border: 1px solid red; */
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 50%;
+  height: 45%;
   box-sizing: border-box;
-  line-height: 200%;
-  margin: auto;
+  /* line-height: 250%; */
   .delete {
     position: absolute;
     width: 20%;
-    height: 15%;
-    bottom: 5%;
+    height: 5%;
+    top: 5%;
     right: 5%;
     font-size: 0.9rem;
     border: none;
-    background: #57b7ff;
     border-radius: 5px;
     color: white;
     font-weight: bold;
@@ -81,13 +78,25 @@ const Content = styled.div`
 `;
 
 const ContainerInfoBox = styled.div`
-  width: 100%;
-  height: 65%;
-  margin-top: 10px;
+  width: 90%;
+  height: 70%;
+  /* border: 1px dashed red; */
+  /* line-height: 250%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+`;
+
+const DeleteBtn = styled.div`
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  :hover {
+    cursor: pointer;
+    color: #108dee;
+  }
 `;
 
 const Name = styled.div`
@@ -100,9 +109,8 @@ const Name = styled.div`
 `;
 
 const TextCover = styled.div`
-  width: 90%;
+  width: 60%;
   display: flex;
-  border: 1px solid #57b7ff;
   border-radius: 5px;
 `;
 
@@ -114,9 +122,7 @@ const Text = styled.div`
   line-height: 170%;
   width: 40%;
   font-weight: 600;
-  color: white;
   font-size: 1.2rem;
-  background: #57b7ff;
 `;
 
 const Size = styled.div`
@@ -145,7 +151,6 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const navigate = useNavigate();
   const month = new Date().getMonth() + 1;
   const accessToken = localStorage.getItem("accessToken");
-
   const DeleteHandler = () => {
     axios
       .delete(`http://localhost:80/container/${id}`, {
@@ -181,11 +186,11 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
-          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
           <ContainerInfoBox>
             <Name>{name}</Name>
+
             <TextCover>
               <Text>크기</Text>
               <Size>{size}L</Size>
@@ -195,9 +200,12 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
               <Theme>{theme}</Theme>
             </TextCover>
           </ContainerInfoBox>
-          <button className="delete" onClick={DeleteHandler}>
+          <DeleteBtn onClick={DeleteHandler}>
+            <FontAwesomeIcon icon={faTimes} size="2x" color="#e5e5e5" />
+          </DeleteBtn>
+          {/* <button className="delete" onClick={DeleteHandler}>
             삭제
-          </button>
+          </button> */}
         </Content>
       </Contents>
     </Container>

@@ -23,14 +23,13 @@ const Auto = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
   width: 100%;
   height: 7.5vh;
   position: relative;
   margin-top: 5%;
   flex-direction: column;
   padding-top: 2%;
-
+  border: 1px solid red;
   .bottom {
     width: 30vw;
     display: flex;
@@ -54,7 +53,6 @@ const InputContainer = styled.div`
 
   .fish-input {
     position: relative;
-    /* flex: 1 0 0; */
     background-color: transparent;
     margin: 0%;
     padding: 0;
@@ -65,14 +63,19 @@ const InputContainer = styled.div`
     font-family: "Kfont";
     text-align: center;
     border-bottom: 2px solid #108dee;
+    /* border: 1px solid red; */
   }
 
   .delete-button {
     font-size: 1.5rem;
     font-weight: bold;
-    position: relative;
+    position: absolute;
+    left: 2px;
+    bottom: 7px;
+    color: #e5e5e5;
+    cursor: pointer;
     /* border: 1px solid black; */
-    padding: 0.8% 0 3%;
+    /* padding: 0.8% 0 3%; */
   }
 `;
 

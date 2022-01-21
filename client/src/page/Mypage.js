@@ -24,13 +24,11 @@ const UserInfo = styled.div`
   .Box {
     width: 100%;
     height: 52vh;
-    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     background: #ace0ff;
   }
   .mypage {
-    /* border: 1px solid black; */
     position: relative;
     width: 10vw;
     height: 6vh;
@@ -39,7 +37,6 @@ const UserInfo = styled.div`
   }
 
   .userImg {
-    /* border: 1px solid black; */
     position: relative;
     left: 15%;
     width: 28vw;
@@ -52,7 +49,6 @@ const UserInfo = styled.div`
     padding: 0;
   }
   .userGreeting {
-    /* border: 1px solid black; */
     position: relative;
     width: 30vw;
     height: 5vh;
@@ -76,13 +72,11 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   height: 25vh;
-  /* border: 1px solid black; */
   align-items: center;
   justify-content: center;
 `;
 const TitleContainer = styled.div`
   position: relative;
-  /* border: 1px solid black; */
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
@@ -97,7 +91,6 @@ const Title = styled.div`
   height: 8vh;
   font-size: 1.7rem;
   font-weight: bold;
-  /* border: 1px solid black; */
   justify-content: center;
   top: 63%;
   right: 8%;
@@ -109,7 +102,6 @@ const Box1 = styled.div`
   display: flex;
   width: 18vw;
   height: 4vh;
-  /* border: 1px solid black; */
   left: 22%;
   top: 8%;
 `;
@@ -142,7 +134,6 @@ const ContentContainer = styled.div`
 `;
 
 const Box3 = styled.div`
-  /* position: relative; */
   border: 1px solid #ace0ff;
   margin-top: 4%;
   width: 70vw;

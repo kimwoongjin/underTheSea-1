@@ -9,7 +9,7 @@ const Container = styled.div`
   margin-bottom: 40px;
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
-  margin-right: 35px;
+  /* margin-right: 35px; */
   flex-direction: column;
   align-items: center;
   transition: all 0.3s;
