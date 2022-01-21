@@ -22,10 +22,27 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 10%;
-
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
+`;
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 40vh;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Img = styled.img``;
+
+const Text = styled.div`
+  font-family: "Kfont";
+  font-weight: bold;
+  font-size: 1.25rem;
 `;
 
 const BtnCover = styled.div`
@@ -37,7 +54,6 @@ const BtnCover = styled.div`
   height: 150px;
   @media screen and (max-width: 768px) {
     justify-content: center;
-    /* border: 1px solid red; */
   }
 `;
 
@@ -76,23 +92,26 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
 
       <CardContainer>
         {/* <Btn></Btn> */}
-        {containerList.map((container, idx) => {
-          return (
-            <ManageInfo
-              id={container.id}
-              key={idx}
-              name={container.container_name}
-              size={container.size}
-              theme={container.theme}
-              level={container.level}
-              handleCondata={handleCondata}
-            ></ManageInfo>
-          );
-        })}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
-        {/* <ManageAdd /> */}
+        {containerList.length !== 0 ? (
+          containerList.map((container, idx) => {
+            return (
+              <ManageInfo
+                id={container.id}
+                key={idx}
+                name={container.container_name}
+                size={container.size}
+                theme={container.theme}
+                level={container.level}
+                handleCondata={handleCondata}
+              ></ManageInfo>
+            );
+          })
+        ) : (
+          <EmptyBox>
+            <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/빈박스.png" />
+            <Text>수조를 등록해주세요!</Text>
+          </EmptyBox>
+        )}
       </CardContainer>
       {isAddContainerModal && <AddContainer />}
     </Container>
