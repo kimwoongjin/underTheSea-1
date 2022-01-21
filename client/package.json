@@ -14,6 +14,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
+    "howler": "^2.2.3",
     "moment": "^2.29.1",
     "next-redux-wrapper": "^7.0.5",
     "react": "^17.0.2",
@@ -25,6 +26,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.3",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

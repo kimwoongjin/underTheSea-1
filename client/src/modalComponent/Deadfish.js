@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import axios from "axios";
 
 const DarkBackGround = styled.div`
@@ -157,6 +156,7 @@ function Deadfish({ container_id }) {
               name="fish_name"
               onChange={handleInputValue}
               list="fishName"
+              autocomplete="off"
             />
             <datalist id="fishName">
               {fish_list2.map((el, idx) => (

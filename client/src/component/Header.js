@@ -11,6 +11,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import waterDrop from "./waterdrop.mp3";
 
 const Container = styled.div`
   /* box-shadow: 0px 0px 10px #adb5bd; */
@@ -171,7 +172,6 @@ const BtnContainer = styled.div`
 
 function Header() {
   const [status, setStatus] = useState(false);
-
   const onClickHandler = (e) => {
     setStatus((prevStatus) => (prevStatus ? false : true));
   };
@@ -212,33 +212,17 @@ function Header() {
         console.log(err);
       });
   };
-  const play = () => {
-    console.log("Play damm it!!");
-    var audio = document.getElementById("audio_play");
-    console.log("Play damm it!!");
-    if (audio.paused) {
-      audio.play();
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
 
   return (
     <Container>
-      <audio
-        id="audio_play"
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
-      ></audio>
       <Img
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer className="menu" onclick={play}>
+      <BtnContainer className="menu">
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide onclick={play}>가이드</Guide>{" "}
-          <audio id="audio_play" src="waterdrop.mp3"></audio>
+          <Guide>가이드</Guide>{" "}
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search>검색</Search>
@@ -249,8 +233,7 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage onclick={play}>관리</Manage>
-              <audio id="audio_play" src="waterdrop.mp3"></audio>
+              <Manage>관리</Manage>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "black" }}
