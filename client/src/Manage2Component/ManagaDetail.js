@@ -900,7 +900,7 @@ function ManageDetail({ condata, setCondata }) {
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  const imgSrcUrl = "${process.env.REACT_APP_API_URL}/level/" + conInfo.level;
+  const imgSrcUrl = `${process.env.REACT_APP_API_URL}/level/` + conInfo.level;
   return (
     <>
       <Header2 />

@@ -167,7 +167,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     navigate(`${id}`);
   };
-  const imgSrcUrl = "${process.env.REACT_APP_API_URL}/level/" + level;
+  const imgSrcUrl = `${process.env.REACT_APP_API_URL}/level/` + level;
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
     // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
