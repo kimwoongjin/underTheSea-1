@@ -18,7 +18,6 @@ import SignUp from "./modalComponent/SignUp";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { loginAction, loginModalOnAction } from "./store/actions";
-import { Howl, Howler } from "howler";
 
 function App() {
   const state = useSelector((state) => state.modalReducer);

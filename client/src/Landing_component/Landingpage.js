@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import "./Landingpage.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Container = styled.div`
   width: 100vw;
@@ -101,6 +103,7 @@ const Contents = styled.div`
 `;
 
 function Landingpage() {
+  gsap.registerPlugin(ScrollTrigger);
   return (
     <Container>
       <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />

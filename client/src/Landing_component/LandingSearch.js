@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./Landingpage.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
@@ -14,6 +18,15 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   background: linear-gradient(to top, #d2f7ff, #70d6ff);
+  .txt1 {
+    z-index: 999;
+  }
+  .txt2 {
+    z-index: 999;
+  }
+  .txt3 {
+    z-index: 999;
+  }
 `;
 
 // const Sqaure = styled.div`
@@ -69,27 +82,19 @@ const TextContainer = styled.div`
 const SearchTitle = styled.div`
   /* border: 1px solid blue; */
   /* position: absolute; */
-  z-index: 999;
+  z-index: 900;
   color: black;
   font-size: 2rem;
   display: flex;
-  /* top: 63%; */
-  /* left: 34%; */
   margin-top: 5px;
   font-family: "SCBfont";
 `;
 
 const SearchText = styled.div`
-  /* border: 1px solid red; */
-  /* position: absolute; */
   text-align: left;
-  z-index: 999;
-  /* margin-right: 10px; */
-  /* font-weight: 650; */
+  z-index: 900;
   color: #092011;
   font-size: 1.4rem;
-  /* top: 42%; */
-  /* left: 28%; */
   line-height: 150%;
   font-family: "Kfont";
 `;
@@ -105,6 +110,22 @@ const IconCover = styled.div`
 `;
 
 function LandingSearch() {
+  useEffect(() => {
+    const txtTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".txt1",
+        start: "100px 90%",
+        end: "top 20%",
+        // markers: true,
+        // markers: {startColor: "red", endColor: "blue", fontSize: "20px"},
+        toggleActions: "play none restart pause",
+      },
+    });
+    txtTimeline.from(".txt1", { opacity: 0, y: 50, duration: 1 });
+    txtTimeline.from(".txt2", { opacity: 0, y: 50, duration: 1 });
+    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
+  }, []);
+
   return (
     <Container>
       <ManImg
@@ -124,13 +145,15 @@ function LandingSearch() {
         alt="무리.png"
       />
       <TextContainer>
-        <MainText>물고기 검색</MainText>
+        <MainText className="txt1">물고기 검색</MainText>
         <SearchText>
-          다양한 물고기의 종류를 알고 싶으시다면<br></br>
-          어종명으로 검색해보세요.<br></br>자세한 정보를 알려드립니다.
+          <div className="txt1">
+            다양한 물고기의 종류를 알고 싶으시다면<br></br>
+            어종명으로 검색해보세요.<br></br>자세한 정보를 알려드립니다.
+          </div>
         </SearchText>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
-          <SearchTitle>
+          <SearchTitle className="txt2">
             Search
             <IconCover>
               <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
