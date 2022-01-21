@@ -70,7 +70,7 @@ const Select = styled.select`
   border-radius: 4px;
   left: 0;
   bottom: 15%;
-  border: 2px solid #108dee;
+  border: 2px solid #e5e5e5;
 
   /* -o-appearance: none;
   -webkit-appearance: none;
@@ -87,9 +87,9 @@ const InfoContainer = styled.div`
   width: 70%;
   height: 100%;
   display: flex;
-  /* justify-content: space-evenly; */
+  /* justify-content: space-between; */
   flex-wrap: wrap;
-  /* border: 2px dashed red; */
+  /* border: 1px solid red; */
   margin-bottom: 10%;
 `;
 

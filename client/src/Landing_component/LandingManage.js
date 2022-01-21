@@ -7,6 +7,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+import { Link } from "react-router-dom";
+import { signupModalOnAction } from "../store/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -51,12 +54,13 @@ const TextContainer = styled.div`
 
 const SearchTitle = styled.div`
   display: flex;
-  z-index: 999;
+  /* z-index: 999; */
   font-size: 1.8rem;
   font-weight: 650;
   color: #092011;
   /* font-family: "Kfont"; */
   font-family: "SCBfont";
+  cursor: pointer;
   margin-top: 5px;
 `;
 
@@ -85,6 +89,7 @@ const MainText = styled.div`
 
 const IconCover = styled.div`
   margin-left: 10px;
+  cursor: pointer;
 `;
 
 function LandingManage() {
@@ -117,6 +122,9 @@ function LandingManage() {
     });
   }, []);
 
+  const state = useSelector((state) => state.authReducer);
+  const { isLogin } = state;
+  const dispatch = useDispatch();
   return (
     <Container>
       <WomanImg
@@ -133,12 +141,24 @@ function LandingManage() {
         <SearchText className="txt3">
           어항 관리가 필요하세요?<br></br>Under the Sea에서 도와드립니다.
         </SearchText>
-        <SearchTitle className="txt4">
-          Management
-          <IconCover>
-            <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
-          </IconCover>
-        </SearchTitle>
+
+        {isLogin ? (
+          <Link style={{ textDecoration: "none", color: "black" }} to="/manage">
+            <SearchTitle>
+              Management
+              <IconCover>
+                <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
+              </IconCover>
+            </SearchTitle>
+          </Link>
+        ) : (
+          <SearchTitle onClick={() => dispatch(signupModalOnAction)}>
+            Management
+            <IconCover>
+              <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
+            </IconCover>
+          </SearchTitle>
+        )}
       </TextContainer>
       {/* <Sqaure /> */}
     </Container>

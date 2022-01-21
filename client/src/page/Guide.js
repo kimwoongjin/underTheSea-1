@@ -19,6 +19,7 @@ const BigBox = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   :hover .overlay {
     height: 100%;
   }

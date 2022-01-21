@@ -22,7 +22,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 10%;
 `;
 const TitleCover = styled.div`
@@ -49,11 +49,12 @@ const Text = styled.div`
 
 const BtnCover = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   width: 60%;
   height: 100%;
   height: 150px;
+  /* border: 1px solid red; */
 `;
 
 const Btn = styled.button`
