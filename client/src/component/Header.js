@@ -235,20 +235,14 @@ function Header() {
 
   return (
     <Container toggle={toggle}>
-      <audio
-        id="audio_play"
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
-      ></audio>
       <Img
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer className="menu" onclick={play} toggle={toggle}>
+      <BtnContainer className="menu" toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide onclick={play} toggle={toggle}>
-            가이드
-          </Guide>
+          <Guide toggle={toggle}>가이드</Guide>
           <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
@@ -260,9 +254,7 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage onclick={play} toggle={toggle}>
-                관리
-              </Manage>
+              <Manage toggle={toggle}>관리</Manage>
               <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
