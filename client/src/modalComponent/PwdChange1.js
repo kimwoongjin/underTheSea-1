@@ -305,6 +305,7 @@ function PwdChange({ handleOff }) {
             icon={faTimes}
             size="2x"
             type="button"
+            color="#e5e5e5"
             onClick={handleOff}
           />
         </CloseBtnContainer>
