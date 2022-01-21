@@ -18,6 +18,7 @@ const DarkBackGround = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
+   z-index: 999;
 `;
 
 const ModalContainer = styled.div`
@@ -40,6 +41,7 @@ const CloseBtnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
+
 `;
 const Title = styled.div`
   width: 40%;
@@ -51,12 +53,14 @@ const Title = styled.div`
   padding-bottom: 10px;
   border-bottom: 2px solid #108dee;
   margin-bottom: 30px;
+
 `;
 const Form = styled.form`
   width: 80%;
   height: 40%;
   display: flex;
   flex-direction: column;
+ 
 `;
 const Email = styled.input`
   width: calc(100%-10px);
@@ -64,6 +68,7 @@ const Email = styled.input`
   padding: 5px;
   box-sizing: border-box;
   margin-bottom: 20px;
+ 
 `;
 
 const Pwd = styled.input`
@@ -72,6 +77,7 @@ const Pwd = styled.input`
   padding: 5px;
   box-sizing: border-box;
   margin-bottom: 20px;
+
 `;
 
 const LoginBtn = styled.button`
@@ -86,6 +92,7 @@ const LoginBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+ 
   :hover::before {
     content: "";
     position: absolute;
@@ -111,6 +118,7 @@ const GoogleBtn = styled.a`
   font-weight: bold;
   box-sizing: border-box;
   position: relative;
+
   :hover::before {
     content: "";
     position: absolute;
@@ -122,6 +130,7 @@ const GoogleBtn = styled.a`
   }
 `;
 const GoogleIcon = styled.img`
+z-index: 999;
   width: 30%;
 `;
 const Warning = styled.div`
