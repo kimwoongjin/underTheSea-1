@@ -111,11 +111,11 @@ const HabitatShow = styled.div`
   height: 100%;
 `;
 
-
-function ManageDetInfo({ conInfo }) {
+function ManageDetInfo() {
+  let conInfo = JSON.parse(localStorage.getItem("conInfo"));
   return (
     <>
-      {condata.fish_list.map((el, idx) => {
+      {conInfo.fish_list.map((el, idx) => {
         return (
           <ContainerS key={idx}>
             <DetailImg>
