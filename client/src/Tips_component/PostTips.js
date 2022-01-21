@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
@@ -21,18 +21,31 @@ const Container = styled.div`
 
 const TopCover = styled.div`
   width: 100%;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   /* border-bottom: 2px solid #808080; */
   flex-direction: column;
-  /* background-image: url("투명바다1.png"); */
+  overflow: hidden;
+  box-shadow: 0px 2px 10px gray;
+`;
+
+const Img = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  z-index: -1;
 `;
 
 const TitleContainer = styled.div`
-  width: 15%;
+  width: 30%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   /* border: 1px solid green; */
   position: relative;
 `;
@@ -40,18 +53,21 @@ const TitleContainer = styled.div`
 const Title = styled.div`
   width: 100%;
   /* border: 1px solid blue; */
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-top: 60%;
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-family: "Kfont";
   padding-bottom: 5px;
+  margin-top: 10%;
   box-sizing: border-box;
-  /* border-bottom: 5px solid #108dee; */
   text-align: center;
 `;
 const SubTitle = styled.div`
-  color: #808080;
+  margin-top: 15px;
+  /* color: #4a4a4a; */
   font-size: 1.25rem;
   margin-bottom: 50px;
+  font-weight: 500;
+  color: #808080;
   /* border: 1px solid red; */
 `;
 
@@ -143,6 +159,7 @@ function PostTips() {
   const navigate = useNavigate();
   const params = useParams();
   const tip_id = params.tip_id;
+  const { pathname } = useLocation();
   const state = useSelector((state) => state.authReducer);
   const { isLogin } = state;
   const accessToken = localStorage.getItem("accessToken");
@@ -150,6 +167,7 @@ function PostTips() {
 
   // 선택한 게시물 댓글 렌더링
   useEffect(() => {
+    window.scroll(0, 0);
     handlePostTip(tip_id);
     handleComment();
   }, []);
@@ -263,6 +281,7 @@ function PostTips() {
       <Header2></Header2>
       <Container>
         <TopCover>
+          <Img src="/게시판베너사진.jpeg"></Img>
           <TitleContainer>
             <Title>정보공유 게시판</Title>
           </TitleContainer>
