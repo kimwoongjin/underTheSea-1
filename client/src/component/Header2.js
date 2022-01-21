@@ -22,11 +22,7 @@ const Container = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    ${(props) =>
-      props.toggle &&
-      css`
-        height: 55vh;
-      `}
+    /* height: 12vh; */
   }
 `;
 
@@ -34,6 +30,10 @@ const Img = styled.img`
   width: 13vw;
   margin-left: 1%;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 17vw;
+    margin-top: 1%;
+  }
 `;
 
 const Login = styled.div`
@@ -108,6 +108,7 @@ const Signout = styled.div`
   }
   @media screen and (max-width: 768px) {
     margin-bottom: 2%;
+    box-sizing: border-box;
   }
 `;
 
@@ -127,10 +128,7 @@ const Search = styled.div`
         justify-content: center;
         align-items: center;
         border-radius: 5px;
-        width: 90%;
-        :hover {
-          background: #e5e5e5;
-        }
+        /* width: 90%; */
       `}
   }
 `;
@@ -146,9 +144,9 @@ const Guide = styled.div`
 const Bars = styled.div`
   position: absolute;
   display: none;
-  /* font-size: 20px; */
+  font-size: 20px;
   /* border: 1px solid red; */
-  top: 16px;
+  top: 20px;
   right: 32px;
   cursor: pointer;
   color: #e5e5e5;
@@ -171,8 +169,9 @@ const BtnContainer = styled.div`
     ${(props) =>
       props.toggle &&
       css`
-        border: 1px solid red;
-        margin-top: 25px;
+        /* border: 1px solid red; */
+        margin-top: 3vh;
+        margin-right: 0;
         display: flex;
         width: 100%;
         background: white;
@@ -192,7 +191,9 @@ function Header2() {
     setStatus((prevStatus) => (prevStatus ? false : true));
   };
   //========================================================================
-
+  const showToggle = () => {
+    setToggle(!toggle);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
@@ -251,7 +252,7 @@ function Header2() {
         alt=""
         onClick={goToHome}
       />
-      <BtnContainer className="menu" onclick={play}>
+      <BtnContainer className="menu" onclick={play} toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide onclick={play} toggle={toggle}>
             가이드
@@ -297,7 +298,7 @@ function Header2() {
         )}
         {/* <Signup onClick={() => dispatch(signupModalOnAction)}>회원가입</Signup> */}
       </BtnContainer>
-      <Bars toggle={toggle}>
+      <Bars toggle={toggle} onClick={showToggle}>
         <FontAwesomeIcon className="toogleBtn" icon={faBars}></FontAwesomeIcon>
       </Bars>
     </Container>
