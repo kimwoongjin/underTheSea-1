@@ -157,7 +157,10 @@ function SearchCurrent({ item }) {
       <Box id="box">
         <Front>
           <ImgContainer>
-            <Img src={"http://localhost:80" + item.fish_img} alt=""></Img>
+            <Img
+              src={process.env.REACT_APP_SERVER_API + item.fish_img}
+              alt=""
+            ></Img>
           </ImgContainer>
           <Content>
             <Name>{item.fish_name}</Name>

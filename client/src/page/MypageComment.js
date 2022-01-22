@@ -151,13 +151,12 @@ function MypageComment() {
   }, [pageNum]);
   const commentHandler = (page_num) => {
     axios
-      .get(`http://localhost:80/user/comments/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/comments/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
         setCommentInfo([...result.data.data]);
-        console.log(result.data);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {
           const page = new Array(page_length + 1).fill(0);

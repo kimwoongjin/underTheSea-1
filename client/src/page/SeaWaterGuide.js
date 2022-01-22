@@ -35,18 +35,33 @@ const Title = styled.div`
   width: 100vw;
   height: 40vh;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 2.5rem;
-  background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png");
+
+  /* background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png"); */
+  .main {
+    z-index: 99;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
   .sub {
+    z-index: 99;
     margin-top: 15px;
     font-size: 1.25rem;
     font-weight: 500;
     color: #26262f;
   }
+`;
+const Img = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 const SearchContainer = styled.div`
@@ -65,9 +80,7 @@ const Select = styled.select`
   bottom: 15%;
   border: 2px solid #e5e5e5;
 `;
-const Option = styled.option`
-  background: black;
-`;
+const Option = styled.option``;
 
 const InfoContainer = styled.div`
   width: 70%;
@@ -114,7 +127,9 @@ function SeaWaterGuide() {
       <Container>
         <Header2 />
         <Title>
-          Saltwater Guide
+          <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
+          <div className="main">Saltwater Guide</div>
+          {/* Saltwater Guide */}
           <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
         </Title>
         <SearchContainer>

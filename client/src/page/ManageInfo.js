@@ -153,7 +153,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const accessToken = localStorage.getItem("accessToken");
   const DeleteHandler = () => {
     axios
-      .delete(`http://localhost:80/container/${id}`, {
+      .delete(`${process.env.REACT_APP_SERVER_API}/container/${id}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -167,7 +167,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
 
   const sendCardInfo = async () => {
     const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
@@ -177,7 +177,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     navigate(`${id}`);
   };
-  const imgSrcUrl = "http://localhost:80/level/" + level;
+  const imgSrcUrl = `${process.env.REACT_APP_SERVER_API}/level/` + level;
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
     // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
