@@ -21,8 +21,8 @@ const Container = styled.div`
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
   }
-  @media screen and (max-width: 768px) {
-    width: 60%;
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 5%;
   }
 `;
 
