@@ -10,7 +10,7 @@ const Container = styled.div`
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
   flex-direction: column;
-  margin-right: 35px;
+  /* margin-right: 35px; */
   align-items: center;
   transition: all 0.3s;
   :hover {

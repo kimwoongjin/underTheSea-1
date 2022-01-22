@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ManageInfo from "./ManageInfo";
-import ManageAdd from "./ManageAdd";
-import axios from "axios";
 import AddContainer from "../modalComponent/AddContainer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addcontainerModalOnAction } from "../store/actions";
 
 const Container = styled.div`
@@ -21,15 +19,18 @@ const CardText = styled.div`
   border: 1px solid black;
 `;
 const CardContainer = styled.div`
-  width: 75%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  width: 70%;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  column-gap: 6%;
+  row-gap: 7%;
   align-items: center;
   margin-bottom: 10%;
-  justify-content: space-evenly;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 30% 30%;
+  }
+  @media screen and (max-width: 1100px) {
+    grid-template-columns: 30%;
   }
 `;
 const EmptyBox = styled.div`
@@ -53,23 +54,24 @@ const Text = styled.div`
 
 const BtnCover = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  width: 60%;
-  height: 100%;
-  height: 150px;
+  width: 70%;
+  height: 80%;
+  margin-bottom: 30px;
   @media screen and (max-width: 768px) {
     justify-content: center;
   }
 `;
 
 const Btn = styled.button`
-  width: 120px;
-  height: 50px;
+  width: 80px;
+  height: 40px;
   background: #108dee;
   border-style: none;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   position: relative;

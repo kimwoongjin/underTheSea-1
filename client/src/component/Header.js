@@ -24,7 +24,6 @@ const Container = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    /* height: 12vh; */
   }
 `;
 
@@ -171,13 +170,11 @@ const BtnContainer = styled.div`
     ${(props) =>
       props.toggle &&
       css`
-        /* border: 1px solid red; */
-        /* background: black; */
         margin-top: 3vh;
         margin-right: 0;
         display: flex;
         width: 100%;
-        background: white;
+        background: linear-gradient(to top, #70d6ff, #d2f7ff);
         align-items: center;
         flex-direction: column;
         height: 350px;
