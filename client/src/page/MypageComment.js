@@ -7,36 +7,39 @@ const Head = styled.div`
   display: flex;
   align-items: center;
   width: 55.5vw;
-  height: 5%;
+  height: 20%;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
   /* border: 1px solid black; */
   position: relative;
-  top: 10.8%;
+  left: 6%;
+  bottom: 3%;
   padding-bottom: 0.5%;
   box-sizing: border-box;
 
   .title {
     display: flex;
-    padding-left: 2%;
+    padding: 0 0 1% 2%;
     /* border: 1px solid black; */
     flex: 6;
     box-sizing: border-box;
     position: relative;
   }
   .comment {
-    flex: 4;
+    flex: 4.5;
     display: flex;
     box-sizing: border-box;
     position: relative;
+    padding-bottom: 1%;
   }
   .date {
     flex: 2;
     display: flex;
     box-sizing: border-box;
     position: relative;
+    padding-bottom: 1%;
   }
 `;
 const Container = styled.div`
@@ -47,7 +50,7 @@ const Container = styled.div`
   align-items: center;
   /* margin-bottom: 1px; */
   z-index: 100;
-  margin-top: 9%;
+  margin-top: 8%;
   /* border: 1px solid black; */
 `;
 
@@ -78,7 +81,7 @@ const Box = styled.div`
 `;
 
 const Box2 = styled.div`
-  flex: 4;
+  flex: 4.5;
   width: 30%;
   height: 50%;
   font-size: 0.9rem;
@@ -93,6 +96,7 @@ const Box1 = styled.div`
   width: 30%;
   height: 50%;
   font-size: 0.9rem;
+  color: gray;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
@@ -105,7 +109,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 9% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -197,11 +201,6 @@ function MypageComment() {
 
   return (
     <>
-      <Head>
-        <div className="title">게시글</div>
-        <div className="comment">댓글</div>
-        <div className="date">날짜</div>
-      </Head>
       <Container>
         {commentInfo.length === 0 ? (
           <>
@@ -215,6 +214,11 @@ function MypageComment() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">게시글</div>
+              <div className="comment">댓글</div>
+              <div className="date">날짜</div>
+            </Head>
             {commentInfo.map((el) => {
               const date = el.createdAt.split("T")[0];
               // console.log(el, "//////");
@@ -228,20 +232,20 @@ function MypageComment() {
                 </>
               );
             })}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {commentLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {commentLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
   // });

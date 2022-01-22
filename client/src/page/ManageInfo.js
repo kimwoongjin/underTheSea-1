@@ -10,8 +10,8 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
-  margin-right: 5%;
-  width: 280px;
+  margin: 15% 3%;
+  width: 270px;
   height: 380px;
   box-shadow: 0px 0px 20px #adb5bd;
   border-radius: 20px;

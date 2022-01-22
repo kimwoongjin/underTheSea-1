@@ -140,27 +140,29 @@ const CardContainer = styled.div`
 function Search() {
   const [fish, setFish] = useState([]); //첫 랜딩될 화면 페이지
   const [allFish, setAllFish] = useState([]); // 60개의 물고기 정보값
-  const [filteredFish, setFilteredFish] = useState([]); //매치된 이름을 통해 정보가 필터링 되어서 들어온다. [{}{}]
+  // const [filteredFish, setFilteredFish] = useState([]); //매치된 이름을 통해 정보가 필터링 되어서 들어온다. [{}{}]
   //==================================================================
   const [currentFish, setCurrentFIsh] = useState(false); //추천, 현재 상태
   const [hasText, setHasText] = useState(false); //인풋값 유무를 확인
   //==================================================================
-  const [input, setInput] = useState();
+  const [input, setInput] = useState([]);
   const [fishList, setFishList] = useState([]); //물고기 이름 리스트
-
+  const [search, setSearch] = useState([]);
   // 검색 받아오기===========================================================
 
   const gotoSearch = () => {
     axios
       .post(`http://localhost:80/fish/one`, { data: { fish_name: input } })
       .then((result) => {
-        console.log(result, "물고기 한마리");
+        setSearch(result.data.data);
+        // console.log(result.data.data, "물고기 한마리");
         setCurrentFIsh(true);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  // console.log(search, "물고기 한마리");
   // 60개 리스트 받아오기===========================================================
 
   useEffect(() => {
@@ -171,7 +173,6 @@ function Search() {
         },
       })
       .then((result) => {
-        // console.log(result.data.data.fish_data);
         setAllFish(result.data.data.fish_data);
       })
       .catch((err) => {
@@ -219,12 +220,11 @@ function Search() {
     const { value } = event.target;
     if (value.includes("\\")) return;
 
-    // input에 텍스트가 있는지 없는지 확인하는 코드
     value ? setHasText(true) : setHasText(false);
-    setInput(value); //
+    setInput(value);
 
-    const matchFish = allFish.filter((fish) => fish.fish_name.match(value));
-    setFilteredFish(matchFish);
+    // const matchFish = allFish.filter((fish) => fish.fish_name.match(value));
+    // setFilteredFish(matchFish);
   };
 
   const handleDeleteButton = () => {
@@ -282,7 +282,7 @@ function Search() {
       <Container>
         {currentFish ? (
           <CardContainer>
-            <SearchInfo filteredFish={filteredFish} />
+            <SearchInfo filteredFish={search} />
           </CardContainer>
         ) : (
           <CardContainer>
