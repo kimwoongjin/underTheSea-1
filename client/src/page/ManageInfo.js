@@ -10,9 +10,9 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
-  margin: 15% 3%;
+  margin: 2% 3% 5%;
   width: 270px;
-  height: 380px;
+  height: 375px;
   box-shadow: 0px 0px 20px #adb5bd;
   border-radius: 20px;
   transition: all 0.3s;
@@ -35,7 +35,7 @@ const Contents = styled.div`
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 55%;
+  height: 53%;
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -45,8 +45,10 @@ const ImgContainer = styled.div`
   border-top-right-radius: 20px;
 `;
 const Img = styled.img`
-  width: 105%;
-  height: 113%;
+  width: 102%;
+  height: 115%;
+  position: relative;
+  top: 2%;
 `;
 const Content = styled.div`
   /* border: 1px solid red; */
@@ -77,26 +79,26 @@ const Content = styled.div`
   }
 `;
 
+const DeleteBtn = styled.div`
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  :hover {
+    cursor: pointer;
+    color: #108dee;
+  }
+`;
+
 const ContainerInfoBox = styled.div`
   width: 90%;
-  height: 70%;
+  height: 80%;
   /* border: 1px dashed red; */
   /* line-height: 250%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-`;
-
-const DeleteBtn = styled.div`
-  /* border: 1px solid red; */
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  :hover {
-    cursor: pointer;
-    color: #108dee;
-  }
 `;
 
 const Name = styled.div`
@@ -109,42 +111,40 @@ const Name = styled.div`
 `;
 
 const TextCover = styled.div`
-  width: 60%;
+  width: 90%;
   display: flex;
   border-radius: 5px;
+  /* border: 1px solid black; */
 `;
 
 const Text = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
   width: 40%;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 `;
 
 const Size = styled.div`
   display: flex;
-  width: 60%;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 5px;
+  background: #e1e1e1;
 `;
 
 const Theme = styled.div`
   display: flex;
-  width: 60%;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  background: #e1e1e1;
 `;
 
 function ManageInfo({ id, name, size, theme, level, handleCondata }) {
@@ -192,16 +192,16 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
             <Name>{name}</Name>
 
             <TextCover>
-              <Text>크기</Text>
+              <Text>어항 크기 :</Text>
               <Size>{size}L</Size>
             </TextCover>
             <TextCover>
-              <Text>테마</Text>
+              <Text>수조 테마 :</Text>
               <Theme>{theme}</Theme>
             </TextCover>
           </ContainerInfoBox>
           <DeleteBtn onClick={DeleteHandler}>
-            <FontAwesomeIcon icon={faTimes} size="2x" color="#e5e5e5" />
+            <FontAwesomeIcon icon={faTimes} size="1x" />
           </DeleteBtn>
           {/* <button className="delete" onClick={DeleteHandler}>
             삭제

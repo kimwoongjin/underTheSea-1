@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 140vh;
   /* border: 1px solid black; */
   display: flex;
   justify-content: center;
@@ -31,24 +31,24 @@ const Container = styled.div`
 
 const ManImg = styled.img`
   position: absolute;
-  width: 33%;
-  height: 63%;
+  width: 37%;
+  height: 54%;
   right: 10%;
-  bottom: 18%;
+  bottom: 12%;
 `;
 const CoralL = styled.img`
-  position: absolute;
+  position: relative;
   width: 12%;
-  height: 24%;
-  bottom: 3%;
-  left: 2%;
+  height: 16%;
+  top: 32%;
+  right: 38%;
 `;
 const CoralS = styled.img`
-  position: absolute;
+  position: relative;
   width: 8%;
-  height: 16%;
-  bottom: 3%;
-  left: 14%;
+  height: 11%;
+  top: 34%;
+  right: 38%;
 `;
 
 // const Fish = styled.img`
@@ -62,6 +62,7 @@ const CoralS = styled.img`
 const TextContainer = styled.div`
   position: absolute;
   left: 15%;
+  top: 45%;
   display: flex;
   flex-direction: column;
   /* border: 2px dashed red; */
@@ -105,7 +106,7 @@ function LandingSearch() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt1",
-        start: "100px 75%",
+        start: "80px 80%",
         end: "top 20%",
         // markers: true,
         toggleActions: "play none restart pause",
@@ -117,7 +118,7 @@ function LandingSearch() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt1",
-        start: "100px 80%",
+        start: "80px 80%",
         end: "top 20%",
         // markers: true,
         toggleActions: "play none restart pause",

@@ -73,7 +73,7 @@ const ContainerS = styled.div`
   border-radius: 10px;
   width: 50%;
   height: 20vh;
-  margin-bottom: 7%;
+  margin-bottom: 3%;
   /* @media screen and (max-width: 768px) {
     flex-direction: column;
   } */
@@ -173,7 +173,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 15%;
+  margin-bottom: 12%;
 `;
 
 const FishCardContainer = styled.div`
@@ -182,7 +182,7 @@ const FishCardContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-bottom: 12%;
 `;
 
 const Level = styled.div`
@@ -603,12 +603,12 @@ function ManageDetail({ condata, setCondata }) {
     });
     localStorage.setItem("finalList", JSON.stringify(final_list));
     finalList = JSON.parse(localStorage.getItem("finalList"));
-    console.log(
-      "UpdateFinalList called and finalList is:",
-      finalList,
-      "and conInfo is:",
-      conInfo
-    );
+    // console.log(
+    //   "UpdateFinalList called and finalList is:",
+    //   finalList,
+    //   "and conInfo is:",
+    //   conInfo
+    // );
   };
   //
   // return 값 없음. 바로 ExWaterObj 갱신
@@ -678,12 +678,12 @@ function ManageDetail({ condata, setCondata }) {
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
     finalList = JSON.parse(localStorage.getItem("finalList"));
     exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
-    console.log(
-      "calendarArr called and conInfo is:",
-      conInfo,
-      "and finalList is :",
-      finalList
-    );
+    // console.log(
+    //   "calendarArr called and conInfo is:",
+    //   conInfo,
+    //   "and finalList is :",
+    //   finalList
+    // );
 
     let result = [];
     let week = firstWeek;
