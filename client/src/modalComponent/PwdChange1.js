@@ -341,13 +341,12 @@ function PwdChange({ handleOff }) {
                   비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
                   {/* currentPwd.new_pwd.length >= 8  */}
                 </Warning>
-              ) : currentPwd.new_pwd.length < 8 ||
+              ) : currentPwd.new_pwd.length >= 8 &&
+                checkPassword(currentPwd.new_pwd) &&
                 checkPassword2(currentPwd.new_pwd) ? (
-                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
-              ) : checkPassword(currentPwd.new_pwd) ? (
                 <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
               ) : (
-                <Warning></Warning>
+                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
               )}
               <NewPwd2
                 placeholder="새 비밀번호 확인"
