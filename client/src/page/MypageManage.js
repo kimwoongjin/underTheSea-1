@@ -7,7 +7,7 @@ const Head = styled.div`
   display: flex;
   align-items: center;
   width: 55.5vw;
-  height: 6%;
+  height: 5vh;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
@@ -16,7 +16,6 @@ const Head = styled.div`
   position: relative;
   left: 6%;
   bottom: 3%;
-  padding-bottom: 0.5%;
   box-sizing: border-box;
 
   .title {
