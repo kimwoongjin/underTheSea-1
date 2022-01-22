@@ -12,11 +12,16 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 10%;
+  margin-top: 5%;
+  font-family: "Kfont";
 `;
 
 const CardText = styled.div`
   border: 1px solid black;
+  display: flex;
+  position: relative;
+  margin: 5% 0 5%;
+  font-size: 1.3rem;
 `;
 const CardContainer = styled.div`
   width: 70%;
@@ -25,7 +30,7 @@ const CardContainer = styled.div`
   column-gap: 6%;
   row-gap: 7%;
   align-items: center;
-  margin-bottom: 10%;
+  margin-bottom: 15%;
   @media screen and (max-width: 1200px) {
     grid-template-columns: 30% 30%;
   }
@@ -94,7 +99,9 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
 
   return (
     <Container>
-      <CardText></CardText>
+      <CardText>
+        수조 추가를 클릭하여 자신만의 관리 수조를 만들어보세요.
+      </CardText>
       <BtnCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
       </BtnCover>
