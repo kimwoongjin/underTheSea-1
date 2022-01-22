@@ -17,8 +17,8 @@ const Container = styled.div`
 `;
 
 const CardText = styled.div`
-  border: 1px solid black;
   display: flex;
+  font-family: "Kfont";
   position: relative;
   margin: 5% 0 5%;
   font-size: 1.3rem;
