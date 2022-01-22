@@ -14,7 +14,7 @@ const TitleContainer = styled.img`
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 60vh;
+  height: 65vh;
   @media screen and (max-width: 768px) {
     width: 0;
     height: 0;
