@@ -143,18 +143,6 @@ function MypageManage() {
     manageHandler(pageNum);
   }, [pageNum]);
 
-  // const handleClickValue = (e) => {
-  //   setClickPage(e.target.value);
-  // };
-
-  // console.log();
-
-  // const pageOnclick = () => {
-  //   const hello = containerId.filter((el) => el.container_id === clickPage);
-  //   console.log(clickPage, "???????");
-  //   navigate(`/manage/${clickPage}`);
-  // };
-
   const manageHandler = (page_num) => {
     axios
       .get(`${process.env.REACT_APP_SERVER_API}/user/manage/${page_num}`, {
