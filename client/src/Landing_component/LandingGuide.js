@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
-  height: 107vh;
+  height: 125vh;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: center;
@@ -23,14 +23,14 @@ const Container = styled.div`
 const WomanImgL = styled.img`
   position: absolute;
   width: 32%;
-  height: 47%;
+  height: 43%;
   right: 24%;
   bottom: 20%;
 `;
 const WomanImgR = styled.img`
   position: absolute;
   width: 25%;
-  height: 54%;
+  height: 50%;
   right: 5%;
   bottom: 40%;
 `;
@@ -64,7 +64,6 @@ const SearchTitle = styled.div`
   color: #092011;
   font-size: 1.7rem;
   font-weight: 650;
-  margin-top: 5px;
 `;
 
 const IconCover = styled.div`
@@ -76,7 +75,7 @@ function LandingGuide() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt5",
-        start: "100px 80%",
+        start: "100px 90%",
         end: "top 20%",
         toggleActions: "play none restart pause",
         // markers: true,
@@ -88,7 +87,7 @@ function LandingGuide() {
     const TL = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt5",
-        start: "100px 80%",
+        start: "100px 90%",
         end: "top 20%",
         toggleActions: "play none restart pause",
       },

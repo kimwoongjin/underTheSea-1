@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Head = styled.div`
   display: flex;
@@ -125,13 +126,29 @@ const PageBtn = styled.div`
 `;
 
 function MypageManage() {
+  const navigate = useNavigate();
   const [manageInfo, setManageInfo] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [manageLength, setManageLength] = useState([]);
+  const [containerId, setContainerId] = useState([]);
+  const [clickPage, setClickPage] = useState();
   const accessToken = localStorage.getItem("accessToken");
+
   useEffect(() => {
     manageHandler(pageNum);
   }, [pageNum]);
+
+  // const handleClickValue = (e) => {
+  //   setClickPage(e.target.value);
+  // };
+
+  // console.log();
+
+  // const pageOnclick = () => {
+  //   const hello = containerId.filter((el) => el.container_id === clickPage);
+  //   console.log(clickPage, "???????");
+  //   navigate(`/manage/${clickPage}`);
+  // };
 
   const manageHandler = (page_num) => {
     axios
@@ -140,6 +157,8 @@ function MypageManage() {
         withCredentials: true,
       })
       .then((result) => {
+        const id = result.data.data.map((el) => el.container_id);
+        setContainerId(id);
         setManageInfo([...result.data.data]);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {

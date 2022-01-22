@@ -202,7 +202,7 @@ function Landingpage() {
             left: 80,
             top: 800,
             width: 50,
-            animationDelay: "2s",
+            animationDelay: "1s",
           }}
         />
         <Bimg
@@ -220,7 +220,7 @@ function Landingpage() {
             left: 500,
             top: 700,
             width: 70,
-            animationDelay: "1s",
+            animationDelay: "1.5s",
           }}
         />
         <Bimg
@@ -230,7 +230,7 @@ function Landingpage() {
             left: 1000,
             top: 700,
             width: 60,
-            animationDelay: "3s",
+            animationDelay: "2s",
           }}
         />
         <Bimg
@@ -239,7 +239,7 @@ function Landingpage() {
           style={{
             left: 1200,
             top: 700,
-            animationDelay: "2s",
+            animationDelay: "1s",
           }}
         />
         <Bimg
@@ -248,7 +248,7 @@ function Landingpage() {
           style={{
             left: 1300,
             top: 700,
-            animationDelay: "1s",
+            animationDelay: "3s",
           }}
         />
       </Bubble>

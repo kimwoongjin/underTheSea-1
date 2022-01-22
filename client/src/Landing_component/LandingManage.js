@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,22 +24,23 @@ const Container = styled.div`
 const WomanImg = styled.img`
   position: absolute;
   width: 40%;
-  height: 70%;
+  height: 60%;
   left: 10%;
-  bottom: 17%;
+  bottom: 15%;
 `;
 
 const Fish = styled.img`
   position: absolute;
   width: 9%;
   height: 15%;
-  top: 20%;
+  top: 28%;
   right: 12%;
 `;
 
 const TextContainer = styled.div`
-  position: absolute;
-  right: 15%;
+  position: relative;
+  left: 23%;
+  top: 5%;
   display: flex;
   flex-direction: column;
 
@@ -86,7 +87,7 @@ function LandingManage() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "120px 90%",
+        start: "80px 95%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,
@@ -98,7 +99,7 @@ function LandingManage() {
     const txt = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "120px 60%",
+        start: "80px 95%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,
@@ -109,7 +110,7 @@ function LandingManage() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "120px 90%",
+        start: "115px 80%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,
