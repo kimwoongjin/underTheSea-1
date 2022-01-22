@@ -74,12 +74,13 @@ const Content = styled.div`
   font-family: "Kfont";
   border-bottom: 3px solid #a7d9ff;
   white-space: normal;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 2%;
 `;
 
 const ContentBox = styled.div`
   width: 90%;
+  white-space: pre-line;
   box-sizing: border-box;
   font-family: "Kfont";
 `;
@@ -117,6 +118,7 @@ function ContentTips({ tipData }) {
         ) : (
           <></>
         )}
+        <br></br>
         <ContentBox>{tipData.content}</ContentBox>
       </Content>
     </>

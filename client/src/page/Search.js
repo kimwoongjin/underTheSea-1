@@ -201,6 +201,7 @@ function Search() {
   // 추천 6개 카드  ===========================================================
 
   useEffect(() => {
+    window.scroll(0, 0);
     axios
       .get(`${process.env.REACT_APP_SERVER_API}/fish/all/6`, {
         headers: {

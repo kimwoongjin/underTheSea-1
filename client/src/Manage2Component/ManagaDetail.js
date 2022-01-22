@@ -884,6 +884,7 @@ function ManageDetail({ condata, setCondata }) {
   //
   // 함수 실행 부분
   useEffect(() => {
+    window.scroll(0, 0);
     UpdateConInfo();
     UpdateProgressBar();
     UpdateFinalList();

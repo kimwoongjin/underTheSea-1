@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const TopCover = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +29,6 @@ const TopCover = styled.div`
   /* border-bottom: 2px solid #808080; */
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0px 2px 10px gray;
 `;
 
 const Img = styled.img`

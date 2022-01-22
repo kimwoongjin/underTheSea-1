@@ -59,6 +59,11 @@ const BoxContainer = styled.div`
   bottom: 3%;
   margin-left: 6%;
   border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f4;
+    color: black;
+  }
 `;
 
 const Box = styled.div`
@@ -174,6 +179,13 @@ function MypageManage() {
       });
   };
 
+  // 컨테이너 선택시 이동
+  const selectCon = (e) => {
+    const id = e.target.id;
+    console.log(id);
+    navigate(`/manage/${id}`);
+  };
+
   // 이전페이지
   const goToPre = () => {
     if (pageNum === 1) {
@@ -219,8 +231,10 @@ function MypageManage() {
               // console.log(el, "?????????");
               return (
                 <>
-                  <BoxContainer>
-                    <Box key={idx}>{el.container_name}</Box>
+                  <BoxContainer key={idx}>
+                    <Box id={el.container_id} onClick={selectCon}>
+                      {el.container_name}
+                    </Box>
                     <Box2>{el.size}</Box2>
                   </BoxContainer>
                 </>

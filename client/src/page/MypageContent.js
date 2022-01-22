@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Head = styled.div`
   display: flex;
@@ -58,6 +59,11 @@ const BoxContainer = styled.div`
   bottom: 3%;
   margin-left: 6%;
   border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f4;
+    color: black;
+  }
 `;
 
 const Box = styled.div`
@@ -124,6 +130,7 @@ const PageBtn = styled.div`
 
 function MypageContent() {
   const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
   const [test, setTest] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [contentLength, setContentLength] = useState([]);
@@ -151,6 +158,12 @@ function MypageContent() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // 게시글 선택시 이동
+  const selectTip = (e) => {
+    const id = e.target.id;
+    navigate(`/posttips/${id}`);
   };
 
   // 이전페이지
@@ -208,8 +221,10 @@ function MypageContent() {
               // console.log(el, "//////");
               return (
                 <>
-                  <BoxContainer>
-                    <Box key={el.id}>{el.title}</Box>
+                  <BoxContainer key={el.id}>
+                    <Box id={el.tip_id} onClick={selectTip}>
+                      {el.title}
+                    </Box>
                     <Box1>{date}</Box1>
                   </BoxContainer>
                 </>

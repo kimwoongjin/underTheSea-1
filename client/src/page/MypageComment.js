@@ -157,7 +157,6 @@ function MypageComment() {
       })
       .then((result) => {
         setCommentInfo([...result.data.data]);
-        console.log(result.data);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {
           const page = new Array(page_length + 1).fill(0);

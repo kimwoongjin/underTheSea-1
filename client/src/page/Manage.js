@@ -56,6 +56,7 @@ function Manage({ getAllConInfo, handleCondata }) {
   const { isAddContainerModal } = state;
 
   useEffect(() => {
+    window.scroll(0, 0);
     axios
       .get(`${process.env.REACT_APP_SERVER_API}/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
