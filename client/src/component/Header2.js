@@ -5,7 +5,6 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
-  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +21,6 @@ const Container = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    /* height: 12vh; */
   }
 `;
 

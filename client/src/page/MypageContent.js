@@ -7,20 +7,21 @@ const Head = styled.div`
   display: flex;
   align-items: center;
   width: 55.5vw;
-  height: 5%;
+  height: 20%;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
   /* border: 1px solid black; */
   position: relative;
-  top: 10.8%;
+  left: 6%;
+  bottom: 3%;
   padding-bottom: 0.5%;
   box-sizing: border-box;
 
   .title {
     display: flex;
-    padding-left: 2%;
+    padding: 0 0 2% 3%;
     /* border: 1px solid black; */
     flex: 6;
     box-sizing: border-box;
@@ -31,6 +32,7 @@ const Head = styled.div`
     display: flex;
     box-sizing: border-box;
     position: relative;
+    padding-bottom: 2%;
     /* border: 1px solid black; */
   }
 `;
@@ -42,7 +44,7 @@ const Container = styled.div`
   align-items: center;
   /* margin-bottom: 1px; */
   z-index: 100;
-  margin-top: 9%;
+  margin-top: 8%;
 `;
 
 const BoxContainer = styled.div`
@@ -76,6 +78,7 @@ const Box1 = styled.div`
   width: 30%;
   height: 50%;
   font-size: 0.9rem;
+  color: gray;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
@@ -88,7 +91,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 9% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -179,10 +182,10 @@ function MypageContent() {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <div className="title">작성한 글 제목</div>
         <div className="date">날짜</div>
-      </Head>
+      </Head> */}
       <Container>
         {test.length === 0 ? (
           <>
@@ -196,6 +199,10 @@ function MypageContent() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">작성한 글 제목</div>
+              <div className="date">날짜</div>
+            </Head>
             {test.map((el) => {
               const date = el.created_at.split("T")[0];
               // console.log(el, "//////");
@@ -207,21 +214,21 @@ function MypageContent() {
                   </BoxContainer>
                 </>
               );
-            })}
+            })}{" "}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {contentLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {contentLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
   // });

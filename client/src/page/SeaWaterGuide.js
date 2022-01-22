@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import React, { useState } from "react";
-// 배경흰색헤더
 import Header2 from "../component/Header2";
-import GuideinfoCard from "../component/GuideinfoCard";
 import SkimmerCard from "../component/SkimmerCard";
 import SkimmerInfo from "../modalComponent/SkimmerInfo";
 import SuppliesCard from "../component/SuppliesCard";
@@ -33,26 +30,22 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Title = styled.div`
   width: 100vw;
-  height: 30vh;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: "Kfont";
-  /* margin-bottom: 140px; */
-  /* border: 1px solid red; */
   align-items: center;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 2.5rem;
   background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png");
-  /* background-image: url("투명바다2.png"); */
-  /* background-image: url("투명바다3.png"); */
   .sub {
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 1.25rem;
-    font-weight: normal;
-    font-family: "Kfont";
+    font-weight: 500;
+    color: #26262f;
   }
 `;
 
@@ -71,26 +64,24 @@ const Select = styled.select`
   left: 0;
   bottom: 15%;
   border: 2px solid #e5e5e5;
-
-  /* -o-appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; */
 `;
 const Option = styled.option`
   background: black;
-  /* color: red; */
-  /* border: 2px solid #108dee; */
 `;
 
 const InfoContainer = styled.div`
   width: 70%;
   height: 100%;
-  display: flex;
-  /* justify-content: space-between; */
-  flex-wrap: wrap;
-  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  column-gap: 55px;
   margin-bottom: 10%;
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 300px 300px;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 300px;
+  }
 `;
 
 function SeaWaterGuide() {
@@ -123,8 +114,8 @@ function SeaWaterGuide() {
       <Container>
         <Header2 />
         <Title>
-          Saltwater Fish Guide
-          <div className="sub">해수어는 어떻게 시작할까?</div>
+          Saltwater Guide
+          <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
         </Title>
         <SearchContainer>
           <Select name="카테고리" onChange={handleInputValue}>

@@ -17,13 +17,13 @@ const Container = styled.div`
 
 const TopCover = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   flex-direction: column;
-  box-shadow: 0px 2px 10px gray;
+  /* box-shadow: 0px 2px 10px gray; */
 `;
 
 const TopImg = styled.img`

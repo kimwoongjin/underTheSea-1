@@ -2,25 +2,26 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Head = styled.div`
   display: flex;
   align-items: center;
   width: 55.5vw;
-  height: 5%;
+  height: 5vh;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
   /* border: 1px solid black; */
   position: relative;
-  top: 10.8%;
-  padding-bottom: 0.5%;
+  left: 6%;
+  bottom: 3%;
   box-sizing: border-box;
 
   .title {
     display: flex;
-    padding-left: 2%;
+    padding-left: 1.5%;
     /* border: 1px solid black; */
     flex: 6;
     box-sizing: border-box;
@@ -93,7 +94,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 8% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -125,13 +126,29 @@ const PageBtn = styled.div`
 `;
 
 function MypageManage() {
+  const navigate = useNavigate();
   const [manageInfo, setManageInfo] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [manageLength, setManageLength] = useState([]);
+  const [containerId, setContainerId] = useState([]);
+  const [clickPage, setClickPage] = useState();
   const accessToken = localStorage.getItem("accessToken");
+
   useEffect(() => {
     manageHandler(pageNum);
   }, [pageNum]);
+
+  // const handleClickValue = (e) => {
+  //   setClickPage(e.target.value);
+  // };
+
+  // console.log();
+
+  // const pageOnclick = () => {
+  //   const hello = containerId.filter((el) => el.container_id === clickPage);
+  //   console.log(clickPage, "???????");
+  //   navigate(`/manage/${clickPage}`);
+  // };
 
   const manageHandler = (page_num) => {
     axios
@@ -140,6 +157,8 @@ function MypageManage() {
         withCredentials: true,
       })
       .then((result) => {
+        const id = result.data.data.map((el) => el.container_id);
+        setContainerId(id);
         setManageInfo([...result.data.data]);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {
@@ -179,10 +198,6 @@ function MypageManage() {
 
   return (
     <>
-      <Head>
-        <div className="title">어항 이름</div>
-        <div className="comment">수조크기</div>
-      </Head>
       <Container>
         {manageInfo.length === 0 ? (
           <>
@@ -196,6 +211,10 @@ function MypageManage() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">어항 이름</div>
+              <div className="comment">수조크기</div>
+            </Head>
             {manageInfo.map((el, idx) => {
               // console.log(el, "?????????");
               return (
@@ -207,20 +226,20 @@ function MypageManage() {
                 </>
               );
             })}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {manageLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {manageLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
 }

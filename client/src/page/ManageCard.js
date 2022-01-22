@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ManageInfo from "./ManageInfo";
-import ManageAdd from "./ManageAdd";
-import axios from "axios";
 import AddContainer from "../modalComponent/AddContainer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addcontainerModalOnAction } from "../store/actions";
 
 const Container = styled.div`
@@ -14,20 +12,34 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 5%;
+  font-family: "Kfont";
 `;
-const CardContainer = styled.div`
-  width: 60%;
-  height: 100%;
+
+const CardText = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  font-family: "Kfont";
+  position: relative;
+  margin: 10% 0 5%;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #828282;
+`;
+
+const CardContainer = styled.div`
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 10%;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  margin: 1% 0 15%;
+  flex-wrap: wrap;
+  @media screen and (max-width: 1200px) {
+    flex-wrap: wrap;
   }
 `;
+
 const EmptyBox = styled.div`
-  width: 100%;
+  width: 90%;
   height: 40vh;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
@@ -47,23 +59,23 @@ const Text = styled.div`
 
 const BtnCover = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  width: 60%;
-  height: 100%;
-  height: 150px;
+  width: 63%;
+  height: 80%;
   @media screen and (max-width: 768px) {
     justify-content: center;
   }
 `;
 
 const Btn = styled.button`
-  width: 120px;
-  height: 50px;
+  width: 77px;
+  height: 33px;
   background: #108dee;
   border-style: none;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   position: relative;
@@ -86,12 +98,15 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
 
   return (
     <Container>
+      <CardText>
+        수조 추가를 클릭하면 수조관리 카드가 생성됩니다.<br></br>
+        관리 카드를 통해 주간별 피딩 & 환수 기록을 확인할 수 있습니다.
+      </CardText>
       <BtnCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
       </BtnCover>
 
       <CardContainer>
-        {/* <Btn></Btn> */}
         {containerList.length !== 0 ? (
           containerList.map((container, idx) => {
             return (

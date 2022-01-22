@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 28%;
-  height: 390px;
+  position: relative;
+  margin: 2% 3% 5%;
+  width: 270px;
+  height: 375px;
   box-shadow: 0px 0px 20px #adb5bd;
-  margin-right: 40px;
-  margin-bottom: 40px;
   border-radius: 20px;
   transition: all 0.3s;
   :hover {
@@ -21,9 +21,8 @@ const Container = styled.div`
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
   }
-  @media screen and (max-width: 768px) {
-    width: 60%;
-    /* height: 12vh; */
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 5%;
   }
 `;
 
@@ -36,34 +35,39 @@ const Contents = styled.div`
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 53%;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 `;
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 102%;
+  height: 115%;
+  position: relative;
+  top: 2%;
 `;
 const Content = styled.div`
-  position: relative;
+  /* border: 1px solid red; */
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 50%;
+  height: 45%;
   box-sizing: border-box;
-  line-height: 200%;
-  margin: auto;
+  /* line-height: 250%; */
   .delete {
     position: absolute;
     width: 20%;
-    height: 15%;
-    bottom: 5%;
+    height: 5%;
+    top: 5%;
     right: 5%;
     font-size: 0.9rem;
     border: none;
-    background: #57b7ff;
     border-radius: 5px;
     color: white;
     font-weight: bold;
@@ -75,10 +79,22 @@ const Content = styled.div`
   }
 `;
 
+const DeleteBtn = styled.div`
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  :hover {
+    cursor: pointer;
+    color: #108dee;
+  }
+`;
+
 const ContainerInfoBox = styled.div`
-  width: 100%;
-  height: 65%;
-  margin-top: 10px;
+  width: 90%;
+  height: 80%;
+  /* border: 1px dashed red; */
+  /* line-height: 250%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,50 +113,44 @@ const Name = styled.div`
 const TextCover = styled.div`
   width: 90%;
   display: flex;
-  border: 1px solid #57b7ff;
   border-radius: 5px;
+  /* border: 1px solid black; */
 `;
 
 const Text = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
   width: 40%;
   font-weight: 600;
-  color: white;
-  font-size: 1.2rem;
-  background: #57b7ff;
+  font-size: 1.1rem;
 `;
 
 const Size = styled.div`
   display: flex;
-  width: 60%;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 5px;
+  background: #e1e1e1;
 `;
 
 const Theme = styled.div`
   display: flex;
-  width: 60%;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  background: #e1e1e1;
 `;
 
 function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const navigate = useNavigate();
   const month = new Date().getMonth() + 1;
   const accessToken = localStorage.getItem("accessToken");
-
   const DeleteHandler = () => {
     axios
       .delete(`${process.env.REACT_APP_SERVER_API}/container/${id}`, {
@@ -176,23 +186,26 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
-          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
           <ContainerInfoBox>
             <Name>{name}</Name>
+
             <TextCover>
-              <Text>크기</Text>
+              <Text>어항 크기 :</Text>
               <Size>{size}L</Size>
             </TextCover>
             <TextCover>
-              <Text>테마</Text>
+              <Text>수조 테마 :</Text>
               <Theme>{theme}</Theme>
             </TextCover>
           </ContainerInfoBox>
-          <button className="delete" onClick={DeleteHandler}>
+          <DeleteBtn onClick={DeleteHandler}>
+            <FontAwesomeIcon icon={faTimes} size="1x" />
+          </DeleteBtn>
+          {/* <button className="delete" onClick={DeleteHandler}>
             삭제
-          </button>
+          </button> */}
         </Content>
       </Contents>
     </Container>

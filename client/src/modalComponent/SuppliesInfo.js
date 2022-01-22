@@ -18,7 +18,7 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 70%;
+  width: 60%;
   height: 80%;
   background: white;
   border-radius: 20px;
@@ -96,6 +96,7 @@ function SuppliesInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>

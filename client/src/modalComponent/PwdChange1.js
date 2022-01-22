@@ -229,7 +229,10 @@ function PwdChange({ handleOff }) {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(new_pwd);
   };
-
+  const checkPassword2 = (new_pwd) => {
+    let regExp2 = /[a-zA-Z0-9]/;
+    return regExp2.test(new_pwd);
+  };
   //------------------------------------------------------------------------------------
 
   const handleInputValue = (key) => (e) => {
@@ -305,6 +308,7 @@ function PwdChange({ handleOff }) {
             icon={faTimes}
             size="2x"
             type="button"
+            color="#e5e5e5"
             onClick={handleOff}
           />
         </CloseBtnContainer>
@@ -335,9 +339,12 @@ function PwdChange({ handleOff }) {
               {!currentPwd.new_pwd ? (
                 <Warning>
                   비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
+                  {/* currentPwd.new_pwd.length >= 8  */}
                 </Warning>
-              ) : currentPwd.new_pwd.length >= 8 ||
-                checkPassword(currentPwd.new_pwd) ? (
+              ) : currentPwd.new_pwd.length < 8 ||
+                checkPassword2(currentPwd.new_pwd) ? (
+                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
+              ) : checkPassword(currentPwd.new_pwd) ? (
                 <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
               ) : (
                 <Warning></Warning>
