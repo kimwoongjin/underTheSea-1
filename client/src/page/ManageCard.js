@@ -16,21 +16,16 @@ const Container = styled.div`
 `;
 const CardContainer = styled.div`
   width: 70%;
-  display: grid;
-  grid-template-columns: 30% 30% 30%;
-  column-gap: 6%;
-  row-gap: 7%;
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 10%;
   @media screen and (max-width: 1200px) {
-    grid-template-columns: 30% 30%;
-  }
-  @media screen and (max-width: 1100px) {
-    grid-template-columns: 30%;
+    flex-wrap: wrap;
   }
 `;
 const EmptyBox = styled.div`
-  width: 100%;
+  width: 90%;
   height: 40vh;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
@@ -52,7 +47,7 @@ const BtnCover = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 70%;
+  width: 63%;
   height: 80%;
   margin-bottom: 30px;
   @media screen and (max-width: 768px) {
@@ -95,7 +90,6 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
       </BtnCover>
 
       <CardContainer>
-        {/* <Btn></Btn> */}
         {containerList.length !== 0 ? (
           containerList.map((container, idx) => {
             return (
