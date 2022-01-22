@@ -20,19 +20,24 @@ const CardText = styled.div`
   display: flex;
   font-family: "Kfont";
   position: relative;
-  margin: 5% 0 5%;
-  font-size: 1.3rem;
+  margin: 10% 0 5%;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #828282;
 `;
+
 const CardContainer = styled.div`
   width: 70%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 15%;
+  margin: 1% 0 15%;
+  flex-wrap: wrap;
   @media screen and (max-width: 1200px) {
     flex-wrap: wrap;
   }
 `;
+
 const EmptyBox = styled.div`
   width: 90%;
   height: 40vh;
@@ -58,15 +63,14 @@ const BtnCover = styled.div`
   align-items: center;
   width: 63%;
   height: 80%;
-  margin-bottom: 30px;
   @media screen and (max-width: 768px) {
     justify-content: center;
   }
 `;
 
 const Btn = styled.button`
-  width: 80px;
-  height: 40px;
+  width: 77px;
+  height: 33px;
   background: #108dee;
   border-style: none;
   color: white;
@@ -95,7 +99,8 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
   return (
     <Container>
       <CardText>
-        수조 추가를 클릭하여 자신만의 관리 수조를 만들어보세요.
+        수조 추가를 클릭하면 수조관리 카드가 생성됩니다.<br></br>
+        관리 카드를 통해 주간별 피딩 & 환수 기록을 확인할 수 있습니다.
       </CardText>
       <BtnCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
