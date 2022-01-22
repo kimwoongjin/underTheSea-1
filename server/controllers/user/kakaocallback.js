@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
         grant_type: "authorization_code",
         client_id: process.env.KAKAO_CLIENT_ID,
         client_secret: process.env.KAKAO_SECRECT_ID,
-        redirect_uri: "http://localhost:80/auth/kakao/callback",
+        redirect_uri: `${process.env.REACT_APP_API_URL}/auth/kakao/callback`,
         code,
       }),
     });

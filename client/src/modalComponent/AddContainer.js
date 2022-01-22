@@ -167,7 +167,7 @@ function AddContainer() {
     if (addConInfo.type !== 0) {
       axios
         .post(
-          `http://localhost:80/container/add`,
+          `${process.env.REACT_APP_SERVER_API}/container/add`,
           {
             data: {
               container_name: addConInfo.container_name,
@@ -244,7 +244,10 @@ function AddContainer() {
             />
             <TypeSelectContainer>
               <Selection>
-                <SelImg src="http://localhost:80/level/11" alt="Type A" />
+                <SelImg
+                  src={process.env.REACT_APP_SERVER_API + `/level/11`}
+                  alt="Type A"
+                />
 
                 <input
                   type="radio"
@@ -254,7 +257,10 @@ function AddContainer() {
                 />
               </Selection>
               <Selection>
-                <SelImg src="http://localhost:80/level/12" alt="Type B" />
+                <SelImg
+                  src={process.env.REACT_APP_SERVER_API + `/level/12`}
+                  alt="Type B"
+                />
 
                 <input
                   type="radio"
@@ -265,7 +271,10 @@ function AddContainer() {
               </Selection>
 
               <Selection>
-                <SelImg src="http://localhost:80/level/13" alt="Type C" />
+                <SelImg
+                  src={process.env.REACT_APP_SERVER_API + `/level/13`}
+                  alt="Type C"
+                />
 
                 <input
                   type="radio"
@@ -275,7 +284,10 @@ function AddContainer() {
                 />
               </Selection>
               <Selection>
-                <SelImg src="http://localhost:80/level/14" alt="Type D" />
+                <SelImg
+                  src={process.env.REACT_APP_SERVER_API + `/level/14`}
+                  alt="Type D"
+                />
 
                 <input
                   type="radio"

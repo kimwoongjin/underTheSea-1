@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header2 from "../component/Header2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../component/Footer";
 
 const Container = styled.div`
@@ -220,6 +220,7 @@ function WriteTips() {
   const accessToken = localStorage.getItem("accessToken");
   const edit_tip = localStorage.getItem("edit_tip");
   const tip_id = localStorage.getItem("tip_id");
+  // const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tip, setTip] = useState({
     title: "",
@@ -231,13 +232,14 @@ function WriteTips() {
 
   // 수정버튼을 누르고 들어왔을 때
   useEffect(() => {
+    window.scroll(0, 0);
     getTipData();
   }, []);
 
   const getTipData = () => {
     if (isEdit === "true") {
       axios
-        .get(`http://localhost:80/tip/${tip_id}`, {
+        .get(`${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
@@ -275,9 +277,13 @@ function WriteTips() {
     const formData = new FormData();
     formData.append("image", file);
 
-    const result = await axios.post("http://localhost:80/images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const result = await axios.post(
+      `${process.env.REACT_APP_SERVER_API}/images`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
 
     return result;
   };
@@ -294,7 +300,7 @@ function WriteTips() {
       return;
     }
     const result = await axios.post(
-      "http://localhost:80/tip",
+      `${process.env.REACT_APP_SERVER_API}/tip`,
       { data: tip },
       {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -330,7 +336,7 @@ function WriteTips() {
   const handleEditTip = () => {
     axios
       .patch(
-        `http://localhost:80/tip/${tip_id}`,
+        `${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`,
         { data: tip },
         {
           headers: {
@@ -398,7 +404,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`http://localhost:80${tip.img}`}
+                      src={`${process.env.REACT_APP_SERVER_API}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",
@@ -447,7 +453,7 @@ function WriteTips() {
                   >
                     <img
                       id="select-img"
-                      src={`http://localhost:80${tip.img}`}
+                      src={`${process.env.REACT_APP_SERVER_API}${tip.img}`}
                       style={{
                         objectFit: "cover",
                         // width: "100%",

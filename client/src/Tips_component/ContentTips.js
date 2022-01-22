@@ -74,12 +74,13 @@ const Content = styled.div`
   font-family: "Kfont";
   border-bottom: 3px solid #a7d9ff;
   white-space: normal;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 2%;
 `;
 
 const ContentBox = styled.div`
   width: 90%;
+  white-space: pre-line;
   box-sizing: border-box;
   font-family: "Kfont";
 `;
@@ -111,12 +112,13 @@ function ContentTips({ tipData }) {
       <Content>
         {tipData.img ? (
           <img
-            src={`http://localhost:80${tipData.img}`}
+            src={`${process.env.REACT_APP_SERVER_API}${tipData.img}`}
             style={{ width: "300px", height: "250px" }}
           ></img>
         ) : (
           <></>
         )}
+        <br></br>
         <ContentBox>{tipData.content}</ContentBox>
       </Content>
     </>

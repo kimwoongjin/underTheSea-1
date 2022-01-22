@@ -119,7 +119,10 @@ function ManageDetInfo() {
         return (
           <ContainerS key={idx}>
             <DetailImg>
-              <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+              <ImgD
+                src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                alt="이미지"
+              />
             </DetailImg>
             {/* ----------------------------------------- */}
             <Content>

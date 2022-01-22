@@ -4,9 +4,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const path = require("path");
-// const { authToken } = require("./middleware/token");
+const http = require("http");
 const db = require("./db/connection");
-// const controllers = require("./controllers");
 const indexRouter = require("./routes");
 
 const port = 80;
@@ -21,11 +20,18 @@ const upload = multer({ dest: "uploads/" });
 const { uploadFile, getFileStream } = require("./s3");
 //const fs = require("fs");
 const app = express();
+const httpServer = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:3000",
+      "http://underthesea.s3-website.ap-northeast-2.amazonaws.com",
+      "https://dhlgdv3s1nzv4.cloudfront.net/",
+      "https://underthesea.ga",
+      "https://www.underthesea.ga",
+    ],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PATCH", "DELETE"],
   })
@@ -71,9 +77,8 @@ app.get("/level/:level_id", (req, res) => {
 });
 app.use("/", indexRouter);
 
-let server;
-server = app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
 });
 
-module.exports = server;
+module.exports = httpServer;

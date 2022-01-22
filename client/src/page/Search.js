@@ -152,7 +152,9 @@ function Search() {
 
   const gotoSearch = () => {
     axios
-      .post(`http://localhost:80/fish/one`, { data: { fish_name: input } })
+      .post(`${process.env.REACT_APP_SERVER_API}/fish/one`, {
+        data: { fish_name: input },
+      })
       .then((result) => {
         setSearch(result.data.data);
         // console.log(result.data.data, "물고기 한마리");
@@ -167,7 +169,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/all/63`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/63`, {
         headers: {
           accept: "application/json",
         },
@@ -182,7 +184,7 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/fishnamelist`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },
@@ -199,8 +201,9 @@ function Search() {
   // 추천 6개 카드  ===========================================================
 
   useEffect(() => {
+    window.scroll(0, 0);
     axios
-      .get(`http://localhost:80/fish/all/6`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/6`, {
         headers: {
           accept: "application/json",
         },

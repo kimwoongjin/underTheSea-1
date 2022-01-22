@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const TopCover = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +29,6 @@ const TopCover = styled.div`
   /* border-bottom: 2px solid #808080; */
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0px 2px 10px gray;
 `;
 
 const Img = styled.img`
@@ -175,7 +174,7 @@ function PostTips() {
   // 해당 게시물 조회
   const handlePostTip = (tip_id) => {
     axios
-      .get(`http://localhost:80/tip/${tip_id}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`, {
         headers: {
           authorization: `Bearer ${accessToken}`,
         },
@@ -197,7 +196,7 @@ function PostTips() {
   // 해당 댓글 정보 불러오기
   const handleComment = () => {
     axios
-      .get(`http://localhost:80/comment/${tip_id}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/comment/${tip_id}`, {
         headers: {
           authorization: `Bearer ${accessToken}`,
         },
@@ -213,7 +212,7 @@ function PostTips() {
   const handleUploadComment = (data) => {
     axios
       .post(
-        `http://localhost:80/comment/${tip_id}`,
+        `${process.env.REACT_APP_SERVER_API}/comment/${tip_id}`,
         { data: data },
         {
           headers: {
@@ -234,7 +233,7 @@ function PostTips() {
   // 댓글 삭제
   const handleDeleteComment = (comment_id) => {
     axios
-      .delete(`http://localhost:80/comment/${comment_id}`, {
+      .delete(`${process.env.REACT_APP_SERVER_API}/comment/${comment_id}`, {
         headers: {
           authorization: `Bearer ${accessToken}`,
         },
@@ -257,7 +256,7 @@ function PostTips() {
   // 게시글 삭제
   const deleteTip = () => {
     axios
-      .delete(`http://localhost:80/tip/${tip_id}`, {
+      .delete(`${process.env.REACT_APP_SERVER_API}/tip/${tip_id}`, {
         headers: {
           authorization: `Bearer ${accessToken}`,
         },

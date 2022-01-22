@@ -67,9 +67,6 @@ function TipList({ tip_id, tip }) {
 
   // 게시물 선택&조회
   const handleSelectTip = (e) => {
-    // localStorage.setItem("tip_id", e.target.id);
-    // const tip_id = localStorage.getItem("tip_id");
-    // console.log(e.target.id);
     navigate(`/posttips/${tip_id}`);
   };
 

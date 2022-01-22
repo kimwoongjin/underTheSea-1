@@ -503,10 +503,13 @@ function ManageDetail({ condata, setCondata }) {
   // return 값 없음. 그냥 바로 condata 갱신
   const UpdateConInfo = async () => {
     await axios
-      .get(`http://localhost:80/container/${container_id}/${month}`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
+      .get(
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
+        {
+          headers: { authorization: `Bearer ${accessToken}` },
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         setCondata(response.data.data);
@@ -514,7 +517,7 @@ function ManageDetail({ condata, setCondata }) {
       });
 
     const response = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
@@ -529,7 +532,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const AddFeedRequest = async () => {
     const response = await axios.post(
-      `http://localhost:80/container/${container_id}/feed`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/feed`,
       {
         data: feedingInfo,
       },
@@ -552,7 +555,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
-      `http://localhost:80/container/${container_id}/ex_water`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/ex_water`,
       {
         data: exwaterInfo,
       },
@@ -575,7 +578,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const LevelUpRequest = async () => {
     const response = await axios.patch(
-      `http://localhost:80/container/level/${container_id}`,
+      `${process.env.REACT_APP_SERVER_API}/container/level/${container_id}`,
       {},
       {
         headers: {
@@ -881,6 +884,7 @@ function ManageDetail({ condata, setCondata }) {
   //
   // 함수 실행 부분
   useEffect(() => {
+    window.scroll(0, 0);
     UpdateConInfo();
     UpdateProgressBar();
     UpdateFinalList();
@@ -897,7 +901,8 @@ function ManageDetail({ condata, setCondata }) {
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  const imgSrcUrl =
+    `${process.env.REACT_APP_SERVER_API}/level/` + conInfo.level;
   return (
     <>
       <Header2 />
@@ -1010,7 +1015,10 @@ function ManageDetail({ condata, setCondata }) {
           return (
             <ContainerS key={idx}>
               <DetailImg>
-                <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+                <ImgD
+                  src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                  alt="이미지"
+                />
               </DetailImg>
               {/* ----------------------------------------- */}
               <Content>
