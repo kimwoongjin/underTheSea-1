@@ -38,7 +38,6 @@ const ModalContainer = styled.div`
   border-radius: 20px;
 `;
 const CloseBtnContainer = styled.div`
-  
   position: absolute;
   right: 3%;
   top: 0%;
@@ -51,7 +50,6 @@ const CloseBtnContainer = styled.div`
 `;
 
 const Form = styled.form`
-
   width: 80%;
   height: 60%;
   display: flex;
@@ -82,7 +80,6 @@ const Btn = styled.div`
   justify-content: space-between;
 `;
 const CancleBtn = styled.button`
-  
   width: 45%;
   height: 90%;
   background: #e1e1e1;
@@ -104,7 +101,6 @@ const CancleBtn = styled.button`
   }
 `;
 const SignOutBtn = styled.button`
- 
   width: 45%;
   height: 90%;
   background: #0474e8;
@@ -151,6 +147,7 @@ function SignOut() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
+            color="#e5e5e5"
             onClick={() => {
               dispatch(modalOff);
             }}
