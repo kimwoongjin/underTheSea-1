@@ -177,7 +177,7 @@ const BtnContainer = styled.div`
         flex-direction: column;
         height: 350px;
         margin-bottom: 2%;
-        z-index: 99;
+        z-index: 100;
       `}
   }
 `;
