@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const KAKAO_AUTH_URL = "https://kauth.kakao.com/oauth/authorize";
-const KAKAO_AUTH_REDIRECT_URL = "http://localhost:80/user/auth/kakao/callback";
+const KAKAO_AUTH_REDIRECT_URL = `${process.env.REACT_APP_API_URL}/user/auth/kakao/callback`;
 
 module.exports = async (req, res) => {
   // 처음 이쪽으로 요청이 들어오고 이 부분에서 구글에 소셜 로그인 화면으로 이동하고

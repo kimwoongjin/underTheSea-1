@@ -160,9 +160,9 @@ function HelpInfo() {
               주1회의 환수를 권장 드리며 추후 레벨에 따른 혜택을 준비중입니다.
             </Content>
             <ImgCover>
-              <ImgShow src="http://localhost:80/level/11" />
+              <ImgShow src={process.env.REACT_APP_SERVER_API + `/level/11`} />
               <FontAwesomeIcon icon={faArrowRight} size="2x" />
-              <ImgShow src="http://localhost:80/level/61" />
+              <ImgShow src={process.env.REACT_APP_SERVER_API + `/level/61`} />
             </ImgCover>
             <LevelInfoCover>
               <LevelInfo>Lv. 1</LevelInfo>

@@ -35,7 +35,7 @@ function App() {
   // 소셜로그인 토큰 받아오기
   const getAccessToken = (authorizationCode) => {
     axios
-      .post(`http://localhost:80/user/auth/google/callback`, {
+      .post(`${process.env.REACT_APP_SERVER_API}/user/auth/google/callback`, {
         authorizationCode,
       })
       .then((res) => {
@@ -48,7 +48,7 @@ function App() {
   // 로그인 상태 확인
   const checkLogin = (accessToken) => {
     axios
-      .get(`http://localhost:80/user/status`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/status`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -64,7 +64,7 @@ function App() {
 
   const getConInfo = async (id) => {
     const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${id}/${month}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -84,7 +84,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/container/all`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -150,7 +150,7 @@ function App() {
     console.log("토큰!", token);
     axios
       .post(
-        `http://localhost:80/container/add`,
+        `${process.env.REACT_APP_SERVER_API}/container/add`,
         { data: aquaInfo },
         {
           headers: {

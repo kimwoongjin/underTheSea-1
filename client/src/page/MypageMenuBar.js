@@ -58,7 +58,7 @@ const Comment = styled.div`
 `;
 
 function MypageMenuBar({ setCurrentPage }) {
-  const [currentClick, setCurrentClick] = useState(null);
+  const [currentClick, setCurrentClick] = useState("manage");
   const [prevClick, setPrevClick] = useState(null);
 
   const GetClick = (e) => {

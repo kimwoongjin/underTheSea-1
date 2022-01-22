@@ -255,7 +255,7 @@ function PwdChange({ handleOff }) {
       } else {
         axios
           .patch(
-            `http://localhost:80/user/password`,
+            `${process.env.REACT_APP_SERVER_API}/user/password`,
             {
               data: { cur_pwd, new_pwd },
             },

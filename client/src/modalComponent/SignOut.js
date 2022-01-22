@@ -130,7 +130,7 @@ function SignOut() {
 
   function signOut() {
     axios
-      .delete("http://localhost:80/user", {
+      .delete(`${process.env.REACT_APP_SERVER_API}/user`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((result) => {

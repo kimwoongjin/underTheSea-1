@@ -133,13 +133,16 @@ function Deadfish({ container_id }) {
 
   const fishRemoveRequest = () => {
     axios
-      .delete(`http://localhost:80/container/${container_id}/fish`, {
-        data: fishDeadInfo,
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      })
+      .delete(
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
+        {
+          data: fishDeadInfo,
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
