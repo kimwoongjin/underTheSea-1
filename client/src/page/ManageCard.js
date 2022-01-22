@@ -14,8 +14,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: 10%;
+`;
+
+const CardText = styled.div`
   border: 1px solid black;
-  margin-top: 5%;
 `;
 const CardContainer = styled.div`
   width: 75%;
@@ -89,6 +92,7 @@ function ManageCard({ containerList, isAddContainerModal, handleCondata }) {
 
   return (
     <Container>
+      <CardText></CardText>
       <BtnCover>
         <Btn onClick={() => dispatch(addcontainerModalOnAction)}>수조추가</Btn>
       </BtnCover>

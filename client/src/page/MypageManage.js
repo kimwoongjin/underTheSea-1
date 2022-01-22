@@ -7,20 +7,21 @@ const Head = styled.div`
   display: flex;
   align-items: center;
   width: 55.5vw;
-  height: 5%;
+  height: 6%;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
   /* border: 1px solid black; */
   position: relative;
-  top: 10.8%;
+  left: 6%;
+  bottom: 3%;
   padding-bottom: 0.5%;
   box-sizing: border-box;
 
   .title {
     display: flex;
-    padding-left: 2%;
+    padding-left: 1.5%;
     /* border: 1px solid black; */
     flex: 6;
     box-sizing: border-box;
@@ -93,7 +94,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 8% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -179,10 +180,6 @@ function MypageManage() {
 
   return (
     <>
-      <Head>
-        <div className="title">어항 이름</div>
-        <div className="comment">수조크기</div>
-      </Head>
       <Container>
         {manageInfo.length === 0 ? (
           <>
@@ -196,6 +193,10 @@ function MypageManage() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">어항 이름</div>
+              <div className="comment">수조크기</div>
+            </Head>
             {manageInfo.map((el, idx) => {
               // console.log(el, "?????????");
               return (
@@ -207,20 +208,20 @@ function MypageManage() {
                 </>
               );
             })}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {manageLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {manageLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
 }

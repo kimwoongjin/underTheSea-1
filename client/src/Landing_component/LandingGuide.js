@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 107vh;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: center;
@@ -22,17 +22,17 @@ const Container = styled.div`
 
 const WomanImgL = styled.img`
   position: absolute;
-  width: 29%;
+  width: 32%;
   height: 47%;
-  right: 35%;
-  bottom: 7%;
+  right: 24%;
+  bottom: 20%;
 `;
 const WomanImgR = styled.img`
   position: absolute;
-  width: 27%;
-  height: 63%;
-  right: 7%;
-  bottom: 25%;
+  width: 25%;
+  height: 54%;
+  right: 5%;
+  bottom: 40%;
 `;
 const TextContainer = styled.div`
   position: absolute;
@@ -42,29 +42,29 @@ const TextContainer = styled.div`
   flex-direction: column;
   /* border: 2px dashed red; */
 `;
-
-const SearchTitle = styled.div`
-  display: flex;
+const MainText = styled.div`
+  text-align: left;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 900;
   color: #092011;
-  font-size: 2rem;
-  font-weight: 650;
-  margin-top: 5px;
 `;
 
 const SearchText = styled.div`
   text-align: left;
   color: #092011;
-  font-size: 1.5rem;
+  margin-bottom: 10%;
+  font-size: 1.4rem;
   line-height: 150%;
   font-family: "Kfont";
 `;
-const MainText = styled.div`
-  text-align: left;
-  font-size: 2.7rem;
-  margin-bottom: 10px;
-  line-height: 120%;
-  font-weight: 750;
+
+const SearchTitle = styled.div`
+  display: flex;
   color: #092011;
+  font-size: 1.7rem;
+  font-weight: 650;
+  margin-top: 5px;
 `;
 
 const IconCover = styled.div`
@@ -76,16 +76,25 @@ function LandingGuide() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt5",
-        start: "100px 60%",
+        start: "100px 80%",
         end: "top 20%",
         toggleActions: "play none restart pause",
         // markers: true,
-        // markers: { startColor: "red", endColor: "blue", fontSize: "20px" },
       },
     });
     txtTimeline.from(".txt5", { opacity: 0, y: 50, duration: 1 });
     txtTimeline.from(".txt6", { opacity: 0, y: 50, duration: 1 });
-    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
+
+    const TL = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".txt5",
+        start: "100px 80%",
+        end: "top 20%",
+        toggleActions: "play none restart pause",
+      },
+    });
+    TL.from(".woman-img", { opacity: 0, x: -100, duration: 1 });
+    // TL.from(".woman-img1", { opacity: 0, x: -100, duration: 1 });
   }, []);
 
   const play = () => {
@@ -102,21 +111,23 @@ function LandingGuide() {
     <Container onclick={play}>
       <audio id="audio_play" src="waterdrop.mp3"></audio>
       <WomanImgL
+        className="woman-img"
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물1.png"
         alt="메인여자인물1.png"
       />
       <WomanImgR
+        className="woman-img"
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물2.png"
         alt="메인여자인물2.png"
       />
       <TextContainer>
         <MainText className="txt5">해수어와 담수어 사육정보</MainText>
         <SearchText className="txt5">
-          사육정보를 확인하고 자신만의 노하우를 공유해주세요!
+          사육정보를 확인하고 <br></br> 자신만의 노하우를 공유해주세요!
         </SearchText>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <SearchTitle className="txt6">
-            Guide
+            가이드페이지
             <IconCover>
               <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
             </IconCover>

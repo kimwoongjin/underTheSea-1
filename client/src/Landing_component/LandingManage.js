@@ -34,46 +34,42 @@ const Fish = styled.img`
   width: 9%;
   height: 15%;
   top: 20%;
-  right: 7%;
+  right: 12%;
 `;
 
 const TextContainer = styled.div`
   position: absolute;
-  right: 10%;
+  right: 15%;
   display: flex;
   flex-direction: column;
+
   /* border: 2px dashed red; */
 `;
 
-const SearchTitle = styled.div`
-  display: flex;
-  /* z-index: 999; */
-  font-size: 1.8rem;
-  font-weight: 650;
+const MainText = styled.div`
+  font-weight: 900;
+  font-size: 2.5rem;
   color: #092011;
-  /* font-family: "Kfont"; */
-  font-family: "SCBfont";
-  cursor: pointer;
-  margin-top: 25px;
+  margin-bottom: 20px;
+  color: #191919;
 `;
 
 const SearchText = styled.div`
   text-align: left;
+  margin-bottom: 10%;
   z-index: 999;
-
-  color: #092011;
-  font-size: 1.5rem;
-
+  font-size: 1.4rem;
   line-height: 150%;
-
   font-family: "Kfont";
 `;
-const MainText = styled.div`
-  font-weight: 750;
-  font-size: 2.7rem;
+
+const SearchTitle = styled.div`
+  display: flex;
+  font-size: 1.7rem;
+  font-weight: 650;
   color: #092011;
-  font-family: "SCBfont";
-  margin-bottom: 10px;
+  /* font-family: "Kfont"; */
+  cursor: pointer;
 `;
 
 const IconCover = styled.div`
@@ -90,21 +86,42 @@ function LandingManage() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "120px 80%",
+        start: "120px 90%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,
-        // markers: { startColor: "red", endColor: "blue", fontSize: "20px" },
       },
     });
     txtTimeline.from(".text", { opacity: 0, y: 50, duration: 1 });
     txtTimeline.from(".text1", { opacity: 0, y: 60, duration: 1 });
-    // txtTimeline.to(".txt3", { opacity: 0, y: 50 });
+
+    const txt = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".text",
+        start: "120px 60%",
+        end: "top 10%",
+        toggleActions: "play none restart pause",
+        // markers: true,
+      },
+    });
+    txt.from(".fish", { opacity: 0, y: 100, duration: 1 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".text",
+        start: "120px 90%",
+        end: "top 10%",
+        toggleActions: "play none restart pause",
+        // markers: true,
+      },
+    });
+    tl.from(".womanImg", { opacity: 0, x: -100, duration: 1 });
   }, []);
 
   return (
     <Container>
       <WomanImg
+        className="womanImg"
         src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인여자인물3.png"
         alt="메인여자인물3.png"
       />
@@ -125,7 +142,7 @@ function LandingManage() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <SearchTitle className="text1">
+              <SearchTitle>
                 관리페이지
                 <IconCover>
                   <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
@@ -133,10 +150,7 @@ function LandingManage() {
               </SearchTitle>
             </Link>
           ) : (
-            <SearchTitle
-              className="text1"
-              onClick={() => dispatch(signupModalOnAction)}
-            >
+            <SearchTitle onClick={() => dispatch(signupModalOnAction)}>
               관리페이지
               <IconCover>
                 <FontAwesomeIcon size="1x" icon={faAngleDoubleRight} />
