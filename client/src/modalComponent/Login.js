@@ -141,7 +141,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
-  const { isLogin } = state;
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",

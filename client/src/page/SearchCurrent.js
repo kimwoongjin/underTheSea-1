@@ -51,7 +51,7 @@ const ImgContainer = styled.div`
   overflow: hidden;
 `;
 const Img = styled.img`
-  width: 100%;
+  width: 105%;
   height: 100%;
 `;
 const Content = styled.div`
