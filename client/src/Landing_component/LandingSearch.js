@@ -27,6 +27,11 @@ const Container = styled.div`
   .txt3 {
     z-index: 999;
   }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: 90vh;
+  }
 `;
 
 const ManImg = styled.img`
@@ -35,6 +40,13 @@ const ManImg = styled.img`
   height: 54%;
   right: 10%;
   bottom: 12%;
+
+  @media screen and (max-width: 480px) {
+    width: 60%;
+    height: 43%;
+    top: 25%;
+    right: 3%;
+  }
 `;
 const CoralL = styled.img`
   position: relative;
@@ -42,6 +54,13 @@ const CoralL = styled.img`
   height: 16%;
   top: 32%;
   right: 38%;
+  @media screen and (max-width: 480px) {
+    width: 18%;
+    height: 12%;
+    top: 10%;
+    margin-bottom: 5%;
+    right: 32%;
+  }
 `;
 const CoralS = styled.img`
   position: relative;
@@ -49,6 +68,13 @@ const CoralS = styled.img`
   height: 11%;
   top: 34%;
   right: 38%;
+  @media screen and (max-width: 480px) {
+    width: 13%;
+    height: 8%;
+    top: 10%;
+    margin-bottom: 1%;
+    right: 33%;
+  }
 `;
 
 // const Fish = styled.img`
@@ -66,6 +92,31 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* border: 2px dashed red; */
+
+  @media screen and (max-width: 480px) {
+    position: absolute;
+    width: 70%;
+    left: 15%;
+    top: 73%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 0%;
+
+    .txt1 {
+      font-size: 0.8rem;
+      line-height: 120%;
+      text-align: center;
+      line-height: 150%;
+    }
+    .txt2 {
+      font-size: 1rem;
+      display: flex;
+      text-align: center;
+      position: relative;
+      left: 30%;
+    }
+  }
 `;
 const MainText = styled.div`
   position: relative;
@@ -106,7 +157,7 @@ function LandingSearch() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt1",
-        start: "80px 80%",
+        start: "80px 100%",
         end: "top 20%",
         // markers: true,
         toggleActions: "play none restart pause",
@@ -118,7 +169,7 @@ function LandingSearch() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt1",
-        start: "80px 80%",
+        start: "80px 100%",
         end: "top 20%",
         // markers: true,
         toggleActions: "play none restart pause",

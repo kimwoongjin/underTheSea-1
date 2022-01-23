@@ -25,6 +25,10 @@ const Container = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    width: 100vw;
+  }
 `;
 
 const Img = styled.img`
@@ -33,6 +37,7 @@ const Img = styled.img`
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 17vw;
+    position: relative;
     margin-top: 1%;
   }
 `;
@@ -153,7 +158,11 @@ const Bars = styled.div`
   color: #e5e5e5;
   z-index: 999;
   @media screen and (max-width: 768px) {
+    top: 0%;
+    right: 0%;
+    padding: 1% 2%;
     display: block;
+    color: #cccccc;
   }
 `;
 
