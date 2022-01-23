@@ -29,7 +29,7 @@ const Container = styled.div`
 
 const Img = styled.img`
   width: 13vw;
-  margin-left: 1%;
+  margin: 0 0 1% 1%;
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 17vw;
@@ -231,12 +231,9 @@ function Header() {
   };
 
   return (
+    // src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
     <Container toggle={toggle}>
-      <Img
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
-        alt=""
-        onClick={goToHome}
-      />
+      <Img src="로고.png" alt="" onClick={goToHome} />
       <BtnContainer className="menu" toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide toggle={toggle}>가이드</Guide>

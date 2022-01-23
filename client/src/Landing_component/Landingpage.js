@@ -96,8 +96,10 @@ const TilteContainer = styled.div`
   /* border: 4px solid red; */
 `;
 const MainImg = styled.img`
-  width: 80%;
-  margin-bottom: 5%;
+  width: 90%;
+  margin-bottom: 27%;
+  position: relative;
+  left: 2%;
 `;
 
 const Contents = styled.div`
@@ -252,16 +254,14 @@ function Landingpage() {
           }}
         />
       </Bubble>
+      {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인1.png" */}
       <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />
       <SeaWeed src="https://iconmage.s3.ap-northeast-2.amazonaws.com/작은해초.png" />
       <SeaWeedL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초L.png" />
       <Shark src="https://iconmage.s3.ap-northeast-2.amazonaws.com/상어.png" />
       <JellyFish src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png" />
       <TilteContainer>
-        <MainImg
-          className="mainimg"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인1.png"
-        ></MainImg>
+        <MainImg className="mainimg" src="/메인.png"></MainImg>
         <Contents>
           당신의 물 속 세상을 만나보세요.
           <br></br> Under The Sea가 함께합니다.

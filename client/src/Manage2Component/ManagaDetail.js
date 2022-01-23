@@ -208,6 +208,8 @@ const LevelText = styled.div`
 
 const Logo = styled.img`
   width: 20%;
+  height: 120%;
+  margin-bottom: 2%;
 `;
 
 const Levelinfo = styled.div`
@@ -925,10 +927,8 @@ function ManageDetail({ condata, setCondata }) {
               <LevelText>Lv.</LevelText>
               <Levelinfo>{Math.floor(conInfo.level / 10)}</Levelinfo>
             </LevelCover>
-            <Logo
-              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
-              alt="/로고.png"
-            />
+            {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png" */}
+            <Logo src="/로고.png" alt="/로고.png" />
           </Level>
           <ProgressBar>
             <Progress EXP={`${progressBar}%`}></Progress>
