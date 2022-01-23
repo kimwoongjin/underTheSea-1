@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 90vh;
   background: linear-gradient(to top, #70d6ff, #d2f7ff);
   display: flex;
@@ -19,6 +19,10 @@ const Container = styled.div`
     stroke: blue;
     stroke-width: 2px;
   }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    overflow: hidden;
+  }
 `;
 
 const SeaWeed = styled.img`
@@ -27,12 +31,26 @@ const SeaWeed = styled.img`
   bottom: 0px;
   right: 2%;
   opacity: 0.7;
+  display: flex;
+
+  @media screen and (max-width: 480px) {
+    width: 20%;
+    bottom: 0%;
+    right: 2%;
+  }
 `;
 const SeaWeedL = styled.img`
   width: 15%;
   position: absolute;
   bottom: 0px;
   left: 5%;
+  display: flex;
+
+  @media screen and (max-width: 480px) {
+    width: 25%;
+    bottom: 2%;
+    left: 0%;
+  }
 `;
 const Coral = styled.img`
   width: 10%;
@@ -40,24 +58,36 @@ const Coral = styled.img`
   bottom: 12px;
   right: 17%;
   opacity: 0.7;
+  display: flex;
+
+  @media screen and (max-width: 480px) {
+    width: 15%;
+    right: 15%;
+    bottom: 1%;
+  }
 `;
 const BubbleL = styled.img`
   width: 27%;
   position: absolute;
   left: 2%;
   bottom: 7%;
+  @media screen and (max-width: 480px) {
+    width: 35%;
+    bottom: 10%;
+    left: 7%;
+  }
 `;
-const BubbleM = styled.img`
-  width: 17%;
-  position: absolute;
-  bottom: 5%;
-  right: 35%;
-`;
+
 const BubbleR = styled.img`
   width: 22%;
   position: absolute;
   right: 11%;
   bottom: 14%;
+  @media screen and (max-width: 480px) {
+    width: 35%;
+    bottom: 10%;
+    right: 7%;
+  }
 `;
 
 const Shark = styled.img`
@@ -65,6 +95,13 @@ const Shark = styled.img`
   left: 8%;
   width: 13%;
   top: 22%;
+
+  @media screen and (max-width: 480px) {
+    width: 25%;
+    position: absolute;
+    left: 7%;
+    top: 2%;
+  }
 `;
 
 const JellyFish = styled.img`
@@ -72,13 +109,31 @@ const JellyFish = styled.img`
   position: absolute;
   left: 24%;
   bottom: 30%;
+
+  @media screen and (max-width: 480px) {
+    width: 19%;
+    display: flex;
+    position: relative;
+    left: 15%;
+    top: 20%;
+  }
 `;
 
 const Fish1 = styled.img`
   width: 11%;
-  position: absolute;
-  top: 10%;
-  right: 17%;
+  position: relative;
+  bottom: 24%;
+  left: 10%;
+  display: flex;
+
+  @media screen and (max-width: 480px) {
+    width: 20%;
+    display: flex;
+    /* border: 1px solid black; */
+    left: -20%;
+    bottom: 30%;
+    position: relative;
+  }
 `;
 
 const Fish3 = styled.img`
@@ -86,6 +141,13 @@ const Fish3 = styled.img`
   position: absolute;
   bottom: 43%;
   right: 4%;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    width: 20%;
+    bottom: 15%;
+    right: 25%;
+  }
 `;
 const TilteContainer = styled.div`
   position: relative;
@@ -93,24 +155,43 @@ const TilteContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 480px) {
+    /* border: 1px solid red; */
+    bottom: 7%;
+  }
+
   /* border: 4px solid red; */
 `;
 const MainImg = styled.img`
   width: 90%;
-  margin-bottom: 27%;
   position: relative;
-  left: 2%;
+  left: 23%;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    position: relative;
+    width: 85vw;
+    left: 0%;
+  }
 `;
 
 const Contents = styled.div`
-  position: absolute;
+  position: relative;
   color: #092011;
   font-size: 1.4rem;
-  top: 62%;
+  bottom: 30%;
+  left: 21%;
   font-weight: 450;
   line-height: 140%;
   text-align: center;
   font-family: "Kfont";
+  @media screen and (max-width: 480px) {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 450;
+    line-height: 140%;
+    left: 0%;
+  }
 `;
 
 const Bubble = styled.div`
@@ -122,6 +203,41 @@ const Bimg = styled.img`
   animation: bubble infinite linear 6s;
   width: 100px;
 
+  @media screen and (max-width: 480px) {
+    display: none;
+    .b1 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b2 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b3 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b4 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b5 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b6 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b7 {
+      position: relative;
+      bottom: 0%;
+    }
+    .b8 {
+      position: relative;
+      bottom: 0%;
+    }
+  }
   @keyframes bubble {
     0% {
       transform: scale(0.95) translateY(0) translateX(0px) rotate(0deg);
@@ -176,8 +292,13 @@ function Landingpage() {
 
   return (
     <Container>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+      ></meta>
       <Bubble>
         <Bimg
+          className="b1"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
           alt="mini.png"
           style={{
@@ -188,6 +309,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b2"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
           alt="mini.png"
           style={{
@@ -198,6 +320,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b3"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
           alt="mini.png"
           style={{
@@ -208,6 +331,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b4"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
           alt="mini.png"
           style={{
@@ -216,6 +340,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b5"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
           alt="mini.png"
           style={{
@@ -226,6 +351,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b6"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
           alt="mini.png"
           style={{
@@ -236,6 +362,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b7"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF3.png"
           alt="mini.png"
           style={{
@@ -245,6 +372,7 @@ function Landingpage() {
           }}
         />
         <Bimg
+          className="b8"
           src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
           alt="mini.png"
           style={{
