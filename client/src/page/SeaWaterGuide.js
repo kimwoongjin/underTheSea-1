@@ -41,8 +41,6 @@ const Title = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 2.5rem;
-
-  /* background-image: url("https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png"); */
   .main {
     z-index: 99;
     font-weight: bold;
@@ -86,9 +84,14 @@ const InfoContainer = styled.div`
   width: 70%;
   height: 100%;
   display: grid;
-  grid-template-columns: 300px 300px 300px;
+  grid-template-columns: 300px 300px 300px 300px;
   column-gap: 55px;
   margin-bottom: 10%;
+
+  @media screen and (max-width: 1500px) {
+    grid-template-columns: 300px 300px 300px;
+  }
+
   @media screen and (max-width: 900px) {
     grid-template-columns: 300px 300px;
   }

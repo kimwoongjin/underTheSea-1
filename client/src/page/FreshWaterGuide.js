@@ -123,7 +123,7 @@ function FreshWaterGuide() {
         <InfoContainer>
           <TextCover>
             <FontAwesomeIcon icon={faTools} size="8x" />
-            <Text>서비스 중비중입니다</Text>
+            <Text>서비스 준비중입니다</Text>
           </TextCover>
         </InfoContainer>
       </Container>
