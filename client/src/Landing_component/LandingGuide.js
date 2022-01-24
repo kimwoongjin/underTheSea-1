@@ -18,6 +18,11 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   background: linear-gradient(to top, #e2fdfa, #a8f2ff);
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: 105vh;
+  }
 `;
 
 const WomanImgL = styled.img`
@@ -26,13 +31,27 @@ const WomanImgL = styled.img`
   height: 43%;
   right: 24%;
   bottom: 20%;
+
+  @media screen and (max-width: 480px) {
+    width: 50%;
+    height: 27%;
+    bottom: 60%;
+    left: 1%;
+  }
 `;
 const WomanImgR = styled.img`
   position: absolute;
-  width: 25%;
-  height: 50%;
+  width: 20%;
+  height: 40%;
   right: 5%;
   bottom: 40%;
+
+  @media screen and (max-width: 480px) {
+    width: 45%;
+    height: 35%;
+    top: 20%;
+    right: 3%;
+  }
 `;
 const TextContainer = styled.div`
   position: absolute;
@@ -40,6 +59,17 @@ const TextContainer = styled.div`
   bottom: 50%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 480px) {
+    bottom: 15%;
+    width: 60%;
+    left: 22%;
+
+    .txt5 {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
   /* border: 2px dashed red; */
 `;
 const MainText = styled.div`
@@ -64,6 +94,12 @@ const SearchTitle = styled.div`
   color: #092011;
   font-size: 1.7rem;
   font-weight: 650;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+    position: relative;
+    left: 22%;
+  }
 `;
 
 const IconCover = styled.div`
@@ -75,7 +111,7 @@ function LandingGuide() {
     const txtTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt5",
-        start: "100px 90%",
+        start: "80px 105%",
         end: "top 20%",
         toggleActions: "play none restart pause",
         // markers: true,
@@ -87,7 +123,7 @@ function LandingGuide() {
     const TL = gsap.timeline({
       scrollTrigger: {
         trigger: ".txt5",
-        start: "100px 90%",
+        start: "80px 105%",
         end: "top 20%",
         toggleActions: "play none restart pause",
       },

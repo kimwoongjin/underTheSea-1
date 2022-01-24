@@ -28,16 +28,10 @@ const UserInfo = styled.div`
     flex-direction: column;
     background: #ace0ff;
   }
-  .mypage {
-    position: relative;
-    width: 10vw;
-    height: 6vh;
-    margin: 1% 0 0 1.5%;
-    font-size: 1.3rem;
-  }
 
   .userImg {
     position: relative;
+    top: 18%;
     left: 15%;
     width: 28vw;
     height: 35vh;
@@ -54,7 +48,7 @@ const UserInfo = styled.div`
     height: 5vh;
     font-size: 1.7rem;
     left: 40%;
-    bottom: 30%;
+    bottom: 10%;
     font-weight: bold;
     padding-left: 1%;
   }
@@ -63,7 +57,7 @@ const UserInfo = styled.div`
     width: 30vw;
     height: 5vh;
     left: 40%;
-    bottom: 28%;
+    bottom: 9%;
     padding-left: 1%;
   }
 `;
@@ -195,8 +189,6 @@ function Mypage() {
       <Header2 />
       <UserInfo>
         <div className="Box">
-          <div className="mypage">마이페이지</div>
-
           <div className="userImg">
             <img className="img" src="유저1.png"></img>
           </div>

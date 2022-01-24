@@ -25,14 +25,19 @@ const Container = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    width: 100vw;
+  }
 `;
 
 const Img = styled.img`
   width: 13vw;
-  margin-left: 1%;
+  margin: 0 0 1% 1%;
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 17vw;
+    position: relative;
     margin-top: 1%;
   }
 `;
@@ -153,7 +158,11 @@ const Bars = styled.div`
   color: #e5e5e5;
   z-index: 999;
   @media screen and (max-width: 768px) {
+    top: 0%;
+    right: 0%;
+    padding: 1% 2%;
     display: block;
+    color: #cccccc;
   }
 `;
 
@@ -231,12 +240,9 @@ function Header() {
   };
 
   return (
+    // src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
     <Container toggle={toggle}>
-      <Img
-        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
-        alt=""
-        onClick={goToHome}
-      />
+      <Img src="로고.png" alt="" onClick={goToHome} />
       <BtnContainer className="menu" toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
           <Guide toggle={toggle}>가이드</Guide>

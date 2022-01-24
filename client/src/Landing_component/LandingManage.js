@@ -19,6 +19,11 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   background: linear-gradient(to top, #a8f2ff, #d2f7ff);
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: 110vh;
+  }
 `;
 
 const WomanImg = styled.img`
@@ -27,6 +32,14 @@ const WomanImg = styled.img`
   height: 60%;
   left: 10%;
   bottom: 15%;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    width: 60%;
+    height: 42%;
+    top: 25%;
+    left: 7%;
+  }
 `;
 
 const Fish = styled.img`
@@ -35,6 +48,12 @@ const Fish = styled.img`
   height: 15%;
   top: 28%;
   right: 12%;
+  @media screen and (max-width: 480px) {
+    width: 20%;
+    height: 13%;
+    top: 65%;
+    right: 8%;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -43,6 +62,19 @@ const TextContainer = styled.div`
   top: 5%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 480px) {
+    left: 0%;
+    top: 35%;
+    font-size: 0.8%;
+
+    .text {
+      position: relative;
+      font-size: 0.8rem;
+      text-align: center;
+      line-height: 150%;
+    }
+  }
 
   /* border: 2px dashed red; */
 `;
@@ -71,6 +103,12 @@ const SearchTitle = styled.div`
   color: #092011;
   /* font-family: "Kfont"; */
   cursor: pointer;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+    position: relative;
+    left: 25%;
+  }
 `;
 
 const IconCover = styled.div`
@@ -99,7 +137,7 @@ function LandingManage() {
     const txt = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "80px 95%",
+        start: "80px 115%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,
@@ -110,7 +148,7 @@ function LandingManage() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".text",
-        start: "115px 80%",
+        start: "80px 115%",
         end: "top 10%",
         toggleActions: "play none restart pause",
         // markers: true,

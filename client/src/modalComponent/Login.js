@@ -32,6 +32,12 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   align-items: center;
   z-index: 999;
+
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 65%;
+    margin-right: 5%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -141,7 +147,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
-  const { isLogin } = state;
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
