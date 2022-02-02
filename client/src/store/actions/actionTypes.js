@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // Auth
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
@@ -19,8 +21,20 @@ export const FEEDING_INPUT_MODAL_ON = "FEEDING_INPUT_MODAL_ON";
 export const ADDFISH_MODAL_ON = "ADDFISH_MODAL_ON";
 export const DEADFISH_MODAL_ON = "DEADFISH_MODAL_ON";
 export const RECOMMENDINFO_MODAL_ON = "RECOMMENDINFO_MODAL_ON";
+export const EXCHANGEWATER_MODAL_ON = "EXCHANGEWATER_MODAL_ON";
+export const WSDINFO_MODAL_ON = "WSDINFO_MODAL_ON";
+export const ADD_CONTAINER_MODAL_ON = "ADD_CONTAINER_MODAL_ON";
+export const HELP_MODAL_ON = "HELP_MODAL_ON";
+export const LOG_OUT_MODAL_ON = "LOG_OUT_MODAL_ON";
+export const LYMPHO_MODAL_ON = "LYMPHO_MODAL_ON";
+export const HTM_MODAL_ON = "HTM_MODAL_ON";
+export const WORD_MODAL_ON = "WORD_MODAL_ON";
+export const LEVEL_UP_MODAL_ON = "LEVEL_UP_MODAL_ON";
 export const MODAL_OFF = "MODAL_OFF";
 export const PWD_MODAL_ON = "PWD_MODAL_ON";
 
 // ManageCard
 export const CONTAINER_CARD_INFO_SHOW = "CONTAINER_CARD_INFO_SHOW";
+
+// ManageDetail
+export const GET_CONTAINER_INFO = "GET_CONTAINER_INFO";

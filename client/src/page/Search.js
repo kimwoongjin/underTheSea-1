@@ -1,88 +1,113 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import axios from "axios";
 import SearchCurrent from "./SearchCurrent";
 import SearchInfo from "./SearchInfo";
 import { useEffect } from "react";
-import SearchDrop from "./SearchDrop";
+import Footer from "../component/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
-const activeBorderRadius = "1rem 1rem 0 0";
-const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
+const MainImg = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const Auto = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
-  width: 50%;
-  height: 7.5vh;
+  width: 100%;
+  height: 8vh;
   position: relative;
-  margin: 10% 0 0 20%;
+  margin-top: 5%;
+  .bottom {
+    width: 30vw;
+    display: flex;
+    border-bottom: 5px solid #108dee;
+    position: relative;
+    outline: none;
+    bottom: 55%;
+    right: 1%;
+  }
 `;
 
 const InputContainer = styled.div`
-  /* position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: 100%;
-  height: 100%;
-  font-family: "Kfont";
-  border: 1px solid black; */
-  /* margin-top: 8rem; */
+  position: relative;
+  border: 2px solid #108dee;
+  border-radius: 5px;
+  width: 30vw;
+  height: 5vh;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
-  padding: 1rem;
-  border: 1px solid rgb(223, 225, 229);
-  border-radius: ${(props) =>
-    props.hasText ? activeBorderRadius : inactiveBorderRadius};
-  z-index: 3;
-  box-shadow: ${(props) => (props.hasText ? boxShadow : 0)};
-
-  &:focus-within {
-    box-shadow: ${boxShadow};
+  margin-right: 2%;
+  top: 20%;
+  .fish-input {
+    /* position: relative; */
+    background-color: transparent;
+    margin: 0%;
+    padding-left: 25px;
+    outline: none;
+    border: none;
+    width: 85%;
+    font-size: 1.2rem;
+    font-family: "Kfont";
+    box-sizing: border-box;
+    /* text-align: center; */
+    /* border-bottom: 2px solid #108dee; */
+    /* border: 1px solid red; */
   }
 
-  .hi {
-    /* border: none;
-    background: none;
-    border-bottom: 5px solid #108dee;
+  .delete-button {
+    font-size: 1.5rem;
+    font-weight: bold;
     position: absolute;
-    width: 70%;
-    height: 100%;
-    text-align: center;
-    font-weight: 700;
-    font-size: 20px; */
-    flex: 1 0 0;
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    outline: none;
-    font-size: 16px;
+    left: 3px;
+    bottom: 8px;
+    color: #e5e5e5;
+    cursor: pointer;
   }
 `;
 
 const Button = styled.button`
-  position: absolute;
-  width: 8vw;
-  height: 5vh;
-  font-size: 1.5rem;
+  /* position: relative; */
+  /* left: 20%; */
+  /* bottom: 46%; */
+  width: 15%;
+  height: 100%;
+  font-size: 1.25rem;
   color: white;
   background: #108dee;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  overflow: hidden;
+  font-weight: bold;
+  font-family: "Kfont";
   border: 2px solid #108dee;
   cursor: pointer;
-  border: 1px solid black;
-  right: 0%;
+  position: relative;
+  :hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.07);
+  }
 `;
 
 const Text = styled.div`
-  position: absolute;
-  top: 115%;
+  position: relative;
+  margin-top: 10%;
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
@@ -92,11 +117,14 @@ const Text = styled.div`
 const Container = styled.div`
   /* border: 1px solid black; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+  margin-top: 5%;
+  margin-bottom: 10%;
 `;
 const CardContainer = styled.div`
   /* border: 1px solid black; */
@@ -106,91 +134,81 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 12%;
+  position: relative;
 `;
-// const DropDown = styled.ul``;
 
 function Search() {
-  // let refresh = window.location.search;
-  const [word, setWord] = useState("");
-  const [search, setSearch] = useState(); //검색 물고기
-  const [fish, setFish] = useState([]); //검색 전 추천 물고기
-  const [options, setOptions] = useState([]); //60개 정보리스트
-  const [filteredOptions, setFilteredOptions] = useState([]);
-  const [fish2, setFish2] = useState([]);
-  const [filteredOptions2, setFilteredOptions2] = useState([]);
+  const [fish, setFish] = useState([]); //첫 랜딩될 화면 페이지
+  const [allFish, setAllFish] = useState([]); // 60개의 물고기 정보값
+  // const [filteredFish, setFilteredFish] = useState([]); //매치된 이름을 통해 정보가 필터링 되어서 들어온다. [{}{}]
   //==================================================================
   const [currentFish, setCurrentFIsh] = useState(false); //추천, 현재 상태
-  const [selected, setSelected] = useState(-1);
   const [hasText, setHasText] = useState(false); //인풋값 유무를 확인
-
-  // const handleInput = (e) => {
-  //   setSearch(e.target.value);
-  // };
-
+  //==================================================================
+  const [input, setInput] = useState([]);
+  const [fishList, setFishList] = useState([]); //물고기 이름 리스트
+  const [search, setSearch] = useState([]);
   // 검색 받아오기===========================================================
 
-  // useEffect(() => {
-  //   gotoSearch();
-  // }, []);
-
   const gotoSearch = () => {
-    //-----> 네임 리스트 <------
-    // navigate(`/search?fish_name=${word}`);
-    // const search = decodeURI(window.location.search);
-
     axios
-      .post(`http://localhost:80/fish`, { data: { fish_name: search } })
+      .post(`${process.env.REACT_APP_SERVER_API}/fish/one`, {
+        data: { fish_name: input },
+      })
       .then((result) => {
-        // if (!word || word === " ") return null;
-        // console.log(result.data, "배열입니까?");
-        setSearch(result.data);
+        setSearch(result.data.data);
+        // console.log(result.data.data, "물고기 한마리");
         setCurrentFIsh(true);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  // console.log(search, "물고기 한마리");
   // 60개 리스트 받아오기===========================================================
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/all/60`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/63`, {
         headers: {
           accept: "application/json",
         },
       })
       .then((result) => {
-        setFish2(result.data.data.fish_data);
-        const list = result.data.data.fish_data.map((el) => el.fish_name);
-        // console.log(list, "---------------");
-        setOptions(list);
+        setAllFish(result.data.data.fish_data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  // 검색 창 ===========================================================
-
-  useEffect(() => {
-    if (search === "") {
-      setHasText(false);
-    }
-  }, [search]);
-
-  // 추천 6개 카드  ===========================================================
-
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/all/6`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },
       })
       .then((result) => {
-        // console.log(result.data.data.fish_data, "---------------");
+        // console.log(result.data.data);
+        setFishList(result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // 추천 6개 카드  ===========================================================
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/all/6`, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+      .then((result) => {
         setCurrentFIsh(false);
         setFish(result.data.data.fish_data);
       })
@@ -199,108 +217,67 @@ function Search() {
       });
   }, []);
 
-  // 인풋 드랍다운  ===========================================================
+  // 인풋  ===========================================================
 
   const handleInputChange = (event) => {
     const { value } = event.target;
     if (value.includes("\\")) return;
 
-    // input에 텍스트가 있는지 없는지 확인하는 코드
     value ? setHasText(true) : setHasText(false);
-    setWord(value);
+    setInput(value);
 
-    // dropdown을 위한 기능
-    const filterRegex = new RegExp(value, "i");
-    // console.log(filterRegex, "너도 콘솔찍히니?");
-    const resultOptions = options.filter((option) => option.match(filterRegex));
-    const testOptions = fish2.filter((fish) =>
-      fish.fish_name.match(filterRegex)
-    );
-    console.log(testOptions, "YEAH~~~~~~~~~");
-    setFilteredOptions2(testOptions);
-    setFilteredOptions(resultOptions);
+    // const matchFish = allFish.filter((fish) => fish.fish_name.match(value));
+    // setFilteredFish(matchFish);
   };
 
-  const handleDropDownClick = (clickedOption) => {
-    setWord(clickedOption);
-    // console.log(clickedOption, "옵션이니");
-    const resultOptions = options.filter((option) => option === clickedOption);
-    // console.log(resultOptions, "맞니 아니니니");
-
-    setOptions(resultOptions);
-  };
-
-  const handleDeleteButtonClick = () => {
-    setWord("");
-  };
-
-  //엔터 키 이벤트
-  // const handleKeyPress = (e) => {
-  //   if (e.type === "keypress" && e.code === "Enter") {
-  //     // handleSearchClick(); //인자 필요하면 넣기
-  //   }
-  // };
-
-  //엔터 키 이벤트 ================================================
-  const handleKeyUp = (event) => {
-    // eslint-disable-next-line
-
-    if (
-      event.getModifierState("Fn") ||
-      event.getModifierState("Hyper") ||
-      event.getModifierState("OS") ||
-      event.getModifierState("Super") ||
-      event.getModifierState("Win")
-    )
-      return;
-    if (
-      event.getModifierState("Control") +
-        event.getModifierState("Alt") +
-        event.getModifierState("Meta") >
-      1
-    )
-      return;
-    if (hasText) {
-      if (event.code === "ArrowDown" && options.length - 1 > selected) {
-        setSelected(selected + 1);
-      }
-      if (event.code === "ArrowUp" && selected >= 0) {
-        setSelected(selected - 1);
-      }
-      if (event.code === "Enter" && selected >= 0) {
-        handleDropDownClick(options[selected]);
-        setSelected(-1);
-      }
-    }
+  const handleDeleteButton = () => {
+    setInput("");
   };
 
   return (
     <>
-      <Header />
+      <Header2 />
+      <MainImg>
+        <img
+          className="img"
+          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A5%E1%84%8E%E1%85%B5%E1%86%BC.jpg"
+          alt=""
+        ></img>
+      </MainImg>
       <Auto>
-        <InputContainer hasText={hasText}>
+        <InputContainer>
           <input
-            className="hi"
+            className="fish-input"
             type="text"
             placeholder="어종명으로 검색해주세요."
             onChange={handleInputChange}
-            value={search}
-            onKeyUp={handleKeyUp}
+            value={input || ""}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                gotoSearch();
+              }
+            }}
+            list="fishName"
           />
-          <div className="delete-button" onClick={handleDeleteButtonClick}>
+
+          <div className="delete-button" onClick={handleDeleteButton}>
             &times;
           </div>
-          {hasText ? (
-            <SearchDrop
-              options={filteredOptions}
-              handleDropDownClick={handleDropDownClick}
-              selected={selected}
-            />
-          ) : null}
-          <Button onClick={gotoSearch}>search</Button>
+          <datalist id="fishName">
+            {fishList.map((el, idx) => (
+              <option
+                className="fish-option"
+                value={el}
+                label={el}
+                key={idx}
+              ></option>
+            ))}
+          </datalist>
+          <Button onClick={gotoSearch}>
+            <FontAwesomeIcon icon={faSearch} size="1x" color="#e5e5e5" />
+          </Button>
         </InputContainer>
       </Auto>
-
       <Text>카드를 클릭하면 세부 정부를 확인할 수 있습니다.</Text>
 
       {/* ============================================================= */}
@@ -308,7 +285,7 @@ function Search() {
       <Container>
         {currentFish ? (
           <CardContainer>
-            <SearchInfo search={filteredOptions2} />
+            <SearchInfo filteredFish={search} />
           </CardContainer>
         ) : (
           <CardContainer>
@@ -318,6 +295,7 @@ function Search() {
           </CardContainer>
         )}
       </Container>
+      <Footer />
     </>
   );
 }

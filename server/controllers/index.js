@@ -14,6 +14,8 @@ module.exports = {
   allcontainer: require("./container/all"),
   fishinfo: require("./fish/fishinfo"),
   allfishinfo: require("./fish/allfishinfo"),
+  exactfishinfo: require("./fish/exactfishinfo"),
+  fishnamelist: require("./fish/fishnamelist"),
   addcomment: require("./comment/addcomment"),
   tipscomment: require("./comment/tipscomment"),
   addtip: require("./tip/addtip"),
@@ -33,4 +35,7 @@ module.exports = {
   commentinfo: require("./comment/commentinfo"),
   authgoogle: require("./user/authgoogle"),
   googlecallback: require("./user/googlecallback"),
+  authkakako: require("./user/authkakao"),
+  kakaocallback: require("./user/kakaocallback"),
+  checkstatus: require("./user/checkstatus"),
 };

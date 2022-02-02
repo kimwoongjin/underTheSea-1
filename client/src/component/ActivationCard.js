@@ -11,6 +11,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* margin-right: 35px; */
+  transition: all 0.3s;
+  :hover {
+    transform: matrix(1, 0, 0, 1, 0, -10);
+    box-shadow: 0px 0px 30px #adb5bd;
+    transition: all 0.3s;
+  }
 `;
 const ImgContainer = styled.div`
   width: 100%;
@@ -53,7 +60,7 @@ function ActivationCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(activationModalOnAction)}>
       <ImgContainer>
-        <Img src="/물맞댐대표사진.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물맞댐대표사진.jpeg" />
       </ImgContainer>
       <Title>물맞댐 방법</Title>
       <Content>

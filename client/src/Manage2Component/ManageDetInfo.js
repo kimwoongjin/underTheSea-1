@@ -8,13 +8,11 @@ import styled from "styled-components";
 const ContainerS = styled.div`
   display: flex;
   align-items: center;
-  /* background-color: rgba(51, 153, 255, 0.1); */
-  border: 2px solid #108dee;
+  box-shadow: 0px 0px 10px #adb5bd;
   border-radius: 10px;
   width: 100%;
-  height: 15vh;
+  height: 20vh;
   margin-bottom: 7%;
-  /* border: 1px solid red; */
 `;
 
 const DetailImg = styled.div`
@@ -24,7 +22,6 @@ const DetailImg = styled.div`
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  /* border-radius: 10px; */
   cursor: pointer;
 `;
 
@@ -32,54 +29,133 @@ const ImgD = styled.img`
   position: relative;
   width: 100%;
   height: 100%;
-  /* border-top-left-radius: 10px; */
-  /* border-bottom-left-radius: 10px; */
 `;
 
 const Content = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   width: 75%;
-  height: 15vh;
-  /* text-align: left; */
-  /* line-height: 200%; */
+  height: 20vh;
 `;
 
 const LeftInfo = styled.div`
-  width: 50%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 0px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
   height: 100%;
-  border: 1px solid darkgrey;
 `;
 
 const RightInfo = styled.div`
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
   height: 100%;
-  /* border: 1px solid darkgrey; */
+`;
+
+const FishDesc = styled.div`
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 10px;
+  width: 100%;
+  height: 90%;
+  font-size: 1rem;
+  line-height: 140%;
+  border-left: 1.5px solid #e5e5e5;
 `;
 
 const Name = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 20%;
   font-weight: bold;
   font-size: 1.2rem;
+  font-family: "Kfont";
 `;
 
-const TextD = styled.div`
-  line-height: 130%;
-  font-weight: 450;
+const HabitatContainer = styled.div`
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+const MidContainer = styled.div`
+  display: flex;
+  width: 80%;
+  height: 20%;
+`;
+
+const Habitat = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
+`;
+
+const HabitatShow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kfont";
+  width: 50%;
+  height: 100%;
 `;
 
 function ManageDetInfo() {
+  let conInfo = JSON.parse(localStorage.getItem("conInfo"));
   return (
     <>
-      <ContainerS>
-        <DetailImg>
-          <ImgD src="/체리바브.jpeg" alt="" />
-        </DetailImg>
-        {/* ----------------------------------------- */}
-        <Content>
-          <LeftInfo></LeftInfo>
-          <RightInfo></RightInfo>
-        </Content>
-      </ContainerS>
+      {conInfo.fish_list.map((el, idx) => {
+        return (
+          <ContainerS key={idx}>
+            <DetailImg>
+              <ImgD
+                src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                alt="이미지"
+              />
+            </DetailImg>
+            {/* ----------------------------------------- */}
+            <Content>
+              <LeftInfo>
+                <Name>{el.fish_name}</Name>
+
+                <HabitatContainer>
+                  <Habitat>종류</Habitat>
+                  <HabitatShow>
+                    {el.fresh_water ? "담수어" : "해수어"}
+                  </HabitatShow>
+                </HabitatContainer>
+                <HabitatContainer>
+                  <Habitat>적정수온</Habitat>
+                  <HabitatShow>{el.temp}</HabitatShow>
+                </HabitatContainer>
+
+                <HabitatContainer>
+                  <Habitat>산호합사</Habitat>
+                  <HabitatShow>{el.reefsafe ? "O" : "X"}</HabitatShow>
+                </HabitatContainer>
+                <HabitatContainer>
+                  <Habitat>마릿수</Habitat>
+                  <HabitatShow>{el.fish_num}</HabitatShow>
+                </HabitatContainer>
+              </LeftInfo>
+              <RightInfo>
+                <FishDesc>{el.desc}</FishDesc>
+              </RightInfo>
+            </Content>
+          </ContainerS>
+        );
+      })}
     </>
   );
 }

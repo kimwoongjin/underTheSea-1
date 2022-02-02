@@ -11,6 +11,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* margin-right: 35px; */
+  transition: all 0.3s;
+  :hover {
+    transform: matrix(1, 0, 0, 1, 0, -10);
+    box-shadow: 0px 0px 30px #adb5bd;
+    transition: all 0.3s;
+  }
 `;
 const ImgContainer = styled.div`
   width: 100%;
@@ -53,7 +60,7 @@ function FilterMediaCard() {
     // 컨테이너를 클릭하면 모달상태가 변경되야함
     <Container onClick={() => dispatch(filterMediaModalOnAction)}>
       <ImgContainer>
-        <Img src="/여과재모음.jpeg" />
+        <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/여과재모음.jpeg" />
       </ImgContainer>
       <Title>여과재는 무엇일까요?</Title>
       <Content>

@@ -10,13 +10,23 @@ import {
   ADDFISH_MODAL_ON,
   DEADFISH_MODAL_ON,
   RECOMMENDINFO_MODAL_ON,
+  WSDINFO_MODAL_ON,
+  ADD_CONTAINER_MODAL_ON,
+  LYMPHO_MODAL_ON,
   MODAL_OFF,
   SIGN_OUT_MODAL_ON,
   PWD_MODAL_ON,
+  EXCHANGEWATER_MODAL_ON,
+  HELP_MODAL_ON,
+  LOG_OUT_MODAL_ON,
+  HTM_MODAL_ON,
+  WORD_MODAL_ON,
+  LEVEL_UP_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
   isLoginModal: false,
+  isLogoutModal: false,
   isSignupModal: false,
   isSkimmerModal: false,
   isSeaBasicInfoModal: false,
@@ -24,13 +34,19 @@ const initialState = {
   isFilterMediaModal: false,
   isActivationModal: false,
   isFeedingModal: false,
-
+  isExchangeModal: false,
   isAddfishModal: false,
   isDeadfishModal: false,
   isRecommendModal: false,
-
+  isWSDInfoModal: false,
   isSignoutModal: false,
   isPwdModal: false,
+  isHelpModal: false,
+  isAddContainerModal: false,
+  isLymphoModal: false,
+  isHtmModal: false,
+  isWordModal: false,
+  isLevelupModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -48,6 +64,9 @@ const modalReducer = (prevState = initialState, action) => {
     case SEA_BASIC_INFO_MODAL_ON:
       state = { ...prevState, isSeaBasicInfoModal: true };
       break;
+    case HTM_MODAL_ON:
+      state = { ...prevState, isHtmModal: true };
+      break;
     case FILTER_MEDIA_MODAL_ON:
       state = { ...prevState, isFilterMediaModal: true };
       break;
@@ -62,6 +81,7 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case PWD_MODAL_ON:
       state = { ...prevState, isPwdModal: true };
+      break;
     case ACTIVATION_MODAL_ON:
       state = { ...prevState, isActivationModal: true };
       break;
@@ -73,6 +93,30 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case RECOMMENDINFO_MODAL_ON:
       state = { ...prevState, isRecommendModal: true };
+      break;
+    case EXCHANGEWATER_MODAL_ON:
+      state = { ...prevState, isExchangeModal: true };
+      break;
+    case WSDINFO_MODAL_ON:
+      state = { ...prevState, isWSDInfoModal: true };
+      break;
+    case ADD_CONTAINER_MODAL_ON:
+      state = { ...prevState, isAddContainerModal: true };
+      break;
+    case HELP_MODAL_ON:
+      state = { ...prevState, isHelpModal: true };
+      break;
+    case LOG_OUT_MODAL_ON:
+      state = { ...prevState, isLogoutModal: true };
+      break;
+    case LYMPHO_MODAL_ON:
+      state = { ...prevState, isLymphoModal: true };
+      break;
+    case WORD_MODAL_ON:
+      state = { ...prevState, isWordModal: true };
+      break;
+    case LEVEL_UP_MODAL_ON:
+      state = { ...prevState, isLevelupModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

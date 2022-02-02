@@ -7,7 +7,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  top: 15%;
+  top: 23%;
   width: 300px;
   height: 420px;
   border-radius: 20px;
@@ -51,7 +51,7 @@ const ImgContainer = styled.div`
   overflow: hidden;
 `;
 const Img = styled.img`
-  width: 100%;
+  width: 105%;
   height: 100%;
 `;
 const Content = styled.div`
@@ -75,6 +75,7 @@ const Name = styled.div`
 const Ename = styled.div`
   font-size: 1.2rem;
   color: #828282;
+  font-style: italic;
 `;
 
 const Back = styled.div`
@@ -82,40 +83,47 @@ const Back = styled.div`
   height: 100%;
   background: white;
   transform: rotateY(180deg);
-  position: absolute;
   backface-visibility: hidden;
   font-family: "Kfont";
   box-sizing: border-box;
   border-radius: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Contents = styled.div`
-  position: relative;
-  display: flex;
   width: 90%;
   height: 93%;
-  border: 1px solid black;
-  margin-top: 7%;
+  /* border: 1px solid black; */
   text-align: left;
   flex-direction: column;
+  display: flex;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 5%;
 `;
 const NameB = styled.div`
-  position: absolute;
+  align-items: center;
+  justify-content: center;
   display: flex;
-  top: 0%;
+  margin-bottom: 130%;
   font-weight: bold;
   font-size: 1.5rem;
 `;
 
 const NamesB = styled.div`
-  top: 8%;
-  position: absolute;
-  font-size: 0.7rem;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 12%;
+  font-size: 0.8rem;
   color: #828282;
+  text-align: center;
+  font-style: italic;
 `;
 const Text = styled.div`
   position: absolute;
-  /* left: 5%; */
   top: 20%;
   line-height: 170%;
   font-weight: bold;
@@ -144,11 +152,15 @@ const DescBottom = styled.div`
 function SearchCurrent({ item }) {
   return (
     // <OuterContainer>
+
     <Container>
       <Box id="box">
         <Front>
           <ImgContainer>
-            <Img src={"http://localhost:80" + item.fish_img} alt=""></Img>
+            <Img
+              src={process.env.REACT_APP_SERVER_API + item.fish_img}
+              alt=""
+            ></Img>
           </ImgContainer>
           <Content>
             <Name>{item.fish_name}</Name>

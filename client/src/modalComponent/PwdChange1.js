@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -124,50 +123,53 @@ const Text = styled.div`
 
 const NewPwd = styled.form`
   width: 100%;
-  height: 40%;
+  height: 70%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 const CurPwd1 = styled.input`
-  margin-top: 23%;
+  margin-top: 9%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
+  z-index: 100;
 `;
 const NewPwd1 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
+  margin-bottom: 2%;
   box-sizing: border-box;
-  /* margin-bottom: 5%; */
+  z-index: 100;
 `;
 const NewPwd2 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
+  margin-bottom: 2%;
+  z-index: 100;
 `;
 const Warning = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 7%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
-
-  padding: 2% 0 5% 2%;
+  position: relative;
+  bottom: 14%;
+  padding-left: 2%;
 `;
 const Warning1 = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 15%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
-
-  padding: 2% 0 5% 2%;
+  position: relative;
+  bottom: 80%;
+  padding-left: 2%;
 `;
 
 const Btn = styled.div`
@@ -227,7 +229,10 @@ function PwdChange({ handleOff }) {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(new_pwd);
   };
-
+  const checkPassword2 = (new_pwd) => {
+    let regExp2 = /[a-zA-Z0-9]/;
+    return regExp2.test(new_pwd);
+  };
   //------------------------------------------------------------------------------------
 
   const handleInputValue = (key) => (e) => {
@@ -250,7 +255,7 @@ function PwdChange({ handleOff }) {
       } else {
         axios
           .patch(
-            `http://localhost:80/user/password`,
+            `${process.env.REACT_APP_SERVER_API}/user/password`,
             {
               data: { cur_pwd, new_pwd },
             },
@@ -303,6 +308,7 @@ function PwdChange({ handleOff }) {
             icon={faTimes}
             size="2x"
             type="button"
+            color="#e5e5e5"
             onClick={handleOff}
           />
         </CloseBtnContainer>
@@ -333,12 +339,14 @@ function PwdChange({ handleOff }) {
               {!currentPwd.new_pwd ? (
                 <Warning>
                   비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
+                  {/* currentPwd.new_pwd.length >= 8  */}
                 </Warning>
-              ) : currentPwd.new_pwd.length >= 8 ||
-                checkPassword(currentPwd.new_pwd) ? (
+              ) : currentPwd.new_pwd.length >= 8 &&
+                checkPassword(currentPwd.new_pwd) &&
+                checkPassword2(currentPwd.new_pwd) ? (
                 <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
               ) : (
-                <Warning></Warning>
+                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
               )}
               <NewPwd2
                 placeholder="새 비밀번호 확인"

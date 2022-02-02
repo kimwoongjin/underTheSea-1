@@ -38,6 +38,13 @@ const CloseBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
 
 const ShowContainer = styled.div`
   width: 90%;
@@ -64,6 +71,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -82,6 +92,9 @@ const Img = styled.img`
     background: #e5e5e5;
     border-radius: 5px;
   }
+  @media screen and (max-width: 768px) {
+    width: 20%;
+  }
 `;
 
 const ImgNameContainer = styled.div`
@@ -96,10 +109,13 @@ const ImgName = styled.div`
   align-items: center;
   font-family: "Kfont";
   ${(props) =>
-    props.type.food_type === props.name &&
+    props.feedingInfo.type === props.name &&
     css`
       color: #108dee;
     `};
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Btn = styled.button`
@@ -127,52 +143,74 @@ const Btn = styled.button`
   }
 `;
 
-function FeedingInput({ addFeedingNum, handleFoodtype, feedingInfo }) {
+function FeedingInput({ handleFeedAddRequest, handleFoodtype, feedingInfo }) {
   const dispatch = useDispatch();
   const [foodType, setFoodType] = useState("");
   const choiceFood = (e) => {
     setFoodType(e.target.name);
   };
-  useEffect(() => {
-    console.log(feedingInfo);
-  }, []);
+  // useEffect(() => {
+  //   console.log("피딩인포", feedingInfo);
+  // }, []);
   // 여기서
   return (
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              // size="2x"
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>
             <Text>먹이 타입을 선택해주세요</Text>
             <ImgContainer>
-              <Img name="1" src="/펠렛.png" onClick={handleFoodtype} />
-              <Img name="2" src="/플레이크.png" onClick={handleFoodtype} />
-              <Img name="3" src="/냉동.png" onClick={handleFoodtype} />
-              <Img name="4" src="/생먹이.png" onClick={handleFoodtype} />
+              <Img
+                name="1"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png"
+                alit="/펠렛.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="2"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png"
+                alt="/플레이크.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="3"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png"
+                alt="/냉동.png"
+                onClick={handleFoodtype}
+              />
+              <Img
+                name="4"
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png"
+                alt="/생먹이.png"
+                onClick={handleFoodtype}
+              />
             </ImgContainer>
             <ImgNameContainer>
-              <ImgName type={feedingInfo} name="pellet">
+              <ImgName feedingInfo={feedingInfo} name="1">
                 펠렛
               </ImgName>
-              <ImgName type={feedingInfo} name="flake">
+              <ImgName feedingInfo={feedingInfo} name="2">
                 플레이크
               </ImgName>
-              <ImgName type={feedingInfo} name="frozen">
+              <ImgName feedingInfo={feedingInfo} name="3">
                 냉동
               </ImgName>
-              <ImgName type={feedingInfo} name="live">
+              <ImgName feedingInfo={feedingInfo} name="4">
                 생먹이
               </ImgName>
             </ImgNameContainer>
 
-            <Btn onClick={addFeedingNum}>선택완료</Btn>
+            <Btn onClick={handleFeedAddRequest}>선택완료</Btn>
           </InfoShow>
         </ShowContainer>
       </ModalContainer>
