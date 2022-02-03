@@ -53,6 +53,9 @@ const Title = styled.div`
     font-weight: 500;
     color: #26262f;
   }
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 const Img = styled.img`
   position: absolute;

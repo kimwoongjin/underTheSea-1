@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -79,6 +82,9 @@ const Wave = styled.img`
 const FilterMedia = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 const Rock = styled.img`
   width: 80%;

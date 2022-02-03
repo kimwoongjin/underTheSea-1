@@ -9,14 +9,18 @@ const Container = styled.div`
   margin-bottom: 40px;
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
+  /* margin-right: 35px; */
   flex-direction: column;
   align-items: center;
-  /* margin-right: 35px; */
   transition: all 0.3s;
   :hover {
     transform: matrix(1, 0, 0, 1, 0, -10);
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
+  }
+  @media screen and (max-width: 400px) {
+    width: 280px;
+    height: 400px;
   }
 `;
 const ImgContainer = styled.div`
@@ -52,6 +56,10 @@ const Content = styled.div`
   background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
+  @media screen and (max-width: 400px) {
+    width: 240px;
+    height: 120px;
+  }
 `;
 function ActivationCard() {
   const dispatch = useDispatch();

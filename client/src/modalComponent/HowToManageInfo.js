@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -64,6 +67,10 @@ const ContentContainer = styled.div`
 const Img = styled.img`
   width: 20%;
   height: 25%;
+  @media screen and (max-width: 1000px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 const IconContainer = styled.div`
   width: 95%;
@@ -79,6 +86,9 @@ const ImgContainer = styled.div`
     margin-bottom: 0px;
     margin-left: 20px;
     font-family: "Kfont";
+  }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
   }
 `;
 
