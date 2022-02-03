@@ -32,15 +32,16 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
+  max-width: 1450px;
   height: 40vh;
+  margin: auto;
 `;
 
 const Title = styled.div`
   position: absolute;
   top: 50%;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   text-align: center;
   line-height: 180%;
   color: #008eff;
@@ -54,6 +55,9 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 60%;
+  }
 `;
 
 const Text = styled.div`
@@ -64,6 +68,9 @@ const Text = styled.div`
   line-height: 180%;
   @media screen and (max-width: 768px) {
     font-size: 1.25rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
   }
 `;
 const ContainerS = styled.div`
@@ -201,6 +208,10 @@ const OuterContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 12%;
+
+  @media screen and (max-width: 868px) {
+    width: 100%;
+  }
 `;
 
 const FishCardContainer = styled.div`
@@ -210,6 +221,9 @@ const FishCardContainer = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 12%;
+  @media screen and (max-width: 868px) {
+    width: 90vw;
+  }
 `;
 
 const Level = styled.div`
@@ -223,6 +237,10 @@ const Level = styled.div`
 const LevelCover = styled.div`
   display: flex;
   width: 8%;
+  @media screen and (max-width: 868px) {
+    position: relative;
+    left: -20%;
+  }
 `;
 const LevelText = styled.div`
   display: flex;
@@ -237,6 +255,12 @@ const Logo = styled.img`
   width: 20%;
   height: 120%;
   margin-bottom: 2%;
+  @media screen and (max-width: 868px) {
+    width: 40%;
+    height: 80%;
+    position: relative;
+    left: 20%;
+  }
 `;
 
 const Levelinfo = styled.div`
@@ -247,11 +271,16 @@ const Levelinfo = styled.div`
   font-size: 1.2rem;
   margin-left: 10px;
   font-family: "Kfont";
+  @media screen and (max-width: 868px) {
+  }
 `;
 
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
+  @media screen and (max-width: 868px) {
+    width: 70%;
+  }
 `;
 
 const MainImg = styled.img`
@@ -274,6 +303,11 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
+  @media screen and (max-width: 868px) {
+    margin-top: 5%;
+    width: 70%;
+    justify-content: center;
+  }
 `;
 
 const HelpBtn = styled.div`
@@ -315,6 +349,11 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 50%;
+    margin-bottom: 5%;
+  }
   border: 2px solid #108dee;
 `;
 
@@ -332,6 +371,10 @@ const BtnContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   height: 6vh;
+  @media screen and (max-width: 480px) {
+    width: 72%;
+    margin-left: 2%;
+  }
 `;
 
 const Button = styled.button`
@@ -354,6 +397,10 @@ const Button = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-right: 3%;
   }
 `;
 

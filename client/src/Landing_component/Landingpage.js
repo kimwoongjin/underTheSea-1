@@ -6,8 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 1920px;
   height: 90vh;
+  margin: auto;
   background: linear-gradient(to top, #70d6ff, #d2f7ff);
   display: flex;
   justify-content: center;
@@ -19,82 +20,128 @@ const Container = styled.div`
     stroke: blue;
     stroke-width: 2px;
   }
+
   @media screen and (max-width: 480px) {
+    height: 105vh;
     width: 100%;
     overflow: hidden;
   }
 `;
+const MaxContainer = styled.div`
+  width: 100%;
+  margin-bottom: 6%;
+`;
 
 const SeaWeed = styled.img`
   width: 15%;
+  margin: 0 auto;
+  /* width: 15%; */
   position: absolute;
   bottom: 0px;
   right: 2%;
   opacity: 0.7;
   display: flex;
 
+  @media screen and (max-width: 1024px) {
+    /* max-width: 12rem; */
+    bottom: 0%;
+    right: 2%;
+  }
   @media screen and (max-width: 480px) {
     width: 20%;
-    bottom: 0%;
+    bottom: 14%;
     right: 2%;
   }
 `;
 const SeaWeedL = styled.img`
-  width: 15%;
+  /* width: 15%; */
+  width: 17%;
+  margin: auto;
   position: absolute;
   bottom: 0px;
   left: 5%;
   display: flex;
 
-  @media screen and (max-width: 480px) {
-    width: 25%;
+  @media screen and (max-width: 1024px) {
+    /* max-width: 12rem; */
     bottom: 2%;
     left: 0%;
   }
+  @media screen and (max-width: 480px) {
+    width: 25%;
+    bottom: 15%;
+    left: 0%;
+  }
 `;
+
 const Coral = styled.img`
-  width: 10%;
+  width: 13%;
+  margin: auto;
+  /* width: 10%; */
   position: absolute;
   bottom: 12px;
   right: 17%;
   opacity: 0.7;
   display: flex;
 
-  @media screen and (max-width: 480px) {
-    width: 15%;
+  @media screen and (max-width: 1024px) {
+    /* width: 10%; */
     right: 15%;
     bottom: 1%;
   }
+  @media screen and (max-width: 480px) {
+    width: 15%;
+    right: 15%;
+    bottom: 14%;
+  }
 `;
+
 const BubbleL = styled.img`
   width: 27%;
+  margin: auto;
+  /* width: 27%; */
   position: absolute;
   left: 2%;
   bottom: 7%;
+  @media screen and (max-width: 1024px) {
+    /* width: 20%; */
+    bottom: 10%;
+    left: 7%;
+  }
   @media screen and (max-width: 480px) {
     width: 35%;
-    bottom: 10%;
+    bottom: 15%;
     left: 7%;
   }
 `;
 
 const BubbleR = styled.img`
   width: 22%;
+  margin: auto;
+  /* width: 22%; */
   position: absolute;
   right: 11%;
   bottom: 14%;
-  @media screen and (max-width: 480px) {
-    width: 35%;
+  @media screen and (max-width: 1024px) {
+    /* width: 20%; */
     bottom: 10%;
     right: 7%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 35%;
+    bottom: 17%;
+    right: 10%;
   }
 `;
 
 const Shark = styled.img`
+  width: 15%;
+  margin: auto;
   position: absolute;
-  left: 8%;
-  width: 13%;
-  top: 22%;
+  left: 15%;
+  top: 2%;
+  @media screen and (max-width: 1024px) {
+  }
 
   @media screen and (max-width: 480px) {
     width: 25%;
@@ -105,86 +152,102 @@ const Shark = styled.img`
 `;
 
 const JellyFish = styled.img`
-  width: 9%;
+  width: 12%;
+  margin: auto;
+  /* width: 9%; */
   position: absolute;
-  left: 24%;
+  left: 10%;
   bottom: 30%;
 
+  @media screen and (max-width: 1024px) {
+    left: 8%;
+  }
   @media screen and (max-width: 480px) {
     width: 19%;
-    display: flex;
-    position: relative;
-    left: 15%;
-    top: 20%;
+    left: 200px;
+    bottom: 72%;
   }
 `;
 
 const Fish1 = styled.img`
-  width: 11%;
-  position: relative;
-  bottom: 24%;
-  left: 10%;
-  display: flex;
-
+  position: absolute;
+  width: 15%;
+  bottom: 59%;
+  right: 17%;
+  margin: auto;
+  @media screen and (max-width: 1024px) {
+  }
   @media screen and (max-width: 480px) {
     width: 20%;
     display: flex;
-    /* border: 1px solid black; */
-    left: -20%;
     bottom: 30%;
-    position: relative;
+    left: -30%;
+    /* border: 1px solid black; */
+    /* right: 20%;
+    bottom: 20px;
+    position: relative; */
   }
 `;
 
 const Fish3 = styled.img`
-  width: 9%;
+  width: 9rem;
+  margin: auto;
+  /* width: 9%; */
   position: absolute;
   bottom: 43%;
   right: 4%;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
-    width: 20%;
+    width: 10%;
     bottom: 15%;
     right: 25%;
   }
-`;
-const TilteContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  @media screen and (max-width: 480px) {
-    /* border: 1px solid red; */
-    bottom: 7%;
-  }
-
-  /* border: 4px solid red; */
-`;
-const MainImg = styled.img`
-  width: 90%;
-  position: relative;
-  left: 23%;
-
   @media screen and (max-width: 480px) {
     display: flex;
-    position: relative;
-    width: 85vw;
-    left: 0%;
+    width: 17%;
+    bottom: 35%;
+    right: 10%;
   }
 `;
 
-const Contents = styled.div`
-  position: relative;
-  color: #092011;
-  font-size: 1.4rem;
-  bottom: 30%;
-  left: 21%;
-  font-weight: 450;
-  line-height: 140%;
-  text-align: center;
+const MainImg = styled.img`
+  width: 35%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  bottom: 47%;
+
+  @media screen and (max-width: 1024px) {
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 80%;
+  }
+`;
+const TilteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: auto;
   font-family: "Kfont";
+  width: 30%;
+  height: 10%;
+  color: #092011;
+
+  @media screen and (max-width: 480px) {
+    width: 80%;
+    margin-bottom: 40%;
+  }
+  /* border: 4px solid red; */
+`;
+const Contents = styled.div`
+  /* font-size: 150%; */
+  font-weight: 500%;
+  font-size: max(2vw, 1.2rem);
+
+  @media screen and (max-width: 860px) {
+    font-size: max(2vw, 0.8rem);
+  }
   @media screen and (max-width: 480px) {
     display: flex;
     font-size: 1rem;
@@ -199,9 +262,10 @@ const Bubble = styled.div`
 `;
 
 const Bimg = styled.img`
+  width: 7%;
+  margin: auto;
   position: absolute;
   animation: bubble infinite linear 6s;
-  width: 100px;
 
   @media screen and (max-width: 480px) {
     display: none;
@@ -292,114 +356,116 @@ function Landingpage() {
 
   return (
     <Container>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-      ></meta>
-      <Bubble>
-        <Bimg
-          className="b1"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
-          alt="mini.png"
-          style={{
-            right: 120,
-            top: 700,
-            width: 30,
-            animationDelay: "4s",
-          }}
-        />
-        <Bimg
-          className="b2"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
-          alt="mini.png"
-          style={{
-            left: 120,
-            top: 700,
-            width: 80,
-            animationDelay: "3s",
-          }}
-        />
-        <Bimg
-          className="b3"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
-          alt="mini.png"
-          style={{
-            left: 80,
-            top: 800,
-            width: 50,
-            animationDelay: "1s",
-          }}
-        />
-        <Bimg
-          className="b4"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
-          alt="mini.png"
-          style={{
-            left: 200,
-            top: 700,
-          }}
-        />
-        <Bimg
-          className="b5"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
-          alt="mini.png"
-          style={{
-            left: 500,
-            top: 700,
-            width: 70,
-            animationDelay: "1.5s",
-          }}
-        />
-        <Bimg
-          className="b6"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
-          alt="mini.png"
-          style={{
-            left: 1000,
-            top: 700,
-            width: 60,
-            animationDelay: "2s",
-          }}
-        />
-        <Bimg
-          className="b7"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF3.png"
-          alt="mini.png"
-          style={{
-            left: 1200,
-            top: 700,
-            animationDelay: "1s",
-          }}
-        />
-        <Bimg
-          className="b8"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
-          alt="mini.png"
-          style={{
-            left: 1300,
-            top: 700,
-            animationDelay: "3s",
-          }}
-        />
-      </Bubble>
-      {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인1.png" */}
-      <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />
-      <SeaWeed src="https://iconmage.s3.ap-northeast-2.amazonaws.com/작은해초.png" />
-      <SeaWeedL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초L.png" />
-      <Shark src="https://iconmage.s3.ap-northeast-2.amazonaws.com/상어.png" />
-      <JellyFish src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png" />
-      <TilteContainer>
+      <MaxContainer>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
+        <Bubble>
+          <Bimg
+            className="b1"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
+            alt="mini.png"
+            style={{
+              right: 120,
+              top: 700,
+              width: 30,
+              animationDelay: "4s",
+            }}
+          />
+          <Bimg
+            className="b2"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
+            alt="mini.png"
+            style={{
+              left: 120,
+              top: 700,
+              width: 80,
+              animationDelay: "3s",
+            }}
+          />
+          <Bimg
+            className="b3"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
+            alt="mini.png"
+            style={{
+              left: 80,
+              top: 800,
+              width: 50,
+              animationDelay: "1s",
+            }}
+          />
+          <Bimg
+            className="b4"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
+            alt="mini.png"
+            style={{
+              left: 200,
+              top: 700,
+            }}
+          />
+          <Bimg
+            className="b5"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
+            alt="mini.png"
+            style={{
+              left: 500,
+              top: 700,
+              width: 70,
+              animationDelay: "1.5s",
+            }}
+          />
+          <Bimg
+            className="b6"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF1.png"
+            alt="mini.png"
+            style={{
+              left: 1000,
+              top: 700,
+              width: 60,
+              animationDelay: "2s",
+            }}
+          />
+          <Bimg
+            className="b7"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF3.png"
+            alt="mini.png"
+            style={{
+              left: 1200,
+              top: 700,
+              animationDelay: "1s",
+            }}
+          />
+          <Bimg
+            className="b8"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%AE%E1%86%AF%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AF2.png"
+            alt="mini.png"
+            style={{
+              left: 1300,
+              top: 700,
+              animationDelay: "3s",
+            }}
+          />
+        </Bubble>
+        {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/메인1.png" */}
+        <Coral src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초.png" />
+        <SeaWeed src="https://iconmage.s3.ap-northeast-2.amazonaws.com/작은해초.png" />
+        <SeaWeedL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해초L.png" />
+        <Shark src="https://iconmage.s3.ap-northeast-2.amazonaws.com/상어.png" />
+        <JellyFish src="https://iconmage.s3.ap-northeast-2.amazonaws.com/해파리.png" />
         <MainImg className="mainimg" src="/메인.png"></MainImg>
-        <Contents>
-          당신의 물 속 세상을 만나보세요.
-          <br></br> Under The Sea가 함께합니다.
-        </Contents>
-      </TilteContainer>
-      <Fish1 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기1.png" />
-      <Fish3 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기3.png" />
-      <BubbleL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울L.png" />
-      {/* <BubbleM src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울M1.png" /> */}
-      <BubbleR src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울R.png" />
+        <TilteContainer>
+          <Contents>
+            당신의 물 속 세상을 만나보세요.
+            <br></br> Under The Sea가 함께합니다.
+          </Contents>
+        </TilteContainer>
+        <Fish1 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기1.png" />
+        <Fish3 src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물고기3.png" />
+        <BubbleL src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울L.png" />
+        {/* <BubbleM src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울M1.png" /> */}
+        <BubbleR src="https://iconmage.s3.ap-northeast-2.amazonaws.com/물방울R.png" />
+      </MaxContainer>
     </Container>
   );
 }
