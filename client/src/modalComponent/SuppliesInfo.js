@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -74,15 +77,27 @@ const SubTitle = styled.div`
 const Wave = styled.img`
   width: 70%;
   margin: 10px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 const AquaBox = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 const Rock = styled.img`
   width: 80%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 function SuppliesInfo() {

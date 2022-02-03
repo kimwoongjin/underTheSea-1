@@ -10,13 +10,16 @@ const Container = styled.div`
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
   flex-direction: column;
-  /* margin-right: 35px; */
   align-items: center;
   transition: all 0.3s;
   :hover {
     transform: matrix(1, 0, 0, 1, 0, -10);
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
+  }
+  @media screen and (max-width: 400px) {
+    width: 280px;
+    height: 400px;
   }
 `;
 const ImgContainer = styled.div`
@@ -34,7 +37,6 @@ const Img = styled.img`
 const Title = styled.div`
   width: 260px;
   height: 40px;
-  /* border: 1px solid black; */
   font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
@@ -45,13 +47,17 @@ const Title = styled.div`
   box-sizing: border-box;
 `;
 const Content = styled.div`
+  font-family: "Kfont";
   width: 260px;
   height: 140px;
-  font-family: "Kfont";
   border-radius: 10px;
   background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
+  @media screen and (max-width: 400px) {
+    width: 240px;
+    height: 120px;
+  }
 `;
 function SkimmerCard() {
   const dispatch = useDispatch();

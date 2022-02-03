@@ -79,21 +79,23 @@ const ContainerS = styled.div`
   box-shadow: 0px 0px 10px #adb5bd;
   border-radius: 10px;
   width: 50%;
-  height: 20vh;
+  height: 22vh;
   margin-bottom: 3%;
+  /* border: 2px dashed blue; */
   @media screen and (max-width: 480px) {
     width: 70%;
+    height: 15vh;
   }
-  /* @media screen and (max-width: 768px) {
-    flex-direction: column;
-  } */
 `;
 const HabitatContainer = styled.div`
-  border-radius: 5px;
   overflow: hidden;
   display: flex;
   width: 100%;
   height: 100%;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    height: 15px;
+  }
 `;
 const FishDesc = styled.div`
   box-sizing: border-box;
@@ -112,7 +114,7 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
-  @media screen and (max-width: 868px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -141,8 +143,14 @@ const Name = styled.div`
   width: 80%;
   height: 20%;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-family: "Kfont";
+  @media screen and (max-width: 868px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 const LeftInfo = styled.div`
   display: flex;
@@ -150,11 +158,20 @@ const LeftInfo = styled.div`
   padding: 10px 0px;
   flex-direction: column;
   justify-content: space-around;
+  gap: 5%;
+  /* justify-content: space-between; */
   align-items: center;
+  font-size: 0.9rem;
   width: 40%;
   height: 100%;
   @media screen and (max-width: 868px) {
     width: 100%;
+    padding: 7px 0px;
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 480px) {
+    height: 15vh;
+    font-size: 0.7rem;
   }
 `;
 const ImgD = styled.img`
@@ -164,8 +181,12 @@ const ImgD = styled.img`
 `;
 const Content = styled.div`
   display: flex;
+  /* border: 1px dashed green; */
   width: 75%;
   height: 20vh;
+  @media screen and (max-width: 868px) {
+    height: 100%;
+  }
 `;
 const DetailImg = styled.div`
   position: relative;
@@ -175,6 +196,9 @@ const DetailImg = styled.div`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   cursor: pointer;
+  @media screen and (max-width: 868px) {
+    width: 40%;
+  }
 `;
 
 const OuterContainer = styled.div`
@@ -250,6 +274,7 @@ const Levelinfo = styled.div`
   @media screen and (max-width: 868px) {
   }
 `;
+
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
@@ -305,6 +330,7 @@ const AddfishBtn = styled.div`
   font-family: "Kfont";
   cursor: pointer;
 `;
+
 const DeadfishBtn = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -330,6 +356,7 @@ const ProgressBar = styled.div`
   }
   border: 2px solid #108dee;
 `;
+
 const Progress = styled.div`
   transition: all 1s;
   width: ${(props) => props.EXP};
@@ -422,6 +449,21 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
+`;
+
+const MobileNumber = styled.span`
+  box-sizing: border-box;
+  padding-left: 5px;
+  display: flex;
+  width: 100%;
+  height: 20px;
+  border: 1px solid red;
+  @media screen and (max-width: 400px) {
+    width: 90%;
+  }
 `;
 
 const Td = styled.td`
@@ -433,7 +475,27 @@ const Td = styled.td`
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
+
+const MobileTd = styled.td`
+  display: flex;
+  border: 1px solid black;
+  background: white;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 1rem;
+  width: 6.8vw;
+  height: 13vh;
+  @media screen and (max-width: 480px) {
+    width: 70vw;
+    height: 17vh;
+  }
+`;
+
 const WeekContainer = styled.div`
   width: 100%;
   display: flex;
@@ -446,6 +508,9 @@ const WeekContainer = styled.div`
   .sat {
     color: blue;
   }
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 const Day = styled.div`
   font-size: 1.2rem;
@@ -457,6 +522,8 @@ const Day = styled.div`
 
 const FoodIconContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 100%;
   height: 40%;
@@ -464,6 +531,9 @@ const FoodIconContainer = styled.div`
 
 const FoodInnerContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 868px) {
+    width: 90%;
+  }
 `;
 
 const ExWaterRecord = styled.div`
@@ -491,6 +561,9 @@ const FeedingNum = styled.div`
 
 const FoodIcon = styled.img`
   width: 40%;
+  @media screen and (max-width: 868px) {
+    width: 25%;
+  }
 `;
 function ManageDetail({ condata, setCondata }) {
   //변수 선언부분
@@ -603,8 +676,7 @@ function ManageDetail({ condata, setCondata }) {
     UpdateProgressBar();
     console.log("AddFeedRequest called and conInfo is:", conInfo);
   };
-  //
-  //return 값 없음. 그냥 바로 condata 갱신
+  // return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_API}/container/${container_id}/ex_water`,
@@ -658,12 +730,6 @@ function ManageDetail({ condata, setCondata }) {
     });
     localStorage.setItem("finalList", JSON.stringify(final_list));
     finalList = JSON.parse(localStorage.getItem("finalList"));
-    // console.log(
-    //   "UpdateFinalList called and finalList is:",
-    //   finalList,
-    //   "and conInfo is:",
-    //   conInfo
-    // );
   };
   //
   // return 값 없음. 바로 ExWaterObj 갱신
@@ -733,12 +799,6 @@ function ManageDetail({ condata, setCondata }) {
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
     finalList = JSON.parse(localStorage.getItem("finalList"));
     exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
-    // console.log(
-    //   "calendarArr called and conInfo is:",
-    //   conInfo,
-    //   "and finalList is :",
-    //   finalList
-    // );
 
     let result = [];
     let week = firstWeek;
@@ -757,7 +817,7 @@ function ManageDetail({ condata, setCondata }) {
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
-                  <Td key={index}>
+                  <MobileTd key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
@@ -802,7 +862,7 @@ function ManageDetail({ condata, setCondata }) {
                     <ExWaterRecord>
                       {exWaterObj[days.format("YYMMDD")]}L
                     </ExWaterRecord>
-                  </Td>
+                  </MobileTd>
                 );
               } else if (finalList[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때
@@ -883,9 +943,105 @@ function ManageDetail({ condata, setCondata }) {
     }
     return result;
   };
-  //
+  // ---- 모바일 캘린더 ----
 
-  //
+  const mobileCalendarArr = () => {
+    UpdateFinalList();
+    UpdateExWaterObj();
+    conInfo = JSON.parse(localStorage.getItem("conInfo"));
+    finalList = JSON.parse(localStorage.getItem("finalList"));
+    exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
+
+    let result = [];
+    let week = firstWeek;
+    for (week; week <= lastWeek; week++) {
+      result = result.concat(
+        <Tr key={week}>
+          {Array(7)
+            .fill(0)
+            .map((data, index) => {
+              let days = today
+                .clone()
+                .startOf("year")
+                .week(week)
+                .startOf("week")
+                .add(index, "day");
+              if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
+                //오늘이고 기록도 있을때
+                return (
+                  <MobileTd key={index}>
+                    <MobileNumber>{days.format("D")}</MobileNumber>
+                    <FoodIconContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
+                          <FeedingNum>
+                            {finalList[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : finalList[days.format("YYMMDD")][0]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
+                          <FeedingNum>
+                            {finalList[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : finalList[days.format("YYMMDD")][1]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                      <FoodInnerContainer>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
+                          <FeedingNum>
+                            {finalList[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : finalList[days.format("YYMMDD")][2]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                        <FoodTypeAndNum>
+                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
+                          <FeedingNum>
+                            {finalList[days.format("YYMMDD")] === undefined
+                              ? 0
+                              : finalList[days.format("YYMMDD")][3]}
+                          </FeedingNum>
+                        </FoodTypeAndNum>
+                      </FoodInnerContainer>
+                    </FoodIconContainer>
+                    <ExWaterRecord>
+                      {exWaterObj[days.format("YYMMDD")]}L
+                    </ExWaterRecord>
+                  </MobileTd>
+                );
+              } else if (
+                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
+              ) {
+                //오늘
+                return (
+                  <Td key={index}>
+                    <Number style={{ color: "#108dee" }}>
+                      {days.format("D")}
+                    </Number>
+                  </Td>
+                );
+              }
+              // else {
+              //   return (
+              //     //모든 경우를 제외한 평범한 날
+              //     <Td key={index}>
+              //       <Number>{days.format("D")}</Number>
+              //     </Td>
+              //   );
+              // }
+            })}
+        </Tr>
+      );
+    }
+    return result;
+  };
+
+  // --------------------
   // handler 함수 선언
   const handleExwaterValue = (e) => {
     setExwaterInfo({
@@ -999,9 +1155,6 @@ function ManageDetail({ condata, setCondata }) {
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
-          {/* <button onClick={() => dispatch(levelupModalOnAction)}>
-            임시버튼
-          </button> */}
           <HelpBtn
             onClick={() => {
               dispatch(helpInfoModalOnAction);
@@ -1052,6 +1205,7 @@ function ManageDetail({ condata, setCondata }) {
             <Day className="sat">토</Day>
           </WeekContainer>
           <Table>
+            {/* {isMobile?<Tbody>{mobileCalendarArr()}</Tbody>:<Tbody>{calendarArr()}</Tbody>} */}
             <Tbody>{calendarArr()}</Tbody>
           </Table>
         </CalendarContainer>

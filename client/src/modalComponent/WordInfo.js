@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;

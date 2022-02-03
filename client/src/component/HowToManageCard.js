@@ -18,6 +18,10 @@ const Container = styled.div`
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
   }
+  @media screen and (max-width: 400px) {
+    width: 280px;
+    height: 400px;
+  }
 `;
 const ImgContainer = styled.div`
   width: 100%;
@@ -52,6 +56,10 @@ const Content = styled.div`
   background: #e5e5e5;
   padding: 10px;
   box-sizing: border-box;
+  @media screen and (max-width: 400px) {
+    width: 240px;
+    height: 120px;
+  }
 `;
 function HowToManageCard() {
   const dispatch = useDispatch();
