@@ -35,11 +35,34 @@ const Head = styled.div`
     padding-bottom: 1%;
   }
   .date {
-    flex: 2;
+    flex: 4.5;
     display: flex;
     box-sizing: border-box;
     position: relative;
     padding-bottom: 1%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: 0%;
+    height: 10%;
+    margin-top: 3%;
+
+    .title {
+      display: none;
+    }
+    .comment {
+      flex: 4;
+      font-size: 0.6rem;
+      padding-bottom: 2%;
+      padding-left: 5%;
+    }
+    .date {
+      flex: 1.6;
+      left: 0%;
+      font-size: 0.6rem;
+      padding-left: 10%;
+      padding-bottom: 2%;
+    }
   }
 `;
 const Container = styled.div`
@@ -65,6 +88,10 @@ const BoxContainer = styled.div`
   bottom: 3%;
   margin-left: 6%;
   border-bottom: 1px solid #cccccc;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -6%;
+  }
 `;
 
 const Box = styled.div`
@@ -78,6 +105,9 @@ const Box = styled.div`
   box-sizing: border-box;
   /* border: 1px solid black; */
   padding: 2.5% 0 2.6% 2%;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Box2 = styled.div`
@@ -89,6 +119,9 @@ const Box2 = styled.div`
   font-family: "Kfont";
   box-sizing: border-box;
   padding: 2.8% 0 2.7% 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Box1 = styled.div`
@@ -101,6 +134,11 @@ const Box1 = styled.div`
   font-family: "Kfont";
   box-sizing: border-box;
   padding: 2.8% 0 2.7% 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+    padding-left: 5%;
+    flex: 2.5;
+  }
 `;
 
 const Empty = styled.div`
@@ -138,6 +176,9 @@ const PageBtn = styled.div`
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 function MypageComment() {

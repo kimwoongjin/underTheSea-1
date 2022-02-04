@@ -21,6 +21,7 @@ const Head = styled.div`
 
   .title {
     display: flex;
+
     padding-left: 1.5%;
     /* border: 1px solid black; */
     flex: 6;
@@ -34,6 +35,20 @@ const Head = styled.div`
     position: relative;
 
     /* border: 1px solid black; */
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: 0%;
+    padding-bottom: 2%;
+    .title {
+      flex: 4;
+      font-size: 0.6rem;
+    }
+    .comment {
+      flex: 2;
+      font-size: 0.6rem;
+      padding-left: 10%;
+    }
   }
 `;
 const Container = styled.div`
@@ -64,6 +79,10 @@ const BoxContainer = styled.div`
     background-color: #f7f7f4;
     color: black;
   }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -6%;
+  }
 `;
 
 const Box = styled.div`
@@ -77,6 +96,9 @@ const Box = styled.div`
   box-sizing: border-box;
   /* border: 1px solid black; */
   padding: 2.5% 0 2.6% 2%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Box2 = styled.div`
@@ -88,6 +110,11 @@ const Box2 = styled.div`
   font-family: "Kfont";
   box-sizing: border-box;
   padding: 2.8% 0 2.7% 2%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+    padding-left: 5%;
+    flex: 2.5;
+  }
 `;
 //+0.3
 //+0.2
@@ -128,6 +155,9 @@ const PageBtn = styled.div`
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 function MypageManage() {

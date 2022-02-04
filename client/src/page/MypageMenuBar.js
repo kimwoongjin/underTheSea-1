@@ -13,6 +13,11 @@ const Box2 = styled.div`
   background: #ace0ff;
   font-size: 2rem;
   font-weight: bold;
+  @media screen and (max-width: 480px) {
+    height: 5vh;
+    width: 80vw;
+    justify-content: space-evenly;
+  }
 `;
 const Manage = styled.div`
   /* border: 1px solid black; */
@@ -25,6 +30,14 @@ const Manage = styled.div`
   :hover {
     background: #cccccc;
     cursor: pointer;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.75rem;
+    margin-right: 0%;
+
+    :hover {
+      background: none;
+    }
   }
 `;
 const Contents = styled.div`
@@ -40,6 +53,13 @@ const Contents = styled.div`
   :hover {
     background: #cccccc;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 0.75rem;
+    margin-right: 0%;
+    :hover {
+      background: none;
+    }
+  }
 `;
 
 const Comment = styled.div`
@@ -54,6 +74,12 @@ const Comment = styled.div`
   cursor: pointer;
   :hover {
     background: #cccccc;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.75rem;
+    :hover {
+      background: none;
+    }
   }
 `;
 
