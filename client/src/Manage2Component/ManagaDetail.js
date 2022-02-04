@@ -222,7 +222,7 @@ const FishCardContainer = styled.div`
   width: 100%;
   margin-bottom: 12%;
   @media screen and (max-width: 868px) {
-    width: 90vw;
+    width: 100%;
   }
 `;
 
@@ -351,7 +351,7 @@ const ProgressBar = styled.div`
   height: 4vh;
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 50%;
+    height: 25%;
     margin-bottom: 5%;
   }
   border: 2px solid #108dee;
@@ -364,6 +364,10 @@ const Progress = styled.div`
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   background: linear-gradient(#00d2ff, #3a7bd5);
+  @media screen and (max-width: 480px) {
+    width: ${(props) => props.EXP};
+    height: 100%;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -943,105 +947,7 @@ function ManageDetail({ condata, setCondata }) {
     }
     return result;
   };
-  // ---- 모바일 캘린더 ----
 
-  const mobileCalendarArr = () => {
-    UpdateFinalList();
-    UpdateExWaterObj();
-    conInfo = JSON.parse(localStorage.getItem("conInfo"));
-    finalList = JSON.parse(localStorage.getItem("finalList"));
-    exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
-
-    let result = [];
-    let week = firstWeek;
-    for (week; week <= lastWeek; week++) {
-      result = result.concat(
-        <Tr key={week}>
-          {Array(7)
-            .fill(0)
-            .map((data, index) => {
-              let days = today
-                .clone()
-                .startOf("year")
-                .week(week)
-                .startOf("week")
-                .add(index, "day");
-              if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
-                //오늘이고 기록도 있을때
-                return (
-                  <MobileTd key={index}>
-                    <MobileNumber>{days.format("D")}</MobileNumber>
-                    <FoodIconContainer>
-                      <FoodInnerContainer>
-                        <FoodTypeAndNum>
-                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
-                          <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
-                              ? 0
-                              : finalList[days.format("YYMMDD")][0]}
-                          </FeedingNum>
-                        </FoodTypeAndNum>
-                        <FoodTypeAndNum>
-                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
-                          <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
-                              ? 0
-                              : finalList[days.format("YYMMDD")][1]}
-                          </FeedingNum>
-                        </FoodTypeAndNum>
-                      </FoodInnerContainer>
-                      <FoodInnerContainer>
-                        <FoodTypeAndNum>
-                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
-                          <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
-                              ? 0
-                              : finalList[days.format("YYMMDD")][2]}
-                          </FeedingNum>
-                        </FoodTypeAndNum>
-                        <FoodTypeAndNum>
-                          <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
-                          <FeedingNum>
-                            {finalList[days.format("YYMMDD")] === undefined
-                              ? 0
-                              : finalList[days.format("YYMMDD")][3]}
-                          </FeedingNum>
-                        </FoodTypeAndNum>
-                      </FoodInnerContainer>
-                    </FoodIconContainer>
-                    <ExWaterRecord>
-                      {exWaterObj[days.format("YYMMDD")]}L
-                    </ExWaterRecord>
-                  </MobileTd>
-                );
-              } else if (
-                moment().format("YYYYMMDD") === days.format("YYYYMMDD")
-              ) {
-                //오늘
-                return (
-                  <Td key={index}>
-                    <Number style={{ color: "#108dee" }}>
-                      {days.format("D")}
-                    </Number>
-                  </Td>
-                );
-              }
-              // else {
-              //   return (
-              //     //모든 경우를 제외한 평범한 날
-              //     <Td key={index}>
-              //       <Number>{days.format("D")}</Number>
-              //     </Td>
-              //   );
-              // }
-            })}
-        </Tr>
-      );
-    }
-    return result;
-  };
-
-  // --------------------
   // handler 함수 선언
   const handleExwaterValue = (e) => {
     setExwaterInfo({

@@ -90,7 +90,6 @@ const InfoContainer = styled.div`
   grid-template-columns: 300px 300px 300px 300px;
   column-gap: 55px;
   margin-bottom: 10%;
-
   @media screen and (max-width: 1500px) {
     grid-template-columns: 300px 300px 300px;
   }
