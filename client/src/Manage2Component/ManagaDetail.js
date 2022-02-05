@@ -34,17 +34,22 @@ const Container = styled.div`
   justify-content: center;
   max-width: 1450px;
   height: 40vh;
-  margin: auto;
+  @media screen and (max-width: 480px) {
+    height: 20vh;
+  }
 `;
 
 const Title = styled.div`
   position: absolute;
   top: 50%;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   text-align: center;
   line-height: 180%;
   color: #008eff;
+  @media screen and (max-width: 480px) {
+    top: 25%;
+  }
 `;
 const TextContainer = styled.div`
   position: absolute;
@@ -57,6 +62,7 @@ const TextContainer = styled.div`
   align-items: center;
   @media screen and (max-width: 480px) {
     width: 60%;
+    top: 45%;
   }
 `;
 
@@ -79,20 +85,19 @@ const ContainerS = styled.div`
   box-shadow: 0px 0px 10px #adb5bd;
   border-radius: 10px;
   width: 50%;
-  height: 22vh;
+  height: 20vh;
   margin-bottom: 3%;
-  /* border: 2px dashed blue; */
   @media screen and (max-width: 480px) {
     width: 70%;
     height: 15vh;
   }
 `;
 const HabitatContainer = styled.div`
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   width: 100%;
   height: 100%;
-  /* border: 1px solid red; */
   @media screen and (max-width: 480px) {
     height: 15px;
   }
@@ -143,9 +148,9 @@ const Name = styled.div`
   width: 80%;
   height: 20%;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-family: "Kfont";
-  @media screen and (max-width: 868px) {
+  @media screen and (max-width: 480px) {
     font-size: 1rem;
   }
   @media screen and (max-width: 480px) {
@@ -158,19 +163,14 @@ const LeftInfo = styled.div`
   padding: 10px 0px;
   flex-direction: column;
   justify-content: space-around;
-  gap: 5%;
-  /* justify-content: space-between; */
   align-items: center;
-  font-size: 0.9rem;
   width: 40%;
   height: 100%;
   @media screen and (max-width: 868px) {
     width: 100%;
-    padding: 7px 0px;
-    font-size: 0.8rem;
   }
   @media screen and (max-width: 480px) {
-    height: 15vh;
+    height: 100%;
     font-size: 0.7rem;
   }
 `;
@@ -181,7 +181,7 @@ const ImgD = styled.img`
 `;
 const Content = styled.div`
   display: flex;
-  /* border: 1px dashed green; */
+  align-items: center;
   width: 75%;
   height: 20vh;
   @media screen and (max-width: 868px) {
@@ -208,10 +208,6 @@ const OuterContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 12%;
-
-  @media screen and (max-width: 868px) {
-    width: 100%;
-  }
 `;
 
 const FishCardContainer = styled.div`
@@ -221,9 +217,6 @@ const FishCardContainer = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 12%;
-  @media screen and (max-width: 868px) {
-    width: 100%;
-  }
 `;
 
 const Level = styled.div`
@@ -233,14 +226,14 @@ const Level = styled.div`
   height: 40px;
   font-weight: bold;
   font-size: 1.5rem;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 const LevelCover = styled.div`
   display: flex;
   width: 8%;
-  @media screen and (max-width: 868px) {
-    position: relative;
-    left: -20%;
-  }
 `;
 const LevelText = styled.div`
   display: flex;
@@ -255,11 +248,9 @@ const Logo = styled.img`
   width: 20%;
   height: 120%;
   margin-bottom: 2%;
-  @media screen and (max-width: 868px) {
+  @media screen and (max-width: 480px) {
     width: 40%;
     height: 80%;
-    position: relative;
-    left: 20%;
   }
 `;
 
@@ -271,14 +262,11 @@ const Levelinfo = styled.div`
   font-size: 1.2rem;
   margin-left: 10px;
   font-family: "Kfont";
-  @media screen and (max-width: 868px) {
-  }
 `;
-
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
-  @media screen and (max-width: 868px) {
+  @media screen and (max-width: 480px) {
     width: 70%;
   }
 `;
@@ -303,10 +291,9 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
-  @media screen and (max-width: 868px) {
-    margin-top: 5%;
+  @media screen and (max-width: 480px) {
     width: 70%;
-    justify-content: center;
+    justify-content: space-between;
   }
 `;
 
@@ -318,6 +305,11 @@ const HelpBtn = styled.div`
   font-weight: bold;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const AddfishBtn = styled.div`
@@ -329,8 +321,13 @@ const AddfishBtn = styled.div`
   margin: 0px 20px;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    margin: 0px;
+    font-size: 0.9rem;
+  }
 `;
-
 const DeadfishBtn = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -340,6 +337,11 @@ const DeadfishBtn = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -349,14 +351,11 @@ const ProgressBar = styled.div`
   border-radius: 5px;
   width: 50%;
   height: 4vh;
+  border: 2px solid #108dee;
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 25%;
-    margin-bottom: 5%;
   }
-  border: 2px solid #108dee;
 `;
-
 const Progress = styled.div`
   transition: all 1s;
   width: ${(props) => props.EXP};
@@ -376,8 +375,7 @@ const BtnContainer = styled.div`
   width: 50%;
   height: 6vh;
   @media screen and (max-width: 480px) {
-    width: 72%;
-    margin-left: 2%;
+    width: 70%;
   }
 `;
 
@@ -404,7 +402,7 @@ const Button = styled.button`
   }
   @media screen and (max-width: 480px) {
     font-size: 0.9rem;
-    margin-right: 3%;
+    /* margin-right: 3%; */
   }
 `;
 
@@ -454,19 +452,7 @@ const Number = styled.span`
   width: 100%;
   height: 20px;
   @media screen and (max-width: 480px) {
-    width: 90%;
-  }
-`;
-
-const MobileNumber = styled.span`
-  box-sizing: border-box;
-  padding-left: 5px;
-  display: flex;
-  width: 100%;
-  height: 20px;
-  border: 1px solid red;
-  @media screen and (max-width: 400px) {
-    width: 90%;
+    font-size: 1.25rem;
   }
 `;
 
@@ -490,13 +476,14 @@ const MobileTd = styled.td`
   background: white;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
   @media screen and (max-width: 480px) {
     width: 70vw;
-    height: 17vh;
+    height: 30vh;
+    justify-content: space-around;
   }
 `;
 
@@ -526,8 +513,6 @@ const Day = styled.div`
 
 const FoodIconContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   width: 100%;
   height: 40%;
@@ -535,9 +520,6 @@ const FoodIconContainer = styled.div`
 
 const FoodInnerContainer = styled.div`
   display: flex;
-  @media screen and (max-width: 868px) {
-    width: 90%;
-  }
 `;
 
 const ExWaterRecord = styled.div`
@@ -561,13 +543,13 @@ const FeedingNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const FoodIcon = styled.img`
   width: 40%;
-  @media screen and (max-width: 868px) {
-    width: 25%;
-  }
 `;
 function ManageDetail({ condata, setCondata }) {
   //변수 선언부분
@@ -680,7 +662,8 @@ function ManageDetail({ condata, setCondata }) {
     UpdateProgressBar();
     console.log("AddFeedRequest called and conInfo is:", conInfo);
   };
-  // return 값 없음. 그냥 바로 condata 갱신
+  //
+  //return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_API}/container/${container_id}/ex_water`,
@@ -734,6 +717,12 @@ function ManageDetail({ condata, setCondata }) {
     });
     localStorage.setItem("finalList", JSON.stringify(final_list));
     finalList = JSON.parse(localStorage.getItem("finalList"));
+    // console.log(
+    //   "UpdateFinalList called and finalList is:",
+    //   finalList,
+    //   "and conInfo is:",
+    //   conInfo
+    // );
   };
   //
   // return 값 없음. 바로 ExWaterObj 갱신
@@ -803,6 +792,12 @@ function ManageDetail({ condata, setCondata }) {
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
     finalList = JSON.parse(localStorage.getItem("finalList"));
     exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
+    // console.log(
+    //   "calendarArr called and conInfo is:",
+    //   conInfo,
+    //   "and finalList is :",
+    //   finalList
+    // );
 
     let result = [];
     let week = firstWeek;
@@ -947,7 +942,9 @@ function ManageDetail({ condata, setCondata }) {
     }
     return result;
   };
+  //
 
+  //
   // handler 함수 선언
   const handleExwaterValue = (e) => {
     setExwaterInfo({
@@ -1061,6 +1058,9 @@ function ManageDetail({ condata, setCondata }) {
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
+          {/* <button onClick={() => dispatch(levelupModalOnAction)}>
+            임시버튼
+          </button> */}
           <HelpBtn
             onClick={() => {
               dispatch(helpInfoModalOnAction);
@@ -1077,7 +1077,7 @@ function ManageDetail({ condata, setCondata }) {
           </DeadfishBtn>
         </BottomContainer>
 
-        {/* -------------------- 달력 ------------------- */}
+        {/* —————————— 달력 ————————— */}
 
         <CalendarContainer>
           <Control>
@@ -1111,12 +1111,11 @@ function ManageDetail({ condata, setCondata }) {
             <Day className="sat">토</Day>
           </WeekContainer>
           <Table>
-            {/* {isMobile?<Tbody>{mobileCalendarArr()}</Tbody>:<Tbody>{calendarArr()}</Tbody>} */}
             <Tbody>{calendarArr()}</Tbody>
           </Table>
         </CalendarContainer>
 
-        {/* ----------------------------------------- */}
+        {/* ———————————————————— */}
 
         {/* <ManageDetCard condata={condata} /> */}
       </OuterContainer>
@@ -1130,7 +1129,7 @@ function ManageDetail({ condata, setCondata }) {
                   alt="이미지"
                 />
               </DetailImg>
-              {/* ----------------------------------------- */}
+              {/* ———————————————————— */}
               <Content>
                 <LeftInfo>
                   <Name>{el.fish_name}</Name>
