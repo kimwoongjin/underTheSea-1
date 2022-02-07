@@ -92,7 +92,7 @@ const DeleteBtn = styled.div`
 
 const ContainerInfoBox = styled.div`
   width: 90%;
-  height: 80%;
+  height: 60%;
   /* border: 1px dashed red; */
   /* line-height: 250%; */
   display: flex;
@@ -107,13 +107,17 @@ const Name = styled.div`
   text-align: center;
   font-family: "Kfont";
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  position: relative;
+  top: -10%;
+  margin-bottom: 5%;
 `;
 
 const TextCover = styled.div`
   width: 90%;
   display: flex;
   border-radius: 5px;
+
   /* border: 1px solid black; */
 `;
 
@@ -123,28 +127,27 @@ const Text = styled.div`
   font-family: "Kfont";
   width: 40%;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
 `;
 
 const Size = styled.div`
   display: flex;
-  width: 57%;
+  width: 68%;
   justify-content: center;
   font-family: "Kfont";
-  font-weight: 600;
   border-radius: 5px;
-  background: #e1e1e1;
+  font-size: 0.9rem;
+  padding-top: 1%;
 `;
 
 const Theme = styled.div`
   display: flex;
-  width: 57%;
+  width: 68%;
   justify-content: center;
   font-family: "Kfont";
-  font-weight: 600;
   border-radius: 5px;
-  padding-bottom: 1%;
-  background: #e1e1e1;
+  padding-top: 1%;
+  font-size: 0.9rem;
 `;
 
 function ManageInfo({ id, name, size, theme, level, handleCondata }) {
