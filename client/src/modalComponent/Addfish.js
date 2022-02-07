@@ -41,6 +41,14 @@ const CloseBtnContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
+
 const ShowContainer = styled.div`
   width: 90%;
   height: 80%;
@@ -68,6 +76,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Input = styled.input`
@@ -123,7 +134,7 @@ function AddFish({ container_id }) {
     console.log("수조아이디", container_id);
     axios
       .post(
-        `http://localhost:80/container/${container_id}/fish`,
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
         {
           data: fishInfo,
         },
@@ -145,7 +156,7 @@ function AddFish({ container_id }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/fish/fishnamelist`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/fish/fishnamelist`, {
         headers: {
           accept: "application/json",
         },
@@ -162,12 +173,13 @@ function AddFish({ container_id }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <Form>

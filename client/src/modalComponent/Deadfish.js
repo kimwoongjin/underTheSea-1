@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { modalOff } from "../store/actions";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import axios from "axios";
 
 const DarkBackGround = styled.div`
@@ -41,6 +40,14 @@ const CloseBtnContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
+
 const ShowContainer = styled.div`
   width: 90%;
   height: 80%;
@@ -68,6 +75,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Input = styled.input`
@@ -123,13 +133,16 @@ function Deadfish({ container_id }) {
 
   const fishRemoveRequest = () => {
     axios
-      .delete(`http://localhost:80/container/${container_id}/fish`, {
-        data: fishDeadInfo,
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      })
+      .delete(
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
+        {
+          data: fishDeadInfo,
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
@@ -141,12 +154,13 @@ function Deadfish({ container_id }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
@@ -157,6 +171,7 @@ function Deadfish({ container_id }) {
               name="fish_name"
               onChange={handleInputValue}
               list="fishName"
+              autocomplete="off"
             />
             <datalist id="fishName">
               {fish_list2.map((el, idx) => (

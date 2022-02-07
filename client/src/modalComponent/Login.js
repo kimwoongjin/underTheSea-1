@@ -18,6 +18,7 @@ const DarkBackGround = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 const ModalContainer = styled.div`
@@ -31,6 +32,12 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   align-items: center;
   z-index: 999;
+
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 65%;
+    margin-right: 5%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -86,6 +93,7 @@ const LoginBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+
   :hover::before {
     content: "";
     position: absolute;
@@ -109,8 +117,9 @@ const GoogleBtn = styled.a`
   padding: 5px;
   font-size: 1.25rem;
   font-weight: bold;
-  position: relative;
   box-sizing: border-box;
+  position: relative;
+
   :hover::before {
     content: "";
     position: absolute;
@@ -122,6 +131,7 @@ const GoogleBtn = styled.a`
   }
 `;
 const GoogleIcon = styled.img`
+  z-index: 999;
   width: 30%;
 `;
 const Warning = styled.div`
@@ -137,7 +147,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
-  const { isLogin } = state;
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
@@ -155,7 +164,9 @@ function Login() {
 
     if (email && user_pwd) {
       axios
-        .post(`http://localhost:80/user/login`, { data: userData })
+        .post(`${process.env.REACT_APP_SERVER_API}/user/login`, {
+          data: userData,
+        })
         .then((res) => {
           // console.log(res.message);
           // if (res.status === 401) {
@@ -185,6 +196,7 @@ function Login() {
             icon={faTimes}
             size="2x"
             onClick={() => dispatch(modalOff)}
+            color="#e5e5e5"
           />
         </CloseBtnContainer>
         <Title>로그인</Title>
@@ -206,7 +218,9 @@ function Login() {
             로그인
           </LoginBtn>
 
-          <GoogleBtn href="http://localhost:80/user/auth/google">
+          <GoogleBtn
+            href={process.env.REACT_APP_SERVER_API + `/user/auth/google`}
+          >
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>

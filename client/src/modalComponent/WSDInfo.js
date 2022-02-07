@@ -27,7 +27,6 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   .btn {
     width: 25px;
     height: 30px;
@@ -37,6 +36,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -82,6 +84,9 @@ const ImgContainer = styled.div`
   .noMargin {
     margin: 0px;
   }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const ImgContainer2 = styled.div`
   display: flex;
@@ -98,12 +103,21 @@ const ImgContainer2 = styled.div`
 const Skimmer = styled.img`
   width: 20%;
   height: 80%;
+  @media screen and (max-width: 750px) {
+    width: 50%;
+  }
 `;
 const DryContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Dry = styled.img`
   width: 40%;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 function WSDInfo() {
@@ -117,6 +131,7 @@ function WSDInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>

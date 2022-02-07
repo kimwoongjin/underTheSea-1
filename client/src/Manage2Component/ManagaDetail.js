@@ -22,16 +22,21 @@ import {
   addfishModalOnAction,
   deadfishModalOnAction,
   helpInfoModalOnAction,
+  levelupModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Levelup from "../modalComponent/Levelup";
 
 const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
+  max-width: 1450px;
   height: 40vh;
+  @media screen and (max-width: 480px) {
+    height: 20vh;
+  }
 `;
 
 const Title = styled.div`
@@ -42,6 +47,9 @@ const Title = styled.div`
   text-align: center;
   line-height: 180%;
   color: #008eff;
+  @media screen and (max-width: 480px) {
+    top: 25%;
+  }
 `;
 const TextContainer = styled.div`
   position: absolute;
@@ -52,6 +60,10 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 60%;
+    top: 45%;
+  }
 `;
 
 const Text = styled.div`
@@ -60,6 +72,12 @@ const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;
   line-height: 180%;
+  @media screen and (max-width: 768px) {
+    font-size: 1.25rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 const ContainerS = styled.div`
   display: flex;
@@ -68,7 +86,11 @@ const ContainerS = styled.div`
   border-radius: 10px;
   width: 50%;
   height: 20vh;
-  margin-bottom: 7%;
+  margin-bottom: 3%;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 15vh;
+  }
 `;
 const HabitatContainer = styled.div`
   border-radius: 5px;
@@ -76,6 +98,9 @@ const HabitatContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 480px) {
+    height: 15px;
+  }
 `;
 const FishDesc = styled.div`
   box-sizing: border-box;
@@ -94,6 +119,9 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 const HabitatShow = styled.div`
   display: flex;
@@ -122,6 +150,12 @@ const Name = styled.div`
   font-weight: bold;
   font-size: 1.2rem;
   font-family: "Kfont";
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 const LeftInfo = styled.div`
   display: flex;
@@ -132,6 +166,13 @@ const LeftInfo = styled.div`
   align-items: center;
   width: 40%;
   height: 100%;
+  @media screen and (max-width: 868px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 480px) {
+    height: 100%;
+    font-size: 0.7rem;
+  }
 `;
 const ImgD = styled.img`
   position: relative;
@@ -140,8 +181,12 @@ const ImgD = styled.img`
 `;
 const Content = styled.div`
   display: flex;
+  align-items: center;
   width: 75%;
   height: 20vh;
+  @media screen and (max-width: 868px) {
+    height: 100%;
+  }
 `;
 const DetailImg = styled.div`
   position: relative;
@@ -151,6 +196,9 @@ const DetailImg = styled.div`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   cursor: pointer;
+  @media screen and (max-width: 868px) {
+    width: 40%;
+  }
 `;
 
 const OuterContainer = styled.div`
@@ -159,7 +207,7 @@ const OuterContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 15%;
+  margin-bottom: 12%;
 `;
 
 const FishCardContainer = styled.div`
@@ -168,7 +216,7 @@ const FishCardContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-bottom: 12%;
 `;
 
 const Level = styled.div`
@@ -178,6 +226,10 @@ const Level = styled.div`
   height: 40px;
   font-weight: bold;
   font-size: 1.5rem;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 const LevelCover = styled.div`
   display: flex;
@@ -194,6 +246,12 @@ const LevelText = styled.div`
 
 const Logo = styled.img`
   width: 20%;
+  height: 120%;
+  margin-bottom: 2%;
+  @media screen and (max-width: 480px) {
+    width: 40%;
+    height: 80%;
+  }
 `;
 
 const Levelinfo = styled.div`
@@ -208,6 +266,9 @@ const Levelinfo = styled.div`
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const MainImg = styled.img`
@@ -230,6 +291,10 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    justify-content: space-between;
+  }
 `;
 
 const HelpBtn = styled.div`
@@ -240,6 +305,11 @@ const HelpBtn = styled.div`
   font-weight: bold;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const AddfishBtn = styled.div`
@@ -251,6 +321,12 @@ const AddfishBtn = styled.div`
   margin: 0px 20px;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    margin: 0px;
+    font-size: 0.9rem;
+  }
 `;
 const DeadfishBtn = styled.div`
   display: flex;
@@ -261,6 +337,11 @@ const DeadfishBtn = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -271,13 +352,21 @@ const ProgressBar = styled.div`
   width: 50%;
   height: 4vh;
   border: 2px solid #108dee;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 const Progress = styled.div`
+  transition: all 1s;
   width: ${(props) => props.EXP};
   height: 3vh;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   background: linear-gradient(#00d2ff, #3a7bd5);
+  @media screen and (max-width: 480px) {
+    width: ${(props) => props.EXP};
+    height: 100%;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -285,6 +374,9 @@ const BtnContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   height: 6vh;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const Button = styled.button`
@@ -307,6 +399,10 @@ const Button = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+    /* margin-right: 3%; */
   }
 `;
 
@@ -355,6 +451,9 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Td = styled.td`
@@ -366,7 +465,28 @@ const Td = styled.td`
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
+
+const MobileTd = styled.td`
+  display: flex;
+  border: 1px solid black;
+  background: white;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  width: 6.8vw;
+  height: 13vh;
+  @media screen and (max-width: 480px) {
+    width: 70vw;
+    height: 30vh;
+    justify-content: space-around;
+  }
+`;
+
 const WeekContainer = styled.div`
   width: 100%;
   display: flex;
@@ -378,6 +498,9 @@ const WeekContainer = styled.div`
   }
   .sat {
     color: blue;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 `;
 const Day = styled.div`
@@ -420,14 +543,15 @@ const FeedingNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const FoodIcon = styled.img`
   width: 40%;
 `;
 function ManageDetail({ condata, setCondata }) {
-  //
-
   //변수 선언부분
   const params = useParams();
   const container_id = params.container_id;
@@ -461,6 +585,7 @@ function ManageDetail({ condata, setCondata }) {
     isDeadfishModal,
     isExchangeModal,
     isHelpModal,
+    isLevelupModal,
   } = state;
 
   const today = getMoment; // today == moment()   입니다.
@@ -489,10 +614,13 @@ function ManageDetail({ condata, setCondata }) {
   // return 값 없음. 그냥 바로 condata 갱신
   const UpdateConInfo = async () => {
     await axios
-      .get(`http://localhost:80/container/${container_id}/${month}`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
+      .get(
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
+        {
+          headers: { authorization: `Bearer ${accessToken}` },
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         setCondata(response.data.data);
@@ -500,7 +628,7 @@ function ManageDetail({ condata, setCondata }) {
       });
 
     const response = await axios.get(
-      `http://localhost:80/container/${container_id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
@@ -515,7 +643,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const AddFeedRequest = async () => {
     const response = await axios.post(
-      `http://localhost:80/container/${container_id}/feed`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/feed`,
       {
         data: feedingInfo,
       },
@@ -531,13 +659,14 @@ function ManageDetail({ condata, setCondata }) {
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
+    UpdateProgressBar();
     console.log("AddFeedRequest called and conInfo is:", conInfo);
   };
   //
   //return 값 없음. 그냥 바로 condata 갱신
   const AddWaterRequest = async () => {
     const response = await axios.post(
-      `http://localhost:80/container/${container_id}/ex_water`,
+      `${process.env.REACT_APP_SERVER_API}/container/${container_id}/ex_water`,
       {
         data: exwaterInfo,
       },
@@ -560,7 +689,7 @@ function ManageDetail({ condata, setCondata }) {
   //return 값 없음. 그냥 바로 condata 갱신
   const LevelUpRequest = async () => {
     const response = await axios.patch(
-      `http://localhost:80/container/level/${container_id}`,
+      `${process.env.REACT_APP_SERVER_API}/container/level/${container_id}`,
       {},
       {
         headers: {
@@ -588,12 +717,12 @@ function ManageDetail({ condata, setCondata }) {
     });
     localStorage.setItem("finalList", JSON.stringify(final_list));
     finalList = JSON.parse(localStorage.getItem("finalList"));
-    console.log(
-      "UpdateFinalList called and finalList is:",
-      finalList,
-      "and conInfo is:",
-      conInfo
-    );
+    // console.log(
+    //   "UpdateFinalList called and finalList is:",
+    //   finalList,
+    //   "and conInfo is:",
+    //   conInfo
+    // );
   };
   //
   // return 값 없음. 바로 ExWaterObj 갱신
@@ -633,9 +762,24 @@ function ManageDetail({ condata, setCondata }) {
         break;
       }
     }
-
+    console.log("conInfo.last_lv_up@@@", conInfo.last_lv_up);
+    // last_lv_up: "2022-01-21T05:39:45.000Z"
     if (temp.length >= 15 && temp.includes(2)) {
       LevelUpRequest();
+      if (!conInfo.last_lv_up) {
+        dispatch(levelupModalOnAction);
+      } else {
+        // console.log("conInfo.last_lv_up ----->>", typeof conInfo.last_lv_up);
+        let lastLvUp = conInfo.last_lv_up.split("T")[0].split("-");
+        lastLvUp = lastLvUp[0].slice(2) + lastLvUp[1] + lastLvUp[2];
+        console.log("라스트업", lastLvUp);
+        if (!curWeek.includes(lastLvUp)) {
+          dispatch(levelupModalOnAction);
+        }
+      }
+      // let lastLvUp
+
+      // 2022-01-21T05:56:51.000Z
     }
 
     setProgressBar(Math.floor((temp.length * 100) / 15));
@@ -648,12 +792,12 @@ function ManageDetail({ condata, setCondata }) {
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
     finalList = JSON.parse(localStorage.getItem("finalList"));
     exWaterObj = JSON.parse(localStorage.getItem("exWaterObj"));
-    console.log(
-      "calendarArr called and conInfo is:",
-      conInfo,
-      "and finalList is :",
-      finalList
-    );
+    // console.log(
+    //   "calendarArr called and conInfo is:",
+    //   conInfo,
+    //   "and finalList is :",
+    //   finalList
+    // );
 
     let result = [];
     let week = firstWeek;
@@ -672,7 +816,7 @@ function ManageDetail({ condata, setCondata }) {
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
-                  <Td key={index}>
+                  <MobileTd key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
@@ -717,7 +861,7 @@ function ManageDetail({ condata, setCondata }) {
                     <ExWaterRecord>
                       {exWaterObj[days.format("YYMMDD")]}L
                     </ExWaterRecord>
-                  </Td>
+                  </MobileTd>
                 );
               } else if (finalList[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때
@@ -851,6 +995,7 @@ function ManageDetail({ condata, setCondata }) {
   //
   // 함수 실행 부분
   useEffect(() => {
+    window.scroll(0, 0);
     UpdateConInfo();
     UpdateProgressBar();
     UpdateFinalList();
@@ -867,7 +1012,8 @@ function ManageDetail({ condata, setCondata }) {
   for (let i = 0; i < todayEx.length; i++) {
     exAmount += todayEx[i].amount;
   }
-  const imgSrcUrl = "http://localhost:80/level/" + conInfo.level;
+  const imgSrcUrl =
+    `${process.env.REACT_APP_SERVER_API}/level/` + conInfo.level;
   return (
     <>
       <Header2 />
@@ -890,10 +1036,8 @@ function ManageDetail({ condata, setCondata }) {
               <LevelText>Lv.</LevelText>
               <Levelinfo>{Math.floor(conInfo.level / 10)}</Levelinfo>
             </LevelCover>
-            <Logo
-              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
-              alt="/로고.png"
-            />
+            {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png" */}
+            <Logo src="/로고.png" alt="/로고.png" />
           </Level>
           <ProgressBar>
             <Progress EXP={`${progressBar}%`}></Progress>
@@ -914,6 +1058,9 @@ function ManageDetail({ condata, setCondata }) {
           </BtnContainer>
         </MidContainer>
         <BottomContainer>
+          {/* <button onClick={() => dispatch(levelupModalOnAction)}>
+            임시버튼
+          </button> */}
           <HelpBtn
             onClick={() => {
               dispatch(helpInfoModalOnAction);
@@ -930,7 +1077,7 @@ function ManageDetail({ condata, setCondata }) {
           </DeadfishBtn>
         </BottomContainer>
 
-        {/* -------------------- 달력 ------------------- */}
+        {/* —————————— 달력 ————————— */}
 
         <CalendarContainer>
           <Control>
@@ -968,7 +1115,7 @@ function ManageDetail({ condata, setCondata }) {
           </Table>
         </CalendarContainer>
 
-        {/* ----------------------------------------- */}
+        {/* ———————————————————— */}
 
         {/* <ManageDetCard condata={condata} /> */}
       </OuterContainer>
@@ -977,9 +1124,12 @@ function ManageDetail({ condata, setCondata }) {
           return (
             <ContainerS key={idx}>
               <DetailImg>
-                <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+                <ImgD
+                  src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                  alt="이미지"
+                />
               </DetailImg>
-              {/* ----------------------------------------- */}
+              {/* ———————————————————— */}
               <Content>
                 <LeftInfo>
                   <Name>{el.fish_name}</Name>
@@ -1036,6 +1186,7 @@ function ManageDetail({ condata, setCondata }) {
       {isAddfishModal && <AddFish container_id={container_id} />}
       {isDeadfishModal && <Deadfish container_id={container_id} />}
       {isHelpModal && <HelpInfo />}
+      {isLevelupModal && <Levelup />}
       <Footer />
     </>
   );

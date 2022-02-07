@@ -1,20 +1,19 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 30%;
-  height: 390px;
-  /* box-shadow: 5px 8px 7px 3px #c6c6c6; */
+  position: relative;
+  margin: 2% 3% 5%;
+  width: 270px;
+  height: 375px;
   box-shadow: 0px 0px 20px #adb5bd;
-  margin-bottom: 3%;
-  /* background: #d1f8ff; */
   border-radius: 20px;
   transition: all 0.3s;
   :hover {
@@ -22,130 +21,139 @@ const Container = styled.div`
     box-shadow: 0px 0px 30px #adb5bd;
     transition: all 0.3s;
   }
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 5%;
+  }
 `;
 
 const Contents = styled.div`
-  /* position: relative; */
   width: 100%;
   height: 100%;
-  /* border: 1px solid green; */
   text-align: left;
 `;
 
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 53%;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border: 1px solid gray;
 `;
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
-  /* opacity: 0.8; */
+  width: 102%;
+  height: 115%;
+  position: relative;
+  top: 2%;
 `;
 const Content = styled.div`
-  position: relative;
+  /* border: 1px solid red; */
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-evenly;
-  /* align-items: center; */
   width: 100%;
-  height: 50%;
-  /* padding: 10px; */
+  height: 45%;
   box-sizing: border-box;
-  /* margin-top: 2%; */
-  line-height: 200%;
-  margin: auto;
-  border: 1px solid black;
+  /* line-height: 250%; */
   .delete {
     position: absolute;
     width: 20%;
-    height: 15%;
-    bottom: 5%;
+    height: 5%;
+    top: 5%;
     right: 5%;
     font-size: 0.9rem;
     border: none;
-    background: #57b7ff;
     border-radius: 5px;
     color: white;
     font-weight: bold;
     font-family: "Kfont";
-    /* z-index: 999; */
+    :hover {
+      cursor: pointer;
+      color: #108dee;
+    }
   }
 `;
 
+const DeleteBtn = styled.div`
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  :hover {
+    cursor: pointer;
+    color: #108dee;
+  }
+`;
+
+const ContainerInfoBox = styled.div`
+  width: 90%;
+  height: 80%;
+  /* border: 1px dashed red; */
+  /* line-height: 250%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const Name = styled.div`
-  /* width: 80%; */
-  /* position: absolute; */
-  /* left: 5%; */
+  width: 90%;
   border-radius: 5px;
-  /* background: #e5e5e5; */
   text-align: center;
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.3rem;
-  border: 1px solid red;
+`;
+
+const TextCover = styled.div`
+  width: 90%;
+  display: flex;
+  border-radius: 5px;
+  /* border: 1px solid black; */
 `;
 
 const Text = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
-  border: 1px solid red;
+  width: 40%;
+  font-weight: 600;
+  font-size: 1.1rem;
 `;
 
 const Size = styled.div`
   display: flex;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
-  border: 1px solid red;
+  font-weight: 600;
+  border-radius: 5px;
+  background: #e1e1e1;
 `;
 
 const Theme = styled.div`
   display: flex;
+  width: 57%;
   justify-content: center;
-  align-items: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
-  border: 1px solid red;
-`;
-const BottomBack = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  border: 1px solid black;
-`;
-const Seaweed = styled.img`
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 30%;
-  /* border: 1px solid red; */
+  font-weight: 600;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  background: #e1e1e1;
 `;
 
 function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const navigate = useNavigate();
   const month = new Date().getMonth() + 1;
   const accessToken = localStorage.getItem("accessToken");
-
   const DeleteHandler = () => {
     axios
-      .delete(`http://localhost:80/container/${id}`, {
+      .delete(`${process.env.REACT_APP_SERVER_API}/container/${id}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -159,7 +167,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
 
   const sendCardInfo = async () => {
     const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${id}/${month}`,
       {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
@@ -169,7 +177,7 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     navigate(`${id}`);
   };
-  const imgSrcUrl = "http://localhost:80/level/" + level;
+  const imgSrcUrl = `${process.env.REACT_APP_SERVER_API}/level/` + level;
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
     // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
@@ -178,17 +186,26 @@ function ManageInfo({ id, name, size, theme, level, handleCondata }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
-          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
-          <Name>{name}</Name>
-          <Text>사이즈</Text>
-          <Size>{size}L</Size>
-          <Text>테마</Text>
-          <Theme>{theme}</Theme>
-          <button className="delete" onClick={DeleteHandler}>
+          <ContainerInfoBox>
+            <Name>{name}</Name>
+
+            <TextCover>
+              <Text>어항 크기 :</Text>
+              <Size>{size}L</Size>
+            </TextCover>
+            <TextCover>
+              <Text>수조 테마 :</Text>
+              <Theme>{theme}</Theme>
+            </TextCover>
+          </ContainerInfoBox>
+          <DeleteBtn onClick={DeleteHandler}>
+            <FontAwesomeIcon icon={faTimes} size="1x" />
+          </DeleteBtn>
+          {/* <button className="delete" onClick={DeleteHandler}>
             삭제
-          </button>
+          </button> */}
         </Content>
       </Contents>
     </Container>

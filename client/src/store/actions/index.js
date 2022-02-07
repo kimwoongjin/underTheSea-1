@@ -21,9 +21,12 @@ import {
   WSDINFO_MODAL_ON,
   HELP_MODAL_ON,
   ADD_CONTAINER_MODAL_ON,
+  LYMPHO_MODAL_ON,
+  WORD_MODAL_ON,
+  LEVEL_UP_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
-  GET_CONTAINER_INFO,
+  HTM_MODAL_ON,
 } from "./actionTypes";
 import axios from "axios";
 // import coninfoApi from "../../../api/getConinfo";
@@ -48,6 +51,9 @@ export const signoutModalAction = {
 };
 export const pwdModalAction = {
   type: PWD_MODAL_ON,
+};
+export const lymphoModalOnAction = {
+  type: LYMPHO_MODAL_ON,
 };
 export const modalOff = {
   type: MODAL_OFF,
@@ -82,6 +88,9 @@ export const wsdInfoModalOnAction = {
 export const helpInfoModalOnAction = {
   type: HELP_MODAL_ON,
 };
+export const htmModalOnAction = {
+  type: HTM_MODAL_ON,
+};
 export const addcontainerModalOnAction = {
   type: ADD_CONTAINER_MODAL_ON,
 };
@@ -91,11 +100,17 @@ export const logoutModalOnAction = {
 export const signupAction = {
   type: SIGN_UP,
 };
+export const levelupModalOnAction = {
+  type: LEVEL_UP_MODAL_ON,
+};
 export const addfishModalOnAction = {
   type: ADDFISH_MODAL_ON,
 };
 export const deadfishModalOnAction = {
   type: DEADFISH_MODAL_ON,
+};
+export const wordModalOnAction = {
+  type: WORD_MODAL_ON,
 };
 // export const getContainerInfoAction = async () => {
 //   const conInfo = await coninfoApi();

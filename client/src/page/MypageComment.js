@@ -3,53 +3,125 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  width: 55.5vw;
+  height: 20%;
+  font-size: 1.3rem;
+  font-family: "Kfont";
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  /* border: 1px solid black; */
+  position: relative;
+  left: 6%;
+  bottom: 3%;
+  padding-bottom: 0.5%;
+  box-sizing: border-box;
+
+  .title {
+    display: flex;
+    padding: 0 0 1% 2%;
+    /* border: 1px solid black; */
+    flex: 6;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .comment {
+    flex: 4.5;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 1%;
+  }
+  .date {
+    flex: 4.5;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 1%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: 0%;
+    height: 10%;
+    margin-top: 3%;
+
+    .title {
+      display: none;
+    }
+    .comment {
+      flex: 4;
+      font-size: 0.6rem;
+      padding-bottom: 2%;
+      padding-left: 5%;
+    }
+    .date {
+      flex: 1.6;
+      left: 0%;
+      font-size: 0.6rem;
+      padding-left: 10%;
+      padding-bottom: 2%;
+    }
+  }
+`;
 const Container = styled.div`
   position: relative;
-  width: 90%;
   display: column;
-  margin-bottom: 1px;
-  z-index: 100;
+  width: 90%;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  /* margin-bottom: 1px; */
+  z-index: 100;
+  margin-top: 8%;
+  /* border: 1px solid black; */
 `;
 
 const BoxContainer = styled.div`
   display: flex;
   margin: 0;
-  width: 55vw;
+  width: 55.5vw;
   /* border: 1px solid red; */
   box-sizing: border-box;
   align-items: center;
-  margin-top: 2%;
-  margin-left: 6.5%;
+  position: relative;
+  bottom: 3%;
+  margin-left: 6%;
   border-bottom: 1px solid #cccccc;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -6%;
+  }
 `;
 
 const Box = styled.div`
   position: relative;
-  //   z-index: 1;
   flex: 6;
-  width: 28%;
+  width: 30%;
   height: 50%;
   margin: 0;
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-top: 1%;
-  padding-left: 2%;
-  padding-bottom: 2.5%;
+  /* border: 1px solid black; */
+  padding: 2.5% 0 2.6% 2%;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Box2 = styled.div`
-  flex: 2;
+  flex: 4.5;
   width: 30%;
   height: 50%;
+  font-size: 0.9rem;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-right: 22.5%;
-  padding-bottom: 2.5%;
+  padding: 2.8% 0 2.7% 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Box1 = styled.div`
@@ -57,40 +129,15 @@ const Box1 = styled.div`
   width: 30%;
   height: 50%;
   font-size: 0.9rem;
+  color: gray;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-right: 5.5%;
-  color: #828282;
-  padding-bottom: 2.5%;
-`;
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  width: 55vw;
-  height: 5vh;
-  font-size: 1.3rem;
-  font-family: "Kfont";
-  font-weight: bold;
-  border-bottom: 1px solid black;
-  position: absolute;
-  bottom: 10%;
-  padding-bottom: 0.5%;
-
-  .title {
-    display: flex;
-    padding-left: 2%;
-    /* border: 1px solid black; */
-    margin-right: 35%;
-  }
-  .comment {
-    display: flex;
-    margin-right: 32%;
-    /* border: 1px solid black; */
-  }
-  .date {
-    display: flex;
-    /* border: 1px solid black; */
+  padding: 2.8% 0 2.7% 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+    padding-left: 5%;
+    flex: 2.5;
   }
 `;
 
@@ -100,7 +147,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 9% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -129,6 +176,9 @@ const PageBtn = styled.div`
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 function MypageComment() {
@@ -142,13 +192,12 @@ function MypageComment() {
   }, [pageNum]);
   const commentHandler = (page_num) => {
     axios
-      .get(`http://localhost:80/user/comments/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/comments/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
         setCommentInfo([...result.data.data]);
-        console.log(result.data);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {
           const page = new Array(page_length + 1).fill(0);
@@ -192,11 +241,6 @@ function MypageComment() {
 
   return (
     <>
-      <Head>
-        <div className="title">게시글</div>
-        <div className="comment">댓글</div>
-        <div className="date">날짜</div>
-      </Head>
       <Container>
         {commentInfo.length === 0 ? (
           <>
@@ -210,6 +254,11 @@ function MypageComment() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">게시글</div>
+              <div className="comment">댓글</div>
+              <div className="date">날짜</div>
+            </Head>
             {commentInfo.map((el) => {
               const date = el.createdAt.split("T")[0];
               // console.log(el, "//////");
@@ -223,20 +272,20 @@ function MypageComment() {
                 </>
               );
             })}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {commentLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {commentLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
   // });

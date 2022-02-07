@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -83,6 +86,11 @@ const ImgContainer = styled.div`
       margin-bottom: 5px;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 3%;
+  }
 `;
 const Img = styled.img`
   /* border: 1px dashed red; */
@@ -97,6 +105,9 @@ const NameCover = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 2%;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const Name = styled.div`
@@ -106,7 +117,13 @@ const Name = styled.div`
   font-weight: bold;
   display: flex;
   justify-content: center;
+  font-size: 1rem;
   align-items: center;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 750px) {
+    width: 90%;
+    font-size: 0.8rem;
+  }
 `;
 
 const Skimmer = styled.img`
@@ -123,6 +140,7 @@ function RecommendInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>

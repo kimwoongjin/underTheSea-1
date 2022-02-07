@@ -13,12 +13,16 @@ const Container = styled.div`
 const MiddleContainer = styled.div`
   display: flex;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const BigBox = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   :hover .overlay {
     height: 100%;
   }
@@ -82,6 +86,11 @@ const TextForm = styled.div`
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -150%);
   text-align: center;
+  @media screen and (max-width: 900px) {
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const TextForm2 = styled.div`
@@ -93,7 +102,7 @@ const TextForm2 = styled.div`
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -250%);
+  transform: translate(-50%, -50%);
   text-align: center;
 `;
 
@@ -106,6 +115,9 @@ const Seawater = styled.div`
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 const Tips = styled.div`
@@ -119,6 +131,9 @@ const Tips = styled.div`
   /* font-family: "Kfont"; */
   cursor: pointer;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 const TipImg = styled.img`
@@ -146,6 +161,9 @@ const Freshwater = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 function Guide() {

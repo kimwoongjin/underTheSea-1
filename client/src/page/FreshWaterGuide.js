@@ -10,14 +10,14 @@ import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
 import { useSelector } from "react-redux";
 import Footer from "../component/Footer";
-import FilterMediaCard from "../component/FilterMediaCard";
-import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
-import ActivationCard from "../component/ActivationCard";
-import ActivationInfo from "../modalComponent/ActivationInfo";
-import RecommendCard from "../component/RecommendCard";
-import RecommendInfo from "../modalComponent/RecommendInfo";
-import WSDCard from "../component/WSDCard";
-import WSDInfo from "../modalComponent/WSDInfo";
+// import FilterMediaCard from "../component/FilterMediaCard";
+// import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
+// import ActivationCard from "../component/ActivationCard";
+// import ActivationInfo from "../modalComponent/ActivationInfo";
+// import RecommendCard from "../component/RecommendCard";
+// import RecommendInfo from "../modalComponent/RecommendInfo";
+// import WSDCard from "../component/WSDCard";
+// import WSDInfo from "../modalComponent/WSDInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTools } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,26 +31,19 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   width: 100vw;
-  height: 30vh;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: "Kfont";
-  color: white;
-  /* margin-bottom: 140px; */
-  /* border: 1px solid red; */
   align-items: center;
   font-weight: bold;
-  font-size: 2rem;
-  background-image: url("/담수어가이드배경.jpeg");
-  /* background-image: url("투명바다2.png"); */
-  /* background-image: url("투명바다3.png"); */
+  font-size: 2.5rem;
+  background-image: url("/담수어가이드배경.png");
   .sub {
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 1.25rem;
-    font-weight: normal;
-    font-family: "Kfont";
-    color: white;
+    font-weight: 500;
+    color: #26262f;
   }
 `;
 
@@ -124,13 +117,13 @@ function FreshWaterGuide() {
       <Container>
         <Header2 />
         <Title>
-          Freshwater Fish Guide
+          Freshwater Guide
           <div className="sub">담수어는 어떻게 시작할까?</div>
         </Title>
         <InfoContainer>
           <TextCover>
             <FontAwesomeIcon icon={faTools} size="8x" />
-            <Text>서비스 중비중입니다</Text>
+            <Text>서비스 준비중입니다</Text>
           </TextCover>
         </InfoContainer>
       </Container>

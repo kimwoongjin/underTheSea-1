@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginModalOnAction } from "../store/actions";
 import axios from "axios";
@@ -18,11 +18,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   /* margin-bottom: 25px; */
-  // background-color: #f7f7f4;
+  /* background-color: #f7f7f4; */
 `;
 const TopCover = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +31,7 @@ const TopCover = styled.div`
   flex-direction: column;
   /* background-image: url("투명바다1.png"); */
   overflow: hidden;
+  /* box-shadow: 0px 2px 10px gray; */
 `;
 
 const Img = styled.img`
@@ -38,47 +39,47 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
+  opacity: 0.2;
   z-index: -1;
 `;
 
-const Swarm = styled.img`
-  position: absolute;
-  top: 80px;
-  left: 80px;
-  bottom: 0px;
-  width: 14%;
-`;
+// const Swarm = styled.img`
+//   position: absolute;
+//   top: 80px;
+//   left: 80px;
+//   bottom: 0px;
+//   width: 14%;
+// `;
+
 const TitleContainer = styled.div`
   width: 20%;
   display: flex;
   /* border: 1px solid green; */
   position: relative;
 `;
-const Starfish = styled.img`
-  position: absolute;
-  right: -30px;
-  bottom: 20px;
-  width: 50%;
-  height: 50%;
-`;
+// const Starfish = styled.img`
+//   position: absolute;
+//   right: -30px;
+//   bottom: 20px;
+//   width: 50%;
+//   height: 50%;
+// `;
+
 const Title = styled.div`
   width: 100%;
-  /* border: 1px solid blue; */
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: bold;
-  margin-top: 60px;
+  margin-top: 10%;
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  border-bottom: 3px solid #108dee;
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
-  color: #4a4a4a;
   font-size: 1.25rem;
   margin-bottom: 50px;
-  /* border: 1px solid red; */
+  font-weight: 500;
+  color: #808080;
 `;
 
 const BtnContainer = styled.div`
@@ -111,7 +112,7 @@ const TipListContainer = styled.div`
   margin-top: 15px;
   width: 70%;
   height: 100%;
-  border: 1px solid #a0d5fd;
+  border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
 `;
@@ -121,7 +122,7 @@ const TipListHeadContainer = styled.div`
   display: flex;
   font-size: 1.5rem;
   margin-top: 30px;
-  border-bottom: 4px solid #108dee;
+  border-bottom: 3px solid #a7d9ff;
   font-weight: bold;
   /* background-color: #f7f7f4; */
 `;
@@ -149,8 +150,8 @@ const PageBtnForm = styled.form`
   width: 95%;
   justify-content: center;
   // border-top: 1px solid #808080;
-  padding-top: 15px;
-  margin-bottom: 15px;
+  padding-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const PageBtn = styled.div`
@@ -179,17 +180,21 @@ function HoneyTips() {
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
     handleTipList();
   }, [pageNum]);
 
   // 페이지 숫자에 따른 게시물 조회
   const handleTipList = async () => {
-    const result = await axios.get(`http://localhost:80/tip/all/${pageNum}`, {
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-      },
-      withCredentials: true,
-    });
+    const result = await axios.get(
+      `${process.env.REACT_APP_SERVER_API}/tip/all/${pageNum}`,
+      {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      }
+    );
     const { data: list } = result.data;
     setTipList([...list]);
 
@@ -259,15 +264,21 @@ function HoneyTips() {
             return <TipList key={idx} tip_id={el.tip_id} tip={el}></TipList>;
           })}
           <PageBtnForm>
-            <PageBtn onClick={goToPre}>이전</PageBtn>
-            {tipLength.map((el, idx) => {
-              return (
-                <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-                  {idx + 1}
-                </PageBtn>
-              );
-            })}
-            <PageBtn onClick={goToNext}>다음</PageBtn>
+            {tipLength.length > 1 ? (
+              <>
+                <PageBtn onClick={goToPre}>이전</PageBtn>
+                {tipLength.map((el, idx) => {
+                  return (
+                    <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                      {idx + 1}
+                    </PageBtn>
+                  );
+                })}
+                <PageBtn onClick={goToNext}>다음</PageBtn>
+              </>
+            ) : (
+              <></>
+            )}
           </PageBtnForm>
         </TipListContainer>
         <Footer />

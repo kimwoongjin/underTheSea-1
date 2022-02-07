@@ -13,120 +13,148 @@ const CommentForm = styled.div`
   font-family: "Kfont";
   /* border: 1px solid red; */
   justify-content: center;
+
+  .comment {
+    font-size: 1.35rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    padding-left: 1%;
+  }
+
+  .writer {
+    width: 80%;
+    display: column;
+    /* flex-direction: column; */
+    margin-bottom: 15px;
+  }
 `;
 
 const SmallCommentForm = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 94%;
-  margin: 0;
   display: flex;
   align-items: center;
-  margin-left: 20px;
-  margin-right: 0;
-  border-bottom: 1px solid gray;
+  margin: 30px 0 0 30px;
+  border-bottom: 1px solid #cccccc;
+
+  .deleteBtn {
+    position: relative;
+    right: 2%;
+    margin-top: 4%;
+  }
 `;
 
 const Comment = styled.div`
   width: 100%;
   height: 95%;
-  display: column;
+  display: flex;
   padding: 0;
   margin-top: 2px;
-  /* margin-left: 20px; */
-  /* border: 1px dashed black; */
 `;
 
 const CommentWriter = styled.div`
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 1.1rem;
   width: 90%;
   height: 30%;
   /* border: 1px solid red; */
-  margin-top: 0.5px;
+  /* margin-bottom: 20px; */
   font-family: "Kfont";
+  display: flex;
+  padding-top: 0.5%;
+  padding-left: 1%;
+  position: relative;
+  /* right: 1%; */
 `;
 
 const CommentContent = styled.div`
   width: 90%;
   height: 20%;
-  font-size: 0.9rem;
+  font-size: 1rem;
   /* border: 1px solid black; */
   margin-top: 0.5px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  padding-left: 1%;
   font-family: "Kfont";
-`;
-
-const EditComment = styled.input`
-  width: 90%;
-  height: 20%;
-  font-size: 0.9rem;
-  /* border: 1px solid black; */
-  margin-top: 0.5px;
-  margin-bottom: 10px;
 `;
 
 const CommnetDate = styled.div`
   width: 90%;
-  height: 10%;
+  height: 20%;
   font-size: 0.8rem;
+  padding-left: 1%;
   color: #808080;
   /* border: 1px solid black; */
   margin-top: 0.5px;
 `;
 
-const CommentDeleteBtn = styled.button`
-  width: 5px;
-  height: 5px;
-  border: 1px solid red;
-  background: none;
-  margin-left: 15px;
-  cursor: pointer;
+const WriterIcon = styled.div`
+  width: 10%;
+  height: 30%;
+  position: relative;
+  /* right: 1%; */
+
+  .userImg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const CommentInputContainer = styled.form`
   position: relative;
-  width: 95%;
+  width: 94%;
   height: 95%;
   /* pading: 10px */
-  border: 1px solid #108dee;
+  border: 1px solid #a7d9ff;
   border-radius: 4px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin: 4% 5% 4%;
   display: column;
   justify-content: center;
   align-items: center;
+
+  .Greeting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5% 0 5%;
+  }
+
+  .commentGreeting {
+  }
 `;
 const AddCommentForm = styled.div`
   font-weight: 900;
   width: 90%;
   height: 30%;
+  margin: 2% 0 1% 8%;
+  font-size: 1.1rem;
   /* border: 1px solid red; */
-  margin-top: 10px;
-  margin-left: 10px;
 `;
 const CommentInput = styled.input`
-  width: 95%;
+  width: 85%;
   height: 20px;
-  margin-left: 9px;
-  margin-top: 10px;
-  border-style: none;
-  border-bottom: 1px solid #108dee;
+  margin: 3% 0 1% 7%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #a7d9ff;
+  font-size: 1.1rem;
+  padding: 0 0 1% 1%;
+
   /* border: 1px solid red; */
 `;
 
 const AddcommentBtn = styled.button`
   position: relative;
   bottom: 8px;
-  right: -20px;
-  width: 80px;
-  height: 30px;
-  color: #108dee;
-  font-size: 1.2rem;
+  right: 2%;
+  width: 65px;
+  height: 25px;
+  /* color: #108dee; */
+  font-size: 1.1rem;
   border-radius: 4px;
-  margin-left: 88%;
-  margin-top: 15px;
-  border: 1px solid #108dee;
+  margin: 2% 0 1% 88%;
+  border: 1px solid black;
   background-color: white;
   cursor: pointer;
   :hover {
@@ -153,9 +181,9 @@ function CommentTips({
   };
 
   // 댓글 수정
-  const editComment = () => {
-    setIsEdit(true);
-  };
+  // const editComment = () => {
+  //   setIsEdit(true);
+  // };
 
   // 댓글 업로드 버튼
   const Upload = () => {
@@ -171,15 +199,7 @@ function CommentTips({
   return (
     <>
       <CommentForm>
-        <div
-          style={{
-            fontSize: "1.35rem",
-            marginBottom: "5px",
-            fontWeight: "bold",
-          }}
-        >
-          댓글
-        </div>
+        <div className="comment">댓글</div>
         {comment.length === 0 ? (
           <></>
         ) : (
@@ -187,25 +207,23 @@ function CommentTips({
             return (
               <SmallCommentForm key={idx}>
                 <Comment>
-                  <CommentWriter>{el.comment_user_name}</CommentWriter>
-                  {isEdit ? (
-                    <EditComment
-                      type="text"
-                      value={el.comment_content}
-                      onChange={handleInputComment}
-                    ></EditComment>
-                  ) : (
+                  <WriterIcon>
+                    <img className="userImg" src="/유저2.png" alt=""></img>
+                  </WriterIcon>
+                  <div className="writer">
+                    <CommentWriter>{el.comment_user_name}</CommentWriter>
                     <CommentContent>{el.comment_content}</CommentContent>
-                  )}
-                  <CommnetDate>
-                    {el.updated_at.split("T")[0]}&nbsp;
-                    {el.updated_at.split("T")[1].split(".")[0]}
-                  </CommnetDate>
+                    <CommnetDate>
+                      {el.updated_at.split("T")[0]}&nbsp;
+                      {el.updated_at.split("T")[1].split(".")[0]}
+                    </CommnetDate>
+                  </div>
                 </Comment>
                 {el.isWriter ? (
                   <>
                     {/* <CommentDeleteBtn value={el.comment_id} onClick={Delete}> */}
                     <FontAwesomeIcon
+                      className="deleteBtn"
                       id={el.comment_id}
                       onClick={Delete}
                       size="1x"
@@ -234,7 +252,9 @@ function CommentTips({
             <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
           </>
         ) : (
-          <></>
+          <div className="Greeting">
+            <div className="commentGreeting">로그인 시 댓글이 가능합니다. </div>
+          </div>
         )}
       </CommentInputContainer>
     </>

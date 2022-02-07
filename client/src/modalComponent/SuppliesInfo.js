@@ -18,7 +18,7 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 70%;
+  width: 60%;
   height: 80%;
   background: white;
   border-radius: 20px;
@@ -37,6 +37,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -74,15 +77,27 @@ const SubTitle = styled.div`
 const Wave = styled.img`
   width: 70%;
   margin: 10px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 const AquaBox = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 const Rock = styled.img`
   width: 80%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 function SuppliesInfo() {
@@ -96,6 +111,7 @@ function SuppliesInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>

@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDoubleRight,
+  faBullseye,
+  faFish,
+} from "@fortawesome/free-solid-svg-icons";
+import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
 
 const TipContainer = styled.div`
   position: relative;
@@ -9,7 +14,7 @@ const TipContainer = styled.div`
   height: 60px;
   display: flex;
   margin-bottom: 1px;
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid #cccccc;
   cursor: pointer;
   align-items: center;
   &:hover {
@@ -62,9 +67,6 @@ function TipList({ tip_id, tip }) {
 
   // 게시물 선택&조회
   const handleSelectTip = (e) => {
-    // localStorage.setItem("tip_id", e.target.id);
-    // const tip_id = localStorage.getItem("tip_id");
-    // console.log(e.target.id);
     navigate(`/posttips/${tip_id}`);
   };
 
@@ -74,7 +76,7 @@ function TipList({ tip_id, tip }) {
         <div style={{ flex: "0.5", alignItems: "center" }}>
           <FontAwesomeIcon
             size="1x"
-            icon={faAngleDoubleRight}
+            icon={faFish}
             color="#828282"
           ></FontAwesomeIcon>
         </div>

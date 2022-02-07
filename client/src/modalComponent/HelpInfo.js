@@ -28,6 +28,9 @@ const ModalContainer = styled.div`
   justify-content: center;
   display: flex;
   border-radius: 20px;
+  @media screen and (max-width: 820px) {
+    height: 85%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -40,13 +43,20 @@ const CloseBtnContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
+
 const ShowContainer = styled.div`
   width: 100%;
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* overflow: scroll; */
 `;
 
 const InfoShow = styled.div`
@@ -128,12 +138,13 @@ function HelpInfo() {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            color="#e5e5e5"
-            onClick={() => dispatch(modalOff)}
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              color="#e5e5e5"
+              onClick={() => dispatch(modalOff)}
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <InfoShow>
@@ -149,9 +160,9 @@ function HelpInfo() {
               주1회의 환수를 권장 드리며 추후 레벨에 따른 혜택을 준비중입니다.
             </Content>
             <ImgCover>
-              <ImgShow src="http://localhost:80/level/11" />
+              <ImgShow src={process.env.REACT_APP_SERVER_API + `/level/11`} />
               <FontAwesomeIcon icon={faArrowRight} size="2x" />
-              <ImgShow src="http://localhost:80/level/61" />
+              <ImgShow src={process.env.REACT_APP_SERVER_API + `/level/61`} />
             </ImgCover>
             <LevelInfoCover>
               <LevelInfo>Lv. 1</LevelInfo>

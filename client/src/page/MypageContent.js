@@ -2,33 +2,92 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  width: 55.5vw;
+  height: 20%;
+  font-size: 1.3rem;
+  font-family: "Kfont";
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  /* border: 1px solid black; */
+  position: relative;
+  left: 6%;
+  bottom: 3%;
+  padding-bottom: 0.5%;
+  box-sizing: border-box;
+
+  .title {
+    display: flex;
+    padding: 0 0 2% 3%;
+    /* border: 1px solid black; */
+    flex: 6;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .date {
+    flex: 2;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 2%;
+    /* border: 1px solid black; */
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: 0%;
+    height: 10%;
+    padding-bottom: 2%;
+    margin-top: 3%;
+    .title {
+      flex: 4;
+      font-size: 0.6rem;
+    }
+    .date {
+      flex: 1.6;
+      font-size: 0.6rem;
+      left: 0%;
+    }
+  }
+`;
 const Container = styled.div`
   position: relative;
-  width: 90%;
   display: column;
-  margin-bottom: 1px;
-  z-index: 100;
+  width: 90%;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  /* margin-bottom: 1px; */
+  z-index: 100;
+  margin-top: 8%;
 `;
 
 const BoxContainer = styled.div`
   display: flex;
   margin: 0;
-  width: 55vw;
+  width: 55.5vw;
   /* border: 1px solid red; */
   box-sizing: border-box;
   align-items: center;
-  margin-top: 2%;
-  margin-left: 6.5%;
+  position: relative;
+  bottom: 3%;
+  margin-left: 6%;
   border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f4;
+    color: black;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -6%;
+  }
 `;
 
 const Box = styled.div`
   position: relative;
-  //   z-index: 1;
   flex: 6;
   width: 30%;
   height: 50%;
@@ -36,9 +95,11 @@ const Box = styled.div`
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-top: 1%;
-  padding-left: 2%;
-  padding-bottom: 2.5%;
+  /* border: 1px solid black; */
+  padding: 2.5% 0 2.6% 3%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Box1 = styled.div`
@@ -46,36 +107,15 @@ const Box1 = styled.div`
   width: 30%;
   height: 50%;
   font-size: 0.9rem;
+  color: gray;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  margin-left: 29%;
-  font-size: 0.9rem;
-  color: #828282;
-  padding-bottom: 2.5%;
-`;
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  width: 55vw;
-  height: 5vh;
-  font-size: 1.3rem;
-  font-family: "Kfont";
-  font-weight: bold;
-  border-bottom: 1px solid black;
-  position: absolute;
-  bottom: 10%;
-  padding-bottom: 0.5%;
-
-  .title {
-    display: flex;
-    padding-left: 2%;
-    /* border: 1px solid black; */
-    margin-right: 65.5%;
-  }
-  .date {
-    display: flex;
-    /* border: 1px solid black; */
+  padding: 2.8% 0 2.7%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+    padding-left: 5%;
+    flex: 2.5;
   }
 `;
 
@@ -85,7 +125,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 9% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -114,10 +154,14 @@ const PageBtn = styled.div`
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 function MypageContent() {
   const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
   const [test, setTest] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [contentLength, setContentLength] = useState([]);
@@ -127,7 +171,7 @@ function MypageContent() {
   }, [pageNum]);
   const content = (page_num) => {
     axios
-      .get(`http://localhost:80/user/tips/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/tips/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -145,6 +189,12 @@ function MypageContent() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // 게시글 선택시 이동
+  const selectTip = (e) => {
+    const id = e.target.id;
+    navigate(`/posttips/${id}`);
   };
 
   // 이전페이지
@@ -176,10 +226,10 @@ function MypageContent() {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <div className="title">작성한 글 제목</div>
         <div className="date">날짜</div>
-      </Head>
+      </Head> */}
       <Container>
         {test.length === 0 ? (
           <>
@@ -193,32 +243,38 @@ function MypageContent() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">작성한 글 제목</div>
+              <div className="date">날짜</div>
+            </Head>
             {test.map((el) => {
               const date = el.created_at.split("T")[0];
               // console.log(el, "//////");
               return (
                 <>
-                  <BoxContainer>
-                    <Box key={el.id}>{el.title}</Box>
+                  <BoxContainer key={el.id}>
+                    <Box id={el.tip_id} onClick={selectTip}>
+                      {el.title}
+                    </Box>
                     <Box1>{date}</Box1>
                   </BoxContainer>
                 </>
               );
-            })}
+            })}{" "}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {contentLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {contentLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
   // });

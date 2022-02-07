@@ -111,19 +111,18 @@ const HabitatShow = styled.div`
   height: 100%;
 `;
 
-const TextD = styled.div`
-  line-height: 130%;
-  font-weight: 450;
-`;
-
-function ManageDetInfo({ condata }) {
+function ManageDetInfo() {
+  let conInfo = JSON.parse(localStorage.getItem("conInfo"));
   return (
     <>
-      {condata.fish_list.map((el, idx) => {
+      {conInfo.fish_list.map((el, idx) => {
         return (
           <ContainerS key={idx}>
             <DetailImg>
-              <ImgD src={`http://localhost:80${el.fish_img}`} alt="이미지" />
+              <ImgD
+                src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                alt="이미지"
+              />
             </DetailImg>
             {/* ----------------------------------------- */}
             <Content>

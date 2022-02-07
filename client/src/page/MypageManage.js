@@ -2,77 +2,28 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-
-const Container = styled.div`
-  position: relative;
-  width: 90%;
-  display: column;
-  margin-bottom: 1px;
-  z-index: 100;
-  justify-content: center;
-  align-items: center;
-  margin-top: 9%;
-
-  /* border: 1px solid black; */
-`;
-
-const BoxContainer = styled.div`
-  display: flex;
-  margin: 0;
-  width: 55vw;
-  /* border: 1px solid red; */
-  box-sizing: border-box;
-  align-items: center;
-  margin-top: 0%;
-  margin-left: 6.5%;
-  border-bottom: 1px solid #cccccc;
-`;
-
-const Box = styled.div`
-  position: relative;
-  flex: 6;
-  width: 30%;
-  height: 50%;
-  margin: 0;
-  align-items: center;
-  font-family: "Kfont";
-  box-sizing: border-box;
-  margin-top: 0%;
-  padding-left: 2%;
-  padding-bottom: 2.5%;
-`;
-
-const Box2 = styled.div`
-  flex: 2;
-  width: 30%;
-  height: 50%;
-  font-size: 0.9rem;
-  /* border: 1px solid black; */
-  font-family: "Kfont";
-  box-sizing: border-box;
-  margin-left: 31%;
-  padding-bottom: 2.5%;
-`;
+import { useNavigate } from "react-router-dom";
 
 const Head = styled.div`
   display: flex;
   align-items: center;
-  width: 78%;
-  height: 5%;
+  width: 55.5vw;
+  height: 5vh;
   font-size: 1.3rem;
   font-family: "Kfont";
   font-weight: bold;
   border-bottom: 1px solid black;
+  /* border: 1px solid black; */
   position: relative;
-  top: 10%;
-  padding-bottom: 0.5%;
+  left: 6%;
+  bottom: 3%;
   box-sizing: border-box;
 
   .title {
     display: flex;
-    padding-left: 2%;
+
+    padding-left: 1.5%;
     /* border: 1px solid black; */
-    /* margin-right: 70%; */
     flex: 6;
     box-sizing: border-box;
     position: relative;
@@ -85,7 +36,89 @@ const Head = styled.div`
 
     /* border: 1px solid black; */
   }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: 0%;
+    padding-bottom: 2%;
+    .title {
+      flex: 4;
+      font-size: 0.6rem;
+    }
+    .comment {
+      flex: 2;
+      font-size: 0.6rem;
+      padding-left: 10%;
+    }
+  }
 `;
+const Container = styled.div`
+  position: relative;
+  display: column;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 1px; */
+  z-index: 100;
+  margin-top: 9%;
+  /* border: 1px solid black; */
+`;
+
+const BoxContainer = styled.div`
+  display: flex;
+  margin: 0;
+  width: 55.5vw;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  bottom: 3%;
+  margin-left: 6%;
+  border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f4;
+    color: black;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -6%;
+  }
+`;
+
+const Box = styled.div`
+  position: relative;
+  flex: 6;
+  width: 30%;
+  height: 50%;
+  margin: 0;
+  align-items: center;
+  font-family: "Kfont";
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  padding: 2.5% 0 2.6% 2%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
+`;
+
+const Box2 = styled.div`
+  flex: 2;
+  width: 30%;
+  height: 50%;
+  font-size: 0.9rem;
+  /* border: 1px solid black; */
+  font-family: "Kfont";
+  box-sizing: border-box;
+  padding: 2.8% 0 2.7% 2%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+    padding-left: 5%;
+    flex: 2.5;
+  }
+`;
+//+0.3
+//+0.2
+//=======================================================================
 
 const Empty = styled.div`
   display: flex;
@@ -93,7 +126,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 15% 0 0 5%;
+  margin: 8% 0 0 5%;
 `;
 
 const BoxImg = styled.img`
@@ -122,24 +155,33 @@ const PageBtn = styled.div`
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 
 function MypageManage() {
+  const navigate = useNavigate();
   const [manageInfo, setManageInfo] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [manageLength, setManageLength] = useState([]);
+  const [containerId, setContainerId] = useState([]);
+  const [clickPage, setClickPage] = useState();
   const accessToken = localStorage.getItem("accessToken");
+
   useEffect(() => {
     manageHandler(pageNum);
   }, [pageNum]);
 
   const manageHandler = (page_num) => {
     axios
-      .get(`http://localhost:80/user/manage/${page_num}`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/user/manage/${page_num}`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
       .then((result) => {
+        const id = result.data.data.map((el) => el.container_id);
+        setContainerId(id);
         setManageInfo([...result.data.data]);
         const page_length = Math.floor(result.data.length / 7);
         if (result.data.length % 7 !== 0) {
@@ -153,6 +195,13 @@ function MypageManage() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // 컨테이너 선택시 이동
+  const selectCon = (e) => {
+    const id = e.target.id;
+    console.log(id);
+    navigate(`/manage/${id}`);
   };
 
   // 이전페이지
@@ -179,10 +228,6 @@ function MypageManage() {
 
   return (
     <>
-      <Head>
-        <div className="title">어항 이름</div>
-        <div className="comment">수조크기</div>
-      </Head>
       <Container>
         {manageInfo.length === 0 ? (
           <>
@@ -196,31 +241,37 @@ function MypageManage() {
           </>
         ) : (
           <>
+            <Head>
+              <div className="title">어항 이름</div>
+              <div className="comment">수조크기</div>
+            </Head>
             {manageInfo.map((el, idx) => {
               // console.log(el, "?????????");
               return (
                 <>
-                  <BoxContainer>
-                    <Box key={idx}>{el.container_name}</Box>
+                  <BoxContainer key={idx}>
+                    <Box id={el.container_id} onClick={selectCon}>
+                      {el.container_name}
+                    </Box>
                     <Box2>{el.size}</Box2>
                   </BoxContainer>
                 </>
               );
             })}
+            <PageBtnForm>
+              <PageBtn onClick={goToPre}>이전</PageBtn>
+              {manageLength.map((el, idx) => {
+                return (
+                  <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
+                    {idx + 1}
+                  </PageBtn>
+                );
+              })}
+              <PageBtn onClick={goToNext}>다음</PageBtn>
+            </PageBtnForm>
           </>
         )}
       </Container>
-      <PageBtnForm>
-        <PageBtn onClick={goToPre}>이전</PageBtn>
-        {manageLength.map((el, idx) => {
-          return (
-            <PageBtn key={idx} id={idx + 1} onClick={selectPageNum}>
-              {idx + 1}
-            </PageBtn>
-          );
-        })}
-        <PageBtn onClick={goToNext}>다음</PageBtn>
-      </PageBtnForm>
     </>
   );
 }

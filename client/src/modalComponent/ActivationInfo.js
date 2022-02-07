@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -61,10 +64,8 @@ const ContentContainer = styled.div`
 const IconContainer = styled.div`
   width: 95%;
   height: 5%;
-  /* margin-top: 5px; */
   display: flex;
   justify-content: flex-end;
-  /* border: 1px solid red; */
 `;
 
 const ImgContainer = styled.div`
@@ -78,6 +79,9 @@ const ImgContainer = styled.div`
       margin-top: 7px;
       margin-bottom: 5px;
     }
+  }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
   }
 `;
 const ImgContainer2 = styled.div`
@@ -94,6 +98,10 @@ const ImgContainer2 = styled.div`
 `;
 const Skimmer = styled.img`
   width: 30%;
+  @media screen and (max-width: 750px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 function ActivationInfo() {
   const dispatch = useDispatch();
@@ -106,6 +114,7 @@ function ActivationInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
