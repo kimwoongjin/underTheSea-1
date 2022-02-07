@@ -78,6 +78,7 @@ const Signup = styled.div`
   background: #008eff;
   color: white;
   position: relative;
+  box-sizing: border-box;
   :hover::before {
     position: absolute;
     content: "";
@@ -96,7 +97,6 @@ const Signup = styled.div`
 const Signout = styled.div`
   border-radius: 5px;
   padding: 10px;
-  height: 100%;
   box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;

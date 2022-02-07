@@ -9,7 +9,6 @@ const Container = styled.div`
   margin-bottom: 40px;
   box-shadow: 0px 0px 20px #adb5bd;
   display: flex;
-  /* margin-right: 35px; */
   flex-direction: column;
   align-items: center;
   transition: all 0.3s;
@@ -22,6 +21,10 @@ const Container = styled.div`
     width: 280px;
     height: 400px;
   }
+  @media screen and (max-width: 320px) {
+    width: 225px;
+    height: 245px;
+  }
 `;
 const ImgContainer = styled.div`
   width: 100%;
@@ -30,15 +33,20 @@ const ImgContainer = styled.div`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
+  @media screen and (max-width: 320px) {
+    height: 165px;
+  }
 `;
 const Img = styled.img`
   width: 100%;
   height: 200px;
+  @media screen and (max-width: 320px) {
+    height: 150px;
+  }
 `;
 const Title = styled.div`
   width: 260px;
   height: 40px;
-  /* border: 1px solid black; */
   font-family: "Kfont";
   margin: 10px 0px;
   font-size: 1.25rem;
@@ -47,6 +55,11 @@ const Title = styled.div`
   align-items: center;
   padding: 5px;
   box-sizing: border-box;
+  @media screen and (max-width: 320px) {
+    width: 225px;
+    justify-content: center;
+    /* height: 245px; */
+  }
 `;
 const Content = styled.div`
   font-family: "Kfont";
@@ -59,6 +72,9 @@ const Content = styled.div`
   @media screen and (max-width: 400px) {
     width: 240px;
     height: 120px;
+  }
+  @media screen and (max-width: 320px) {
+    display: none;
   }
 `;
 function SuppliesCard() {
