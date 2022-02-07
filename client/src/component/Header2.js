@@ -76,6 +76,7 @@ const Signup = styled.div`
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
+  box-sizing: border-box;
   cursor: pointer;
   background: #008eff;
   color: white;
@@ -94,11 +95,10 @@ const Signup = styled.div`
     box-sizing: border-box;
   }
 `;
-
+// 이거 높이 %쓰지말고 바꿔서 크기 줄이고 피알하기
 const Signout = styled.div`
   border-radius: 5px;
   padding: 10px;
-  height: 100%;
   box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;
