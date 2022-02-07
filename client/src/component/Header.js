@@ -61,6 +61,15 @@ const Manage = styled.div`
   }
 `;
 
+const Aquarium = styled.div`
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
+`;
+
 const Mypage = styled.div`
   padding: 10px;
   font-family: "Kfont";
@@ -261,6 +270,13 @@ function Header2() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search toggle={toggle}>검색</Search>
         </Link>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/nearbyaquarium"
+        >
+          <Aquarium>수족관</Aquarium>
+        </Link>
+
         {isLogin ? (
           <>
             <Link
