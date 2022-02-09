@@ -56,7 +56,7 @@ const MiddleBox = styled.div`
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0);
   overflow: hidden;
-  width: 100%;
+  max-width: 1920px;
   height: 0;
   transition: 1s ease;
   /* transition-delay: 0.5s; */
