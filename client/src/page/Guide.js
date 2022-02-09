@@ -4,7 +4,7 @@ import React from "react";
 import Header2 from "../component/Header2";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@ const MiddleBox = styled.div`
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0);
   overflow: hidden;
-  max-width: 1920px;
+  width: 100%;
   height: 0;
   transition: 1s ease;
   /* transition-delay: 0.5s; */
