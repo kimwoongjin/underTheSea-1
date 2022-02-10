@@ -32,8 +32,11 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
+  max-width: 2000px;
   height: 40vh;
+  @media screen and (max-width: 480px) {
+    height: 20vh;
+  }
 `;
 
 const Title = styled.div`
@@ -44,6 +47,9 @@ const Title = styled.div`
   text-align: center;
   line-height: 180%;
   color: #008eff;
+  @media screen and (max-width: 480px) {
+    top: 25%;
+  }
 `;
 const TextContainer = styled.div`
   position: absolute;
@@ -54,6 +60,10 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 60%;
+    top: 45%;
+  }
 `;
 
 const Text = styled.div`
@@ -65,6 +75,9 @@ const Text = styled.div`
   @media screen and (max-width: 768px) {
     font-size: 1.25rem;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 const ContainerS = styled.div`
   display: flex;
@@ -74,9 +87,10 @@ const ContainerS = styled.div`
   width: 50%;
   height: 20vh;
   margin-bottom: 3%;
-  /* @media screen and (max-width: 768px) {
-    flex-direction: column;
-  } */
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 18vh;
+  }
 `;
 const HabitatContainer = styled.div`
   border-radius: 5px;
@@ -84,6 +98,9 @@ const HabitatContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 480px) {
+    height: 15px;
+  }
 `;
 const FishDesc = styled.div`
   box-sizing: border-box;
@@ -102,7 +119,7 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
-  @media screen and (max-width: 868px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -133,6 +150,12 @@ const Name = styled.div`
   font-weight: bold;
   font-size: 1.2rem;
   font-family: "Kfont";
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 const LeftInfo = styled.div`
   display: flex;
@@ -146,6 +169,11 @@ const LeftInfo = styled.div`
   @media screen and (max-width: 868px) {
     width: 100%;
   }
+  @media screen and (max-width: 480px) {
+    height: 100%;
+    font-size: 0.7rem;
+    padding: 0px;
+  }
 `;
 const ImgD = styled.img`
   position: relative;
@@ -154,8 +182,12 @@ const ImgD = styled.img`
 `;
 const Content = styled.div`
   display: flex;
+  align-items: center;
   width: 75%;
   height: 20vh;
+  @media screen and (max-width: 868px) {
+    height: 100%;
+  }
 `;
 const DetailImg = styled.div`
   position: relative;
@@ -165,6 +197,9 @@ const DetailImg = styled.div`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   cursor: pointer;
+  @media screen and (max-width: 868px) {
+    width: 40%;
+  }
 `;
 
 const OuterContainer = styled.div`
@@ -192,6 +227,10 @@ const Level = styled.div`
   height: 40px;
   font-weight: bold;
   font-size: 1.5rem;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 const LevelCover = styled.div`
   display: flex;
@@ -210,6 +249,10 @@ const Logo = styled.img`
   width: 20%;
   height: 120%;
   margin-bottom: 2%;
+  @media screen and (max-width: 480px) {
+    width: 40%;
+    height: 80%;
+  }
 `;
 
 const Levelinfo = styled.div`
@@ -221,9 +264,13 @@ const Levelinfo = styled.div`
   margin-left: 10px;
   font-family: "Kfont";
 `;
+
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const MainImg = styled.img`
@@ -246,6 +293,10 @@ const BottomContainer = styled.div`
   width: 50%;
   height: 4vh;
   margin-top: 1%;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    justify-content: space-between;
+  }
 `;
 
 const HelpBtn = styled.div`
@@ -256,6 +307,11 @@ const HelpBtn = styled.div`
   font-weight: bold;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const AddfishBtn = styled.div`
@@ -267,6 +323,12 @@ const AddfishBtn = styled.div`
   margin: 0px 20px;
   font-family: "Kfont";
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    margin: 0px;
+    font-size: 0.9rem;
+  }
 `;
 const DeadfishBtn = styled.div`
   display: flex;
@@ -277,6 +339,11 @@ const DeadfishBtn = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 30%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -287,6 +354,9 @@ const ProgressBar = styled.div`
   width: 50%;
   height: 4vh;
   border: 2px solid #108dee;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 const Progress = styled.div`
   transition: all 1s;
@@ -295,6 +365,10 @@ const Progress = styled.div`
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   background: linear-gradient(#00d2ff, #3a7bd5);
+  @media screen and (max-width: 480px) {
+    width: ${(props) => props.EXP};
+    height: 100%;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -302,6 +376,9 @@ const BtnContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   height: 6vh;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const Button = styled.button`
@@ -324,6 +401,10 @@ const Button = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+    /* margin-right: 3%; */
   }
 `;
 
@@ -352,6 +433,9 @@ const CalendarBtn = styled.button`
   width: 40px;
   height: 30px;
   border-style: none;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Span = styled.span`
@@ -372,6 +456,9 @@ const Number = styled.span`
   display: flex;
   width: 100%;
   height: 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Td = styled.td`
@@ -383,7 +470,28 @@ const Td = styled.td`
   font-size: 1rem;
   width: 6.8vw;
   height: 13vh;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
+
+const MobileTd = styled.td`
+  display: flex;
+  border: 1px solid black;
+  background: white;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  width: 6.8vw;
+  height: 13vh;
+  @media screen and (max-width: 480px) {
+    width: 70vw;
+    height: 40vh;
+    justify-content: space-around;
+  }
+`;
+
 const WeekContainer = styled.div`
   width: 100%;
   display: flex;
@@ -395,6 +503,9 @@ const WeekContainer = styled.div`
   }
   .sat {
     color: blue;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 `;
 const Day = styled.div`
@@ -437,6 +548,9 @@ const FeedingNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const FoodIcon = styled.img`
@@ -707,7 +821,7 @@ function ManageDetail({ condata, setCondata }) {
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
-                  <Td key={index}>
+                  <MobileTd key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
@@ -752,7 +866,7 @@ function ManageDetail({ condata, setCondata }) {
                     <ExWaterRecord>
                       {exWaterObj[days.format("YYMMDD")]}L
                     </ExWaterRecord>
-                  </Td>
+                  </MobileTd>
                 );
               } else if (finalList[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때
@@ -968,7 +1082,7 @@ function ManageDetail({ condata, setCondata }) {
           </DeadfishBtn>
         </BottomContainer>
 
-        {/* -------------------- 달력 ------------------- */}
+        {/* —————————— 달력 ————————— */}
 
         <CalendarContainer>
           <Control>
@@ -1006,7 +1120,7 @@ function ManageDetail({ condata, setCondata }) {
           </Table>
         </CalendarContainer>
 
-        {/* ----------------------------------------- */}
+        {/* ———————————————————— */}
 
         {/* <ManageDetCard condata={condata} /> */}
       </OuterContainer>
@@ -1020,7 +1134,7 @@ function ManageDetail({ condata, setCondata }) {
                   alt="이미지"
                 />
               </DetailImg>
-              {/* ----------------------------------------- */}
+              {/* ———————————————————— */}
               <Content>
                 <LeftInfo>
                   <Name>{el.fish_name}</Name>

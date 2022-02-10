@@ -27,7 +27,7 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 9999;
   .btn {
     width: 25px;
     height: 30px;
@@ -37,6 +37,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -74,15 +77,27 @@ const SubTitle = styled.div`
 const Wave = styled.img`
   width: 70%;
   margin: 10px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 const AquaBox = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 const Rock = styled.img`
   width: 80%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 function SuppliesInfo() {

@@ -5,29 +5,23 @@ import {
   loginModalOnAction,
   logoutAction,
   signupModalOnAction,
-  logoutModalOnAction,
 } from "../store/actions";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import waterDrop from "./waterdrop.mp3";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 10vh;
-  background: white;
   background: #d2f7ff;
   box-shadow: 0px 0px 5px #adb5bd;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-  }
-  @media screen and (max-width: 480px) {
-    flex-direction: column;
-    width: 100vw;
   }
 `;
 
@@ -36,14 +30,20 @@ const Img = styled.img`
   margin: 0 0 1% 1%;
   cursor: pointer;
   @media screen and (max-width: 768px) {
-    width: 17vw;
-    position: relative;
-    margin-top: 1%;
+    width: 22vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 610px) {
+    width: 25vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 450px) {
+    width: 30vw;
+    margin: auto;
   }
 `;
 
 const Login = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -53,7 +53,6 @@ const Login = styled.div`
 `;
 
 const Manage = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -63,7 +62,6 @@ const Manage = styled.div`
 `;
 
 const Mypage = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -73,7 +71,6 @@ const Mypage = styled.div`
 `;
 
 const Signup = styled.div`
-  /* border: 1px solid red; */
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
@@ -81,6 +78,7 @@ const Signup = styled.div`
   background: #008eff;
   color: white;
   position: relative;
+  box-sizing: border-box;
   :hover::before {
     position: absolute;
     content: "";
@@ -90,13 +88,15 @@ const Signup = styled.div`
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
   }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2%;
+    box-sizing: border-box;
+  }
 `;
 
 const Signout = styled.div`
-  /* border: 1px solid red; */
   border-radius: 5px;
   padding: 10px;
-  height: 100%;
   box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;
@@ -119,7 +119,6 @@ const Signout = styled.div`
 `;
 
 const Search = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -134,12 +133,10 @@ const Search = styled.div`
         justify-content: center;
         align-items: center;
         border-radius: 5px;
-        /* width: 90%; */
       `}
   }
 `;
 const Guide = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -151,18 +148,14 @@ const Bars = styled.div`
   position: absolute;
   display: none;
   font-size: 20px;
-  /* border: 1px solid red; */
-  top: 20px;
+  top: 30%;
   right: 32px;
   cursor: pointer;
   color: #e5e5e5;
   z-index: 999;
   @media screen and (max-width: 768px) {
-    top: 0%;
-    right: 0%;
-    padding: 1% 2%;
     display: block;
-    color: #cccccc;
+    top: 30%;
   }
 `;
 
@@ -173,7 +166,6 @@ const BtnContainer = styled.div`
   margin-right: 2%;
   width: 370px;
   font-family: "Kfont";
-
   @media screen and (max-width: 768px) {
     display: none;
     ${(props) =>
@@ -183,17 +175,18 @@ const BtnContainer = styled.div`
         margin-right: 0;
         display: flex;
         width: 100%;
-        background: linear-gradient(to top, #70d6ff, #d2f7ff);
+        background: white;
         align-items: center;
+        background: linear-gradient(to top, #70d6ff, #d2f7ff);
         flex-direction: column;
         height: 350px;
         margin-bottom: 2%;
-        z-index: 99;
+        z-index: 100;
       `}
   }
 `;
 
-function Header() {
+function Header2() {
   const [status, setStatus] = useState(false);
   const [toggle, setToggle] = useState(false);
   const onClickHandler = (e) => {
@@ -238,14 +231,31 @@ function Header() {
         console.log(err);
       });
   };
+  const play = () => {
+    console.log("Play damm it!!");
+    var audio = document.getElementById("audio_play");
+    console.log("Play damm it!!");
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
 
   return (
-    // src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png"
     <Container toggle={toggle}>
-      <Img src="로고.png" alt="" onClick={goToHome} />
-      <BtnContainer className="menu" toggle={toggle}>
+      <audio
+        id="audio_play"
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/waterdrop.mp3"
+      ></audio>
+      {/* src="https://iconmage.s3.ap-northeast-2.amazonaws.com/로고.png" */}
+      <Img src="/로고.png" alt="" onClick={goToHome} />
+      <BtnContainer className="menu" onclick={play} toggle={toggle}>
         <Link style={{ textDecoration: "none", color: "black" }} to="/guide">
-          <Guide toggle={toggle}>가이드</Guide>
+          <Guide onclick={play} toggle={toggle}>
+            가이드
+          </Guide>
           <audio id="audio_play" src="waterdrop.mp3"></audio>
         </Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
@@ -257,7 +267,9 @@ function Header() {
               style={{ textDecoration: "none", color: "black" }}
               to="/manage"
             >
-              <Manage toggle={toggle}>관리</Manage>
+              <Manage onclick={play} toggle={toggle}>
+                관리
+              </Manage>
               <audio id="audio_play" src="waterdrop.mp3"></audio>
             </Link>
             <Link
@@ -292,4 +304,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Header2;

@@ -4,7 +4,7 @@ import React from "react";
 import Header2 from "../component/Header2";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,10 @@ const Container = styled.div`
 const MiddleContainer = styled.div`
   display: flex;
   overflow: hidden;
+  max-width: 2000px;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const BigBox = styled.div`
@@ -83,6 +87,11 @@ const TextForm = styled.div`
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -150%);
   text-align: center;
+  @media screen and (max-width: 900px) {
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const TextForm2 = styled.div`
@@ -94,12 +103,12 @@ const TextForm2 = styled.div`
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -250%);
+  transform: translate(-50%, -50%);
   text-align: center;
 `;
 
 const Seawater = styled.div`
-  width: 33vw;
+  width: 33%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;
@@ -107,11 +116,14 @@ const Seawater = styled.div`
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 const Tips = styled.div`
   position: relative;
-  width: 34vw;
+  width: 34%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;
@@ -120,6 +132,9 @@ const Tips = styled.div`
   /* font-family: "Kfont"; */
   cursor: pointer;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 const TipImg = styled.img`
@@ -140,13 +155,16 @@ const FreshImg = styled.img`
   opacity: 0.4;
 `;
 const Freshwater = styled.div`
-  width: 33vw;
+  width: 33%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 `;
 
 function Guide() {

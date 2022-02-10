@@ -27,7 +27,7 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 999;
   .btn {
     width: 25px;
     height: 30px;
@@ -37,6 +37,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -101,9 +104,15 @@ const Skimmer = styled.img`
 `;
 const DryContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Dry = styled.img`
-  width: 12%;
+  width: 14%;
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
 `;
 
 function LymphoInfo() {

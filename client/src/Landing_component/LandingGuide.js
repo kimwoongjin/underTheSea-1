@@ -10,8 +10,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 125vh;
+  margin: auto;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: center;
@@ -21,7 +22,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    height: 105vh;
+    height: 120vh;
   }
 `;
 
@@ -33,35 +34,49 @@ const WomanImgL = styled.img`
   bottom: 20%;
 
   @media screen and (max-width: 480px) {
-    width: 50%;
-    height: 27%;
+    width: 45%;
+    height: 23%;
     bottom: 60%;
-    left: 1%;
+    left: 3%;
   }
 `;
 const WomanImgR = styled.img`
   position: absolute;
-  width: 20%;
-  height: 40%;
+  width: 16%;
+  height: 37%;
   right: 5%;
   bottom: 40%;
 
   @media screen and (max-width: 480px) {
     width: 45%;
     height: 35%;
-    top: 20%;
+    top: 12%;
     right: 3%;
   }
 `;
+
 const TextContainer = styled.div`
   position: absolute;
   left: 10%;
   bottom: 50%;
   display: flex;
   flex-direction: column;
+  font-size: max(1vw, 0.7rem);
+
+  @media screen and (max-width: 1024px) {
+    left: 5%;
+
+    .txt5 {
+      font-size: max(2vw, 0.6rem);
+      line-height: 160%;
+    }
+    .txt6 {
+      font-size: max(2vw, 1.5rem);
+    }
+  }
 
   @media screen and (max-width: 480px) {
-    bottom: 15%;
+    bottom: 22%;
     width: 60%;
     left: 22%;
 

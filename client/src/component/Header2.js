@@ -16,6 +16,7 @@ const Container = styled.div`
   height: 10vh;
   background: white;
   box-shadow: 0px 0px 5px #adb5bd;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,15 +28,23 @@ const Container = styled.div`
 const Img = styled.img`
   width: 13vw;
   margin: 0 0 1% 1%;
+  /* margin: auto; */
   cursor: pointer;
   @media screen and (max-width: 768px) {
-    width: 17vw;
-    margin-top: 1%;
+    width: 22vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 610px) {
+    width: 25vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 450px) {
+    width: 30vw;
+    margin: auto;
   }
 `;
 
 const Login = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -55,7 +64,6 @@ const Manage = styled.div`
 `;
 
 const Mypage = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -65,10 +73,10 @@ const Mypage = styled.div`
 `;
 
 const Signup = styled.div`
-  /* border: 1px solid red; */
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
+  box-sizing: border-box;
   cursor: pointer;
   background: #008eff;
   color: white;
@@ -82,13 +90,15 @@ const Signup = styled.div`
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
   }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2%;
+    box-sizing: border-box;
+  }
 `;
-
+// 이거 높이 %쓰지말고 바꿔서 크기 줄이고 피알하기
 const Signout = styled.div`
-  /* border: 1px solid red; */
   border-radius: 5px;
   padding: 10px;
-  height: 100%;
   box-sizing: border-box;
   font-family: "Kfont";
   cursor: pointer;
@@ -111,7 +121,6 @@ const Signout = styled.div`
 `;
 
 const Search = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -126,12 +135,10 @@ const Search = styled.div`
         justify-content: center;
         align-items: center;
         border-radius: 5px;
-        /* width: 90%; */
       `}
   }
 `;
 const Guide = styled.div`
-  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -143,14 +150,14 @@ const Bars = styled.div`
   position: absolute;
   display: none;
   font-size: 20px;
-  /* border: 1px solid red; */
-  top: 20px;
+  top: 30%;
   right: 32px;
   cursor: pointer;
   color: #e5e5e5;
   z-index: 999;
   @media screen and (max-width: 768px) {
     display: block;
+    top: 30%;
   }
 `;
 
@@ -167,7 +174,6 @@ const BtnContainer = styled.div`
     ${(props) =>
       props.toggle &&
       css`
-        /* border: 1px solid red; */
         margin-top: 3vh;
         margin-right: 0;
         display: flex;

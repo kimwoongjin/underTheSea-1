@@ -37,7 +37,13 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
   z-index: 999;
   border-radius: 20px;
+
+  @media screen and (max-width: 480px) {
+    width: 80%;
+    height: 75%;
+  }
 `;
+
 const CloseBtnContainer = styled.button`
   z-index: 999;
   position: absolute;
@@ -113,6 +119,10 @@ const TextForm = styled.div`
   display: flex;
   text-align: center;
   top: 5%;
+
+  @media screen and (max-width: 480px) {
+    top: 0%;
+  }
 `;
 const Text = styled.div`
   position: relative;
@@ -127,6 +137,9 @@ const NewPwd = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: 480px) {
+    top: -5%;
+  }
 `;
 const CurPwd1 = styled.input`
   margin-top: 9%;
@@ -136,6 +149,10 @@ const CurPwd1 = styled.input`
   box-sizing: border-box;
   margin-bottom: 10%;
   z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: -5%;
+  }
 `;
 const NewPwd1 = styled.input`
   width: calc(100%-10px);
@@ -144,6 +161,10 @@ const NewPwd1 = styled.input`
   margin-bottom: 2%;
   box-sizing: border-box;
   z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: -3%;
+  }
 `;
 const NewPwd2 = styled.input`
   width: calc(100%-10px);
@@ -152,6 +173,11 @@ const NewPwd2 = styled.input`
   box-sizing: border-box;
   margin-bottom: 2%;
   z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: 0%;
+    margin-top: 4%;
+  }
 `;
 const Warning = styled.div`
   width: calc(100%-10px);
@@ -161,6 +187,15 @@ const Warning = styled.div`
   position: relative;
   bottom: 14%;
   padding-left: 2%;
+
+  @media screen and (max-width: 480px) {
+    /* border: 1px solid black; */
+    line-height: 120%;
+    height: 10%;
+    top: 0%;
+    padding-left: 2%;
+    margin: 0%;
+  }
 `;
 const Warning1 = styled.div`
   width: calc(100%-10px);
@@ -170,6 +205,11 @@ const Warning1 = styled.div`
   position: relative;
   bottom: 80%;
   padding-left: 2%;
+
+  @media screen and (max-width: 480px) {
+    border: 1px solid black;
+    bottom: 55%;
+  }
 `;
 
 const Btn = styled.div`
@@ -203,6 +243,13 @@ const ConfirmBtn = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-top: 10%;
+    height: 60%;
+    font-size: 1rem;
+    padding: 0.2em 0 0.2em;
   }
 `;
 //=======================================================================
@@ -356,7 +403,7 @@ function PwdChange({ handleOff }) {
                 onChange={handleInputValue("verifyPassword")}
               />
               {onChangePasswordChk() || !currentPwd.verifyPassword ? (
-                <Warning>비밀번호가 일치합니다.</Warning>
+                <Warning className="pwd-txt">비밀번호가 일치합니다.</Warning>
               ) : (
                 <Warning>비밀번호가 일치하지 않습니다.</Warning>
               )}

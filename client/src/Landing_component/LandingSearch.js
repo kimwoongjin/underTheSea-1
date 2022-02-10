@@ -10,8 +10,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  width: 100vw;
-  height: 140vh;
+  max-width: 2000px;
+  height: 130vh;
+  margin: auto;
   /* border: 1px solid black; */
   display: flex;
   justify-content: center;
@@ -30,7 +31,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    height: 90vh;
+    height: 80vh;
   }
 `;
 
@@ -42,9 +43,9 @@ const ManImg = styled.img`
   bottom: 12%;
 
   @media screen and (max-width: 480px) {
-    width: 60%;
-    height: 43%;
-    top: 25%;
+    width: 55%;
+    height: 50%;
+    top: 13%;
     right: 3%;
   }
 `;
@@ -55,9 +56,9 @@ const CoralL = styled.img`
   top: 32%;
   right: 38%;
   @media screen and (max-width: 480px) {
-    width: 18%;
-    height: 12%;
-    top: 10%;
+    width: 19%;
+    height: 16%;
+    top: 3%;
     margin-bottom: 5%;
     right: 32%;
   }
@@ -68,30 +69,40 @@ const CoralS = styled.img`
   height: 11%;
   top: 34%;
   right: 38%;
+
+  @media screen and (max-width: 1024px) {
+  }
+
   @media screen and (max-width: 480px) {
     width: 13%;
-    height: 8%;
-    top: 10%;
+    height: 12%;
+    top: 3%;
     margin-bottom: 1%;
     right: 33%;
   }
 `;
 
-// const Fish = styled.img`
-//   position: absolute;
-//   width: 13%;
-//   height: 15%;
-//   top: 7%;
-//   right: 4%;
-// `;
-
 const TextContainer = styled.div`
+  margin: auto;
   position: absolute;
   left: 15%;
   top: 45%;
   display: flex;
   flex-direction: column;
-  /* border: 2px dashed red; */
+  font-size: max(1vw, 0.7rem);
+
+  @media screen and (max-width: 1024px) {
+    left: 10%;
+    bottom: 70%;
+
+    .txt1 {
+      font-size: max(2vw, 0.6rem);
+      line-height: 160%;
+    }
+    .txt2 {
+      font-size: max(2vw, 1.5rem);
+    }
+  }
 
   @media screen and (max-width: 480px) {
     position: absolute;
@@ -122,7 +133,7 @@ const MainText = styled.div`
   position: relative;
   bottom: 50%;
   font-weight: 900;
-  font-size: 2.5rem;
+  font-size: 2.5em;
   margin-bottom: 20px;
   color: #092011;
 `;
@@ -133,7 +144,7 @@ const SearchText = styled.div`
   text-align: left;
   z-index: 900;
   color: #092011;
-  font-size: 1.4rem;
+  font-size: 1.4em;
   line-height: 150%;
   font-family: "Kfont";
 `;
@@ -142,7 +153,7 @@ const SearchTitle = styled.div`
   /* position: absolute; */
   z-index: 900;
   font-weight: 900;
-  font-size: 1.7rem;
+  font-size: 1.7em;
   display: flex;
   position: relative;
   margin-bottom: 30%;

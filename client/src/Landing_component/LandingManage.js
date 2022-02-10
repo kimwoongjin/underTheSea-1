@@ -12,8 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 120vh;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +36,7 @@ const WomanImg = styled.img`
 
   @media screen and (max-width: 480px) {
     display: flex;
-    width: 60%;
+    width: 65%;
     height: 42%;
     top: 25%;
     left: 7%;
@@ -62,7 +63,18 @@ const TextContainer = styled.div`
   top: 5%;
   display: flex;
   flex-direction: column;
+  font-size: max(1vw, 0.7rem);
 
+  @media screen and (max-width: 1024px) {
+    left: 27%;
+
+    .text {
+      font-size: max(2vw, 0.6rem);
+    }
+    .text1 {
+      font-size: max(2vw, 1.5rem);
+    }
+  }
   @media screen and (max-width: 480px) {
     left: 0%;
     top: 35%;
