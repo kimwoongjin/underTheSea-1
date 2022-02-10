@@ -89,7 +89,7 @@ const ContainerS = styled.div`
   margin-bottom: 3%;
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 15vh;
+    height: 18vh;
   }
 `;
 const HabitatContainer = styled.div`
@@ -172,6 +172,7 @@ const LeftInfo = styled.div`
   @media screen and (max-width: 480px) {
     height: 100%;
     font-size: 0.7rem;
+    padding: 0px;
   }
 `;
 const ImgD = styled.img`
@@ -263,6 +264,7 @@ const Levelinfo = styled.div`
   margin-left: 10px;
   font-family: "Kfont";
 `;
+
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
@@ -431,6 +433,9 @@ const CalendarBtn = styled.button`
   width: 40px;
   height: 30px;
   border-style: none;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Span = styled.span`
@@ -482,7 +487,7 @@ const MobileTd = styled.td`
   height: 13vh;
   @media screen and (max-width: 480px) {
     width: 70vw;
-    height: 30vh;
+    height: 40vh;
     justify-content: space-around;
   }
 `;
