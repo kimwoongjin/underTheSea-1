@@ -32,7 +32,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  max-width: 1450px;
+  max-width: 2000px;
   height: 40vh;
   @media screen and (max-width: 480px) {
     height: 20vh;
