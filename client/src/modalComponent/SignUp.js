@@ -52,6 +52,12 @@ const Title = styled.div`
   padding-bottom: 10px;
   border-bottom: 2px solid #108dee;
   margin-bottom: 30px;
+  @media screen and (max-width: 1108px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 830px) {
+    font-size: 1.25rem;
+  }
 `;
 const Form = styled.form`
   width: 80%;
@@ -225,7 +231,7 @@ function SignUp() {
         .then(() => {
           dispatch(signupAction);
           dispatch(modalOff);
-          navigate("/mypage");
+          alert("회원가입에 성공하셨습니다!");
         })
         .catch((res) => {
           setErrorMsg("이미 사용중인 이메일입니다");

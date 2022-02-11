@@ -2,6 +2,7 @@ const { feeds, containers } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+  console.log("피드요청 오니?");
   const userInfo = isAuthorized(req);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
