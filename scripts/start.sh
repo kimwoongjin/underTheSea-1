@@ -13,6 +13,7 @@ export BUCKET_NAME=$(aws ssm get-parameters --region ap-northeast-2 --names BUCK
 export BUCKET_REGION=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_REGION --query Parameters[0].Value | sed 's/"//g')
 export BUCKET_ACCESS_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_ACCESS_KEY --query Parameters[0].Value | sed 's/"//g')
 export BUCKET_SECRET_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_SECRET_KEY --query Parameters[0].Value | sed 's/"//g')
+export REACT_APP_API_URL=$(aws ssm get-parameters --region ap-northeast-2 --names REACT_APP_API_URL --query Parameters[0].Value | sed 's/"//g')
 
 sudo kill -9 $(sudo lsof -t -i:80)
 authbind --deep pm2 start index.js
