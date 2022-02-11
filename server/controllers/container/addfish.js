@@ -54,11 +54,6 @@ module.exports = async (req, res) => {
           .redirect(
             `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
           );
-
-        // return res.status(201).json({
-        //   data: { container_fish },
-        //   message: "The fish is successfully added",
-        // });
       }
     }
   }
