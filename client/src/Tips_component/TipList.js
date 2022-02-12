@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDoubleRight,
-  faBullseye,
-  faFish,
-} from "@fortawesome/free-solid-svg-icons";
-import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
+import { faFish } from "@fortawesome/free-solid-svg-icons";
 
 const TipContainer = styled.div`
   position: relative;
