@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/add", controllers.addcon);
 router.get("/:container_id/:month", controllers.coninfo);
-router.get("/info/:container_id/:month", controllers.coninfo);
+router.get("/:container_id/:month", controllers.coninfo);
 router.delete("/info/:container_id/:month", controllers.coninfo);
 router.patch("/info/:container_id/:month", controllers.coninfo);
 router.post("/info/:container_id/:month", controllers.coninfo);

@@ -9,7 +9,7 @@ const { isAuthorized } = require("../tokenFunction");
 const sequelize = require("sequelize");
 
 module.exports = async (req, res) => {
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  console.log("겟컨인포가 요청이가나?");
   const userInfo = isAuthorized(req);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });

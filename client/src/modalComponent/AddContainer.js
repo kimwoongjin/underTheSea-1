@@ -31,6 +31,14 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  @media screen and (max-width: 1100px) {
+    width: 70%;
+    height: 90%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 90%;
+    height: 70%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -215,21 +223,21 @@ function AddContainer() {
             <MidInputContainer>
               <SizeInput
                 name="width"
-                placeholder="가로"
+                placeholder="가로(cm)"
                 type="number"
                 onChange={handleInputValue}
                 required
               />
               <SizeInput
                 name="height"
-                placeholder="세로"
+                placeholder="세로(cm)"
                 type="number"
                 onChange={handleInputValue}
                 required
               />
               <SizeInput
                 name="vertical"
-                placeholder="높이(수위)"
+                placeholder="높이(수위, cm)"
                 type="number"
                 onChange={handleInputValue}
                 required

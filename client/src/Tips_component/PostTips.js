@@ -47,6 +47,9 @@ const TitleContainer = styled.div`
   justify-content: center;
   /* border: 1px solid green; */
   position: relative;
+  @media screen and (max-width: 1108px) {
+    width: 50%;
+  }
 `;
 
 const Title = styled.div`
@@ -108,6 +111,9 @@ const BtnL = styled.button`
     /* filter: brightness(95%); */
     background: #cccccc;
   }
+  @media screen and (max-width: 900px) {
+    width: 20%;
+  }
 `;
 
 const Btn = styled.button`
@@ -128,6 +134,9 @@ const Btn = styled.button`
     /* filter: brightness(95%); */
     background: #cccccc;
   }
+  @media screen and (max-width: 900px) {
+    width: 20%;
+  }
 `;
 
 const BtnR = styled.button`
@@ -147,6 +156,9 @@ const BtnR = styled.button`
   :hover {
     /* filter: brightness(95%); */
     background: #cccccc;
+  }
+  @media screen and (max-width: 900px) {
+    width: 20%;
   }
 `;
 
@@ -282,7 +294,7 @@ function PostTips() {
         <TopCover>
           <Img src="/게시판베너사진.jpeg"></Img>
           <TitleContainer>
-            <Title>정보공유 게시판</Title>
+            <Title>Board</Title>
           </TitleContainer>
           <SubTitle>여러분의 지식을 나눠주세요!</SubTitle>
         </TopCover>
