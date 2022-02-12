@@ -11,12 +11,10 @@ import Footer from "../component/Footer";
 const Container = styled.div`
   width: 100vw;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Kfont";
 `;
 
 const TopCover = styled.div`
@@ -26,9 +24,11 @@ const TopCover = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  /* border-bottom: 2px solid #808080; */
   flex-direction: column;
   overflow: hidden;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Img = styled.img`
@@ -41,11 +41,8 @@ const Img = styled.img`
 `;
 
 const TitleContainer = styled.div`
-  width: 30%;
+  width: 20%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* border: 1px solid green; */
   position: relative;
   @media screen and (max-width: 1108px) {
     width: 50%;
@@ -54,23 +51,22 @@ const TitleContainer = styled.div`
 
 const Title = styled.div`
   width: 100%;
-  /* border: 1px solid blue; */
-  font-size: 2.2rem;
-  font-weight: 900;
-  font-family: "Kfont";
-  padding-bottom: 5px;
+  font-size: 3rem;
+  font-weight: bold;
   margin-top: 10%;
+  padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
+  @media screen and (max-width: 1108px) {
+    font-size: 2rem;
+  }
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
-  /* color: #4a4a4a; */
   font-size: 1.25rem;
   margin-bottom: 50px;
   font-weight: 500;
   color: #808080;
-  /* border: 1px solid red; */
 `;
 
 const PostContainer = styled.div`
@@ -83,24 +79,32 @@ const PostContainer = styled.div`
   border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
+  @media screen and (max-width: 480px) {
+    margin: 0 1em 0 1em;
+    border-style: none;
+    width: 95%;
+  }
 `;
 
 const BtnContainer = styled.div`
   width: 70%;
   margin-top: 45px;
   display: flex;
+  gap: 8px;
   justify-content: flex-end;
-  /* border: 1px dashed darkcyan; */
+  @media screen and (max-width: 480px) {
+    margin: 3% 1em 0 0;
+    width: 100%;
+  }
 `;
 
 const BtnL = styled.button`
-  width: 7%;
+  width: 10%;
   height: 30px;
   box-sizing: border-box;
   align-items: center;
-  margin: 0 8px;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   border-style: none;
   border-radius: 4px;
@@ -111,18 +115,19 @@ const BtnL = styled.button`
     /* filter: brightness(95%); */
     background: #cccccc;
   }
-  @media screen and (max-width: 900px) {
-    width: 20%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    width: 13%;
+    height: 25px;
   }
 `;
 
 const Btn = styled.button`
-  width: 7%;
+  width: 10%;
   height: 30px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   box-sizing: border-box;
   align-items: center;
-  margin: 0 8px;
   color: white;
   font-weight: bold;
   border-style: none;
@@ -134,18 +139,19 @@ const Btn = styled.button`
     /* filter: brightness(95%); */
     background: #cccccc;
   }
-  @media screen and (max-width: 900px) {
-    width: 20%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    width: 13%;
+    height: 25px;
   }
 `;
 
 const BtnR = styled.button`
-  width: 7%;
+  width: 10%;
   height: 30px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   box-sizing: border-box;
   align-items: center;
-  margin: 0 5px;
   color: black;
   font-weight: bold;
   border-style: none;
@@ -157,8 +163,10 @@ const BtnR = styled.button`
     /* filter: brightness(95%); */
     background: #cccccc;
   }
-  @media screen and (max-width: 900px) {
-    width: 20%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    width: 13%;
+    height: 25px;
   }
 `;
 

@@ -4,6 +4,7 @@ import React from "react";
 import Header2 from "../component/Header2";
 
 const Container = styled.div`
+  margin: auto;
   max-width: 2000px;
   height: 100vh;
   display: flex;
@@ -15,6 +16,7 @@ const MiddleContainer = styled.div`
   overflow: hidden;
   max-width: 2000px;
   @media screen and (max-width: 768px) {
+    height: 87vh;
     flex-direction: column;
   }
 `;
@@ -187,8 +189,8 @@ function Guide() {
   };
   return (
     <>
+      <Header2></Header2>
       <Container>
-        <Header2></Header2>
         <MiddleContainer>
           <Seawater onClick={goToSeawater}>
             <BigBox>
