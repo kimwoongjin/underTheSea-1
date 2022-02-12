@@ -12,7 +12,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
+  margin: auto;
   height: 10vh;
   background: #d2f7ff;
   box-shadow: 0px 0px 5px #adb5bd;
@@ -270,12 +271,12 @@ function Header2() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search toggle={toggle}>검색</Search>
         </Link>
-        <Link
+        {/* <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/nearbyaquarium"
         >
           <Aquarium>수족관</Aquarium>
-        </Link>
+        </Link> */}
 
         {isLogin ? (
           <>

@@ -24,27 +24,15 @@ const BigBox = styled.div`
   height: 100%;
   object-fit: cover;
   :hover .overlay {
-    height: 100%;
+    height: 80%;
   }
   :hover .image {
     opacity: 1;
     transform: scale(1.05);
     transition: all 300ms ease-in;
   }
-`;
 
-const BigBox2 = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  :hover .overlay {
-    bottom: 0;
-    height: 100%;
-  }
-  :hover .image {
-    opacity: 1;
-    transform: scale(1.05);
-    transition: all 300ms ease-in;
+  @media screen and (max-width: 480px) {
   }
 `;
 
@@ -60,19 +48,10 @@ const MiddleBox = styled.div`
   height: 0;
   transition: 1s ease;
   /* transition-delay: 0.5s; */
-`;
 
-const MiddleBox2 = styled.div`
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0);
-  overflow: hidden;
-  width: 100%;
-  height: 0;
-  transition: 1s ease;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const TextForm = styled.div`
@@ -148,11 +127,7 @@ const SeaImg = styled.img`
   height: 100%;
   opacity: 0.4;
 `;
-const FreshImg = styled.img`
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-`;
+
 const Freshwater = styled.div`
   width: 33vw;
   height: 90vh;

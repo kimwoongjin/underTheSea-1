@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const BoxContainer = styled.div`
-  max-width: 1450px;
+  max-width: 2000px;
   margin: auto;
   @media screen and (max-width: 480px) {
     width: 100%;
@@ -30,42 +30,49 @@ const UserInfo = styled.div`
 
   .Box {
     width: 100%;
-    height: 52vh;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     background: #ace0ff;
+    align-items: center;
+    padding: 6em 0 6em;
   }
 
   .userImg {
     position: relative;
-    top: 18%;
-    left: 15%;
-    width: 28vw;
-    height: 35vh;
+    width: 17%;
+    /* border: 1px solid black; */
+    display: flex;
+    left: 27%;
   }
 
   .img {
     width: 100%;
     height: 100%;
-    padding: 0;
   }
+  .user {
+    width: 30%;
+    height: 30%;
+    /* border: 1px solid red; */
+    margin-top: 5%;
+    position: relative;
+    left: 29%;
+  }
+
   .userGreeting {
     position: relative;
-    width: 30vw;
-    height: 5vh;
+    width: 100%;
+    height: 15%;
     font-size: 1.7em;
-    left: 40%;
-    bottom: 10%;
     font-weight: bold;
-    padding-left: 2%;
+    padding-bottom: 0.2em;
+    /* border: 1px solid red; */
   }
   .userNotice {
     position: relative;
-    width: 30vw;
-    height: 5vh;
-    left: 40%;
-    bottom: 9%;
-    padding-left: 2%;
+    width: 100%;
+    height: 10%;
+
+    /* border: 1px solid black; */
   }
   @media screen and (max-width: 1024px) {
     .userGreeting {
@@ -87,31 +94,25 @@ const UserInfo = styled.div`
   }
   @media screen and (max-width: 480px) {
     .Box {
-      width: 100%;
-      height: 40vh;
+      width: 101%;
+      height: 100%;
+      padding: 2em 0 2em;
     }
 
     .userImg {
       position: relative;
-      top: 25%;
-      width: 40vw;
-      height: 20vh;
-      left: 8%;
+      width: 30%;
+      left: 15%;
     }
-
-    .img {
+    .user {
+      width: 40%;
+      left: 20%;
     }
     .userGreeting {
-      top: -18%;
-      margin-left: 7%;
-      font-size: 0.7em;
-      width: 40%;
+      font-size: 0.8rem;
     }
     .userNotice {
-      top: -19%;
-      width: 35%;
-      margin-left: 7%;
-      font-size: 0.6em;
+      font-size: 0.6rem;
     }
   }
 `;
@@ -298,11 +299,13 @@ function Mypage() {
         <UserInfo>
           <div className="Box">
             <div className="userImg">
-              <img className="img" src="유저1.png"></img>
+              <img className="img" src="유저3.png"></img>
             </div>
-            <div className="userGreeting">{userName}님 환영합니다!</div>
-            <div className="userNotice">
-              마이페이지에서는 간략한 사용자정보를 조회할 수 있습니다.
+            <div className="user">
+              <div className="userGreeting">{userName}님 환영합니다!</div>
+              <div className="userNotice">
+                마이페이지에서는 간략한 사용자정보를 조회할 수 있습니다.
+              </div>
             </div>
           </div>
         </UserInfo>

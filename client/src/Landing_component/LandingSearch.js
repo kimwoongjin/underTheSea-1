@@ -10,10 +10,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  max-width: 1450px;
-  height: 130vh;
+  max-width: 2000px;
+  height: 115vh;
   margin: auto;
-  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +30,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    height: 80vh;
+    height: 90vh;
   }
 `;
 
@@ -44,8 +43,8 @@ const ManImg = styled.img`
 
   @media screen and (max-width: 480px) {
     width: 55%;
-    height: 50%;
-    top: 13%;
+    height: 45%;
+    top: 8%;
     right: 3%;
   }
 `;
@@ -55,10 +54,11 @@ const CoralL = styled.img`
   height: 16%;
   top: 32%;
   right: 38%;
+
   @media screen and (max-width: 480px) {
     width: 19%;
-    height: 16%;
-    top: 3%;
+    height: 14%;
+    top: -3%;
     margin-bottom: 5%;
     right: 32%;
   }
@@ -75,8 +75,8 @@ const CoralS = styled.img`
 
   @media screen and (max-width: 480px) {
     width: 13%;
-    height: 12%;
-    top: 3%;
+    height: 10%;
+    top: -3%;
     margin-bottom: 1%;
     right: 33%;
   }
@@ -107,8 +107,9 @@ const TextContainer = styled.div`
   @media screen and (max-width: 480px) {
     position: absolute;
     width: 70%;
+    height: 35%;
     left: 15%;
-    top: 73%;
+    bottom: 0%;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -116,16 +117,14 @@ const TextContainer = styled.div`
 
     .txt1 {
       font-size: 0.8rem;
-      line-height: 120%;
       text-align: center;
-      line-height: 150%;
     }
     .txt2 {
       font-size: 1rem;
       display: flex;
       text-align: center;
       position: relative;
-      left: 30%;
+      justify-content: center;
     }
   }
 `;
@@ -136,6 +135,10 @@ const MainText = styled.div`
   font-size: 2.5em;
   margin-bottom: 20px;
   color: #092011;
+
+  @media screen and (max-width: 480px) {
+    top: 0%;
+  }
 `;
 
 const SearchText = styled.div`
@@ -144,7 +147,7 @@ const SearchText = styled.div`
   text-align: left;
   z-index: 900;
   color: #092011;
-  font-size: 1.4em;
+  font-size: 1.3rem;
   line-height: 150%;
   font-family: "Kfont";
 `;
@@ -153,7 +156,7 @@ const SearchTitle = styled.div`
   /* position: absolute; */
   z-index: 900;
   font-weight: 900;
-  font-size: 1.7em;
+  font-size: 1.7rem;
   display: flex;
   position: relative;
   margin-bottom: 30%;
@@ -186,7 +189,7 @@ function LandingSearch() {
         toggleActions: "play none restart pause",
       },
     });
-    tl.from(".manImg", { opacity: 0, x: -100, duration: 1 });
+    tl.from(".manImg", { opacity: 0, x: 100, duration: 1 });
   }, []);
 
   return (
