@@ -23,7 +23,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 25%;
-  height: 55%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -58,6 +58,12 @@ const Title = styled.div`
   padding-bottom: 10px;
   border-bottom: 2px solid #108dee;
   margin-bottom: 30px;
+  @media screen and (max-width: 830px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 623px) {
+    font-size: 1.25rem;
+  }
 `;
 const Form = styled.form`
   width: 80%;
@@ -93,7 +99,7 @@ const LoginBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
-
+  box-sizing: border-box;
   :hover::before {
     content: "";
     position: absolute;

@@ -89,7 +89,7 @@ const ContainerS = styled.div`
   margin-bottom: 3%;
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 18vh;
+    height: 20vh;
   }
 `;
 const HabitatContainer = styled.div`
@@ -171,7 +171,7 @@ const LeftInfo = styled.div`
   }
   @media screen and (max-width: 480px) {
     height: 100%;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     padding: 0px;
   }
 `;
@@ -356,6 +356,7 @@ const ProgressBar = styled.div`
   border: 2px solid #108dee;
   @media screen and (max-width: 480px) {
     width: 70%;
+    margin-bottom: 5px;
   }
 `;
 const Progress = styled.div`
@@ -417,6 +418,9 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const Control = styled.div`
@@ -433,16 +437,22 @@ const CalendarBtn = styled.button`
   width: 40px;
   height: 30px;
   border-style: none;
-  @media screen and (max-width: 480px) {
-    display: none;
-  }
+  /* @media screen and (max-width: 480px) {
+    border-bottom: 1px solid black;
+  } */
 `;
 
 const Span = styled.span`
   font-size: 1.5rem;
 `;
 
-const Table = styled.table``;
+const Table = styled.table`
+  @media screen and (max-width: 480px) {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    width: 100%;
+  }
+`;
 
 const Tbody = styled.tbody``;
 
@@ -450,7 +460,7 @@ const Tr = styled.tr`
   display: flex;
   flex-direction: row;
 `;
-const Number = styled.span`
+const DayNumber = styled.span`
   box-sizing: border-box;
   padding-left: 5px;
   display: flex;
@@ -458,6 +468,26 @@ const Number = styled.span`
   height: 20px;
   @media screen and (max-width: 480px) {
     font-size: 1.25rem;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
+    display: none;
+  }
+`;
+const MobileNumber = styled.span`
+  box-sizing: border-box;
+  padding-left: 5px;
+  width: 100%;
+  height: 20px;
+  display: none;
+  @media screen and (max-width: 480px) {
+    font-size: 1.25rem;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
   }
 `;
 
@@ -471,23 +501,25 @@ const Td = styled.td`
   width: 6.8vw;
   height: 13vh;
   @media screen and (max-width: 480px) {
-    display: none;
+    width: 100%;
+    border-style: none;
   }
 `;
 
 const MobileTd = styled.td`
-  display: flex;
-  border: 1px solid black;
-  background: white;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-  font-size: 1rem;
-  width: 6.8vw;
-  height: 13vh;
+  display: none;
   @media screen and (max-width: 480px) {
-    width: 70vw;
-    height: 40vh;
+    display: flex;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    background: white;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 1rem;
+    width: 70%;
+    padding: 5px;
+    box-sizing: border-box;
     justify-content: space-around;
   }
 `;
@@ -505,7 +537,10 @@ const WeekContainer = styled.div`
     color: blue;
   }
   @media screen and (max-width: 480px) {
-    display: none;
+    width: 95%;
+  }
+  @media screen and (max-width: 350px) {
+    width: 95%;
   }
 `;
 const Day = styled.div`
@@ -514,6 +549,12 @@ const Day = styled.div`
   text-align: center;
   width: 7vw;
   height: 3vh;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const FoodIconContainer = styled.div`
@@ -521,6 +562,19 @@ const FoodIconContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 40%;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+const FoodIconContainer2 = styled.div`
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+  @media screen and (max-width: 480px) {
+    display: flex;
+  }
 `;
 
 const FoodInnerContainer = styled.div`
@@ -537,6 +591,25 @@ const ExWaterRecord = styled.div`
   border: 1px solid gray;
   border-radius: 4px;
   margin-top: 2px;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+const ExWaterRecord2 = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 90%;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 2px;
+  @media screen and (max-width: 480px) {
+    display: flex;
+    margin: 10px 0;
+  }
 `;
 
 const FoodTypeAndNum = styled.div`
@@ -571,7 +644,6 @@ function ManageDetail({ condata, setCondata }) {
   let finalList = JSON.parse(localStorage.getItem("finalList"));
   const [progressBar, setProgressBar] = useState(0);
   const [getMoment, setMoment] = useState(moment());
-
   const [exwaterInfo, setExwaterInfo] = useState({
     container_id,
     amount: "",
@@ -580,7 +652,23 @@ function ManageDetail({ condata, setCondata }) {
     container_id,
     type: "",
   });
-
+  const [selectDate, setSelectDate] = useState("");
+  const handleMobileDate = (e) => {
+    let date = new Date();
+    let year = date.getFullYear();
+    year = String(year).slice(2);
+    let month = date.getMonth() + 1;
+    let day = e.target.innerText;
+    if (month < 10) {
+      month = "0" + String(month);
+    }
+    if (Number(day) < 10) {
+      day = "0" + day;
+    }
+    let result = year + month + day;
+    console.log("결과", result);
+    setSelectDate(result);
+  };
   const dispatch = useDispatch();
   const state = useSelector((state) => state.modalReducer);
   const {
@@ -627,6 +715,7 @@ function ManageDetail({ condata, setCondata }) {
         }
       )
       .then((response) => {
+        console.log("업데이트컨인포 되는거?", response);
         localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         setCondata(response.data.data);
         UpdateFinalList();
@@ -661,6 +750,8 @@ function ManageDetail({ condata, setCondata }) {
         withCredentials: true,
       }
     );
+    console.log("container 아이디", container_id);
+    console.log("응답", response);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
@@ -821,10 +912,16 @@ function ManageDetail({ condata, setCondata }) {
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
-                  <MobileTd key={index}>
-                    <Number style={{ color: "#108dee" }}>
+                  <Td key={index}>
+                    <DayNumber style={{ color: "#108dee" }}>
                       {days.format("D")}
-                    </Number>
+                    </DayNumber>
+                    <MobileNumber
+                      style={{ color: "#108dee" }}
+                      onClick={handleMobileDate}
+                    >
+                      {days.format("D")}
+                    </MobileNumber>
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
@@ -866,13 +963,16 @@ function ManageDetail({ condata, setCondata }) {
                     <ExWaterRecord>
                       {exWaterObj[days.format("YYMMDD")]}L
                     </ExWaterRecord>
-                  </MobileTd>
+                  </Td>
                 );
               } else if (finalList[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때
                 return (
                   <Td key={index}>
-                    <Number>{days.format("D")}</Number>
+                    <DayNumber>{days.format("D")}</DayNumber>
+                    <MobileNumber onClick={handleMobileDate}>
+                      {days.format("D")}
+                    </MobileNumber>
                     <FoodIconContainer>
                       <FoodInnerContainer>
                         <FoodTypeAndNum>
@@ -916,9 +1016,15 @@ function ManageDetail({ condata, setCondata }) {
                 //오늘
                 return (
                   <Td key={index}>
-                    <Number style={{ color: "#108dee" }}>
+                    <DayNumber style={{ color: "#108dee" }}>
                       {days.format("D")}
-                    </Number>
+                    </DayNumber>
+                    <MobileNumber
+                      style={{ color: "#108dee" }}
+                      onClick={handleMobileDate}
+                    >
+                      {days.format("D")}
+                    </MobileNumber>
                   </Td>
                 );
               } else if (days.format("MM") !== today.format("MM")) {
@@ -930,14 +1036,20 @@ function ManageDetail({ condata, setCondata }) {
                       color: "#e5e5e5",
                     }}
                   >
-                    <Number>{days.format("D")}</Number>
+                    <DayNumber>{days.format("D")}</DayNumber>
+                    <MobileNumber onClick={handleMobileDate}>
+                      {days.format("D")}
+                    </MobileNumber>
                   </Td>
                 );
               } else {
                 return (
                   //모든 경우를 제외한 평범한 날
                   <Td key={index}>
-                    <Number>{days.format("D")}</Number>
+                    <DayNumber>{days.format("D")}</DayNumber>
+                    <MobileNumber onClick={handleMobileDate}>
+                      {days.format("D")}
+                    </MobileNumber>
                   </Td>
                 );
               }
@@ -1000,7 +1112,7 @@ function ManageDetail({ condata, setCondata }) {
   //
   // 함수 실행 부분
   useEffect(() => {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     UpdateConInfo();
     UpdateProgressBar();
     UpdateFinalList();
@@ -1119,9 +1231,51 @@ function ManageDetail({ condata, setCondata }) {
             <Tbody>{calendarArr()}</Tbody>
           </Table>
         </CalendarContainer>
-
+        <MobileTd>
+          <MobileNumber onClick={handleMobileDate}>
+            {selectDate.slice(2, 4)}월 {selectDate.slice(4)}일
+          </MobileNumber>
+          <FoodIconContainer2>
+            <FoodInnerContainer>
+              <FoodTypeAndNum>
+                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
+                <FeedingNum>
+                  {finalList[selectDate] === undefined
+                    ? 0
+                    : finalList[selectDate][0]}
+                </FeedingNum>
+              </FoodTypeAndNum>
+              <FoodTypeAndNum>
+                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
+                <FeedingNum>
+                  {finalList[selectDate] === undefined
+                    ? 0
+                    : finalList[selectDate][1]}
+                </FeedingNum>
+              </FoodTypeAndNum>
+            </FoodInnerContainer>
+            <FoodInnerContainer>
+              <FoodTypeAndNum>
+                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
+                <FeedingNum>
+                  {finalList[selectDate] === undefined
+                    ? 0
+                    : finalList[selectDate][2]}
+                </FeedingNum>
+              </FoodTypeAndNum>
+              <FoodTypeAndNum>
+                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
+                <FeedingNum>
+                  {finalList[selectDate] === undefined
+                    ? 0
+                    : finalList[selectDate][3]}
+                </FeedingNum>
+              </FoodTypeAndNum>
+            </FoodInnerContainer>
+          </FoodIconContainer2>
+          <ExWaterRecord2>{exWaterObj[selectDate]}L</ExWaterRecord2>
+        </MobileTd>
         {/* ———————————————————— */}
-
         {/* <ManageDetCard condata={condata} /> */}
       </OuterContainer>
       <FishCardContainer>
