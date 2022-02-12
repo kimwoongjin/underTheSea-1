@@ -10,13 +10,15 @@ import TipList from "./TipList";
 
 const Container = styled.div`
   position: relative;
-  width: 100%;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
 const TopCover = styled.div`
   width: 100%;
   height: 40vh;
@@ -67,10 +69,14 @@ const SubTitle = styled.div`
 `;
 
 const BtnContainer = styled.div`
+  position: relative;
   width: 70%;
   margin-top: 3%;
   display: flex;
   justify-content: flex-end;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const Btn = styled.button`
@@ -87,6 +93,11 @@ const Btn = styled.button`
   :hover {
     filter: brightness(95%);
   }
+  @media screen and (max-width: 480px) {
+    width: 60px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
 `;
 
 const TipListContainer = styled.div`
@@ -99,6 +110,10 @@ const TipListContainer = styled.div`
   border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    border-style: none;
+  }
 `;
 
 const TipListHeadContainer = styled.div`
@@ -109,7 +124,7 @@ const TipListHeadContainer = styled.div`
   /* border: 1px solid red; */
   border-bottom: 3px solid #a7d9ff;
   font-weight: bold;
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     /* height: 50px; */
     /* border: 1px solid red; */
     display: none;
@@ -121,7 +136,7 @@ const TipListTitle = styled.div`
   margin-bottom: 30px;
   text-align: start;
   /* border: 1px solid red; */
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
   }
 `;
 
@@ -130,7 +145,7 @@ const TipListWriter = styled.div`
   margin-bottom: 30px;
   text-align: start;
   /* border: 1px solid red; */
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -140,7 +155,7 @@ const TipListDate = styled.div`
   margin-bottom: 30px;
   text-align: center;
   /* border: 1px solid red; */
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -151,6 +166,10 @@ const PageBtnForm = styled.form`
   justify-content: center;
   padding-top: 30px;
   margin-bottom: 30px;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
 `;
 
 const PageBtn = styled.div`
