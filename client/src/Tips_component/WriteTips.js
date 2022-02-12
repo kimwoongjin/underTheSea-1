@@ -8,11 +8,13 @@ import Footer from "../component/Footer";
 const Container = styled.div`
   width: 100vw;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    height: 50%;
+  }
 `;
 
 const TopCover = styled.div`
@@ -23,7 +25,6 @@ const TopCover = styled.div`
   align-items: center;
   position: relative;
   flex-direction: column;
-  /* box-shadow: 0px 2px 10px gray; */
 `;
 
 const TopImg = styled.img`
@@ -41,19 +42,22 @@ const TitleContainer = styled.div`
   margin-top: 5%;
   /* border: 1px solid green; */
   position: relative;
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const Title = styled.div`
   width: 100%;
-  /* border: 1px solid blue; */
-  /* font-family: "Kfont"; */
   font-size: 3rem;
   font-weight: bold;
   margin-top: 40px;
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  /* border-bottom: 5px solid #108dee; */
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 const SubTitle = styled.div`
   width: 70%;
@@ -63,7 +67,6 @@ const SubTitle = styled.div`
   font-size: 1.25rem;
   margin-bottom: 50px;
   text-align: center;
-  /* border: 1px solid red; */
 `;
 
 const SubTitle2 = styled.div`
@@ -74,7 +77,9 @@ const SubTitle2 = styled.div`
   font-size: 1.25rem;
   margin-bottom: 50px;
   text-align: center;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TipRules = styled.div`
@@ -83,6 +88,9 @@ const TipRules = styled.div`
   color: black;
   background-color: #e3e3e2;
   text-align: start;
+  @media screen and (max-width: 768px) {
+    width: 78%;
+  }
 `;
 // ------------------------------------------------------
 
@@ -94,7 +102,10 @@ const InputContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 2%;
-  /* border: 1px solid black; */
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    height: 80vh;
+  }
 `;
 
 const TitleInput = styled.input`
@@ -108,6 +119,9 @@ const TitleInput = styled.input`
   font-size: 1.3rem;
   margin-bottom: 1%;
   outline: none;
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 //
 const ImageInputForm = styled.label`
@@ -154,6 +168,10 @@ const TipBtnBox = styled.div`
   display: flex;
   justify-content: flex-end;
   border-bottom: 3px solid #808080;
+  @media screen and (max-width: 768px) {
+    margin-top: 10%;
+    width: 84%;
+  }
 `;
 
 const StringBox = styled.div`
@@ -193,6 +211,9 @@ const Btn = styled.button`
   :hover {
     background: #cccccc;
   }
+  @media screen and (max-width: 768px) {
+    width: 40%;
+  }
 `;
 const BtnR = styled.button`
   width: 12%;
@@ -211,6 +232,9 @@ const BtnR = styled.button`
   cursor: pointer;
   :hover {
     background: #cccccc;
+  }
+  @media screen and (max-width: 768px) {
+    width: 40%;
   }
 `;
 

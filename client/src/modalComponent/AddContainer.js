@@ -31,6 +31,14 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  @media screen and (max-width: 1100px) {
+    width: 70%;
+    height: 90%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 90%;
+    height: 70%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -83,6 +91,7 @@ const Input = styled.input`
   width: 100%;
   height: 30px;
 `;
+
 const SizeInput = styled.input`
   box-sizing: border-box;
   padding: 5px;
@@ -134,9 +143,9 @@ const Selection = styled.label`
 const SelImg = styled.img`
   display: flex;
   justify-content: space-evenly;
-  width: 80px;
+  width: 100%;
   @media screen and (max-width: 768px) {
-    width: 40px;
+    width: 100%;
   }
 `;
 
@@ -214,21 +223,21 @@ function AddContainer() {
             <MidInputContainer>
               <SizeInput
                 name="width"
-                placeholder="가로"
+                placeholder="가로(cm)"
                 type="number"
                 onChange={handleInputValue}
                 required
               />
               <SizeInput
                 name="height"
-                placeholder="세로"
+                placeholder="세로(cm)"
                 type="number"
                 onChange={handleInputValue}
                 required
               />
               <SizeInput
                 name="vertical"
-                placeholder="높이(수위)"
+                placeholder="높이(수위, cm)"
                 type="number"
                 onChange={handleInputValue}
                 required
@@ -248,7 +257,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/11`}
                   alt="Type A"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -261,7 +269,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/12`}
                   alt="Type B"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -275,7 +282,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/13`}
                   alt="Type C"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -288,7 +294,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/14`}
                   alt="Type D"
                 />
-
                 <input
                   type="radio"
                   name="type"

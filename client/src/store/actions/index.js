@@ -24,6 +24,7 @@ import {
   LYMPHO_MODAL_ON,
   WORD_MODAL_ON,
   LEVEL_UP_MODAL_ON,
+  MOBILEMANAGEDETAIL_MODAL_ON,
   MODAL_OFF,
   PWD_MODAL_ON,
   HTM_MODAL_ON,
@@ -111,6 +112,9 @@ export const deadfishModalOnAction = {
 };
 export const wordModalOnAction = {
   type: WORD_MODAL_ON,
+};
+export const mobileDetailModalOnAction = {
+  type: MOBILEMANAGEDETAIL_MODAL_ON,
 };
 // export const getContainerInfoAction = async () => {
 //   const conInfo = await coninfoApi();

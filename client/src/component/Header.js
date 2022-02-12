@@ -13,7 +13,10 @@ import { useState } from "react";
 
 const Container = styled.div`
   max-width: 2000px;
+<<<<<<< HEAD
   margin: auto;
+=======
+>>>>>>> eded4ff687265e14004037e3165ba91e39c04d9c
   height: 10vh;
   background: #d2f7ff;
   box-shadow: 0px 0px 5px #adb5bd;

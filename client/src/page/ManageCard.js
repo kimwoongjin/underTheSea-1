@@ -24,6 +24,9 @@ const CardText = styled.div`
   font-size: 1.2rem;
   text-align: center;
   color: #828282;
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const CardContainer = styled.div`
@@ -34,7 +37,8 @@ const CardContainer = styled.div`
   margin: 1% 0 15%;
   flex-wrap: wrap;
   @media screen and (max-width: 1200px) {
-    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 30px;
   }
 `;
 
@@ -87,6 +91,9 @@ const Btn = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
+  }
+  @media screen and (max-width: 768px) {
+    width: 80px;
   }
 `;
 
