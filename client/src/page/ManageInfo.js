@@ -104,7 +104,10 @@ const Name = styled.div`
   text-align: center;
   font-family: "Kfont";
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  position: relative;
+  top: -10%;
+  margin-bottom: 5%;
 `;
 
 const TextCover = styled.div`
@@ -127,10 +130,9 @@ const Text = styled.div`
 
 const Size = styled.div`
   display: flex;
-  width: 57%;
+  width: 68%;
   justify-content: center;
   font-family: "Kfont";
-  font-weight: 600;
   border-radius: 5px;
   background: #e1e1e1;
   @media screen and (max-width: 768px) {
@@ -140,10 +142,9 @@ const Size = styled.div`
 
 const Theme = styled.div`
   display: flex;
-  width: 57%;
+  width: 68%;
   justify-content: center;
   font-family: "Kfont";
-  font-weight: 600;
   border-radius: 5px;
   padding-bottom: 1%;
   background: #e1e1e1;

@@ -10,13 +10,15 @@ import TipList from "./TipList";
 
 const Container = styled.div`
   position: relative;
-  width: 100%;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
 const TopCover = styled.div`
   width: 100%;
   height: 40vh;

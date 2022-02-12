@@ -27,7 +27,7 @@ const BigBox = styled.div`
   height: 100%;
   object-fit: cover;
   :hover .overlay {
-    height: 100%;
+    height: 80%;
   }
   :hover .image {
     opacity: 1;
@@ -67,17 +67,8 @@ const TextForm = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  /* -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); */
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -230%);
   text-align: center;
-  @media screen and (max-width: 480px) {
-    /* -webkit-transform: none;
-    -ms-transform: none; */
-    /* transform: (none, none); */
-    position: relative;
-    color: black;
-  }
 `;
 
 const TextForm2 = styled.div`
@@ -87,9 +78,7 @@ const TextForm2 = styled.div`
   font-weight: 800;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -250%);
+  transform: translate(-50%, -450%);
   text-align: center;
 `;
 

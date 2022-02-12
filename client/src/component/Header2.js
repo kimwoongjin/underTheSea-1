@@ -14,6 +14,7 @@ import { useState } from "react";
 const Container = styled.div`
   max-width: 2000px;
   height: 10vh;
+  margin: auto;
   background: white;
   box-shadow: 0px 0px 5px #adb5bd;
   position: relative;
@@ -47,6 +48,15 @@ const Img = styled.img`
 `;
 
 const Login = styled.div`
+  padding: 10px;
+  font-family: "Kfont";
+  cursor: pointer;
+  :hover {
+    color: #008eff;
+  }
+`;
+
+const Aquarium = styled.div`
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -265,6 +275,12 @@ function Header2() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/search">
           <Search toggle={toggle}>검색</Search>
         </Link>
+        {/* <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/nearbyaquarium"
+        >
+          <Aquarium>수족관</Aquarium>
+        </Link> */}
         {isLogin ? (
           <>
             <Link

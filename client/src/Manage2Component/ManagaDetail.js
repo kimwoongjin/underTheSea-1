@@ -119,6 +119,7 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
+  overflow: hidden visible;
   @media screen and (max-width: 900px) {
     display: none;
   }

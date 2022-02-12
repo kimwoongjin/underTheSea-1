@@ -10,25 +10,31 @@ import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
 import { useSelector } from "react-redux";
 import Footer from "../component/Footer";
-// import FilterMediaCard from "../component/FilterMediaCard";
-// import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
-// import ActivationCard from "../component/ActivationCard";
-// import ActivationInfo from "../modalComponent/ActivationInfo";
-// import RecommendCard from "../component/RecommendCard";
-// import RecommendInfo from "../modalComponent/RecommendInfo";
-// import WSDCard from "../component/WSDCard";
-// import WSDInfo from "../modalComponent/WSDInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTools } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 100%;
+  position: relative;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
+const TopCover = styled.div`
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 const Title = styled.div`
   width: 100vw;
   height: 40vh;
@@ -114,12 +120,14 @@ function FreshWaterGuide() {
 
   return (
     <>
+      <Header2 />
       <Container>
-        <Header2 />
-        <Title>
-          Freshwater Guide
-          <div className="sub">담수어는 어떻게 시작할까?</div>
-        </Title>
+        <TopCover>
+          <Title>
+            Freshwater Guide
+            <div className="sub">담수어는 어떻게 시작할까?</div>
+          </Title>
+        </TopCover>
         <InfoContainer>
           <TextCover>
             <FontAwesomeIcon icon={faTools} size="8x" />
