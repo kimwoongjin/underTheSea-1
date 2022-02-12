@@ -520,7 +520,6 @@ const MobileTd = styled.td`
     width: 70%;
     padding: 5px;
     box-sizing: border-box;
-    /* height: 13vh; */
     justify-content: space-around;
   }
 `;
