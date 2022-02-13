@@ -1003,7 +1003,7 @@ function ManageDetail({ condata, setCondata }) {
                           </FeedingNum>
                         </FoodTypeAndNum>
                       </FoodInnerContainer>
-                      <FoodInnerContainer></FoodInnerContainer>
+
                       {/* 여기서 exAmount 이거로 랜더링 하면됨 */}
                       <ExWaterRecord>
                         {exWaterObj[days.format("YYMMDD")] || 0}L
