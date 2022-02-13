@@ -74,6 +74,16 @@ const UserInfo = styled.div`
 
     /* border: 1px solid black; */
   }
+
+  @media screen and (min-width: 2000px) {
+    .userGreeting {
+      font-size: 2rem;
+    }
+    .userNotice {
+      font-size: 1.5rem;
+    }
+  }
+
   @media screen and (max-width: 1024px) {
     .userGreeting {
       font-size: 1.4rem;
@@ -133,6 +143,11 @@ const TitleContainer = styled.div`
   display: flex;
   text-align: left;
   line-height: 500%;
+
+  @media screen and (max-width: 480px) {
+    line-height: 0%;
+    text-align: center;
+  }
 `;
 
 const Title = styled.div`
@@ -143,13 +158,26 @@ const Title = styled.div`
   font-weight: bold;
   justify-content: center;
   top: 63%;
-  right: 8%;
+  right: 7%;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 1.1rem;
+    margin-bottom: 5%;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: 5%;
+  }
+
   @media screen and (max-width: 480px) {
-    font-size: 0.5rem;
-    height: 2vh;
-    width: 30vw;
-    top: 50%;
-    left: 3%;
+    font-size: 0.8rem;
+    height: 15%;
+    width: 23%;
+    top: 70%;
+    left: 0%;
+    /* border: 1px solid black; */
+    padding-top: 1.5em;
   }
 `;
 
@@ -157,13 +185,29 @@ const Box1 = styled.div`
   position: relative;
   justify-content: space-evenly;
   display: flex;
-  width: 20vw;
-  height: 4vh;
+  width: 20%;
+  height: 19%;
   left: 22%;
   top: 8%;
+  /* border: 1px solid black; */
+
+  @media screen and (min-width: 2000px) {
+    right: 0%;
+  }
+
+  @media screen and (max-width: 1024px) {
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 15%;
+    height: 40%;
+    top: 3%;
+  }
+
   @media screen and (max-width: 480px) {
-    width: 30%;
-    height: 45%;
+    width: 37%;
+    height: 50%;
     left: 14%;
     flex-direction: column;
     /* border: 1px solid black; */
@@ -171,46 +215,56 @@ const Box1 = styled.div`
   }
 `;
 const ButtonL = styled.button`
-  width: 8vw;
+  width: 40%;
   font-size: 0.9rem;
   font-weight: bold;
   color: white;
   border-radius: 10px;
   border: 1px solid #108dee;
   background: #108dee;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.2rem;
+  }
+
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
-    height: 6vh;
   }
   @media screen and (max-width: 768px) {
-    font-size: 0.5rem;
-    height: 6vh;
+    font-size: 0.7rem;
+    width: 100%;
+    height: 35%;
   }
   @media screen and (max-width: 480px) {
     width: 75%;
-    height: 4vh;
+    height: 4.5vh;
     border-radius: 5px;
   }
 `;
 const ButtonR = styled.button`
-  width: 8vw;
+  width: 40%;
   font-size: 0.9rem;
   font-weight: bold;
   color: white;
   border-radius: 10px;
   border: 1px solid #cccccc;
   background: #cccccc;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.2rem;
+  }
+
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
-    height: 6vh;
   }
   @media screen and (max-width: 768px) {
-    font-size: 0.5rem;
-    height: 6vh;
+    font-size: 0.7rem;
+    width: 100%;
+    height: 35%;
   }
   @media screen and (max-width: 480px) {
     width: 75%;
-    height: 4vh;
+    height: 4.5vh;
     border-radius: 5px;
     /* border: 1px solid black; */
   }
@@ -230,13 +284,22 @@ const ContentContainer = styled.div`
 
 const Box3 = styled.div`
   border: 1px solid #ace0ff;
-  margin-top: 4%;
+  margin-top: 4em;
   width: 70vw;
   height: 90vh;
   margin-bottom: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 3em;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 2em;
+  }
+
   @media screen and (max-width: 480px) {
     border: 1px solid black;
     height: 60vh;

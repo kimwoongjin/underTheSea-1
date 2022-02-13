@@ -279,8 +279,8 @@ function HoneyTips() {
             )}
           </PageBtnForm>
         </TipListContainer>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }

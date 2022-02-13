@@ -5,6 +5,7 @@ import Header2 from "../component/Header2";
 
 const Container = styled.div`
   max-width: 2000px;
+  margin: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -155,8 +156,8 @@ function Guide() {
   };
   return (
     <>
+      <Header2></Header2>
       <Container>
-        <Header2></Header2>
         <MiddleContainer>
           <Seawater onClick={goToSeawater}>
             <BigBox>

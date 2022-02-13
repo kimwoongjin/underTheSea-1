@@ -114,8 +114,8 @@ function FreshWaterGuide() {
 
   return (
     <>
+      <Header2 />
       <Container>
-        <Header2 />
         <Title>
           Freshwater Guide
           <div className="sub">담수어는 어떻게 시작할까?</div>

@@ -128,8 +128,8 @@ function SeaWaterGuide() {
 
   return (
     <>
+      <Header2 />
       <Container>
-        <Header2 />
         <Title>
           <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
           <div className="main">Saltwater Guide</div>
