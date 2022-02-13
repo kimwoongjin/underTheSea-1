@@ -58,7 +58,7 @@ const Title = styled.div`
     font-weight: bold;
     font-size: 2.5rem;
     @media screen and (max-width: 900px) {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
     }
   }
   .sub {
