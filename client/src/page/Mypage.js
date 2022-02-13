@@ -124,52 +124,65 @@ const Container = styled.div`
   height: 25vh;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 480px) {
+    height: 100px;
+  }
 `;
 const TitleContainer = styled.div`
-  /* position: relative; */
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
   display: flex;
   text-align: left;
   line-height: 500%;
+  @media screen and (max-width: 480px) {
+    width: 80vw;
+    height: 15vh;
+  }
 `;
 
 const Title = styled.div`
-  /* position: relative; */
+  position: relative;
   width: 13vw;
   height: 8vh;
   font-size: 1.7rem;
   font-weight: bold;
   justify-content: center;
-  /* top: 63%; */
-  /* right: 8%; */
-  @media screen and (max-width: 480px) {
-    font-size: 0.5rem;
-
-    height: 2vh;
+  top: 63%;
+  right: 8%;
+  @media screen and (max-width: 1135px) {
+    font-size: 1.25rem;
+    height: 3vh;
     width: 30vw;
-    /* top: 50%; */
-    /* left: 3%; */
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 `;
 
 const Box1 = styled.div`
   position: relative;
   justify-content: space-evenly;
-
   display: flex;
   width: 20vw;
   height: 4vh;
   left: 22%;
   top: 8%;
   @media screen and (max-width: 480px) {
-    width: 30%;
-    height: 45%;
-    left: 14%;
-    flex-direction: column;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 50%;
+    justify-content: space-between;
+    /* top: 10% */
+    /* flex-direction: column; */
     /* border: 1px solid black; */
+    gap: 4px;
     align-items: center;
+  }
+  @media screen and (max-width: 330px) {
+    left: 20%;
+    width: 60%;
   }
 `;
 const ButtonL = styled.button`
@@ -189,9 +202,9 @@ const ButtonL = styled.button`
     height: 6vh;
   }
   @media screen and (max-width: 480px) {
-    width: 75%;
-    height: 4vh;
-    border-radius: 5px;
+    width: 50%;
+    height: 25px;
+    border-radius: 4px;
   }
 `;
 const ButtonR = styled.button`
@@ -211,10 +224,9 @@ const ButtonR = styled.button`
     height: 6vh;
   }
   @media screen and (max-width: 480px) {
-    width: 75%;
-    height: 4vh;
-    border-radius: 5px;
-    /* border: 1px solid black; */
+    width: 50%;
+    height: 25px;
+    border-radius: 4px;
   }
 `;
 
@@ -222,6 +234,7 @@ const ContentContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -269,7 +282,6 @@ function Mypage() {
         withCredentials: true,
       })
       .then((result) => {
-        // console.log(result.data.user_name, "????????");
         setUserName([...result.data.user_name]);
       })
       .catch((err) => {
