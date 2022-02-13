@@ -26,7 +26,7 @@ const MainImg = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    height: 180px;
+    height: 170px;
   }
 `;
 
@@ -129,8 +129,8 @@ const Text = styled.div`
     font-size: max(2vw, 1.3rem);
   }
   @media screen and (max-width: 480px) {
-    margin: 17% 0 10%;
-    font-size: 0.8rem;
+    margin: 15% 0 7%;
+    font-size: 0.7rem;
   }
 `;
 
@@ -160,6 +160,7 @@ const CardContainer = styled.div`
   position: relative;
 
   @media screen and (max-width: 480px) {
+    width: 100%;
   }
 `;
 

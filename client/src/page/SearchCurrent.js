@@ -10,7 +10,7 @@ const Container = styled.div`
   top: 23%;
   width: 300px;
   height: 420px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   margin-bottom: 7%;
   perspective: 1000px;
 
@@ -19,9 +19,9 @@ const Container = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    width: 85%;
-    height: 270px;
-    margin-bottom: 25%;
+    width: 140px;
+    height: 210px;
+    margin-bottom: 10%;
   }
 `;
 
@@ -39,6 +39,9 @@ const Box = styled.div`
   box-shadow: 0px 0px 20px #adb5bd;
   transform: rotateY(0deg);
   transition: 1.5s;
+  @media screen and (max-width: 480px) {
+    border-radius: 10px;
+  }
   /* border: 1px solid black; */
 `;
 
@@ -58,7 +61,9 @@ const ImgContainer = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 480px) {
-    height: 65%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 160px;
   }
 `;
 const Img = styled.img`
@@ -79,6 +84,8 @@ const Content = styled.div`
 
   @media screen and (max-width: 480px) {
     padding-left: 5%;
+    margin: 3% 0 0 3%;
+    width: 125px;
   }
 `;
 
@@ -87,8 +94,8 @@ const Name = styled.div`
   font-size: 1.5rem;
 
   @media screen and (max-width: 480px) {
-    font-size: 1rem;
-    width: 70%;
+    font-size: 0.9rem;
+    width: 80%;
     height: 17%;
   }
 `;
@@ -99,8 +106,10 @@ const Ename = styled.div`
   font-style: italic;
 
   @media screen and (max-width: 480px) {
-    font-size: 0.8rem;
-    width: 70%;
+    font-size: 0.6rem;
+    width: 100%;
+    position: relative;
+    bottom: 5%;
   }
 `;
 
@@ -128,6 +137,9 @@ const Contents = styled.div`
   left: 50%;
   transform: translate(-50%, 0);
   margin-top: 5%;
+  @media screen and (max-width: 480px) {
+    overflow: hidden visible;
+  }
 `;
 
 const NameB = styled.div`
@@ -139,7 +151,7 @@ const NameB = styled.div`
   font-size: 1.5rem;
 
   @media screen and (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -154,8 +166,8 @@ const NamesB = styled.div`
   font-style: italic;
 
   @media screen and (max-width: 480px) {
-    font-size: 0.7rem;
-    width: 70%;
+    font-size: 0.6rem;
+    width: 100%;
   }
 `;
 const Text = styled.div`
@@ -164,25 +176,26 @@ const Text = styled.div`
   line-height: 170%;
   font-weight: bold;
   @media screen and (max-width: 480px) {
+    font-weight: 500;
     top: 20%;
-    line-height: 100%;
+    line-height: 90%;
   }
 `;
 const Habitat = styled.div`
   @media screen and (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   /* border: 1px solid red; */
 `;
 const Temp = styled.div`
   @media screen and (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   /* border: 1px solid red; */
 `;
 const Size = styled.div`
   @media screen and (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   /* border: 1px solid red; */
 `;
@@ -190,7 +203,7 @@ const Size = styled.div`
 const Desc = styled.div`
   margin-top: 8%;
   @media screen and (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   /* border: 1px solid red; */
 `;
@@ -202,6 +215,7 @@ const DescBottom = styled.div`
   text-align: justify;
 
   @media screen and (max-width: 480px) {
+    line-height: 150%;
     font-size: 0.5rem;
   }
 `;
