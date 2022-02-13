@@ -36,9 +36,9 @@ const FishContainerL = styled.img`
 
   @media screen and (max-width: 480px) {
     display: flex;
-    width: 40%;
-    height: 23%;
-    top: 25%;
+    width: 120px;
+    height: 80px;
+    top: 30%;
     left: 10%;
   }
 `;
@@ -54,8 +54,8 @@ const FishContainerR = styled.img`
 
   @media screen and (max-width: 480px) {
     display: flex;
-    width: 55%;
-    height: 30%;
+    width: 180px;
+    height: 130px;
     top: 12%;
     left: 34%;
   }
@@ -67,6 +67,11 @@ const LevelText = styled.div`
   position: absolute;
   top: 33%;
   left: 6%;
+
+  @media screen and (max-width: 1024px) {
+    left: 10%;
+    font-size: max(2vw, 1.8rem);
+  }
 
   @media screen and (max-width: 480px) {
     font-size: 1rem;
@@ -83,8 +88,8 @@ const Fish = styled.img`
   right: 7%;
 
   @media screen and (max-width: 480px) {
-    width: 18%;
-    height: 13%;
+    width: 50px;
+    height: 50px;
     top: 50%;
     right: 12%;
   }
@@ -99,13 +104,11 @@ const TextContainer = styled.div`
   font-size: max(1vw, 0.7rem);
 
   @media screen and (max-width: 1024px) {
-    left: 27%;
-
-    .text {
-      font-size: max(2vw, 0.6rem);
+    .text8 {
+      font-size: max(1.8vw, 0.6rem);
     }
-    .text1 {
-      font-size: max(2vw, 1.5rem);
+    .text {
+      font-size: max(2vw, 1.4rem);
     }
   }
   @media screen and (max-width: 480px) {
@@ -134,6 +137,11 @@ const IconCover = styled.div`
   font-size: 3.5rem;
   top: 37%;
   left: 23%;
+
+  @media screen and (max-width: 1024px) {
+    top: 39%;
+    font-size: max(2vw, 2.5rem);
+  }
 
   @media screen and (max-width: 480px) {
     font-size: 1.5rem;

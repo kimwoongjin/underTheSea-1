@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { signoutAction, modalOff } from "../store/actions";
-// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -23,8 +22,8 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   z-index: 999;
-  width: 25%;
-  height: 40%;
+  width: 22%;
+  height: 35%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -36,6 +35,11 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
 
   border-radius: 20px;
+
+  @media screen and (min-width: 2000px) {
+    width: 15%;
+    height: 28%;
+  }
 
   @media screen and (max-width: 480px) {
     width: 70%;
@@ -59,6 +63,7 @@ const Form = styled.form`
   height: 60%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
   @media screen and (max-width: 480px) {
     align-items: center;
@@ -70,6 +75,7 @@ const TextForm = styled.div`
   display: flex;
   text-align: center;
   top: 22%;
+
   @media screen and (max-width: 480px) {
     justify-content: center;
   }
@@ -78,10 +84,19 @@ const Text = styled.div`
   position: relative;
   line-height: 170%;
   font-family: "Kfont";
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
   @media screen and (max-width: 480px) {
-    top: -20%;
+    top: -30%;
     width: 80%;
     font-size: 0.9rem;
   }
@@ -94,9 +109,18 @@ const Btn = styled.div`
   position: absolute;
   top: 80%;
   justify-content: space-between;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 10%;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 8%;
+  }
+
   @media screen and (max-width: 480px) {
-    top: 75%;
-    height: 45%;
+    top: 60%;
+    height: 50%;
     width: 80%;
     flex-direction: column;
     /* border: 1px solid black; */
@@ -105,7 +129,7 @@ const Btn = styled.div`
 `;
 const CancleBtn = styled.button`
   width: 45%;
-  height: 90%;
+  height: 97%;
   background: #e1e1e1;
   color: black;
   font-family: "Kfont";
@@ -113,6 +137,8 @@ const CancleBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  padding: 0.7em 0 0.7em;
+
   cursor: pointer;
   :hover::before {
     content: "";
@@ -124,15 +150,24 @@ const CancleBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 
+  @media screen and (max-width: 1024px) {
+    font-size: 0.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.4rem;
+  }
+
   @media screen and (max-width: 480px) {
     font-size: 0.7rem;
     width: 100%;
-    margin-bottom: 5%;
+    padding: 0em;
+    height: 40%;
   }
 `;
 const SignOutBtn = styled.button`
   width: 45%;
-  height: 90%;
+  height: 97%;
   background: #0474e8;
   color: white;
   font-family: "Kfont";
@@ -140,6 +175,7 @@ const SignOutBtn = styled.button`
   border-radius: 4px;
   font-weight: bold;
   position: relative;
+  padding: 0.7em 0 0.7em;
   cursor: pointer;
   :hover::before {
     content: "";
@@ -150,9 +186,21 @@ const SignOutBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
   }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.4rem;
+  }
+
   @media screen and (max-width: 480px) {
     font-size: 0.7rem;
     width: 100%;
+    padding: 0em;
+    height: 40%;
+    margin-bottom: 3%;
   }
 `;
 //=======================================================================

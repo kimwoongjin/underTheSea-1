@@ -16,52 +16,55 @@ const Head = styled.div`
   position: relative;
   left: 6%;
   bottom: 3%;
-  padding-bottom: 0.5%;
   box-sizing: border-box;
 
-  .title {
-    display: flex;
-    padding: 0 0 1% 2%;
-    /* border: 1px solid black; */
-    flex: 6;
-    box-sizing: border-box;
-    position: relative;
-  }
   .comment {
-    flex: 4.5;
+    flex: 6;
     display: flex;
     box-sizing: border-box;
     position: relative;
-    padding-bottom: 1%;
+    padding: 0 0 2% 3%;
   }
   .date {
-    flex: 4.5;
+    flex: 2;
     display: flex;
     box-sizing: border-box;
     position: relative;
-    padding-bottom: 1%;
+    padding-bottom: 2%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .comment {
+      font-size: 1rem;
+    }
+    .date {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comment {
+      font-size: 0.9rem;
+    }
+    .date {
+      font-size: 0.9rem;
+    }
   }
   @media screen and (max-width: 480px) {
     width: 100%;
     left: 0%;
     height: 10%;
     margin-top: 3%;
+    padding-bottom: 2%;
 
-    .title {
-      display: none;
-    }
     .comment {
       flex: 4;
       font-size: 0.6rem;
-      padding-bottom: 2%;
-      padding-left: 5%;
     }
     .date {
       flex: 1.6;
       left: 0%;
       font-size: 0.6rem;
-      padding-left: 10%;
-      padding-bottom: 2%;
     }
   }
 `;
@@ -94,31 +97,22 @@ const BoxContainer = styled.div`
   }
 `;
 
-const Box = styled.div`
-  position: relative;
+const Box2 = styled.div`
   flex: 6;
   width: 30%;
   height: 50%;
-  margin: 0;
-  align-items: center;
+  /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  /* border: 1px solid black; */
-  padding: 2.5% 0 2.6% 2%;
-  @media screen and (max-width: 480px) {
-    display: none;
-  }
-`;
+  padding: 2.5% 0 2.6% 3%;
 
-const Box2 = styled.div`
-  flex: 4.5;
-  width: 30%;
-  height: 50%;
-  font-size: 0.9rem;
-  /* border: 1px solid black; */
-  font-family: "Kfont";
-  box-sizing: border-box;
-  padding: 2.8% 0 2.7% 1%;
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
   @media screen and (max-width: 480px) {
     font-size: 0.5rem;
   }
@@ -128,12 +122,20 @@ const Box1 = styled.div`
   flex: 2;
   width: 30%;
   height: 50%;
-  font-size: 0.9rem;
   color: gray;
+  font-size: 0.9rem;
   /* border: 1px solid black; */
   font-family: "Kfont";
   box-sizing: border-box;
-  padding: 2.8% 0 2.7% 1%;
+  padding: 2.8% 0 2.7%;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
   @media screen and (max-width: 480px) {
     font-size: 0.5rem;
     padding-left: 5%;
@@ -153,12 +155,20 @@ const Empty = styled.div`
 const BoxImg = styled.img`
   display: flex;
   margin-bottom: 2%;
+
+  @media screen and (max-width: 480px) {
+    width: 100px;
+  }
 `;
 
 const Notice = styled.div`
   display: flex;
   font-size: 1.4rem;
   margin-left: 2%;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const PageBtnForm = styled.form`
@@ -255,7 +265,6 @@ function MypageComment() {
         ) : (
           <>
             <Head>
-              <div className="title">게시글</div>
               <div className="comment">댓글</div>
               <div className="date">날짜</div>
             </Head>
@@ -265,7 +274,7 @@ function MypageComment() {
               return (
                 <>
                   <BoxContainer>
-                    <Box key={el.id}>{el.tip_title}</Box>
+                    {/* <Box key={el.id}>{el.tip_title}</Box> */}
                     <Box2>{el.content}</Box2>
                     <Box1>{date}</Box1>
                   </BoxContainer>

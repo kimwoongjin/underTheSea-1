@@ -6,6 +6,7 @@ import Header2 from "../component/Header2";
 const Container = styled.div`
   margin: auto;
   max-width: 2000px;
+  margin: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;

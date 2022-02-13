@@ -4,15 +4,28 @@ import { useState, useEffect } from "react";
 
 const Box2 = styled.div`
   /* border: 1px solid #108dee; */
-  margin-top: 2%;
-  width: 70vw;
-  height: 8vh;
+  width: 71%;
+  height: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ace0ff;
   font-size: 2rem;
   font-weight: bold;
+  margin: auto;
+
+  /* @media screen and (min-width: 2000px) {
+    height: 5vh;
+  } */
+  @media screen and (max-width: 1024px) {
+    margin-top: 2%;
+    height: 12%;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 2%;
+    height: 10%;
+  }
+
   @media screen and (max-width: 480px) {
     height: 5vh;
     width: 80vw;
@@ -22,17 +35,28 @@ const Box2 = styled.div`
 const Manage = styled.div`
   /* border: 1px solid black; */
   width: 16%;
-  height: 60%;
+  height: 50%;
   font-size: 1.7rem;
   background: none;
   text-align: center;
   margin-right: 10%;
+  padding: 0.5em 0 0.5em;
+
   :hover {
     background: #cccccc;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
+
   @media screen and (max-width: 480px) {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     margin-right: 0%;
 
     :hover {
@@ -48,13 +72,24 @@ const Contents = styled.div`
   background: none;
   text-align: center;
   margin-right: 10%;
+  padding: 0.5em 0 0.5em;
+
   /* z-index: 999; */
   cursor: pointer;
   :hover {
     background: #cccccc;
   }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
+
   @media screen and (max-width: 480px) {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     margin-right: 0%;
     :hover {
       background: none;
@@ -70,13 +105,23 @@ const Comment = styled.div`
   text-align: center;
   /* z-index: 999; */
   background: none;
+  padding: 0.5em 0 0.5em;
 
   cursor: pointer;
   :hover {
     background: #cccccc;
   }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
+
   @media screen and (max-width: 480px) {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     :hover {
       background: none;
     }
