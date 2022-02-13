@@ -66,7 +66,7 @@ const LevelText = styled.div`
   font-weight: bold;
   position: absolute;
   top: 33%;
-  left: 6%;
+  left: 7%;
 
   @media screen and (max-width: 1024px) {
     left: 10%;
@@ -134,13 +134,13 @@ const SearchText = styled.div`
 
 const IconCover = styled.div`
   position: absolute;
-  font-size: 3.5rem;
-  top: 37%;
+  font-size: 3.2rem;
+  top: 38%;
   left: 23%;
 
   @media screen and (max-width: 1024px) {
     top: 39%;
-    font-size: max(2vw, 2.5rem);
+    font-size: max(2vw, 2rem);
   }
 
   @media screen and (max-width: 480px) {
