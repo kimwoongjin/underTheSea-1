@@ -28,8 +28,6 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://dhlgdv3s1nzv4.cloudfront.net/",
-      "https://yesjin.link",
-      "http://ec2-52-79-221-13.ap-northeast-2.compute.amazonaws.com",
       "https://underthesea.ga",
       "https://www.underthesea.ga",
     ],

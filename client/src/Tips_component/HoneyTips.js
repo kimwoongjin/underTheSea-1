@@ -17,6 +17,13 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    .line {
+      margin-top: 10px;
+      width: 95%;
+      border-bottom: 1px solid #cccccc;
+    }
+  }
 `;
 
 const TopCover = styled.div`
@@ -73,9 +80,11 @@ const BtnContainer = styled.div`
   width: 70%;
   margin-top: 3%;
   display: flex;
+  /* flex-direction: column; */
   justify-content: flex-end;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
+    justify-content: flex-end;
   }
 `;
 
@@ -110,7 +119,7 @@ const TipListContainer = styled.div`
   border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     width: 100vw;
     border-style: none;
   }
@@ -270,6 +279,7 @@ function HoneyTips() {
             <Btn onClick={() => dispatch(loginModalOnAction)}>글쓰기</Btn>
           )}
         </BtnContainer>
+        <div className="line"></div>
         <TipListContainer>
           <TipListHeadContainer>
             <div style={{ flex: "0.5" }}></div>
@@ -298,8 +308,8 @@ function HoneyTips() {
             )}
           </PageBtnForm>
         </TipListContainer>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }
