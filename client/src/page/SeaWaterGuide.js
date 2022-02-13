@@ -42,18 +42,20 @@ const TopCover = styled.div`
   position: relative;
   flex-direction: column;
   overflow: hidden;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Title = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 40vh;
   display: flex;
-  position: relative;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 2.5rem;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
   .main {
     font-weight: bold;
     font-size: 2.5rem;
@@ -146,14 +148,14 @@ function SeaWaterGuide() {
     <>
       <Header2 />
       <Container>
-        <TopCover>
-          <Title>
-            <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
-            <div className="main">Saltwater Guide</div>
-            {/* Saltwater Guide */}
-            <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
-          </Title>
-        </TopCover>
+        {/* <TopCover> */}
+        <Title>
+          <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
+          <div className="main">Saltwater Guide</div>
+          {/* Saltwater Guide */}
+          <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
+        </Title>
+        {/* </TopCover> */}
         <SearchContainer>
           <Select name="카테고리" onChange={handleInputValue}>
             <Option value="all">전체보기</Option>

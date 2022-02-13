@@ -17,7 +17,7 @@ const Head = styled.div`
   position: relative;
   left: 6%;
   bottom: 3%;
-  padding-bottom: 0.5%;
+
   box-sizing: border-box;
 
   .title {
@@ -36,6 +36,25 @@ const Head = styled.div`
     padding-bottom: 2%;
     /* border: 1px solid black; */
   }
+
+  @media screen and (max-width: 1024px) {
+    .title {
+      font-size: 1rem;
+    }
+    .date {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 0.9rem;
+    }
+    .date {
+      font-size: 0.9rem;
+    }
+  }
+
   @media screen and (max-width: 480px) {
     width: 100%;
     left: 0%;
@@ -97,6 +116,14 @@ const Box = styled.div`
   box-sizing: border-box;
   /* border: 1px solid black; */
   padding: 2.5% 0 2.6% 3%;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
   @media screen and (max-width: 480px) {
     font-size: 0.5rem;
   }
@@ -112,6 +139,15 @@ const Box1 = styled.div`
   font-family: "Kfont";
   box-sizing: border-box;
   padding: 2.8% 0 2.7%;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
   @media screen and (max-width: 480px) {
     font-size: 0.5rem;
     padding-left: 5%;
@@ -131,12 +167,20 @@ const Empty = styled.div`
 const BoxImg = styled.img`
   display: flex;
   margin-bottom: 2%;
+
+  @media screen and (max-width: 480px) {
+    width: 100px;
+  }
 `;
 
 const Notice = styled.div`
   display: flex;
   font-size: 1.4rem;
   margin-left: 2%;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const PageBtnForm = styled.form`

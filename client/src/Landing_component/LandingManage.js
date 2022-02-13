@@ -37,9 +37,9 @@ const Phone = styled.img`
 
   @media screen and (max-width: 480px) {
     display: flex;
-    width: 50%;
-    height: 40%;
-    top: 10%;
+    width: 170px;
+    height: 190px;
+    top: 12%;
     left: 25%;
   }
 `;
@@ -65,14 +65,15 @@ const TextContainer = styled.div`
   font-size: max(1vw, 0.7rem);
 
   @media screen and (max-width: 1024px) {
-    left: 27%;
-
+    .login {
+      font-size: max(2vw, 0.6rem);
+    }
     .text {
       font-size: max(2vw, 0.6rem);
     }
-    .text1 {
-      font-size: max(2vw, 1.5rem);
-    }
+    /* .text1 {
+      font-size: max(2vw, 1.4rem);
+    } */
   }
   @media screen and (max-width: 480px) {
     top: 25%;
@@ -129,6 +130,10 @@ const SearchTitle = styled.div`
   color: #092011;
   /* font-family: "Kfont"; */
   cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    font-size: max(2vw, 1.4rem);
+  }
 
   @media screen and (max-width: 480px) {
     font-size: 1rem;

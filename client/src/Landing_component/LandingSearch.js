@@ -42,9 +42,9 @@ const ManImg = styled.img`
   bottom: 12%;
 
   @media screen and (max-width: 480px) {
-    width: 55%;
-    height: 45%;
-    top: 8%;
+    width: 190px;
+    height: 190px;
+    top: 9%;
     right: 3%;
   }
 `;
@@ -56,8 +56,8 @@ const CoralL = styled.img`
   right: 38%;
 
   @media screen and (max-width: 480px) {
-    width: 19%;
-    height: 14%;
+    width: 60px;
+    height: 50px;
     top: -3%;
     margin-bottom: 5%;
     right: 32%;
@@ -74,8 +74,8 @@ const CoralS = styled.img`
   }
 
   @media screen and (max-width: 480px) {
-    width: 13%;
-    height: 10%;
+    width: 40px;
+    height: 40px;
     top: -3%;
     margin-bottom: 1%;
     right: 33%;
@@ -100,7 +100,7 @@ const TextContainer = styled.div`
       line-height: 160%;
     }
     .txt2 {
-      font-size: max(2vw, 1.5rem);
+      font-size: max(2vw, 1.4rem);
     }
   }
 

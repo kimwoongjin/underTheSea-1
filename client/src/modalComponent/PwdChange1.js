@@ -243,7 +243,7 @@ const ConfirmBtn = styled.button`
 `;
 //=======================================================================
 
-function PwdChange({ handleOff }) {
+function PwdChange1({ handleOff }) {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   // 비밀번호 저장
@@ -375,4 +375,4 @@ function PwdChange({ handleOff }) {
   );
 }
 
-export default PwdChange;
+export default PwdChange1;
