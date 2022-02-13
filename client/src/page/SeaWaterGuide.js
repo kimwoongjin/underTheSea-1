@@ -23,12 +23,25 @@ import WordCard from "../component/WordCard";
 import WordInfo from "../modalComponent/WordInfo";
 
 const Container = styled.div`
-  width: 100%;
+  position: relative;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const TopCover = styled.div`
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const Title = styled.div`
@@ -44,15 +57,18 @@ const Title = styled.div`
   .main {
     font-weight: bold;
     font-size: 2.5rem;
+    @media screen and (max-width: 900px) {
+      font-size: 1.5rem;
+    }
   }
   .sub {
     margin-top: 15px;
     font-size: 1.25rem;
     font-weight: 500;
     color: #26262f;
-  }
-  @media screen and (max-width: 900px) {
-    display: none;
+    @media screen and (max-width: 900px) {
+      font-size: 1rem;
+    }
   }
 `;
 const Img = styled.img`
@@ -130,12 +146,14 @@ function SeaWaterGuide() {
     <>
       <Header2 />
       <Container>
-        <Title>
-          <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
-          <div className="main">Saltwater Guide</div>
-          {/* Saltwater Guide */}
-          <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
-        </Title>
+        <TopCover>
+          <Title>
+            <Img src="https://iconmage.s3.ap-northeast-2.amazonaws.com/투명바다1.png" />
+            <div className="main">Saltwater Guide</div>
+            {/* Saltwater Guide */}
+            <div className="sub">해수어에 관한 다양한 지식들을 만나보세요</div>
+          </Title>
+        </TopCover>
         <SearchContainer>
           <Select name="카테고리" onChange={handleInputValue}>
             <Option value="all">전체보기</Option>

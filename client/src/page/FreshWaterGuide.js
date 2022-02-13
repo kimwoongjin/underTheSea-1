@@ -10,25 +10,31 @@ import SuppliesCard from "../component/SuppliesCard";
 import SuppliesInfo from "../modalComponent/SuppliesInfo";
 import { useSelector } from "react-redux";
 import Footer from "../component/Footer";
-// import FilterMediaCard from "../component/FilterMediaCard";
-// import FilterMediaInfo from "../modalComponent/FilterMediaInfo";
-// import ActivationCard from "../component/ActivationCard";
-// import ActivationInfo from "../modalComponent/ActivationInfo";
-// import RecommendCard from "../component/RecommendCard";
-// import RecommendInfo from "../modalComponent/RecommendInfo";
-// import WSDCard from "../component/WSDCard";
-// import WSDInfo from "../modalComponent/WSDInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTools } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 100%;
+  position: relative;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
+const TopCover = styled.div`
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 const Title = styled.div`
   width: 100vw;
   height: 40vh;
@@ -44,6 +50,12 @@ const Title = styled.div`
     font-size: 1.25rem;
     font-weight: 500;
     color: #26262f;
+    @media screen and (max-width: 900px) {
+      font-size: 1rem;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -88,6 +100,9 @@ const Text = styled.div`
   margin-top: 20px;
   font-size: 2rem;
   font-weight: bold;
+  @media screen and (max-width: 900px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -116,10 +131,19 @@ function FreshWaterGuide() {
     <>
       <Header2 />
       <Container>
+<<<<<<< HEAD
         <Title>
           Freshwater Guide
           <div className="sub">담수어는 어떻게 시작할까?</div>
         </Title>
+=======
+        <TopCover>
+          <Title>
+            Freshwater Guide
+            <div className="sub">담수어는 어떻게 시작할까?</div>
+          </Title>
+        </TopCover>
+>>>>>>> 87a459af7f2803f2f0dcf16d1619f4ab7785c58f
         <InfoContainer>
           <TextCover>
             <FontAwesomeIcon icon={faTools} size="8x" />

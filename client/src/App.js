@@ -57,8 +57,6 @@ function App() {
         const result = res.data.status;
         if (result === 1) {
           dispatch(loginAction);
-        } else if (result === 2) {
-          dispatch(loginModalOnAction);
         }
       });
   };
@@ -75,32 +73,18 @@ function App() {
         withCredentials: true,
       }
     );
-    // console.log("response:", response.data.data);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     return response.data.data;
   };
 
   const accessToken = localStorage.getItem("accessToken");
-  const [containerList, setContainerList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_API}/container/all`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-        withCredentials: true,
-      })
-      .then((res) => {
-        // console.log("전체 수조목록", res.data.data);
-        setContainerList(res.data.data);
-        // console.log("수조목록", containerList);
-      });
     if (authorizationCode) {
       getAccessToken(authorizationCode);
     }
     checkLogin(accessToken);
   }, []);
-
-  const idList = containerList.map((container) => container.id);
 
   //-----------------------------------------------
 
@@ -197,7 +181,7 @@ function App() {
           element={
             <Manage
               aquaInfo={aquaInfo}
-              containerList={containerList}
+              // containerList={containerList}
               handleCondata={handleCondata}
             />
           }
@@ -207,7 +191,7 @@ function App() {
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
           element={
             <ManageDetail
-              idList={idList}
+              // idList={idList}
               condata={condata}
               setCondata={setCondata}
             />

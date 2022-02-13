@@ -134,19 +134,20 @@ const Container = styled.div`
   height: 25vh;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 480px) {
+    height: 100px;
+  }
 `;
 const TitleContainer = styled.div`
-  position: relative;
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
   display: flex;
   text-align: left;
   line-height: 500%;
-
   @media screen and (max-width: 480px) {
-    line-height: 0%;
-    text-align: center;
+    width: 80vw;
+    height: 15vh;
   }
 `;
 
@@ -158,26 +159,14 @@ const Title = styled.div`
   font-weight: bold;
   justify-content: center;
   top: 63%;
-  right: 7%;
-
-  @media screen and (max-width: 1200px) {
-    font-size: 1.1rem;
-    margin-bottom: 5%;
+  right: 8%;
+  @media screen and (max-width: 1135px) {
+    font-size: 1.25rem;
+    height: 3vh;
+    width: 30vw;
   }
-
-  @media screen and (max-width: 768px) {
-    font-size: 0.8rem;
-    margin-bottom: 5%;
-  }
-
   @media screen and (max-width: 480px) {
-    font-size: 0.8rem;
-    height: 15%;
-    width: 23%;
-    top: 70%;
-    left: 0%;
-    /* border: 1px solid black; */
-    padding-top: 1.5em;
+    display: none;
   }
 `;
 
@@ -206,12 +195,20 @@ const Box1 = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    width: 37%;
+    width: 50%;
     height: 50%;
-    left: 14%;
-    flex-direction: column;
+    left: 25%;
+    top: 50%;
+    justify-content: space-between;
+    /* top: 10% */
+    /* flex-direction: column; */
     /* border: 1px solid black; */
+    gap: 4px;
     align-items: center;
+  }
+  @media screen and (max-width: 330px) {
+    left: 20%;
+    width: 60%;
   }
 `;
 const ButtonL = styled.button`
@@ -236,9 +233,9 @@ const ButtonL = styled.button`
     height: 35%;
   }
   @media screen and (max-width: 480px) {
-    width: 75%;
-    height: 4.5vh;
-    border-radius: 5px;
+    width: 50%;
+    height: 25px;
+    border-radius: 4px;
   }
 `;
 const ButtonR = styled.button`
@@ -263,10 +260,9 @@ const ButtonR = styled.button`
     height: 35%;
   }
   @media screen and (max-width: 480px) {
-    width: 75%;
-    height: 4.5vh;
-    border-radius: 5px;
-    /* border: 1px solid black; */
+    width: 50%;
+    height: 25px;
+    border-radius: 4px;
   }
 `;
 
@@ -274,6 +270,7 @@ const ContentContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -330,7 +327,6 @@ function Mypage() {
         withCredentials: true,
       })
       .then((result) => {
-        // console.log(result.data.user_name, "????????");
         setUserName([...result.data.user_name]);
       })
       .catch((err) => {
