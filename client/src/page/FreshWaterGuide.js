@@ -131,19 +131,12 @@ function FreshWaterGuide() {
     <>
       <Header2 />
       <Container>
-<<<<<<< HEAD
-        <Title>
-          Freshwater Guide
-          <div className="sub">담수어는 어떻게 시작할까?</div>
-        </Title>
-=======
         <TopCover>
           <Title>
             Freshwater Guide
             <div className="sub">담수어는 어떻게 시작할까?</div>
           </Title>
         </TopCover>
->>>>>>> 87a459af7f2803f2f0dcf16d1619f4ab7785c58f
         <InfoContainer>
           <TextCover>
             <FontAwesomeIcon icon={faTools} size="8x" />
