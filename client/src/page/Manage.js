@@ -16,8 +16,7 @@ const TitleContainer = styled.img`
   width: 100vw;
   height: 65vh;
   @media screen and (max-width: 768px) {
-    width: 0;
-    height: 0;
+    height: 180px;
   }
 `;
 
@@ -70,10 +69,7 @@ function Manage({ getAllConInfo, handleCondata }) {
   return (
     <>
       <Header2 />
-      <TitleContainer src="/관리배너.jpg">
-        {/* <Title>My Aquarium</Title> */}
-        {/* <Text>당신의 어항을 관리해보세요!</Text> */}
-      </TitleContainer>
+      <TitleContainer src="/관리배너.jpg"></TitleContainer>
       {/* <ManageCard /> */}
       {/* <ManageCard containerList={con_list.data.data} />
       <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}

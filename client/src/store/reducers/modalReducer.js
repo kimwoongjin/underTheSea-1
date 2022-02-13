@@ -22,6 +22,7 @@ import {
   HTM_MODAL_ON,
   WORD_MODAL_ON,
   LEVEL_UP_MODAL_ON,
+  MOBILEMANAGEDETAIL_MODAL_ON,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -47,6 +48,7 @@ const initialState = {
   isHtmModal: false,
   isWordModal: false,
   isLevelupModal: false,
+  isMobileDetailModal: false,
 };
 
 const modalReducer = (prevState = initialState, action) => {
@@ -117,6 +119,9 @@ const modalReducer = (prevState = initialState, action) => {
       break;
     case LEVEL_UP_MODAL_ON:
       state = { ...prevState, isLevelupModal: true };
+      break;
+    case MOBILEMANAGEDETAIL_MODAL_ON:
+      state = { ...prevState, isMobileDetailModal: true };
       break;
     case MODAL_OFF:
       state = { ...initialState };

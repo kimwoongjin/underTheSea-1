@@ -36,6 +36,11 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
 
   border-radius: 20px;
+
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 220px;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -55,6 +60,9 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: 480px) {
+    align-items: center;
+  }
 `;
 
 const TextForm = styled.div`
@@ -62,6 +70,9 @@ const TextForm = styled.div`
   display: flex;
   text-align: center;
   top: 22%;
+  @media screen and (max-width: 480px) {
+    justify-content: center;
+  }
 `;
 const Text = styled.div`
   position: relative;
@@ -69,6 +80,11 @@ const Text = styled.div`
   font-family: "Kfont";
   font-size: 1.2rem;
   font-weight: 600;
+  @media screen and (max-width: 480px) {
+    top: -20%;
+    width: 80%;
+    font-size: 0.9rem;
+  }
 `;
 const Btn = styled.div`
   display: flex;
@@ -78,6 +94,14 @@ const Btn = styled.div`
   position: absolute;
   top: 80%;
   justify-content: space-between;
+  @media screen and (max-width: 480px) {
+    top: 75%;
+    height: 45%;
+    width: 80%;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: center;
+  }
 `;
 const CancleBtn = styled.button`
   width: 45%;
@@ -99,6 +123,12 @@ const CancleBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+    width: 100%;
+    margin-bottom: 5%;
+  }
 `;
 const SignOutBtn = styled.button`
   width: 45%;
@@ -119,6 +149,10 @@ const SignOutBtn = styled.button`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+    width: 100%;
   }
 `;
 //=======================================================================

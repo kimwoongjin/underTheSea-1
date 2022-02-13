@@ -10,16 +10,15 @@ import TipList from "./TipList";
 
 const Container = styled.div`
   position: relative;
-  width: 100%;
+  max-width: 2000px;
+  margin: auto;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 25px; */
-  /* background-color: #f7f7f4; */
 `;
+
 const TopCover = styled.div`
   width: 100%;
   height: 40vh;
@@ -27,11 +26,8 @@ const TopCover = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  /* border-bottom: 2px solid #808080; */
   flex-direction: column;
-  /* background-image: url("투명바다1.png"); */
   overflow: hidden;
-  /* box-shadow: 0px 2px 10px gray; */
 `;
 
 const Img = styled.img`
@@ -43,27 +39,14 @@ const Img = styled.img`
   z-index: -1;
 `;
 
-// const Swarm = styled.img`
-//   position: absolute;
-//   top: 80px;
-//   left: 80px;
-//   bottom: 0px;
-//   width: 14%;
-// `;
-
 const TitleContainer = styled.div`
   width: 20%;
   display: flex;
-  /* border: 1px solid green; */
   position: relative;
+  @media screen and (max-width: 1108px) {
+    width: 50%;
+  }
 `;
-// const Starfish = styled.img`
-//   position: absolute;
-//   right: -30px;
-//   bottom: 20px;
-//   width: 50%;
-//   height: 50%;
-// `;
 
 const Title = styled.div`
   width: 100%;
@@ -73,6 +56,9 @@ const Title = styled.div`
   padding-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
+  @media screen and (max-width: 1108px) {
+    font-size: 2rem;
+  }
 `;
 const SubTitle = styled.div`
   margin-top: 15px;
@@ -83,12 +69,16 @@ const SubTitle = styled.div`
 `;
 
 const BtnContainer = styled.div`
+  position: relative;
   width: 70%;
   margin-top: 3%;
   display: flex;
   justify-content: flex-end;
-  /* border: 1px dashed darkcyan; */
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
+
 const Btn = styled.button`
   width: 80px;
   height: 30px;
@@ -103,6 +93,11 @@ const Btn = styled.button`
   :hover {
     filter: brightness(95%);
   }
+  @media screen and (max-width: 480px) {
+    width: 60px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
 `;
 
 const TipListContainer = styled.div`
@@ -115,6 +110,10 @@ const TipListContainer = styled.div`
   border: 1px solid #a7d9ff;
   border-radius: 4px;
   margin-bottom: 10%;
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    border-style: none;
+  }
 `;
 
 const TipListHeadContainer = styled.div`
@@ -124,41 +123,58 @@ const TipListHeadContainer = styled.div`
   margin-top: 30px;
   border-bottom: 3px solid #a7d9ff;
   font-weight: bold;
-  /* background-color: #f7f7f4; */
+  @media screen and (max-width: 768px) {
+    /* height: 50px; */
+    /* border: 1px solid red; */
+    display: none;
+  }
 `;
 
 const TipListTitle = styled.div`
   flex: 6;
   margin-bottom: 30px;
   text-align: start;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+  }
 `;
 
 const TipListWriter = styled.div`
   flex: 2;
   margin-bottom: 30px;
   text-align: start;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TipListDate = styled.div`
   flex: 2;
   margin-bottom: 30px;
   text-align: center;
+  /* border: 1px solid red; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const PageBtnForm = styled.form`
   display: flex;
   width: 95%;
   justify-content: center;
-  // border-top: 1px solid #808080;
   padding-top: 30px;
   margin-bottom: 30px;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
 `;
 
 const PageBtn = styled.div`
   align-items: center;
   border-style: none;
   background-color: #ffffff;
-  // border-bottom: 1px solid black;
   margin: 5px;
   font-size: 18px;
   cursor: pointer;
@@ -281,8 +297,8 @@ function HoneyTips() {
             )}
           </PageBtnForm>
         </TipListContainer>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }

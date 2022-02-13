@@ -10,18 +10,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  width: 100vw;
-  height: 125vh;
-  border-bottom: 1px solid black;
+  max-width: 2000px;
+  height: 110vh;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: linear-gradient(to top, #e2fdfa, #a8f2ff);
+  background: linear-gradient(to top, #a8f2ff, #d2f7ff);
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    height: 105vh;
+    height: 100vh;
   }
 `;
 
@@ -29,36 +29,50 @@ const WomanImgL = styled.img`
   position: absolute;
   width: 32%;
   height: 43%;
-  right: 24%;
-  bottom: 20%;
+  left: 7%;
+  bottom: 10%;
 
   @media screen and (max-width: 480px) {
-    width: 50%;
-    height: 27%;
-    bottom: 60%;
-    left: 1%;
+    width: 53%;
+    height: 30%;
+    bottom: 46%;
+    left: 7%;
   }
 `;
 const WomanImgR = styled.img`
   position: absolute;
-  width: 20%;
-  height: 40%;
-  right: 5%;
-  bottom: 40%;
+  width: 21%;
+  height: 42%;
+  left: 35%;
+  bottom: 25%;
 
   @media screen and (max-width: 480px) {
-    width: 45%;
-    height: 35%;
-    top: 20%;
-    right: 3%;
+    width: 35%;
+    height: 30%;
+    top: 23%;
+    left: 60%;
   }
 `;
+
 const TextContainer = styled.div`
   position: absolute;
-  left: 10%;
-  bottom: 50%;
+  right: 7%;
+  bottom: 27%;
   display: flex;
   flex-direction: column;
+  font-size: max(1vw, 0.7rem);
+
+  @media screen and (max-width: 1024px) {
+    left: 5%;
+
+    .txt5 {
+      font-size: max(2vw, 0.6rem);
+      line-height: 160%;
+    }
+    .txt6 {
+      font-size: max(2vw, 1.5rem);
+    }
+  }
 
   @media screen and (max-width: 480px) {
     bottom: 15%;
@@ -67,6 +81,10 @@ const TextContainer = styled.div`
 
     .txt5 {
       font-size: 0.8rem;
+      text-align: center;
+    }
+    .txt6 {
+      font-size: 1rem;
       text-align: center;
     }
   }
@@ -87,6 +105,11 @@ const SearchText = styled.div`
   font-size: 1.4rem;
   line-height: 150%;
   font-family: "Kfont";
+
+  @media screen and (max-width: 480px) {
+    line-height: 0%;
+    margin-bottom: 7%;
+  }
 `;
 
 const SearchTitle = styled.div`

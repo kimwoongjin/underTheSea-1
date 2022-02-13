@@ -10,6 +10,11 @@ import Footer from "../component/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+const Con = styled.div`
+  /* max-width: 1450px;
+  margin: auto; */
+`;
+
 const MainImg = styled.div`
   display: flex;
   position: relative;
@@ -18,6 +23,10 @@ const MainImg = styled.div`
   .img {
     width: 100%;
     height: 100%;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 180px;
   }
 `;
 
@@ -29,68 +38,71 @@ const Auto = styled.div`
   height: 8vh;
   position: relative;
   margin-top: 5%;
-  .bottom {
-    width: 30vw;
-    display: flex;
-    border-bottom: 5px solid #108dee;
-    position: relative;
-    outline: none;
-    bottom: 55%;
-    right: 1%;
+  /* border: 1px solid black; */
+
+  @media screen and (max-width: 480px) {
+    margin-top: 17%;
   }
 `;
 
 const InputContainer = styled.div`
   position: relative;
+  align-items: center;
   border: 2px solid #108dee;
   border-radius: 5px;
-  width: 30vw;
-  height: 5vh;
+  width: 35%;
+  height: 80%;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
-  margin-right: 2%;
-  top: 20%;
+
   .fish-input {
-    /* position: relative; */
     background-color: transparent;
     margin: 0%;
-    padding-left: 25px;
+    padding-left: 8%;
     outline: none;
     border: none;
     width: 85%;
-    font-size: 1.2rem;
+    font-size: max(1vw, 1.3rem);
     font-family: "Kfont";
     box-sizing: border-box;
-    /* text-align: center; */
-    /* border-bottom: 2px solid #108dee; */
-    /* border: 1px solid red; */
   }
 
   .delete-button {
-    font-size: 1.5rem;
     font-weight: bold;
-    position: absolute;
-    left: 3px;
-    bottom: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5em 0.1em;
     color: #e5e5e5;
+    font-size: 1.6rem;
+    /* border: 1px solid black; */
+
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .fish-input {
+      font-size: max(2vw, 0.6rem);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 70%;
+    .delete-button {
+      padding-bottom: 2%;
+    }
   }
 `;
 
 const Button = styled.button`
-  /* position: relative; */
-  /* left: 20%; */
-  /* bottom: 46%; */
   width: 15%;
   height: 100%;
   font-size: 1.25rem;
   color: white;
   background: #108dee;
-  /* border-radius: 5px; */
   overflow: hidden;
-  font-weight: bold;
-  font-family: "Kfont";
+  padding: 0.2em;
+  margin: 0%;
   border: 2px solid #108dee;
   cursor: pointer;
   position: relative;
@@ -109,9 +121,17 @@ const Text = styled.div`
   position: relative;
   margin-top: 10%;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: max(1vw, 1.7rem);
   text-align: center;
   line-height: 180%;
+
+  @media screen and (max-width: 1024px) {
+    font-size: max(2vw, 1.3rem);
+  }
+  @media screen and (max-width: 480px) {
+    margin: 17% 0 10%;
+    font-size: 0.8rem;
+  }
 `;
 
 const Container = styled.div`
@@ -125,6 +145,9 @@ const Container = styled.div`
   position: relative;
   margin-top: 5%;
   margin-bottom: 10%;
+
+  @media screen and (max-width: 480px) {
+  }
 `;
 const CardContainer = styled.div`
   /* border: 1px solid black; */
@@ -135,6 +158,9 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+
+  @media screen and (max-width: 480px) {
+  }
 `;
 
 function Search() {
@@ -237,64 +263,66 @@ function Search() {
   return (
     <>
       <Header2 />
-      <MainImg>
-        <img
-          className="img"
-          src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A5%E1%84%8E%E1%85%B5%E1%86%BC.jpg"
-          alt=""
-        ></img>
-      </MainImg>
-      <Auto>
-        <InputContainer>
-          <input
-            className="fish-input"
-            type="text"
-            placeholder="어종명으로 검색해주세요."
-            onChange={handleInputChange}
-            value={input || ""}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                gotoSearch();
-              }
-            }}
-            list="fishName"
-          />
+      <Con>
+        <MainImg>
+          <img
+            className="img"
+            src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A5%E1%84%8E%E1%85%B5%E1%86%BC.jpg"
+            alt=""
+          ></img>
+        </MainImg>
+        <Auto>
+          <InputContainer>
+            <input
+              className="fish-input"
+              type="text"
+              placeholder="어종명으로 검색해주세요."
+              onChange={handleInputChange}
+              value={input || ""}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  gotoSearch();
+                }
+              }}
+              list="fishName"
+            />
 
-          <div className="delete-button" onClick={handleDeleteButton}>
-            &times;
-          </div>
-          <datalist id="fishName">
-            {fishList.map((el, idx) => (
-              <option
-                className="fish-option"
-                value={el}
-                label={el}
-                key={idx}
-              ></option>
-            ))}
-          </datalist>
-          <Button onClick={gotoSearch}>
-            <FontAwesomeIcon icon={faSearch} size="1x" color="#e5e5e5" />
-          </Button>
-        </InputContainer>
-      </Auto>
-      <Text>카드를 클릭하면 세부 정부를 확인할 수 있습니다.</Text>
+            <div className="delete-button" onClick={handleDeleteButton}>
+              &times;
+            </div>
+            <datalist id="fishName">
+              {fishList.map((el, idx) => (
+                <option
+                  className="fish-option"
+                  value={el}
+                  label={el}
+                  key={idx}
+                ></option>
+              ))}
+            </datalist>
+            <Button onClick={gotoSearch}>
+              <FontAwesomeIcon icon={faSearch} size="1x" color="#e5e5e5" />
+            </Button>
+          </InputContainer>
+        </Auto>
+        <Text>카드를 클릭하면 뒷면의 세부정보를 확인할 수 있습니다.</Text>
 
-      {/* ============================================================= */}
+        {/* ============================================================= */}
 
-      <Container>
-        {currentFish ? (
-          <CardContainer>
-            <SearchInfo filteredFish={search} />
-          </CardContainer>
-        ) : (
-          <CardContainer>
-            {fish.map((item) => (
-              <SearchCurrent key={item.id} item={item} />
-            ))}
-          </CardContainer>
-        )}
-      </Container>
+        <Container>
+          {currentFish ? (
+            <CardContainer>
+              <SearchInfo filteredFish={search} />
+            </CardContainer>
+          ) : (
+            <CardContainer>
+              {fish.map((item) => (
+                <SearchCurrent key={item.id} item={item} />
+              ))}
+            </CardContainer>
+          )}
+        </Container>
+      </Con>
       <Footer />
     </>
   );

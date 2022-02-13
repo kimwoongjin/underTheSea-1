@@ -25,7 +25,7 @@ const DarkBackGround = styled.div`
 const ModalContainer = styled.div`
   z-index: 999;
   width: 25%;
-  height: 55%;
+  height: 40%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -37,7 +37,12 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
   z-index: 999;
   border-radius: 20px;
+  @media screen and (max-width: 480px) {
+    width: 80%;
+    height: 300px;
+  }
 `;
+
 const CloseBtnContainer = styled.button`
   z-index: 999;
   position: absolute;
@@ -56,19 +61,33 @@ const CloseBtnContainer = styled.button`
 const Form = styled.form`
   z-index: 999;
   width: 80%;
-  height: 85%;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  position: relative;
+`;
+const Pwd = styled.input`
+  width: calc(100%-10px);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  /* margin-bottom: 20px; */
+`;
+const PwdChk = styled.input`
+  width: calc(100%-10px);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  /* margin-bottom: 20px; */
 `;
 
 //성공메세지=======================================================================
 
 const PwdSuccess = styled.div`
   width: 100%;
-  height: 85%;
+  height: 70%;
   display: flex;
   flex-direction: column;
+  border: 1px solid red;
   justify-content: center;
   /* border: 1px solid red; */
 `;
@@ -106,16 +125,18 @@ const CloseBtn = styled.button`
     background: rgba(0, 0, 0, 0.07);
   }
 `;
-//비밀번호 창 =======================================================================
+// ============================= 비밀번호 창 =======================================
 
 const TextForm = styled.div`
-  position: relative;
   display: flex;
   text-align: center;
-  top: 5%;
+  top: 3%;
+
+  @media screen and (max-width: 480px) {
+    top: 0%;
+  }
 `;
 const Text = styled.div`
-  position: relative;
   font-family: "Kfont";
   font-size: 1.1rem;
   font-weight: 600;
@@ -123,25 +144,22 @@ const Text = styled.div`
 
 const NewPwd = styled.form`
   width: 100%;
-  height: 70%;
+  height: 80%;
   display: flex;
   flex-direction: column;
-  position: relative;
 `;
 const CurPwd1 = styled.input`
-  margin-top: 9%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 10%;
+  margin-bottom: 20px;
   z-index: 100;
 `;
 const NewPwd1 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
-  margin-bottom: 2%;
   box-sizing: border-box;
   z-index: 100;
 `;
@@ -150,25 +168,28 @@ const NewPwd2 = styled.input`
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 2%;
   z-index: 100;
 `;
+
 const Warning = styled.div`
   width: calc(100%-10px);
-  height: 7%;
-  font-size: 0.5rem;
+  height: 20px;
+  font-size: 0.4rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   color: red;
-  position: relative;
-  bottom: 14%;
   padding-left: 2%;
 `;
 const Warning1 = styled.div`
   width: calc(100%-10px);
-  height: 15%;
-  font-size: 0.5rem;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.6rem;
   color: red;
-  position: relative;
-  bottom: 80%;
+  margin-top: 5px;
   padding-left: 2%;
 `;
 
@@ -177,15 +198,13 @@ const Btn = styled.div`
   width: 100%;
   height: 25%;
   flex-direction: column;
-  position: absolute;
-  top: 80%;
   justify-content: space-between;
 `;
 
 const ConfirmBtn = styled.button`
   z-index: 999;
   width: 100%;
-  height: 50%;
+  height: 60%;
   background: #0474e8;
   color: white;
   font-family: "Kfont";
@@ -204,18 +223,25 @@ const ConfirmBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
   }
+
+  @media screen and (max-width: 480px) {
+    height: 60%;
+    font-size: 1rem;
+    padding: 0.2em 0 0.2em;
+  }
 `;
 //=======================================================================
 
 function PwdChange({ handleOff }) {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
-  //비밀번호 저장
+  // 비밀번호 저장
   const [currentPwd, setCurrentPwd] = useState({
     cur_pwd: "",
     new_pwd: "",
     verifyPassword: "",
   });
+
   //상태 변경
   const [password, setPassword] = useState(false);
   //에러메세지
@@ -265,7 +291,8 @@ function PwdChange({ handleOff }) {
             }
           )
           .then(() => {
-            setPassword(true);
+            handleOff();
+            alert("비밀번호가 변경되었습니다!");
             navigate("/mypage");
           })
           .catch((err) => {
@@ -275,30 +302,6 @@ function PwdChange({ handleOff }) {
       }
     }
   };
-  //------------------------------------------------------------------------------------
-  // useEffect(() => {
-  //   setMessage({
-  //     ...message,
-  //     password:
-  //       currentPwd.new_pwd.length >= 8
-  //         ? checkPassword(currentPwd.new_pwd)
-  //           ? "사용할 수 있는 비밀번호 입니다."
-  //           : "비밀번호는 영문, 숫자 조합이어야 합니다."
-  //         : "비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.",
-  //     verifyPassword:
-  //       currentPwd.verifyPassword.length >= currentPwd.new_pwd.length &&
-  //       currentPwd.verifyPassword.length >= 8
-  //         ? currentPwd.verifyPassword === currentPwd.new_pwd
-  //           ? "비밀번호가 일치합니다."
-  //           : "비밀번호가 불일치합니다."
-  //         : "비밀번호를 확인해주세요.",
-  //   });
-  //   setValidation({
-  //     ...validation,
-  //     password: checkPassword(currentPwd.new_pwd),
-  //     verifyPassword: currentPwd.new_pwd === currentPwd.verifyPassword,
-  //   });
-  // }, [currentPwd]);
 
   return (
     <DarkBackGround>
@@ -316,59 +319,45 @@ function PwdChange({ handleOff }) {
           <TextForm>
             <Text>비밀번호 변경</Text>
           </TextForm>
-          {password ? (
-            <PwdSuccess>
-              <PwdSuccessText>
-                비밀번호가 변경되었습니다.<br></br>닫기를 눌러주세요.
-              </PwdSuccessText>
-              <CloseBtn onClick={handleOff}>닫기</CloseBtn>
-            </PwdSuccess>
-          ) : (
-            <NewPwd>
-              <CurPwd1
-                placeholder="현재 비밀번호"
-                type="password"
-                onChange={handleInputValue("cur_pwd")}
-              />
-              <NewPwd1
-                placeholder="새 비밀번호"
-                type="password"
-                autoComplete="on"
-                onChange={handleInputValue("new_pwd")}
-              />
-              {!currentPwd.new_pwd ? (
-                <Warning>
-                  비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
-                  {/* currentPwd.new_pwd.length >= 8  */}
-                </Warning>
-              ) : currentPwd.new_pwd.length >= 8 &&
-                checkPassword(currentPwd.new_pwd) &&
-                checkPassword2(currentPwd.new_pwd) ? (
-                <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
-              ) : (
-                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
-              )}
-              <NewPwd2
-                placeholder="새 비밀번호 확인"
-                type="password"
-                required
-                autoComplete="on"
-                onChange={handleInputValue("verifyPassword")}
-              />
-              {onChangePasswordChk() || !currentPwd.verifyPassword ? (
-                <Warning>비밀번호가 일치합니다.</Warning>
-              ) : (
-                <Warning>비밀번호가 일치하지 않습니다.</Warning>
-              )}
 
-              <Btn>
-                <ConfirmBtn type="button" onClick={fixPasswordHandler}>
-                  확인
-                </ConfirmBtn>
-                <Warning1>{errorMsg}</Warning1>
-              </Btn>
-            </NewPwd>
-          )}
+          <NewPwd>
+            <CurPwd1
+              placeholder="현재 비밀번호"
+              type="password"
+              onChange={handleInputValue("cur_pwd")}
+            />
+            <Pwd
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              name="user_pwd"
+              autoComplete="on"
+              onChange={handleInputValue("new_pwd")}
+            />
+            {checkPassword(currentPwd.new_pwd) || !currentPwd.new_pwd ? (
+              <Warning />
+            ) : (
+              <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
+            )}
+            <PwdChk
+              placeholder="비밀번호를 확인해주세요"
+              type="password"
+              name="pwd_chk"
+              required
+              autoComplete="on"
+              onChange={handleInputValue("verifyPassword")}
+            />
+            {onChangePasswordChk() || !currentPwd.verifyPassword ? (
+              <Warning></Warning>
+            ) : (
+              <Warning>비밀번호가 일치하지 않습니다.</Warning>
+            )}
+            <Btn>
+              <ConfirmBtn type="button" onClick={fixPasswordHandler}>
+                확인
+              </ConfirmBtn>
+              <Warning1>{errorMsg}</Warning1>
+            </Btn>
+          </NewPwd>
         </Form>
       </ModalContainer>
     </DarkBackGround>
