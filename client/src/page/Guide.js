@@ -155,8 +155,8 @@ function Guide() {
   };
   return (
     <>
+      <Header2></Header2>
       <Container>
-        <Header2></Header2>
         <MiddleContainer>
           <Seawater onClick={goToSeawater}>
             <BigBox>

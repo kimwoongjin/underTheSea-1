@@ -106,12 +106,9 @@ const TipListHeadContainer = styled.div`
   display: flex;
   font-size: 1.5rem;
   margin-top: 30px;
-  /* border: 1px solid red; */
   border-bottom: 3px solid #a7d9ff;
   font-weight: bold;
   @media screen and (max-width: 1108px) {
-    /* height: 50px; */
-    /* border: 1px solid red; */
     display: none;
   }
 `;
@@ -279,8 +276,8 @@ function HoneyTips() {
             )}
           </PageBtnForm>
         </TipListContainer>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }
