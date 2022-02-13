@@ -16,7 +16,7 @@ const TitleContainer = styled.img`
   width: 100vw;
   height: 65vh;
   @media screen and (max-width: 768px) {
-    height: 45vh;
+    height: 180px;
   }
 `;
 
