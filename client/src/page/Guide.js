@@ -6,8 +6,7 @@ import Header2 from "../component/Header2";
 const Container = styled.div`
   margin: auto;
   max-width: 2000px;
-  margin: auto;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
 `;
@@ -17,7 +16,7 @@ const MiddleContainer = styled.div`
   overflow: hidden;
   max-width: 2000px;
   @media screen and (max-width: 768px) {
-    height: 87vh;
+    height: 100%;
     flex-direction: column;
   }
 `;
@@ -203,7 +202,7 @@ function Guide() {
           <Freshwater onClick={goToFreshwater}>
             <BigBox>
               <SeaImg src="프레시워터.jpeg" className="image" />
-              <SmallText>SEA WATER</SmallText>
+              <SmallText>FRESH WATER</SmallText>
               <MiddleBox className="overlay">
                 <TextForm className="text">FRESH WATER</TextForm>
               </MiddleBox>
