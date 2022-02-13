@@ -55,7 +55,7 @@ const InputContainer = styled.div`
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
-
+  overflow: hidden;
   .fish-input {
     background-color: transparent;
     margin: 0%;
@@ -96,11 +96,11 @@ const InputContainer = styled.div`
 
 const Button = styled.button`
   width: 15%;
-  height: 100%;
+  height: 110%;
   font-size: 1.25rem;
   color: white;
   background: #108dee;
-  overflow: hidden;
+
   padding: 0.2em;
   margin: 0%;
   border: 2px solid #108dee;
