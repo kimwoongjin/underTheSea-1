@@ -18,7 +18,6 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 const { uploadFile, getFileStream } = require("./s3");
-//const fs = require("fs");
 const app = express();
 const httpServer = http.createServer(app);
 app.use(express.json());
@@ -51,10 +50,8 @@ app.get("/status", (req, res) => {
 });
 
 app.get("/images/:key", (req, res) => {
-  // console.log(req.params);
   const key = req.params.key;
   const readStream = getFileStream(key);
-  // console.log(readStream);
   readStream.pipe(res);
 });
 app.get("/addfishinfo", (req, res) => {
@@ -66,7 +63,6 @@ app.post("/images", upload.single("image"), async (req, res) => {
 
   const result = await uploadFile(file);
   await unlinkFile(file.path);
-  console.log(result);
   res.send({ imagePath: `/images/${result.Key}` });
 });
 

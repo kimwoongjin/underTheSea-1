@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/underTheSea-1/server
+cd /home/ubuntu/underTheSea/server
 sudo npm install -g npm@latest
 sudo npm install
 sudo npm install dotenv
