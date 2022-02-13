@@ -39,7 +39,7 @@ const ModalContainer = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 50%;
+    height: 220px;
   }
 `;
 const CloseBtnContainer = styled.div`

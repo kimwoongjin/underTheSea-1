@@ -37,10 +37,9 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
   z-index: 999;
   border-radius: 20px;
-
   @media screen and (max-width: 480px) {
     width: 80%;
-    height: 45%;
+    height: 300px;
   }
 `;
 
