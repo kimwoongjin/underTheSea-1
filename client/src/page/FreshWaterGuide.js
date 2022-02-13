@@ -50,6 +50,12 @@ const Title = styled.div`
     font-size: 1.25rem;
     font-weight: 500;
     color: #26262f;
+    @media screen and (max-width: 900px) {
+      font-size: 1rem;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -94,6 +100,9 @@ const Text = styled.div`
   margin-top: 20px;
   font-size: 2rem;
   font-weight: bold;
+  @media screen and (max-width: 900px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const InfoContainer = styled.div`

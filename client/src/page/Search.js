@@ -26,7 +26,7 @@ const MainImg = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    height: 30vh;
+    height: 180px;
   }
 `;
 
@@ -105,12 +105,12 @@ const Button = styled.button`
   margin: 0%;
   border: 2px solid #108dee;
   cursor: pointer;
-
+  position: relative;
   :hover::before {
     content: "";
     position: absolute;
     top: 0;
-    /* left: 0; */
+    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.07);

@@ -33,8 +33,8 @@ const WomanImgL = styled.img`
   bottom: 10%;
 
   @media screen and (max-width: 480px) {
-    width: 53%;
-    height: 30%;
+    width: 160px;
+    height: 160px;
     bottom: 46%;
     left: 7%;
   }
@@ -47,8 +47,8 @@ const WomanImgR = styled.img`
   bottom: 25%;
 
   @media screen and (max-width: 480px) {
-    width: 35%;
-    height: 30%;
+    width: 120px;
+    height: 160px;
     top: 23%;
     left: 60%;
   }
@@ -63,14 +63,12 @@ const TextContainer = styled.div`
   font-size: max(1vw, 0.7rem);
 
   @media screen and (max-width: 1024px) {
-    left: 5%;
-
     .txt5 {
       font-size: max(2vw, 0.6rem);
       line-height: 160%;
     }
     .txt6 {
-      font-size: max(2vw, 1.5rem);
+      font-size: max(2vw, 1.4rem);
     }
   }
 

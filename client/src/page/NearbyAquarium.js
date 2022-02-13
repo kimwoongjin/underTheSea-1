@@ -1,34 +1,77 @@
 import styled from "styled-components";
 import Header2 from "../component/Header2";
 import Footer from "../component/Footer";
-import React, { useRef, useEffect, useState } from "react";
-import Nn from "../page/Nn";
+import React, { useRef, useEffect } from "react";
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MapContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+`;
+
+const Input = styled.input`
+  width: 80%;
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+
+const Button = styled.button`
+  width: 20%;
+  height: 100%;
+`;
+
+const SearchContainer = styled.form`
+  display: flex;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  width: 20%;
+  height: 40px;
+  z-index: 99;
+`;
 
 function NearbyAquarium() {
-  const [InputText, setInputText] = useState("");
-  const [Place, setPlace] = useState("서울특별시 강남구 영동대로 513");
-
-  const onChange = (e) => {
-    setInputText(e.target.value);
+  //   const container = useRef(null); //지도를 담을 영역의 DOM 레퍼런스
+  //   const options = {
+  //     //지도를 생성할 때 필요한 기본 옵션
+  //     center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+  //     level: 3, //지도의 레벨(확대, 축소 정도)
+  //   };
+  let mapContainer = document.getElementById("myMap");
+  let mapOption = {
+    center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    level: 3, //지도의 레벨(확대, 축소 정도)
   };
+  // let map = new window.kakao.maps.Map(mapContainer, mapOption)
+  const ps = new window.kakao.maps.services.Places();
+  useEffect(() => {
+    // 지도생성
+    // new window.kakao.maps.Map(mapContainer, mapOption);
+    // 장소 검색 객체
+    // new window.kakao.maps.services.Places();
+    return () => {};
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setPlace(InputText);
-    setInputText("");
-  };
+  //   useEffect(() => {
+  //     new window.kakao.maps.Map(container.current, options); //지도 생성 및 객체 리턴
+  //     return () => {};
+  //   }, []);
 
   return (
     <>
-      <form className="inputForm" onSubmit={handleSubmit}>
-        <input
-          placeholder="검색어를 입력하세요"
-          onChange={onChange}
-          value={InputText}
-        />
-        <button type="submit">검색</button>
-      </form>
-      <Nn searchPlace={Place} />
+      <Header2 />
+      <MapContainer id="myMap"></MapContainer>
+      <Footer />
     </>
   );
 }

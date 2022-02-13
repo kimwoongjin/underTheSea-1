@@ -59,15 +59,18 @@ const Title = styled.div`
   .main {
     font-weight: bold;
     font-size: 2.5rem;
+    @media screen and (max-width: 900px) {
+      font-size: 1.5rem;
+    }
   }
   .sub {
     margin-top: 15px;
     font-size: 1.25rem;
     font-weight: 500;
     color: #26262f;
-  }
-  @media screen and (max-width: 900px) {
-    display: none;
+    @media screen and (max-width: 900px) {
+      font-size: 1rem;
+    }
   }
 `;
 const Img = styled.img`

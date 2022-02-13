@@ -74,6 +74,16 @@ const UserInfo = styled.div`
 
     /* border: 1px solid black; */
   }
+
+  @media screen and (min-width: 2000px) {
+    .userGreeting {
+      font-size: 2rem;
+    }
+    .userNotice {
+      font-size: 1.5rem;
+    }
+  }
+
   @media screen and (max-width: 1024px) {
     .userGreeting {
       font-size: 1.4rem;
@@ -164,10 +174,26 @@ const Box1 = styled.div`
   position: relative;
   justify-content: space-evenly;
   display: flex;
-  width: 20vw;
-  height: 4vh;
+  width: 20%;
+  height: 19%;
   left: 22%;
   top: 8%;
+  /* border: 1px solid black; */
+
+  @media screen and (min-width: 2000px) {
+    right: 0%;
+  }
+
+  @media screen and (max-width: 1024px) {
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 15%;
+    height: 40%;
+    top: 3%;
+  }
+
   @media screen and (max-width: 480px) {
     width: 50%;
     height: 50%;
@@ -186,20 +212,25 @@ const Box1 = styled.div`
   }
 `;
 const ButtonL = styled.button`
-  width: 8vw;
+  width: 40%;
   font-size: 0.9rem;
   font-weight: bold;
   color: white;
   border-radius: 10px;
   border: 1px solid #108dee;
   background: #108dee;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.2rem;
+  }
+
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
-    height: 6vh;
   }
   @media screen and (max-width: 768px) {
-    font-size: 0.5rem;
-    height: 6vh;
+    font-size: 0.7rem;
+    width: 100%;
+    height: 35%;
   }
   @media screen and (max-width: 480px) {
     width: 50%;
@@ -208,20 +239,25 @@ const ButtonL = styled.button`
   }
 `;
 const ButtonR = styled.button`
-  width: 8vw;
+  width: 40%;
   font-size: 0.9rem;
   font-weight: bold;
   color: white;
   border-radius: 10px;
   border: 1px solid #cccccc;
   background: #cccccc;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.2rem;
+  }
+
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
-    height: 6vh;
   }
   @media screen and (max-width: 768px) {
-    font-size: 0.5rem;
-    height: 6vh;
+    font-size: 0.7rem;
+    width: 100%;
+    height: 35%;
   }
   @media screen and (max-width: 480px) {
     width: 50%;
@@ -245,13 +281,22 @@ const ContentContainer = styled.div`
 
 const Box3 = styled.div`
   border: 1px solid #ace0ff;
-  margin-top: 4%;
+  margin-top: 4em;
   width: 70vw;
   height: 90vh;
   margin-bottom: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 3em;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 2em;
+  }
+
   @media screen and (max-width: 480px) {
     border: 1px solid black;
     height: 60vh;
