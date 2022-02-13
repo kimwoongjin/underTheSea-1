@@ -41,6 +41,9 @@ const ModalContainer = styled.div`
     width: 80%;
     height: 300px;
   }
+  @media screen and (max-height: 700px) {
+    height: 300px;
+  }
 `;
 
 const CloseBtnContainer = styled.button`
@@ -140,6 +143,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-size: 1.1rem;
   font-weight: 600;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const NewPwd = styled.form`
@@ -223,10 +229,15 @@ const ConfirmBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
   }
+  @media screen and (max-width: 600px) {
+    height: 60%;
+    font-size: 1rem;
+    padding: 0.2em 0 0.2em;
+  }
 
   @media screen and (max-width: 480px) {
     height: 60%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0.2em 0 0.2em;
   }
 `;
