@@ -106,8 +106,6 @@ const Name = styled.div`
   font-weight: bold;
   font-size: 1.1rem;
   position: relative;
-  top: -10%;
-  margin-bottom: 5%;
 `;
 
 const TextCover = styled.div`
