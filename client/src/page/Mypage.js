@@ -126,7 +126,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 const TitleContainer = styled.div`
-  position: relative;
+  /* position: relative; */
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
@@ -136,26 +136,28 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.div`
-  position: relative;
+  /* position: relative; */
   width: 13vw;
   height: 8vh;
   font-size: 1.7rem;
   font-weight: bold;
   justify-content: center;
-  top: 63%;
-  right: 8%;
+  /* top: 63%; */
+  /* right: 8%; */
   @media screen and (max-width: 480px) {
     font-size: 0.5rem;
+
     height: 2vh;
     width: 30vw;
-    top: 50%;
-    left: 3%;
+    /* top: 50%; */
+    /* left: 3%; */
   }
 `;
 
 const Box1 = styled.div`
   position: relative;
   justify-content: space-evenly;
+
   display: flex;
   width: 20vw;
   height: 4vh;
