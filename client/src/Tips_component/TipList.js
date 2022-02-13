@@ -17,7 +17,7 @@ const TipContainer = styled.div`
     color: black;
   }
 
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
     .fish {
       display: none;
@@ -31,20 +31,25 @@ const TipTitle = styled.div`
   width: 90%;
   height: 50%;
   margin-top: 5px;
-  /* border: 1px solid red; */
   align-items: center;
   font-family: "Kfont";
   box-sizing: border-box;
-  @media screen and (max-width: 1108px) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @media screen and (max-width: 768px) {
+    margin-top: 8px;
+    flex: 4;
     font-size: 0.8rem;
     line-height: 120%;
+    box-sizing: content-box;
   }
 `;
 
 const WriterDateCover = styled.div`
   display: flex;
   flex: 4;
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     flex-direction: row;
     /* border: 1px solid red; */
     width: 90%;
@@ -59,7 +64,7 @@ const TipWriter = styled.div`
   font-size: 0.9rem;
   font-family: "Kfont";
   box-sizing: border-box;
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     flex: 2;
     font-size: 0.6rem;
     color: #cccccc;
@@ -79,7 +84,7 @@ const TipDate = styled.div`
   font-family: "Kfont";
   text-align: center;
   box-sizing: border-box;
-  @media screen and (max-width: 1108px) {
+  @media screen and (max-width: 768px) {
     flex: 4;
     font-size: 0.6rem;
     text-align: left;
@@ -109,10 +114,11 @@ function TipList({ tip_id, tip }) {
             color="#828282"
           ></FontAwesomeIcon>
         </div>
-
+        {/* <TitleCover> */}
         <TipTitle id={tip_id} onClick={handleSelectTip}>
           {tip.title}
         </TipTitle>
+        {/* </TitleCover> */}
         <WriterDateCover>
           <TipWriter>{tip.user_name}</TipWriter>
           <TipDate>{date}</TipDate>

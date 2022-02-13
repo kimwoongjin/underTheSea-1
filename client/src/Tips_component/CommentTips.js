@@ -16,7 +16,7 @@ const CommentForm = styled.div`
 
   .comment {
     font-size: 1.35rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-weight: bold;
     padding-left: 1%;
   }
@@ -27,21 +27,32 @@ const CommentForm = styled.div`
     /* flex-direction: column; */
     margin-bottom: 15px;
   }
+  @media screen and (max-width: 480px) {
+    .comment {
+      display: none;
+    }
+    .writer {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const SmallCommentForm = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: 94%;
+  width: 100%;
   display: flex;
   align-items: center;
-  margin: 30px 0 0 30px;
+  margin: 20px 0 0 0;
   border-bottom: 1px solid #cccccc;
 
   .deleteBtn {
     position: relative;
     right: 2%;
     margin-top: 4%;
+  }
+  @media screen and (max-width: 480px) {
+    margin: 2px 0 0 2px;
   }
 `;
 
@@ -58,25 +69,30 @@ const CommentWriter = styled.div`
   font-size: 1.1rem;
   width: 90%;
   height: 30%;
-  /* border: 1px solid red; */
-  /* margin-bottom: 20px; */
   font-family: "Kfont";
   display: flex;
   padding-top: 0.5%;
   padding-left: 1%;
   position: relative;
-  /* right: 1%; */
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
 `;
 
 const CommentContent = styled.div`
   width: 90%;
   height: 20%;
   font-size: 1rem;
-  /* border: 1px solid black; */
   margin-top: 0.5px;
   margin-bottom: 18px;
   padding-left: 1%;
   font-family: "Kfont";
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
 `;
 
 const CommnetDate = styled.div`
@@ -85,8 +101,10 @@ const CommnetDate = styled.div`
   font-size: 0.8rem;
   padding-left: 1%;
   color: #808080;
-  /* border: 1px solid black; */
   margin-top: 0.5px;
+  @media screen and (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const WriterIcon = styled.div`
@@ -98,6 +116,9 @@ const WriterIcon = styled.div`
   .userImg {
     width: 100%;
     height: 100%;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 `;
 
@@ -129,7 +150,10 @@ const AddCommentForm = styled.div`
   height: 30%;
   margin: 2% 0 1% 8%;
   font-size: 1.1rem;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
 `;
 const CommentInput = styled.input`
   width: 85%;
@@ -140,25 +164,39 @@ const CommentInput = styled.input`
   border-bottom: 1px solid #a7d9ff;
   font-size: 1.1rem;
   padding: 0 0 1% 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+`;
 
-  /* border: 1px solid red; */
+const BtnContainer = styled.div`
+  /* position: relative; */
+  width: 90%;
+  margin: 0% 0 1% 7%;
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 const AddcommentBtn = styled.button`
-  position: relative;
-  bottom: 8px;
-  right: 2%;
-  width: 65px;
-  height: 25px;
-  /* color: #108dee; */
-  font-size: 1.1rem;
+  width: 80px;
+  height: 30px;
+  font-size: 1rem;
+  font-weight: bold;
   border-radius: 4px;
-  margin: 2% 0 1% 88%;
+  margin-right: 0;
   border: 1px solid black;
   background-color: white;
   cursor: pointer;
   :hover {
     filter: brightness(95%);
+  }
+  @media screen and (max-width: 480px) {
+    width: 15%;
+    height: 20px;
+    font-size: 0.6rem;
   }
 `;
 
@@ -249,7 +287,9 @@ function CommentTips({
               placeholder="입력"
               onChange={handleInputComment}
             ></CommentInput>
-            <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+            <BtnContainer>
+              <AddcommentBtn onClick={Upload}>등록</AddcommentBtn>
+            </BtnContainer>
           </>
         ) : (
           <div className="Greeting">

@@ -8,6 +8,11 @@ const PostTitle = styled.div`
   /* border: 1px solid red; */
   font-family: "Kfont";
   font-weight: bold;
+  @media screen and (max-width: 480px) {
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-top: 0;
+  }
 `;
 
 const WriterCover = styled.div`
@@ -15,26 +20,21 @@ const WriterCover = styled.div`
   margin-top: 30px;
   display: flex;
   border-bottom: 3px solid #a7d9ff;
-  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    margin-top: 3px;
+  }
 `;
 
 const WriterIcon = styled.div`
-  /* width: 2.7vw;
-  height: 5vh;
-  border-radius: 60px;
-  border: 1px solid gray;
-  text-align: center;
-  justify-content: center;
-  margin-bottom: 10px; */
-  /* width: 5.1vw;
-  height: 6.6vh; */
   width: 10%;
   height: 10%;
   position: relative;
   .userImg {
-    /* object-fit: contain; */
     width: 100%;
     height: 100%;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 `;
 
@@ -54,6 +54,9 @@ const Writer = styled.div`
   font-family: "Kfont";
   /* border: 1px solid red; */
   margin: 1% 0 1%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Date = styled.div`
@@ -61,7 +64,9 @@ const Date = styled.div`
   color: #808080;
   font-size: 0.8rem;
   font-family: "Kfont";
-  /* border: 1px solid red; */
+  @media screen and (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const Content = styled.div`
@@ -76,6 +81,18 @@ const Content = styled.div`
   white-space: normal;
   align-items: flex-start;
   margin-bottom: 2%;
+  img {
+    width: 300px;
+    height: 250px;
+  }
+  @media screen and (max-width: 480px) {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    img {
+      width: 200px;
+      height: 150px;
+    }
+  }
 `;
 
 const ContentBox = styled.div`
@@ -111,10 +128,7 @@ function ContentTips({ tipData }) {
       </WriterCover>
       <Content>
         {tipData.img ? (
-          <img
-            src={`${process.env.REACT_APP_SERVER_API}${tipData.img}`}
-            style={{ width: "300px", height: "250px" }}
-          ></img>
+          <img src={`${process.env.REACT_APP_SERVER_API}${tipData.img}`}></img>
         ) : (
           <></>
         )}
