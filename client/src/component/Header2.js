@@ -24,7 +24,7 @@ const Container = styled.div`
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    height: 12vh;
+    height: 80px;
   }
 `;
 
@@ -180,20 +180,20 @@ const BtnContainer = styled.div`
   margin-right: 2%;
   width: 370px;
   font-family: "Kfont";
-
   @media screen and (max-width: 768px) {
     display: none;
     ${(props) =>
       props.toggle &&
       css`
-        /* margin-top: 3vh; */
+        position: absolute;
+        top: 79px;
         margin-right: 0;
         display: flex;
         width: 100%;
         background: white;
         align-items: center;
         flex-direction: column;
-        height: 350px;
+        height: 200px;
         margin-bottom: 2%;
         z-index: 100;
       `}

@@ -34,8 +34,8 @@ const ModalContainer = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 480px) {
-    width: 70%;
-    height: 65%;
+    width: 300px;
+    height: 300px;
     margin-right: 5%;
   }
 `;
