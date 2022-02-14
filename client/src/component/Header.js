@@ -13,22 +13,25 @@ import { useState } from "react";
 
 const Container = styled.div`
   max-width: 2000px;
-  margin: auto;
   height: 10vh;
+  margin: auto;
   background: #d2f7ff;
   box-shadow: 0px 0px 5px #adb5bd;
   position: relative;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    height: 80px;
   }
 `;
 
 const Img = styled.img`
   width: 13vw;
   margin: 0 0 1% 1%;
+  /* margin: auto; */
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 22vw;
@@ -53,7 +56,7 @@ const Login = styled.div`
   }
 `;
 
-const Manage = styled.div`
+const Aquarium = styled.div`
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -62,7 +65,8 @@ const Manage = styled.div`
   }
 `;
 
-const Aquarium = styled.div`
+const Manage = styled.div`
+  /* border: 1px solid red; */
   padding: 10px;
   font-family: "Kfont";
   cursor: pointer;
@@ -84,11 +88,11 @@ const Signup = styled.div`
   border-radius: 8px;
   padding: 10px;
   font-family: "Kfont";
+  box-sizing: border-box;
   cursor: pointer;
   background: #008eff;
   color: white;
   position: relative;
-  box-sizing: border-box;
   :hover::before {
     position: absolute;
     content: "";
@@ -103,7 +107,7 @@ const Signup = styled.div`
     box-sizing: border-box;
   }
 `;
-
+// 이거 높이 %쓰지말고 바꿔서 크기 줄이고 피알하기
 const Signout = styled.div`
   border-radius: 5px;
   padding: 10px;
@@ -181,15 +185,15 @@ const BtnContainer = styled.div`
     ${(props) =>
       props.toggle &&
       css`
-        margin-top: 3vh;
+        position: absolute;
+        top: 79px;
         margin-right: 0;
         display: flex;
         width: 100%;
-        background: white;
-        align-items: center;
         background: linear-gradient(to top, #70d6ff, #d2f7ff);
+        align-items: center;
         flex-direction: column;
-        height: 350px;
+        height: 200px;
         margin-bottom: 2%;
         z-index: 100;
       `}
@@ -277,7 +281,6 @@ function Header2() {
         >
           <Aquarium>수족관</Aquarium>
         </Link> */}
-
         {isLogin ? (
           <>
             <Link
