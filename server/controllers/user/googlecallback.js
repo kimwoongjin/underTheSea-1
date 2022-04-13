@@ -9,7 +9,7 @@ dotenv.config();
 
 const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const GOOGLE_AUTH_TOKEN_URL = "https://oauth2.googleapis.com/token";
-const GOOGLE_AUTH_REDIRECT_URL = "https://underthesea.ga/";
+const GOOGLE_AUTH_REDIRECT_URL = "https://underthesea.gq/";
 
 module.exports = async (req, res) => {
   // 여기가 redirect uri 이므로
